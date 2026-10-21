@@ -16,6 +16,7 @@ This list deliberately separates confirmed software checks from unresolved desig
 ## P1 — Coverage and implementation gaps
 
 - The schemas are candidate envelopes, not a complete transcription of every normative field and condition in the design document.
+- **End-to-end pilot exposed empty-only structured fields.** The current schemas reject non-empty payloads for `run_plan.execution_spec`/`fingerprint_inputs`, the Run Manifest snapshot objects (`configuration`, `code`, `environment`, `fingerprints`, `execution`, `outputs`, `validation`), `claim.evidence_status`, and Artifact Plan/Artifact structure fields. The synthetic pilot can validate a sparse record graph but cannot certify a complete reproducibility record. See `tests/eval-cases/analytic-mass-matrix-pilot/README.md`.
 - Cross-record validation does not cover every polymorphic reference or every state-machine namespace.
 - Event payload hashes are not comprehensively recomputed.
 - The directory-manifest helper validates a restricted FileEntry representation; it does not walk the filesystem or prove that the manifest matches disk contents. Symlinks are rejected by default.
@@ -25,5 +26,5 @@ This list deliberately separates confirmed software checks from unresolved desig
 ## Scientific acceptance — Not yet implemented
 
 - No physical calculation, phenomenological scan, experimental recast, or manuscript claim is certified merely because software tests pass.
-- A future end-to-end acceptance suite must test a real research task, including source provenance, conventions, independent symbolic/numerical checks, software versions, and result-to-claim traceability.
+- The synthetic 2x2 matrix pilot exercises exact results and independent algebraic checks, but is not a real phenomenology task. A later acceptance suite must test a real research task, including source provenance, conventions, independent symbolic/numerical checks, software versions, and result-to-claim traceability.
 - Parameter-space reports must distinguish theoretically realizable, experimentally allowed, excluded, not assessed, and EFT-inapplicable regions; benchmark-dependent results must label their benchmark assumptions.

@@ -55,3 +55,7 @@ Do not treat a candidate as an approved release until the four Artifact identity
 - Decision review: docs/governance/schema-v1.4.3.7-four-decisions-review.md
 - Repository status: docs/REPOSITORY_STATUS.md
 - Open issues: docs/OPEN_ISSUES.md
+
+## End-to-end Skill pilot
+
+A synthetic 2x2 mass-squared matrix pilot exercises analytic derivation, independent checks, result hashing, and the candidate record validator. Run `python tests/eval-cases/analytic-mass-matrix-pilot/run_pilot.py`. The mathematical checks pass, but full reproducibility acceptance remains blocked by candidate schemas that cannot store non-empty structured run-manifest, execution, artifact-plan, and claim-evidence payloads. See the pilot README and the open-issues list.

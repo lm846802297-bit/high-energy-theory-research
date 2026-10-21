@@ -13,6 +13,7 @@
 | Requirement/test traceability | CSV traceability data and regenerated validation report included |
 | Skill runtime | Initial instruction and reference scaffold added; not yet a complete automated research agent |
 | Project-record validator | P0 CLI added for JSON/YAML parsing, candidate-schema validation, mapped references, cross-type ID uniqueness, status/reason checks, and local source/artifact path checks |
+| End-to-end Skill pilot | Synthetic 2x2 matrix calculation and independent checks are implemented; the sparse candidate-record graph validates, but full reproducibility acceptance is blocked by empty-only structured schema fields |
 | Scientific validation | Not implemented; no physics result is certified by this repository |
 
 ## Local verification performed
@@ -34,4 +35,5 @@ These results apply only to the initial import candidate and declared test scope
 2. Resolve fixture-index top-level version-field semantics using the audit in `schema/v1.4.3.7/audit/fixture-index-version-audit.md`; the source ZIP is not committed and the current validator does not interpret that field.
 3. Resolve the migration ambiguity around validation_ids without guessing target types.
 4. Expand semantic/state-machine coverage and test actual filesystem manifests.
-5. Define scientific acceptance tests for real research tasks before claiming end-to-end reproducibility.
+5. Expand the structured record schemas so the end-to-end pilot can preserve execution specifications, fingerprints, Run Manifest snapshots, and Claim evidence dimensions.
+6. Define scientific acceptance tests for real research tasks before claiming end-to-end reproducibility.

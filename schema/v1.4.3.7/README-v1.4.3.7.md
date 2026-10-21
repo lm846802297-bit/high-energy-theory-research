@@ -31,3 +31,7 @@ All four normative decisions remain pending approval. See `audit/v1.6.6-four-dec
 ## Fixture-index version-field audit
 
 The fixture index retains the observed top-level label `1.4.3.6-candidate`, while this integrated bundle is labeled `1.4.3.7-candidate`. The source lineage points to a v1.4.3.6 archive, but the archive is not committed and the current validator does not interpret the index field. The value is intentionally left unchanged pending source-byte comparison or an explicit metadata contract. See `audit/fixture-index-version-audit.md`.
+
+## End-to-end Skill pilot
+
+The repository includes a synthetic algebraic pilot under `tests/eval-cases/analytic-mass-matrix-pilot/`. Its mathematical checks pass. Full reproducibility acceptance remains blocked because several candidate schema objects cannot represent non-empty structured execution, manifest, artifact-plan, and claim-evidence data. This is recorded in the pilot README and `audit/审计报告-v1.4.3.7.md`.
