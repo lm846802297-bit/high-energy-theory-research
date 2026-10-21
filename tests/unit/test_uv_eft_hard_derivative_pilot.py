@@ -18,7 +18,7 @@ class UVEFTHardDerivativePilotTests(unittest.TestCase):
             self.assertTrue(summary["physics_checks"]["all_checks_passed"], summary)
             self.assertEqual(summary["record_validation"]["errors"], 0, summary)
             self.assertEqual(summary["fingerprint_validation"], "passed")
-            self.assertGreaterEqual(summary["record_count"], 19)
+            self.assertGreaterEqual(summary["record_count"], 21)
 
             chain = json.loads((bundle_root / "outputs" / "record-chain.json").read_text(encoding="utf-8"))
             by_type = {}
@@ -30,8 +30,18 @@ class UVEFTHardDerivativePilotTests(unittest.TestCase):
             self.assertEqual(len(by_type["source"]), 4)
             self.assertEqual(len(by_type["run_manifest"]), 1)
             self.assertEqual(len(by_type["validation_report"]), 1)
-            self.assertEqual(len(by_type["artifact"]), 1)
-            self.assertEqual(claim["artifact_ids"], [by_type["artifact"][0]["artifact_id"]])
+            self.assertEqual(len(by_type["artifact"]), 2)
+            result_artifact = next(item for item in by_type["artifact"] if item["artifact_id"] == "ART-UV-EFT-RESULT-001")
+            log_artifact = next(item for item in by_type["artifact"] if item["artifact_id"] == "ART-UV-EFT-LOG-001")
+            self.assertEqual(claim["artifact_ids"], [result_artifact["artifact_id"]])
+            run = by_type["run"][0]
+            manifest = by_type["run_manifest"][0]
+            self.assertEqual(run["log_artifact_ids"], [log_artifact["artifact_id"]])
+            self.assertEqual(manifest["execution"]["log_artifact_ids"], [log_artifact["artifact_id"]])
+            self.assertEqual(log_artifact["content_sha256"], summary["log_sha256"])
+            validation_report = json.loads((bundle_root / "outputs" / "record-validation-report.json").read_text(encoding="utf-8"))
+            self.assertEqual(validation_report["summary"]["errors"], 0)
+            self.assertEqual(validation_report["summary"]["warnings"], 0)
             self.assertEqual(claim["validation_report_ids"], [by_type["validation_report"][0]["validation_report_id"]])
             self.assertIn("full UV diagram numerator", " ".join(claim["unresolved_items"]))
 

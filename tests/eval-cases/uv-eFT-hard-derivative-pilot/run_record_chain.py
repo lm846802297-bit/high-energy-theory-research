@@ -46,6 +46,8 @@ SOURCE_IDS = {
     "configuration": "SRC-UV-EFT-CONFIG-001",
     "arxiv": "SRC-UV-EFT-ARXIV-001",
 }
+LOG_ARTIFACT_PLAN_ID = "ARTPLAN-UV-EFT-LOG-001"
+LOG_ARTIFACT_ID = "ART-UV-EFT-LOG-001"
 
 
 def _now() -> str:
@@ -202,7 +204,7 @@ def _criterion() -> dict:
     }
 
 
-def _build_records(bundle_root: Path, started_at: str, completed_at: str, run_exit_code: int, physics_result: dict, output_sha: str, code_tree_sha: str, environment_sha: str, config_sha: str, source_hashes: dict, execution_spec: dict, execution_sha: str, fingerprints: dict, lockfile_sha: str, runtime: dict, convention_payload: dict, configuration_payload: dict, external_reference: dict) -> list[dict]:
+def _build_records(bundle_root: Path, started_at: str, completed_at: str, run_exit_code: int, physics_result: dict, output_sha: str, log_sha: str, code_tree_sha: str, environment_sha: str, config_sha: str, source_hashes: dict, execution_spec: dict, execution_sha: str, fingerprints: dict, lockfile_sha: str, runtime: dict, convention_payload: dict, configuration_payload: dict, external_reference: dict) -> list[dict]:
     schemas_dir = bundle_root / "schema/v1.4.3.7/schemas"
     schemas = {
         path.name.removesuffix(".schema.json"): json.loads(path.read_text(encoding="utf-8"))
@@ -327,7 +329,7 @@ def _build_records(bundle_root: Path, started_at: str, completed_at: str, run_ex
             "status": "accepted",
             "source_or_rationale": "The integral definitions provide an independent numerical representation of the closed-form Bbar and Bprime functions.",
         }],
-        "artifact_plan_ids": [IDS["artifact_plan"]],
+        "artifact_plan_ids": [IDS["artifact_plan"], LOG_ARTIFACT_PLAN_ID],
         "validation_plan_ids": [IDS["validation_plan"]],
         "acceptance_criteria": [_criterion()],
         "failure_branches": ["Reject invalid mass ratios, non-finite PV values, failed quadrature comparisons, or missing record references."],
@@ -402,7 +404,7 @@ def _build_records(bundle_root: Path, started_at: str, completed_at: str, run_ex
         "code_id": IDS["code"],
         "environment_id": IDS["environment"],
         "input_artifact_ids": [],
-        "artifact_plan_ids": [IDS["artifact_plan"]],
+        "artifact_plan_ids": [IDS["artifact_plan"], LOG_ARTIFACT_PLAN_ID],
         "validation_plan_ids": [IDS["validation_plan"]],
         "execution_spec": execution_spec,
         "fingerprint_inputs": fingerprint_inputs,
@@ -427,7 +429,7 @@ def _build_records(bundle_root: Path, started_at: str, completed_at: str, run_ex
         "retry_of_run_id": None,
         "manifest_ids": [IDS["run_manifest"]],
         "latest_manifest_id": IDS["run_manifest"],
-        "log_artifact_ids": [],
+        "log_artifact_ids": [LOG_ARTIFACT_ID],
         "created_at": completed_at,
     })
 
@@ -491,11 +493,11 @@ def _build_records(bundle_root: Path, started_at: str, completed_at: str, run_ex
                 "quadrature_tolerance": json.loads(config_file.read_text(encoding="utf-8"))["quadrature_tolerance"],
                 "quadrature_max_depth": json.loads(config_file.read_text(encoding="utf-8"))["quadrature_max_depth"],
             },
-            "log_artifact_ids": [],
+            "log_artifact_ids": [LOG_ARTIFACT_ID],
         },
         "outputs": {
-            "artifact_plan_ids": [IDS["artifact_plan"]],
-            "artifact_ids": [IDS["artifact"]],
+            "artifact_plan_ids": [IDS["artifact_plan"], LOG_ARTIFACT_PLAN_ID],
+            "artifact_ids": [IDS["artifact"], LOG_ARTIFACT_ID],
             "artifact_integrity_status": "passed",
             "completeness_check": {
                 "missing": [],
@@ -577,7 +579,7 @@ def _build_records(bundle_root: Path, started_at: str, completed_at: str, run_ex
         "required": True,
         "validation_plan_status": "completed",
         "subject_ids": [IDS["artifact"]],
-        "expected_artifact_plan_ids": [IDS["artifact_plan"]],
+        "expected_artifact_plan_ids": [IDS["artifact_plan"], LOG_ARTIFACT_PLAN_ID],
         "instantiated_validation_activity_ids": [IDS["validation_activity"]],
         "created_at": completed_at,
         "blocked_reason": None,
@@ -587,11 +589,11 @@ def _build_records(bundle_root: Path, started_at: str, completed_at: str, run_ex
     validation_activity.update({
         "validation_plan_id": IDS["validation_plan"],
         "task_id": IDS["task"],
-        "subject_ids": [IDS["artifact"]],
-        "method": "Independent numerical quadrature and exact rational algebra checks",
+        "subject_ids": [IDS["artifact"], LOG_ARTIFACT_ID],
+        "method": "Independent numerical quadrature and exact rational algebra checks, including run-summary integrity",
         "tool_id": "python-stdlib",
         "environment_id": IDS["environment"],
-        "input_artifact_ids": [IDS["artifact"]],
+        "input_artifact_ids": [IDS["artifact"], LOG_ARTIFACT_ID],
         "execution_status": "succeeded",
         "started_at": started_at,
         "completed_at": completed_at,
@@ -603,8 +605,8 @@ def _build_records(bundle_root: Path, started_at: str, completed_at: str, run_ex
     validation_report = rec["validation_report"]
     validation_report.update({
         "validation_activity_id": IDS["validation_activity"],
-        "subject_ids": [IDS["artifact"]],
-        "method": "Recomputed Feynman-parameter integrals, compared closed-form PV functions and derivative combinations, checked the O(r) expansion and exact rational projection factors.",
+        "subject_ids": [IDS["artifact"], LOG_ARTIFACT_ID],
+        "method": "Recomputed Feynman-parameter integrals, compared closed-form PV functions and derivative combinations, checked the O(r) expansion, exact rational projection factors, and run-summary output.",
         "acceptance_criteria": [criterion],
         "check_status": "passed" if physics_result["all_checks_passed"] and run_exit_code == 0 else "failed",
         "evidence_ids": [IDS["evidence_fragment"]],
@@ -694,7 +696,57 @@ def _build_records(bundle_root: Path, started_at: str, completed_at: str, run_ex
         "updated_at": completed_at,
     })
 
-    records = source_records + list(rec.values())
+    log_plan = _make_record("artifact_plan", LOG_ARTIFACT_PLAN_ID, schemas, primary)
+    log_plan.update({
+        "artifact_type": "run_log",
+        "format": "text/plain",
+        "required": True,
+        "completeness_rules": {
+            "required_paths": ["content"],
+            "non_empty_paths": ["content"],
+            "allowed_empty_paths": [],
+            "allowed_formats": ["text/plain"],
+            "schema_validator_id": "uv-eFT-run-log-v1",
+            "parse_required": False,
+            "directory_policy_version": None,
+        },
+        "artifact_plan_status": "fulfilled",
+        "planned_for_task_id": IDS["task"],
+        "planned_run_plan_id": IDS["run_plan"],
+        "fulfilled_artifact_ids": [LOG_ARTIFACT_ID],
+        "created_at": completed_at,
+        "schema_or_structure": {"type": "text", "non_empty": True},
+        "units": ["UTF-8 text"],
+    })
+    log_artifact = _make_record("artifact", LOG_ARTIFACT_ID, schemas, primary)
+    log_artifact.update({
+        "artifact_type": "run_log",
+        "origin_kind": "generated",
+        "path_or_uri": "outputs/run.log",
+        "format": "text/plain",
+        "content_sha256": log_sha,
+        "schema_or_structure": {"type": "text", "non_empty": True},
+        "units": ["UTF-8 text"],
+        "input_artifact_ids": [],
+        "configuration_id": IDS["configuration"],
+        "code_id": IDS["code"],
+        "environment_id": IDS["environment"],
+        "artifact_integrity_status": "passed",
+        "artifact_lifecycle_status": "active",
+        "generated_by_run_id": IDS["run"],
+        "generated_by_activity_id": None,
+        "acquired_from_source_id": None,
+        "ingested_by_activity_id": None,
+        "required_files": [],
+        "directory_manifest": [],
+        "directory_manifest_sha256": None,
+        "hash_unavailable_reason": None,
+        "created_at": completed_at,
+        "artifact_storage_kind": "file",
+        "alternative_identity": None,
+    })
+
+    records = source_records + list(rec.values()) + [log_plan, log_artifact]
     records.sort(key=lambda item: (item["record_type"], item.get(primary[item["record_type"]], "")))
     return records
 
@@ -821,10 +873,11 @@ def build_bundle(output_dir: Path | str) -> dict:
     }
     fingerprints = fingerprint_module.compute_fingerprint_bundle(provisional_inputs, execution_spec)
     output_sha = _sha_file(output_dir / "outputs/results.json")
+    log_sha = _sha_file(output_dir / "outputs/run.log")
 
     records = _build_records(
         output_dir, started_at, completed_at, completed.returncode, physics_result,
-        output_sha, code_tree_sha, environment_sha, config_sha, source_hashes,
+        output_sha, log_sha, code_tree_sha, environment_sha, config_sha, source_hashes,
         execution_spec, execution_sha, fingerprints, lockfile_sha, runtime,
         {"conventions_id": convention_id}, configuration_payload, arxiv_reference,
     )
@@ -854,6 +907,9 @@ def build_bundle(output_dir: Path | str) -> dict:
         output_path=output_dir / "outputs/record-validation-report.json",
     )
     report_summary = record_report["summary"]
+    (output_dir / "outputs/record-validation-report.json").write_text(
+        json.dumps(record_report, ensure_ascii=False, sort_keys=True, indent=2) + "\n", encoding="utf-8"
+    )
     if report_summary["errors"] != 0:
         raise RuntimeError("Candidate record graph failed validation: " + json.dumps(record_report["errors"], ensure_ascii=False))
     if record_report["warnings"]:
@@ -877,6 +933,7 @@ def build_bundle(output_dir: Path | str) -> dict:
         "fingerprints": fingerprints,
         "source_hashes": source_hashes,
         "output_sha256": output_sha,
+        "log_sha256": log_sha,
         "code_tree_sha256": code_tree_sha,
         "configuration_sha256": config_sha,
         "environment_sha256": environment_sha,
