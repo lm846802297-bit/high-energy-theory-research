@@ -49,6 +49,14 @@ python skills/high-energy-theory-research/scripts/validate_project_records.py pa
 
 The record directory should contain only project record JSON/YAML files. The default schema directory is this repository's Schema v1.4.3.7 candidate bundle. The report checks declared schemas, mapped cross-record references, ID uniqueness, status/reason consistency, and local source/artifact paths. A clean report is a bounded software check; it does not certify a physics derivation, full state-machine coverage, or scientific acceptance.
 
+## Migration safety
+
+Treat schema migration as a separate, review-gated workflow. The bundled v1.3-to-v1.4 migration prototype is dry-run by default; even staging mode never commits or overwrites source records, and its report must keep `commit_allowed=false`.
+
+For legacy `validation_ids`, resolve references only from the read-only source snapshot, using a unique primary ID within the same project. Map to `validation_plan_ids` only when the target record is a Validation Plan. Map to `validation_activity_ids` only when the target is a uniquely identified Validation Activity with `execution_status` in `in_progress`, `succeeded`, or `failed` and a non-empty `started_at`. Missing targets, duplicate IDs, project mismatches, unstarted activities, and unclear states remain unresolved; do not guess from the field name alone. An empty legacy list may be represented as two empty typed lists because it contains no references to classify.
+
+The migration resolver does not implement transactional commit or rollback and does not recover a missing source-schema archive. Keep unresolved items visible, preserve source hashes, and do not treat a successful dry run as migration approval. Candidate Artifact decisions DD-ART-007 through DD-ART-010 remain pending until explicitly approved.
+
 ## References
 
 - Task selection: references/task-router.md
