@@ -1,6 +1,7 @@
 # Design documents
 
-- high-energy-theory-research-Skill-v1.6.5.md is the retained design baseline.
-- The latest v1.6.6 Artifact-identity clarification is stored under schema/v1.4.3.7/audit/ because the candidate bundle pins its source document there.
+- **Current consolidated document:** [high-energy-theory-research-Skill-v1.6.7.md](high-energy-theory-research-Skill-v1.6.7.md). Sections 1–75 preserve the prior design material; §76 records actual CI and a bounded UV–EFT research-task pilot. The pilot is not a certification of the complete matching calculation.
+- **Historical baseline:** high-energy-theory-research-Skill-v1.6.5.md is preserved as the prior design baseline.
+- **Unapproved candidate clarification:** the v1.6.6 Artifact-identity clarification remains under schema/v1.4.3.7/audit/ and is not silently promoted into normative rules. DD-ART-007 through DD-ART-010 still require explicit approval.
 
-The v1.6.6 document is a candidate clarification, not an approved replacement for the normative baseline. Where recommendations differ, record a decision rather than silently promoting the candidate wording.
+Schema version and Skill-document version are separate. The current schema bundle remains v1.4.3.7-candidate; the PR remains Draft until normative decisions, migration semantics, and remaining provenance issues are reviewed.
