@@ -578,7 +578,7 @@ def _build_records(bundle_root: Path, started_at: str, completed_at: str, run_ex
         "acceptance_criteria": [criterion],
         "required": True,
         "validation_plan_status": "completed",
-        "subject_ids": [IDS["artifact"]],
+        "subject_ids": [IDS["artifact"], LOG_ARTIFACT_ID],
         "expected_artifact_plan_ids": [IDS["artifact_plan"], LOG_ARTIFACT_PLAN_ID],
         "instantiated_validation_activity_ids": [IDS["validation_activity"]],
         "created_at": completed_at,
