@@ -6136,9 +6136,9 @@ benchmark。文档生成和静态检查只证明报告所述范围内的结构�
 ### 76.1 可复核执行记录
 
 - 代码提交：4f271e2575687d453d4fcd41bf092714102d49d5。
-- 代码与迁移规则验收 CI：[Candidate schema validation，成功](https://github.com/lm846802297-bit/high-energy-theory-research/actions/runs/39541398645)。
-- [下载 UV–EFT 来源追溯证据包](https://github.com/lm846802297-bit/high-energy-theory-research/actions/runs/39541398645/artifacts/12319477721)。
-- [下载候选 Schema 验证报告](https://github.com/lm846802297-bit/high-energy-theory-research/actions/runs/39541398645/artifacts/12319122990)。
+- 代码与迁移规则验收 CI：[Candidate schema validation，成功](https://github.com/lm846802297-bit/high-energy-theory-research/actions/runs/39541569425)。
+- [下载 UV–EFT 来源追溯证据包](https://github.com/lm846802297-bit/high-energy-theory-research/actions/runs/39541569425/artifacts/12319502894)。
+- [下载候选 Schema 验证报告](https://github.com/lm846802297-bit/high-energy-theory-research/actions/runs/39541569425/artifacts/12319118196)。
 
 证据包保留输入、配置、源摘录、代码与 Schema 快照、数值结果、运行日志、22 条记录、完整 record chain、指纹摘要和跨记录验证报告。当前记录链验证结果为 22 条记录、0 个错误、0 个警告；运行指纹重新计算通过。证据包中的 Claim 和 evidence review status 仍为 pending。
 
