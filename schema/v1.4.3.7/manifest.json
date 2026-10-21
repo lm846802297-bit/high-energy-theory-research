@@ -46,7 +46,7 @@
     },
     "run_plan": {
       "path": "schemas/run_plan.schema.json",
-      "sha256": "828d56ab5386ec05a5d1edc161a8bbaa8c31ea24ce6ed07b2f5f13f17f116c79"
+      "sha256": "88c01a531ef64a263fa898d93e9bf394e62cfdd71a0e4efdbd95745d17d83e00"
     },
     "run": {
       "path": "schemas/run.schema.json",
@@ -54,7 +54,7 @@
     },
     "run_manifest": {
       "path": "schemas/run_manifest.schema.json",
-      "sha256": "6df0d78fe6bf650d3f15c447b07a0e97e896ce94ceea2040c574f8031820e4ed"
+      "sha256": "b10f539900db8878b8ee2806a5912bf1358fee853291adb4ac127cdf87d2de5a"
     },
     "artifact_plan": {
       "path": "schemas/artifact_plan.schema.json",
