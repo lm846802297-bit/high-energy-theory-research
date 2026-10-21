@@ -21,7 +21,7 @@ PRIMARY = {
 }
 # Explicit non-polymorphic reference contracts. Polymorphic refs are checked separately.
 REFS = {
-("task","active_contract_id"):"task_execution_contract",("task","dependency_task_ids"):"task",
+("task","active_contract_id"):"task_execution_contract",
 ("task_execution_contract","task_id"):"task",("task_execution_contract","supersedes_contract_id"):"task_execution_contract",
 ("run_plan","task_id"):"task",("run_plan","contract_id"):"task_execution_contract",("run_plan","instantiated_run_id"):"run",
 ("run_plan","configuration_id"):"configuration",("run_plan","code_id"):"code",("run_plan","environment_id"):"environment",
@@ -43,7 +43,7 @@ REFS = {
 ("test_run","test_id"):"test_case"
 }
 LIST_REF_FIELDS = {
-("run","manifest_ids"):"run_manifest",("run","latest_manifest_id"):"run_manifest",("run","log_artifact_ids"):"artifact",
+("task","dependency_task_ids"):"task",("run","manifest_ids"):"run_manifest",("run","latest_manifest_id"):"run_manifest",("run","log_artifact_ids"):"artifact",
 ("run_plan","input_artifact_ids"):"artifact",("run_plan","artifact_plan_ids"):"artifact_plan",("run_plan","validation_plan_ids"):"validation_plan",
 ("task","claim_ids"):"claim",("task","completion_evidence_ids"):"evidence_any",
 ("artifact_plan","fulfilled_artifact_ids"):"artifact",("validation_plan","expected_artifact_plan_ids"):"artifact_plan",

@@ -202,6 +202,34 @@ def _reason_is_present(record: dict, field: str) -> bool:
     )
 
 
+def _check_global_ids(records, project_root: Path):
+    """Enforce the design rule that IDs share one namespace within a project."""
+    errors = []
+    seen = {}
+    for path, record in records:
+        record_type = record.get("record_type")
+        id_field = PRIMARY.get(record_type)
+        record_id = record.get(id_field) if id_field else None
+        if not isinstance(record_id, str) or not record_id:
+            continue
+        project_id = record.get("project_id")
+        key = (project_id, record_id)
+        previous = seen.get(key)
+        if previous is not None and previous[0] != record_type:
+            errors.append({
+                "code": "DUPLICATE_ID_ACROSS_TYPES",
+                "path": _display_path(path, project_root),
+                "record_type": record_type,
+                "id": record_id,
+                "first_record_type": previous[0],
+                "first_path": _display_path(previous[1], project_root),
+                "project_id": project_id,
+            })
+        else:
+            seen.setdefault(key, (record_type, path))
+    return errors
+
+
 def _check_statuses_and_reasons(records, schemas, project_root: Path):
     errors = []
     for path, record in records:
@@ -378,10 +406,11 @@ def validate_project_records(
     schemas, schema_errors = _load_schemas(schemas_dir)
 
     cross = validate_records(records, schemas, validate_schema=bool(schemas))
+    id_errors = _check_global_ids(records, project_root)
     extra_errors = _check_statuses_and_reasons(records, schemas, project_root)
     path_errors, path_warnings = _check_local_references(records, project_root)
 
-    errors = load_errors + schema_errors + cross["errors"] + extra_errors + path_errors
+    errors = load_errors + schema_errors + cross["errors"] + id_errors + extra_errors + path_errors
     warnings = cross["warnings"] + path_warnings
 
     for item in errors + warnings:
