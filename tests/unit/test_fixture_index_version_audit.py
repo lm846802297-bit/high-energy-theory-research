@@ -29,7 +29,7 @@ class FixtureIndexVersionAuditTests(unittest.TestCase):
         actual_index_hash = hashlib.sha256(INDEX_PATH.read_bytes()).hexdigest()
         self.assertEqual(actual_index_hash, manifest["fixture_index_sha256"])
         self.assertIn("unresolved", audit.lower())
-        self.assertIn("do not interpret", audit.lower())
+        self.assertIn("does not interpret", audit.lower())
 
     def test_current_validator_checks_index_digest_not_its_top_level_version(self):
         validator = VALIDATOR_PATH.read_text(encoding="utf-8")
