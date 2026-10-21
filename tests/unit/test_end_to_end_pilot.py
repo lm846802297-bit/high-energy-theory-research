@@ -31,6 +31,10 @@ VALIDATOR = _load_module(
     "skill_project_record_validator",
     ROOT / "skills" / "high-energy-theory-research" / "scripts" / "validate_project_records.py",
 )
+FINGERPRINTS = _load_module(
+    "fingerprint_inputs",
+    ROOT / "skills" / "high-energy-theory-research" / "scripts" / "fingerprint_inputs.py",
+)
 
 PRIMARY = {
     "task": "task_id",
@@ -78,7 +82,7 @@ def _sha(data):
     return hashlib.sha256(data).hexdigest()
 
 def _json_hash(value):
-    return _sha(json.dumps(value, sort_keys=True, separators=(",", ":"), ensure_ascii=False))
+    return FINGERPRINTS.sha256_json(value)
 
 def _minimal_value(schema, root_schema):
     if "$ref" in schema:
@@ -169,7 +173,7 @@ def _make_records(result_path, result_hash):
     script_path = PILOT_DIR / "run_pilot.py"
     expected_path = PILOT_DIR / "expected-results.json"
     code_files = []
-    for path in sorted((problem_path, expected_path, script_path)):
+    for path in sorted((problem_path, expected_path, script_path, ROOT / "requirements-dev.txt", ROOT / "skills" / "high-energy-theory-research" / "scripts" / "fingerprint_inputs.py")):
         code_files.append({
             "path": str(path.relative_to(ROOT)).replace("\\", "/"),
             "sha256": _sha(path.read_bytes()),
@@ -324,9 +328,18 @@ def _make_records(result_path, result_hash):
         "input_artifact_ids": [],
         "artifact_plan_ids": [IDS["artifact_plan"]],
         "validation_plan_ids": [IDS["validation_plan"]],
-        # Current candidate schema permits only empty objects here; see gap test.
         "execution_spec": execution_spec,
-        "fingerprint_inputs": {},
+        "fingerprint_inputs": {
+            "contract_version": FINGERPRINTS.CONTRACT_VERSION,
+            "canonicalization": FINGERPRINTS.CANONICALIZATION,
+            "source_inputs": [{"source_id": IDS["source"], "content_sha256": problem_hash}],
+            "input_artifacts": [],
+            "configuration": {"record_id": IDS["configuration"], "configuration_sha256": configuration["configuration_sha256"], "not_applicable_reason": None},
+            "code": {"record_id": IDS["code"], "code_tree_sha256": code_tree_hash, "not_applicable_reason": None},
+            "environment": {"record_id": IDS["environment"], "environment_sha256": environment_hash, "not_applicable_reason": None},
+            "execution_spec_sha256": _json_hash(execution_spec),
+            "fingerprint_profile_version": FINGERPRINTS.DEFAULT_PROFILE_VERSION,
+        },
         "execution_spec_sha256": _json_hash(execution_spec),
         "instantiated_run_id": IDS["run"],
         "blocked_reason": None,
@@ -397,26 +410,7 @@ def _make_records(result_path, result_hash):
             "container_unavailable_reason": environment["container_unavailable_reason"],
             "environment_sha256": environment["environment_sha256"],
         },
-        "fingerprints": {
-            "algorithm": "sha256",
-            "input_set_sha256": _json_hash({"source_sha256": problem_hash, "configuration_sha256": configuration["configuration_sha256"], "input_artifact_ids": []}),
-            "configuration_sha256": configuration["configuration_sha256"],
-            "code_tree_sha256": code_tree_hash,
-            "environment_sha256": environment_hash,
-            "execution_spec_sha256": _json_hash(execution_spec),
-            "dependency_artifact_sha256": _json_hash([]),
-            "composite_sha256": _json_hash({
-                "algorithm": "sha256",
-                "input_set_sha256": _json_hash({"source_sha256": problem_hash, "configuration_sha256": configuration["configuration_sha256"], "input_artifact_ids": []}),
-                "configuration_sha256": configuration["configuration_sha256"],
-                "code_tree_sha256": code_tree_hash,
-                "environment_sha256": environment_hash,
-                "execution_spec_sha256": _json_hash(execution_spec),
-                "dependency_artifact_sha256": _json_hash([]),
-                "fingerprint_profile_version": "pilot-fingerprint-v1",
-            }),
-            "fingerprint_profile_version": "pilot-fingerprint-v1",
-        },
+        "fingerprints": FINGERPRINTS.compute_fingerprint_bundle(run_plan["fingerprint_inputs"], execution_spec),
         "execution": {
             "tool_id": "python-stdlib",
             "command_or_notebook": "python tests/eval-cases/analytic-mass-matrix-pilot/run_pilot.py",
@@ -672,35 +666,23 @@ class EndToEndResearchSkillPilotTests(unittest.TestCase):
             output_path=report_path,
         )
         self.assertEqual(report["summary"]["errors"], 0, json.dumps(report["errors"], ensure_ascii=False, indent=2))
+        recomputed_bundle = FINGERPRINTS.validate_run_plan_fingerprint_inputs(records["run_plan"], records["task_execution_contract"], records["run_manifest"])
+        self.assertEqual(recomputed_bundle, records["run_manifest"]["fingerprints"])
         self.assertGreaterEqual(report["summary"]["records"], 17)
         self.assertTrue(generated_path.is_file())
 
-    def test_structured_payloads_are_supported_except_undefined_fingerprint_inputs(self):
+    def test_structured_payloads_and_fingerprint_inputs_are_supported(self):
         schemas = _load_schemas()
         records, _ = _make_records(PILOT_DIR / "expected-results.json", _sha((PILOT_DIR / "expected-results.json").read_bytes()))
 
         accepted = [
-            ("run_plan", "execution_spec", {
-                "entrypoint": "python run_pilot.py", "arguments": [], "working_directory": ".",
-                "precision": "binary64", "tolerances": {"absolute": 1e-12}, "random_seed": None,
-                "parallelism": 1, "locale": "C", "timezone": "UTC", "expected_outputs": ["results.json"],
-                "timeout_policy": {"timeout_seconds": 30, "on_timeout": "fail", "retry_limit": 0},
-            }),
-            ("run_manifest", "outputs", {
-                "artifact_plan_ids": [IDS["artifact_plan"]], "artifact_ids": [IDS["artifact"]],
-                "artifact_integrity_status": "passed",
-                "completeness_check": {"missing": [], "empty": [], "parse_errors": [], "checked_at": TIMESTAMP, "checker_version": "test-v1"},
-            }),
-            ("run_manifest", "code", {"code_id": IDS["code"], "repository_uri": "https://example.org/repo"}),
-            ("claim", "evidence_status", {"theory": {
-                "check_status": "passed", "reason": "independent check passed", "evidence_ids": [IDS["evidence_fragment"]],
-                "checked_at": TIMESTAMP, "checked_by": "test", "limitations": [], "invalidated_by": [],
-            }}),
-            ("artifact_plan", "completeness_rules", {
-                "required_paths": ["eigenvalues"], "non_empty_paths": ["eigenvalues"], "allowed_empty_paths": [],
-                "allowed_formats": ["application/json"], "schema_validator_id": "test-v1",
-                "parse_required": True, "directory_policy_version": None,
-            }),
+            ("run_plan", "execution_spec", records["run_plan"]["execution_spec"]),
+            ("run_plan", "fingerprint_inputs", records["run_plan"]["fingerprint_inputs"]),
+            ("run_manifest", "fingerprints", records["run_manifest"]["fingerprints"]),
+            ("run_manifest", "outputs", records["run_manifest"]["outputs"]),
+            ("run_manifest", "code", records["run_manifest"]["code"]),
+            ("claim", "evidence_status", records["claim"]["evidence_status"]),
+            ("artifact_plan", "completeness_rules", records["artifact_plan"]["completeness_rules"]),
             ("artifact_plan", "schema_or_structure", {"type": "object", "required": ["eigenvalues"]}),
             ("artifact", "schema_or_structure", {"type": "object", "required": ["eigenvalues"]}),
         ]
@@ -712,17 +694,9 @@ class EndToEndResearchSkillPilotTests(unittest.TestCase):
                 self.assertFalse(errors, f"{record_type}.{field} should accept its declared structured payload: {errors}")
 
         candidate = deepcopy(records["run_plan"])
-        candidate["fingerprint_inputs"] = {"code_tree_sha256": "a" * 64}
+        del candidate["fingerprint_inputs"]["execution_spec_sha256"]
         errors = list(Draft202012Validator(schemas["run_plan"]).iter_errors(candidate))
-        self.assertTrue(errors, "fingerprint_inputs must remain blocked until its field contract is defined")
-
-        readme = (PILOT_DIR / "README.md").read_text(encoding="utf-8")
-        self.assertIn("full reproducibility acceptance remains blocked", readme.lower())
-        self.assertIn("run_plan.fingerprint_inputs", readme)
-        self.assertIn("not define its fields", readme)
-        review = (ROOT / "docs" / "governance" / "fingerprint-inputs-contract-review.md").read_text(encoding="utf-8")
-        self.assertIn("proposal only; not implemented", review)
-        self.assertIn("Canonicalization", review)
+        self.assertTrue(errors, "FingerprintInputs must require the execution-spec digest")
 
 
 if __name__ == "__main__":
