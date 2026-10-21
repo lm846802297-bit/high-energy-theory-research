@@ -1,0 +1,369 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.example.invalid/high-energy-theory/v1.4.2/configuration.schema.json",
+  "title": "configuration record schema (v1.4.2 candidate)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "record_type",
+    "project_id",
+    "configuration_id",
+    "conventions_id",
+    "independent_inputs",
+    "derived_parameters",
+    "units",
+    "configuration_sha256",
+    "created_at"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.4"
+    },
+    "record_type": {
+      "const": "configuration"
+    },
+    "project_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "description": {
+      "type": "string"
+    },
+    "configuration_id": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[A-Z][A-Z0-9-]{2,80}$"
+    },
+    "parameters": {
+      "type": [
+        "array",
+        "object",
+        "number",
+        "string",
+        "null"
+      ]
+    },
+    "conventions_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "input_fingerprint": {
+      "type": "string",
+      "minLength": 1
+    },
+    "independent_inputs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "derived_parameters": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "units": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "configuration_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    }
+  },
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "sha256OrNull": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/sha256"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "scope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "included",
+        "excluded",
+        "target_domain",
+        "out_of_scope_behavior"
+      ],
+      "properties": {
+        "included": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "excluded": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "target_domain": {
+          "type": "string",
+          "minLength": 1
+        },
+        "out_of_scope_behavior": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "inputRefs": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source_ids",
+        "configuration_ids",
+        "input_artifact_ids",
+        "external_references"
+      ],
+      "properties": {
+        "source_ids": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "configuration_ids": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "input_artifact_ids": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "external_references": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "external_system",
+              "external_id",
+              "uri",
+              "version_or_revision",
+              "retrieved_at",
+              "content_sha256",
+              "hash_unavailable_reason"
+            ],
+            "properties": {
+              "external_system": {
+                "type": "string",
+                "minLength": 1
+              },
+              "external_id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "uri": {
+                "type": "string",
+                "minLength": 1
+              },
+              "version_or_revision": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "retrieved_at": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "format": "date-time"
+              },
+              "content_sha256": {
+                "$ref": "#/$defs/sha256OrNull"
+              },
+              "hash_unavailable_reason": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "acceptanceCriterion": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "criterion_id",
+        "description",
+        "required",
+        "verification_method",
+        "pass_condition",
+        "failure_condition",
+        "evidence_kind"
+      ],
+      "properties": {
+        "criterion_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1
+        },
+        "required": {
+          "type": "boolean"
+        },
+        "verification_method": {
+          "type": "string",
+          "minLength": 1
+        },
+        "pass_condition": {
+          "type": "string",
+          "minLength": 1
+        },
+        "failure_condition": {
+          "type": "string",
+          "minLength": 1
+        },
+        "evidence_kind": {
+          "type": "string",
+          "minLength": 1
+        },
+        "threshold": {},
+        "comparison_operator": {
+          "type": "string"
+        },
+        "unit": {
+          "type": "string"
+        },
+        "tolerance_basis": {
+          "type": "string"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "required": [
+              "threshold"
+            ]
+          },
+          "then": {
+            "required": [
+              "comparison_operator",
+              "unit",
+              "tolerance_basis"
+            ]
+          }
+        }
+      ]
+    },
+    "assumption": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "assumption_id",
+        "description",
+        "scope",
+        "status",
+        "source_or_rationale"
+      ],
+      "properties": {
+        "assumption_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1
+        },
+        "scope": {
+          "type": "string",
+          "minLength": 1
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "proposed",
+            "accepted",
+            "rejected",
+            "superseded"
+          ]
+        },
+        "source_or_rationale": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "method": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "method_id",
+        "description",
+        "scope",
+        "status",
+        "source_or_rationale"
+      ],
+      "properties": {
+        "method_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1
+        },
+        "scope": {
+          "type": "string",
+          "minLength": 1
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "proposed",
+            "accepted",
+            "rejected",
+            "superseded"
+          ]
+        },
+        "source_or_rationale": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    }
+  }
+}
