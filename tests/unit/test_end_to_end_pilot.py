@@ -217,11 +217,11 @@ def _make_records(result_path, result_hash):
             "input_artifact_ids": [],
             "external_references": [],
         },
-        "assumptions": [{"statement": "The matrix is real symmetric and entries are in TeV^2."}],
+        "assumptions": [{"assumption_id": "ASM-E2E-001", "description": "The matrix is real symmetric and entries are in TeV^2.", "scope": "This single toy matrix.", "status": "accepted", "source_or_rationale": "Explicit input declaration in problem.json."}],
         "conventions_id": IDS["convention_set"],
         "conventions_reason": None,
         "required_capabilities": ["python-stdlib"],
-        "planned_methods": [{"method": "analytic eigenvalue formula", "independent_checks": ["trace", "determinant", "residuals"]}],
+        "planned_methods": [{"method_id": "METHOD-E2E-001", "description": "Analytic eigenvalue formula with independent checks.", "scope": "The supplied 2x2 matrix only.", "status": "accepted", "source_or_rationale": "The closed-form characteristic equation is exact for a real symmetric 2x2 matrix."}],
         "artifact_plan_ids": [IDS["artifact_plan"]],
         "validation_plan_ids": [IDS["validation_plan"]],
         "acceptance_criteria": [{
@@ -352,6 +352,7 @@ def _make_records(result_path, result_hash):
             "source_ids": [IDS["source"]],
             "configuration_ids": [IDS["configuration"]],
             "input_artifact_ids": [],
+            "external_references": [],
         },
         # The candidate schemas currently reject non-empty values in these
         # closed objects; the negative tests below make that limitation explicit.
@@ -478,7 +479,7 @@ def _make_records(result_path, result_hash):
         "locator": "results.json#/eigenvalues and results.json#/checks",
         "content_sha256": result_hash,
         "scope_statement": "Supports the eigenvalues and checks for the single matrix in problem.json only.",
-        "assumptions": [{"statement": "The input matrix is real symmetric."}],
+        "assumptions": [{"assumption_id": "ASM-E2E-001", "description": "The input matrix is real symmetric.", "scope": "The computed eigenvalues and checks for this input only.", "status": "accepted", "source_or_rationale": "Explicit input declaration in problem.json."}],
         "captured_at": TIMESTAMP,
         "review_status": "pending",
     })
@@ -501,7 +502,7 @@ def _make_records(result_path, result_hash):
             "assessed_by": "automated-pilot-test",
             "assessed_at": TIMESTAMP,
         },
-        "assumptions": [{"statement": "The matrix is real symmetric and expressed in TeV^2."}],
+        "assumptions": [{"assumption_id": "ASM-E2E-001", "description": "The matrix is real symmetric and expressed in TeV^2.", "scope": "This single toy matrix.", "status": "accepted", "source_or_rationale": "Explicit input declaration in problem.json."}],
         "source_ids": [IDS["source"]],
         "config_ids": [IDS["configuration"]],
         "run_plan_ids": [IDS["run_plan"]],
