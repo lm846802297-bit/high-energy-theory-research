@@ -6,7 +6,16 @@
     "model": "Axial U_A(1)_{L_mu-L_tau} UV completion with a singlet scalar and vector-like charged leptons",
     "primary_model_reference": "https://arxiv.org/html/2608.27258v1",
     "primary_reference_version": "arXiv:2608.27258v1, submitted 2026-08-27",
-    "working_note_sections": ["39.6", "39.7", "40.1", "40.2", "40.3", "40.4", "128.2", "128.3"],
+    "working_note_sections": [
+      "39.6",
+      "39.7",
+      "40.1",
+      "40.2",
+      "40.3",
+      "40.4",
+      "128.2",
+      "128.3"
+    ],
     "source_boundary": "The arXiv paper anchors model conventions. The hard-kernel/PV formulas under audit are transcribed from the user's working note and are not claimed to appear in the arXiv paper."
   },
   "definitions": {
@@ -34,7 +43,7 @@
     "single_operator_projection_definition": "Pi'_local(0)=-(C_PhiD/Lambda^2)*v_h*v_s/2",
     "scope_warning": "This projection fixes a coefficient only under the stated single-operator convention. It is not a complete, unique Wilson-coefficient match in a full dimension-six basis."
   },
-  "target_claim": "Within the transcribed hard-kernel and PV conventions, the leading small-r derivative is F'_hard(0)/K = 4/3 - 2*ln(M^2/mu^2) + O(r*ln r); at mu=M, Pi'_hard(0) = -K/(12*pi^2) + O(K*r*ln r). Under the explicitly stated single-operator projection convention only, C_PhiD/Lambda^2 = K/(6*pi^2*v_h*v_s) + O(K*r*ln r/(v_h*v_s)).",
+  "target_claim": "Within the transcribed hard-kernel and PV conventions, F'_hard(0)/K = 4/3 - 2*L - 4*r*ln(r) - 16*r - 28*r^2*ln(r) - 32*r^2 + O(r^3*ln(r)), where L=ln(M^2/mu^2); in particular the leading small-r term is 4/3 - 2*L. At mu=M, Pi'_hard(0) = -K/(12*pi^2) + O(K*r*ln(r)). Under the explicitly stated single-operator projection convention only, C_PhiD/Lambda^2 = K/(6*pi^2*v_h*v_s) + O(K*r*ln(r)/(v_h*v_s)).",
   "excluded_claims": [
     "This task does not independently rederive the complete UV Feynman-diagram numerator or prove that every diagram has been included.",
     "This task does not establish a unique Wilson coefficient in a complete nonredundant operator basis.",

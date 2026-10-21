@@ -125,8 +125,10 @@ def compute(problem: dict, config: dict) -> dict:
             )
             leading = 4.0 / 3.0 - 2.0 * scale_log
             first_correction = leading - 4.0 * r * math.log(r) - 16.0 * r
+            second_correction = first_correction - 28.0 * r**2 * math.log(r) - 32.0 * r**2
             asymptotic_residual = fprime_closed_over_K - leading
             series_residual = fprime_closed_over_K - first_correction
+            second_order_residual = fprime_closed_over_K - second_correction
             rows.append({
                 "r": r,
                 "L": scale_log,
@@ -137,9 +139,13 @@ def compute(problem: dict, config: dict) -> dict:
                 "Fprime_hard_over_K_quadrature": fprime_integral_over_K,
                 "Fprime_hard_over_K_leading_small_r": leading,
                 "Fprime_hard_over_K_first_correction": first_correction,
+                "Fprime_hard_over_K_second_correction": second_correction,
                 "asymptotic_residual_over_K": asymptotic_residual,
                 "residual_after_first_correction_over_K": series_residual,
+                "residual_after_second_correction_over_K": second_order_residual,
                 "residual_scaled_by_r_abslogr": abs(asymptotic_residual) / (r * abs(math.log(r))),
+                "residual_scaled_by_r2_abslogr_after_first_correction": abs(series_residual) / (r**2 * abs(math.log(r))),
+                "residual_scaled_by_r3_abslogr_after_second_correction": abs(second_order_residual) / (r**3 * abs(math.log(r))),
                 "max_component_absolute_error": max(component_errors.values()),
                 "absolute_Fprime_quadrature_error": abs(fprime_closed_over_K - fprime_integral_over_K),
             })
@@ -147,9 +153,11 @@ def compute(problem: dict, config: dict) -> dict:
     matching_scale_rows = [row for row in rows if row["L"] == 0.0]
     leading_residuals = [abs(row["asymptotic_residual_over_K"]) for row in matching_scale_rows]
     next_order_residuals = [abs(row["residual_after_first_correction_over_K"]) for row in matching_scale_rows]
+    second_order_residuals = [abs(row["residual_after_second_correction_over_K"]) for row in matching_scale_rows]
     max_component_error = max(row["max_component_absolute_error"] for row in rows)
     max_fprime_error = max(row["absolute_Fprime_quadrature_error"] for row in rows)
     max_scaled_residual = max(row["residual_scaled_by_r_abslogr"] for row in rows)
+    max_scaled_second_order_residual = max(row["residual_scaled_by_r3_abslogr_after_second_correction"] for row in rows)
 
     rational_4_over_3_div_16 = Fraction(4, 3) / 16
     rational_projection_factor = 2 * rational_4_over_3_div_16
@@ -160,7 +168,9 @@ def compute(problem: dict, config: dict) -> dict:
         "Fprime_combination_agrees_with_independent_quadrature": max_fprime_error <= agreement_tolerance,
         "leading_small_r_residual_decreases": all(a > b for a, b in zip(leading_residuals, leading_residuals[1:])),
         "first_correction_residual_decreases": all(a > b for a, b in zip(next_order_residuals, next_order_residuals[1:])),
+        "second_correction_residual_decreases": all(a > b for a, b in zip(second_order_residuals, second_order_residuals[1:])),
         "scaled_asymptotic_residual_is_bounded_on_test_grid": max_scaled_residual < float(config["maximum_scaled_asymptotic_residual"]),
+        "second_order_scaled_residual_is_bounded_on_test_grid": max_scaled_second_order_residual < float(config["maximum_scaled_second_order_residual"]),
         "exact_rational_factor_4_over_3_div_16_is_1_over_12": rational_4_over_3_div_16 == Fraction(1, 12),
         "exact_rational_projection_factor_is_1_over_6": rational_projection_factor == Fraction(1, 6),
         "matching_scale_pi_prime_has_expected_sign_and_factor": pi_prime_at_matching_scale_over_K < 0.0 and math.isclose(
@@ -188,6 +198,7 @@ def compute(problem: dict, config: dict) -> dict:
         "exact_coefficients": {
             "Fprime_hard_over_K_leading_small_r": "4/3 - 2*L",
             "Fprime_hard_over_K_first_correction": "4/3 - 2*L - 4*r*ln(r) - 16*r + O(r^2*ln(r))",
+            "Fprime_hard_over_K_second_correction": "4/3 - 2*L - 4*r*ln(r) - 16*r - 28*r^2*ln(r) - 32*r^2 + O(r^3*ln(r))",
             "Pi_prime_hard_over_K_at_mu_equals_M": "-1/(12*pi^2) + O(r*ln(r))",
             "single_operator_projection_C_over_Lambda2": "K/(6*pi^2*v_h*v_s) + O(K*r*ln(r)/(v_h*v_s))",
             "projection_scope": "single-operator convention only; not a unique complete-basis Wilson coefficient",
@@ -197,6 +208,7 @@ def compute(problem: dict, config: dict) -> dict:
             "max_component_absolute_error": max_component_error,
             "max_Fprime_absolute_error": max_fprime_error,
             "max_scaled_asymptotic_residual": max_scaled_residual,
+            "max_scaled_second_order_residual": max_scaled_second_order_residual,
             "pi_prime_at_matching_scale_over_K_numeric": pi_prime_at_matching_scale_over_K,
             "exact_projection_factor": str(rational_projection_factor),
         },

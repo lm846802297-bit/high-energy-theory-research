@@ -11,7 +11,8 @@ The model conventions are cross-referenced to [arXiv:2608.27258v1](https://arxiv
 ## What the task can establish
 
 - The listed \(B_0\)-type values and derivatives are numerically consistent with independent Feynman-parameter integrals.
-- The exact derivative combination approaches \(4/3-2L\), with first correction \(-4r\ln r-16r\).
+- The exact derivative combination approaches \(4/3-2L\), with first correction \(-4r\ln r-16r\) and the independently expanded second correction \(-28r^2\ln r-32r^2\).
+- The checked second-order expansion is \(4/3-2L-4r\ln r-16r-28r^2\ln r-32r^2+O(r^3\ln r)\); its residual is tested on the declared finite grid, not proven for all \(r\).
 - At \(\mu=M\), the declared insertion convention gives \(\Pi'_{\rm hard}(0)=-K/(12\pi^2)+O(Kr\ln r)\).
 - Under the declared single-operator projection convention only, the coefficient factor is \(C_{\Phi D}/\Lambda^2=K/(6\pi^2v_hv_s)\).
 

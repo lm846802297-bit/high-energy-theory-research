@@ -51,6 +51,33 @@ so in particular
 F'_{\mathrm{hard}}(0)=K\left(\frac43-2L\right)+O(Kr\ln r).
 \]
 
+## Additional next-order derivation (derived in this pilot, not attributed to the source note)
+
+Expanding the transcribed closed forms for \(0<r\ll1\),
+\[
+\overline B_{mM}(0)=1-L+r\ln r+r^2\ln r+O(r^3\ln r),
+\]
+and
+\[
+M^2 B'_{mM}(0)
+=\frac12+r\left(\frac32+\ln r\right)
++r^2\left(\frac52+3\ln r\right)+O(r^3\ln r).
+\]
+Consequently,
+\[
+(1+r)M^2 B'_{mM}(0)
+=\frac12+r(2+\ln r)+r^2(4+4\ln r)+O(r^3\ln r),
+\]
+which yields the stronger expansion
+\[
+\boxed{
+\frac{F'_{\mathrm{hard}}(0)}{K}
+=\frac43-2L-4r\ln r-16r
+-28r^2\ln r-32r^2+O(r^3\ln r)
+}.
+\]
+The pilot now tests whether the residual after subtracting the second-order expression decreases across the declared \(r\) grid and whether its \(r^3|\ln r|\)-scaled magnitude remains below the explicit test-grid threshold. This is a numerical asymptotic-consistency test, not a proof of convergence or a bound for all \(r\).
+
 Using the note's insertion convention,
 \[
 \Pi'_{\mathrm{hard}}(0)=-\frac{F'_{\mathrm{hard}}(0)}{16\pi^2}.

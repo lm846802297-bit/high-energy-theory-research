@@ -60,6 +60,23 @@ class UVEFTHardDerivativePilotTests(unittest.TestCase):
             )
             self.assertTrue(summary["physics_checks"]["checks"]["exact_rational_projection_factor_is_1_over_6"])
 
+    def test_second_order_small_r_correction_is_recorded_and_residual_shrinks(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            bundle_root = Path(tmp) / "bundle"
+            summary = build_bundle(bundle_root)
+            result = json.loads((bundle_root / "outputs" / "results.json").read_text(encoding="utf-8"))
+            self.assertEqual(
+                result["exact_coefficients"]["Fprime_hard_over_K_second_correction"],
+                "4/3 - 2*L - 4*r*ln(r) - 16*r - 28*r^2*ln(r) - 32*r^2 + O(r^3*ln(r))",
+            )
+            checks = summary["physics_checks"]["checks"]
+            self.assertTrue(checks["second_correction_residual_decreases"], summary)
+            self.assertTrue(checks["second_order_scaled_residual_is_bounded_on_test_grid"], summary)
+            self.assertLess(
+                result["summary"]["max_scaled_second_order_residual"],
+                70.0,
+            )
+
 
 if __name__ == "__main__":
     unittest.main()
