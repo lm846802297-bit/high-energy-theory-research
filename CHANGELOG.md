@@ -28,3 +28,10 @@
 - Added a regression test that verifies the fixture-index version mismatch, source-lineage record, and current validator behavior remain explicit; the index bytes were not changed.
 - Added a synthetic 2x2 mass-squared matrix pilot with exact eigenvalues/masses, trace and determinant checks, eigenvector normalization/orthogonality, eigenpair residuals, and a positivity check.
 - Added a synthetic Task-to-Claim record chain and tests for candidate-schema payloads that are currently rejected. The mathematical calculation passes, but full reproducibility acceptance is explicitly blocked until the structured schema envelopes are completed.
+
+## 2026-10-21 — Structured research-record payload remediation
+
+- Added explicit candidate-schema structures for Run Plan `execution_spec`, Run Manifest snapshots/fingerprint bundle/outputs/validation, Claim evidence dimensions and physics assessment, and Artifact Plan completeness rules.
+- Allowed `schema_or_structure` to carry an opaque object or null, consistent with its design-document type.
+- Updated the two positive Claim fixtures to use `physics_assessment: null` under the object-or-null contract.
+- Left `run_plan.fingerprint_inputs` unchanged because the source design references `FingerprintInputs` without defining its fields or hash semantics; documented this as a release blocker rather than inventing a normative contract.

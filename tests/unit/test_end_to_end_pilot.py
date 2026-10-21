@@ -717,7 +717,7 @@ class EndToEndResearchSkillPilotTests(unittest.TestCase):
         self.assertTrue(errors, "fingerprint_inputs must remain blocked until its field contract is defined")
 
         readme = (PILOT_DIR / "README.md").read_text(encoding="utf-8")
-        self.assertIn("full reproducibility acceptance remains blocked", readme)
+        self.assertIn("full reproducibility acceptance remains blocked", readme.lower())
         self.assertIn("run_plan.fingerprint_inputs", readme)
         self.assertIn("not define its fields", readme)
 

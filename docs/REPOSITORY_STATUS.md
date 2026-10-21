@@ -13,7 +13,7 @@
 | Requirement/test traceability | CSV traceability data and regenerated validation report included |
 | Skill runtime | Initial instruction and reference scaffold added; not yet a complete automated research agent |
 | Project-record validator | P0 CLI added for JSON/YAML parsing, candidate-schema validation, mapped references, cross-type ID uniqueness, status/reason checks, and local source/artifact path checks |
-| End-to-end Skill pilot | Synthetic 2x2 matrix calculation and independent checks are implemented; the sparse candidate-record graph validates, but full reproducibility acceptance is blocked by empty-only structured schema fields |
+| End-to-end Skill pilot | Synthetic 2x2 matrix calculation and independent checks pass; structured candidate records validate. Full reproducibility acceptance remains blocked by the undefined `FingerprintInputs` contract. |
 | Scientific validation | Not implemented; no physics result is certified by this repository |
 
 ## Local verification performed

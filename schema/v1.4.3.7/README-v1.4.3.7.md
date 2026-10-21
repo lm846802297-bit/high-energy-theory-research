@@ -34,4 +34,4 @@ The fixture index retains the observed top-level label `1.4.3.6-candidate`, whil
 
 ## End-to-end Skill pilot
 
-The repository includes a synthetic algebraic pilot under `tests/eval-cases/analytic-mass-matrix-pilot/`. Its mathematical checks pass. Full reproducibility acceptance remains blocked because several candidate schema objects cannot represent non-empty structured execution, manifest, artifact-plan, and claim-evidence data. This is recorded in the pilot README and `audit/审计报告-v1.4.3.7.md`.
+The repository includes a synthetic algebraic pilot under `tests/eval-cases/analytic-mass-matrix-pilot/`. Its mathematical checks pass. Structured execution, Run Manifest, artifact-plan, and Claim evidence payloads are now represented in the candidate schemas. Full reproducibility acceptance remains blocked because the design document names `FingerprintInputs` without defining its fields or hashing semantics. This is recorded in the pilot README and `audit/审计报告-v1.4.3.7.md`.
