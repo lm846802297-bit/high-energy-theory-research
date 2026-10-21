@@ -1,0 +1,36 @@
+{
+  "schema_version": "1.4",
+  "record_type": "task_execution_contract",
+  "project_id": "P-HEP",
+  "contract_id": "TEC-1",
+  "task_id": "TASK-1",
+  "contract_version": 1,
+  "contract_status": "approved",
+  "contract_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "alternative_identity_methods": [
+    {
+      "method_id": "AIM-PUBLISHER-V1",
+      "method_version": 1,
+      "method_kind": "immutable_versioned_locator",
+      "method_status": "approved",
+      "description": "Publisher immutable version locator",
+      "applicable_source_types": [
+        "publisher"
+      ],
+      "applicable_artifact_storage_kinds": [
+        "file"
+      ],
+      "identity_value_specification": "immutable publisher URL",
+      "verification_procedure": "resolve and compare version identifier",
+      "required_evidence_kinds": [
+        "publisher_metadata"
+      ],
+      "acceptance_criteria": [
+        "publisher version matches declared identity"
+      ],
+      "limitations": [
+        "does not prove local byte equality"
+      ]
+    }
+  ]
+}
