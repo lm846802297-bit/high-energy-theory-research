@@ -52,6 +52,7 @@ def migrate_record(rec, target_properties=None, unknown_policy="quarantine", sou
     # type and, for activities, evidence that execution actually started.
     if "validation_ids" in out:
         raw_ids=out.pop("validation_ids")
+        validation_unresolved_start=len(unresolved)
         if not isinstance(raw_ids,list):
             unresolved.append({"code":"VALIDATION_IDS_INVALID_SHAPE","field":"validation_ids","source_value":raw_ids})
         elif not raw_ids:
@@ -110,6 +111,12 @@ def migrate_record(rec, target_properties=None, unknown_policy="quarantine", sou
                     if value not in merged:
                         merged.append(value)
                 out[field]=merged
+            # The target Claim schema separates plans from activities. If every
+            # legacy reference was resolved, make the other typed list explicitly empty.
+            if len(unresolved)==validation_unresolved_start:
+                for field in ("validation_activity_ids","validation_plan_ids"):
+                    if field not in out:
+                        out[field]=[]
 
     out["schema_version"]="1.4"
     changes.append({"from":"schema_version","to":"schema_version","old_value":sv or None,"new_value":"1.4","basis":"explicit_rule","rule_version":RULE_VERSION})

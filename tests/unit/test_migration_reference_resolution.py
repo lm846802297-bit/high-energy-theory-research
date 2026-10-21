@@ -54,6 +54,7 @@ class ValidationReferenceResolutionTests(unittest.TestCase):
         activity = activity_record("VAL-ACT-1")
         out, changes, unresolved, _ = migration.migrate_record(claim, source_index=make_index(claim, activity))
         self.assertEqual(out["validation_activity_ids"], ["VAL-ACT-1"])
+        self.assertEqual(out["validation_plan_ids"], [])
         self.assertNotIn("validation_ids", out)
         self.assertEqual(unresolved, [])
         self.assertTrue(any(c.get("basis") == "source_record_type_and_launch_evidence" for c in changes))
@@ -72,6 +73,7 @@ class ValidationReferenceResolutionTests(unittest.TestCase):
         plan = plan_record("VAL-PLAN-1")
         out, _, unresolved, _ = migration.migrate_record(claim, source_index=make_index(claim, plan))
         self.assertEqual(out["validation_plan_ids"], ["VAL-PLAN-1"])
+        self.assertEqual(out["validation_activity_ids"], [])
         self.assertNotIn("validation_ids", out)
         self.assertEqual(unresolved, [])
 
