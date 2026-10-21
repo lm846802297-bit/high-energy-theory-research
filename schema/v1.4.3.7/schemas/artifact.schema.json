@@ -106,8 +106,10 @@
       "pattern": "^[a-f0-9]{64}$"
     },
     "schema_or_structure": {
-      "type": "object",
-      "additionalProperties": false
+      "type": [
+        "object",
+        "null"
+      ]
     },
     "units": {
       "type": "array",

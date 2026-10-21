@@ -75,12 +75,13 @@
       ]
     },
     "physics_assessment": {
-      "type": [
-        "array",
-        "object",
-        "number",
-        "string",
-        "null"
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "$ref": "#/$defs/physicsAssessment"
+        }
       ]
     },
     "task_id": {
@@ -97,7 +98,9 @@
     },
     "evidence_status": {
       "type": "object",
-      "additionalProperties": false
+      "additionalProperties": {
+        "$ref": "#/$defs/evidenceDimension"
+      }
     },
     "assumptions": {
       "type": "array",
@@ -467,6 +470,129 @@
         "source_or_rationale": {
           "type": "string",
           "minLength": 1
+        }
+      }
+    },
+    "evidenceDimension": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "check_status",
+        "reason",
+        "evidence_ids",
+        "checked_at",
+        "checked_by",
+        "limitations",
+        "invalidated_by"
+      ],
+      "properties": {
+        "check_status": {
+          "type": "string",
+          "enum": [
+            "passed",
+            "failed",
+            "inconclusive",
+            "blocked",
+            "not_applicable",
+            "not_run",
+            "stale"
+          ]
+        },
+        "reason": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1
+        },
+        "evidence_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "checked_at": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "checked_by": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1
+        },
+        "limitations": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "invalidated_by": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "physicsAssessment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "theory_result",
+        "experiment_result",
+        "eft_validity_result",
+        "detectability_result",
+        "scope_statement",
+        "assessment_basis",
+        "assessed_by",
+        "assessed_at"
+      ],
+      "properties": {
+        "theory_result": {
+          "type": "string",
+          "minLength": 1
+        },
+        "experiment_result": {
+          "type": "string",
+          "minLength": 1
+        },
+        "eft_validity_result": {
+          "type": "string",
+          "minLength": 1
+        },
+        "detectability_result": {
+          "type": "string",
+          "minLength": 1
+        },
+        "scope_statement": {
+          "type": "string",
+          "minLength": 1
+        },
+        "assessment_basis": {
+          "type": "string",
+          "minLength": 1
+        },
+        "assessed_by": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1
+        },
+        "assessed_at": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
         }
       }
     }

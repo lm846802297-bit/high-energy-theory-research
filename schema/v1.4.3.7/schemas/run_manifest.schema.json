@@ -106,32 +106,25 @@
       "$ref": "#/$defs/inputRefs"
     },
     "configuration": {
-      "type": "object",
-      "additionalProperties": false
+      "$ref": "#/$defs/configurationSnapshot"
     },
     "code": {
-      "type": "object",
-      "additionalProperties": false
+      "$ref": "#/$defs/codeSnapshot"
     },
     "environment": {
-      "type": "object",
-      "additionalProperties": false
+      "$ref": "#/$defs/environmentSnapshot"
     },
     "fingerprints": {
-      "type": "object",
-      "additionalProperties": false
+      "$ref": "#/$defs/fingerprintBundle"
     },
     "execution": {
-      "type": "object",
-      "additionalProperties": false
+      "$ref": "#/$defs/executionSnapshot"
     },
     "outputs": {
-      "type": "object",
-      "additionalProperties": false
+      "$ref": "#/$defs/runOutputs"
     },
     "validation": {
-      "type": "object",
-      "additionalProperties": false
+      "$ref": "#/$defs/validationSnapshot"
     },
     "supersedes_manifest_id": {
       "type": [
@@ -414,6 +407,403 @@
         "source_or_rationale": {
           "type": "string",
           "minLength": 1
+        }
+      }
+    },
+    "configurationSnapshot": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "configuration_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "conventions_id": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1
+        },
+        "independent_inputs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "derived_parameters": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "units": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "configuration_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      }
+    },
+    "codeSnapshot": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "code_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "repository_uri": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1
+        },
+        "repository_uri_unavailable_reason": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1
+        },
+        "git_commit": {
+          "type": "string",
+          "minLength": 1
+        },
+        "git_commit_unavailable_reason": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1
+        },
+        "dirty": {
+          "type": "boolean"
+        },
+        "diff_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "code_tree_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      }
+    },
+    "environmentSnapshot": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "environment_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "platform": {
+          "type": "string",
+          "minLength": 1
+        },
+        "runtime_versions": {
+          "type": "object"
+        },
+        "lockfile_sha256": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "lockfile_unavailable_reason": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1
+        },
+        "container_digest": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1
+        },
+        "container_unavailable_reason": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1
+        },
+        "environment_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      }
+    },
+    "fingerprintBundle": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "algorithm": {
+          "const": "sha256"
+        },
+        "input_set_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "configuration_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "code_tree_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "environment_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "execution_spec_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "dependency_artifact_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "composite_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "fingerprint_profile_version": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "executionSnapshot": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "tool_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "command_or_notebook": {
+          "type": "string",
+          "minLength": 1
+        },
+        "arguments": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "working_directory": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1
+        },
+        "random_seed": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "precision": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1
+        },
+        "tolerances": {
+          "type": "object"
+        },
+        "parallelism": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1
+        },
+        "locale": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1
+        },
+        "timezone": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1
+        },
+        "started_at": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "completed_at": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "exit_code": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "exit_code_unavailable_reason": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1
+        },
+        "runtime_parameters": {
+          "type": "object"
+        },
+        "log_artifact_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "runOutputs": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "artifact_plan_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "artifact_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "artifact_integrity_status": {
+          "type": "string",
+          "enum": [
+            "not_checked",
+            "in_progress",
+            "passed",
+            "failed",
+            "blocked",
+            "needs_review",
+            "not_applicable"
+          ]
+        },
+        "completeness_check": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "missing",
+            "empty",
+            "parse_errors",
+            "checked_at",
+            "checker_version"
+          ],
+          "properties": {
+            "missing": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "empty": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "parse_errors": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "checked_at": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "checker_version": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        }
+      }
+    },
+    "validationSnapshot": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "overall_check_status": {
+          "type": "string",
+          "enum": [
+            "passed",
+            "failed",
+            "inconclusive",
+            "blocked",
+            "not_applicable",
+            "not_run",
+            "stale"
+          ]
+        },
+        "validation_plan_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "validation_activity_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "validation_report_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "aggregation_profile_version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "aggregated_at": {
+          "type": "string",
+          "format": "date-time"
         }
       }
     }

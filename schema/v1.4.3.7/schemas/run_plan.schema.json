@@ -126,8 +126,7 @@
       "uniqueItems": true
     },
     "execution_spec": {
-      "type": "object",
-      "additionalProperties": false
+      "$ref": "#/$defs/executionSpec"
     },
     "fingerprint_inputs": {
       "type": "object",
@@ -432,6 +431,79 @@
         "source_or_rationale": {
           "type": "string",
           "minLength": 1
+        }
+      }
+    },
+    "executionSpec": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "entrypoint": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1
+        },
+        "arguments": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "working_directory": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1
+        },
+        "precision": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1
+        },
+        "tolerances": {
+          "type": "object"
+        },
+        "random_seed": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "parallelism": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1
+        },
+        "locale": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1
+        },
+        "timezone": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1
+        },
+        "expected_outputs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "timeout_policy": {
+          "type": "object"
         }
       }
     }

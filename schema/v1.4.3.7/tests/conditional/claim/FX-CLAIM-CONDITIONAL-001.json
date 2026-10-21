@@ -8,7 +8,7 @@
   "statement": "sample",
   "claim_lifecycle_status": "sample",
   "evidence_status": {},
-  "physics_assessment": [],
+  "physics_assessment": null,
   "assumptions": [],
   "source_ids": [],
   "config_ids": [],

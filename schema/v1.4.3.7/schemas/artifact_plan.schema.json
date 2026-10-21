@@ -72,8 +72,7 @@
       "type": "boolean"
     },
     "completeness_rules": {
-      "type": "object",
-      "additionalProperties": false
+      "$ref": "#/$defs/completenessRules"
     },
     "artifact_plan_status": {
       "type": "string",
@@ -106,8 +105,10 @@
       "uniqueItems": true
     },
     "schema_or_structure": {
-      "type": "object",
-      "additionalProperties": false
+      "type": [
+        "object",
+        "null"
+      ]
     },
     "units": {
       "type": "array",
@@ -390,6 +391,57 @@
         },
         "source_or_rationale": {
           "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "completenessRules": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "required_paths": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "non_empty_paths": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "allowed_empty_paths": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "allowed_formats": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "schema_validator_id": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1
+        },
+        "parse_required": {
+          "type": "boolean"
+        },
+        "directory_policy_version": {
+          "type": [
+            "string",
+            "null"
+          ],
           "minLength": 1
         }
       }

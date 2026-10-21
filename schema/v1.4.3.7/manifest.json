@@ -46,7 +46,7 @@
     },
     "run_plan": {
       "path": "schemas/run_plan.schema.json",
-      "sha256": "f44853a057485d237c5b67e4b905e7ac25e5f8e5d396e77bdb746cbc28633de9"
+      "sha256": "828d56ab5386ec05a5d1edc161a8bbaa8c31ea24ce6ed07b2f5f13f17f116c79"
     },
     "run": {
       "path": "schemas/run.schema.json",
@@ -54,15 +54,15 @@
     },
     "run_manifest": {
       "path": "schemas/run_manifest.schema.json",
-      "sha256": "4be99ab5b0abf6c0d57e070e14f3c732e56d081459a8264042a5e39f3667855c"
+      "sha256": "6df0d78fe6bf650d3f15c447b07a0e97e896ce94ceea2040c574f8031820e4ed"
     },
     "artifact_plan": {
       "path": "schemas/artifact_plan.schema.json",
-      "sha256": "79e326dae9ba35c0a8f680dc04b41116bba8c47000273e2b19b34a9b14b30d80"
+      "sha256": "add2e285c0a5cb615d9e111f9602ba4c7e8111876dfaa4b2e38d7bd39d69d346"
     },
     "artifact": {
       "path": "schemas/artifact.schema.json",
-      "sha256": "b27321a241e4e297b076ad21f9b7f169bb3e9b8a04c67bf9a7904f88cd9274f1"
+      "sha256": "69520a6efc1a9c8b19d35339fc56c236c6b19b63fbbffa21e7896cc76fcf711b"
     },
     "validation_plan": {
       "path": "schemas/validation_plan.schema.json",
@@ -78,7 +78,7 @@
     },
     "claim": {
       "path": "schemas/claim.schema.json",
-      "sha256": "8b551050e371b110f30e526c890285157e0d0c9af08a771d7b12293dce9a6e32"
+      "sha256": "3e40a10ab44c52af248a9c3b013ae2be863f669ac9034070a6b0077d4bef3bc5"
     },
     "source": {
       "path": "schemas/source.schema.json",
