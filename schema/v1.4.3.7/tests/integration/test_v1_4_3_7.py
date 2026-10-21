@@ -107,11 +107,13 @@ class MigrationTests(unittest.TestCase):
         out,ch,un,w=mig.migrate_record(rec)
         self.assertEqual(out["run_plan_ids"],["RPL-1"]); self.assertNotIn("planned_run_ids",out)
         self.assertEqual(un,[])
-    def test_20_ambiguous_validation_ids_not_guessed(self):
+    def test_20_missing_validation_target_remains_unresolved(self):
         rec={"schema_version":"1.3","record_type":"claim","claim_id":"C-1","project_id":"P-1","validation_ids":["V-1"]}
         out,ch,un,w=mig.migrate_record(rec)
-        self.assertIn("AMBIGUOUS_VALIDATION_IDS",[x["code"] for x in un])
+        self.assertIn("VALIDATION_TARGET_NOT_FOUND",[x["code"] for x in un])
         self.assertNotIn("validation_ids",out)
+        self.assertNotIn("validation_activity_ids",out)
+        self.assertNotIn("validation_plan_ids",out)
     def test_21_unknown_fields_quarantined_not_silent(self):
         rec={"schema_version":"1.3","record_type":"source","source_id":"S-1","project_id":"P-1","mystery_field":5}
         out,ch,un,w=mig.migrate_record(rec,target_properties={"schema_version":{},"record_type":{},"project_id":{},"source_id":{}})
