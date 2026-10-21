@@ -54,6 +54,15 @@ def migrate_record(rec, target_properties=None, unknown_policy="quarantine", sou
         raw_ids=out.pop("validation_ids")
         if not isinstance(raw_ids,list):
             unresolved.append({"code":"VALIDATION_IDS_INVALID_SHAPE","field":"validation_ids","source_value":raw_ids})
+        elif not raw_ids:
+            # An empty legacy list carries no type information and no references;
+            # represent "no references" explicitly in both typed target fields.
+            for field in ("validation_activity_ids","validation_plan_ids"):
+                if field not in out:
+                    out[field]=[]
+                elif not isinstance(out[field],list):
+                    unresolved.append({"code":"FIELD_MAPPING_CONFLICT","old_field":"validation_ids","new_field":field,"existing_value":out[field],"mapped_values":[]})
+            changes.append({"from":"validation_ids","to":"validation_activity_ids+validation_plan_ids","source_value":[],"basis":"empty_legacy_reference_list","rule_version":RULE_VERSION})
         else:
             if any(not isinstance(value,str) or not value.strip() for value in raw_ids):
                 unresolved.append({"code":"VALIDATION_IDS_INVALID_VALUE","field":"validation_ids","source_value":raw_ids})

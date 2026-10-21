@@ -58,6 +58,15 @@ class ValidationReferenceResolutionTests(unittest.TestCase):
         self.assertEqual(unresolved, [])
         self.assertTrue(any(c.get("basis") == "source_record_type_and_launch_evidence" for c in changes))
 
+    def test_empty_legacy_list_maps_to_empty_typed_lists(self):
+        claim = claim_record([])
+        out, changes, unresolved, _ = migration.migrate_record(claim, source_index=make_index(claim))
+        self.assertEqual(out["validation_activity_ids"], [])
+        self.assertEqual(out["validation_plan_ids"], [])
+        self.assertNotIn("validation_ids", out)
+        self.assertEqual(unresolved, [])
+        self.assertTrue(any(c.get("basis") == "empty_legacy_reference_list" for c in changes))
+
     def test_plan_maps_to_validation_plan_ids(self):
         claim = claim_record(["VAL-PLAN-1"])
         plan = plan_record("VAL-PLAN-1")
