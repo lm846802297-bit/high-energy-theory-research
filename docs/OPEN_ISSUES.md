@@ -6,8 +6,8 @@ This list deliberately separates confirmed software checks from unresolved desig
 
 1. **Four normative decisions remain pending.** DD-ART-007 through DD-ART-010 are recommendations, not approvals. See the decision register and full review.
 2. **Migration remains blocked.** The dry-run finds an ambiguous validation_ids mapping. The prototype must not guess the target record type; commit_allowed remains false.
-4. **Fixture-index version label.** manifest.json identifies the package as 1.4.3.7-candidate, while tests/fixture-index.json retains 1.4.3.6-candidate. This may reflect inherited fixtures; do not relabel until the intended meaning of the field is confirmed.
-5. **Source lineage.** The v1.4.3.7 audit records derivation from a v1.4.3.6 candidate source bundle. Preserve that lineage; do not describe this as an independently approved v1.4.3.7 release.
+3. **Fixture-index version field is unresolved.** The imported index says 1.4.3.6-candidate while the bundle manifest says 1.4.3.7-candidate. The source lineage points to a v1.4.3.6 archive, but that archive is not committed, and the current validator does not define or enforce the top-level field's meaning. Preserve the current value until source bytes or a metadata contract resolve it. See [fixture-index version audit](../schema/v1.4.3.7/audit/fixture-index-version-audit.md).
+4. **Source lineage.** The v1.4.3.7 audit records derivation from a v1.4.3.6 candidate source bundle. Preserve that lineage; do not describe this as an independently approved v1.4.3.7 release.
 
 ## Reconciled in this branch
 

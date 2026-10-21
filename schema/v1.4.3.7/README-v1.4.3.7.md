@@ -27,3 +27,7 @@ python tools/migrate_v1_3_to_v1_4.py tests/integration/migration-source-v1.3 --s
 Migration defaults to dry-run. `--write-staging --output PATH` writes a staging result only. No commit or overwrite is implemented.
 
 All four normative decisions remain pending approval. See `audit/v1.6.6-four-decisions-review.csv` and `audit/审计报告-v1.4.3.7.md`.
+
+## Fixture-index version-field audit
+
+The fixture index retains the observed top-level label `1.4.3.6-candidate`, while this integrated bundle is labeled `1.4.3.7-candidate`. The source lineage points to a v1.4.3.6 archive, but the archive is not committed and the current validator does not interpret the index field. The value is intentionally left unchanged pending source-byte comparison or an explicit metadata contract. See `audit/fixture-index-version-audit.md`.

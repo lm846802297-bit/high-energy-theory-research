@@ -31,7 +31,7 @@ These results apply only to the initial import candidate and declared test scope
 ## Release gates
 
 1. Approve or reject DD-ART-007 through DD-ART-010 explicitly.
-2. Resolve the inherited fixture-index version label without relabeling it until its intended semantics are confirmed.
+2. Resolve fixture-index top-level version-field semantics using the audit in `schema/v1.4.3.7/audit/fixture-index-version-audit.md`; the source ZIP is not committed and the current validator does not interpret that field.
 3. Resolve the migration ambiguity around validation_ids without guessing target types.
 4. Expand semantic/state-machine coverage and test actual filesystem manifests.
 5. Define scientific acceptance tests for real research tasks before claiming end-to-end reproducibility.
