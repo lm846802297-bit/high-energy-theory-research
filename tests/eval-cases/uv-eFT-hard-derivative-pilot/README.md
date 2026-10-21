@@ -32,3 +32,8 @@ The bundle contains versioned source excerpts, input/configuration files, exact 
 
 The execution contract is approved only for this bounded automated pilot. The Claim and evidence review status remain pending human scientific review. Passing software tests is not a physics-correctness certificate for the full UV–EFT matching problem.
 
+
+
+## Separate Mathematica verification
+
+The provenance bundle also includes verify_pv_derivative_mathematica.wl. It uses Mathematica symbolic integration and series expansion to check the listed PV integrals and second-order small-r expression. This script is not executed by GitHub Actions and is not marked passed. It is provided for a separate local Mathematica run; record the Mathematica version and actual output before changing its status. Open the .wl file in the Mathematica front end and evaluate it. Review any FAIL result or unevaluated conditional equality rather than changing the expected value to force a pass.

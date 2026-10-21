@@ -148,6 +148,7 @@ def _minimal_value(schema, root_schema, field="value", depth=0):
 def _copy_snapshot(bundle_root: Path) -> None:
     files = [
         (ROOT / CASE_REL / "run_pilot.py", CASE_REL / "run_pilot.py"),
+        (ROOT / CASE_REL / "verify_pv_derivative_mathematica.wl", CASE_REL / "verify_pv_derivative_mathematica.wl"),
         (ROOT / CASE_REL / "run_record_chain.py", CASE_REL / "run_record_chain.py"),
         (ROOT / CASE_REL / "README.md", CASE_REL / "README.md"),
         (ROOT / CASE_REL / "problem.json", Path("inputs/problem.json")),
@@ -813,6 +814,7 @@ def build_bundle(output_dir: Path | str) -> dict:
 
     code_paths = [
         "tests/eval-cases/uv-eFT-hard-derivative-pilot/run_pilot.py",
+        "tests/eval-cases/uv-eFT-hard-derivative-pilot/verify_pv_derivative_mathematica.wl",
         "tests/eval-cases/uv-eFT-hard-derivative-pilot/run_record_chain.py",
         "skills/high-energy-theory-research/scripts/fingerprint_inputs.py",
         "skills/high-energy-theory-research/scripts/validate_project_records.py",

@@ -16,6 +16,10 @@ class UVEFTHardDerivativePilotTests(unittest.TestCase):
             bundle_root = Path(tmp) / "bundle"
             summary = build_bundle(bundle_root)
             self.assertTrue(summary["physics_checks"]["all_checks_passed"], summary)
+            mathematica_script = bundle_root / "tests/eval-cases/uv-eFT-hard-derivative-pilot/verify_pv_derivative_mathematica.wl"
+            self.assertTrue(mathematica_script.is_file())
+            self.assertIn("Integrate[", mathematica_script.read_text(encoding="utf-8"))
+            self.assertIn("expectedSecond", mathematica_script.read_text(encoding="utf-8"))
             self.assertEqual(summary["record_validation"]["errors"], 0, summary)
             self.assertEqual(summary["fingerprint_validation"], "passed")
             self.assertGreaterEqual(summary["record_count"], 21)
