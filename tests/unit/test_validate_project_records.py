@@ -8,7 +8,15 @@ ROOT = Path(__file__).resolve().parents[2]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from scripts.validate_project_records import validate_project_records, validate_records
+import importlib.util
+
+VALIDATOR_PATH = ROOT / "skills" / "high-energy-theory-research" / "scripts" / "validate_project_records.py"
+SPEC = importlib.util.spec_from_file_location("skill_project_record_validator", VALIDATOR_PATH)
+VALIDATOR = importlib.util.module_from_spec(SPEC)
+assert SPEC is not None and SPEC.loader is not None
+SPEC.loader.exec_module(VALIDATOR)
+validate_project_records = VALIDATOR.validate_project_records
+validate_records = VALIDATOR.validate_records
 
 
 class ProjectRecordValidatorTests(unittest.TestCase):

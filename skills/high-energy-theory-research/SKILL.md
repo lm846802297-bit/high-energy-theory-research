@@ -39,6 +39,16 @@ Use this Skill for general high-energy theory and phenomenology research. Review
 
 Report the parameter mapping, scan ranges, priors/sampling method, perturbativity and stability criteria, applicable experiments, likelihood/limit assumptions, and validity domain. Separate theoretical realizability from experimental allowance, exclusion, EFT-inapplicability, and unassessed regions. Label benchmark-dependent results in figures and captions; do not collapse disconnected allowed regions into one interval.
 
+## Project record validation
+
+When a project stores structured research records as JSON or YAML, run the bundled validator against the project record directory:
+
+~~~bash
+python skills/high-energy-theory-research/scripts/validate_project_records.py path/to/project/records --project-root path/to/project
+~~~
+
+The record directory should contain only project record JSON/YAML files. The default schema directory is this repository's Schema v1.4.3.7 candidate bundle. The report checks declared schemas, mapped cross-record references, ID uniqueness, status/reason consistency, and local source/artifact paths. A clean report is a bounded software check; it does not certify a physics derivation, full state-machine coverage, or scientific acceptance.
+
 ## References
 
 - Task selection: references/task-router.md

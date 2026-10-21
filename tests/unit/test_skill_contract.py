@@ -28,6 +28,11 @@ class SkillContractTests(unittest.TestCase):
         self.assertIn("not", readme)
         self.assertIn("formal schema release", readme)
 
+    def test_project_record_validator_is_referenced_and_present(self):
+        script = SKILL.parent / "scripts" / "validate_project_records.py"
+        self.assertTrue(script.is_file())
+        self.assertIn("validate_project_records.py", SKILL.read_text(encoding="utf-8"))
+
 
 if __name__ == "__main__":
     unittest.main()

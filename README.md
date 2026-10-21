@@ -11,7 +11,7 @@ A reusable research Skill and evidence-aware workflow for high-energy theoretica
 - Schema package: schema/v1.4.3.7, imported as a candidate bundle.
 - The current candidate includes 25 JSON Schema entry points, 83 indexed fixtures, a cross-record validator, a conservative migration prototype, a directory-manifest helper, audit reports, and traceability data.
 - The reusable Skill entry point is in skills/high-energy-theory-research/SKILL.md.
-- The P0 project-record validator is in scripts/validate_project_records.py; it supports JSON/YAML records and bounded candidate-schema, reference, ID, status/reason, and local-path checks.
+- The P0 project-record validator is in skills/high-energy-theory-research/scripts/validate_project_records.py; it supports JSON/YAML records and bounded candidate-schema, reference, ID, status/reason, and local-path checks.
 
 ## Local validation
 
@@ -40,7 +40,7 @@ python -m pip install -r requirements-dev.txt
 python schema/v1.4.3.7/tools/schema-v1.4.3.6-validate.py schema/v1.4.3.7
 python schema/v1.4.3.7/tests/integration/test_v1_4_3_7.py
 python -m unittest discover -s tests/unit -v
-python scripts/validate_project_records.py path/to/project/records --project-root path/to/project
+python skills/high-energy-theory-research/scripts/validate_project_records.py path/to/project/records --project-root path/to/project
 ~~~
 
 ## Governance gates

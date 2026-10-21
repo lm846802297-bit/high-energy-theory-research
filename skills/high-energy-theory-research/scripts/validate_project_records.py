@@ -19,7 +19,7 @@ from urllib.parse import unquote, urlparse
 import yaml
 from yaml.constructor import ConstructorError
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(__file__).resolve().parents[3]
 SCHEMA_TOOLS = ROOT / "schema" / "v1.4.3.7" / "tools"
 if str(SCHEMA_TOOLS) not in sys.path:
     sys.path.insert(0, str(SCHEMA_TOOLS))
