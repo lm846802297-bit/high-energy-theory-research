@@ -16,7 +16,7 @@ class UVEFTHardDerivativePilotTests(unittest.TestCase):
             bundle_root = Path(tmp) / "bundle"
             summary = build_bundle(bundle_root)
             self.assertTrue(summary["physics_checks"]["all_checks_passed"], summary)
-            self.assertEqual(summary["record_validation"]["summary"]["errors"], 0, summary)
+            self.assertEqual(summary["record_validation"]["errors"], 0, summary)
             self.assertEqual(summary["fingerprint_validation"], "passed")
             self.assertGreaterEqual(summary["record_count"], 19)
 
