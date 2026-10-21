@@ -1,0 +1,15 @@
+{
+  "pilot_id": "ANALYTIC-MATRIX-PILOT-001",
+  "expected_eigenvalues": [
+    4,
+    9
+  ],
+  "expected_masses": [
+    2,
+    3
+  ],
+  "expected_trace": 13,
+  "expected_determinant": 36,
+  "expected_positive_definite": true,
+  "expected_all_checks_passed": true
+}
