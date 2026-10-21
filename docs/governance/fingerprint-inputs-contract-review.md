@@ -16,8 +16,26 @@ The Run Manifest does define a `FingerprintBundle` with input-set, configuration
 4. How are dependency artifact hashes sorted and canonicalized, and which profile/version fixes the composite-hash payload?
 5. How does a changed input invalidate downstream Run Plans, Runs, manifests, validation reports, and Claims?
 
+## Recommended candidate contract (proposal only; not implemented)
+
+A reasonable default is for `FingerprintInputs` to declare **which versioned records participate in the fingerprint**, while the Run Manifest's `FingerprintBundle` stores the computed component and composite hashes. This avoids duplicating digest outputs in the input declaration.
+
+Proposed fields for review:
+
+- `source_ids`: unique Source record IDs, sorted by a specified canonical order;
+- `configuration_id`, `code_id`, `environment_id`: the exact records used, nullable only when the task contract explicitly permits their absence;
+- `input_artifact_ids`: the exact input Artifact IDs, not output artifacts;
+- `execution_spec_sha256`: digest of the exact execution specification;
+- `fingerprint_profile_version`: identifies the canonicalization and composition rules used to calculate the Run Manifest's `FingerprintBundle`.
+
+Under this proposal, the fingerprinting procedure resolves each referenced record to its declared content/component digest. A required digest that is unavailable must not be silently omitted: the Run Plan should remain blocked or otherwise explicitly non-reproducible under a reviewed status rule. The manifest then records `input_set_sha256`, component digests, `dependency_artifact_sha256`, and `composite_sha256`.
+
+## Decisions still required
+
+1. **Unavailable hashes:** should a missing required digest block a Run Plan from becoming `ready`, or is there an explicitly non-reproducible execution mode?
+2. **Input set:** should external Source IDs and input Artifact IDs both feed `input_set_sha256`, with artifact dependencies also summarized separately, or should there be a non-overlapping partition?
+3. **Canonicalization:** which exact serialization, sorting, and numeric encoding rules are normative, and how is the profile version advanced?
+
 ## Recommended disposition
 
-Keep `run_plan.fingerprint_inputs` closed and empty-only until these semantics are defined. Do not silently reuse the Run Manifest's `FingerprintBundle` as the input declaration; they serve different roles. Once agreed, add the field schema, a canonical test vector, positive/negative fixtures, and dependency-invalidation tests.
-
-This issue is separate from DD-ART-007 through DD-ART-010. It does not authorize a schema release or migration commit.
+Adopt the proposed field separation only after review; do not implement it from this note alone. Until the fields and hashing semantics are approved, keep `run_plan.fingerprint_inputs` closed and empty-only. Do not silently reuse the Run Manifest's `FingerprintBundle` as the input declaration; they serve different roles. Once agreed, add the field schema, a canonical test vector, positive/negative fixtures, and dependency-invalidation tests.

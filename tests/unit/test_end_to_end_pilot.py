@@ -720,6 +720,9 @@ class EndToEndResearchSkillPilotTests(unittest.TestCase):
         self.assertIn("full reproducibility acceptance remains blocked", readme.lower())
         self.assertIn("run_plan.fingerprint_inputs", readme)
         self.assertIn("not define its fields", readme)
+        review = (ROOT / "docs" / "governance" / "fingerprint-inputs-contract-review.md").read_text(encoding="utf-8")
+        self.assertIn("proposal only; not implemented", review)
+        self.assertIn("Canonicalization", review)
 
 
 if __name__ == "__main__":
