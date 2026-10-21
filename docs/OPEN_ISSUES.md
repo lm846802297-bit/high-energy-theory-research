@@ -16,7 +16,7 @@ This list deliberately separates confirmed software checks from unresolved desig
 ## P1 — Coverage and implementation gaps
 
 - The schemas are candidate envelopes, not a complete transcription of every normative field and condition in the design document.
-- **End-to-end pilot exposed empty-only structured fields.** The current schemas reject non-empty payloads for `run_plan.execution_spec`/`fingerprint_inputs`, the Run Manifest snapshot objects (`configuration`, `code`, `environment`, `fingerprints`, `execution`, `outputs`, `validation`), `claim.evidence_status`, and Artifact Plan/Artifact structure fields. The synthetic pilot can validate a sparse record graph but cannot certify a complete reproducibility record. See `tests/eval-cases/analytic-mass-matrix-pilot/README.md`.
+- **`FingerprintInputs` lacks a field contract.** The design document references `Record<FingerprintInputs>` but does not define its properties or hashing semantics; the candidate schema therefore leaves `run_plan.fingerprint_inputs` empty-only rather than guessing. The pilot now exercises structured execution specs, Run Manifest snapshots, Claim evidence dimensions, and artifact completeness/structure payloads, but full reproducibility acceptance remains blocked until this contract is reviewed. See `docs/governance/fingerprint-inputs-contract-review.md` and the pilot README.
 - Cross-record validation does not cover every polymorphic reference or every state-machine namespace.
 - Event payload hashes are not comprehensively recomputed.
 - The directory-manifest helper validates a restricted FileEntry representation; it does not walk the filesystem or prove that the manifest matches disk contents. Symlinks are rejected by default.

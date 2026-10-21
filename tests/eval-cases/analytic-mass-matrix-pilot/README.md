@@ -42,10 +42,6 @@ The script uses only the Python standard library. `expected-results.json` record
 
 The unit test constructs a synthetic Task → approved test contract → Run Plan → Run → Run Manifest → Artifact → Validation Plan/Activity/Report → Evidence Fragment → Claim chain and validates it against the candidate schemas. The generated result file is hash-checked and local source/artifact paths are checked.
 
-The minimal chain can pass, but **full reproducibility acceptance remains blocked** by candidate-schema envelopes that permit only empty objects for fields the design says must carry structured data:
-- `run_plan.execution_spec` and `fingerprint_inputs`;
-- `run_manifest.configuration`, `code`, `environment`, `fingerprints`, `execution`, `outputs`, and `validation`;
-- `claim.evidence_status`;
-- `artifact_plan.completeness_rules` and `schema_or_structure`.
+The candidate schemas now accept structured payloads for `run_plan.execution_spec`, Run Manifest snapshots, `claim.evidence_status`/`physics_assessment`, Artifact Plan `completeness_rules`, and Artifact Plan/Artifact `schema_or_structure`. The pilot populates these fields and validates them. **Full reproducibility acceptance remains blocked by `run_plan.fingerprint_inputs`:** the design document references `Record<FingerprintInputs>` but does not define its fields or hashing semantics, so the schema still accepts only an empty object rather than inventing a contract.
 
-The regression test proves that representative non-empty payloads are rejected by the current schemas. The pilot therefore passes the algebraic and minimal-reference checks but does **not** pass full end-to-end reproducibility acceptance. These are schema-coverage findings, not one of the four pending DD-ART decisions, and no normative approval is inferred.
+Regression tests prove that the now-defined structured payloads are accepted and that a non-empty `fingerprint_inputs` payload remains rejected until its contract is reviewed. The pilot passes the algebraic checks and the structured record graph, but does **not** pass full end-to-end reproducibility acceptance. No normative approval is inferred.

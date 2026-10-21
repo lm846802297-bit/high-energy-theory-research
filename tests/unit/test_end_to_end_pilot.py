@@ -300,6 +300,19 @@ def _make_records(result_path, result_hash):
         "created_at": TIMESTAMP,
     })
 
+    execution_spec = {
+        "entrypoint": "python tests/eval-cases/analytic-mass-matrix-pilot/run_pilot.py",
+        "arguments": ["--input", str(problem_path.relative_to(ROOT)), "--output", str(result_path.relative_to(ROOT))],
+        "working_directory": ".",
+        "precision": "binary64",
+        "tolerances": {"absolute": 1e-12, "relative": 1e-12},
+        "random_seed": None,
+        "parallelism": 1,
+        "locale": "C",
+        "timezone": "UTC",
+        "expected_outputs": ["results.json"],
+        "timeout_policy": {"timeout_seconds": 30, "on_timeout": "fail", "retry_limit": 0},
+    }
     run_plan = records["run_plan"]
     run_plan.update({
         "task_id": IDS["task"],
@@ -312,9 +325,9 @@ def _make_records(result_path, result_hash):
         "artifact_plan_ids": [IDS["artifact_plan"]],
         "validation_plan_ids": [IDS["validation_plan"]],
         # Current candidate schema permits only empty objects here; see gap test.
-        "execution_spec": {},
+        "execution_spec": execution_spec,
         "fingerprint_inputs": {},
-        "execution_spec_sha256": _json_hash({}),
+        "execution_spec_sha256": _json_hash(execution_spec),
         "instantiated_run_id": IDS["run"],
         "blocked_reason": None,
         "supersedes_run_plan_id": None,
@@ -356,13 +369,92 @@ def _make_records(result_path, result_hash):
         },
         # The candidate schemas currently reject non-empty values in these
         # closed objects; the negative tests below make that limitation explicit.
-        "configuration": {},
-        "code": {},
-        "environment": {},
-        "fingerprints": {},
-        "execution": {},
-        "outputs": {},
-        "validation": {},
+        "configuration": {
+            "configuration_id": IDS["configuration"],
+            "conventions_id": IDS["convention_set"],
+            "independent_inputs": config_payload["independent_inputs"],
+            "derived_parameters": config_payload["derived_parameters"],
+            "units": config_payload["units"],
+            "configuration_sha256": configuration["configuration_sha256"],
+        },
+        "code": {
+            "code_id": IDS["code"],
+            "repository_uri": code["repository_uri"],
+            "repository_uri_unavailable_reason": None,
+            "git_commit": code["git_commit"],
+            "git_commit_unavailable_reason": code["git_commit_unavailable_reason"],
+            "dirty": code["dirty"],
+            "diff_sha256": code["diff_sha256"],
+            "code_tree_sha256": code["code_tree_sha256"],
+        },
+        "environment": {
+            "environment_id": IDS["environment"],
+            "platform": environment["platform"],
+            "runtime_versions": environment["runtime_versions"],
+            "lockfile_sha256": environment["lockfile_sha256"],
+            "lockfile_unavailable_reason": environment["lockfile_unavailable_reason"],
+            "container_digest": environment["container_digest"],
+            "container_unavailable_reason": environment["container_unavailable_reason"],
+            "environment_sha256": environment["environment_sha256"],
+        },
+        "fingerprints": {
+            "algorithm": "sha256",
+            "input_set_sha256": _json_hash({"source_sha256": problem_hash, "configuration_sha256": configuration["configuration_sha256"], "input_artifact_ids": []}),
+            "configuration_sha256": configuration["configuration_sha256"],
+            "code_tree_sha256": code_tree_hash,
+            "environment_sha256": environment_hash,
+            "execution_spec_sha256": _json_hash(execution_spec),
+            "dependency_artifact_sha256": _json_hash([]),
+            "composite_sha256": _json_hash({
+                "algorithm": "sha256",
+                "input_set_sha256": _json_hash({"source_sha256": problem_hash, "configuration_sha256": configuration["configuration_sha256"], "input_artifact_ids": []}),
+                "configuration_sha256": configuration["configuration_sha256"],
+                "code_tree_sha256": code_tree_hash,
+                "environment_sha256": environment_hash,
+                "execution_spec_sha256": _json_hash(execution_spec),
+                "dependency_artifact_sha256": _json_hash([]),
+                "fingerprint_profile_version": "pilot-fingerprint-v1",
+            }),
+            "fingerprint_profile_version": "pilot-fingerprint-v1",
+        },
+        "execution": {
+            "tool_id": "python-stdlib",
+            "command_or_notebook": "python tests/eval-cases/analytic-mass-matrix-pilot/run_pilot.py",
+            "arguments": ["--input", str(problem_path.relative_to(ROOT)), "--output", str(result_path.relative_to(ROOT))],
+            "working_directory": ".",
+            "random_seed": None,
+            "precision": "binary64",
+            "tolerances": {"absolute": 1e-12, "relative": 1e-12},
+            "parallelism": 1,
+            "locale": "C",
+            "timezone": "UTC",
+            "started_at": TIMESTAMP,
+            "completed_at": TIMESTAMP,
+            "exit_code": 0,
+            "exit_code_unavailable_reason": None,
+            "runtime_parameters": runtime,
+            "log_artifact_ids": [],
+        },
+        "outputs": {
+            "artifact_plan_ids": [IDS["artifact_plan"]],
+            "artifact_ids": [IDS["artifact"]],
+            "artifact_integrity_status": "passed",
+            "completeness_check": {
+                "missing": [],
+                "empty": [],
+                "parse_errors": [],
+                "checked_at": TIMESTAMP,
+                "checker_version": "pilot-result-check-v1",
+            },
+        },
+        "validation": {
+            "overall_check_status": "passed",
+            "validation_plan_ids": [IDS["validation_plan"]],
+            "validation_activity_ids": [IDS["validation_activity"]],
+            "validation_report_ids": [IDS["validation_report"]],
+            "aggregation_profile_version": "pilot-validation-v1",
+            "aggregated_at": TIMESTAMP,
+        },
         "created_at": TIMESTAMP,
         "supersedes_manifest_id": None,
     })
@@ -372,7 +464,15 @@ def _make_records(result_path, result_hash):
         "artifact_type": "analytic_result",
         "format": "application/json",
         "required": True,
-        "completeness_rules": {},
+        "completeness_rules": {
+            "required_paths": ["eigenvalues", "masses", "checks"],
+            "non_empty_paths": ["eigenvalues", "masses"],
+            "allowed_empty_paths": [],
+            "allowed_formats": ["application/json"],
+            "schema_validator_id": "pilot-result-v1",
+            "parse_required": True,
+            "directory_policy_version": None,
+        },
         "artifact_plan_status": "fulfilled",
         "planned_for_task_id": IDS["task"],
         "planned_run_plan_id": IDS["run_plan"],
@@ -389,7 +489,7 @@ def _make_records(result_path, result_hash):
         "path_or_uri": str(result_path.relative_to(ROOT)).replace("\\", "/"),
         "format": "application/json",
         "content_sha256": result_hash,
-        "schema_or_structure": {},
+        "schema_or_structure": {"type": "object", "required": ["eigenvalues", "masses", "checks"]},
         "units": ["TeV^2", "TeV"],
         "input_artifact_ids": [],
         "configuration_id": IDS["configuration"],
@@ -491,7 +591,17 @@ def _make_records(result_path, result_hash):
         "statement": "For the supplied toy matrix, the eigenvalues are 4 and 9 TeV^2 and the corresponding masses are 2 and 3 TeV.",
         "claim_lifecycle_status": "active",
         # Empty because the candidate schema disallows dimension keys today.
-        "evidence_status": {},
+        "evidence_status": {
+            "theory": {
+                "check_status": "passed",
+                "reason": "Closed-form eigenvalues agree with independent invariants and eigenvector checks.",
+                "evidence_ids": [IDS["evidence_fragment"]],
+                "checked_at": TIMESTAMP,
+                "checked_by": "automated-pilot-test",
+                "limitations": ["toy matrix only"],
+                "invalidated_by": [],
+            }
+        },
         "physics_assessment": {
             "theory_result": "derived",
             "experiment_result": "not_assessed",
@@ -565,30 +675,51 @@ class EndToEndResearchSkillPilotTests(unittest.TestCase):
         self.assertGreaterEqual(report["summary"]["records"], 17)
         self.assertTrue(generated_path.is_file())
 
-    def test_candidate_schema_gaps_are_reproducible_and_explicit(self):
+    def test_structured_payloads_are_supported_except_undefined_fingerprint_inputs(self):
         schemas = _load_schemas()
         records, _ = _make_records(PILOT_DIR / "expected-results.json", _sha((PILOT_DIR / "expected-results.json").read_bytes()))
 
-        probes = [
-            ("run_plan", "execution_spec", {"entrypoint": "python run_pilot.py"}),
-            ("run_plan", "fingerprint_inputs", {"code_tree_sha256": "a" * 64}),
-            ("run_manifest", "outputs", {"artifact_ids": [IDS["artifact"]]}),
-            ("run_manifest", "code", {"code_id": IDS["code"]}),
-            ("claim", "evidence_status", {"theory_result": "independently_checked"}),
-            ("artifact_plan", "completeness_rules", {"required_outputs": ["eigenvalues"]}),
-            ("artifact", "schema_or_structure", {"required_keys": ["eigenvalues"]}),
+        accepted = [
+            ("run_plan", "execution_spec", {
+                "entrypoint": "python run_pilot.py", "arguments": [], "working_directory": ".",
+                "precision": "binary64", "tolerances": {"absolute": 1e-12}, "random_seed": None,
+                "parallelism": 1, "locale": "C", "timezone": "UTC", "expected_outputs": ["results.json"],
+                "timeout_policy": {"timeout_seconds": 30, "on_timeout": "fail", "retry_limit": 0},
+            }),
+            ("run_manifest", "outputs", {
+                "artifact_plan_ids": [IDS["artifact_plan"]], "artifact_ids": [IDS["artifact"]],
+                "artifact_integrity_status": "passed",
+                "completeness_check": {"missing": [], "empty": [], "parse_errors": [], "checked_at": TIMESTAMP, "checker_version": "test-v1"},
+            }),
+            ("run_manifest", "code", {"code_id": IDS["code"], "repository_uri": "https://example.org/repo"}),
+            ("claim", "evidence_status", {"theory": {
+                "check_status": "passed", "reason": "independent check passed", "evidence_ids": [IDS["evidence_fragment"]],
+                "checked_at": TIMESTAMP, "checked_by": "test", "limitations": [], "invalidated_by": [],
+            }}),
+            ("artifact_plan", "completeness_rules", {
+                "required_paths": ["eigenvalues"], "non_empty_paths": ["eigenvalues"], "allowed_empty_paths": [],
+                "allowed_formats": ["application/json"], "schema_validator_id": "test-v1",
+                "parse_required": True, "directory_policy_version": None,
+            }),
+            ("artifact_plan", "schema_or_structure", {"type": "object", "required": ["eigenvalues"]}),
+            ("artifact", "schema_or_structure", {"type": "object", "required": ["eigenvalues"]}),
         ]
-        for record_type, field, value in probes:
+        for record_type, field, value in accepted:
             with self.subTest(record_type=record_type, field=field):
                 candidate = deepcopy(records[record_type])
                 candidate[field] = value
                 errors = list(Draft202012Validator(schemas[record_type]).iter_errors(candidate))
-                self.assertTrue(errors, f"{record_type}.{field} unexpectedly accepted a non-empty structured payload")
+                self.assertFalse(errors, f"{record_type}.{field} should accept its declared structured payload: {errors}")
+
+        candidate = deepcopy(records["run_plan"])
+        candidate["fingerprint_inputs"] = {"code_tree_sha256": "a" * 64}
+        errors = list(Draft202012Validator(schemas["run_plan"]).iter_errors(candidate))
+        self.assertTrue(errors, "fingerprint_inputs must remain blocked until its field contract is defined")
 
         readme = (PILOT_DIR / "README.md").read_text(encoding="utf-8")
         self.assertIn("full reproducibility acceptance remains blocked", readme)
-        self.assertIn("run_plan.execution_spec", readme)
-        self.assertIn("claim.evidence_status", readme)
+        self.assertIn("run_plan.fingerprint_inputs", readme)
+        self.assertIn("not define its fields", readme)
 
 
 if __name__ == "__main__":
