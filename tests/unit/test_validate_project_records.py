@@ -8,7 +8,7 @@ ROOT = Path(__file__).resolve().parents[2]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from scripts.validate_project_records import validate_project_records
+from scripts.validate_project_records import validate_project_records, validate_records
 
 
 class ProjectRecordValidatorTests(unittest.TestCase):
@@ -185,6 +185,60 @@ class ProjectRecordValidatorTests(unittest.TestCase):
         report = self._validate()
         self.assertTrue(any(e["code"] == "RECORD_PARSE_ERROR" for e in report["errors"]))
         self.assertTrue(any("duplicate key" in e.get("message", "") for e in report["errors"]))
+
+
+    def test_candidate_cross_record_validator_handles_array_references(self):
+        records = [
+            {
+                "record_type": "task",
+                "project_id": "PROJECT-001",
+                "task_id": "TASK-001",
+                "dependency_task_ids": [],
+                "claim_ids": [],
+                "completion_evidence_ids": [],
+            },
+            {
+                "record_type": "artifact",
+                "project_id": "PROJECT-001",
+                "artifact_id": "ART-001",
+                "artifact_storage_kind": "file",
+                "origin_kind": "generated",
+                "content_sha256": "a" * 64,
+                "directory_manifest": None,
+                "artifact_integrity_status": "passed",
+                "input_artifact_ids": [],
+            },
+            {
+                "record_type": "validation_activity",
+                "project_id": "PROJECT-001",
+                "validation_activity_id": "VALACT-001",
+                "input_artifact_ids": [],
+                "validation_report_ids": [],
+                "subject_ids": [],
+            },
+            {
+                "record_type": "validation_report",
+                "project_id": "PROJECT-001",
+                "validation_report_id": "VALREP-001",
+                "evidence_ids": [],
+            },
+            {
+                "record_type": "benchmark_result",
+                "project_id": "PROJECT-001",
+                "benchmark_result_id": "BENCH-001",
+                "evidence_ids": [],
+                "subject_ids": [],
+            },
+            {
+                "record_type": "parameter_point",
+                "project_id": "PROJECT-001",
+                "point_id": "POINT-001",
+                "artifact_ids": [],
+                "validation_report_ids": [],
+            },
+        ]
+        report = validate_records(records)
+        self.assertEqual(report["errors"], [], report["errors"])
 
 
 if __name__ == "__main__":
