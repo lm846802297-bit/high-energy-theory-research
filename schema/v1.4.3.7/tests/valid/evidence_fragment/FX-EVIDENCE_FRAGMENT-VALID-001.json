@@ -1,0 +1,14 @@
+{
+  "schema_version": "1.4",
+  "record_type": "evidence_fragment",
+  "project_id": "HEP-RESEARCH",
+  "evidence_id": "EVID-001",
+  "evidence_type": "sample",
+  "target_record_id": "SAMPLE-001",
+  "locator": "sample",
+  "content_sha256": "sample",
+  "scope_statement": "sample",
+  "assumptions": [],
+  "captured_at": "2026-10-20T12:00:00Z",
+  "review_status": "pending"
+}

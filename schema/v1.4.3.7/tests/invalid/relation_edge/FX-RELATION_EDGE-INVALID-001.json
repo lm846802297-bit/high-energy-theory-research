@@ -1,0 +1,19 @@
+{
+  "schema_version": "1.4",
+  "record_type": "relation_edge",
+  "project_id": "HEP-RESEARCH",
+  "edge_id": "EDGE-001",
+  "from_id": "SAMPLE-001",
+  "from_record_type": "sample",
+  "to_id": "SAMPLE-001",
+  "to_record_type": "sample",
+  "relation": "supports",
+  "created_at": "2026-10-20T12:00:00Z",
+  "scope_statement": "Declared scope",
+  "assumptions": [],
+  "evidence_locator": "artifact:ART-001",
+  "relation_rationale": "Direct evidence",
+  "valid_for_fingerprint": "sample",
+  "lifecycle_status": "active",
+  "__undeclared_field__": "must reject"
+}

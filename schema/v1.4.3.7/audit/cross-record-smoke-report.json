@@ -1,0 +1,40 @@
+{
+  "errors": [],
+  "warnings": [],
+  "summary": {
+    "records": 5,
+    "errors": 0,
+    "warnings": 0,
+    "cross_record_scope": "explicit reference map + alternative identity + event chain continuity + supports-cycle checks",
+    "not_implemented": [
+      "JCS directory manifest hash recomputation",
+      "filesystem traversal/symlink and path-collision checks",
+      "event_sha256 payload recomputation because canonical event payload is not yet specified",
+      "all state-machine transitions for every namespace",
+      "full polymorphic reference coverage for every field",
+      "physics/scientific acceptance"
+    ]
+  },
+  "input_files": [
+    {
+      "path": "/mnt/data/schema-v1.4.3.7-work/schema-v1.4.3.7-candidate/tests/integration/dataset/00-task.json",
+      "sha256": "861a36c14fe3ee3ae89eafee0826cd0e5d17781d42ba453e4d69074e9b60b0d8"
+    },
+    {
+      "path": "/mnt/data/schema-v1.4.3.7-work/schema-v1.4.3.7-candidate/tests/integration/dataset/01-task_execution_contract.json",
+      "sha256": "0571e1da9b4c2b7f8dd08439487b7debee4d634e6ad119f0e142c2070f103832"
+    },
+    {
+      "path": "/mnt/data/schema-v1.4.3.7-work/schema-v1.4.3.7-candidate/tests/integration/dataset/02-source.json",
+      "sha256": "1a3fd16649379ccdca29ea635c9fee6d238107e9e36c1f3817ad53ae2ead6533"
+    },
+    {
+      "path": "/mnt/data/schema-v1.4.3.7-work/schema-v1.4.3.7-candidate/tests/integration/dataset/03-artifact.json",
+      "sha256": "631f602d6a4f7d9fc53cf145f168aedf76a998edcffbc7146389f6a39ed86250"
+    },
+    {
+      "path": "/mnt/data/schema-v1.4.3.7-work/schema-v1.4.3.7-candidate/tests/integration/dataset/04-artifact.json",
+      "sha256": "114d051119956ac0c524c92ddda3d8fadf9818cd1578e4af4822ea8fbb1e9929"
+    }
+  ]
+}

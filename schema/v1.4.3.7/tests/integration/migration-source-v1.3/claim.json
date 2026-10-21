@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.3",
+  "record_type": "claim",
+  "project_id": "P-HEP",
+  "claim_id": "CLAIM-1",
+  "planned_run_ids": [
+    "RUNPLAN-1"
+  ],
+  "planned_validation_ids": [
+    "VALPLAN-1"
+  ],
+  "expected_artifact_plan_ids": [
+    "ARTPLAN-1"
+  ],
+  "validation_ids": [
+    "VAL-AMBIG-1"
+  ],
+  "legacy_extension": {
+    "retained": "in report/quarantine"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "schema_version": "1.4",
+  "record_type": "source_fragment",
+  "project_id": "HEP-RESEARCH",
+  "source_fragment_id": "SRCFRAG-001",
+  "source_id": "SRC-001",
+  "locator": "sample",
+  "fragment_type": "sample",
+  "content_sha256": "sample",
+  "extracted_text_or_transcription": "sample",
+  "review_status": "pending"
+}

@@ -1,0 +1,17 @@
+{
+  "schema_version": "1.4",
+  "record_type": "benchmark_result",
+  "project_id": "HEP-RESEARCH",
+  "benchmark_result_id": "BENCHRES-001",
+  "benchmark_id": "SAMPLE-001",
+  "subject_ids": [],
+  "expected_values": [],
+  "actual_values": [],
+  "tolerances": [],
+  "comparison_method": "sample",
+  "check_status": "passed",
+  "evidence_ids": [],
+  "checked_at": "2026-10-20T12:00:00Z",
+  "checked_by": "sample",
+  "__undeclared_field__": "must reject"
+}

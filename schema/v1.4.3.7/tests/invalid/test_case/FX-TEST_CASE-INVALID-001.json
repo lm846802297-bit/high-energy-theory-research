@@ -1,0 +1,14 @@
+{
+  "schema_version": "1.4",
+  "record_type": "test_case",
+  "project_id": "HEP-RESEARCH",
+  "test_case_id": "TESTCASE-001",
+  "test_id": "TST-001",
+  "requirement_ids": [],
+  "fixture_ids": [],
+  "setup": {},
+  "action": {},
+  "assertions": [],
+  "test_layer": "schema",
+  "__undeclared_field__": "must reject"
+}

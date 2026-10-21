@@ -1,0 +1,31 @@
+{
+  "schema_version": "1.4",
+  "record_type": "artifact",
+  "project_id": "P-HEP",
+  "artifact_id": "ART-1",
+  "artifact_storage_kind": "file",
+  "origin_kind": "ingested_external",
+  "acquired_from_source_id": "SRC-1",
+  "content_sha256": null,
+  "hash_unavailable_reason": "Publisher metadata exposes version but not downloadable bytes.",
+  "directory_manifest": [],
+  "directory_manifest_sha256": null,
+  "artifact_integrity_status": "needs_review",
+  "alternative_identity": {
+    "approved_contract_id": "TEC-1",
+    "approved_contract_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "method_id": "AIM-PUBLISHER-V1",
+    "method_version": 1,
+    "identity_value": "https://publisher.example/item/v1",
+    "evidence_artifact_ids": [
+      "ART-EVID-1"
+    ],
+    "verification_status": "verified",
+    "verified_at": "2026-10-21T00:00:00Z",
+    "verified_by": "reviewer-1",
+    "scope_statement": "publisher version identifier matches",
+    "limitations": [
+      "does not prove byte equality"
+    ]
+  }
+}

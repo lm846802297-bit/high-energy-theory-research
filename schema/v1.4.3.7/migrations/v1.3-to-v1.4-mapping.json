@@ -1,0 +1,56 @@
+{
+  "migration_id": "MIG-V1.3-TO-V1.4-CANDIDATE",
+  "source_schema_version": "1.3",
+  "target_schema_version": "1.4",
+  "status": "contract_only_not_implemented",
+  "source_bundle_available": false,
+  "compatibility_status": "unverified",
+  "rules": [
+    {
+      "rule_id": "MIG-001",
+      "rule": "Read source records read-only and preserve original bytes and SHA-256."
+    },
+    {
+      "rule_id": "MIG-002",
+      "rule": "Build deterministic source_record_key from project_id, record_type, and source primary key."
+    },
+    {
+      "rule_id": "MIG-003",
+      "rule": "Do not infer missing field meanings without explicit rule or human approval."
+    },
+    {
+      "rule_id": "MIG-004",
+      "rule": "Unresolved mappings, collisions, or unrecoverable event ordering block commit."
+    },
+    {
+      "rule_id": "MIG-005",
+      "rule": "Generate targets only in staging; validate schema and semantic rules before commit."
+    },
+    {
+      "rule_id": "MIG-006",
+      "rule": "Repeated migration of the same source snapshot and rule version must yield identical canonical target hashes."
+    },
+    {
+      "rule_id": "MIG-007",
+      "rule": "Rollback restores the active dataset pointer; it never deletes source history."
+    }
+  ],
+  "id_mapping_fields": [
+    "source_record_uri",
+    "source_record_type",
+    "source_primary_key",
+    "source_sha256",
+    "target_record_type",
+    "target_primary_key",
+    "target_sha256",
+    "mapping_basis",
+    "mapping_rule_id",
+    "review_status"
+  ],
+  "prohibited_actions": [
+    "overwrite_source_records",
+    "invent_legacy_field_mappings",
+    "silently_drop_unmapped_fields",
+    "auto_merge_multiple_sources_without_review"
+  ]
+}

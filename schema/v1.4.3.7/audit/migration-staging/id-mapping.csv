@@ -1,0 +1,2 @@
+﻿source_path,source_record_type,source_id,target_record_type,target_id,mapping_basis,unresolved_count,source_sha256,target_sha256
+/mnt/data/schema-v1.4.3.7-work/schema-v1.4.3.7-candidate/tests/integration/migration-source-v1.3/claim.json,claim,CLAIM-1,claim,CLAIM-1,unresolved,1,1ed9fa7f51b10d2d36d551f55e89a2c8367cbf53e07b95992229e63a6f23a118,f51bf23355b67d097ba82e18e266d420a614da3772a630e685088284ceb2c758

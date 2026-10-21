@@ -1,0 +1,9 @@
+{
+  "schema_version": "1.4",
+  "record_type": "test_case",
+  "project_id": "PROJECT-DEMO",
+  "test_case_id": "TESTCASE-001",
+  "created_at": "2026-10-20T00:00:00Z",
+  "description": "Condition branch fixture; schema-valid, semantic guard not implemented.",
+  "test_id": "E2E-001"
+}

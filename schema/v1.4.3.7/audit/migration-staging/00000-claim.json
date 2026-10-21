@@ -1,0 +1,15 @@
+{
+  "schema_version": "1.4",
+  "record_type": "claim",
+  "project_id": "P-HEP",
+  "claim_id": "CLAIM-1",
+  "artifact_plan_ids": [
+    "ARTPLAN-1"
+  ],
+  "run_plan_ids": [
+    "RUNPLAN-1"
+  ],
+  "validation_plan_ids": [
+    "VALPLAN-1"
+  ]
+}
