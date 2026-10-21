@@ -1,0 +1,180 @@
+{
+  "bundle_id": "schema-v1.4.3.7-integrated-candidate",
+  "schema_version": "1.4.3.7-candidate",
+  "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
+  "bundle_status": "candidate",
+  "compatibility_status": "unverified; schema adds required artifact fields and requires data migration",
+  "source_design_document": "高能理论物理研究-Skill-详细设计文档-v1.6.6-Artifact身份语义候选修订.md",
+  "source_design_sha256": "49b113fe790b413851dbafafc0728426d6de74af05503a728dd687ebcbde2269",
+  "record_types": [
+    "task",
+    "task_execution_contract",
+    "run_plan",
+    "run",
+    "run_manifest",
+    "artifact_plan",
+    "artifact",
+    "validation_plan",
+    "validation_activity",
+    "validation_report",
+    "claim",
+    "source",
+    "source_fragment",
+    "configuration",
+    "code",
+    "environment",
+    "convention_set",
+    "parameter_point",
+    "benchmark_result",
+    "evidence_fragment",
+    "test_case",
+    "test_run",
+    "state_transition_event",
+    "migration_record",
+    "relation_edge"
+  ],
+  "strict_unknown_fields": true,
+  "extensions_supported": false,
+  "schema_files": {
+    "task": {
+      "path": "schemas/task.schema.json",
+      "sha256": "babd28b891a1c998b52dd9ca2dd14917c27dd2ab14e0fe5de7f63c8d52c6004c"
+    },
+    "task_execution_contract": {
+      "path": "schemas/task_execution_contract.schema.json",
+      "sha256": "7eda6908825072e819bf43a688ee156ae70906a09e2f6a316553d49df835d5ef"
+    },
+    "run_plan": {
+      "path": "schemas/run_plan.schema.json",
+      "sha256": "f44853a057485d237c5b67e4b905e7ac25e5f8e5d396e77bdb746cbc28633de9"
+    },
+    "run": {
+      "path": "schemas/run.schema.json",
+      "sha256": "9699f09ee935121c302f2da3d7363c9df251895b97a188e32336d40f4a0a2ab8"
+    },
+    "run_manifest": {
+      "path": "schemas/run_manifest.schema.json",
+      "sha256": "4be99ab5b0abf6c0d57e070e14f3c732e56d081459a8264042a5e39f3667855c"
+    },
+    "artifact_plan": {
+      "path": "schemas/artifact_plan.schema.json",
+      "sha256": "79e326dae9ba35c0a8f680dc04b41116bba8c47000273e2b19b34a9b14b30d80"
+    },
+    "artifact": {
+      "path": "schemas/artifact.schema.json",
+      "sha256": "b27321a241e4e297b076ad21f9b7f169bb3e9b8a04c67bf9a7904f88cd9274f1"
+    },
+    "validation_plan": {
+      "path": "schemas/validation_plan.schema.json",
+      "sha256": "3b85d9d4186e137d627ab489db2895b40b450b2999ab464729a1fcac8632b27f"
+    },
+    "validation_activity": {
+      "path": "schemas/validation_activity.schema.json",
+      "sha256": "fd464524e76a4a16c54fdeffe757680478bd2fa3f51f51472413bf704aa3def6"
+    },
+    "validation_report": {
+      "path": "schemas/validation_report.schema.json",
+      "sha256": "8604bde9fd9f691de46f4cd378aa65a58d68d0b4a478e041d1dd59b967d5f748"
+    },
+    "claim": {
+      "path": "schemas/claim.schema.json",
+      "sha256": "8b551050e371b110f30e526c890285157e0d0c9af08a771d7b12293dce9a6e32"
+    },
+    "source": {
+      "path": "schemas/source.schema.json",
+      "sha256": "feeb0e1c9567518d5b305af1fcc18cad8e221eda7899af31eb9a6f6f2eedfc04"
+    },
+    "source_fragment": {
+      "path": "schemas/source_fragment.schema.json",
+      "sha256": "de50c51164a7790aec79c0f6e8b1680a57158b574c3eac214ac81d516958a79c"
+    },
+    "configuration": {
+      "path": "schemas/configuration.schema.json",
+      "sha256": "a3157e8f1917207c74678b74c696ca6fac9de6d638eccaba3464094d12333857"
+    },
+    "code": {
+      "path": "schemas/code.schema.json",
+      "sha256": "59f8006b531817eb21908043c348fddaef20edbc5ff8a0d44d8c4e402fb82e41"
+    },
+    "environment": {
+      "path": "schemas/environment.schema.json",
+      "sha256": "3ed6b2d4d3794eb58d952791e27c38b64abb08e50f5c8c93ca3217e888ea9118"
+    },
+    "convention_set": {
+      "path": "schemas/convention_set.schema.json",
+      "sha256": "75911ba598b4580ca30cdeeaaca3a2b3112e614e55c2ef1338c259159010e391"
+    },
+    "parameter_point": {
+      "path": "schemas/parameter_point.schema.json",
+      "sha256": "4a8b40f5af2475ea26f7c83c878f65f6a2088f0378988f022ed390153187fbc5"
+    },
+    "benchmark_result": {
+      "path": "schemas/benchmark_result.schema.json",
+      "sha256": "23fd1c92a207d3009b75fe935a19e00139cdac20b3ee59e442c5972ce97152dc"
+    },
+    "evidence_fragment": {
+      "path": "schemas/evidence_fragment.schema.json",
+      "sha256": "95083f4d070e36b94e986e9f008c5c6e3a3347a66de0a8f484ef835416e79746"
+    },
+    "test_case": {
+      "path": "schemas/test_case.schema.json",
+      "sha256": "3a3442cc9710a19605eb8c0013a8317fc41b36a6608363d0d177a416496ce68c"
+    },
+    "test_run": {
+      "path": "schemas/test_run.schema.json",
+      "sha256": "360eafd6f546fa5702362cac7f391db443cf71736e6605da395abe5c5017e13d"
+    },
+    "state_transition_event": {
+      "path": "schemas/state_transition_event.schema.json",
+      "sha256": "580b7a366861bec2fabc50174f52889195c642511d53e57c40aa1a2eedb4290a"
+    },
+    "migration_record": {
+      "path": "schemas/migration_record.schema.json",
+      "sha256": "787bf80a9b9accc58278deebcf26fe9efefc92deae583f2ead93f7878955bf38"
+    },
+    "relation_edge": {
+      "path": "schemas/relation_edge.schema.json",
+      "sha256": "d4ff296ef6270c84585c5ed858fef8a3fd4fb7334da09e987bdb12b6187d1f3b"
+    }
+  },
+  "fixture_index": "tests/fixture-index.json",
+  "migration_contract": "migrations/v1.3-to-v1.4-mapping.json",
+  "limitations": [
+    "v1.3 machine-readable bundle was not found in the available workspace; backward compatibility is unverified.",
+    "Schemas are candidate minimal envelopes, not a complete transcription of every normative field in the design document.",
+    "Cross-record semantic validation, state-machine validation, event-ledger verification, and migration execution are not implemented.",
+    "Conditional fixtures validate schema shape only; semantic guards remain not_run.",
+    "v1.4.1 is an audited candidate, not a released baseline.",
+    "Only explicit fixes with normative support were applied; many record-specific required fields and conditions remain uncovered.",
+    "Cross-record references, full state transition graph, event-chain/checkpoint integrity, directory normalization and scientific validity are not checked by JSON Schema alone.",
+    "Compatibility with the historical schema v1.3 bundle has not been verified because that bundle was not available in the current workspace.",
+    "v1.4.3.6 introduces required artifact_storage_kind and alternative_identity keys; no migration has been implemented.",
+    "Strict status interpretation: a hashless external file remains needs_review even if an alternative identity method is verified; byte integrity is not inferred.",
+    "For directories, content_sha256 is null and directory_manifest_sha256 is the integrity digest. This is a proposed clarification of the previous storage-agnostic generated-hash rule.",
+    "Only the DD-ART-006 subset of cross-record semantics is tested; full cross-record validator is not implemented.",
+    "Physics correctness is not validated."
+  ],
+  "release_evidence": {
+    "schema_meta_validation": "25/25 passed",
+    "fixture_validation": "83/83 expected outcomes matched",
+    "cross_record_semantics": "16/16 expected outcomes matched for DD-ART-006 subset",
+    "traceability": "58/58 validator checks passed overall; 96 trace rows",
+    "migration": "not run",
+    "physics_acceptance": "not implemented"
+  },
+  "requirement_traceability": "audit/requirement-test-trace.csv",
+  "fixture_index_sha256": "fa1047d096208c81e2798af0276cfe0aeccca37dba599e3ef837664c44cc6133",
+  "audit_status": {
+    "schema_meta_validation": "passed: 25/25",
+    "schema_fixture_validation": "passed: 83/83",
+    "inherited_semantic_subset": "passed: 16/16",
+    "new_prototype_tests": "passed: 29/29",
+    "cross_record_smoke": "passed: 5 records, 0 errors",
+    "migration": "staging prototype; unresolved ambiguity; commit blocked",
+    "directory_jcs": "restricted FileEntry canonicalization helper; not general RFC8785 or filesystem verifier",
+    "physics_acceptance": "not_implemented"
+  },
+  "source_bundle": "schema-v1.4.3.6-integrated-candidate-bundle.zip",
+  "source_bundle_sha256": "aefb34e68af65daf8277b9553d232cab29ffb5df9c4f18c1cfe126474a06adf1",
+  "requirement_traceability_rows": 125
+}

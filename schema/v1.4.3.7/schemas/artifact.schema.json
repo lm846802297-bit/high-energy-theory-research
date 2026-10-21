@@ -1,0 +1,1034 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.example.invalid/high-energy-theory/v1.4.3.6/artifact.schema.json",
+  "title": "Artifact record schema (v1.4.3.6 integrated candidate)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "record_type",
+    "project_id",
+    "artifact_id",
+    "artifact_type",
+    "origin_kind",
+    "path_or_uri",
+    "format",
+    "content_sha256",
+    "schema_or_structure",
+    "units",
+    "input_artifact_ids",
+    "configuration_id",
+    "code_id",
+    "environment_id",
+    "artifact_integrity_status",
+    "artifact_lifecycle_status",
+    "generated_by_run_id",
+    "generated_by_activity_id",
+    "acquired_from_source_id",
+    "ingested_by_activity_id",
+    "required_files",
+    "directory_manifest",
+    "directory_manifest_sha256",
+    "hash_unavailable_reason",
+    "created_at",
+    "artifact_storage_kind",
+    "alternative_identity"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.4"
+    },
+    "record_type": {
+      "const": "artifact"
+    },
+    "project_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "description": {
+      "type": "string"
+    },
+    "artifact_id": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[A-Z][A-Z0-9-]{2,80}$"
+    },
+    "artifact_type": {
+      "type": "string",
+      "minLength": 1
+    },
+    "sha256": {
+      "type": "string",
+      "minLength": 1
+    },
+    "uri": {
+      "type": "string",
+      "minLength": 1
+    },
+    "producer_run_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "integrity_status": {
+      "type": "string",
+      "minLength": 1
+    },
+    "origin_kind": {
+      "type": "string",
+      "enum": [
+        "generated",
+        "ingested_external",
+        "derived",
+        "manual"
+      ]
+    },
+    "path_or_uri": {
+      "type": "string",
+      "minLength": 1
+    },
+    "format": {
+      "type": "string",
+      "minLength": 1
+    },
+    "content_sha256": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "schema_or_structure": {
+      "type": "object",
+      "additionalProperties": false
+    },
+    "units": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "input_artifact_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "configuration_id": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "minLength": 1
+    },
+    "code_id": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "minLength": 1
+    },
+    "environment_id": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "minLength": 1
+    },
+    "artifact_integrity_status": {
+      "type": "string",
+      "enum": [
+        "not_checked",
+        "in_progress",
+        "passed",
+        "failed",
+        "blocked",
+        "needs_review",
+        "not_applicable"
+      ]
+    },
+    "artifact_lifecycle_status": {
+      "type": "string",
+      "enum": [
+        "active",
+        "superseded",
+        "archived",
+        "deleted"
+      ]
+    },
+    "generated_by_run_id": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "minLength": 1
+    },
+    "generated_by_activity_id": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "minLength": 1
+    },
+    "acquired_from_source_id": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "minLength": 1
+    },
+    "ingested_by_activity_id": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "minLength": 1
+    },
+    "required_files": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "directory_manifest": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/fileEntry"
+      },
+      "uniqueItems": true
+    },
+    "directory_manifest_sha256": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "hash_unavailable_reason": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "minLength": 1
+    },
+    "artifact_storage_kind": {
+      "type": "string",
+      "enum": [
+        "file",
+        "directory"
+      ],
+      "description": "Explicit storage representation; required to select file-vs-directory integrity rules."
+    },
+    "alternative_identity": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "$ref": "#/$defs/alternativeIdentityUse"
+        }
+      ],
+      "description": "Required explicit null unless an eligible hashless external file uses a contract-approved method."
+    }
+  },
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "sha256OrNull": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/sha256"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "scope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "included",
+        "excluded",
+        "target_domain",
+        "out_of_scope_behavior"
+      ],
+      "properties": {
+        "included": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "excluded": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "target_domain": {
+          "type": "string",
+          "minLength": 1
+        },
+        "out_of_scope_behavior": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "inputRefs": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source_ids",
+        "configuration_ids",
+        "input_artifact_ids",
+        "external_references"
+      ],
+      "properties": {
+        "source_ids": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "configuration_ids": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "input_artifact_ids": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "external_references": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "external_system",
+              "external_id",
+              "uri",
+              "version_or_revision",
+              "retrieved_at",
+              "content_sha256",
+              "hash_unavailable_reason"
+            ],
+            "properties": {
+              "external_system": {
+                "type": "string",
+                "minLength": 1
+              },
+              "external_id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "uri": {
+                "type": "string",
+                "minLength": 1
+              },
+              "version_or_revision": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "retrieved_at": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "format": "date-time"
+              },
+              "content_sha256": {
+                "$ref": "#/$defs/sha256OrNull"
+              },
+              "hash_unavailable_reason": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "acceptanceCriterion": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "criterion_id",
+        "description",
+        "required",
+        "verification_method",
+        "pass_condition",
+        "failure_condition",
+        "evidence_kind"
+      ],
+      "properties": {
+        "criterion_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1
+        },
+        "required": {
+          "type": "boolean"
+        },
+        "verification_method": {
+          "type": "string",
+          "minLength": 1
+        },
+        "pass_condition": {
+          "type": "string",
+          "minLength": 1
+        },
+        "failure_condition": {
+          "type": "string",
+          "minLength": 1
+        },
+        "evidence_kind": {
+          "type": "string",
+          "minLength": 1
+        },
+        "threshold": {},
+        "comparison_operator": {
+          "type": "string"
+        },
+        "unit": {
+          "type": "string"
+        },
+        "tolerance_basis": {
+          "type": "string"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "required": [
+              "threshold"
+            ]
+          },
+          "then": {
+            "required": [
+              "comparison_operator",
+              "unit",
+              "tolerance_basis"
+            ]
+          }
+        }
+      ]
+    },
+    "assumption": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "assumption_id",
+        "description",
+        "scope",
+        "status",
+        "source_or_rationale"
+      ],
+      "properties": {
+        "assumption_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1
+        },
+        "scope": {
+          "type": "string",
+          "minLength": 1
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "proposed",
+            "accepted",
+            "rejected",
+            "superseded"
+          ]
+        },
+        "source_or_rationale": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "method": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "method_id",
+        "description",
+        "scope",
+        "status",
+        "source_or_rationale"
+      ],
+      "properties": {
+        "method_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1
+        },
+        "scope": {
+          "type": "string",
+          "minLength": 1
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "proposed",
+            "accepted",
+            "rejected",
+            "superseded"
+          ]
+        },
+        "source_or_rationale": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "fileEntry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "relative_path",
+        "entry_type",
+        "size_bytes",
+        "content_sha256",
+        "symlink_target"
+      ],
+      "properties": {
+        "relative_path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "entry_type": {
+          "type": "string",
+          "enum": [
+            "file",
+            "directory",
+            "symlink"
+          ]
+        },
+        "size_bytes": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "content_sha256": {
+          "$ref": "#/$defs/sha256OrNull"
+        },
+        "symlink_target": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "alternativeIdentityUse": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "approved_contract_id",
+        "approved_contract_sha256",
+        "method_id",
+        "method_version",
+        "identity_value",
+        "evidence_artifact_ids",
+        "verification_status",
+        "verified_at",
+        "verified_by",
+        "scope_statement",
+        "limitations"
+      ],
+      "properties": {
+        "approved_contract_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "approved_contract_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "method_id": {
+          "type": "string",
+          "pattern": "^AIM-[A-Z0-9]+(?:-[A-Z0-9]+)*$"
+        },
+        "method_version": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "identity_value": {
+          "type": "string",
+          "minLength": 1
+        },
+        "evidence_artifact_ids": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "verification_status": {
+          "type": "string",
+          "enum": [
+            "not_checked",
+            "verified",
+            "failed",
+            "inconclusive"
+          ]
+        },
+        "verified_at": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "verified_by": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "scope_statement": {
+          "type": "string",
+          "minLength": 1
+        },
+        "limitations": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "verification_status": {
+                "const": "verified"
+              }
+            },
+            "required": [
+              "verification_status"
+            ]
+          },
+          "then": {
+            "properties": {
+              "verified_at": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "verified_by": {
+                "type": "string",
+                "minLength": 1
+              },
+              "evidence_artifact_ids": {
+                "minItems": 1
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "verification_status": {
+                "enum": [
+                  "failed",
+                  "inconclusive",
+                  "not_checked"
+                ]
+              }
+            },
+            "required": [
+              "verification_status"
+            ]
+          },
+          "then": {
+            "properties": {
+              "verified_by": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "verified_at": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            }
+          }
+        }
+      ]
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "origin_kind": {
+            "const": "generated"
+          }
+        },
+        "required": [
+          "origin_kind"
+        ]
+      },
+      "then": {
+        "oneOf": [
+          {
+            "properties": {
+              "generated_by_run_id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "generated_by_activity_id": {
+                "type": "null"
+              }
+            }
+          },
+          {
+            "properties": {
+              "generated_by_run_id": {
+                "type": "null"
+              },
+              "generated_by_activity_id": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "origin_kind": {
+            "const": "ingested_external"
+          }
+        },
+        "required": [
+          "origin_kind"
+        ]
+      },
+      "then": {
+        "anyOf": [
+          {
+            "properties": {
+              "acquired_from_source_id": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          },
+          {
+            "properties": {
+              "ingested_by_activity_id": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "artifact_storage_kind": {
+            "const": "file"
+          }
+        },
+        "required": [
+          "artifact_storage_kind"
+        ]
+      },
+      "then": {
+        "properties": {
+          "required_files": {
+            "const": []
+          },
+          "directory_manifest": {
+            "const": []
+          },
+          "directory_manifest_sha256": {
+            "type": "null"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "artifact_storage_kind": {
+            "const": "directory"
+          }
+        },
+        "required": [
+          "artifact_storage_kind"
+        ]
+      },
+      "then": {
+        "properties": {
+          "content_sha256": {
+            "type": "null"
+          },
+          "directory_manifest_sha256": {
+            "$ref": "#/$defs/sha256"
+          },
+          "hash_unavailable_reason": {
+            "type": "null"
+          },
+          "alternative_identity": {
+            "type": "null"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "content_sha256": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "content_sha256"
+        ]
+      },
+      "then": {
+        "properties": {
+          "alternative_identity": {
+            "type": "null"
+          },
+          "hash_unavailable_reason": {
+            "type": "null"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "origin_kind": {
+            "const": "generated"
+          },
+          "artifact_storage_kind": {
+            "const": "file"
+          }
+        },
+        "required": [
+          "origin_kind",
+          "artifact_storage_kind"
+        ]
+      },
+      "then": {
+        "properties": {
+          "content_sha256": {
+            "$ref": "#/$defs/sha256"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "origin_kind": {
+            "const": "generated"
+          },
+          "artifact_storage_kind": {
+            "const": "directory"
+          }
+        },
+        "required": [
+          "origin_kind",
+          "artifact_storage_kind"
+        ]
+      },
+      "then": {
+        "properties": {
+          "directory_manifest_sha256": {
+            "$ref": "#/$defs/sha256"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "origin_kind": {
+            "const": "ingested_external"
+          },
+          "artifact_storage_kind": {
+            "const": "file"
+          },
+          "content_sha256": {
+            "type": "null"
+          }
+        },
+        "required": [
+          "origin_kind",
+          "artifact_storage_kind",
+          "content_sha256"
+        ]
+      },
+      "then": {
+        "properties": {
+          "hash_unavailable_reason": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "origin_kind": {
+            "const": "ingested_external"
+          },
+          "artifact_storage_kind": {
+            "const": "file"
+          },
+          "content_sha256": {
+            "type": "null"
+          },
+          "alternative_identity": {
+            "type": "null"
+          }
+        },
+        "required": [
+          "origin_kind",
+          "artifact_storage_kind",
+          "content_sha256",
+          "alternative_identity"
+        ]
+      },
+      "then": {
+        "properties": {
+          "artifact_integrity_status": {
+            "const": "needs_review"
+          },
+          "hash_unavailable_reason": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "alternative_identity": {
+            "type": "object"
+          }
+        },
+        "required": [
+          "alternative_identity"
+        ]
+      },
+      "then": {
+        "properties": {
+          "origin_kind": {
+            "const": "ingested_external"
+          },
+          "artifact_storage_kind": {
+            "const": "file"
+          },
+          "content_sha256": {
+            "type": "null"
+          },
+          "hash_unavailable_reason": {
+            "type": "string",
+            "minLength": 1
+          },
+          "artifact_integrity_status": {
+            "enum": [
+              "needs_review",
+              "failed"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "alternative_identity": {
+            "type": "object",
+            "properties": {
+              "verification_status": {
+                "enum": [
+                  "not_checked",
+                  "failed",
+                  "inconclusive"
+                ]
+              }
+            },
+            "required": [
+              "verification_status"
+            ]
+          }
+        },
+        "required": [
+          "alternative_identity"
+        ]
+      },
+      "then": {
+        "properties": {
+          "artifact_integrity_status": {
+            "enum": [
+              "needs_review",
+              "failed"
+            ]
+          }
+        }
+      }
+    }
+  ],
+  "description": "Candidate integration. Hashless external file identity is tracked separately from byte-integrity status; directory identity uses a directory manifest digest."
+}

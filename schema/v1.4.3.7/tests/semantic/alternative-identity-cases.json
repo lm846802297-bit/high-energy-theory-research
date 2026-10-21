@@ -1,0 +1,2222 @@
+[
+  {
+    "test_id": "SEM-ALTID-001-APPROVED-METHOD",
+    "expected": "pass",
+    "artifact": {
+      "schema_version": "1.4",
+      "record_type": "artifact",
+      "project_id": "HEP-RESEARCH",
+      "artifact_id": "ART-001",
+      "artifact_type": "sample",
+      "origin_kind": "ingested_external",
+      "path_or_uri": "sample",
+      "format": "sample",
+      "content_sha256": null,
+      "schema_or_structure": {},
+      "units": [],
+      "input_artifact_ids": [],
+      "configuration_id": null,
+      "code_id": null,
+      "environment_id": null,
+      "artifact_integrity_status": "needs_review",
+      "artifact_lifecycle_status": "active",
+      "generated_by_run_id": null,
+      "generated_by_activity_id": null,
+      "acquired_from_source_id": "SRC-001",
+      "ingested_by_activity_id": null,
+      "required_files": [],
+      "directory_manifest": [],
+      "directory_manifest_sha256": null,
+      "hash_unavailable_reason": "No raw-byte digest available from source endpoint.",
+      "created_at": "2026-10-20T12:00:00Z",
+      "artifact_storage_kind": "file",
+      "alternative_identity": {
+        "approved_contract_id": "TEC-ALT-001",
+        "approved_contract_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "method_id": "AIM-PUB-VERSION-001",
+        "method_version": 1,
+        "identity_value": "https://example.invalid/document/v2#version=v2",
+        "evidence_artifact_ids": [
+          "ART-EVID-001"
+        ],
+        "verification_status": "verified",
+        "verified_at": "2026-10-20T12:05:00Z",
+        "verified_by": "reviewer-1",
+        "scope_statement": "Publisher-declared version identity only.",
+        "limitations": [
+          "No raw-byte SHA-256 is available.",
+          "Does not prove byte-for-byte identity."
+        ]
+      }
+    },
+    "contract": {
+      "schema_version": "1.4",
+      "record_type": "task_execution_contract",
+      "project_id": "HEP-RESEARCH",
+      "contract_id": "TEC-ALT-001",
+      "task_id": "TASK-001",
+      "contract_version": 1,
+      "contract_status": "approved",
+      "objective": "sample",
+      "scope": {
+        "included": [],
+        "excluded": [],
+        "target_domain": "sample",
+        "out_of_scope_behavior": "sample"
+      },
+      "input_refs": {
+        "source_ids": [],
+        "configuration_ids": [],
+        "input_artifact_ids": [],
+        "external_references": []
+      },
+      "assumptions": [],
+      "conventions_id": null,
+      "conventions_reason": "Not applicable to this fixture",
+      "required_capabilities": [],
+      "planned_methods": [],
+      "artifact_plan_ids": [],
+      "validation_plan_ids": [],
+      "acceptance_criteria": [
+        {
+          "criterion_id": "AC-1",
+          "description": "output exists",
+          "required": true,
+          "verification_method": "file check",
+          "pass_condition": "exists",
+          "failure_condition": "missing",
+          "evidence_kind": "artifact"
+        }
+      ],
+      "failure_branches": [],
+      "stop_conditions": [],
+      "contract_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "created_at": "2026-10-20T12:00:00Z",
+      "approved_at": "2026-10-20T12:00:00Z",
+      "approved_by": "reviewer-1",
+      "supersedes_contract_id": null,
+      "alternative_identity_methods": [
+        {
+          "method_id": "AIM-PUB-VERSION-001",
+          "method_version": 1,
+          "method_kind": "immutable_versioned_locator",
+          "method_status": "approved",
+          "description": "Publisher-declared immutable version locator",
+          "applicable_source_types": [
+            "publisher_document"
+          ],
+          "applicable_artifact_storage_kinds": [
+            "file"
+          ],
+          "identity_value_specification": "Stable publisher URI and version",
+          "verification_procedure": "Resolve URI and compare publisher-declared version",
+          "required_evidence_kinds": [
+            "publisher_record"
+          ],
+          "acceptance_criteria": [
+            "Version matches the declaration"
+          ],
+          "limitations": [
+            "Does not prove byte identity"
+          ]
+        }
+      ]
+    },
+    "source": {
+      "schema_version": "1.4",
+      "record_type": "source",
+      "project_id": "HEP-RESEARCH",
+      "source_id": "SRC-001",
+      "source_type": "publisher_document",
+      "title": "sample",
+      "uri_or_path": "sample",
+      "source_version": "sample",
+      "content_sha256": null,
+      "retrieved_at": "2026-10-20T12:00:00Z",
+      "lifecycle_status": "active",
+      "verification_status": "verified",
+      "hash_unavailable_reason": "Source hash unavailable in fixture"
+    }
+  },
+  {
+    "test_id": "SEM-ALTID-002-METHOD-NOT-REGISTERED",
+    "expected": "semantic_reject",
+    "artifact": {
+      "schema_version": "1.4",
+      "record_type": "artifact",
+      "project_id": "HEP-RESEARCH",
+      "artifact_id": "ART-001",
+      "artifact_type": "sample",
+      "origin_kind": "ingested_external",
+      "path_or_uri": "sample",
+      "format": "sample",
+      "content_sha256": null,
+      "schema_or_structure": {},
+      "units": [],
+      "input_artifact_ids": [],
+      "configuration_id": null,
+      "code_id": null,
+      "environment_id": null,
+      "artifact_integrity_status": "needs_review",
+      "artifact_lifecycle_status": "active",
+      "generated_by_run_id": null,
+      "generated_by_activity_id": null,
+      "acquired_from_source_id": "SRC-001",
+      "ingested_by_activity_id": null,
+      "required_files": [],
+      "directory_manifest": [],
+      "directory_manifest_sha256": null,
+      "hash_unavailable_reason": "No raw-byte digest available from source endpoint.",
+      "created_at": "2026-10-20T12:00:00Z",
+      "artifact_storage_kind": "file",
+      "alternative_identity": {
+        "approved_contract_id": "TEC-ALT-001",
+        "approved_contract_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "method_id": "AIM-NOT-REGISTERED",
+        "method_version": 1,
+        "identity_value": "https://example.invalid/document/v2#version=v2",
+        "evidence_artifact_ids": [
+          "ART-EVID-001"
+        ],
+        "verification_status": "verified",
+        "verified_at": "2026-10-20T12:05:00Z",
+        "verified_by": "reviewer-1",
+        "scope_statement": "Publisher-declared version identity only.",
+        "limitations": [
+          "No raw-byte SHA-256 is available.",
+          "Does not prove byte-for-byte identity."
+        ]
+      }
+    },
+    "contract": {
+      "schema_version": "1.4",
+      "record_type": "task_execution_contract",
+      "project_id": "HEP-RESEARCH",
+      "contract_id": "TEC-ALT-001",
+      "task_id": "TASK-001",
+      "contract_version": 1,
+      "contract_status": "approved",
+      "objective": "sample",
+      "scope": {
+        "included": [],
+        "excluded": [],
+        "target_domain": "sample",
+        "out_of_scope_behavior": "sample"
+      },
+      "input_refs": {
+        "source_ids": [],
+        "configuration_ids": [],
+        "input_artifact_ids": [],
+        "external_references": []
+      },
+      "assumptions": [],
+      "conventions_id": null,
+      "conventions_reason": "Not applicable to this fixture",
+      "required_capabilities": [],
+      "planned_methods": [],
+      "artifact_plan_ids": [],
+      "validation_plan_ids": [],
+      "acceptance_criteria": [
+        {
+          "criterion_id": "AC-1",
+          "description": "output exists",
+          "required": true,
+          "verification_method": "file check",
+          "pass_condition": "exists",
+          "failure_condition": "missing",
+          "evidence_kind": "artifact"
+        }
+      ],
+      "failure_branches": [],
+      "stop_conditions": [],
+      "contract_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "created_at": "2026-10-20T12:00:00Z",
+      "approved_at": "2026-10-20T12:00:00Z",
+      "approved_by": "reviewer-1",
+      "supersedes_contract_id": null,
+      "alternative_identity_methods": [
+        {
+          "method_id": "AIM-PUB-VERSION-001",
+          "method_version": 1,
+          "method_kind": "immutable_versioned_locator",
+          "method_status": "approved",
+          "description": "Publisher-declared immutable version locator",
+          "applicable_source_types": [
+            "publisher_document"
+          ],
+          "applicable_artifact_storage_kinds": [
+            "file"
+          ],
+          "identity_value_specification": "Stable publisher URI and version",
+          "verification_procedure": "Resolve URI and compare publisher-declared version",
+          "required_evidence_kinds": [
+            "publisher_record"
+          ],
+          "acceptance_criteria": [
+            "Version matches the declaration"
+          ],
+          "limitations": [
+            "Does not prove byte identity"
+          ]
+        }
+      ]
+    },
+    "source": {
+      "schema_version": "1.4",
+      "record_type": "source",
+      "project_id": "HEP-RESEARCH",
+      "source_id": "SRC-001",
+      "source_type": "publisher_document",
+      "title": "sample",
+      "uri_or_path": "sample",
+      "source_version": "sample",
+      "content_sha256": null,
+      "retrieved_at": "2026-10-20T12:00:00Z",
+      "lifecycle_status": "active",
+      "verification_status": "verified",
+      "hash_unavailable_reason": "Source hash unavailable in fixture"
+    }
+  },
+  {
+    "test_id": "SEM-ALTID-003-CONTRACT-NOT-APPROVED",
+    "expected": "semantic_reject",
+    "artifact": {
+      "schema_version": "1.4",
+      "record_type": "artifact",
+      "project_id": "HEP-RESEARCH",
+      "artifact_id": "ART-001",
+      "artifact_type": "sample",
+      "origin_kind": "ingested_external",
+      "path_or_uri": "sample",
+      "format": "sample",
+      "content_sha256": null,
+      "schema_or_structure": {},
+      "units": [],
+      "input_artifact_ids": [],
+      "configuration_id": null,
+      "code_id": null,
+      "environment_id": null,
+      "artifact_integrity_status": "needs_review",
+      "artifact_lifecycle_status": "active",
+      "generated_by_run_id": null,
+      "generated_by_activity_id": null,
+      "acquired_from_source_id": "SRC-001",
+      "ingested_by_activity_id": null,
+      "required_files": [],
+      "directory_manifest": [],
+      "directory_manifest_sha256": null,
+      "hash_unavailable_reason": "No raw-byte digest available from source endpoint.",
+      "created_at": "2026-10-20T12:00:00Z",
+      "artifact_storage_kind": "file",
+      "alternative_identity": {
+        "approved_contract_id": "TEC-ALT-001",
+        "approved_contract_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "method_id": "AIM-PUB-VERSION-001",
+        "method_version": 1,
+        "identity_value": "https://example.invalid/document/v2#version=v2",
+        "evidence_artifact_ids": [
+          "ART-EVID-001"
+        ],
+        "verification_status": "verified",
+        "verified_at": "2026-10-20T12:05:00Z",
+        "verified_by": "reviewer-1",
+        "scope_statement": "Publisher-declared version identity only.",
+        "limitations": [
+          "No raw-byte SHA-256 is available.",
+          "Does not prove byte-for-byte identity."
+        ]
+      }
+    },
+    "contract": {
+      "schema_version": "1.4",
+      "record_type": "task_execution_contract",
+      "project_id": "HEP-RESEARCH",
+      "contract_id": "TEC-ALT-001",
+      "task_id": "TASK-001",
+      "contract_version": 1,
+      "contract_status": "draft",
+      "objective": "sample",
+      "scope": {
+        "included": [],
+        "excluded": [],
+        "target_domain": "sample",
+        "out_of_scope_behavior": "sample"
+      },
+      "input_refs": {
+        "source_ids": [],
+        "configuration_ids": [],
+        "input_artifact_ids": [],
+        "external_references": []
+      },
+      "assumptions": [],
+      "conventions_id": null,
+      "conventions_reason": "Not applicable to this fixture",
+      "required_capabilities": [],
+      "planned_methods": [],
+      "artifact_plan_ids": [],
+      "validation_plan_ids": [],
+      "acceptance_criteria": [
+        {
+          "criterion_id": "AC-1",
+          "description": "output exists",
+          "required": true,
+          "verification_method": "file check",
+          "pass_condition": "exists",
+          "failure_condition": "missing",
+          "evidence_kind": "artifact"
+        }
+      ],
+      "failure_branches": [],
+      "stop_conditions": [],
+      "contract_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "created_at": "2026-10-20T12:00:00Z",
+      "approved_at": "2026-10-20T12:00:00Z",
+      "approved_by": "reviewer-1",
+      "supersedes_contract_id": null,
+      "alternative_identity_methods": [
+        {
+          "method_id": "AIM-PUB-VERSION-001",
+          "method_version": 1,
+          "method_kind": "immutable_versioned_locator",
+          "method_status": "approved",
+          "description": "Publisher-declared immutable version locator",
+          "applicable_source_types": [
+            "publisher_document"
+          ],
+          "applicable_artifact_storage_kinds": [
+            "file"
+          ],
+          "identity_value_specification": "Stable publisher URI and version",
+          "verification_procedure": "Resolve URI and compare publisher-declared version",
+          "required_evidence_kinds": [
+            "publisher_record"
+          ],
+          "acceptance_criteria": [
+            "Version matches the declaration"
+          ],
+          "limitations": [
+            "Does not prove byte identity"
+          ]
+        }
+      ]
+    },
+    "source": {
+      "schema_version": "1.4",
+      "record_type": "source",
+      "project_id": "HEP-RESEARCH",
+      "source_id": "SRC-001",
+      "source_type": "publisher_document",
+      "title": "sample",
+      "uri_or_path": "sample",
+      "source_version": "sample",
+      "content_sha256": null,
+      "retrieved_at": "2026-10-20T12:00:00Z",
+      "lifecycle_status": "active",
+      "verification_status": "verified",
+      "hash_unavailable_reason": "Source hash unavailable in fixture"
+    }
+  },
+  {
+    "test_id": "SEM-ALTID-004-CONTRACT-HASH-MISMATCH",
+    "expected": "semantic_reject",
+    "artifact": {
+      "schema_version": "1.4",
+      "record_type": "artifact",
+      "project_id": "HEP-RESEARCH",
+      "artifact_id": "ART-001",
+      "artifact_type": "sample",
+      "origin_kind": "ingested_external",
+      "path_or_uri": "sample",
+      "format": "sample",
+      "content_sha256": null,
+      "schema_or_structure": {},
+      "units": [],
+      "input_artifact_ids": [],
+      "configuration_id": null,
+      "code_id": null,
+      "environment_id": null,
+      "artifact_integrity_status": "needs_review",
+      "artifact_lifecycle_status": "active",
+      "generated_by_run_id": null,
+      "generated_by_activity_id": null,
+      "acquired_from_source_id": "SRC-001",
+      "ingested_by_activity_id": null,
+      "required_files": [],
+      "directory_manifest": [],
+      "directory_manifest_sha256": null,
+      "hash_unavailable_reason": "No raw-byte digest available from source endpoint.",
+      "created_at": "2026-10-20T12:00:00Z",
+      "artifact_storage_kind": "file",
+      "alternative_identity": {
+        "approved_contract_id": "TEC-ALT-001",
+        "approved_contract_sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+        "method_id": "AIM-PUB-VERSION-001",
+        "method_version": 1,
+        "identity_value": "https://example.invalid/document/v2#version=v2",
+        "evidence_artifact_ids": [
+          "ART-EVID-001"
+        ],
+        "verification_status": "verified",
+        "verified_at": "2026-10-20T12:05:00Z",
+        "verified_by": "reviewer-1",
+        "scope_statement": "Publisher-declared version identity only.",
+        "limitations": [
+          "No raw-byte SHA-256 is available.",
+          "Does not prove byte-for-byte identity."
+        ]
+      }
+    },
+    "contract": {
+      "schema_version": "1.4",
+      "record_type": "task_execution_contract",
+      "project_id": "HEP-RESEARCH",
+      "contract_id": "TEC-ALT-001",
+      "task_id": "TASK-001",
+      "contract_version": 1,
+      "contract_status": "approved",
+      "objective": "sample",
+      "scope": {
+        "included": [],
+        "excluded": [],
+        "target_domain": "sample",
+        "out_of_scope_behavior": "sample"
+      },
+      "input_refs": {
+        "source_ids": [],
+        "configuration_ids": [],
+        "input_artifact_ids": [],
+        "external_references": []
+      },
+      "assumptions": [],
+      "conventions_id": null,
+      "conventions_reason": "Not applicable to this fixture",
+      "required_capabilities": [],
+      "planned_methods": [],
+      "artifact_plan_ids": [],
+      "validation_plan_ids": [],
+      "acceptance_criteria": [
+        {
+          "criterion_id": "AC-1",
+          "description": "output exists",
+          "required": true,
+          "verification_method": "file check",
+          "pass_condition": "exists",
+          "failure_condition": "missing",
+          "evidence_kind": "artifact"
+        }
+      ],
+      "failure_branches": [],
+      "stop_conditions": [],
+      "contract_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "created_at": "2026-10-20T12:00:00Z",
+      "approved_at": "2026-10-20T12:00:00Z",
+      "approved_by": "reviewer-1",
+      "supersedes_contract_id": null,
+      "alternative_identity_methods": [
+        {
+          "method_id": "AIM-PUB-VERSION-001",
+          "method_version": 1,
+          "method_kind": "immutable_versioned_locator",
+          "method_status": "approved",
+          "description": "Publisher-declared immutable version locator",
+          "applicable_source_types": [
+            "publisher_document"
+          ],
+          "applicable_artifact_storage_kinds": [
+            "file"
+          ],
+          "identity_value_specification": "Stable publisher URI and version",
+          "verification_procedure": "Resolve URI and compare publisher-declared version",
+          "required_evidence_kinds": [
+            "publisher_record"
+          ],
+          "acceptance_criteria": [
+            "Version matches the declaration"
+          ],
+          "limitations": [
+            "Does not prove byte identity"
+          ]
+        }
+      ]
+    },
+    "source": {
+      "schema_version": "1.4",
+      "record_type": "source",
+      "project_id": "HEP-RESEARCH",
+      "source_id": "SRC-001",
+      "source_type": "publisher_document",
+      "title": "sample",
+      "uri_or_path": "sample",
+      "source_version": "sample",
+      "content_sha256": null,
+      "retrieved_at": "2026-10-20T12:00:00Z",
+      "lifecycle_status": "active",
+      "verification_status": "verified",
+      "hash_unavailable_reason": "Source hash unavailable in fixture"
+    }
+  },
+  {
+    "test_id": "SEM-ALTID-005-SOURCE-TYPE-NOT-APPLICABLE",
+    "expected": "semantic_reject",
+    "artifact": {
+      "schema_version": "1.4",
+      "record_type": "artifact",
+      "project_id": "HEP-RESEARCH",
+      "artifact_id": "ART-001",
+      "artifact_type": "sample",
+      "origin_kind": "ingested_external",
+      "path_or_uri": "sample",
+      "format": "sample",
+      "content_sha256": null,
+      "schema_or_structure": {},
+      "units": [],
+      "input_artifact_ids": [],
+      "configuration_id": null,
+      "code_id": null,
+      "environment_id": null,
+      "artifact_integrity_status": "needs_review",
+      "artifact_lifecycle_status": "active",
+      "generated_by_run_id": null,
+      "generated_by_activity_id": null,
+      "acquired_from_source_id": "SRC-001",
+      "ingested_by_activity_id": null,
+      "required_files": [],
+      "directory_manifest": [],
+      "directory_manifest_sha256": null,
+      "hash_unavailable_reason": "No raw-byte digest available from source endpoint.",
+      "created_at": "2026-10-20T12:00:00Z",
+      "artifact_storage_kind": "file",
+      "alternative_identity": {
+        "approved_contract_id": "TEC-ALT-001",
+        "approved_contract_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "method_id": "AIM-PUB-VERSION-001",
+        "method_version": 1,
+        "identity_value": "https://example.invalid/document/v2#version=v2",
+        "evidence_artifact_ids": [
+          "ART-EVID-001"
+        ],
+        "verification_status": "verified",
+        "verified_at": "2026-10-20T12:05:00Z",
+        "verified_by": "reviewer-1",
+        "scope_statement": "Publisher-declared version identity only.",
+        "limitations": [
+          "No raw-byte SHA-256 is available.",
+          "Does not prove byte-for-byte identity."
+        ]
+      }
+    },
+    "contract": {
+      "schema_version": "1.4",
+      "record_type": "task_execution_contract",
+      "project_id": "HEP-RESEARCH",
+      "contract_id": "TEC-ALT-001",
+      "task_id": "TASK-001",
+      "contract_version": 1,
+      "contract_status": "approved",
+      "objective": "sample",
+      "scope": {
+        "included": [],
+        "excluded": [],
+        "target_domain": "sample",
+        "out_of_scope_behavior": "sample"
+      },
+      "input_refs": {
+        "source_ids": [],
+        "configuration_ids": [],
+        "input_artifact_ids": [],
+        "external_references": []
+      },
+      "assumptions": [],
+      "conventions_id": null,
+      "conventions_reason": "Not applicable to this fixture",
+      "required_capabilities": [],
+      "planned_methods": [],
+      "artifact_plan_ids": [],
+      "validation_plan_ids": [],
+      "acceptance_criteria": [
+        {
+          "criterion_id": "AC-1",
+          "description": "output exists",
+          "required": true,
+          "verification_method": "file check",
+          "pass_condition": "exists",
+          "failure_condition": "missing",
+          "evidence_kind": "artifact"
+        }
+      ],
+      "failure_branches": [],
+      "stop_conditions": [],
+      "contract_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "created_at": "2026-10-20T12:00:00Z",
+      "approved_at": "2026-10-20T12:00:00Z",
+      "approved_by": "reviewer-1",
+      "supersedes_contract_id": null,
+      "alternative_identity_methods": [
+        {
+          "method_id": "AIM-PUB-VERSION-001",
+          "method_version": 1,
+          "method_kind": "immutable_versioned_locator",
+          "method_status": "approved",
+          "description": "Publisher-declared immutable version locator",
+          "applicable_source_types": [
+            "publisher_document"
+          ],
+          "applicable_artifact_storage_kinds": [
+            "file"
+          ],
+          "identity_value_specification": "Stable publisher URI and version",
+          "verification_procedure": "Resolve URI and compare publisher-declared version",
+          "required_evidence_kinds": [
+            "publisher_record"
+          ],
+          "acceptance_criteria": [
+            "Version matches the declaration"
+          ],
+          "limitations": [
+            "Does not prove byte identity"
+          ]
+        }
+      ]
+    },
+    "source": {
+      "schema_version": "1.4",
+      "record_type": "source",
+      "project_id": "HEP-RESEARCH",
+      "source_id": "SRC-001",
+      "source_type": "unknown_source",
+      "title": "sample",
+      "uri_or_path": "sample",
+      "source_version": "sample",
+      "content_sha256": null,
+      "retrieved_at": "2026-10-20T12:00:00Z",
+      "lifecycle_status": "active",
+      "verification_status": "verified",
+      "hash_unavailable_reason": "Source hash unavailable in fixture"
+    }
+  },
+  {
+    "test_id": "SEM-ALTID-006-SOURCE-ID-MISMATCH",
+    "expected": "semantic_reject",
+    "artifact": {
+      "schema_version": "1.4",
+      "record_type": "artifact",
+      "project_id": "HEP-RESEARCH",
+      "artifact_id": "ART-001",
+      "artifact_type": "sample",
+      "origin_kind": "ingested_external",
+      "path_or_uri": "sample",
+      "format": "sample",
+      "content_sha256": null,
+      "schema_or_structure": {},
+      "units": [],
+      "input_artifact_ids": [],
+      "configuration_id": null,
+      "code_id": null,
+      "environment_id": null,
+      "artifact_integrity_status": "needs_review",
+      "artifact_lifecycle_status": "active",
+      "generated_by_run_id": null,
+      "generated_by_activity_id": null,
+      "acquired_from_source_id": "SRC-OTHER",
+      "ingested_by_activity_id": null,
+      "required_files": [],
+      "directory_manifest": [],
+      "directory_manifest_sha256": null,
+      "hash_unavailable_reason": "No raw-byte digest available from source endpoint.",
+      "created_at": "2026-10-20T12:00:00Z",
+      "artifact_storage_kind": "file",
+      "alternative_identity": {
+        "approved_contract_id": "TEC-ALT-001",
+        "approved_contract_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "method_id": "AIM-PUB-VERSION-001",
+        "method_version": 1,
+        "identity_value": "https://example.invalid/document/v2#version=v2",
+        "evidence_artifact_ids": [
+          "ART-EVID-001"
+        ],
+        "verification_status": "verified",
+        "verified_at": "2026-10-20T12:05:00Z",
+        "verified_by": "reviewer-1",
+        "scope_statement": "Publisher-declared version identity only.",
+        "limitations": [
+          "No raw-byte SHA-256 is available.",
+          "Does not prove byte-for-byte identity."
+        ]
+      }
+    },
+    "contract": {
+      "schema_version": "1.4",
+      "record_type": "task_execution_contract",
+      "project_id": "HEP-RESEARCH",
+      "contract_id": "TEC-ALT-001",
+      "task_id": "TASK-001",
+      "contract_version": 1,
+      "contract_status": "approved",
+      "objective": "sample",
+      "scope": {
+        "included": [],
+        "excluded": [],
+        "target_domain": "sample",
+        "out_of_scope_behavior": "sample"
+      },
+      "input_refs": {
+        "source_ids": [],
+        "configuration_ids": [],
+        "input_artifact_ids": [],
+        "external_references": []
+      },
+      "assumptions": [],
+      "conventions_id": null,
+      "conventions_reason": "Not applicable to this fixture",
+      "required_capabilities": [],
+      "planned_methods": [],
+      "artifact_plan_ids": [],
+      "validation_plan_ids": [],
+      "acceptance_criteria": [
+        {
+          "criterion_id": "AC-1",
+          "description": "output exists",
+          "required": true,
+          "verification_method": "file check",
+          "pass_condition": "exists",
+          "failure_condition": "missing",
+          "evidence_kind": "artifact"
+        }
+      ],
+      "failure_branches": [],
+      "stop_conditions": [],
+      "contract_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "created_at": "2026-10-20T12:00:00Z",
+      "approved_at": "2026-10-20T12:00:00Z",
+      "approved_by": "reviewer-1",
+      "supersedes_contract_id": null,
+      "alternative_identity_methods": [
+        {
+          "method_id": "AIM-PUB-VERSION-001",
+          "method_version": 1,
+          "method_kind": "immutable_versioned_locator",
+          "method_status": "approved",
+          "description": "Publisher-declared immutable version locator",
+          "applicable_source_types": [
+            "publisher_document"
+          ],
+          "applicable_artifact_storage_kinds": [
+            "file"
+          ],
+          "identity_value_specification": "Stable publisher URI and version",
+          "verification_procedure": "Resolve URI and compare publisher-declared version",
+          "required_evidence_kinds": [
+            "publisher_record"
+          ],
+          "acceptance_criteria": [
+            "Version matches the declaration"
+          ],
+          "limitations": [
+            "Does not prove byte identity"
+          ]
+        }
+      ]
+    },
+    "source": {
+      "schema_version": "1.4",
+      "record_type": "source",
+      "project_id": "HEP-RESEARCH",
+      "source_id": "SRC-001",
+      "source_type": "publisher_document",
+      "title": "sample",
+      "uri_or_path": "sample",
+      "source_version": "sample",
+      "content_sha256": null,
+      "retrieved_at": "2026-10-20T12:00:00Z",
+      "lifecycle_status": "active",
+      "verification_status": "verified",
+      "hash_unavailable_reason": "Source hash unavailable in fixture"
+    }
+  },
+  {
+    "test_id": "SEM-ALTID-007-SOURCE-PROJECT-MISMATCH",
+    "expected": "semantic_reject",
+    "artifact": {
+      "schema_version": "1.4",
+      "record_type": "artifact",
+      "project_id": "HEP-RESEARCH",
+      "artifact_id": "ART-001",
+      "artifact_type": "sample",
+      "origin_kind": "ingested_external",
+      "path_or_uri": "sample",
+      "format": "sample",
+      "content_sha256": null,
+      "schema_or_structure": {},
+      "units": [],
+      "input_artifact_ids": [],
+      "configuration_id": null,
+      "code_id": null,
+      "environment_id": null,
+      "artifact_integrity_status": "needs_review",
+      "artifact_lifecycle_status": "active",
+      "generated_by_run_id": null,
+      "generated_by_activity_id": null,
+      "acquired_from_source_id": "SRC-001",
+      "ingested_by_activity_id": null,
+      "required_files": [],
+      "directory_manifest": [],
+      "directory_manifest_sha256": null,
+      "hash_unavailable_reason": "No raw-byte digest available from source endpoint.",
+      "created_at": "2026-10-20T12:00:00Z",
+      "artifact_storage_kind": "file",
+      "alternative_identity": {
+        "approved_contract_id": "TEC-ALT-001",
+        "approved_contract_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "method_id": "AIM-PUB-VERSION-001",
+        "method_version": 1,
+        "identity_value": "https://example.invalid/document/v2#version=v2",
+        "evidence_artifact_ids": [
+          "ART-EVID-001"
+        ],
+        "verification_status": "verified",
+        "verified_at": "2026-10-20T12:05:00Z",
+        "verified_by": "reviewer-1",
+        "scope_statement": "Publisher-declared version identity only.",
+        "limitations": [
+          "No raw-byte SHA-256 is available.",
+          "Does not prove byte-for-byte identity."
+        ]
+      }
+    },
+    "contract": {
+      "schema_version": "1.4",
+      "record_type": "task_execution_contract",
+      "project_id": "HEP-RESEARCH",
+      "contract_id": "TEC-ALT-001",
+      "task_id": "TASK-001",
+      "contract_version": 1,
+      "contract_status": "approved",
+      "objective": "sample",
+      "scope": {
+        "included": [],
+        "excluded": [],
+        "target_domain": "sample",
+        "out_of_scope_behavior": "sample"
+      },
+      "input_refs": {
+        "source_ids": [],
+        "configuration_ids": [],
+        "input_artifact_ids": [],
+        "external_references": []
+      },
+      "assumptions": [],
+      "conventions_id": null,
+      "conventions_reason": "Not applicable to this fixture",
+      "required_capabilities": [],
+      "planned_methods": [],
+      "artifact_plan_ids": [],
+      "validation_plan_ids": [],
+      "acceptance_criteria": [
+        {
+          "criterion_id": "AC-1",
+          "description": "output exists",
+          "required": true,
+          "verification_method": "file check",
+          "pass_condition": "exists",
+          "failure_condition": "missing",
+          "evidence_kind": "artifact"
+        }
+      ],
+      "failure_branches": [],
+      "stop_conditions": [],
+      "contract_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "created_at": "2026-10-20T12:00:00Z",
+      "approved_at": "2026-10-20T12:00:00Z",
+      "approved_by": "reviewer-1",
+      "supersedes_contract_id": null,
+      "alternative_identity_methods": [
+        {
+          "method_id": "AIM-PUB-VERSION-001",
+          "method_version": 1,
+          "method_kind": "immutable_versioned_locator",
+          "method_status": "approved",
+          "description": "Publisher-declared immutable version locator",
+          "applicable_source_types": [
+            "publisher_document"
+          ],
+          "applicable_artifact_storage_kinds": [
+            "file"
+          ],
+          "identity_value_specification": "Stable publisher URI and version",
+          "verification_procedure": "Resolve URI and compare publisher-declared version",
+          "required_evidence_kinds": [
+            "publisher_record"
+          ],
+          "acceptance_criteria": [
+            "Version matches the declaration"
+          ],
+          "limitations": [
+            "Does not prove byte identity"
+          ]
+        }
+      ]
+    },
+    "source": {
+      "schema_version": "1.4",
+      "record_type": "source",
+      "project_id": "OTHER-PROJECT",
+      "source_id": "SRC-001",
+      "source_type": "publisher_document",
+      "title": "sample",
+      "uri_or_path": "sample",
+      "source_version": "sample",
+      "content_sha256": null,
+      "retrieved_at": "2026-10-20T12:00:00Z",
+      "lifecycle_status": "active",
+      "verification_status": "verified",
+      "hash_unavailable_reason": "Source hash unavailable in fixture"
+    }
+  },
+  {
+    "test_id": "SEM-ALTID-008-DUPLICATE-METHOD-ID",
+    "expected": "semantic_reject",
+    "artifact": {
+      "schema_version": "1.4",
+      "record_type": "artifact",
+      "project_id": "HEP-RESEARCH",
+      "artifact_id": "ART-001",
+      "artifact_type": "sample",
+      "origin_kind": "ingested_external",
+      "path_or_uri": "sample",
+      "format": "sample",
+      "content_sha256": null,
+      "schema_or_structure": {},
+      "units": [],
+      "input_artifact_ids": [],
+      "configuration_id": null,
+      "code_id": null,
+      "environment_id": null,
+      "artifact_integrity_status": "needs_review",
+      "artifact_lifecycle_status": "active",
+      "generated_by_run_id": null,
+      "generated_by_activity_id": null,
+      "acquired_from_source_id": "SRC-001",
+      "ingested_by_activity_id": null,
+      "required_files": [],
+      "directory_manifest": [],
+      "directory_manifest_sha256": null,
+      "hash_unavailable_reason": "No raw-byte digest available from source endpoint.",
+      "created_at": "2026-10-20T12:00:00Z",
+      "artifact_storage_kind": "file",
+      "alternative_identity": {
+        "approved_contract_id": "TEC-ALT-001",
+        "approved_contract_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "method_id": "AIM-PUB-VERSION-001",
+        "method_version": 1,
+        "identity_value": "https://example.invalid/document/v2#version=v2",
+        "evidence_artifact_ids": [
+          "ART-EVID-001"
+        ],
+        "verification_status": "verified",
+        "verified_at": "2026-10-20T12:05:00Z",
+        "verified_by": "reviewer-1",
+        "scope_statement": "Publisher-declared version identity only.",
+        "limitations": [
+          "No raw-byte SHA-256 is available.",
+          "Does not prove byte-for-byte identity."
+        ]
+      }
+    },
+    "contract": {
+      "schema_version": "1.4",
+      "record_type": "task_execution_contract",
+      "project_id": "HEP-RESEARCH",
+      "contract_id": "TEC-ALT-001",
+      "task_id": "TASK-001",
+      "contract_version": 1,
+      "contract_status": "approved",
+      "objective": "sample",
+      "scope": {
+        "included": [],
+        "excluded": [],
+        "target_domain": "sample",
+        "out_of_scope_behavior": "sample"
+      },
+      "input_refs": {
+        "source_ids": [],
+        "configuration_ids": [],
+        "input_artifact_ids": [],
+        "external_references": []
+      },
+      "assumptions": [],
+      "conventions_id": null,
+      "conventions_reason": "Not applicable to this fixture",
+      "required_capabilities": [],
+      "planned_methods": [],
+      "artifact_plan_ids": [],
+      "validation_plan_ids": [],
+      "acceptance_criteria": [
+        {
+          "criterion_id": "AC-1",
+          "description": "output exists",
+          "required": true,
+          "verification_method": "file check",
+          "pass_condition": "exists",
+          "failure_condition": "missing",
+          "evidence_kind": "artifact"
+        }
+      ],
+      "failure_branches": [],
+      "stop_conditions": [],
+      "contract_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "created_at": "2026-10-20T12:00:00Z",
+      "approved_at": "2026-10-20T12:00:00Z",
+      "approved_by": "reviewer-1",
+      "supersedes_contract_id": null,
+      "alternative_identity_methods": [
+        {
+          "method_id": "AIM-PUB-VERSION-001",
+          "method_version": 1,
+          "method_kind": "immutable_versioned_locator",
+          "method_status": "approved",
+          "description": "Publisher-declared immutable version locator",
+          "applicable_source_types": [
+            "publisher_document"
+          ],
+          "applicable_artifact_storage_kinds": [
+            "file"
+          ],
+          "identity_value_specification": "Stable publisher URI and version",
+          "verification_procedure": "Resolve URI and compare publisher-declared version",
+          "required_evidence_kinds": [
+            "publisher_record"
+          ],
+          "acceptance_criteria": [
+            "Version matches the declaration"
+          ],
+          "limitations": [
+            "Does not prove byte identity"
+          ]
+        },
+        {
+          "method_id": "AIM-PUB-VERSION-001",
+          "method_version": 1,
+          "method_kind": "immutable_versioned_locator",
+          "method_status": "approved",
+          "description": "Duplicate method ID with different content",
+          "applicable_source_types": [
+            "publisher_document"
+          ],
+          "applicable_artifact_storage_kinds": [
+            "file"
+          ],
+          "identity_value_specification": "Stable publisher URI and version",
+          "verification_procedure": "Resolve URI and compare publisher-declared version",
+          "required_evidence_kinds": [
+            "publisher_record"
+          ],
+          "acceptance_criteria": [
+            "Version matches the declaration"
+          ],
+          "limitations": [
+            "Does not prove byte identity"
+          ]
+        }
+      ]
+    },
+    "source": {
+      "schema_version": "1.4",
+      "record_type": "source",
+      "project_id": "HEP-RESEARCH",
+      "source_id": "SRC-001",
+      "source_type": "publisher_document",
+      "title": "sample",
+      "uri_or_path": "sample",
+      "source_version": "sample",
+      "content_sha256": null,
+      "retrieved_at": "2026-10-20T12:00:00Z",
+      "lifecycle_status": "active",
+      "verification_status": "verified",
+      "hash_unavailable_reason": "Source hash unavailable in fixture"
+    }
+  },
+  {
+    "test_id": "SEM-ALTID-009-UNVERIFIED-CANNOT-PASS",
+    "expected": "schema_reject",
+    "artifact": {
+      "schema_version": "1.4",
+      "record_type": "artifact",
+      "project_id": "HEP-RESEARCH",
+      "artifact_id": "ART-001",
+      "artifact_type": "sample",
+      "origin_kind": "ingested_external",
+      "path_or_uri": "sample",
+      "format": "sample",
+      "content_sha256": null,
+      "schema_or_structure": {},
+      "units": [],
+      "input_artifact_ids": [],
+      "configuration_id": null,
+      "code_id": null,
+      "environment_id": null,
+      "artifact_integrity_status": "passed",
+      "artifact_lifecycle_status": "active",
+      "generated_by_run_id": null,
+      "generated_by_activity_id": null,
+      "acquired_from_source_id": "SRC-001",
+      "ingested_by_activity_id": null,
+      "required_files": [],
+      "directory_manifest": [],
+      "directory_manifest_sha256": null,
+      "hash_unavailable_reason": "No raw-byte digest available from source endpoint.",
+      "created_at": "2026-10-20T12:00:00Z",
+      "artifact_storage_kind": "file",
+      "alternative_identity": {
+        "approved_contract_id": "TEC-ALT-001",
+        "approved_contract_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "method_id": "AIM-PUB-VERSION-001",
+        "method_version": 1,
+        "identity_value": "https://example.invalid/document/v2#version=v2",
+        "evidence_artifact_ids": [
+          "ART-EVID-001"
+        ],
+        "verification_status": "verified",
+        "verified_at": "2026-10-20T12:05:00Z",
+        "verified_by": "reviewer-1",
+        "scope_statement": "Publisher-declared version identity only.",
+        "limitations": [
+          "No raw-byte SHA-256 is available.",
+          "Does not prove byte-for-byte identity."
+        ]
+      }
+    },
+    "contract": {
+      "schema_version": "1.4",
+      "record_type": "task_execution_contract",
+      "project_id": "HEP-RESEARCH",
+      "contract_id": "TEC-ALT-001",
+      "task_id": "TASK-001",
+      "contract_version": 1,
+      "contract_status": "approved",
+      "objective": "sample",
+      "scope": {
+        "included": [],
+        "excluded": [],
+        "target_domain": "sample",
+        "out_of_scope_behavior": "sample"
+      },
+      "input_refs": {
+        "source_ids": [],
+        "configuration_ids": [],
+        "input_artifact_ids": [],
+        "external_references": []
+      },
+      "assumptions": [],
+      "conventions_id": null,
+      "conventions_reason": "Not applicable to this fixture",
+      "required_capabilities": [],
+      "planned_methods": [],
+      "artifact_plan_ids": [],
+      "validation_plan_ids": [],
+      "acceptance_criteria": [
+        {
+          "criterion_id": "AC-1",
+          "description": "output exists",
+          "required": true,
+          "verification_method": "file check",
+          "pass_condition": "exists",
+          "failure_condition": "missing",
+          "evidence_kind": "artifact"
+        }
+      ],
+      "failure_branches": [],
+      "stop_conditions": [],
+      "contract_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "created_at": "2026-10-20T12:00:00Z",
+      "approved_at": "2026-10-20T12:00:00Z",
+      "approved_by": "reviewer-1",
+      "supersedes_contract_id": null,
+      "alternative_identity_methods": [
+        {
+          "method_id": "AIM-PUB-VERSION-001",
+          "method_version": 1,
+          "method_kind": "immutable_versioned_locator",
+          "method_status": "approved",
+          "description": "Publisher-declared immutable version locator",
+          "applicable_source_types": [
+            "publisher_document"
+          ],
+          "applicable_artifact_storage_kinds": [
+            "file"
+          ],
+          "identity_value_specification": "Stable publisher URI and version",
+          "verification_procedure": "Resolve URI and compare publisher-declared version",
+          "required_evidence_kinds": [
+            "publisher_record"
+          ],
+          "acceptance_criteria": [
+            "Version matches the declaration"
+          ],
+          "limitations": [
+            "Does not prove byte identity"
+          ]
+        }
+      ]
+    },
+    "source": {
+      "schema_version": "1.4",
+      "record_type": "source",
+      "project_id": "HEP-RESEARCH",
+      "source_id": "SRC-001",
+      "source_type": "publisher_document",
+      "title": "sample",
+      "uri_or_path": "sample",
+      "source_version": "sample",
+      "content_sha256": null,
+      "retrieved_at": "2026-10-20T12:00:00Z",
+      "lifecycle_status": "active",
+      "verification_status": "verified",
+      "hash_unavailable_reason": "Source hash unavailable in fixture"
+    }
+  },
+  {
+    "test_id": "SEM-ALTID-010-VERIFICATION-NO-EVIDENCE",
+    "expected": "schema_reject",
+    "artifact": {
+      "schema_version": "1.4",
+      "record_type": "artifact",
+      "project_id": "HEP-RESEARCH",
+      "artifact_id": "ART-001",
+      "artifact_type": "sample",
+      "origin_kind": "ingested_external",
+      "path_or_uri": "sample",
+      "format": "sample",
+      "content_sha256": null,
+      "schema_or_structure": {},
+      "units": [],
+      "input_artifact_ids": [],
+      "configuration_id": null,
+      "code_id": null,
+      "environment_id": null,
+      "artifact_integrity_status": "needs_review",
+      "artifact_lifecycle_status": "active",
+      "generated_by_run_id": null,
+      "generated_by_activity_id": null,
+      "acquired_from_source_id": "SRC-001",
+      "ingested_by_activity_id": null,
+      "required_files": [],
+      "directory_manifest": [],
+      "directory_manifest_sha256": null,
+      "hash_unavailable_reason": "No raw-byte digest available from source endpoint.",
+      "created_at": "2026-10-20T12:00:00Z",
+      "artifact_storage_kind": "file",
+      "alternative_identity": {
+        "approved_contract_id": "TEC-ALT-001",
+        "approved_contract_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "method_id": "AIM-PUB-VERSION-001",
+        "method_version": 1,
+        "identity_value": "https://example.invalid/document/v2#version=v2",
+        "evidence_artifact_ids": [],
+        "verification_status": "verified",
+        "verified_at": "2026-10-20T12:05:00Z",
+        "verified_by": "reviewer-1",
+        "scope_statement": "Publisher-declared version identity only.",
+        "limitations": [
+          "No raw-byte SHA-256 is available.",
+          "Does not prove byte-for-byte identity."
+        ]
+      }
+    },
+    "contract": {
+      "schema_version": "1.4",
+      "record_type": "task_execution_contract",
+      "project_id": "HEP-RESEARCH",
+      "contract_id": "TEC-ALT-001",
+      "task_id": "TASK-001",
+      "contract_version": 1,
+      "contract_status": "approved",
+      "objective": "sample",
+      "scope": {
+        "included": [],
+        "excluded": [],
+        "target_domain": "sample",
+        "out_of_scope_behavior": "sample"
+      },
+      "input_refs": {
+        "source_ids": [],
+        "configuration_ids": [],
+        "input_artifact_ids": [],
+        "external_references": []
+      },
+      "assumptions": [],
+      "conventions_id": null,
+      "conventions_reason": "Not applicable to this fixture",
+      "required_capabilities": [],
+      "planned_methods": [],
+      "artifact_plan_ids": [],
+      "validation_plan_ids": [],
+      "acceptance_criteria": [
+        {
+          "criterion_id": "AC-1",
+          "description": "output exists",
+          "required": true,
+          "verification_method": "file check",
+          "pass_condition": "exists",
+          "failure_condition": "missing",
+          "evidence_kind": "artifact"
+        }
+      ],
+      "failure_branches": [],
+      "stop_conditions": [],
+      "contract_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "created_at": "2026-10-20T12:00:00Z",
+      "approved_at": "2026-10-20T12:00:00Z",
+      "approved_by": "reviewer-1",
+      "supersedes_contract_id": null,
+      "alternative_identity_methods": [
+        {
+          "method_id": "AIM-PUB-VERSION-001",
+          "method_version": 1,
+          "method_kind": "immutable_versioned_locator",
+          "method_status": "approved",
+          "description": "Publisher-declared immutable version locator",
+          "applicable_source_types": [
+            "publisher_document"
+          ],
+          "applicable_artifact_storage_kinds": [
+            "file"
+          ],
+          "identity_value_specification": "Stable publisher URI and version",
+          "verification_procedure": "Resolve URI and compare publisher-declared version",
+          "required_evidence_kinds": [
+            "publisher_record"
+          ],
+          "acceptance_criteria": [
+            "Version matches the declaration"
+          ],
+          "limitations": [
+            "Does not prove byte identity"
+          ]
+        }
+      ]
+    },
+    "source": {
+      "schema_version": "1.4",
+      "record_type": "source",
+      "project_id": "HEP-RESEARCH",
+      "source_id": "SRC-001",
+      "source_type": "publisher_document",
+      "title": "sample",
+      "uri_or_path": "sample",
+      "source_version": "sample",
+      "content_sha256": null,
+      "retrieved_at": "2026-10-20T12:00:00Z",
+      "lifecycle_status": "active",
+      "verification_status": "verified",
+      "hash_unavailable_reason": "Source hash unavailable in fixture"
+    }
+  },
+  {
+    "test_id": "SEM-ALTID-011-ALT-ID-WITH-CONTENT-HASH",
+    "expected": "schema_reject",
+    "artifact": {
+      "schema_version": "1.4",
+      "record_type": "artifact",
+      "project_id": "HEP-RESEARCH",
+      "artifact_id": "ART-001",
+      "artifact_type": "sample",
+      "origin_kind": "ingested_external",
+      "path_or_uri": "sample",
+      "format": "sample",
+      "content_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "schema_or_structure": {},
+      "units": [],
+      "input_artifact_ids": [],
+      "configuration_id": null,
+      "code_id": null,
+      "environment_id": null,
+      "artifact_integrity_status": "needs_review",
+      "artifact_lifecycle_status": "active",
+      "generated_by_run_id": null,
+      "generated_by_activity_id": null,
+      "acquired_from_source_id": "SRC-001",
+      "ingested_by_activity_id": null,
+      "required_files": [],
+      "directory_manifest": [],
+      "directory_manifest_sha256": null,
+      "hash_unavailable_reason": "No raw-byte digest available from source endpoint.",
+      "created_at": "2026-10-20T12:00:00Z",
+      "artifact_storage_kind": "file",
+      "alternative_identity": {
+        "approved_contract_id": "TEC-ALT-001",
+        "approved_contract_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "method_id": "AIM-PUB-VERSION-001",
+        "method_version": 1,
+        "identity_value": "https://example.invalid/document/v2#version=v2",
+        "evidence_artifact_ids": [
+          "ART-EVID-001"
+        ],
+        "verification_status": "verified",
+        "verified_at": "2026-10-20T12:05:00Z",
+        "verified_by": "reviewer-1",
+        "scope_statement": "Publisher-declared version identity only.",
+        "limitations": [
+          "No raw-byte SHA-256 is available.",
+          "Does not prove byte-for-byte identity."
+        ]
+      }
+    },
+    "contract": {
+      "schema_version": "1.4",
+      "record_type": "task_execution_contract",
+      "project_id": "HEP-RESEARCH",
+      "contract_id": "TEC-ALT-001",
+      "task_id": "TASK-001",
+      "contract_version": 1,
+      "contract_status": "approved",
+      "objective": "sample",
+      "scope": {
+        "included": [],
+        "excluded": [],
+        "target_domain": "sample",
+        "out_of_scope_behavior": "sample"
+      },
+      "input_refs": {
+        "source_ids": [],
+        "configuration_ids": [],
+        "input_artifact_ids": [],
+        "external_references": []
+      },
+      "assumptions": [],
+      "conventions_id": null,
+      "conventions_reason": "Not applicable to this fixture",
+      "required_capabilities": [],
+      "planned_methods": [],
+      "artifact_plan_ids": [],
+      "validation_plan_ids": [],
+      "acceptance_criteria": [
+        {
+          "criterion_id": "AC-1",
+          "description": "output exists",
+          "required": true,
+          "verification_method": "file check",
+          "pass_condition": "exists",
+          "failure_condition": "missing",
+          "evidence_kind": "artifact"
+        }
+      ],
+      "failure_branches": [],
+      "stop_conditions": [],
+      "contract_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "created_at": "2026-10-20T12:00:00Z",
+      "approved_at": "2026-10-20T12:00:00Z",
+      "approved_by": "reviewer-1",
+      "supersedes_contract_id": null,
+      "alternative_identity_methods": [
+        {
+          "method_id": "AIM-PUB-VERSION-001",
+          "method_version": 1,
+          "method_kind": "immutable_versioned_locator",
+          "method_status": "approved",
+          "description": "Publisher-declared immutable version locator",
+          "applicable_source_types": [
+            "publisher_document"
+          ],
+          "applicable_artifact_storage_kinds": [
+            "file"
+          ],
+          "identity_value_specification": "Stable publisher URI and version",
+          "verification_procedure": "Resolve URI and compare publisher-declared version",
+          "required_evidence_kinds": [
+            "publisher_record"
+          ],
+          "acceptance_criteria": [
+            "Version matches the declaration"
+          ],
+          "limitations": [
+            "Does not prove byte identity"
+          ]
+        }
+      ]
+    },
+    "source": {
+      "schema_version": "1.4",
+      "record_type": "source",
+      "project_id": "HEP-RESEARCH",
+      "source_id": "SRC-001",
+      "source_type": "publisher_document",
+      "title": "sample",
+      "uri_or_path": "sample",
+      "source_version": "sample",
+      "content_sha256": null,
+      "retrieved_at": "2026-10-20T12:00:00Z",
+      "lifecycle_status": "active",
+      "verification_status": "verified",
+      "hash_unavailable_reason": "Source hash unavailable in fixture"
+    }
+  },
+  {
+    "test_id": "SEM-ALTID-012-HASHLESS-NO-ALT-NEEDS-REVIEW",
+    "expected": "pass",
+    "artifact": {
+      "schema_version": "1.4",
+      "record_type": "artifact",
+      "project_id": "HEP-RESEARCH",
+      "artifact_id": "ART-001",
+      "artifact_type": "sample",
+      "origin_kind": "ingested_external",
+      "path_or_uri": "sample",
+      "format": "sample",
+      "content_sha256": null,
+      "schema_or_structure": {},
+      "units": [],
+      "input_artifact_ids": [],
+      "configuration_id": null,
+      "code_id": null,
+      "environment_id": null,
+      "artifact_integrity_status": "needs_review",
+      "artifact_lifecycle_status": "active",
+      "generated_by_run_id": null,
+      "generated_by_activity_id": null,
+      "acquired_from_source_id": "SRC-001",
+      "ingested_by_activity_id": null,
+      "required_files": [],
+      "directory_manifest": [],
+      "directory_manifest_sha256": null,
+      "hash_unavailable_reason": "No raw-byte digest available from source endpoint.",
+      "created_at": "2026-10-20T12:00:00Z",
+      "artifact_storage_kind": "file",
+      "alternative_identity": null
+    },
+    "contract": {
+      "schema_version": "1.4",
+      "record_type": "task_execution_contract",
+      "project_id": "HEP-RESEARCH",
+      "contract_id": "TEC-ALT-001",
+      "task_id": "TASK-001",
+      "contract_version": 1,
+      "contract_status": "approved",
+      "objective": "sample",
+      "scope": {
+        "included": [],
+        "excluded": [],
+        "target_domain": "sample",
+        "out_of_scope_behavior": "sample"
+      },
+      "input_refs": {
+        "source_ids": [],
+        "configuration_ids": [],
+        "input_artifact_ids": [],
+        "external_references": []
+      },
+      "assumptions": [],
+      "conventions_id": null,
+      "conventions_reason": "Not applicable to this fixture",
+      "required_capabilities": [],
+      "planned_methods": [],
+      "artifact_plan_ids": [],
+      "validation_plan_ids": [],
+      "acceptance_criteria": [
+        {
+          "criterion_id": "AC-1",
+          "description": "output exists",
+          "required": true,
+          "verification_method": "file check",
+          "pass_condition": "exists",
+          "failure_condition": "missing",
+          "evidence_kind": "artifact"
+        }
+      ],
+      "failure_branches": [],
+      "stop_conditions": [],
+      "contract_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "created_at": "2026-10-20T12:00:00Z",
+      "approved_at": "2026-10-20T12:00:00Z",
+      "approved_by": "reviewer-1",
+      "supersedes_contract_id": null,
+      "alternative_identity_methods": [
+        {
+          "method_id": "AIM-PUB-VERSION-001",
+          "method_version": 1,
+          "method_kind": "immutable_versioned_locator",
+          "method_status": "approved",
+          "description": "Publisher-declared immutable version locator",
+          "applicable_source_types": [
+            "publisher_document"
+          ],
+          "applicable_artifact_storage_kinds": [
+            "file"
+          ],
+          "identity_value_specification": "Stable publisher URI and version",
+          "verification_procedure": "Resolve URI and compare publisher-declared version",
+          "required_evidence_kinds": [
+            "publisher_record"
+          ],
+          "acceptance_criteria": [
+            "Version matches the declaration"
+          ],
+          "limitations": [
+            "Does not prove byte identity"
+          ]
+        }
+      ]
+    },
+    "source": {
+      "schema_version": "1.4",
+      "record_type": "source",
+      "project_id": "HEP-RESEARCH",
+      "source_id": "SRC-001",
+      "source_type": "publisher_document",
+      "title": "sample",
+      "uri_or_path": "sample",
+      "source_version": "sample",
+      "content_sha256": null,
+      "retrieved_at": "2026-10-20T12:00:00Z",
+      "lifecycle_status": "active",
+      "verification_status": "verified",
+      "hash_unavailable_reason": "Source hash unavailable in fixture"
+    }
+  },
+  {
+    "test_id": "SEM-ALTID-013-HASHLESS-NO-REASON",
+    "expected": "schema_reject",
+    "artifact": {
+      "schema_version": "1.4",
+      "record_type": "artifact",
+      "project_id": "HEP-RESEARCH",
+      "artifact_id": "ART-001",
+      "artifact_type": "sample",
+      "origin_kind": "ingested_external",
+      "path_or_uri": "sample",
+      "format": "sample",
+      "content_sha256": null,
+      "schema_or_structure": {},
+      "units": [],
+      "input_artifact_ids": [],
+      "configuration_id": null,
+      "code_id": null,
+      "environment_id": null,
+      "artifact_integrity_status": "needs_review",
+      "artifact_lifecycle_status": "active",
+      "generated_by_run_id": null,
+      "generated_by_activity_id": null,
+      "acquired_from_source_id": "SRC-001",
+      "ingested_by_activity_id": null,
+      "required_files": [],
+      "directory_manifest": [],
+      "directory_manifest_sha256": null,
+      "hash_unavailable_reason": null,
+      "created_at": "2026-10-20T12:00:00Z",
+      "artifact_storage_kind": "file",
+      "alternative_identity": {
+        "approved_contract_id": "TEC-ALT-001",
+        "approved_contract_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "method_id": "AIM-PUB-VERSION-001",
+        "method_version": 1,
+        "identity_value": "https://example.invalid/document/v2#version=v2",
+        "evidence_artifact_ids": [
+          "ART-EVID-001"
+        ],
+        "verification_status": "verified",
+        "verified_at": "2026-10-20T12:05:00Z",
+        "verified_by": "reviewer-1",
+        "scope_statement": "Publisher-declared version identity only.",
+        "limitations": [
+          "No raw-byte SHA-256 is available.",
+          "Does not prove byte-for-byte identity."
+        ]
+      }
+    },
+    "contract": {
+      "schema_version": "1.4",
+      "record_type": "task_execution_contract",
+      "project_id": "HEP-RESEARCH",
+      "contract_id": "TEC-ALT-001",
+      "task_id": "TASK-001",
+      "contract_version": 1,
+      "contract_status": "approved",
+      "objective": "sample",
+      "scope": {
+        "included": [],
+        "excluded": [],
+        "target_domain": "sample",
+        "out_of_scope_behavior": "sample"
+      },
+      "input_refs": {
+        "source_ids": [],
+        "configuration_ids": [],
+        "input_artifact_ids": [],
+        "external_references": []
+      },
+      "assumptions": [],
+      "conventions_id": null,
+      "conventions_reason": "Not applicable to this fixture",
+      "required_capabilities": [],
+      "planned_methods": [],
+      "artifact_plan_ids": [],
+      "validation_plan_ids": [],
+      "acceptance_criteria": [
+        {
+          "criterion_id": "AC-1",
+          "description": "output exists",
+          "required": true,
+          "verification_method": "file check",
+          "pass_condition": "exists",
+          "failure_condition": "missing",
+          "evidence_kind": "artifact"
+        }
+      ],
+      "failure_branches": [],
+      "stop_conditions": [],
+      "contract_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "created_at": "2026-10-20T12:00:00Z",
+      "approved_at": "2026-10-20T12:00:00Z",
+      "approved_by": "reviewer-1",
+      "supersedes_contract_id": null,
+      "alternative_identity_methods": [
+        {
+          "method_id": "AIM-PUB-VERSION-001",
+          "method_version": 1,
+          "method_kind": "immutable_versioned_locator",
+          "method_status": "approved",
+          "description": "Publisher-declared immutable version locator",
+          "applicable_source_types": [
+            "publisher_document"
+          ],
+          "applicable_artifact_storage_kinds": [
+            "file"
+          ],
+          "identity_value_specification": "Stable publisher URI and version",
+          "verification_procedure": "Resolve URI and compare publisher-declared version",
+          "required_evidence_kinds": [
+            "publisher_record"
+          ],
+          "acceptance_criteria": [
+            "Version matches the declaration"
+          ],
+          "limitations": [
+            "Does not prove byte identity"
+          ]
+        }
+      ]
+    },
+    "source": {
+      "schema_version": "1.4",
+      "record_type": "source",
+      "project_id": "HEP-RESEARCH",
+      "source_id": "SRC-001",
+      "source_type": "publisher_document",
+      "title": "sample",
+      "uri_or_path": "sample",
+      "source_version": "sample",
+      "content_sha256": null,
+      "retrieved_at": "2026-10-20T12:00:00Z",
+      "lifecycle_status": "active",
+      "verification_status": "verified",
+      "hash_unavailable_reason": "Source hash unavailable in fixture"
+    }
+  },
+  {
+    "test_id": "SEM-ALTID-014-ALT-ID-GENERATED",
+    "expected": "schema_reject",
+    "artifact": {
+      "schema_version": "1.4",
+      "record_type": "artifact",
+      "project_id": "HEP-RESEARCH",
+      "artifact_id": "ART-001",
+      "artifact_type": "sample",
+      "origin_kind": "generated",
+      "path_or_uri": "sample",
+      "format": "sample",
+      "content_sha256": null,
+      "schema_or_structure": {},
+      "units": [],
+      "input_artifact_ids": [],
+      "configuration_id": null,
+      "code_id": null,
+      "environment_id": null,
+      "artifact_integrity_status": "needs_review",
+      "artifact_lifecycle_status": "active",
+      "generated_by_run_id": null,
+      "generated_by_activity_id": null,
+      "acquired_from_source_id": "SRC-001",
+      "ingested_by_activity_id": null,
+      "required_files": [],
+      "directory_manifest": [],
+      "directory_manifest_sha256": null,
+      "hash_unavailable_reason": "No raw-byte digest available from source endpoint.",
+      "created_at": "2026-10-20T12:00:00Z",
+      "artifact_storage_kind": "file",
+      "alternative_identity": {
+        "approved_contract_id": "TEC-ALT-001",
+        "approved_contract_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "method_id": "AIM-PUB-VERSION-001",
+        "method_version": 1,
+        "identity_value": "https://example.invalid/document/v2#version=v2",
+        "evidence_artifact_ids": [
+          "ART-EVID-001"
+        ],
+        "verification_status": "verified",
+        "verified_at": "2026-10-20T12:05:00Z",
+        "verified_by": "reviewer-1",
+        "scope_statement": "Publisher-declared version identity only.",
+        "limitations": [
+          "No raw-byte SHA-256 is available.",
+          "Does not prove byte-for-byte identity."
+        ]
+      }
+    },
+    "contract": {
+      "schema_version": "1.4",
+      "record_type": "task_execution_contract",
+      "project_id": "HEP-RESEARCH",
+      "contract_id": "TEC-ALT-001",
+      "task_id": "TASK-001",
+      "contract_version": 1,
+      "contract_status": "approved",
+      "objective": "sample",
+      "scope": {
+        "included": [],
+        "excluded": [],
+        "target_domain": "sample",
+        "out_of_scope_behavior": "sample"
+      },
+      "input_refs": {
+        "source_ids": [],
+        "configuration_ids": [],
+        "input_artifact_ids": [],
+        "external_references": []
+      },
+      "assumptions": [],
+      "conventions_id": null,
+      "conventions_reason": "Not applicable to this fixture",
+      "required_capabilities": [],
+      "planned_methods": [],
+      "artifact_plan_ids": [],
+      "validation_plan_ids": [],
+      "acceptance_criteria": [
+        {
+          "criterion_id": "AC-1",
+          "description": "output exists",
+          "required": true,
+          "verification_method": "file check",
+          "pass_condition": "exists",
+          "failure_condition": "missing",
+          "evidence_kind": "artifact"
+        }
+      ],
+      "failure_branches": [],
+      "stop_conditions": [],
+      "contract_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "created_at": "2026-10-20T12:00:00Z",
+      "approved_at": "2026-10-20T12:00:00Z",
+      "approved_by": "reviewer-1",
+      "supersedes_contract_id": null,
+      "alternative_identity_methods": [
+        {
+          "method_id": "AIM-PUB-VERSION-001",
+          "method_version": 1,
+          "method_kind": "immutable_versioned_locator",
+          "method_status": "approved",
+          "description": "Publisher-declared immutable version locator",
+          "applicable_source_types": [
+            "publisher_document"
+          ],
+          "applicable_artifact_storage_kinds": [
+            "file"
+          ],
+          "identity_value_specification": "Stable publisher URI and version",
+          "verification_procedure": "Resolve URI and compare publisher-declared version",
+          "required_evidence_kinds": [
+            "publisher_record"
+          ],
+          "acceptance_criteria": [
+            "Version matches the declaration"
+          ],
+          "limitations": [
+            "Does not prove byte identity"
+          ]
+        }
+      ]
+    },
+    "source": {
+      "schema_version": "1.4",
+      "record_type": "source",
+      "project_id": "HEP-RESEARCH",
+      "source_id": "SRC-001",
+      "source_type": "publisher_document",
+      "title": "sample",
+      "uri_or_path": "sample",
+      "source_version": "sample",
+      "content_sha256": null,
+      "retrieved_at": "2026-10-20T12:00:00Z",
+      "lifecycle_status": "active",
+      "verification_status": "verified",
+      "hash_unavailable_reason": "Source hash unavailable in fixture"
+    }
+  },
+  {
+    "test_id": "SEM-ALTID-015-DIRECTORY-CANNOT-USE-ALT-ID",
+    "expected": "schema_reject",
+    "artifact": {
+      "schema_version": "1.4",
+      "record_type": "artifact",
+      "project_id": "HEP-RESEARCH",
+      "artifact_id": "ART-001",
+      "artifact_type": "sample",
+      "origin_kind": "ingested_external",
+      "path_or_uri": "sample",
+      "format": "sample",
+      "content_sha256": null,
+      "schema_or_structure": {},
+      "units": [],
+      "input_artifact_ids": [],
+      "configuration_id": null,
+      "code_id": null,
+      "environment_id": null,
+      "artifact_integrity_status": "needs_review",
+      "artifact_lifecycle_status": "active",
+      "generated_by_run_id": null,
+      "generated_by_activity_id": null,
+      "acquired_from_source_id": "SRC-001",
+      "ingested_by_activity_id": null,
+      "required_files": [],
+      "directory_manifest": [],
+      "directory_manifest_sha256": null,
+      "hash_unavailable_reason": "No raw-byte digest available from source endpoint.",
+      "created_at": "2026-10-20T12:00:00Z",
+      "artifact_storage_kind": "directory",
+      "alternative_identity": {
+        "approved_contract_id": "TEC-ALT-001",
+        "approved_contract_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "method_id": "AIM-PUB-VERSION-001",
+        "method_version": 1,
+        "identity_value": "https://example.invalid/document/v2#version=v2",
+        "evidence_artifact_ids": [
+          "ART-EVID-001"
+        ],
+        "verification_status": "verified",
+        "verified_at": "2026-10-20T12:05:00Z",
+        "verified_by": "reviewer-1",
+        "scope_statement": "Publisher-declared version identity only.",
+        "limitations": [
+          "No raw-byte SHA-256 is available.",
+          "Does not prove byte-for-byte identity."
+        ]
+      }
+    },
+    "contract": {
+      "schema_version": "1.4",
+      "record_type": "task_execution_contract",
+      "project_id": "HEP-RESEARCH",
+      "contract_id": "TEC-ALT-001",
+      "task_id": "TASK-001",
+      "contract_version": 1,
+      "contract_status": "approved",
+      "objective": "sample",
+      "scope": {
+        "included": [],
+        "excluded": [],
+        "target_domain": "sample",
+        "out_of_scope_behavior": "sample"
+      },
+      "input_refs": {
+        "source_ids": [],
+        "configuration_ids": [],
+        "input_artifact_ids": [],
+        "external_references": []
+      },
+      "assumptions": [],
+      "conventions_id": null,
+      "conventions_reason": "Not applicable to this fixture",
+      "required_capabilities": [],
+      "planned_methods": [],
+      "artifact_plan_ids": [],
+      "validation_plan_ids": [],
+      "acceptance_criteria": [
+        {
+          "criterion_id": "AC-1",
+          "description": "output exists",
+          "required": true,
+          "verification_method": "file check",
+          "pass_condition": "exists",
+          "failure_condition": "missing",
+          "evidence_kind": "artifact"
+        }
+      ],
+      "failure_branches": [],
+      "stop_conditions": [],
+      "contract_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "created_at": "2026-10-20T12:00:00Z",
+      "approved_at": "2026-10-20T12:00:00Z",
+      "approved_by": "reviewer-1",
+      "supersedes_contract_id": null,
+      "alternative_identity_methods": [
+        {
+          "method_id": "AIM-PUB-VERSION-001",
+          "method_version": 1,
+          "method_kind": "immutable_versioned_locator",
+          "method_status": "approved",
+          "description": "Publisher-declared immutable version locator",
+          "applicable_source_types": [
+            "publisher_document"
+          ],
+          "applicable_artifact_storage_kinds": [
+            "file"
+          ],
+          "identity_value_specification": "Stable publisher URI and version",
+          "verification_procedure": "Resolve URI and compare publisher-declared version",
+          "required_evidence_kinds": [
+            "publisher_record"
+          ],
+          "acceptance_criteria": [
+            "Version matches the declaration"
+          ],
+          "limitations": [
+            "Does not prove byte identity"
+          ]
+        }
+      ]
+    },
+    "source": {
+      "schema_version": "1.4",
+      "record_type": "source",
+      "project_id": "HEP-RESEARCH",
+      "source_id": "SRC-001",
+      "source_type": "publisher_document",
+      "title": "sample",
+      "uri_or_path": "sample",
+      "source_version": "sample",
+      "content_sha256": null,
+      "retrieved_at": "2026-10-20T12:00:00Z",
+      "lifecycle_status": "active",
+      "verification_status": "verified",
+      "hash_unavailable_reason": "Source hash unavailable in fixture"
+    }
+  },
+  {
+    "test_id": "SEM-ART-DIRECTORY-MANIFEST-HASH",
+    "expected": "pass",
+    "artifact": {
+      "schema_version": "1.4",
+      "record_type": "artifact",
+      "project_id": "HEP-RESEARCH",
+      "artifact_id": "ART-001",
+      "artifact_type": "sample",
+      "origin_kind": "generated",
+      "path_or_uri": "sample",
+      "format": "sample",
+      "content_sha256": null,
+      "schema_or_structure": {},
+      "units": [],
+      "input_artifact_ids": [],
+      "configuration_id": null,
+      "code_id": null,
+      "environment_id": null,
+      "artifact_integrity_status": "not_checked",
+      "artifact_lifecycle_status": "active",
+      "generated_by_run_id": "RUN-001",
+      "generated_by_activity_id": null,
+      "acquired_from_source_id": null,
+      "ingested_by_activity_id": null,
+      "required_files": [],
+      "directory_manifest": [
+        {
+          "relative_path": "data.csv",
+          "entry_type": "file",
+          "size_bytes": 4,
+          "content_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "symlink_target": null
+        }
+      ],
+      "directory_manifest_sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+      "hash_unavailable_reason": null,
+      "created_at": "2026-10-20T12:00:00Z",
+      "artifact_storage_kind": "directory",
+      "alternative_identity": null
+    },
+    "contract": {
+      "schema_version": "1.4",
+      "record_type": "task_execution_contract",
+      "project_id": "HEP-RESEARCH",
+      "contract_id": "TEC-ALT-001",
+      "task_id": "TASK-001",
+      "contract_version": 1,
+      "contract_status": "approved",
+      "objective": "sample",
+      "scope": {
+        "included": [],
+        "excluded": [],
+        "target_domain": "sample",
+        "out_of_scope_behavior": "sample"
+      },
+      "input_refs": {
+        "source_ids": [],
+        "configuration_ids": [],
+        "input_artifact_ids": [],
+        "external_references": []
+      },
+      "assumptions": [],
+      "conventions_id": null,
+      "conventions_reason": "Not applicable to this fixture",
+      "required_capabilities": [],
+      "planned_methods": [],
+      "artifact_plan_ids": [],
+      "validation_plan_ids": [],
+      "acceptance_criteria": [
+        {
+          "criterion_id": "AC-1",
+          "description": "output exists",
+          "required": true,
+          "verification_method": "file check",
+          "pass_condition": "exists",
+          "failure_condition": "missing",
+          "evidence_kind": "artifact"
+        }
+      ],
+      "failure_branches": [],
+      "stop_conditions": [],
+      "contract_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "created_at": "2026-10-20T12:00:00Z",
+      "approved_at": "2026-10-20T12:00:00Z",
+      "approved_by": "reviewer-1",
+      "supersedes_contract_id": null,
+      "alternative_identity_methods": [
+        {
+          "method_id": "AIM-PUB-VERSION-001",
+          "method_version": 1,
+          "method_kind": "immutable_versioned_locator",
+          "method_status": "approved",
+          "description": "Publisher-declared immutable version locator",
+          "applicable_source_types": [
+            "publisher_document"
+          ],
+          "applicable_artifact_storage_kinds": [
+            "file"
+          ],
+          "identity_value_specification": "Stable publisher URI and version",
+          "verification_procedure": "Resolve URI and compare publisher-declared version",
+          "required_evidence_kinds": [
+            "publisher_record"
+          ],
+          "acceptance_criteria": [
+            "Version matches the declaration"
+          ],
+          "limitations": [
+            "Does not prove byte identity"
+          ]
+        }
+      ]
+    },
+    "source": {
+      "schema_version": "1.4",
+      "record_type": "source",
+      "project_id": "HEP-RESEARCH",
+      "source_id": "SRC-001",
+      "source_type": "publisher_document",
+      "title": "sample",
+      "uri_or_path": "sample",
+      "source_version": "sample",
+      "content_sha256": null,
+      "retrieved_at": "2026-10-20T12:00:00Z",
+      "lifecycle_status": "active",
+      "verification_status": "verified",
+      "hash_unavailable_reason": "Source hash unavailable in fixture"
+    }
+  }
+]
