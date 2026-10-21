@@ -152,11 +152,12 @@
     "Strict status interpretation: a hashless external file remains needs_review even if an alternative identity method is verified; byte integrity is not inferred.",
     "For directories, content_sha256 is null and directory_manifest_sha256 is the integrity digest. This is a proposed clarification of the previous storage-agnostic generated-hash rule.",
     "Only the DD-ART-006 subset of cross-record semantics is tested; full cross-record validator is not implemented.",
-    "Physics correctness is not validated."
+    "Physics correctness is not validated.",
+    "The inherited tests/fixture-index.json remains schema version 1.4.3.6-candidate and is preserved byte-for-byte. Its four Run Plan/Run Manifest placeholder fixtures do not satisfy the stricter v1.4.3.7 candidate schemas; current-schema fixtures live in a separate versioned index and compatibility drift is reported separately."
   ],
   "release_evidence": {
     "schema_meta_validation": "25/25 passed",
-    "fixture_validation": "83/83 expected outcomes matched",
+    "fixture_validation": "v1.4.3.7 candidate index: 83/83 expected outcomes matched; inherited v1.4.3.6 index retained unchanged and audited separately",
     "cross_record_semantics": "16/16 expected outcomes matched for DD-ART-006 subset",
     "traceability": "58/58 validator checks passed overall; 96 trace rows",
     "migration": "not run",
@@ -166,7 +167,7 @@
   "fixture_index_sha256": "fa1047d096208c81e2798af0276cfe0aeccca37dba599e3ef837664c44cc6133",
   "audit_status": {
     "schema_meta_validation": "passed: 25/25",
-    "schema_fixture_validation": "passed: 83/83",
+    "schema_fixture_validation": "v1.4.3.7 candidate index to be validated; v1.4.3.6 baseline index retained with compatibility drift explicitly audited",
     "inherited_semantic_subset": "passed: 16/16",
     "new_prototype_tests": "passed: 29/29",
     "cross_record_smoke": "passed: 5 records, 0 errors",
@@ -176,5 +177,7 @@
   },
   "source_bundle": "schema-v1.4.3.6-integrated-candidate-bundle.zip",
   "source_bundle_sha256": "aefb34e68af65daf8277b9553d232cab29ffb5df9c4f18c1cfe126474a06adf1",
-  "requirement_traceability_rows": 125
+  "requirement_traceability_rows": 125,
+  "candidate_fixture_index": "tests/fixture-index-v1.4.3.7.json",
+  "candidate_fixture_index_sha256": "720a2f450991ecf8518e1fae86c0e17bfa0765aae1d0c7ff684bb71e32de4fc4"
 }

@@ -1,7 +1,19 @@
-# Schema v1.4.3.6 integrated candidate
+# Schema v1.4.3.7 candidate
 
-Status: CANDIDATE / NOT RELEASED. Derived from v1.4.2 candidate bundle plus DD-ART-006 proposal.
+This directory contains an unapproved candidate schema bundle. It is not a released normative version.
 
-This bundle changes the Artifact contract and is not backward-compatible without migration. `artifact_storage_kind` and `alternative_identity` are required. A hashless external file remains `needs_review` under the strict candidate interpretation even if an alternative identity is verified; that status means method verification only, not byte-level integrity. Directory artifacts use FileEntry objects and `directory_manifest_sha256`.
+## Versioned fixture sets
 
-The source design document remains v1.6.5; an aligned draft is provided outside the bundle as v1.6.6 candidate. The normative choices are not approved.
+- `tests/fixture-index.json` is the inherited `1.4.3.6-candidate` fixture index. Its bytes and version label are preserved as provenance; it is not silently relabeled.
+- `tests/fixture-index-v1.4.3.7.json` is the candidate-specific fixture index used for acceptance against the current schemas. The four Run Plan/Run Manifest valid/conditional fixture records are regenerated in `tests/v1.4.3.7/` with non-empty structured payloads that meet the candidate contracts.
+- The validator reports mismatches between the inherited fixture expectations and current candidate schemas separately as compatibility drift. Those mismatches do not replace or weaken the version-matched candidate test suite.
+
+## FingerprintInputs
+
+`run_plan.fingerprint_inputs` uses the candidate-only `fingerprint-inputs-v1` contract described in `docs/governance/fingerprint-inputs-contract-review.md`. The RFC 8785 deterministic hashing implementation, golden vector and negative tests are in the research Skill scripts and `tests/unit/test_fingerprint_inputs.py`.
+
+## Release constraints
+
+- DD-ART-007 through DD-ART-010 remain unapproved.
+- `validation_ids` migration remains staging-only and blocked while ambiguous.
+- Schema/CI success is not a physics correctness certificate. A real research task must independently verify provenance → configuration → run → artifact → validation → evidence → Claim before any release decision.
