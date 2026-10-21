@@ -1,0 +1,31 @@
+{
+  "configuration_id": "CONF-UV-EFT-HARD-001",
+  "profile_version": "uv-eFT-hard-derivative-config-v1",
+  "r_values": [0.01, 0.001, 0.0001, 0.00001],
+  "L_values": [0.0, 0.7],
+  "M_squared_normalization": 1.0,
+  "K_normalization": 1.0,
+  "quadrature_tolerance": 1e-11,
+  "quadrature_max_depth": 28,
+  "agreement_absolute_tolerance": 5e-9,
+  "maximum_scaled_asymptotic_residual": 4.0,
+  "independent_inputs": [
+    "r=m^2/M^2 values: 1e-2, 1e-3, 1e-4, 1e-5",
+    "L=ln(M^2/mu^2) values: 0 and 0.7",
+    "M^2=1 and K=1 are normalization choices for dimensionless audit tests, not a physical benchmark",
+    "adaptive Simpson tolerance 1e-11 and maximum recursion depth 28"
+  ],
+  "derived_parameters": [
+    "closed-form PV functions at p^2=0",
+    "Feynman-parameter quadrature cross-check of Bbar and Bprime functions",
+    "exact hard-derivative combination",
+    "leading and first-correction small-r expansion",
+    "Pi-prime conversion and conditional single-operator projection factor"
+  ],
+  "units": [
+    "Bbar and Fprime/K are dimensionless",
+    "Bprime has mass dimension -2; the reported M^2*Bprime is dimensionless",
+    "K is dimensionless",
+    "C_PhiD/Lambda^2 has mass dimension -2"
+  ]
+}
