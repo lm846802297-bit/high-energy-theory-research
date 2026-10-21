@@ -108,6 +108,8 @@ class ValidationReferenceResolutionTests(unittest.TestCase):
             report = migration.migrate(root)
         self.assertEqual(report["source_count"], 2)
         self.assertEqual(report["unresolved"], [])
+        claim_mapping = next(item for item in report["id_mapping"] if item["source_record_type"] == "claim")
+        self.assertEqual(claim_mapping["mapping_basis"], "source_reference_resolution")
         self.assertFalse(report["commit_allowed"])
 
 
