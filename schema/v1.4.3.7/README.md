@@ -12,6 +12,10 @@ This directory contains an unapproved candidate schema bundle. It is not a relea
 
 `run_plan.fingerprint_inputs` uses the candidate-only `fingerprint-inputs-v1` contract described in `docs/governance/fingerprint-inputs-contract-review.md`. The RFC 8785 deterministic hashing implementation, golden vector and negative tests are in the research Skill scripts and `tests/unit/test_fingerprint_inputs.py`.
 
+## Validation-report provenance
+
+The workflow regenerates `audit/validation-report.json` in the runner and uploads it as the `candidate-schema-validation-report` Actions artifact. The checked-in report file is an imported repository snapshot and is not by itself evidence of the latest CI run. Use the report artifact attached to the specific workflow run when auditing current counts and fixture outcomes.
+
 ## Release constraints
 
 - DD-ART-007 through DD-ART-010 remain unapproved.

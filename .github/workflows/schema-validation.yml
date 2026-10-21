@@ -29,6 +29,15 @@ jobs:
       - name: Validate schemas, fixtures, and traceability
         run: python schema/v1.4.3.7/tools/schema-v1.4.3.6-validate.py schema/v1.4.3.7
 
+      - name: Upload candidate schema validation report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: candidate-schema-validation-report
+          path: schema/v1.4.3.7/audit/validation-report.json
+          if-no-files-found: warn
+          retention-days: 30
+
       - name: Run candidate integration tests
         run: python schema/v1.4.3.7/tests/integration/test_v1_4_3_7.py
 
