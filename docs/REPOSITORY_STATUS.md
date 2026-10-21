@@ -27,7 +27,7 @@ Environment: Python 3.13, jsonschema 4.26.0.
 - Prototype integration tests: 29/29 passed.
 - Python syntax compilation: 7 candidate Python files passed.
 
-These results apply only to the initial import candidate and declared test scope. GitHub Actions passed for the initial import head `2aea74decaa9676d211186610dbafd8a4d638f4b` ([run](https://github.com/lm846802297-bit/high-energy-theory-research/actions/runs/39521772118)). That run does not validate later commits; use the latest workflow run for the exact head SHA.
+The synthetic end-to-end pilot and fixture-index audit guard passed on commit `1d03b425a49e9c0c073f4c1667727db0d15b9e3f` ([CI run](https://github.com/lm846802297-bit/high-energy-theory-research/actions/runs/39531582474)): 58/58 bundle checks, 25/25 schema/manifest checks, 83/83 fixture expectations, 16/16 semantic cases, 29/29 bundled integration tests, 18/18 repository unit tests, and Python compilation passed. These are SHA-specific results; use the PR's latest check for any later head.
 
 ## Release gates
 

@@ -25,7 +25,8 @@ class FixtureIndexVersionAuditTests(unittest.TestCase):
             provenance["source_lineage_recorded_in_audit"]["archive"],
             "schema-v1.4.3.6-integrated-candidate-bundle.zip",
         )
-        self.assertFalse((BUNDLE / provenance["source_lineage_recorded_in_audit"]["archive"]).exists())
+        archive_name = provenance["source_lineage_recorded_in_audit"]["archive"]
+        self.assertFalse(any(ROOT.rglob(archive_name)), "The source ZIP should not be assumed present unless it is actually committed.")
         actual_index_hash = hashlib.sha256(INDEX_PATH.read_bytes()).hexdigest()
         self.assertEqual(actual_index_hash, manifest["fixture_index_sha256"])
         self.assertIn("unresolved", audit.lower())
