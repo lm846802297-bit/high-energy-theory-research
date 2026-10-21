@@ -50,7 +50,7 @@ schema v1.3
 13. **v1.6.5 Schema 覆盖与需求追踪闭环**：明确 schema v1.4 bundle
     结构、25 类记录的逐类型 fixture
     计划、需求与测试双向追踪、分级发布门槛、迁移事务和通用高能理论物理科学验收矩阵。
-14. **v1.6.7 真实研究任务试点后续**：将真实 UV–EFT 子任务纳入 CI，增加 PV 闭式表达式与独立 Feynman 参数积分的交叉核查，推导并测试小质量比展开的第二阶修正，生成来源—配置—代码/环境指纹—运行—结果/日志—验证—证据—Claim 的完整候选记录链；明确本试点不能替代完整圈图推导、完整 EFT 基底匹配或人工科学审查。
+14. **v1.6.7 真实研究任务试点后续**：将真实 UV–EFT 子任务纳入 CI，增加 PV 闭式表达式与独立 Feynman 参数积分的交叉核查，推导并测试小质量比展开的第二阶修正，生成来源—配置—代码/环境指纹—运行—结果/日志—验证—证据—Claim 的完整候选记录链，并以保守的源记录图解析器处理可确定的旧 validation_ids；明确本试点不能替代完整圈图推导、完整 EFT 基底匹配或人工科学审查。
 
 ### 规范优先级与兼容原则
 
@@ -6136,9 +6136,9 @@ benchmark。文档生成和静态检查只证明报告所述范围内的结构�
 ### 76.1 可复核执行记录
 
 - 代码提交：4f271e2575687d453d4fcd41bf092714102d49d5。
-- CI 运行：[Candidate schema validation，成功](https://github.com/lm846802297-bit/high-energy-theory-research/actions/runs/39540163666)。
-- [下载 UV–EFT 来源追溯证据包](https://github.com/lm846802297-bit/high-energy-theory-research/actions/runs/39540163666/artifacts/12319760791)。
-- [下载当前候选 Schema 验证报告](https://github.com/lm846802297-bit/high-energy-theory-research/actions/runs/39540163666/artifacts/12319335969)。
+- 代码与迁移规则验收 CI：[Candidate schema validation，成功](https://github.com/lm846802297-bit/high-energy-theory-research/actions/runs/39541232669)。
+- [下载 UV–EFT 来源追溯证据包](https://github.com/lm846802297-bit/high-energy-theory-research/actions/runs/39541232669/artifacts/12319698296)。
+- [下载候选 Schema 验证报告](https://github.com/lm846802297-bit/high-energy-theory-research/actions/runs/39541232669/artifacts/12319088782)。
 
 证据包保留输入、配置、源摘录、代码与 Schema 快照、数值结果、运行日志、22 条记录、完整 record chain、指纹摘要和跨记录验证报告。当前记录链验证结果为 22 条记录、0 个错误、0 个警告；运行指纹重新计算通过。证据包中的 Claim 和 evidence review status 仍为 pending。
 
@@ -6150,7 +6150,7 @@ benchmark。文档生成和静态检查只证明报告所述范围内的结构�
 | 候选 fixture 预期结果 | 83/83 | 使用独立的 v1.4.3.7 candidate index |
 | 语义测试 | 16/16 | 所有已登记预期结果匹配 |
 | 候选集成测试 | 29/29 | 当前候选包集成测试通过 |
-| 仓库单元测试 | 29/29 | 包含本试点的二阶展开回归测试 |
+| 仓库单元测试 | 36/36 | 包含二阶展开回归测试与源图驱动的迁移解析测试 |
 | Python 编译 | 通过 | 仅覆盖 CI 指定的脚本目录 |
 | PV 数值交叉核查 | 8/8 | 4 个质量比 × 2 个尺度对数 |
 | PV 导数组合最大绝对差 | \(4.53\times10^{-13}\) | 闭式表达式与独立 Feynman 参数自适应 Simpson 积分的差 |
@@ -6255,6 +6255,25 @@ CI 对四个质量比 \(r=10^{-2},10^{-3},10^{-4},10^{-5}\) 和两个 \(L\) 值�
 3. **再做独立软件复核。** 为 Mathematica/FeynCalc 提供最小可运行脚本、软件版本、输入、输出和对照量；记录实际执行环境，不以脚本已写好代替运行通过。
 4. **再进入现象学分析。** 只有在 UV 系数、质量/混合映射和 EFT 适用域明确后，才把相关结果用于微扰性、实验限制或参数空间重铸。
 5. **继续完善通用工作流。** 用另一个不同类型的任务检验同一记录契约，随后推进 FeynRules/UFO 的最小状态测试、Run Manifest 失效传播和真实干净环境复现。当前 Python 子任务不覆盖这些模块。
-6. **治理决策仍需显式批准。** DD-ART-007 至 DD-ART-010 仍为 pending；validation_ids 的迁移语义仍不清楚；旧 fixture index 的原始来源包缺失，仍不能完成字节级来源谱系核对。Schema v1.4.3.7 保持 candidate，PR 保持 Draft。
+6. **治理决策仍需显式批准。** DD-ART-007 至 DD-ART-010 仍为 pending；validation_ids 迁移现在只在源记录图能证明同项目唯一目标类型、且 Activity 具有启动证据时自动映射，无法判定的案例仍阻断迁移；事务性提交与回滚尚未实现。旧 fixture index 的原始来源包缺失，仍不能完成字节级来源谱系核对。Schema v1.4.3.7 保持 candidate，PR 保持 Draft。
 
 **本节最终状态：** 一个真实、范围受限的理论物理子任务已完成自动数值核查和记录链验收；完整 UV–EFT 科学推导、完整算符基底匹配、人工审查、其他软件工具链和 Schema 发布决策仍未完成。
+
+
+### 76.6 旧 validation_ids 的保守源图解析（migration rules v2）
+
+本轮将迁移器从“所有 validation_ids 一律视为歧义”升级为“先查只读源记录图；只有证据充分时才自动映射”。这不是放宽安全边界，也不启用提交模式。
+
+解析规则：
+
+1. 先读取完整源快照，按同一 project_id 与记录主键建立索引；源文件字节和 SHA-256 仍保留。跨项目匹配不允许。
+2. 如果引用 ID 唯一指向 validation_plan，映射到 validation_plan_ids。
+3. 如果唯一指向 validation_activity，只有 execution_status 为 in_progress、succeeded 或 failed，且 started_at 非空，才映射到 validation_activity_ids。失败的 Activity 仍然是实际执行过的 Activity；失败状态不能被误转成计划。
+4. validation_activity 的状态为 planned 或 not_run 且无 started_at 时，不自动转换成 Validation Plan。除非源证据能支持单独构造计划记录，否则保留 unresolved。
+5. 缺失目标、跨类型重复主键、目标类型不支持、项目不一致、启动状态冲突或缺少 started_at 都会保留具体 unresolved 代码。
+6. 空的 legacy validation_ids 列表表示没有引用，可安全转换成空的 validation_activity_ids 和 validation_plan_ids 列表；非空列表不能仅凭字段名称推断类型。
+7. 无论解析结果是否全部明确，migration report 的 commit_allowed 仍为 false。当前迁移器不具备事务性提交、活动数据指针切换或回滚实现；全量 target schema/semantic validation 与人工审查仍是独立门槛。
+
+新增回归测试覆盖：实际启动的 Activity、Validation Plan、未启动 Activity、缺失目标、同 ID 跨类型冲突、空引用列表和源图驱动的 dry-run。CI 中候选集成测试 29/29、仓库单元测试 36/36 通过。
+
+该解析器只解决“目标类型和启动证据能否从源记录中明确识别”的技术问题；它不能恢复缺失的 v1.3 原始 Schema 或替代源档案，也不能解决来源记录本身缺失、ID 冲突或状态字段不可信的情况。历史 audit/migration-dry-run-summary.json 记录的是 migration rules v1 的旧试运行，不应被误读为本轮 rules v2 的运行结果。
