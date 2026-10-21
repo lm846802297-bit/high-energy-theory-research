@@ -12,6 +12,7 @@
 | Migration | Dry-run/staging prototype only; no source overwrite or commit operation |
 | Requirement/test traceability | CSV traceability data and regenerated validation report included |
 | Skill runtime | Initial instruction and reference scaffold added; not yet a complete automated research agent |
+| Project-record validator | P0 CLI added for JSON/YAML parsing, candidate-schema validation, mapped references, cross-type ID uniqueness, status/reason checks, and local source/artifact path checks |
 | Scientific validation | Not implemented; no physics result is certified by this repository |
 
 ## Local verification performed
@@ -25,12 +26,12 @@ Environment: Python 3.13, jsonschema 4.26.0.
 - Prototype integration tests: 29/29 passed.
 - Python syntax compilation: 7 candidate Python files passed.
 
-These results apply only to the current candidate and declared test scope. CI results remain pending until the pull request workflow completes.
+These results apply only to the initial import candidate and declared test scope. GitHub Actions passed for the initial import head `2aea74decaa9676d211186610dbafd8a4d638f4b` ([run](https://github.com/lm846802297-bit/high-energy-theory-research/actions/runs/39521772118)). That run does not validate later commits; use the latest workflow run for the exact head SHA.
 
 ## Release gates
 
 1. Approve or reject DD-ART-007 through DD-ART-010 explicitly.
-2. Reconcile the traceability row-count discrepancy and the fixture-index version label.
+2. Resolve the inherited fixture-index version label without relabeling it until its intended semantics are confirmed.
 3. Resolve the migration ambiguity around validation_ids without guessing target types.
 4. Expand semantic/state-machine coverage and test actual filesystem manifests.
 5. Define scientific acceptance tests for real research tasks before claiming end-to-end reproducibility.

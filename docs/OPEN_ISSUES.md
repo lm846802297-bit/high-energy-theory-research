@@ -6,9 +6,12 @@ This list deliberately separates confirmed software checks from unresolved desig
 
 1. **Four normative decisions remain pending.** DD-ART-007 through DD-ART-010 are recommendations, not approvals. See the decision register and full review.
 2. **Migration remains blocked.** The dry-run finds an ambiguous validation_ids mapping. The prototype must not guess the target record type; commit_allowed remains false.
-3. **Traceability count mismatch.** The historical audit narrative reports 123 trace rows, while the freshly regenerated validator report reads 125 rows. Reconcile the source CSV, counting convention, and narrative before release.
 4. **Fixture-index version label.** manifest.json identifies the package as 1.4.3.7-candidate, while tests/fixture-index.json retains 1.4.3.6-candidate. This may reflect inherited fixtures; do not relabel until the intended meaning of the field is confirmed.
 5. **Source lineage.** The v1.4.3.7 audit records derivation from a v1.4.3.6 candidate source bundle. Preserve that lineage; do not describe this as an independently approved v1.4.3.7 release.
+
+## Reconciled in this branch
+
+- **Traceability row count.** The CSV contains 125 non-empty data rows excluding the header, matching the regenerated validation report. The stale audit narrative count of 123 has been corrected. This reconciles the count only; it does not establish full requirement coverage.
 
 ## P1 — Coverage and implementation gaps
 

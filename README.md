@@ -11,6 +11,7 @@ A reusable research Skill and evidence-aware workflow for high-energy theoretica
 - Schema package: schema/v1.4.3.7, imported as a candidate bundle.
 - The current candidate includes 25 JSON Schema entry points, 83 indexed fixtures, a cross-record validator, a conservative migration prototype, a directory-manifest helper, audit reports, and traceability data.
 - The reusable Skill entry point is in skills/high-energy-theory-research/SKILL.md.
+- The P0 project-record validator is in scripts/validate_project_records.py; it supports JSON/YAML records and bounded candidate-schema, reference, ID, status/reason, and local-path checks.
 
 ## Local validation
 
@@ -23,7 +24,7 @@ The candidate package was checked locally on 2026-10-21:
 - 29/29 prototype integration tests passed.
 - Python syntax compilation passed for the 7 candidate Python files.
 
-These are bounded software-validation results. They do **not** establish full schema completeness, historical migration compatibility, or correctness of any physics result. GitHub Actions has not yet been verified for this import.
+These are bounded software-validation results. They do **not** establish full schema completeness, historical migration compatibility, or correctness of any physics result. GitHub Actions passed for the initial import head `2aea74decaa9676d211186610dbafd8a4d638f4b` ([run](https://github.com/lm846802297-bit/high-energy-theory-research/actions/runs/39521772118)). That run does not validate later commits; use the latest workflow run for the exact head SHA.
 
 ## Start here
 
@@ -39,6 +40,7 @@ python -m pip install -r requirements-dev.txt
 python schema/v1.4.3.7/tools/schema-v1.4.3.6-validate.py schema/v1.4.3.7
 python schema/v1.4.3.7/tests/integration/test_v1_4_3_7.py
 python -m unittest discover -s tests/unit -v
+python scripts/validate_project_records.py path/to/project/records --project-root path/to/project
 ~~~
 
 ## Governance gates
