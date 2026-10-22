@@ -6,7 +6,7 @@ This directory contains active Scientific Diff records for substantive research 
 
 | ID | Research task | Status | Current conclusion |
 |---|---|---|---|
-| [RC-001](RC-001-vll-higgs-singlet-uv-eft.md) | VLL–Higgs–Singlet UV–EFT one-loop matching: baseline and evidence-chain consolidation | Verification in progress | The exact mass-basis h–s kernel and local pole counterterm for the stated EFT bubble-plus-contact subset are now documented. The finite derivative coefficient remains unresolved because the two-point and four-point routes differ by 4/3, same-order EFT soft insertions remain open, and the committed script/log pair is not yet synchronized. See the [RC-001 claim–evidence matrix](RC-001-claim-evidence-matrix.md). |
+| [RC-001](RC-001-vll-higgs-singlet-uv-eft.md) | VLL–Higgs–Singlet UV–EFT one-loop matching: baseline and evidence-chain consolidation | Verification in progress | The exact mass-basis h–s kernel and local pole counterterm for the stated EFT bubble-plus-contact subset are documented. The synchronized v14 script/log pair passes 15 symbolic checks; the finite derivative coefficient remains unresolved because the two-point and four-point routes differ by 4/3, same-order EFT soft insertions remain open, and the higher-order constant-pole operator assignment is not fixed. See the [RC-001 claim–evidence matrix](RC-001-claim-evidence-matrix.md). |
 
 ## Rules
 
