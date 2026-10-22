@@ -120,6 +120,7 @@ check("two-point/four-point finite slope mismatch is 4q/[3(16 pi^2)]",
       pi2_slope-pi4_slope, 4*q/(3*16*sp.pi**2))
 
 print(f"RESULT: {len(checks)} exact symbolic/algebraic checks passed")
-print("OPEN: the finite 4/3 slope discrepancy is detected, not resolved.")
-print("OPEN: complete EFT soft insertions and the gauge-invariant assignment of the higher-order constant pole remain unresolved.")
-print("SCOPE: no numerical loop integration or FeynArts/FeynCalc/Mathematica/Matchete/Matchmakereft run.")
+print("STATUS: the 4/3 difference is between the two-point result and the legacy on-shell four-point representative.")
+print("STATUS: master-record §301.1-§301.4 attributes this difference to the off-shell external-momentum terms and EOM completion; the coefficients align in the same operator basis after that completion.")
+print("OPEN: full-model Wilson-vector closure, all remaining EFT soft/source sectors, gauge-invariant assignment of the higher-order constant pole, and independent diagram-level validation.")
+print("SCOPE: algebraic checks only; no numerical loop integration or FeynArts/FeynCalc/Mathematica/Matchete/Matchmakereft run.")
