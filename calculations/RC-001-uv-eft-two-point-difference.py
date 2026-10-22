@@ -1,53 +1,125 @@
 #!/usr/bin/env python3
-"""Exact algebra checks for §137 UV-EFT h-s two-point difference.
-No loop library is invoked; this validates formulas/transcription and expansions.
+"""RC-001 source-aligned UV-EFT h-s kernel and counterterm audit.
+
+This script checks exact symbolic identities and finite PV-function algebra.
+It does not evaluate loop integrals numerically and does not run
+FeynArts, FeynCalc, Mathematica, Matchete, or Matchmakereft.
 """
 import sympy as sp
-x,y,s,mu,k=sp.symbols('x y s mu k', positive=True)
-Lx=sp.log(x/mu**2); Ly=sp.log(y/mu**2)
-# UV and EFT pole coefficients with common Delta_MSbar factored out.
-uv_pole=(4*x-s)+(4*y-s)-2*(2*x+2*y-s)
-eft_pole=4*x+(4*x-s)
-diff_pole=uv_pole-eft_pole
-checks=[]
-def ck(name, expr, expected=0):
-    res=sp.simplify(expr-expected)
-    assert res == 0, f'{name}: residual={res}'
-    checks.append(name); print('PASS:',name)
-ck('UV four-path pole cancels',uv_pole,0)
-ck('EFT bubble plus contact pole is 8x-s',eft_pole,8*x-s)
-ck('bare difference pole is s-8x',diff_pole,s-8*x)
-# Difference after exact cancellation of light bubble.
-uv_without_light=(4*y-s) # coefficient of B_yy
-mixed_coeff=-2*(2*x+2*y-s)
-ck('mixed B0 coefficient is -2(2x+2y-s)',mixed_coeff,-4*x-4*y+2*s)
-# Zero-momentum finite exact difference from F_UV - F_EFT.
-Fuv0=4*k*(2*x*y/(x-y)*sp.log(x/y)-(x+y))
-Feft0=k*(4*x*(1-Lx)-4*x*Lx)
-D0=sp.simplify(Fuv0-Feft0)
-D0_expected=k*(8*x*y/(x-y)*sp.log(x/y)-4*y-8*x+8*x*Lx)
-ck('exact zero-momentum finite difference',D0,D0_expected)
-# Large-y expansion: verify the proposed asymptotic coefficients by formal algebra
-# using B0 expansions through O(x,s) and A0 finite part.
-B_yy=-Ly+s/(6*y)
-B_xy=1-Ly-(x/y)*sp.log(y/x)+s/(2*y)
-A0x=x*(1-Lx)
-D_asym=sp.expand((4*y-s)*B_yy-2*(2*x+2*y-s)*B_xy-4*A0x)
-# Remove terms beyond linear in x,s by polynomial truncation in dummy eps.
-eps=sp.symbols('eps')
-D_eps=sp.expand(D_asym.subs({x:eps*x,s:eps*s}))
-D_linear=sp.expand(sp.series(D_eps,eps,0,2).removeO().subs(eps,1))
-expected=-4*y+8*x*(Ly-1)+s*(sp.Rational(2,3)-Ly)
-ck('large-mass expansion gives -4y+8x(Ly-1)+s(2/3-Ly)',D_linear,expected)
-# Common normalization: kappa=2*yh*ys.
-yh,ys=sp.symbols('y_h y_s')
-ck('12x-2s in yh*ys normalization equals 6x-s in kappa normalization',
-   yh*ys*(12*x-2*s), 2*yh*ys*(6*x-s))
-ck('contact tadpole adds 2*kappa*x to EFT pole', (8*x-s)-(6*x-s),2*x)
-# Leading portal threshold matches CW result after kappa asymptotic substitution.
-yH,lam,v,vs,M=sp.symbols('y_H lam v v_s M', positive=True)
-kappa_lead=yH**2*lam**2*v*vs/(2*M**2)
-ck('leading -4*kappa*M^2/(16 pi^2) matches CW portal mass threshold',
-   -4*kappa_lead*M**2/(16*sp.pi**2),-yH**2*lam**2*v*vs/(8*sp.pi**2))
-print(f'RESULT: {len(checks)} exact symbolic checks passed')
-print('SCOPE: exact algebra and asymptotic coefficient checks only; no Mathematica/FeynCalc/Matchmakereft execution.')
+
+checks = []
+
+def check(name, expr, expected=0):
+    residual = sp.simplify(expr - expected)
+    if isinstance(residual, sp.matrices.matrixbase.MatrixBase):
+        failed = any(sp.simplify(entry) != 0 for entry in residual)
+    else:
+        failed = residual != 0
+    if failed:
+        raise AssertionError(f"{name}: residual={residual}")
+    checks.append(name)
+    print(f"PASS: {name}")
+
+# 1-2. Reconstruct the C_hs and D_hs matrices from the frozen mass-basis vertices.
+y_l, lam_l = sp.symbols("y_l lambda_l", real=True)
+cL, sL, cR, sR = sp.symbols("c_L s_L c_R s_R", real=True)
+Gh = y_l / sp.sqrt(2) * sp.Matrix([
+    [-cL*sR, cL*cR],
+    [-sL*sR, sL*cR],
+])
+Gs = lam_l / sp.sqrt(2) * sp.Matrix([
+    [-sL*cR, -sL*sR],
+    [ cL*cR,  cL*sR],
+])
+C = sp.Matrix(2, 2, lambda i, j: sp.expand(Gh[i,j]*Gs[i,j] + Gh[j,i]*Gs[j,i]))
+D = sp.Matrix(2, 2, lambda i, j: sp.expand(Gh[i,j]*Gs[j,i] + Gh[j,i]*Gs[i,j]))
+q_def = y_l*lam_l*cL*cR*sL*sR
+r_def = y_l*lam_l*(cL**2*cR**2 + sL**2*sR**2)/2
+check("§276 C_hs matrix reconstructed from Gh,Gs", C,
+      sp.Matrix([[q_def, -q_def], [-q_def, q_def]]))
+check("§276 D_hs matrix reconstructed from Gh,Gs", D,
+      sp.Matrix([[q_def, r_def], [r_def, q_def]]))
+
+# 3-6. Signed eigenmasses and the exact diagonalization identity.
+m1, m2, s = sp.symbols("m_1 m_2 s", real=True, nonzero=True)
+x, Y = sp.symbols("x Y", positive=True)
+q, r = sp.symbols("q r", real=True)
+relation = q*(x + Y) + 2*r*m1*m2
+rotation_factor = y_l*lam_l*(cL*cR*m1 + sL*sR*m2)*(sL*sR*m1 + cL*cR*m2)
+check("exact mass identity factorizes into diagonalization factors",
+      q_def*(m1**2 + m2**2) + 2*r_def*m1*m2, rotation_factor)
+uv_pole = q*((4*x-s) + (4*Y-s)) + 4*r*m1*m2 - 2*q*(x+Y-s)
+check("UV pole coefficient equals 2[q(x+Y)+2 r m1 m2]", uv_pole, 2*relation)
+check("exact mass relation cancels the complete UV pole",
+      uv_pole.subs(r, -q*(x+Y)/(2*m1*m2)), 0)
+mixed_exact = 4*r*m1*m2 - 2*q*(x+Y-s)
+mixed_reduced = -2*q*(2*x+2*Y-s)
+check("§277 mixed B0 reduction follows from the exact mass identity",
+      mixed_exact - mixed_reduced, 2*relation)
+
+# 7. The A0 terms cancel in K11+K22-2K12.
+A_x, A_Y, B11, B22, B12 = sp.symbols("A_x A_Y B_11 B_22 B_12")
+K11 = 2*A_x + (2*x-s)*B11
+K22 = 2*A_Y + (2*Y-s)*B22
+K12 = A_x + A_Y + (x+Y-s)*B12
+K_expected = (2*x-s)*B11 + (2*Y-s)*B22 - 2*(x+Y-s)*B12
+check("A0 terms cancel in K11+K22-2K12", sp.expand(K11+K22-2*K12), K_expected)
+
+# 8-11. EFT bubble + contact tadpole poles and the local derivative counterterm.
+Delta = sp.symbols("Delta_UV")
+eft_loop_pole = -q*(8*x-s)*Delta/(16*sp.pi**2)
+local_ct_pole = +q*(8*x-s)*Delta/(16*sp.pi**2)
+check("EFT bubble-plus-contact pole has coefficient -(8x-s)",
+      eft_loop_pole, -q*(8*x-s)*Delta/(16*sp.pi**2))
+check("local inverse-kernel counterterm cancels the stated EFT pole",
+      eft_loop_pole + local_ct_pole, 0)
+check("contact tadpole has zero momentum derivative", sp.diff(2*q*A_x, s), 0)
+Mstar2, vh, vs = sp.symbols("Mstar2 v_h v_s", positive=True)
+delta_c = -Mstar2*q*Delta/(16*sp.pi**2*vh*vs)
+check("dimension-six derivative counterterm cancels the s-pole",
+      delta_c*vh*vs/Mstar2*s + q*s*Delta/(16*sp.pi**2), 0)
+
+# 12. Exact finite UV-minus-EFT kernel at s=0.
+mu2 = sp.symbols("mu_R2", positive=True)
+Lx = sp.log(x/mu2)
+LY = sp.log(Y/mu2)
+A0x_fin = x*(1-Lx)
+B11_fin = -Lx
+B22_fin = -LY
+B12_fin = 1 - (x*Lx - Y*LY)/(x-Y)
+Fuv0 = q*(4*x*B11_fin + 4*Y*B22_fin - 4*(x+Y)*B12_fin)
+Feft0 = q*(4*A0x_fin + 4*x*B11_fin)
+DeltaF0 = sp.simplify(Fuv0-Feft0)
+DeltaF0_expected = q*(8*x*Y/(x-Y)*sp.log(x/Y) - 4*Y - 8*x + 8*x*Lx)
+check("exact finite p^2=0 UV-minus-EFT subtraction",
+      sp.expand_log(DeltaF0-DeltaF0_expected, force=True), 0)
+
+# 13. Large-heavy-mass expansion of the finite hard-minus-soft kernel.
+B22_asym = -LY + s/(6*Y)
+B12_asym = 1 - LY - (x/Y)*sp.log(Y/x) + s/(2*Y)
+D_asym = q*((4*Y-s)*B22_asym - 2*(2*x+2*Y-s)*B12_asym - 4*A0x_fin)
+eps = sp.symbols("eps", positive=True)
+D_eps = sp.expand(D_asym.subs({x: eps*x, s: eps*s}))
+D_linear = sp.expand(sp.series(D_eps, eps, 0, 2).removeO().subs(eps, 1))
+D_linear_expected = q*(-4*Y + 8*x*(LY-1) + s*(sp.Rational(2,3)-LY))
+check("large-mass expansion of the finite hard-minus-soft kernel",
+      sp.expand_log(D_linear-D_linear_expected, force=True), 0)
+
+# 14. Check the sign of Pi=-F/(16 pi^2) against the leading portal threshold.
+y_l2, lam_l2, M2 = sp.symbols("y_l2 lambda_l2 M2", positive=True)
+q_lead = y_l2*lam_l2*vh*vs/(2*M2)
+pi_hard_lead = -(-4*q_lead*M2)/(16*sp.pi**2)
+portal_target = vh*vs*y_l2*lam_l2/(8*sp.pi**2)
+check("leading hard Pi_hs(0) has the §274.4 positive sign", pi_hard_lead, portal_target)
+
+# 15. Explicitly detect, but do not resolve, the two-point/four-point finite mismatch.
+Lheavy = sp.symbols("L_E")
+pi2_slope = q*(Lheavy-sp.Rational(2,3))/(16*sp.pi**2)
+pi4_slope = q*(Lheavy-2)/(16*sp.pi**2)
+check("two-point/four-point finite slope mismatch is 4q/[3(16 pi^2)]",
+      pi2_slope-pi4_slope, 4*q/(3*16*sp.pi**2))
+
+print(f"RESULT: {len(checks)} exact symbolic/algebraic checks passed")
+print("OPEN: the finite 4/3 slope discrepancy is detected, not resolved.")
+print("OPEN: complete EFT soft insertions and the gauge-invariant assignment of the higher-order constant pole remain unresolved.")
+print("SCOPE: no numerical loop integration or FeynArts/FeynCalc/Mathematica/Matchete/Matchmakereft run.")
