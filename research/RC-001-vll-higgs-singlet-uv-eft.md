@@ -196,6 +196,7 @@ The RC-001-specific rows are recorded in the [RC-001 claim–evidence matrix](RC
 - **CL-003 — Portal threshold:** Conditionally supported as the effective-potential coefficient under the stated potential convention. The algebra audit JSON is historical (v76→v77), not a v153 run; the FeynArts/FeynCalc cross-check remains open.
 - **CL-004 — Broken-phase symbolic/soft-function subclaims:** Supported only within the explicit algebraic and integral checks recorded in §§261–262. These checks are not a complete physical pole calculation.
 - **CL-005 — Complete Wilson vector and physical scalar mixing:** Unresolved. The current evidence does not establish a unique complete vector or a final physical mixing prediction; §274 is a downstream analytical dependency and has not passed diagram-level validation.
+- **CL-006 — Momentum-dependent h–s self-energy:** Conditionally supported at the algebraic level only, within the conventions and scope of §274. The reported checks do not include numerical PV integration, diagram-level UV/EFT hard-minus-soft validation, or a physical pole solution.
 
 ## 7. Verification plan and acceptance gates
 
