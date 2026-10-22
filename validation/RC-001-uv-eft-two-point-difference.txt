@@ -1,11 +1,18 @@
-PASS: UV four-path pole cancels
-PASS: EFT bubble plus contact pole is 8x-s
-PASS: bare difference pole is s-8x
-PASS: mixed B0 coefficient is -2(2x+2y-s)
-PASS: exact zero-momentum finite difference
-PASS: large-mass expansion gives -4y+8x(Ly-1)+s(2/3-Ly)
-PASS: 12x-2s in yh*ys normalization equals 6x-s in kappa normalization
-PASS: contact tadpole adds 2*kappa*x to EFT pole
-PASS: leading -4*kappa*M^2/(16 pi^2) matches CW portal mass threshold
-RESULT: 9 exact symbolic checks passed
-SCOPE: exact algebra and asymptotic coefficient checks only; no Mathematica/FeynCalc/Matchmakereft execution.
+PASS: §276 C_hs matrix reconstructed from Gh,Gs
+PASS: §276 D_hs matrix reconstructed from Gh,Gs
+PASS: UV-pole identity factorizes into the exact diagonalization factors
+PASS: exact UV pole coefficient equals 2[q(x+Y)+2 r m1 m2]
+PASS: exact mass-eigenstate relation cancels the full UV pole
+PASS: §277 reduced mixed B0 coefficient follows from the exact mass identity
+PASS: A0 terms cancel in K11+K22-2K12
+PASS: EFT loop pole is -q(8x-s) Delta/(16 pi^2)
+PASS: local inverse-kernel counterterm cancels the EFT loop pole
+PASS: contact tadpole has zero momentum derivative
+PASS: dimension-six derivative counterterm cancels the s-pole
+PASS: exact p2=0 UV-minus-EFT finite subtraction
+PASS: large-mass expansion of the finite hard-minus-soft kernel
+PASS: leading hard Pi_hs(0) has the §274.4 positive sign
+PASS: known finite two-point/four-point slope discrepancy is 4q/[3(16 pi^2)]
+RESULT: 15 exact symbolic/algebraic checks passed
+OPEN: the finite 4/3 slope discrepancy is detected, not resolved.
+OPEN: complete EFT soft insertions, gauge-invariant dimension-eight mass-term basis, and FeynArts/FeynCalc remain outside this script.
