@@ -59,17 +59,19 @@ The leading finite \(s^0\) hard term satisfies the source sign check
 \]
 This leading dimension-four portal threshold is finite. The \(O(q_\ell x)\) pole in the broken-phase EFT subset is a higher-order term and does not by itself determine the renormalized \(\lambda_{HS}\) boundary condition.
 
-For the derivative projection, subtracting only the renormalized-Yukawa bubble/contact subset gives
+For the derivative projection, subtracting the stated renormalized-Yukawa bubble/contact subset gives
 \[
 \Delta\Pi_{\rm hard}^{(2{\rm pt})\,\prime}(0)
 =\frac{q_\ell}{16\pi^2}\left(L_E-\frac23\right)+\cdots,
 \]
-whereas the independent four-point route gives
+while the older on-shell four-point representative gives
 \[
-\Delta\Pi_{\rm hard}^{(4{\rm pt})\,\prime}(0)
+\Delta\Pi_{\rm hard}^{(4{\rm pt}),\,\rm old\,rep\,\prime}(0)
 =\frac{q_\ell}{16\pi^2}(L_E-2)+\cdots.
 \]
-The finite difference \(4q_\ell/[3(16\pi^2)]\) remains open. The contact tadpole cannot fix it because its derivative is zero. Same-order EFT soft insertions and the independent four-point hard-region calculation must be reconciled before \(c_{\partial HS}\) is finalized.
+Their difference \(4q_\ell/[3(16\pi^2)]\) is a difference between these representatives, not a remaining same-basis mismatch. The cumulative master source v153 §301.1–§301.4 includes the off-shell external-leg terms and EOM completion by \(T_H,T_S\), shifting \(c_H,c_S,c_D\) by \(+2a_\ell/3\) and aligning the specified Yukawa-box derivative coefficients. The contact tadpole itself still has zero momentum derivative.
+
+Open items are the complete model-level Wilson vector, any remaining EFT soft/source sectors outside the restricted comparison, the gauge-invariant assignment of the higher-order constant pole, and independent diagram-level validation.
 
 ## Reproducibility boundary
 
