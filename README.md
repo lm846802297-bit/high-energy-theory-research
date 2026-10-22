@@ -14,7 +14,7 @@ The workflow is designed for theoretical particle physics, UV–EFT matching, pe
 2. Copy [the research-change template](templates/research-change.md) for each substantive research change.
 3. Use [the claim–evidence matrix](templates/claim-evidence-matrix.md) to track the support for important physical statements.
 4. Apply [the review checklist](docs/review-checklist.md) before marking a change complete or synchronizing it into a manuscript.
-5. Read the [active research records](research/README.md); the first baseline is [RC-001: VLL–Higgs–Singlet UV–EFT matching](research/RC-001-vll-higgs-singlet-uv-eft.md).
+5. Read the [active research records](research/README.md); the first baseline is [RC-001: VLL–Higgs–Singlet UV–EFT matching](research/RC-001-vll-higgs-singlet-uv-eft.md), with its [record-specific claim–evidence matrix](research/RC-001-claim-evidence-matrix.md).
 
 ### Core chain
 
@@ -27,7 +27,8 @@ Every arrow should be traceable. A change to an upstream assumption or formula m
 - **docs/scientific-diff-workflow.md** — workflow, definitions, status model, and physics-specific guidance.
 - **docs/review-checklist.md** — checks for scientific changes and manuscript synchronization.
 - **templates/research-change.md** — record for an individual research change.
-- **templates/claim-evidence-matrix.md** — ledger connecting physical claims to evidence and verification.
+- **templates/claim-evidence-matrix.md** — generic template for a new claim–evidence ledger.
+- **research/*-claim-evidence-matrix.md** — record-specific active claims, with unique IDs per research record.
 - **research/** — active research-change records and their current claim status.
 
 ## Operating principles
