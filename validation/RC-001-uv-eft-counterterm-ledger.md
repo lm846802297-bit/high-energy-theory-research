@@ -1,0 +1,76 @@
+# RC-001 UV–EFT h–s local counterterm ledger
+
+**Scope.** This ledger is derived from the frozen v153 source §§274.2–274.4, 276–278, 283.1–283.5, 284.1–284.4 and 285.1–285.4. It covers the explicitly stated EFT light-state Yukawa bubble plus the tree-generated \(hs\bar\ell\ell\) contact tadpole. It does not claim that all same-order EFT soft insertions have been calculated.
+
+## Conventions
+
+\[
+\Gamma_{\rm inv}(s)=s\mathbf 1-\mathcal M_{\rm loc}^2+\Pi(s),\qquad
+\Pi_{\rm loop}^{\ell}(s)
+=-\frac{q_\ell}{16\pi^2}\left[4A_0(x)+(4x-s)B_0(s;x,x)\right],
+\]
+where \(x=m_\ell^2\), \(q_\ell=2g_{h\ell}g_{s\ell}\), \(s=p^2\), and
+\[
+A_0(x)|_{\rm pole}=x\Delta_{\rm UV},\qquad
+B_0(s;x,x)|_{\rm pole}=\Delta_{\rm UV}.
+\]
+The bubble and contact terms are separately
+\[
+\Pi_{\rm bub}^{\ell}(s)
+=-\frac{q_\ell}{16\pi^2}\left[2A_0(x)+(4x-s)B_0(s;x,x)\right],
+\qquad
+\Pi_{\rm ct}^{\ell}
+=-\frac{q_\ell}{16\pi^2}2A_0(x).
+\]
+The contact tadpole has no \(s\)-dependence.
+
+## Pole cancellation
+
+The total EFT-loop pole is
+\[
+\boxed{\Pi_{\rm EFT,loop}^{\ell}(s)|_{\rm pole}
+=-\frac{q_\ell}{16\pi^2}(8x-s)\Delta_{\rm UV}.}
+\]
+The local contribution to the inverse propagator must therefore be
+\[
+\boxed{\Pi_{\rm local\,CT}^{\ell}(s)|_{\rm pole}
+=+\frac{q_\ell}{16\pi^2}(8x-s)\Delta_{\rm UV}.}
+\]
+The bare UV-minus-EFT difference carries this same local pole because the complete mass-basis UV self-energy has zero UV pole under
+\[
+q_\ell(m_1^2+m_2^2)+2r_\ell m_1m_2=0.
+\]
+
+| Projection | Counterterm contribution to \(\Gamma_{\rm inv}\) | Interpretation | Status |
+|---|---|---|---|
+| \(s^0\) | \(+8q_\ell x\Delta_{\rm UV}/(16\pi^2)\) | In seesaw counting, \(q_\ell=O(M_E^{-2})\) and \(x=O(M_E^{-2})\), so this is \(O(M_E^{-4})\). It must not be misidentified as the leading dimension-four portal counterterm. A gauge-invariant assignment requires a frozen higher-dimensional scalar-potential basis and EOM conventions. | Pole identified; operator assignment open |
+| \(s^1\) | \(-q_\ell s\Delta_{\rm UV}/(16\pi^2)\) | For \(\mathcal L_{\rm EFT}\supset(c_{\partial HS}/M_*^2)\partial_\mu(H^\dagger H)\partial^\mu(S^\dagger S)\), the quadratic term contributes \(c_{\partial HS}v_hv_s s/M_*^2\). Thus \(\displaystyle\delta c_{\partial HS}=-\frac{M_*^2q_\ell}{16\pi^2v_hv_s}\Delta_{\rm UV}\). | Pole cancellation verified algebraically for this EFT subset |
+
+## Finite terms and unresolved matching
+
+The leading finite \(s^0\) hard term satisfies the source sign check
+\[
+\Delta\Pi_{\rm hard}^{\ell}(0)
+\simeq+\frac{|y_\ell|^2|\lambda_\ell|^2v_hv_s}{8\pi^2}
+=-v_hv_s\Delta\lambda_{HS}^{E,\ell},
+\quad
+\Delta\lambda_{HS}^{E,\ell}
+=-\frac{|y_\ell|^2|\lambda_\ell|^2}{8\pi^2}.
+\]
+This leading dimension-four portal threshold is finite. The \(O(q_\ell x)\) pole in the broken-phase EFT subset is a higher-order term and does not by itself determine the renormalized \(\lambda_{HS}\) boundary condition.
+
+For the derivative projection, subtracting only the renormalized-Yukawa bubble/contact subset gives
+\[
+\Delta\Pi_{\rm hard}^{(2{\rm pt})\,\prime}(0)
+=\frac{q_\ell}{16\pi^2}\left(L_E-\frac23\right)+\cdots,
+\]
+whereas the independent four-point route gives
+\[
+\Delta\Pi_{\rm hard}^{(4{\rm pt})\,\prime}(0)
+=\frac{q_\ell}{16\pi^2}(L_E-2)+\cdots.
+\]
+The finite difference \(4q_\ell/[3(16\pi^2)]\) remains open. The contact tadpole cannot fix it because its derivative is zero. Same-order EFT soft insertions and the independent four-point hard-region calculation must be reconciled before \(c_{\partial HS}\) is finalized.
+
+## Reproducibility boundary
+
+The SymPy script at calculations/RC-001-uv-eft-two-point-difference.py checks the stated algebraic identities and the counterterm pole cancellation. Its output is in validation/RC-001-uv-eft-two-point-difference.txt. No numerical loop integration, FeynArts/FeynCalc run, complete higher-dimensional EFT soft-insertion sum, or final finite dimension-six Wilson coefficient is claimed.
