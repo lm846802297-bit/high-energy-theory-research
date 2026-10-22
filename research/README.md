@@ -6,7 +6,7 @@ This directory contains active Scientific Diff records for substantive research 
 
 | ID | Research task | Status | Current conclusion |
 |---|---|---|---|
-| [RC-001](RC-001-vll-higgs-singlet-uv-eft.md) | VLL–Higgs–Singlet UV–EFT one-loop matching: baseline and evidence-chain consolidation | Verification in progress | Fixed-sector analytical results are documented; the B1/B3 reconciliation, diagram-level checks, complete Wilson vector, and physical observables remain open. See the [RC-001 claim–evidence matrix](RC-001-claim-evidence-matrix.md). |
+| [RC-001](RC-001-vll-higgs-singlet-uv-eft.md) | VLL–Higgs–Singlet UV–EFT one-loop matching: baseline and evidence-chain consolidation | Verification in progress | Fixed-sector analytical results and a provisional explicit UV–EFT h–s subtraction are documented; the B1/B3 and §274 convention reconciliations, diagram-level checks, complete Wilson vector, and physical observables remain open. See the [RC-001 claim–evidence matrix](RC-001-claim-evidence-matrix.md). |
 
 ## Rules
 

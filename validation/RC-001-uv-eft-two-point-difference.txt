@@ -1,0 +1,11 @@
+PASS: UV four-path pole cancels
+PASS: EFT bubble plus contact pole is 8x-s
+PASS: bare difference pole is s-8x
+PASS: mixed B0 coefficient is -2(2x+2y-s)
+PASS: exact zero-momentum finite difference
+PASS: large-mass expansion gives -4y+8x(Ly-1)+s(2/3-Ly)
+PASS: 12x-2s in yh*ys normalization equals 6x-s in kappa normalization
+PASS: contact tadpole adds 2*kappa*x to EFT pole
+PASS: leading -4*kappa*M^2/(16 pi^2) matches CW portal mass threshold
+RESULT: 9 exact symbolic checks passed
+SCOPE: exact algebra and asymptotic coefficient checks only; no Mathematica/FeynCalc/Matchmakereft execution.

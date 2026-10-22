@@ -235,9 +235,127 @@ At this baseline, the defensible conclusion is **partial and conditional**:
 
 This record does not change or certify the physics result. It makes the baseline and evidence chain explicit and defines what must be completed before the final physical claim can be upgraded.
 
-## 9. Change history
+
+
+## 9. Follow-up calculation: explicit UV–EFT difference for the broken-phase \(h\)–\(s\) two-point function
+
+> **Status: provisional analytical supplement; not yet reconciled term by term with §274.** This addition records the explicit subtraction worked out in the follow-up calculation. It does not replace the frozen v153 baseline, and it does not promote the physical scalar-mixing claim to verified.
+
+### 9.1 Definitions and UV kernel
+
+Set
+\[
+x=m_{\ell,\mathrm{light}}^2,\qquad
+y=m_{\ell,\mathrm{heavy}}^2,\qquad s=p^2,
+\]
+and use the mass-eigenstate scalar-kernel normalization
+\[
+\kappa=2ab\,c_Ls_Lc_Rs_R
+\]
+from the associated derivation. The UV four-path sum is recorded as
+\[
+\mathcal F_{\rm UV}(s)=\kappa\left[
+(4x-s)B_0(s;x,x)+(4y-s)B_0(s;y,y)
+-2(2x+2y-s)B_0(s;x,y)\right].
+\]
+Its overall UV pole cancels:
+\[
+(4x-s)+(4y-s)-2(2x+2y-s)=0.
+\]
+This cancellation must be checked using the complete set of mass-eigenstate paths and the exact vertex conventions of §274.
+
+### 9.2 EFT bubble plus contact tadpole
+
+For the EFT calculation, the follow-up derivation separates
+\[
+\mathcal F_{\rm EFT,bub}(s)
+=\kappa\left[2A_0(x)+(4x-s)B_0(s;x,x)\right]
+\]
+from the contact-vertex tadpole
+\[
+\mathcal F_{\rm EFT,ct}(s)=2\kappa A_0(x).
+\]
+Thus
+\[
+\mathcal F_{\rm EFT}(s)=\kappa\left[
+4A_0(x)+(4x-s)B_0(s;x,x)\right].
+\]
+With \(A_0|_{\rm pole}=x\Delta_{\rm UV}\) and \(B_0|_{\rm pole}=\Delta_{\rm UV}\), this EFT kernel has pole \(\kappa(8x-s)\Delta_{\rm UV}\). The UV-minus-EFT bare loop difference consequently has pole \(\kappa(s-8x)\Delta_{\rm UV}\). This is a bare difference, not yet a finite Wilson coefficient: the EFT local counterterms and their renormalization conditions must be included before interpreting it as a matched result.
+
+### 9.3 Explicit subtraction
+
+The common light-lepton bubble cancels exactly:
+\[
+\boxed{
+\Delta\mathcal F_{\rm bare}(s)=
+\kappa\left[(4y-s)B_0(s;y,y)
+-2(2x+2y-s)B_0(s;x,y)-4A_0(x)\right].
+}
+\]
+This isolates the heavy-heavy and mixed heavy-light loop functions together with the EFT contact tadpole. It is not valid to omit the mixed \(B_0(s;x,y)\) term.
+
+Using
+\[
+A_0^{\rm fin}(x)=x\left(1-\ln\frac{x}{\mu_R^2}\right),\quad
+B_0^{\rm fin}(0;x,x)=-\ln\frac{x}{\mu_R^2},
+\]
+and the previously derived full-theory zero-momentum kernel, the recorded finite difference is
+\[
+\boxed{
+\Delta\mathcal F_{\rm fin}(0)=
+\kappa\left[
+\frac{8xy}{x-y}\ln\frac{x}{y}
+-4y-8x+8x\ln\frac{x}{\mu_R^2}
+\right].
+}
+\]
+This zero-momentum expression is an algebraic subtraction using the existing full-theory kernel; it is not an independent numerical loop integration.
+
+### 9.4 Heavy-mass expansion and the factor-of-two question
+
+For \(y\gg x,|s|\), the follow-up expansion gives
+\[
+\Delta\mathcal F_{\rm fin}(s)=
+\kappa\left[
+-4y+8x\left(\ln\frac{y}{\mu_R^2}-1\right)
++s\left(\frac23-\ln\frac{y}{\mu_R^2}\right)
+\right]+\cdots .
+\]
+The leading local mass term agrees algebraically with the effective-potential threshold after substituting
+\[
+\kappa\simeq
+\frac{|y_{H\ell}|^2|\lambda_\ell|^2vv_s}{2M_{E\ell}^2},
+\qquad y\simeq M_{E\ell}^2,
+\]
+and dividing the scalar kernel by \(16\pi^2\):
+\[
+-\frac{4\kappa y}{16\pi^2}
+\simeq-\frac{|y_{H\ell}|^2|\lambda_\ell|^2vv_s}{8\pi^2}.
+\]
+
+The numerical change \(12\to6\) can be a pure normalization conversion if, and only if, the common prefactor changes at the same time:
+\[
+(y_hy_s)(12x-2s)=
+\kappa(6x-s),\qquad \kappa=2y_hy_s.
+\]
+If the two expressions use the same prefactor, this identity does not explain their difference. The original derivation's full prefactors must therefore be checked, not only the bracket coefficients.
+
+### 9.5 Reproducibility and limitations
+
+- Script: [RC-001 UV–EFT difference check](../calculations/RC-001-uv-eft-two-point-difference.py).
+- Captured output: [RC-001 UV–EFT difference log](../validation/RC-001-uv-eft-two-point-difference.txt).
+- SHA-256 of script: d952d079af814e1571740534c8ca576aaf4d6e5519a528de3821dbedba6c427b.
+- SHA-256 of captured output: 547ecc874858f65904f23ebf47f0b30a4a51cbc4e5d36b595e98ba7d529a6c8e.
+
+The script reports nine exact symbolic/algebraic checks. Those checks cover pole coefficients, the subtraction identity, the stated asymptotic expansion, the normalization identity, and agreement of the leading threshold formula. They do **not** independently validate the original Feynman-rule multiplicities, reproduce the complete mass-eigenstate loop kernel, run Mathematica/FeynCalc, or close the counterterm matching.
+
+Before adopting this supplement as the authoritative RC-001 result, reconcile its \(\kappa\), \(A_0/B_0\), and 1PI sign conventions term by term with §§274.1–274.4. Until that comparison and the EFT counterterm ledger are complete, CL-006 remains conditional and the physical scalar-mixing claim remains unresolved.
+
+
+## 10. Change history
 
 | Date | Revision | Change | Reason |
 |---|---|---|---|
 | 2026-10-23 | RC-001 initial record | Consolidated the v153 source baseline, analytical subresults, Mathematica/Python evidence, unrun FeynArts/FeynCalc scaffold, and claim status | Establish the first end-to-end Scientific Diff record without overstating the completed calculation |
 | 2026-10-23 | Review revision 1 | Separated the RC-001 claim matrix; recorded the B1/B3 candidate-kernel discrepancy, historical v76→v77 audit provenance, and §274 downstream dependency | Resolve evidence-traceability issues without changing physical coefficients or overstating validation |
+| 2026-10-23 | Follow-up calculation | Added the explicit UV–EFT h–s subtraction and its exact symbolic checks as a provisional supplement; kept counterterm and §274 convention reconciliation open | Record the new calculation without promoting it to a fully verified physical result |

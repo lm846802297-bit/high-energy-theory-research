@@ -30,6 +30,8 @@ Every arrow should be traceable. A change to an upstream assumption or formula m
 - **templates/claim-evidence-matrix.md** — generic template for a new claim–evidence ledger.
 - **research/*-claim-evidence-matrix.md** — record-specific active claims, with unique IDs per research record.
 - **research/** — active research-change records and their current claim status.
+- **calculations/** — reproducible symbolic/algebraic calculation scripts; each script states what it does and does not validate.
+- **validation/** — captured calculation outputs and validation logs, kept distinct from planned or unexecuted checks.
 
 ## Operating principles
 
