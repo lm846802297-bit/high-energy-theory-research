@@ -23,10 +23,10 @@ Every arrow should be traceable. A change to an upstream assumption or formula m
 
 ### Repository layout
 
-- \`docs/scientific-diff-workflow.md\` — workflow, definitions, status model, and physics-specific guidance.
-- \`docs/review-checklist.md\` — checks for scientific changes and manuscript synchronization.
-- \`templates/research-change.md\` — record for an individual research change.
-- \`templates/claim-evidence-matrix.md\` — ledger connecting physical claims to evidence and verification.
+- **docs/scientific-diff-workflow.md** — workflow, definitions, status model, and physics-specific guidance.
+- **docs/review-checklist.md** — checks for scientific changes and manuscript synchronization.
+- **templates/research-change.md** — record for an individual research change.
+- **templates/claim-evidence-matrix.md** — ledger connecting physical claims to evidence and verification.
 
 ## Operating principles
 
