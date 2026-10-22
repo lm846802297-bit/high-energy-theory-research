@@ -52,7 +52,7 @@ For each record, capture:
 - affected claims, figures, tables, and manuscript locations;
 - unresolved questions and the decision made.
 
-Use the template in \`templates/research-change.md\`.
+Use the template in **templates/research-change.md**.
 
 ## 5. Recommended workflow
 
@@ -221,7 +221,7 @@ Before declaring a research change complete, confirm that:
 - [ ] manuscript and reviewer-response wording matches the assessed result;
 - [ ] unresolved issues and limitations are recorded.
 
-Use \`docs/review-checklist.md\` for the operational review.
+Use **docs/review-checklist.md** for the operational review.
 
 ## 10. Method boundary
 
