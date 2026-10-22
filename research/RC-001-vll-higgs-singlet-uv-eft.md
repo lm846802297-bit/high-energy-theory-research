@@ -239,7 +239,7 @@ This record does not change or certify the physics result. It makes the baseline
 
 ## 9. Follow-up calculation: explicit UV–EFT difference for the broken-phase \(h\)–\(s\) two-point function
 
-> **Status: provisional analytical supplement; not yet reconciled term by term with §274.** This addition records the explicit subtraction worked out in the follow-up calculation. It does not replace the frozen v153 baseline, and it does not promote the physical scalar-mixing claim to verified.
+> **Status: preliminary supplement; the source-aligned kernel and pole analysis are superseded/clarified in §10 below.** The finite dimension-six derivative matching remains provisional; this addition does not replace the frozen v153 baseline or certify a physical scalar-mixing result.
 
 ### 9.1 Definitions and UV kernel
 
@@ -327,11 +327,14 @@ The leading local mass term agrees algebraically with the effective-potential th
 \frac{|y_{H\ell}|^2|\lambda_\ell|^2vv_s}{2M_{E\ell}^2},
 \qquad y\simeq M_{E\ell}^2,
 \]
-and dividing the scalar kernel by \(16\pi^2\):
+and dividing the scalar-kernel difference by \(16\pi^2\):
 \[
--\frac{4\kappa y}{16\pi^2}
-\simeq-\frac{|y_{H\ell}|^2|\lambda_\ell|^2vv_s}{8\pi^2}.
+\Delta\mathcal F_{\rm fin}(0)\simeq-4\kappa Y
+\quad\Longrightarrow\quad
+\Delta\Pi_{hs}^{\rm hard}(0)=-\frac{\Delta\mathcal F_{\rm fin}(0)}{16\pi^2}
+\simeq+\frac{|y_{H\ell}|^2|\lambda_\ell|^2vv_s}{8\pi^2}.
 \]
+The self-energy sign is positive because the source convention is \(\Pi=-\mathcal F/(16\pi^2)\); the scalar-kernel coefficient itself is negative.
 
 The numerical change \(12\to6\) can be a pure normalization conversion if, and only if, the common prefactor changes at the same time:
 \[
@@ -352,7 +355,182 @@ The script reports nine exact symbolic/algebraic checks. Those checks cover pole
 Before adopting this supplement as the authoritative RC-001 result, reconcile its \(\kappa\), \(A_0/B_0\), and 1PI sign conventions term by term with §§274.1–274.4. Until that comparison and the EFT counterterm ledger are complete, CL-006 remains conditional and the physical scalar-mixing claim remains unresolved.
 
 
-## 10. Change history
+## 10. Source-aligned mass-basis kernel and local counterterm reconciliation
+
+This section supersedes the preliminary conventions in §9 wherever they are less explicit. The comparison is against the frozen v153 source record, especially §§274.1–274.5 and 276–285, plus the EFT bubble/contact derivation in §§185.1–185.4 and 186.2.
+
+### 10.1 Exact mass-basis vertices and UV-pole identity
+
+For one flavor,
+\[
+\mathcal M_\ell=\begin{pmatrix}0&a_\ell\\b_\ell&M_{0\ell}\end{pmatrix},
+\quad a_\ell=\frac{y_\ell v_h}{\sqrt2},\quad
+b_\ell=\frac{\lambda_\ell v_s}{\sqrt2},
+\]
+and \(U_L^T\mathcal M_\ell U_R=\operatorname{diag}(m_1,m_2)\), with signed physical eigenmasses \(m_1,m_2\). Set \(x=m_1^2\), \(Y=m_2^2\), \(s=p^2\). The heavy eigenmass \(m_2\) is not exactly the input parameter \(M_{0\ell}\) except in the leading heavy-mass expansion.
+
+Using the source rotations and Yukawa matrices,
+\[
+G_h=\frac{y_\ell}{\sqrt2}
+\begin{pmatrix}-c_Ls_R&c_Lc_R\\-s_Ls_R&s_Lc_R\end{pmatrix},\qquad
+G_s=\frac{\lambda_\ell}{\sqrt2}
+\begin{pmatrix}-s_Lc_R&-s_Ls_R\\c_Lc_R&c_Ls_R\end{pmatrix},
+\]
+the \(C,D\) matrices of §274 are
+\[
+C_{hs}=\begin{pmatrix}q_\ell&-q_\ell\\-q_\ell&q_\ell\end{pmatrix},\qquad
+D_{hs}=\begin{pmatrix}q_\ell&r_\ell\\r_\ell&q_\ell\end{pmatrix},
+\]
+with
+\[
+q_\ell=y_\ell\lambda_\ell c_Lc_Rs_Ls_R,\qquad
+r_\ell=\frac{y_\ell\lambda_\ell}{2}(c_L^2c_R^2+s_L^2s_R^2).
+\]
+The exact \((1,1)\) diagonalization condition is
+\[
+c_Lc_Rm_1+s_Ls_Rm_2=0,
+\]
+which implies
+\[
+q_\ell(x+Y)+2r_\ell m_1m_2
+=y_\ell\lambda_\ell(c_Lc_Rm_1+s_Ls_Rm_2)
+(s_Ls_Rm_1+c_Lc_Rm_2)=0.
+\]
+This exact identity is the required reason the complete UV mass-basis sum has no UV pole. It also justifies reducing the mixed-channel coefficient; the reduced expression is not an independent assumption.
+
+### 10.2 Compact UV kernel and 1PI sign
+
+Using the source PV convention,
+\[
+K_{ij}=A_0(m_i^2)+A_0(m_j^2)
++(m_i^2+m_j^2-s)B_0(s;m_i^2,m_j^2),
+\]
+the \(A_0\) terms cancel in \(K_{11}+K_{22}-2K_{12}\). Before using the exact mass identity, the complete one-flavor kernel is
+\[
+\begin{aligned}
+\mathcal F_{\rm UV}^{\ell}(s)={}&q_\ell(4x-s)B_{11}
++q_\ell(4Y-s)B_{22}\\
+&+\left[4r_\ell m_1m_2-2q_\ell(x+Y-s)\right]B_{12},
+\end{aligned}
+\]
+where \(B_{11}=B_0(s;x,x)\), \(B_{22}=B_0(s;Y,Y)\), and \(B_{12}=B_0(s;x,Y)\). The exact identity gives
+\[
+4r_\ell m_1m_2-2q_\ell(x+Y-s)
+=-2q_\ell(2x+2Y-s),
+\]
+hence the compact kernel already used in §9 follows. The source inverse-propagator convention is
+\[
+\Gamma_{\rm inv}(s)=s\mathbf1-\mathcal M_{\rm loc}^2+\Pi(s),\qquad
+\Pi_{\rm UV}^{F,\ell}(s)=-\frac{\mathcal F_{\rm UV}^{\ell}(s)}{16\pi^2}.
+\]
+The signed light eigenmass must be retained in \(m_1m_2\); the propagator denominators use only \(m_i^2\).
+
+### 10.3 EFT bubble and contact tadpole
+
+The EFT subset consists of the light-state bubble and the \(hs\bar\ell\ell\) contact tadpole induced by the tree-level dimension-five interaction. With \(q_\ell^{\rm soft}=2g_{h\ell}g_{s\ell}=q_\ell\) in the real rotation convention,
+\[
+\Pi_{\rm bub}^{\ell}(s)=-\frac{q_\ell}{16\pi^2}
+\left[2A_0(x)+(4x-s)B_{11}\right],\qquad
+\Pi_{\rm ct}^{\ell}=-\frac{q_\ell}{16\pi^2}2A_0(x).
+\]
+Thus
+\[
+\Pi_{\rm EFT,bub+ct}^{\ell}(s)
+=-\frac{q_\ell}{16\pi^2}
+\left[4A_0(x)+(4x-s)B_{11}\right].
+\]
+The contact tadpole contributes to the constant term but has zero derivative with respect to \(s\). As stated in §284.3, this bubble-plus-contact subset is not yet the complete set of same-order EFT soft insertions required for a final dimension-six matching.
+
+### 10.4 Subtraction, finite threshold, and sign
+
+Define \(\Delta\mathcal F=\mathcal F_{\rm UV}-\mathcal F_{\rm EFT}\). The common \(B_{11}\) term cancels, giving
+\[
+\Delta\mathcal F_{\rm bare}^{\ell}(s)=q_\ell\left[
+(4Y-s)B_{22}-2(2x+2Y-s)B_{12}-4A_0(x)\right],
+\]
+and
+\[
+\Delta\Pi_{\rm bare}^{\ell}(s)=-\frac{\Delta\mathcal F_{\rm bare}^{\ell}(s)}{16\pi^2}.
+\]
+With \(L_x=\ln(x/\mu_R^2)\), \(L_Y=\ln(Y/\mu_R^2)\),
+\[
+A_0^{\rm fin}(x)=x(1-L_x),\quad
+B_{11}^{\rm fin}(0)=-L_x,\quad
+B_{22}^{\rm fin}(0)=-L_Y,\quad
+B_{12}^{\rm fin}(0)=1-\frac{xL_x-YL_Y}{x-Y},
+\]
+the finite zero-momentum kernel difference is
+\[
+\boxed{\Delta\mathcal F_{\rm fin}^{\ell}(0)=q_\ell\left[
+\frac{8xY}{x-Y}\ln\frac{x}{Y}-4Y-8x+8xL_x\right].}
+\]
+For \(Y\gg x,|s|\),
+\[
+\Delta\mathcal F_{\rm fin}^{\ell}(s)=q_\ell\left[
+-4Y+8x(L_Y-1)+s\left(\frac23-L_Y\right)\right]+\cdots .
+\]
+Because the 1PI self-energy is minus the kernel divided by \(16\pi^2\), the leading hard self-energy is positive:
+\[
+\Delta\Pi_{\rm hard}^{\ell}(0)\simeq+\frac{4q_\ell Y}{16\pi^2}
+\simeq+\frac{|y_\ell|^2|\lambda_\ell|^2v_hv_s}{8\pi^2}
+=-v_hv_s\Delta\lambda_{HS}^{E,\ell}.
+\]
+This matches the sign condition in §274.4. The leading dimension-four portal threshold is finite.
+
+### 10.5 Local UV-pole counterterms for the stated EFT subset
+
+The bubble-plus-contact kernel has pole \(q_\ell(8x-s)\Delta_{\rm UV}\), so
+\[
+\Pi_{\rm EFT,bub+ct}^{\ell}(s)\big|_{\rm pole}
+=-\frac{q_\ell}{16\pi^2}(8x-s)\Delta_{\rm UV}.
+\]
+The local contribution to \(\Gamma_{\rm inv}\) required to cancel this pole is
+\[
+\boxed{\Pi_{\rm local\,CT}^{\ell}(s)\big|_{\rm pole}
+=+\frac{q_\ell}{16\pi^2}(8x-s)\Delta_{\rm UV}.}
+\]
+For the derivative operator and normalization in §283.2,
+\[
+\mathcal L_{\rm EFT}\supset\frac{c_{\partial HS}}{M_*^2}
+\partial_\mu(H^\dagger H)\partial^\mu(S^\dagger S),\qquad
+\Delta\Pi^{(6)}(s)=\frac{c_{\partial HS}v_hv_s}{M_*^2}s,
+\]
+the pole counterterm is therefore
+\[
+\boxed{\delta c_{\partial HS}
+=-\frac{M_*^2q_\ell}{16\pi^2v_hv_s}\Delta_{\rm UV}.}
+\]
+This cancels the derivative pole for the explicitly stated bubble-plus-contact subset. The constant pole is \(+8q_\ell x\Delta_{\rm UV}/(16\pi^2)\) in the local inverse kernel. Since \(q_\ell=O(M_E^{-2})\) and \(x=O(M_E^{-2})\) in the seesaw expansion, it is \(O(M_E^{-4})\), not the leading dimension-four portal divergence. Its gauge-invariant assignment requires a fixed higher-dimensional scalar-potential basis and EOM convention.
+
+A separate ledger is available at validation/RC-001-uv-eft-counterterm-ledger.md. These pole results do not complete the finite matching.
+
+### 10.6 Finite derivative coefficient remains unresolved
+
+The two-point hard difference after subtracting only the renormalized-Yukawa bubble/contact subset gives
+\[
+\Delta\Pi_{\rm hard}^{(2{\rm pt})\,\prime}(0)
+=\frac{q_\ell}{16\pi^2}\left(L_Y-\frac23\right)+O(M_E^{-4}\ln M_E).
+\]
+The four-point route in §285.3 gives
+\[
+\Delta\Pi_{\rm hard}^{(4{\rm pt})\,\prime}(0)
+=\frac{q_\ell}{16\pi^2}(L_Y-2)+O(M_E^{-4}\ln M_E),
+\]
+leaving
+\[
+\Delta\Pi_{\rm hard}^{(2{\rm pt})\,\prime}(0)
+-\Delta\Pi_{\rm hard}^{(4{\rm pt})\,\prime}(0)
+=\frac{4q_\ell}{3(16\pi^2)}+O(M_E^{-4}\ln M_E).
+\]
+The contact tadpole cannot resolve this difference because its \(s\)-derivative is zero. The same-order EFT soft insertions identified in §284.3 and the independent hard-region four-point calculation remain to be reconciled before the finite \(c_{\partial HS}\) can be fixed.
+
+### 10.7 Audit artifact status
+
+The committed script and the validation output must be kept synchronized. The current validation log records the 15-check reconciliation, but the existing Python file is still the earlier nine-check draft and does not yet reproduce all 15 checks. Until the script is updated and rerun, the log is a review record, not an execution artifact of the committed script. This mismatch is an explicit open item; it must not be represented as reproducible validation.
+
+**Acceptance decision:** the exact mass-basis formula, leading portal-threshold sign, and pole counterterm for the stated EFT subset are reconciled. The gauge-invariant assignment of the higher-order constant pole, the committed script/log reproducibility pair, and the finite \(4/3\) derivative mismatch remain open. PR #4 stays draft and must not be merged as a completed matching result.
+
+## 11. Change history
 
 | Date | Revision | Change | Reason |
 |---|---|---|---|
