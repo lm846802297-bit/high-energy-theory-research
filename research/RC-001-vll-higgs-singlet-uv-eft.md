@@ -345,9 +345,11 @@ If the two expressions use the same prefactor, this identity does not explain th
 
 ### 9.5 Reproducibility and limitations
 
-The committed file at calculations/RC-001-uv-eft-two-point-difference.py is still the earlier nine-check draft. The validation log currently records the 15-check source-aligned reconciliation, but the committed script has not yet been synchronized to reproduce that log. Therefore the log is a review record of the symbolic reconciliation, **not** an execution output from the committed script. The script/log pair must be synchronized and rerun before this evidence is treated as reproducible.
+The source-aligned v14 SymPy audit is now synchronized between `calculations/RC-001-uv-eft-two-point-difference.py` and `validation/RC-001-uv-eft-two-point-difference.txt`. The script was executed and passed 15 exact symbolic/algebraic checks. The log is the captured output of that run, not a manually reconstructed review log.
 
-The algebraic review does not independently validate all Feynman-rule multiplicities, run Mathematica/FeynCalc, evaluate loop integrals numerically, close the complete EFT soft subtraction, or determine a final physical scalar-mixing observable.
+The checks cover the exact mass-basis C,D matrices and signed-mass identity, UV-pole cancellation, mixed-channel reduction, A0 cancellation, local pole cancellation for the EFT bubble-plus-contact subset, the finite zero-momentum subtraction, the large-mass expansion, the leading portal-threshold sign, and the detected finite 4/3 discrepancy.
+
+The audit remains algebraic. It does not run Mathematica/FeynCalc, evaluate loop integrals numerically, complete all EFT soft insertions, or determine a final physical scalar-mixing observable.
 
 ## 10. Source-aligned mass-basis kernel and local counterterm reconciliation
 
