@@ -12,8 +12,9 @@ The workflow is designed for theoretical particle physics, UV–EFT matching, pe
 
 1. Read [the workflow specification](docs/scientific-diff-workflow.md).
 2. Copy [the research-change template](templates/research-change.md) for each substantive research change.
-3. Use the [claim–evidence matrix](templates/claim-evidence-matrix.md) to track the support for important physical statements.
-4. Apply the [review checklist](docs/review-checklist.md) before marking a change complete or synchronizing it into a manuscript.
+3. Use [the claim–evidence matrix](templates/claim-evidence-matrix.md) to track the support for important physical statements.
+4. Apply [the review checklist](docs/review-checklist.md) before marking a change complete or synchronizing it into a manuscript.
+5. Read the [active research records](research/README.md); the first baseline is [RC-001: VLL–Higgs–Singlet UV–EFT matching](research/RC-001-vll-higgs-singlet-uv-eft.md).
 
 ### Core chain
 
@@ -27,6 +28,7 @@ Every arrow should be traceable. A change to an upstream assumption or formula m
 - **docs/review-checklist.md** — checks for scientific changes and manuscript synchronization.
 - **templates/research-change.md** — record for an individual research change.
 - **templates/claim-evidence-matrix.md** — ledger connecting physical claims to evidence and verification.
+- **research/** — active research-change records and their current claim status.
 
 ## Operating principles
 
