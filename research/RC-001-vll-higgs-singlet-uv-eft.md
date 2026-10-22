@@ -500,33 +500,37 @@ This cancels the derivative pole for the explicitly stated bubble-plus-contact s
 
 A separate ledger is available at validation/RC-001-uv-eft-counterterm-ledger.md. These pole results do not complete the finite matching.
 
-### 10.6 Finite derivative coefficient remains unresolved
+### 10.6 Finite derivative coefficient: reconcile the legacy on-shell representative with the EOM-completed basis
 
-The two-point hard difference after subtracting only the renormalized-Yukawa bubble/contact subset gives
+The two-point hard difference after subtracting the stated renormalized-Yukawa bubble/contact subset gives
 \[
 \Delta\Pi_{\rm hard}^{(2{\rm pt})\,\prime}(0)
 =\frac{q_\ell}{16\pi^2}\left(L_Y-\frac23\right)+O(M_E^{-4}\ln M_E).
 \]
-The four-point route in §285.3 gives
+The older four-point route in §285.3 gives the on-shell representative
 \[
-\Delta\Pi_{\rm hard}^{(4{\rm pt})\,\prime}(0)
+\Delta\Pi_{\rm hard}^{(4{\rm pt}),\,\rm old\,rep\,\prime}(0)
 =\frac{q_\ell}{16\pi^2}(L_Y-2)+O(M_E^{-4}\ln M_E),
 \]
-leaving
+so the difference between these two representatives is
 \[
 \Delta\Pi_{\rm hard}^{(2{\rm pt})\,\prime}(0)
--\Delta\Pi_{\rm hard}^{(4{\rm pt})\,\prime}(0)
+-\Delta\Pi_{\rm hard}^{(4{\rm pt}),\,\rm old\,rep\,\prime}(0)
 =\frac{4q_\ell}{3(16\pi^2)}+O(M_E^{-4}\ln M_E).
 \]
-The contact tadpole cannot resolve this difference because its \(s\)-derivative is zero. The same-order EFT soft insertions identified in §284.3 and the independent hard-region four-point calculation remain to be reconciled before the finite \(c_{\partial HS}\) can be fixed.
+This is not the current same-basis matching discrepancy. The cumulative master source v153, §301.1–§301.4, records the off-shell external-leg momentum terms and the redundant operators \(T_H,T_S\), with \(\eta_H=\eta_S=-a_\ell/3\). Their EOM completion shifts the derivative coefficients by \(\Delta c_H=\Delta c_S=\Delta c_D=2a_\ell/3\), making the EOM-reduced four-point coefficients agree with the two-point coefficients in the same operator basis.
+
+Therefore, retain the \(4/3\) result as a documented difference between the older on-shell representative and the two-point representation, but do not label it as an unresolved same-basis difference. Remaining open gates are the complete model-level Wilson vector, any still-unclosed EFT soft/source sectors outside this restricted comparison, the gauge-invariant assignment of the higher-order constant pole, and independent diagram-level validation.
 
 ### 10.7 Audit artifact status
 
-The synchronized v14 SymPy script at `calculations/RC-001-uv-eft-two-point-difference.py` was executed and passed 15 exact symbolic/algebraic checks. The paired output at `validation/RC-001-uv-eft-two-point-difference.txt` is the captured execution log. The checks cover the mass-basis C,D matrices, the signed-mass identity, the UV-pole cancellation, mixed-channel reduction, A0 cancellation, EFT subset pole and local counterterm, finite p²=0 subtraction, large-mass expansion, leading portal-threshold sign, and detection of the finite 4/3 discrepancy.
+The synchronized v14 SymPy script at `calculations/RC-001-uv-eft-two-point-difference.py` was executed and passed 15 exact symbolic/algebraic checks. The paired output at `validation/RC-001-uv-eft-two-point-difference.txt` is the captured execution log. The checks cover the mass-basis C,D matrices, signed-mass identity, UV-pole cancellation, mixed-channel reduction, A0 cancellation, EFT subset pole and local counterterm, finite p²=0 subtraction, large-mass expansion, leading portal-threshold sign, and the historical 4/3 difference between the two-point result and the legacy on-shell four-point representative.
 
-This validation is algebraic only. It does not include numerical loop integration, FeynArts/FeynCalc/Mathematica/Matchete/Matchmakereft execution, the complete EFT soft-insertion sum, or a final finite dimension-six Wilson coefficient.
+The cumulative master source v153 §301.1–§301.4 shows that the off-shell external-momentum terms and EOM completion by \(T_H,T_S\) align the specified Yukawa-box derivative coefficients in the same operator basis. The audit therefore reproduces the old representative difference; it does not classify that difference as unresolved after EOM completion.
 
-**Acceptance decision:** the exact mass-basis kernel, leading hard-self-energy sign, local pole cancellation for the stated EFT subset, and script/log reproducibility are supported. The gauge-invariant assignment of the higher-order constant pole and the finite derivative matching remain open. PR #4 stays open and in Draft state.
+This validation is algebraic only. It does not include numerical loop integration, FeynArts/FeynCalc/Mathematica/Matchete/Matchmakereft execution, complete model-level Wilson-vector closure, all remaining EFT soft/source sectors, or a final physical observable.
+
+**Acceptance decision:** the exact mass-basis kernel, leading hard-self-energy sign, local pole cancellation for the stated EFT subset, and script/log reproducibility are supported. The higher-order constant-pole operator assignment, full model-level Wilson-vector closure, and independent diagram-level validation remain open. PR #4 stays open and in Draft state.
  
 ## 11. Change history
 
