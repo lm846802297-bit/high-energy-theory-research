@@ -189,7 +189,7 @@ The dependency must be revisited after the portal threshold and two-point matchi
 
 ## 6. Claim–evidence decisions at baseline
 
-The RC-001-specific rows are recorded in research/RC-001-claim-evidence-matrix.md; templates/claim-evidence-matrix.md remains a generic reusable template.
+The RC-001-specific rows are recorded in the [RC-001 claim–evidence matrix](RC-001-claim-evidence-matrix.md); [templates/claim-evidence-matrix.md](../templates/claim-evidence-matrix.md) remains a generic reusable template.
 
 - **CL-001 — Four-point derivative hard difference:** Conditionally supported for the fixed external legs, Yukawa order, massless-light-field setup, and scheme specified in §248. Full-model matching remains unresolved. The historical B1/B3 candidate-kernel warning is open; EV-007 does not validate this claim, and no term-by-term reconciliation has yet established whether §248 supersedes that earlier kernel.
 - **CL-002 — Two-point hard kernel:** Conditionally supported for the stated heavy–light Yukawa sector and \(i\Pi\)/PV conventions in §250. External diagram-package reproduction remains open.
