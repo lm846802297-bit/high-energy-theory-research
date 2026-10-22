@@ -520,10 +520,12 @@ The contact tadpole cannot resolve this difference because its \(s\)-derivative 
 
 ### 10.7 Audit artifact status
 
-The committed script and the validation output must be kept synchronized. The current validation log records the 15-check reconciliation, but the existing Python file is still the earlier nine-check draft and does not yet reproduce all 15 checks. Until the script is updated and rerun, the log is a review record, not an execution artifact of the committed script. This mismatch is an explicit open item; it must not be represented as reproducible validation.
+The synchronized v14 SymPy script at `calculations/RC-001-uv-eft-two-point-difference.py` was executed and passed 15 exact symbolic/algebraic checks. The paired output at `validation/RC-001-uv-eft-two-point-difference.txt` is the captured execution log. The checks cover the mass-basis C,D matrices, the signed-mass identity, the UV-pole cancellation, mixed-channel reduction, A0 cancellation, EFT subset pole and local counterterm, finite p²=0 subtraction, large-mass expansion, leading portal-threshold sign, and detection of the finite 4/3 discrepancy.
 
-**Acceptance decision:** the exact mass-basis formula, leading portal-threshold sign, and pole counterterm for the stated EFT subset are reconciled. The gauge-invariant assignment of the higher-order constant pole, the committed script/log reproducibility pair, and the finite \(4/3\) derivative mismatch remain open. PR #4 stays draft and must not be merged as a completed matching result.
+This validation is algebraic only. It does not include numerical loop integration, FeynArts/FeynCalc/Mathematica/Matchete/Matchmakereft execution, the complete EFT soft-insertion sum, or a final finite dimension-six Wilson coefficient.
 
+**Acceptance decision:** the exact mass-basis kernel, leading hard-self-energy sign, local pole cancellation for the stated EFT subset, and script/log reproducibility are supported. The gauge-invariant assignment of the higher-order constant pole and the finite derivative matching remain open. PR #4 stays open and in Draft state.
+ 
 ## 11. Change history
 
 | Date | Revision | Change | Reason |
