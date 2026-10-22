@@ -345,15 +345,9 @@ If the two expressions use the same prefactor, this identity does not explain th
 
 ### 9.5 Reproducibility and limitations
 
-- Script: [RC-001 UV–EFT difference check](../calculations/RC-001-uv-eft-two-point-difference.py).
-- Captured output: [RC-001 UV–EFT difference log](../validation/RC-001-uv-eft-two-point-difference.txt).
-- SHA-256 of script: d952d079af814e1571740534c8ca576aaf4d6e5519a528de3821dbedba6c427b.
-- SHA-256 of captured output: 547ecc874858f65904f23ebf47f0b30a4a51cbc4e5d36b595e98ba7d529a6c8e.
+The committed file at calculations/RC-001-uv-eft-two-point-difference.py is still the earlier nine-check draft. The validation log currently records the 15-check source-aligned reconciliation, but the committed script has not yet been synchronized to reproduce that log. Therefore the log is a review record of the symbolic reconciliation, **not** an execution output from the committed script. The script/log pair must be synchronized and rerun before this evidence is treated as reproducible.
 
-The script reports nine exact symbolic/algebraic checks. Those checks cover pole coefficients, the subtraction identity, the stated asymptotic expansion, the normalization identity, and agreement of the leading threshold formula. They do **not** independently validate the original Feynman-rule multiplicities, reproduce the complete mass-eigenstate loop kernel, run Mathematica/FeynCalc, or close the counterterm matching.
-
-Before adopting this supplement as the authoritative RC-001 result, reconcile its \(\kappa\), \(A_0/B_0\), and 1PI sign conventions term by term with §§274.1–274.4. Until that comparison and the EFT counterterm ledger are complete, CL-006 remains conditional and the physical scalar-mixing claim remains unresolved.
-
+The algebraic review does not independently validate all Feynman-rule multiplicities, run Mathematica/FeynCalc, evaluate loop integrals numerically, close the complete EFT soft subtraction, or determine a final physical scalar-mixing observable.
 
 ## 10. Source-aligned mass-basis kernel and local counterterm reconciliation
 
@@ -537,3 +531,4 @@ The committed script and the validation output must be kept synchronized. The cu
 | 2026-10-23 | RC-001 initial record | Consolidated the v153 source baseline, analytical subresults, Mathematica/Python evidence, unrun FeynArts/FeynCalc scaffold, and claim status | Establish the first end-to-end Scientific Diff record without overstating the completed calculation |
 | 2026-10-23 | Review revision 1 | Separated the RC-001 claim matrix; recorded the B1/B3 candidate-kernel discrepancy, historical v76→v77 audit provenance, and §274 downstream dependency | Resolve evidence-traceability issues without changing physical coefficients or overstating validation |
 | 2026-10-23 | Follow-up calculation | Added the explicit UV–EFT h–s subtraction and its exact symbolic checks as a provisional supplement; kept counterterm and §274 convention reconciliation open | Record the new calculation without promoting it to a fully verified physical result |
+| 2026-10-23 | Kernel/counterterm reconciliation | Reconstructed the exact mass-basis C,D matrices; made the signed-mass identity explicit; corrected the leading hard-self-energy sign; derived the bubble-plus-contact UV pole and the dimension-six derivative counterterm; recorded the unresolved 4/3 finite mismatch | Align the new difference with §§274–285 without promoting the finite derivative coefficient or the full EFT basis to verified |
