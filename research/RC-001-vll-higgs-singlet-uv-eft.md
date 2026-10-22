@@ -21,7 +21,7 @@ The record links the existing model definition, analytical derivations, symbolic
 - **Source location:** ChatGPT Library, file ID file_00000000b7b48230a2ada1957a9ed4a0, version ID 1
 - **Size:** 1,989,214 bytes
 - **SHA-256:** f30af8ccc62feafa3923e8356437e4b80b40e518fc9b1188646b4d763e2791f1
-- **Relevant sections:** §§248–251 (unbroken-phase four-point and two-point hard matching); §§261–262 (broken-phase algebra and light-field soft functions); §273.9 (FeynArts/FeynCalc scaffold and effective-potential cross-check).
+- **Relevant sections:** §§248–251 (fixed-sector hard matching and effective-potential threshold); §§261–262 (broken-phase algebra and light-field soft functions); §273.9 (historical FeynArts/FeynCalc scaffold and effective-potential algebra check); §274 (parameterized momentum-dependent h–s self-energy, tracked as a downstream dependency only). Earlier candidate-kernel audits in §§238–240 are relevant to the open B1/B3 sign reconciliation. Section presence does not imply that every derivation in this cumulative working document has been independently revalidated.
 - **Model reference used by the source note:** original paper, version v1, model section: https://arxiv.org/html/2608.27258v1#S2
 
 The primary source is a Library artifact, not a file currently committed to this repository. The filename, Library ID/version, size, and SHA-256 identify the exact source used to seed this record. If a later source revision is adopted, add a new baseline entry rather than silently replacing this one.
@@ -31,10 +31,10 @@ The primary source is a Library artifact, not a file currently committed to this
 | Artifact | SHA-256 | Status and scope |
 |---|---|---|
 | section273_feyncalc_threshold_workflow.wl | 8e2c7a36c5cacecf35194a92cde50e52ec457cb884684c719e5aafc6b67053ab | 2,577-byte annotated FeynArts/FeynCalc scaffold for the four-point portal threshold. It is not an execution log and has not been run. The custom FeynArts model file and schematic particle-label mapping are still required. |
-| section273_feyncalc_audit_log.json | dea8c3ff0a18163d4e1b697a4a44ea44f33a416ab7c85adc3dc71c8bd11e0bfa | Records exact effective-potential algebra checks and explicitly records FeynCalc execution as NOT RUN. |
-| uv_eft_audit_suite_output.txt | d8471c9b990671777d957ea1afa5b2c3d5e67ffd6e2e1f6925f7713f68d66a86 | Python audit-suite output for selected numerator, trace, and Wick-sign checks. The log itself explicitly limits what these checks establish; it is not a complete UV–EFT matching result. |
+| section273_feyncalc_audit_log.json | dea8c3ff0a18163d4e1b697a4a44ea44f33a416ab7c85adc3dc71c8bd11e0bfa | Historical audit log: its metadata identifies v76 as base_document and v77 as new_document. It records the effective-potential algebra check and FeynCalc as NOT RUN; it is not a v153 execution log. |
+| uv_eft_audit_suite_output.txt | d8471c9b990671777d957ea1afa5b2c3d5e67ffd6e2e1f6925f7713f68d66a86 | Python bookkeeping/algebra audit output. It includes an unresolved historical candidate-kernel sign warning: B1 and B3 flip relative to prior definitions while B2 is unchanged. It lacks the complete external-leg permutation sum, counterterms, and UV–EFT subtraction; it does not validate CL-001. |
 
-The supporting files above were located in the Library and hashed for provenance. Their existence does not mean that the unexecuted scaffold has been run or that every check in the audit log is independent of the derivation it tests.
+The supporting files above were located in the Library and their SHA-256 hashes were recomputed for provenance. The JSON audit log explicitly names v76 and v77, so it is a historical artifact included in the v153 source bundle, not a run performed against v153. Its PASS status applies only to the listed Coleman–Weinberg algebra and artifact-integrity checks; it explicitly says FeynCalc was NOT RUN. The Python audit output likewise records checks of its declared algebraic kernels, not a complete amplitude. In particular, its B1/B3 sign warning remains an open cross-reconciliation item described below. File integrity is verified; physical equivalence across source versions is not implied.
 
 ## 3. Model, scheme, and scope frozen for this record
 
@@ -75,6 +75,7 @@ The two-point derivation fixes the Minkowski metric \((+---)\), \(D=4-2\epsilon\
 - The zero-momentum effective-potential portal threshold, tracked separately from the \(p^2\) derivative coefficients.
 - The existing broken-phase algebra and light-field soft-loop calculations, with their limited scope stated explicitly.
 - The verification gap between analytical/symbolic checks and external diagram-level execution.
+- Section 274's parameterized momentum-dependent h–s self-energy is tracked as a downstream dependency for the portal threshold and scalar-mixing analysis. Its recorded algebra checks do not constitute FeynArts/FeynCalc validation.
 
 ### Explicitly not claimed by this record
 
@@ -108,6 +109,8 @@ L_\ell=\ln\frac{M_{E\ell}^2}{\mu_R^2}.
 The source separates UV and IR poles, the EFT nonlocal logarithms, and the local polynomial. It also records the portal \(p^0\) projection of the same heavy/light fermion box separately from the \(p^2\) derivative projection. This prevents counting the same box as two different diagrams or placing the quartic threshold inside a dimension-six derivative coefficient.
 
 **Evidence boundary:** this is an analytical fixed-sector matching ledger with symbolic consistency checks. The source explicitly states that FeynArts/FeynCalc was not run, that the full set of model sectors and nonzero kinetic mixing are outside this calculation, and that the full nonredundant Wilson vector and on-shell observables remain incomplete.
+
+**Open cross-reconciliation — historical B1/B3 warning:** the cited Python audit output reports that, under its stated Minkowski/Wick convention, the prior candidate definitions of \(B_1\) and \(B_3\) have opposite signs to the Wick-rotated candidate kernel, while \(B_2\) is unchanged. The same output explicitly requires rechecking external-momentum continuation and numerator conventions before treating this as a physical correction; it does not include the full external-leg permutation sum, counterterms, or UV–EFT subtraction. Section 248 separately derives the fixed-external-leg hard-minus-soft local difference, but this record does not yet contain a term-by-term map proving that the earlier \(B_i\) candidate kernel is superseded by that result. Accordingly, EV-007 is not evidence validating CL-001, and no physical coefficient is changed on the basis of this warning alone.
 
 ### 4.2 Two-point hard matching — source §250
 
@@ -157,6 +160,20 @@ For section 262, the source reports 62 exact light-fermion checks, eight \(B_0\)
 
 These results can support the corresponding algebraic subclaims within their recorded scope. They must not be described as full external loop-package validation or as a final physical mixing angle.
 
+### 4.5 Downstream dependency: momentum-dependent h–s self-energy — source §274
+
+Section 274 derives a parameterized mass-eigenstate expression for the momentum-dependent h–s self-energy and states the zero-momentum relation
+
+\[
+\Pi_{hs}^{F,\mathrm{hard}}(0)=-v_hv_s\,\Delta\lambda_{HS}^{E}
+\]
+
+under its stated inverse-propagator and potential conventions. It also defines how the hard contribution is to be combined with the EFT soft self-energy in a later pole equation. The section intentionally does not quote a unique numerical pole or mixing angle because the model parameters do not specify a unique benchmark.
+
+The associated standalone algebra audit is reported in the source as four checks of the numerator identity, PV reduction structure, UV-overlap cancellation, and the zero-momentum sign relation. It does **not** numerically evaluate the PV integrals and does not call Mathematica/FeynCalc. Therefore, for RC-001 this is a downstream analytical/algebraic dependency, not an independently diagram-validated self-energy result. The full UV/EFT hard-minus-soft self-energy, consistent portal boundary, tadpole/input scheme, and physical pole solution remain open.
+
+The dependency must be revisited after the portal threshold and two-point matching are reconciled. Do not infer that validation of the effective-potential coefficient alone validates the finite-\(p^2\) self-energy or a physical scalar-mixing prediction.
+
 ## 5. Evidence ledger
 
 | Evidence ID | Artifact / location | What it checks | What it does not establish |
@@ -166,36 +183,40 @@ These results can support the corresponding algebraic subclaims within their rec
 | EV-003 | Baseline document §251 | Effective-potential threshold and higher scalar-potential coefficients from two analytical routes | General off-shell derivative operators, gauge/fermion external-leg matching, physical mixing angle |
 | EV-004 | Baseline document §261 and embedded Mathematica log | 25 Mathematica symbolic checks of matrix/EOM/VEV transformations; related Python matrix checks | FeynArts/FeynCalc execution or direct verification of every hard loop coefficient |
 | EV-005 | Baseline document §262 and embedded logs | Soft-loop functions, \(B_0\) integrals, massless limits and associated symbolic identities | Complete physical spectrum or full-model pole matching |
-| EV-006 | section273_feyncalc_threshold_workflow.wl and section273_feyncalc_audit_log.json | Reproducible scaffold and exact Coleman–Weinberg algebra statement | Actual FeynArts diagram generation or FeynCalc reduction; the scaffold remains unrun |
-| EV-007 | uv_eft_audit_suite_output.txt | Selected numerator, trace, Wick-sign, and algebraic kernel checks | External diagram census, full external-leg permutations, all counterterms, or a final Wilson vector |
+| EV-006 | section273_feyncalc_threshold_workflow.wl and section273_feyncalc_audit_log.json | Annotated scaffold plus a historical effective-potential algebra/artifact-integrity check. The JSON metadata identifies v76→v77, not v153. | Actual FeynArts diagram generation or FeynCalc reduction; no v153 execution log exists, and the scaffold remains unrun |
+| EV-007 | uv_eft_audit_suite_output.txt | Selected numerator/trace/kernel algebra checks; includes the unresolved B1/B3 sign warning against the prior candidate kernel, with B2 unchanged | Does not validate CL-001 or settle the physical sign: no complete external-leg permutation sum, counterterms, or UV–EFT subtraction |
+| EV-008 | Baseline document §274 and its linked algebra audit | Parameterized momentum-dependent h–s self-energy, the stated \(p^2=0\) relation to the portal threshold, and four reported algebraic checks | No numerical PV integration, no Mathematica/FeynCalc run, no full UV/EFT hard-minus-soft self-energy, and no physical pole solution |
 
 ## 6. Claim–evidence decisions at baseline
 
-The corresponding rows are recorded in templates/claim-evidence-matrix.md.
+The RC-001-specific rows are recorded in research/RC-001-claim-evidence-matrix.md; templates/claim-evidence-matrix.md remains a generic reusable template.
 
-- **CL-001 — Four-point derivative hard difference:** Conditionally supported for the fixed external legs, Yukawa order, massless-light-field setup, and scheme specified in §248. Full-model matching remains unresolved.
+- **CL-001 — Four-point derivative hard difference:** Conditionally supported for the fixed external legs, Yukawa order, massless-light-field setup, and scheme specified in §248. Full-model matching remains unresolved. The historical B1/B3 candidate-kernel warning is open; EV-007 does not validate this claim, and no term-by-term reconciliation has yet established whether §248 supersedes that earlier kernel.
 - **CL-002 — Two-point hard kernel:** Conditionally supported for the stated heavy–light Yukawa sector and \(i\Pi\)/PV conventions in §250. External diagram-package reproduction remains open.
-- **CL-003 — Portal threshold:** Conditionally supported as the effective-potential coefficient under the stated potential convention. The FeynArts/FeynCalc cross-check remains open; do not claim it has run.
+- **CL-003 — Portal threshold:** Conditionally supported as the effective-potential coefficient under the stated potential convention. The algebra audit JSON is historical (v76→v77), not a v153 run; the FeynArts/FeynCalc cross-check remains open.
 - **CL-004 — Broken-phase symbolic/soft-function subclaims:** Supported only within the explicit algebraic and integral checks recorded in §§261–262. These checks are not a complete physical pole calculation.
-- **CL-005 — Complete Wilson vector and physical scalar mixing:** Unresolved. The current evidence does not establish a unique complete vector or a final physical mixing prediction.
+- **CL-005 — Complete Wilson vector and physical scalar mixing:** Unresolved. The current evidence does not establish a unique complete vector or a final physical mixing prediction; §274 is a downstream analytical dependency and has not passed diagram-level validation.
 
 ## 7. Verification plan and acceptance gates
 
 The next actions are ordered by dependency.
 
 1. **Freeze inputs and conventions.** Record the exact UV Lagrangian, field charges, \(C_5\) sign, mass basis, \(i\Pi\) definition, \(A_0/B_0\) normalization, regularization/subtraction scheme, retained EFT fields, and any benchmark choices. Do not silently promote \(M_{E\mu}=M_{E\tau}\) or \(\epsilon_{BX}=0\) from a benchmark to a general theorem.
-2. **Make the loop-package input executable.** Create and version the custom FeynArts model file for the actual VLL model; replace all schematic particle labels and confirm the generated graph list against the hand-derived graph ledger.
-3. **Run and archive the diagram-level calculations.** Execute the relevant FeynArts/FeynCalc workflow with recorded Mathematica/FeynArts/FeynCalc versions, exact commands, warnings, diagram counts, intermediate expressions, and output hashes. Keep the portal \(p^0\) projection distinct from the derivative \(p^2\) projection.
-4. **Compare by layer.** Compare the direct UV loop, the EFT soft graphs, UV/IR poles, counterterms, finite terms, and local operator projections separately. A match of the final simplified expression alone is not sufficient if conventions or IR subtraction differ.
-5. **Perform a genuinely independent check.** Use a separately constructed derivation or implementation for the high-impact coefficients. Do not count the same code path run twice as independent verification. Check known limits, dimensions, scale dependence, and the expected cancellation of nonlocal EFT logarithms and IR poles.
-6. **Close the EFT basis and parameter boundary.** Include the required field redefinitions/EOM terms and any additional sectors retained by the model. Specify the renormalized \(\lambda_{HS}\) boundary and decide whether \(A'\) remains in the EFT or is also integrated out.
-7. **Only then evaluate physical observables.** Combine the matched coefficients with the broken-phase mass matrix, light-field/tadpole contributions, external-leg normalization, and a stated on-shell process. Record the input scheme and uncertainties before making a numerical scalar-mixing or phenomenological claim.
+2. **Resolve the historical B1/B3 cross-reconciliation.** Reconstruct the candidate kernel under one explicit Minkowski and external-momentum convention; trace the numerator reduction, Wick factors, closed-loop phase, vertex orientations, and all external-leg permutations. Compare its local projection with the separately derived §248 UV–EFT difference, including counterterms and EFT soft subtraction. Until the comparison is term-by-term complete, keep the discrepancy open and do not change a physical coefficient merely to reconcile the documents.
+3. **Make the loop-package input executable.** Create and version the custom FeynArts model file for the actual VLL model; replace all schematic particle labels and confirm the generated graph list against the hand-derived graph ledger.
+4. **Run and archive the diagram-level calculations.** Execute the relevant FeynArts/FeynCalc workflow with recorded Mathematica/FeynArts/FeynCalc versions, exact commands, warnings, diagram counts, intermediate expressions, and output hashes. Keep the portal \(p^0\) projection distinct from the derivative \(p^2\) projection.
+5. **Compare by layer.** Compare the direct UV loop, the EFT soft graphs, UV/IR poles, counterterms, finite terms, and local operator projections separately. A match of the final simplified expression alone is not sufficient if conventions or IR subtraction differ.
+6. **Perform a genuinely independent check.** Use a separately constructed derivation or implementation for the high-impact coefficients. Do not count the same code path run twice as independent verification. Check known limits, dimensions, scale dependence, and the expected cancellation of nonlocal EFT logarithms and IR poles.
+7. **Close the EFT basis and parameter boundary.** Include the required field redefinitions/EOM terms and any additional sectors retained by the model. Specify the renormalized \(\lambda_{HS}\) boundary and decide whether \(A'\) remains in the EFT or is also integrated out.
+8. **Only then evaluate physical observables.** Combine the matched coefficients with the broken-phase mass matrix, light-field/tadpole contributions, external-leg normalization, and a stated on-shell process. Revisit §274's momentum-dependent h–s self-energy in the same hard/soft and input-scheme ledger before quoting a physical pole or mixing angle. Record uncertainties before making a phenomenological claim.
 
 ### Acceptance criteria
 
 - [ ] Exact baseline and model assumptions are identifiable.
 - [ ] Every reported result is linked to its derivation and actual computational artifact.
-- [ ] Mathematica symbolic algebra, Python exact checks, and FeynArts/FeynCalc diagram execution are reported as separate evidence types.
+- [ ] Mathematica symbolic algebra, Python exact checks, historical audit logs, and FeynArts/FeynCalc diagram execution are reported as distinct evidence types.
+- [ ] Historical artifacts naming earlier document versions are not represented as executions against v153.
+- [ ] The B1/B3 sign discrepancy is reconciled against the complete labeled amplitude and UV–EFT subtraction, or remains explicitly open.
 - [ ] UV and IR poles, finite terms, counterterms, and matching conventions are consistently separated.
 - [ ] Required independent checks have actual outputs and are not merely planned.
 - [ ] The claim–evidence matrix reflects the valid parameter domain and remaining gaps.
@@ -205,15 +226,17 @@ The next actions are ordered by dependency.
 
 At this baseline, the defensible conclusion is **partial and conditional**:
 
-- The source contains analytical results for the specified four-point hard difference and heavy–light two-point hard functions.
-- The zero-momentum portal threshold has an effective-potential algebra cross-check; selected broken-phase matrix/EOM and light-loop functions have documented symbolic and numerical checks.
-- The actual FeynArts/FeynCalc diagram-level workflow is not yet executed.
+- The source contains an analytical fixed-external-leg UV–EFT local difference and related bookkeeping for the specified four-point sector, as well as heavy–light two-point hard functions.
+- The zero-momentum portal threshold has an effective-potential algebra cross-check, but the associated JSON is a historical v76→v77 audit log, not an execution against v153; FeynArts/FeynCalc remains unrun.
+- The Python audit output contains a historical B1/B3 sign warning for an earlier candidate kernel. Its scope is insufficient to settle the physical sign or to validate CL-001. The relationship between that candidate kernel and the independent §248 derivation remains to be reconciled term by term.
+- Section 274 supplies a parameterized momentum-dependent h–s self-energy and an algebraically checked \(p^2=0\) relation to the portal threshold, but no numerical PV integration, diagram-level validation, complete hard-minus-soft self-energy, or physical pole solution.
 - The complete nonredundant model-level Wilson vector, the required portal boundary, and the physical on-shell scalar-mixing prediction remain unresolved.
 
-This record therefore does not change or certify the physics result. It makes the baseline and evidence chain explicit and defines what must be completed before the final physical claim can be upgraded.
+This record does not change or certify the physics result. It makes the baseline and evidence chain explicit and defines what must be completed before the final physical claim can be upgraded.
 
 ## 9. Change history
 
 | Date | Revision | Change | Reason |
 |---|---|---|---|
 | 2026-10-23 | RC-001 initial record | Consolidated the v153 source baseline, analytical subresults, Mathematica/Python evidence, unrun FeynArts/FeynCalc scaffold, and claim status | Establish the first end-to-end Scientific Diff record without overstating the completed calculation |
+| 2026-10-23 | Review revision 1 | Separated the RC-001 claim matrix; recorded the B1/B3 candidate-kernel discrepancy, historical v76→v77 audit provenance, and §274 downstream dependency | Resolve evidence-traceability issues without changing physical coefficients or overstating validation |
