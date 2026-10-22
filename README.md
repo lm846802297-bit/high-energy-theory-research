@@ -30,6 +30,7 @@ Every arrow should be traceable. A change to an upstream assumption or formula m
 - **templates/claim-evidence-matrix.md** — generic template for a new claim–evidence ledger.
 - **research/*-claim-evidence-matrix.md** — record-specific active claims, with unique IDs per research record.
 - **research/** — active research-change records and their current claim status.
+- **artifacts/** — immutable, hashed snapshots of large or binary research sources (main-document versions, calculation script trees, audit outputs), with provenance and verification status. See [artifacts/README.md](artifacts/README.md).
 
 ## Operating principles
 

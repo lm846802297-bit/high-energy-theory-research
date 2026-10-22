@@ -36,6 +36,19 @@ The primary source is a Library artifact, not a file currently committed to this
 
 The supporting files above were located in the Library and their SHA-256 hashes were recomputed for provenance. The JSON audit log explicitly names v76 and v77, so it is a historical artifact included in the v153 source bundle, not a run performed against v153. Its PASS status applies only to the listed Coleman–Weinberg algebra and artifact-integrity checks; it explicitly says FeynCalc was NOT RUN. The Python audit output likewise records checks of its declared algebraic kernels, not a complete amplitude. In particular, its B1/B3 sign warning remains an open cross-reconciliation item described below. File integrity is verified; physical equivalence across source versions is not implied.
 
+### Committed artifact bundle
+
+The working tree behind an earlier generation of the primary source is now committed at [artifacts/higgs-portal-v66-20261019](../artifacts/higgs-portal-v66-20261019/), with provenance and a hash table in [artifacts/README.md](../artifacts/README.md).
+
+**This bundle does not supersede the v153 baseline.** It is the v66 main document (2026-10-19) plus the `work/` and `计算脚本/` trees as they stood at that date. Its purpose is to give the computational artifacts a committed, hashable location instead of a local path or a Library file ID.
+
+| Consequence | Detail |
+|---|---|
+| Hash match | `计算脚本/section273_feyncalc_threshold_workflow.wl` in the bundle is byte-identical to the hash listed above (`8e2c7a36…053ab`), so this artifact's provenance is now reproducible from the repository rather than the Library alone. |
+| Not covered | The other two artifacts in the table above (`section273_feyncalc_audit_log.json`, `uv_eft_audit_suite_output.txt`) are not in the v66 bundle; their hashes still rest on the Library copy. |
+| Version gap | Any result stated in the v153 source that is absent from, or different in, the v66 document has no committed backing here. Presence in the bundle is not evidence for a v153 claim. |
+| Unchanged claims | All claim statuses in §6 and the open B1/B3 item are unaffected. Adding a committed script tree does not advance diagram-level verification. |
+
 ## 3. Model, scheme, and scope frozen for this record
 
 The working UV interaction is the flavor-resolved VLL model
@@ -241,3 +254,4 @@ This record does not change or certify the physics result. It makes the baseline
 |---|---|---|---|
 | 2026-10-23 | RC-001 initial record | Consolidated the v153 source baseline, analytical subresults, Mathematica/Python evidence, unrun FeynArts/FeynCalc scaffold, and claim status | Establish the first end-to-end Scientific Diff record without overstating the completed calculation |
 | 2026-10-23 | Review revision 1 | Separated the RC-001 claim matrix; recorded the B1/B3 candidate-kernel discrepancy, historical v76→v77 audit provenance, and §274 downstream dependency | Resolve evidence-traceability issues without changing physical coefficients or overstating validation |
+| 2026-10-23 | Review revision 2 | Committed the v66 working tree as `artifacts/higgs-portal-v66-20261019/` and linked it from §2 | Give the calculation scripts and audit outputs a committed, hashable location; the v153 baseline and all claim statuses are unchanged |
