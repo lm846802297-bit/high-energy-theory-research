@@ -10,9 +10,10 @@
 | \(Q_{LD}\) \(SU(2)_L\) generator contractions | PASS | Exact tensor decomposition of all six \(WW\) line-pair classes into singlet/triplet tensors | Loop integrals, graph signs beyond the generator contraction, or finite Wilson coefficients |
 | Diagonal-gauge input-parameter counterterm algebra | PASS | Exact rational combination \(2\delta y/y-2\delta M_E/M_E\) and \(2\delta\lambda/\lambda-2\delta M_E/M_E\) for the stated standard MS pole formulas | Independent derivation of the general counterterm formulas, mixed kinetic-mixing terms, EFT operator counterterms, or full UV–EFT matching |
 | Light-only external-leg factor cancellation | ANALYTIC IDENTITY | With matched tree amplitudes and identical light-field conventions, common light-leg gauge factors multiply the same tree amplitude and cancel in the UV–EFT difference at \(O(M_E^{-2})\) | Heavy-line corrections, finite field decoupling, external gauge-field thresholds, or the complete Ward-identity sum |
-
-| Heavy-\(E\) self-energy and scalar master integrals | PASS | Exact Feynman-parameter integrals at \(p^2=0\), the \(B_0(0;0,M_E^2)\) kernel, crossed-box partial fractions, and the displayed UV/IR split | Full vertex/box graph signs, multiplicities, and Wilson coefficients |
-| Additive \(B-A'\) kinetic mixing | PASS | \(\operatorname{Tr}(YX)=0\) for the stated light sector and across the \(\mu,\tau\) heavy pair; finite heavy threshold \(\propto\ln(M_{E_\mu}^2/M_{E_\tau}^2)\) | Independent \(\chi\) boundary, full kinetic-matrix scheme, and mixed-propagator four-point amplitudes |
+| Heavy-\(E\) self-energy and scalar master integrals | PASS (local algebra only) | Exact Feynman-parameter integrals at \(p^2=0\), \(dB_0=4\Delta_\epsilon+2-4L_E\), crossed-box partial fractions, and the displayed UV/IR split; see the local reproduction log | Full vertex/box graph signs, multiplicities, and Wilson coefficients |
+| Additive \(B-A'\) kinetic mixing | PASS (charge-trace algebra only) | \(\operatorname{Tr}(YX)=0\) for the stated light sector and across the \(\mu,\tau\) heavy pair; finite heavy threshold \(\propto\ln(M_{E_\mu}^2/M_{E_\tau}^2)\) | Independent \(\chi\) boundary, full kinetic-matrix scheme, and mixed-propagator four-point amplitudes |
+| Conjugate Yukawa-vertex charge factors | PASS (exact rational algebra) | Hypercharge and \(X\)-charge conservation plus all signed \(F_B,F_X,F_{BX}\) pair factors for the four Yukawa vertices and both flavors | Overall Feynman-rule signs, loop integrals, and full vertex amplitudes |
+| Light-only Yukawa-vertex hard cancellation | ANALYTIC IDENTITY | Tree propagator expansion and common light-loop factor cancel at \(O(M_E^{-2})\) when the full gauge-covariant EFT insertion/contact set is included | Full contact/vertex set has not been independently generated; final summed Ward identity remains open |
 
 ## Open physics evidence
 
@@ -21,4 +22,4 @@
 - The new \(O(g^2/M_E^2)\) UV loop integrals and corresponding EFT soft integrals have not been evaluated as a complete set.
 - No finite gauge-correction Wilson coefficient is claimed.
 - The shared UV/EFT pole tables, counterterm matrix, Ward-identity completion, kinetic-mixing terms, and full EOM/source/current projection remain open.
-- PR #4 may be merged as a research-continuity checkpoint. Merge does not close the physics gates above; CI remains skipped by explicit project decision and is not claimed to pass.
+- PR #4 was merged as a research-continuity checkpoint. The merge does not close the physics gates above; CI remains skipped by explicit project decision and is not claimed to pass.
