@@ -299,6 +299,8 @@ class ValidationReferenceResolutionTests(unittest.TestCase):
             "draft2020-12+format-checker-per-record; invalid-targets-withheld",
         )
         self.assertEqual(mapping_contract["target_digest_algorithm"], "RFC8785-JCS-SHA256")
+        declared_migration_rules = {rule["rule_id"] for rule in mapping_contract["rules"]}
+        self.assertTrue({"MIG-010", "MIG-011"}.issubset(declared_migration_rules))
 
     def test_target_schema_missing_required_field_is_blocked_from_staging(self):
         with tempfile.TemporaryDirectory() as tmp:
