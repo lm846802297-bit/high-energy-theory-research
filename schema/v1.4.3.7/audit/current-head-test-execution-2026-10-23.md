@@ -63,12 +63,11 @@ python -m compileall -q schema/v1.4.3.7/tools skills/high-energy-theory-research
 
 For a local validation run, the generated report should identify the exact tested commit and execution environment, have zero failed checks, and show all candidate fixtures and semantic cases matching their expected outcomes. The migration regression suite must explicitly pass the incomplete-snapshot test and the JCS golden-vector test. Workflow-specific run identifiers are not required to classify a result as locally validated.
 
-## Disposition
+## Disposition at the time of the initial runner failure (historical)
 
-- No code changes were made in response to the runner failure because no code test executed and no test failure was observed.
-- Do not relabel the current HEAD as tested or passing.
-- Keep PR #6 Open and Draft, keep `commit_allowed=false`, and do not merge or release.
-- Resume code-level diagnosis only after a runner actually starts and reports failing steps, or after the repository is available in an executable local environment.
+- No code changes were made in response to that runner failure because no code test executed and no test failure was observed.
+- At that time, the current HEAD was not execution-verified.
+- This historical disposition is superseded by the later owner-reported local verification entries below; it does not imply that GitHub Actions passed.
 
 
 ## Follow-up: integration test fixture mismatch (2026-10-23)
@@ -192,3 +191,11 @@ The new directory-manifest tests cover missing/extra FileEntry keys, NFC-equival
 These are local results reported by the repository owner. They are not evidence of a passing GitHub Actions run. The tested code/test HEAD is recorded explicitly because subsequent documentation-only audit commits may advance the PR branch without changing the validated implementation.
 
 The result verifies the available candidate test scope only. It does not establish historical v1.3 compatibility, byte-for-byte lineage of the unavailable v1.4.3.6 archive, approval of DD-ART-007 through DD-ART-010, complete cross-record/state-machine semantics, scientific correctness, or transaction safety. `commit_allowed=false` remains unchanged.
+
+## Follow-up static review — Task Execution Contract hash gate
+
+A subsequent static review found that the migration could emit a Task Execution Contract after mapping `contract_hash` to `contract_sha256` without revalidating the hash against the candidate payload, and could accept a missing `alternative_identity_methods` registry because that property is optional in the candidate Schema. This conflicts with the pending DD-ART-010 recommendation and its compatibility matrix, which prohibits silently defaulting a missing registry and requires unresolved treatment when the original hash payload cannot be validated.
+
+The migration prototype has been updated to rules version `v1.4.3.7-migration-rules-6` with rule MIG-015. It now withholds a Task Execution Contract when the registry is absent or its source hash cannot be revalidated under an owner-approved payload rule. Two unit tests and the migration-contract assertion were added. **These rules-v6 changes and tests have not yet been executed locally.** The previous 7/7, 33/33, 30/30, 83/83, and Schema 68/68 results apply to rules-v5 code/test HEAD `0799dada7eaa8dcd08b8db2f2311a844335d7198`, not the current rules-v6 code.
+
+The same static pass identified a remaining DD-ART-008 contract mismatch: the Artifact Schema permits `entry_type: "symlink"`, while the directory-manifest helper rejects all symlink entries. Do not resolve this by silently changing the Schema before the owner approves the symlink policy. Actual filesystem traversal and byte verification remain unimplemented. `commit_allowed=false` remains unchanged.
