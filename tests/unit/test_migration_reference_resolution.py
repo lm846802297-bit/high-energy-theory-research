@@ -272,20 +272,33 @@ class ValidationReferenceResolutionTests(unittest.TestCase):
         self.assertIn("version", run_quarantine["fields"])
         self.assertIn("contract_hash", run_quarantine["fields"])
 
-    def test_task_execution_contract_without_identity_registry_is_unresolved(self):
-        contract = {
-            "schema_version": "1.3",
-            "record_type": "task_execution_contract",
-            "project_id": "P-TEST",
-            "contract_id": "TEC-TEST",
-            "task_id": "TASK-TEST",
-            "version": 1,
-            "contract_hash": "a" * 64,
-        }
-        _, _, unresolved, _ = migration.migrate_record(contract)
-        codes = {item["code"] for item in unresolved}
+    def test_task_execution_contract_without_identity_registry_is_withheld_from_staging(self):
+        fixture_path = (
+            ROOT / "schema" / "v1.4.3.7" / "tests" / "valid"
+            / "task_execution_contract" / "FX-TASK_EXECUTION_CONTRACT-VALID-001.json"
+        )
+        contract = json.loads(fixture_path.read_text(encoding="utf-8"))
+        contract["schema_version"] = "1.3"
+        contract["version"] = contract.pop("contract_version")
+        contract["contract_hash"] = contract.pop("contract_sha256")
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            source = root / "source"
+            source.mkdir()
+            (source / "contract.json").write_text(json.dumps(contract), encoding="utf-8")
+            output = root / "staging"
+            report = migration.migrate(source, output_dir=output, write_staging=True)
+            staged_targets = [
+                path for path in output.glob("*.json")
+                if path.name != "migration-report.json"
+            ]
+        codes = {item["code"] for item in report["unresolved"]}
         self.assertIn("TEC_ALTERNATIVE_IDENTITY_METHODS_MISSING_PENDING_DD_ART_010", codes)
         self.assertIn("TEC_CONTRACT_HASH_REVALIDATION_PENDING_DD_ART_010", codes)
+        self.assertEqual(report["migratable_record_count"], 0)
+        self.assertEqual(report["staging_written_record_count"], 0)
+        self.assertEqual(staged_targets, [])
+        self.assertFalse(report["commit_allowed"])
 
     def test_task_execution_contract_hash_stays_unverified_even_if_registry_exists(self):
         contract = {
