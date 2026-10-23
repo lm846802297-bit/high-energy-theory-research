@@ -753,10 +753,14 @@ def _build_records(bundle_root: Path, started_at: str, completed_at: str, run_ex
 
 
 def build_bundle(output_dir: Path | str) -> dict:
-    output_dir = Path(output_dir).resolve()
-    if output_dir.exists():
-        shutil.rmtree(output_dir)
-    output_dir.mkdir(parents=True, exist_ok=True)
+    requested_output_dir = Path(output_dir).expanduser()
+    if requested_output_dir.exists() or requested_output_dir.is_symlink():
+        raise FileExistsError(
+            f"Refusing to overwrite existing output path: {requested_output_dir}. "
+            "Choose a new, non-existent output directory."
+        )
+    output_dir = requested_output_dir.resolve()
+    output_dir.mkdir(parents=True, exist_ok=False)
     _copy_snapshot(output_dir)
     (output_dir / "inputs").mkdir(parents=True, exist_ok=True)
     (output_dir / "sources").mkdir(parents=True, exist_ok=True)

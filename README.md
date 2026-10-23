@@ -34,6 +34,8 @@ Every arrow should be traceable. A change to an upstream assumption or formula m
 - **templates/research-change.md** — record for an individual research change.
 - **templates/claim-evidence-matrix.md** — generic template for a new claim–evidence ledger.
 - **research/** — active research-change records and their current claim status.
+- **calculations/** — reproducible symbolic/algebraic calculation scripts; each script states what it does and does not validate.
+- **validation/** — captured calculation outputs and validation logs, kept distinct from planned or unexecuted checks.
 - **schema/v1.4.3.7/** — candidate JSON Schemas, fixtures, validators, migration prototype, audit reports, and requirement/test traceability.
 - **skills/high-energy-theory-research/** — reusable Skill entry point, reference guides, fingerprinting, and project-record validation tools.
 - **tests/eval-cases/** — bounded analytic-matrix and UV–EFT hard-derivative pilot cases.
@@ -77,7 +79,9 @@ The latest pre-integration CI run for PR HEAD `5c5b10b6889c2e4146d0a696fde16f2b3
 - Fingerprint recomputation and source-aware migration tests: passed; ambiguous references remain unresolved.
 - Second-order small-`r` residual regression: maximum scaled residual 63.86, below the test threshold of 70.
 
-These are bounded, SHA-specific software-validation results. They do **not** establish full schema completeness, historical migration compatibility, or correctness of a complete physics result. The separate Mathematica verification script is included in the provenance bundle but was **not run in CI** and is not marked passed. After the current `main` branch is integrated, rerun the complete workflow for the new HEAD.
+These are bounded, SHA-specific software-validation results. They do **not** establish full schema completeness, historical migration compatibility, or correctness of a complete physics result. The separate Mathematica verification script is included in the provenance bundle but was **not run in CI** and is not marked passed.
+
+The successful run above targets the pre-integration HEAD `5c5b10b6889c2e4146d0a696fde16f2b3ca847bf`. A later integration attempt at `879996ce13929afdf63e463dced6668df0b691b1` failed before any workflow step was recorded: the job had no assigned runner name and its logs were unavailable. This does not establish a code-test failure, but it also does not provide a passing result for the integrated tree. The output-directory safety regression added in the current candidate tree has not been CI-verified. Rerun the complete workflow for the final HEAD when a runner is available.
 
 ### Validation commands
 

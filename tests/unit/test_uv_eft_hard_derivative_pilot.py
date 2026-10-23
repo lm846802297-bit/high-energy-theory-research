@@ -82,6 +82,19 @@ class UVEFTHardDerivativePilotTests(unittest.TestCase):
             )
 
 
+    def test_existing_output_directory_is_preserved(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            bundle_root = Path(tmp) / "bundle"
+            bundle_root.mkdir()
+            sentinel = bundle_root / "preserve-me.txt"
+            sentinel.write_text("do not delete", encoding="utf-8")
+
+            with self.assertRaisesRegex(FileExistsError, "Refusing to overwrite existing output path"):
+                build_bundle(bundle_root)
+
+            self.assertEqual(sentinel.read_text(encoding="utf-8"), "do not delete")
+            self.assertEqual(sorted(p.name for p in bundle_root.iterdir()), ["preserve-me.txt"])
+
 if __name__ == "__main__":
     unittest.main()
 

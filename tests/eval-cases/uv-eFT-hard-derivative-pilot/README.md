@@ -37,3 +37,8 @@ The execution contract is approved only for this bounded automated pilot. The Cl
 ## Separate Mathematica verification
 
 The provenance bundle also includes verify_pv_derivative_mathematica.wl. It uses Mathematica symbolic integration and series expansion to check the listed PV integrals and second-order small-r expression. This script is not executed by GitHub Actions and is not marked passed. It is provided for a separate local Mathematica run; record the Mathematica version and actual output before changing its status. Open the .wl file in the Mathematica front end and evaluate it. Review any FAIL result or unevaluated conditional equality rather than changing the expected value to force a pass.
+
+
+## Output-directory safety
+
+Pass a fresh, non-existent destination to `--output-dir`. The bundle builder refuses to overwrite any existing path and does not recursively delete user-supplied directories. If a previous run left a directory behind, inspect it and choose a new path (or remove it manually only after confirming its contents are disposable).
