@@ -486,6 +486,50 @@ class ValidationReferenceResolutionTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "SHA-256 does not match manifest"):
                 migration.migrate(source, schemas_dir=bundle / "schemas")
 
+    def test_valid_claim_is_withheld_when_referenced_plan_fails_target_schema(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            source = root / "source"
+            source.mkdir()
+            claim = json.loads(
+                (ROOT / "schema" / "v1.4.3.7" / "tests" / "valid" / "claim" / "FX-CLAIM-VALID-001.json").read_text(encoding="utf-8")
+            )
+            claim["schema_version"] = "1.3"
+            claim["project_id"] = "P-TEST"
+            claim["validation_ids"] = ["VAL-PLAN-INVALID"]
+            claim["validation_plan_ids"] = []
+            claim["validation_activity_ids"] = []
+            (source / "claim.json").write_text(json.dumps(claim), encoding="utf-8")
+            # This source Plan resolves uniquely but cannot produce a target record:
+            # the target Schema requires method and other Plan fields absent here.
+            (source / "plan.json").write_text(json.dumps(plan_record("VAL-PLAN-INVALID")), encoding="utf-8")
+            output = root / "staging"
+            report = migration.migrate(source, output_dir=output, write_staging=True)
+            staged_targets = [
+                path for path in output.glob("*.json")
+                if path.name != "migration-report.json"
+            ]
+        claim_mapping = next(
+            item for item in report["id_mapping"]
+            if item["source_record_type"] == "claim"
+        )
+        self.assertTrue(any(
+            item["code"] == "TARGET_SCHEMA_VALIDATION_FAILED"
+            and item["record_type"] == "validation_plan"
+            for item in report["unresolved"]
+        ))
+        self.assertTrue(any(
+            item["code"] == "VALIDATION_TARGET_WITHHELD"
+            and item["record_type"] == "claim"
+            and item["target_id"] == "VAL-PLAN-INVALID"
+            for item in report["unresolved"]
+        ))
+        self.assertIsNone(claim_mapping["target_record_type"])
+        self.assertEqual(claim_mapping["review_status"], "blocked_unresolved")
+        self.assertEqual(report["staging_written_record_count"], 0)
+        self.assertEqual(staged_targets, [])
+        self.assertFalse(report["commit_allowed"])
+
     def test_pending_alternative_identity_rule_blocks_artifact_target(self):
         artifact = {
             "schema_version": "1.3", "record_type": "artifact", "project_id": "P-TEST",
