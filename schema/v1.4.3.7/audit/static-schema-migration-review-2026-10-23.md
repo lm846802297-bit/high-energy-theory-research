@@ -39,12 +39,12 @@ The corresponding regression tests were added or updated, but **they have not be
 
 1. The original historical v1.3 schema bundle and representative/complete record corpus are unavailable. The 12 listed candidate field mappings therefore remain historically unverified.
 2. Source values such as `in_progress`, `planned`, and `not_run` need an explicit, evidence-backed mapping decision before they can be converted to target statuses. No mapping has been approved by this review.
-3. Full per-record JSON Schema validation is implemented in the migration code but remains unexecuted on the current HEAD. Complete cross-record/state-machine validation still needs implementation and separate evidence.
+3. Full per-record JSON Schema validation and the new migration guards have since been executed locally by the owner on code HEAD `1bb852c85594a6ef0e930e934cd28a438bc28a7c`: migration regression tests 32/32 passed, integration tests 30/30 passed, repository unit tests 75/75 passed, Python compilation passed, and the full Schema validator passed (68/68 checks, 83/83 candidate fixture outcomes, 16/16 semantic cases, 125 trace rows). Complete cross-record/state-machine validation still needs implementation and separate evidence.
 4. Obtain an owner-approved stable, versioned schema `$id` URI and define whether inherited schema titles/IDs preserve source identity or are versioned to the integrated bundle.
 5. Refresh the field/constraint coverage matrix against the current v1.6.6 design and v1.4.3.7 schemas; reconcile the permissive `claim.evidence_ids` type and the `completed_at`/`finished_at` mismatch.
 6. Transactional commit, active-dataset pointer switching, and rollback remain unimplemented. `commit_allowed=false` must remain unchanged.
 7. DD-ART-007 through DD-ART-010 remain pending explicit owner approval.
-8. No CI or test result is claimed for the current PR HEAD. All newly added regression cases remain unexecuted.
+8. At the time of this static review, no test result had yet been reported for the corrected fixtures. The owner subsequently reported the local results recorded above; those results apply to code HEAD `1bb852c85594a6ef0e930e934cd28a438bc28a7c`. Later commits update audit documentation only, not migration or Schema code.
 
 ## Review disposition
 
@@ -56,7 +56,7 @@ The following points were rechecked against the current migration implementation
 
 ### P0 — Full target JSON Schema validation before staging
 
-**Implemented in rules v4; execution and regression results remain unverified.**
+**Implemented in rules v4; local execution and regression results subsequently passed on code HEAD `1bb852c85594a6ef0e930e934cd28a438bc28a7c` (owner-reported).**
 
 The prior implementation retained only schema properties and could emit a record that lacked a required field or contained an invalid nested object. The current candidate change now retains the complete schema objects, checks the declared Draft 2020-12 dialect and schema metaschema, constructs full validators with a format checker, and validates each transformed target. Schema errors are added to the unresolved report with JSON Pointer paths, and any record with a schema error is withheld from staging.
 
@@ -64,7 +64,7 @@ Regression cases have been added for a missing required Claim field and an inval
 
 ### P1 — Target digest serialization
 
-**Implementation and contract updated; golden-vector test added but not executed.**
+**Implementation and contract updated; golden-vector test is included in the owner-reported passing migration regression suite (32/32) on code HEAD `1bb852c85594a6ef0e930e934cd28a438bc28a7c`.**
 
 The migration implementation now uses the repository's pinned RFC 8785 package and declares target digests as `RFC8785-JCS-SHA256`: SHA-256 over canonical UTF-8 bytes of the transformed target record. Original `source_sha256` continues to hash the exact source bytes and is not replaced by canonicalization. A machine-readable golden vector and a unit test have been added. The mapping contract and migration rule version were advanced to `v1.4.3.7-migration-rules-4` to make the digest semantic change explicit.
 
@@ -76,4 +76,4 @@ The candidate schema files retain schemas.example.invalid identifiers and mixed 
 
 ### Verification boundary
 
-No unit test, integration test, local migration, or CI job was executed for these follow-up findings. They are source-level review conclusions only. PR #6 must remain Draft, and commit_allowed=false must remain unchanged until the target-validation and incomplete-snapshot gates are executed and verified and the other release gates are addressed.
+The follow-up findings were initially source-level review conclusions. The owner later reported that migration regression tests (32/32), integration tests (30/30), repository unit tests (75/75), Python compilation, and the full Schema validator passed locally on code HEAD `1bb852c85594a6ef0e930e934cd28a438bc28a7c`. This does not establish historical v1.3 compatibility, resolve the normative decisions, implement transaction safety, or authorize release. PR #6 must remain Draft, and `commit_allowed=false` must remain unchanged.
