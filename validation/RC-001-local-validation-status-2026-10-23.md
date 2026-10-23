@@ -21,4 +21,4 @@
 - The new \(O(g^2/M_E^2)\) UV loop integrals and corresponding EFT soft integrals have not been evaluated as a complete set.
 - No finite gauge-correction Wilson coefficient is claimed.
 - The shared UV/EFT pole tables, counterterm matrix, Ward-identity completion, kinetic-mixing terms, and full EOM/source/current projection remain open.
-- PR #4 remains Draft/Open until these physics requirements are met. CI is not a closure gate for this iteration.
+- PR #4 may be merged as a research-continuity checkpoint. Merge does not close the physics gates above; CI remains skipped by explicit project decision and is not claimed to pass.
