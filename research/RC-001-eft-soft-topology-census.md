@@ -1,6 +1,6 @@
 # RC-001 — EFT soft-topology census and heavy-mass power counting
 
-**Status:** structural census completed for the dimension-six scalar-derivative matching problem and its adjacent current/source sectors; explicit integral closure and model-level Wilson-vector closure remain open.
+**Status:** expanded structural census across scalar, two-fermion/two-scalar, four-fermion, current/source, and dimension-eight candidate families; explicit integral closure and model-level Wilson-vector closure remain open.
 
 **Baseline:** PR #4 head before this addition, 1fa84601b95b79d325877a11651393dc2d58269f; frozen primary source v153, especially §§243.2–243.5, 244, 252.3–252.10, 283–285, and 301.1–301.4.
 
@@ -20,7 +20,7 @@ For a connected graph, the topological loop count is \(L=I-V+1\). A self-contrac
 
 ## 2. Topology ledger
 
-The companion script calculations/RC-001-eft-soft-topology-census.py checks the Euler loop counts and explicit heavy-mass powers listed below. It is a structural audit, not an integral evaluator or an automatic Feynman-diagram generator.
+The companion script calculations/RC-001-eft-soft-topology-census.py checks 26 candidate topology families, their Euler loop counts, and explicit heavy-mass powers. It is a structural audit, not an integral evaluator or an automatic Feynman-diagram generator.
 
 | ID | Candidate EFT topology | Loops | Explicit heavy-mass order | 1PI w.r.t. external scalars? | Decision at strict \(O(M_E^{-2})\) |
 |---|---|---:|---:|---|---|
@@ -37,6 +37,19 @@ The companion script calculations/RC-001-eft-soft-topology-census.py checks the 
 | SFT-11 | Four \(C_5\) insertions in an eight-scalar light-fermion loop | 1 | \(M_E^{-4}\) | Yes | Retain for the dimension-eight \(X^2Y^2\) potential sector. The broken-phase \(C_5^2\) constant self-energy projection is a VEV projection of this operator structure, not an extra graph to add a second time. |
 | SFT-12 | \(C_5 C_7^\ast\) light-fermion loop, if a dimension-seven representative survives EOM reduction | 1 | \(M_E^{-4}\) | Yes | Conditional dimension-eight contribution. First derive and reduce the \(1/M_E^3\) tree-level operator; if it is redundant, preserve its EOM-induced source/potential companions. |
 | SFT-13 | \(C_5 C_5^\ast\) bubble with a \(Q_{LD}\) or \(Q_{RD}\) VEV wavefunction insertion | 1 | \(M_E^{-4}\) at fixed \(v_h,v_s\) | Yes | Exclude from strict dimension six; retain in a complete broken-phase \(O(M_E^{-4})\) calculation. This agrees with the explicit \(\delta Z_{L,R}\) counting in §243.4. |
+| SFT-14 | \(C_5 C_5^\ast\) crossed loop in \(\bar L L H^\dagger H\), with internal \(\ell_R\) and \(S\) | 1 | \(M_E^{-2}\) | Yes | Keep for the complete dimension-six fermion-operator vector; one internal fermion and one scalar propagator form a 1PI loop. |
+| SFT-15 | \(C_5 C_5^\ast\) crossed loop in \(\bar L L S^\dagger S\), with internal \(\ell_R\) and \(H\) | 1 | \(M_E^{-2}\) | Yes | Keep for the complete dimension-six fermion-operator vector; one internal fermion and one scalar propagator form a 1PI loop. |
+| SFT-16 | \(C_5 C_5^\ast\) crossed loop in \(\bar\ell_R\ell_R H^\dagger H\), with internal \(L\) and \(S\) | 1 | \(M_E^{-2}\) | Yes | Keep for the complete dimension-six fermion-operator vector; one internal fermion and one scalar propagator form a 1PI loop. |
+| SFT-17 | \(C_5 C_5^\ast\) crossed loop in \(\bar\ell_R\ell_R S^\dagger S\), with internal \(L\) and \(H\) | 1 | \(M_E^{-2}\) | Yes | Keep for the complete dimension-six fermion-operator vector; one internal fermion and one scalar propagator form a 1PI loop. |
+| SFT-18 | \(C_5 C_5^\ast\) scalar loop in the \(\bar L L\,\bar\ell_R\ell_R\) four-fermion channel, with internal \(H,S\) | 1 | \(M_E^{-2}\) | Yes | Keep for the complete dimension-six four-fermion vector; the two scalar propagators form a 1PI bubble. |
+| SFT-19 | \(Q_{LD}\) plus \(\lambda_H\) scalar bubble in \(\bar L L H^\dagger H\) | 1 | \(M_E^{-2}\) | Yes | Keep for the full dimension-six fermion-operator vector; two scalar propagators give a non-scaleless bubble. |
+| SFT-20 | \(Q_{LD}\) plus \(\lambda_{HS}\) scalar bubble in \(\bar L L S^\dagger S\) | 1 | \(M_E^{-2}\) | Yes | Keep for the full dimension-six fermion-operator vector; order \(\lambda_{HS}|y|^2/M_E^2\). |
+| SFT-21 | \(Q_{RD}\) plus \(\lambda_S\) scalar bubble in \(\bar\ell_R\ell_R S^\dagger S\) | 1 | \(M_E^{-2}\) | Yes | Keep for the full dimension-six fermion-operator vector; two scalar propagators give a non-scaleless bubble. |
+| SFT-22 | \(Q_{RD}\) plus \(\lambda_{HS}\) scalar bubble in \(\bar\ell_R\ell_R H^\dagger H\) | 1 | \(M_E^{-2}\) | Yes | Keep for the full dimension-six fermion-operator vector; order \(\lambda_{HS}|\lambda|^2/M_E^2\). |
+| SFT-23 | \(C_5\) plus \(\lambda_{HS}\) scalar bubble in the \(\bar L\ell_R H S\) amplitude | 1 | \(M_E^{-1}\) | Yes | Required only if claiming one-loop closure of \(C_5\); not needed for the one-loop dimension-six scalar coefficient. |
+| SFT-24 | \(C_5\) insertion with one-loop gauge corrections in the \(\bar L\ell_R H S\) amplitude | 1 | \(M_E^{-1}\) | Yes | Required for one-loop \(C_5\) closure; include gauge vertex, leg, and covariant-derivative contact graphs as a gauge-invariant set. |
+| SFT-25 | \(Q_{LD}\) insertion with gauge-loop corrections in \(\bar L L H^\dagger H\) | 1 | \(M_E^{-2}\) | Yes | Required for the complete one-loop \(Q_{LD}\) coefficient; include gauge vertex, leg, contact, and counterterm contributions. |
+| SFT-26 | \(Q_{RD}\) insertion with gauge-loop corrections in \(\bar\ell_R\ell_R S^\dagger S\) | 1 | \(M_E^{-2}\) | Yes | Required for the complete one-loop \(Q_{RD}\) coefficient; include gauge vertex, leg, contact, and counterterm contributions. |
 
 The table is deliberately split between **direct scalar 1PI topologies** and **reducible current-exchange graphs**. The latter are not to be silently dropped from a full connected amplitude or current-operator analysis, but they are not an extra local 1PI contribution to the scalar derivative coefficient. Whether their form factors are needed explicitly depends on the chosen matching object and whether gauge-current operators are retained or eliminated with gauge-field EOM.
 
@@ -48,15 +61,27 @@ For the marked unbroken-phase external legs \(H,S,H^\dagger,S^\dagger\), the two
 
 In this coupling sector, the existing master calculation and the later off-shell/EOM completion in §§252 and 301 cover the stated \(C_5C_5^\ast\) soft subtraction. The \(\frac43\) historical difference is resolved for that specified Yukawa-box sector by the off-shell/EOM completion; this does not close the other model sectors or substitute for an independent diagram-package calculation.
 
-### 3.2 Why the \(Q_{LD},Q_{RD}\) scalar-quartic candidates are not extra dimension-six 1PI terms
+### 3.2 Scalar-quartic candidates in four-scalar amplitudes
 
-A single \(Q_{LD}\) or \(Q_{RD}\) insertion can be connected to a scalar-quartic vertex with one scalar propagator, leaving a one-propagator fermion tadpole at the derivative-operator insertion. The graph is one-loop by \(L=I-V+1\), but it is reducible through the scalar line. In the unbroken massless theory, its fermion tadpole is scaleless and vanishes in dimensional regularization.
+For a four-scalar external state, one \(Q_{LD}\) or \(Q_{RD}\) insertion plus a scalar-quartic vertex can leave one fermion tadpole and one scalar propagator. The graph is one-loop by \(L=I-V+1\), but is reducible through the scalar line. In the unbroken massless theory the fermion tadpole is scaleless and vanishes in dimensional regularization.
 
 This excludes that candidate from the local scalar 1PI coefficient at strict \(O(M_E^{-2})\). It does **not** delete \(Q_{LD}\), \(Q_{RD}\), the scalar portal, or their EOM consequences from the EFT. If light masses, VEV insertions, a different IR regulator, or a different matching object are retained, the integral and its power counting must be reconsidered under that stated scheme.
 
-### 3.3 Current exchange is a separate matching problem
+### 3.3 Other one-loop soft graphs in fermionic external-state amplitudes
 
-A \(Q_{LD}\) or \(Q_{RD}\) insertion can enter a one-loop current form factor, with a gauge propagator connecting that form factor to an external scalar current. Examples are \(Q_{LD}\)-\(A'\)-\(S^\dagger S\), \(Q_{RD}\)-\(B\)-\(H^\dagger H\), \(Q_{LD}\)-\(B/W\)-\(H^\dagger H\), and \(Q_{RD}\)-\(A'\)-\(S^\dagger S\). These graphs carry one \(1/M_E^2\) Wilson coefficient and one loop, but are reducible through the exchanged gauge propagator in the four-scalar amplitude.
+The full dimension-six Wilson vector also requires external-state families beyond the scalar four-point function:
+
+- **Two fermions plus two scalars from \(C_5C_5^\ast\):** four crossed channels are possible: \(\bar L L H^\dagger H\), \(\bar L L S^\dagger S\), \(\bar\ell_R\ell_R H^\dagger H\), and \(\bar\ell_R\ell_R S^\dagger S\). Each has one internal fermion and one internal scalar propagator, so \(L=1\), the product is \(O(M_E^{-2})\), and the topology is 1PI. The channels are not covered by the scalar-bubble integral.
+- **Four fermions from \(C_5C_5^\ast\):** the external \(\bar L,L,\bar\ell_R,\ell_R\) legs are supplied by the two insertions and the internal \(H,S\) scalar propagators form a one-loop 1PI bubble. This is also \(O(M_E^{-2})\) and requires its own spinor/operator projection.
+- **One \(Q_6\) insertion plus a scalar-quartic bubble:** \(Q_{LD}+\lambda_H\) contributes to \(\bar L L H^\dagger H\), \(Q_{LD}+\lambda_{HS}\) to \(\bar L L S^\dagger S\), \(Q_{RD}+\lambda_S\) to \(\bar\ell_R\ell_R S^\dagger S\), and \(Q_{RD}+\lambda_{HS}\) to \(\bar\ell_R\ell_R H^\dagger H\). Two scalar propagators connect the dimension-six insertion to the quartic vertex. These are non-scaleless one-loop 1PI candidates at \(O(M_E^{-2})\), unlike the four-scalar tadpole candidates above, and their integrals must be evaluated if the corresponding fermion-operator coefficients are in scope.
+- **Gauge corrections to \(Q_{LD},Q_{RD}\):** one-loop vertex, external-leg, and covariant-derivative contact contributions renormalize the two-fermion/two-scalar amplitudes at \(O(g^2/M_E^2)\). The full gauge-invariant set, its counterterms, and the declared external-field scheme are required.
+- **One-loop corrections to \(C_5\):** \(C_5+\lambda_{HS}\) scalar bubbles and gauge corrections enter the \(\bar L\ell_R H S\) amplitude at \(O(M_E^{-1})\). They are not needed to obtain the one-loop dimension-six scalar coefficient from a tree-level \(C_5C_5^\ast\) insertion, because inserting a one-loop-corrected \(C_5\) there would be a two-loop effect. They are required if the claim is expanded to the full one-loop dimension-five Wilson coefficient.
+
+These fermionic external-state graphs are not optional if the claim is a complete dimension-six Wilson vector. Their numerator algebra, UV poles, operator mixing, and EOM projection have not been evaluated by the structural census script.
+
+### 3.4 Current exchange is a separate matching problem
+
+A \(Q_{LD}\) or \(Q_{RD}\) insertion can enter a one-loop current form factor, with a gauge propagator connecting that form factor to an external scalar current. Gauge-covariant contact vertices from the covariant derivatives must be included in the same gauge-invariant set; a scaleless contact tadpole may vanish, but that is not grounds to omit the remaining vertex graphs. Examples are \(Q_{LD}\)-\(A'\)-\(S^\dagger S\), \(Q_{RD}\)-\(B\)-\(H^\dagger H\), \(Q_{LD}\)-\(B/W\)-\(H^\dagger H\), and \(Q_{RD}\)-\(A'\)-\(S^\dagger S\). These graphs carry one \(1/M_E^2\) Wilson coefficient and one loop, but are reducible through the exchanged gauge propagator in the four-scalar amplitude.
 
 Therefore:
 - Do not add these graphs as direct local 1PI contributions to \(C_{\partial HS}\).
@@ -98,9 +123,10 @@ The existing four-check \(C_5^2\) constant-pole audit verifies only the stated s
 **Power-counting decision:** at strict \(O(M_E^{-2})\), keep the \(C_5C_5^\ast\) mixed scalar bubble as the direct 1PI soft subtraction in the fixed \(|y|^2|\lambda|^2\) sector; do not add \(Q_{LD}/Q_{RD}\)-plus-quartic tadpoles to that local 1PI coefficient; keep gauge-current exchange graphs in the separate current/source ledger; and do not import \(Q_6Q_6\), \(C_5C_7^\ast\), or \(C_5^4\) terms into the dimension-six result.
 
 **Explicit-integral priority:**
-1. First, independently validate the existing \(C_5C_5^\ast\) soft bubble and its normalization using a diagram-level tool.
-2. Next, determine the chosen basis treatment of gauge-current operators and explicitly match only those current form factors required by that basis, with the kinetic-mixing boundary stated.
-3. Separately enumerate the fermionic external-state amplitudes needed for the full Wilson vector; the scalar-source table alone does not close them.
-4. Only then start the \(O(M_E^{-4})\) dimension-eight hard/soft calculation using the list in §6.
+1. Independently validate the existing \(C_5C_5^\ast\) scalar bubble and its normalization with a diagram-level tool.
+2. Compute the four \(C_5C_5^\ast\) crossed two-fermion/two-scalar channels and the \(C_5C_5^\ast\) four-fermion scalar bubble at \(O(M_E^{-2})\), with separate operator projections.
+3. Compute the \(Q_{LD}/Q_{RD}\)-plus-quartic scalar bubbles and the gauge-corrected \(Q_{LD}/Q_{RD}\) two-fermion/two-scalar amplitudes needed by the chosen basis. Include the full covariant-derivative contact set and counterterms.
+4. Close the current/source sector and any remaining fermionic amplitudes; state the kinetic-mixing boundary and the parameter/input scheme. Compute one-loop \(C_5\) corrections only if the full dimension-five vector is in scope.
+5. Only then start the \(O(M_E^{-4})\) dimension-eight hard/soft calculation using the list in §6.
 
 No loop integral is evaluated by the companion census script. No FeynCalc, Mathematica, FeynArts, Matchete, or Matchmakereft execution is claimed. PR #4 remains Draft/Open; no merge is authorized by this topology census.
