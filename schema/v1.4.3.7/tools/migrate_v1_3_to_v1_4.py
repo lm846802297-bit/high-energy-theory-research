@@ -2,7 +2,7 @@
 """Conservative v1.3 -> v1.4 migration prototype. Dry-run by default.
 Does not overwrite source records. Ambiguous transformations are unresolved, never guessed.
 """
-import argparse, json, hashlib, csv, sys, re
+import argparse, json, hashlib, csv, sys, re, math
 from pathlib import Path
 from datetime import datetime, timezone
 from urllib.parse import quote
@@ -39,6 +39,30 @@ def reject_duplicate_json_keys(pairs):
         if key in result: raise ValueError(f"duplicate JSON object key: {key!r}")
         result[key]=value
     return result
+def reject_nonfinite_json_constant(value):
+    raise ValueError(f"non-finite JSON numeric constant is not allowed: {value}")
+def ensure_json_compatible(value,seen=None):
+    if seen is None: seen=set()
+    if isinstance(value,dict):
+        identity=id(value)
+        if identity in seen: raise ValueError("cyclic YAML object graph is unsupported")
+        seen.add(identity)
+        for key,item in value.items():
+            if not isinstance(key,str): raise ValueError(f"YAML mapping key must be a string, got {type(key).__name__}")
+            ensure_json_compatible(item,seen)
+        seen.remove(identity)
+    elif isinstance(value,list):
+        identity=id(value)
+        if identity in seen: raise ValueError("cyclic YAML object graph is unsupported")
+        seen.add(identity)
+        for item in value: ensure_json_compatible(item,seen)
+        seen.remove(identity)
+    elif value is None or isinstance(value,(str,bool,int)):
+        return
+    elif isinstance(value,float):
+        if not math.isfinite(value): raise ValueError("non-finite YAML number is not allowed")
+    else:
+        raise ValueError(f"non-JSON YAML value is unsupported: {type(value).__name__}")
 def load_yaml_record(text):
     if yaml is None: raise RuntimeError("PyYAML is unavailable")
     class UniqueKeySafeLoader(yaml.SafeLoader):
@@ -269,11 +293,12 @@ def migrate(input_dir, schemas_dir=None, output_dir=None, unknown_policy="quaran
         try:
             source_text=raw_bytes.decode("utf-8")
             if p.suffix.lower()==".json":
-                rec=json.loads(source_text,object_pairs_hook=reject_duplicate_json_keys)
+                rec=json.loads(source_text,object_pairs_hook=reject_duplicate_json_keys,parse_constant=reject_nonfinite_json_constant)
             elif p.suffix.lower() in {".yaml",".yml"}:
                 if yaml is None:
                     all_unresolved.append({"path":source_relpath(p),"code":"YAML_PARSER_UNAVAILABLE","source_sha256":src_sha}); continue
                 rec=load_yaml_record(source_text)
+                ensure_json_compatible(rec)
                 json.dumps(rec,ensure_ascii=False,allow_nan=False)
             else:
                 all_unresolved.append({"path":source_relpath(p),"code":"UNSUPPORTED_SOURCE_FORMAT","source_sha256":src_sha}); continue
