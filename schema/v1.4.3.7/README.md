@@ -4,9 +4,10 @@ This directory contains an unapproved candidate schema bundle. It is not a relea
 
 ## Versioned fixture sets
 
-- `tests/fixture-index.json` is the inherited `1.4.3.6-candidate` fixture index. Its bytes and version label are preserved as provenance; it is not silently relabeled.
-- `tests/fixture-index-v1.4.3.7.json` is the candidate-specific fixture index used for acceptance against the current schemas. The four Run Plan/Run Manifest valid/conditional fixture records are regenerated in `tests/v1.4.3.7/` with non-empty structured payloads that meet the candidate contracts.
-- The validator reports mismatches between the inherited fixture expectations and current candidate schemas separately as compatibility drift. Those mismatches do not replace or weaken the version-matched candidate test suite.
+- The canonical manifest field `fixture_index` points to `tests/fixture-index-v1.4.3.7.json`, the acceptance index for this candidate. Its top-level `schema_version` must equal the bundle `schema_version`.
+- The manifest field `legacy_fixture_index` points to `tests/fixture-index.json`, the preserved `1.4.3.6-candidate` expectation baseline. The legacy bytes and version label are not rewritten.
+- The index `schema_version` means “the target bundle whose fixture expectations are declared”; source-archive lineage is recorded separately in `IMPORT_PROVENANCE.json`. The validator checks both index digests and both declared version relationships.
+- The validator reports mismatches between legacy fixture expectations and current candidate schemas separately as compatibility drift. They do not replace or weaken the version-matched candidate test suite.
 
 ## FingerprintInputs
 
@@ -19,7 +20,7 @@ The workflow regenerates `audit/validation-report.json` in the runner and upload
 
 ## Migration prototype and validation_ids boundary
 
-The migration tool uses rules version v1.4.3.7-migration-rules-2.
+The migration tool uses rules version `v1.4.3.7-migration-rules-2`. A positive source-graph fixture verifies unique plan/activity resolution; the negative fixture keeps a missing target unresolved. These synthetic cases test the resolver, not the full historical v1.3 corpus.
 
 - The tool loads the read-only source snapshot first and resolves references only by unique primary key within the same project.
 - A uniquely resolved validation_plan maps to validation_plan_ids.
@@ -29,7 +30,7 @@ The migration tool uses rules version v1.4.3.7-migration-rules-2.
 - Dry-run and staging remain non-committing. The report always sets commit_allowed=false; transactional commit, active-pointer switching, rollback, and full migration validation are not implemented.
 - Regression tests: tests/unit/test_migration_reference_resolution.py. The existing audit/migration-dry-run-summary.json is a historical report generated under rules version 1.
 
-This resolver reduces avoidable ambiguity only when source evidence is complete. It does not make the migration source bundle available and does not approve any normative decision.
+This resolver reduces avoidable ambiguity only when source evidence is complete. The full historical v1.3 source bundle remains unavailable, so compatibility remains unverified. See `audit/v1.3-compatibility-gate.md`. No normative decision is implicitly approved.
 
 ## Release constraints
 

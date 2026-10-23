@@ -2,7 +2,7 @@
   "migration_id": "MIG-V1.3-TO-V1.4-CANDIDATE",
   "source_schema_version": "1.3",
   "target_schema_version": "1.4",
-  "status": "contract_only_not_implemented",
+  "status": "implemented_prototype_staging_only",
   "source_bundle_available": false,
   "compatibility_status": "unverified",
   "rules": [
@@ -52,5 +52,21 @@
     "invent_legacy_field_mappings",
     "silently_drop_unmapped_fields",
     "auto_merge_multiple_sources_without_review"
-  ]
+  ],
+  "migration_rules_version": "v1.4.3.7-migration-rules-2",
+  "commit_allowed": false,
+  "staging_only": true,
+  "validation_ids_resolution": {
+    "status": "source_aware_prototype",
+    "rule": "Resolve only a unique primary key in the same project; validation_activity additionally requires execution_status in in_progress/succeeded/failed and a non-empty started_at.",
+    "unresolved_cases": [
+      "missing target",
+      "duplicate/cross-type ID",
+      "project mismatch",
+      "not-started activity",
+      "insufficient launch evidence",
+      "invalid source shape"
+    ],
+    "full_historical_compatibility": "unverified_until_original_v1_3_bundle_is_supplied"
+  }
 }

@@ -1,39 +1,33 @@
 # Repository status
 
-**As of 2026-10-21. Status: development / candidate.**
+**As of 2026-10-23. Status: development / candidate; no formal Schema release.**
 
-## Imported assets
+## Current state
 
 | Area | State |
 |---|---|
-| Research Skill design | v1.6.5 baseline retained; v1.6.6 Artifact-identity clarification is the latest candidate |
-| Schema package | 25 schema entry points, 83 indexed fixtures, candidate only |
+| Research Skill design | v1.6.5 baseline retained; v1.6.6 Artifact-identity clarification remains a candidate |
+| Schema package | v1.4.3.7 candidate; 25 schema entry points and 83 indexed fixture IDs |
+| Normative decisions | DD-ART-007 through DD-ART-010 pending explicit owner approval |
+| Fixture index | Canonical index is version-matched to v1.4.3.7 candidate; inherited v1.4.3.6 expectations remain separately preserved |
 | Cross-record validation | Prototype available; bounded semantic checks implemented |
-| Migration | Dry-run/staging prototype only; no source overwrite or commit operation |
-| Requirement/test traceability | CSV traceability data and regenerated validation report included |
+| Migration | Source-aware validation_ids resolver has positive/negative synthetic tests; dry-run/staging only, commit_allowed=false |
+| Historical v1.3 compatibility | Unverified; original v1.3 source bundle/corpus unavailable |
+| Requirement/test traceability | CSV traceability data and imported audit reports included; report snapshots are SHA/time scoped |
 | Skill runtime | Initial instruction and reference scaffold added; not yet a complete automated research agent |
-| Project-record validator | P0 CLI added for JSON/YAML parsing, candidate-schema validation, mapped references, cross-type ID uniqueness, status/reason checks, and local source/artifact path checks |
-| End-to-end Skill pilot | Synthetic 2x2 matrix calculation and independent checks pass; structured candidate records validate. Full reproducibility acceptance remains blocked by the undefined `FingerprintInputs` contract. |
 | Scientific validation | Not implemented; no physics result is certified by this repository |
 
-## Local verification performed
+## Validation evidence and CI boundary
 
-Environment: Python 3.13, jsonschema 4.26.0.
+The repository has historical green software-test results for pre-integration SHAs, including the candidate schema suite and migration unit tests. Those results remain valid only for their recorded commits.
 
-- Bundle validator: 58 checks passed, 0 failed.
-- Schema meta-validation and manifest hashes: 25 record types loaded.
-- Fixture expectations: 83/83 matched.
-- Bundled semantic cases: 16/16 matched.
-- Prototype integration tests: 29/29 passed.
-- Python syntax compilation: 7 candidate Python files passed.
-
-The synthetic end-to-end pilot and fixture-index audit guard passed on commit `1d03b425a49e9c0c073f4c1667727db0d15b9e3f` ([CI run](https://github.com/lm846802297-bit/high-energy-theory-research/actions/runs/39531582474)): 58/58 bundle checks, 25/25 schema/manifest checks, 83/83 fixture expectations, 16/16 semantic cases, 29/29 bundled integration tests, 18/18 repository unit tests, and Python compilation passed. These are SHA-specific results; use the PR's latest check for any later head.
+The latest main HEAD inspected for this work was 954cf50898513aad28cb2d3c88f9099df465327b. Its latest workflow run, https://github.com/lm846802297-bit/high-energy-theory-research/actions/runs/39894348004, failed before any workflow step was recorded; the job had no assigned runner name. This is not evidence of a code-test failure, but it also is not a passing CI result for current main. The governance-fix branch requires its own validation when a runner is available.
 
 ## Release gates
 
-1. Approve or reject DD-ART-007 through DD-ART-010 explicitly.
-2. Resolve fixture-index top-level version-field semantics using the audit in `schema/v1.4.3.7/audit/fixture-index-version-audit.md`; the source ZIP is not committed and the current validator does not interpret that field.
-3. Resolve the migration ambiguity around validation_ids without guessing target types.
-4. Expand semantic/state-machine coverage and test actual filesystem manifests.
-5. Expand the structured record schemas so the end-to-end pilot can preserve execution specifications, fingerprints, Run Manifest snapshots, and Claim evidence dimensions.
-6. Define scientific acceptance tests for real research tasks before claiming end-to-end reproducibility.
+1. Obtain explicit owner decisions on DD-ART-007 through DD-ART-010.
+2. Supply and hash the exact historical v1.3 source bundle and representative/complete source records; run the compatibility procedure in schema/v1.4.3.7/audit/v1.3-compatibility-gate.md.
+3. Keep migration staging-only until all references and target records validate, unresolved items are zero, and transactional commit/rollback safeguards exist. Do not change commit_allowed=false to bypass these gates.
+4. Run the full workflow on the final candidate HEAD and inspect its artifacts; a historical green run cannot substitute for current CI.
+5. Expand semantic/state-machine coverage and test actual filesystem manifests.
+6. Complete normative schema coverage and define scientific acceptance tests for real research tasks before claiming end-to-end reproducibility.

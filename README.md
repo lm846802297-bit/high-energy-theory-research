@@ -15,10 +15,9 @@ The workflow is designed for theoretical particle physics, UV–EFT matching, pe
 3. Use [the claim–evidence matrix template](templates/claim-evidence-matrix.md) to track the support for important physical statements.
 4. Apply [the review checklist](docs/review-checklist.md) before marking a change complete or synchronizing it into a manuscript.
 5. Read the [active research records](research/README.md); the first baseline is [RC-001: VLL–Higgs–Singlet UV–EFT matching](research/RC-001-vll-higgs-singlet-uv-eft.md), with its [record-specific claim–evidence matrix](research/RC-001-claim-evidence-matrix.md).
-6. Use the [project registry](projects/README.md) to distinguish top-level research projects from workstreams and research-change records. The VLL–Higgs–Singlet UV–EFT workstream belongs to the parent project axial-vector-model-building; it is not a separate top-level project.
-7. For the reusable research Skill, start at [SKILL.md](skills/high-energy-theory-research/SKILL.md), then read its reference guides.
-8. Review [repository status](docs/REPOSITORY_STATUS.md), [open issues](docs/OPEN_ISSUES.md), and the [normative decision register](docs/governance/DECISION_REGISTER.md) before changing candidate schemas.
-9. Read the [v1.6.5 design baseline](docs/design/high-energy-theory-research-Skill-v1.6.5.md), the [v1.6.7 consolidated design/implementation report](docs/design/high-energy-theory-research-Skill-v1.6.7.md), and the [v1.6.6 Artifact-identity candidate clarification](schema/v1.4.3.7/audit/高能理论物理研究-Skill-详细设计文档-v1.6.6-Artifact身份语义候选修订.md).
+6. For the reusable research Skill, start at [SKILL.md](skills/high-energy-theory-research/SKILL.md), then read its reference guides.
+7. Review [repository status](docs/REPOSITORY_STATUS.md), [open issues](docs/OPEN_ISSUES.md), and the [normative decision register](docs/governance/DECISION_REGISTER.md) before changing candidate schemas.
+8. Read the [v1.6.5 design baseline](docs/design/high-energy-theory-research-Skill-v1.6.5.md), the [v1.6.7 consolidated design/implementation report](docs/design/high-energy-theory-research-Skill-v1.6.7.md), and the [v1.6.6 Artifact-identity candidate clarification](schema/v1.4.3.7/audit/高能理论物理研究-Skill-详细设计文档-v1.6.6-Artifact身份语义候选修订.md).
 
 ### Core chain
 
@@ -29,12 +28,10 @@ Every arrow should be traceable. A change to an upstream assumption or formula m
 ### Repository layout
 
 - **docs/scientific-diff-workflow.md** — workflow, definitions, status model, and physics-specific guidance.
-- **projects/** — top-level project registry and project/workstream hierarchy; navigation metadata only at this stage.
 - **docs/review-checklist.md** — checks for scientific changes and manuscript synchronization.
 - **docs/design/** — retained design baseline and consolidated implementation report.
 - **docs/governance/** — normative decisions and fingerprint-contract review.
 - **templates/research-change.md** — record for an individual research change.
-- **templates/project-record.md** — template for registering a top-level research project or a nested workstream.
 - **templates/claim-evidence-matrix.md** — generic template for a new claim–evidence ledger.
 - **research/** — active research-change records and their current claim status.
 - **calculations/** — reproducible symbolic/algebraic calculation scripts; each script states what it does and does not validate.
@@ -53,6 +50,7 @@ Every arrow should be traceable. A change to an upstream assumption or formula m
 - Consolidated design/implementation report: v1.6.7.
 - Schema package: `schema/v1.4.3.7/`, imported as a candidate bundle.
 - The candidate contains 25 JSON Schema entry points, 83 indexed fixtures, cross-record validation, a conservative migration prototype, a directory-manifest helper, audit reports, and traceability data.
+- The canonical `manifest.fixture_index` is version-matched to `1.4.3.7-candidate`; `manifest.legacy_fixture_index` preserves the `1.4.3.6-candidate` expectation baseline. Both digests and version relationships are checked.
 - The project-record validator is `skills/high-energy-theory-research/scripts/validate_project_records.py`. It supports JSON/YAML parsing, candidate-schema checks, bounded reference and ID validation, status/reason consistency, and local source/artifact path checks.
 - The end-to-end UV–EFT pilot checks a bounded hard-kernel derivative and small-`r` expansion against independent Feynman-parameter quadrature. It does not establish completeness of the full UV diagram set, full dimension-six basis reduction, or scientific acceptance of a final Wilson coefficient.
 
@@ -68,23 +66,11 @@ Every arrow should be traceable. A change to an upstream assumption or formula m
 
 ## Local validation
 
-The latest pre-integration CI run for PR HEAD `5c5b10b6889c2e4146d0a696fde16f2b3ca847bf` passed the candidate validation workflow on 2026-10-21 ([GitHub Actions run](https://github.com/lm846802297-bit/high-energy-theory-research/actions/runs/39542332657)):
+A historical pre-integration CI run for PR HEAD `5c5b10b6889c2e4146d0a696fde16f2b3ca847bf` passed the candidate validation workflow on 2026-10-21 ([GitHub Actions run](https://github.com/lm846802297-bit/high-energy-theory-research/actions/runs/39542332657)). Its results included 25/25 schema entry points, 83/83 fixture expectations, 16/16 semantic cases, 29/29 integration tests, and 36/36 repository unit tests. These results apply only to that SHA.
 
-- Candidate schema-bundle checks: 60/60.
-- Schema entry points and manifest hashes: 25/25.
-- Current candidate fixture expectations: 83/83.
-- Semantic cases: 16/16.
-- Candidate integration tests: 29/29.
-- Repository unit tests: 36/36.
-- Python compilation: passed.
-- Real physics audit cases: 8/8.
-- Research-record graph: 22 records, 0 errors, 0 warnings.
-- Fingerprint recomputation and source-aware migration tests: passed; ambiguous references remain unresolved.
-- Second-order small-`r` residual regression: maximum scaled residual 63.86, below the test threshold of 70.
+The current `main` HEAD inspected for the governance work was `954cf50898513aad28cb2d3c88f9099df465327b`. The latest main workflow run, [#39894348004](https://github.com/lm846802297-bit/high-energy-theory-research/actions/runs/39894348004), failed before any workflow step was recorded because no runner was assigned. This is not evidence of a code-test failure, but it also provides no passing CI result for current `main`. Do not use the historical green run as a substitute for validating the current candidate.
 
-These are bounded, SHA-specific software-validation results. They do **not** establish full schema completeness, historical migration compatibility, or correctness of a complete physics result. The separate Mathematica verification script is included in the provenance bundle but was **not run in CI** and is not marked passed.
-
-The successful run above targets the pre-integration HEAD `5c5b10b6889c2e4146d0a696fde16f2b3ca847bf`. A later integration attempt at `879996ce13929afdf63e463dced6668df0b691b1` failed before any workflow step was recorded: the job had no assigned runner name and its logs were unavailable. This does not establish a code-test failure, but it also does not provide a passing result for the integrated tree. The output-directory safety regression added in the current candidate tree has not been CI-verified. Rerun the complete workflow for the final HEAD when a runner is available.
+The separate Mathematica verification script is included in the provenance bundle but was **not run in CI** and is not marked passed. Rerun the complete workflow for the final HEAD when a runner is available.
 
 ### Validation commands
 

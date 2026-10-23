@@ -1,26 +1,25 @@
 # Open issues and known limitations
 
-This list deliberately separates confirmed software checks from unresolved design and scientific questions.
+This list separates verified software behavior from unresolved design, provenance, and scientific questions.
 
 ## P0 — Must resolve before calling the schema package a release
 
-1. **Four normative decisions remain pending.** DD-ART-007 through DD-ART-010 are recommendations, not approvals. See the decision register and full review.
-2. **Migration remains blocked.** The dry-run finds an ambiguous validation_ids mapping. The prototype must not guess the target record type; commit_allowed remains false.
-3. **Fixture-index version field is unresolved.** The imported index says 1.4.3.6-candidate while the bundle manifest says 1.4.3.7-candidate. The source lineage points to a v1.4.3.6 archive, but that archive is not committed, and the current validator does not define or enforce the top-level field's meaning. Preserve the current value until source bytes or a metadata contract resolve it. See [fixture-index version audit](../schema/v1.4.3.7/audit/fixture-index-version-audit.md).
-4. **Source lineage.** The v1.4.3.7 audit records derivation from a v1.4.3.6 candidate source bundle. Preserve that lineage; do not describe this as an independently approved v1.4.3.7 release.
+1. **Four normative decisions remain pending.** DD-ART-007 through DD-ART-010 are recommendations, not approvals. No normative Schema change or formal release may treat them as approved until the repository owner explicitly decides each one. See docs/governance/DECISION_REGISTER.md and docs/governance/schema-v1.4.3.7-four-decisions-review.md.
+2. **Historical v1.3 compatibility is unverified.** The exact v1.3 machine-readable source bundle and historical record corpus are unavailable in the repository/inspected Library inventory. The migration prototype's synthetic tests do not replace that baseline. See schema/v1.4.3.7/audit/v1.3-compatibility-gate.md.
+3. **Migration cannot commit.** The source-aware validation_ids resolver has positive and negative regression cases, but unresolved/missing source targets still block migration. Transactional commit and pointer-based rollback are not implemented, so commit_allowed=false is an intentional safety invariant.
+4. **The integrated candidate is not released.** Schema v1.4.3.7 remains candidate-only; current-main CI has no passing result for its latest HEAD because the latest workflow run failed before a runner/step was assigned. Historical green runs apply only to their recorded SHAs.
 
-## Reconciled in this branch
+## Resolved in the candidate metadata contract
 
-- **Traceability row count.** The CSV contains 125 non-empty data rows excluding the header, matching the regenerated validation report. The stale audit narrative count of 123 has been corrected. This reconciles the count only; it does not establish full requirement coverage.
+- **Fixture-index version semantics.** The canonical manifest.fixture_index now points to the version-matched v1.4.3.7 candidate index. manifest.legacy_fixture_index preserves the 1.4.3.6 expectation baseline. The validator checks both file digests and both version relationships. The original source ZIP is not committed, so byte-for-byte equality with that archive is not claimed. See schema/v1.4.3.7/audit/fixture-index-version-audit.md.
 
 ## P1 — Coverage and implementation gaps
 
 - The schemas are candidate envelopes, not a complete transcription of every normative field and condition in the design document.
-- **`FingerprintInputs` lacks a field contract.** The design document references `Record<FingerprintInputs>` but does not define its properties or hashing semantics; the candidate schema therefore leaves `run_plan.fingerprint_inputs` empty-only rather than guessing. The pilot now exercises structured execution specs, Run Manifest snapshots, Claim evidence dimensions, and artifact completeness/structure payloads, but full reproducibility acceptance remains blocked until this contract is reviewed. See `docs/governance/fingerprint-inputs-contract-review.md` and the pilot README.
+- FingerprintInputs has a candidate contract and deterministic tests, but its normative status still requires review. The fingerprint contract does not establish scientific correctness.
 - Cross-record validation does not cover every polymorphic reference or every state-machine namespace.
 - Event payload hashes are not comprehensively recomputed.
 - The directory-manifest helper validates a restricted FileEntry representation; it does not walk the filesystem or prove that the manifest matches disk contents. Symlinks are rejected by default.
-- Migration is staging-only and historical v1.3 compatibility has not been established.
 - The Skill instruction scaffold is not yet a complete executable workflow for all research tasks.
 
 ## Scientific acceptance — Not yet implemented

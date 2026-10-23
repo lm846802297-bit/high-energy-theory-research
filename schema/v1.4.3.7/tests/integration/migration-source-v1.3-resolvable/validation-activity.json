@@ -1,0 +1,8 @@
+{
+  "schema_version": "1.3",
+  "record_type": "validation_activity",
+  "project_id": "P-HEP",
+  "validation_activity_id": "VAL-ACT-RESOLVABLE-1",
+  "execution_status": "succeeded",
+  "started_at": "2026-10-20T10:00:00Z"
+}

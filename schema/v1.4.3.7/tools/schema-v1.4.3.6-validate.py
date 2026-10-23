@@ -7,7 +7,7 @@ def sha(p): return hashlib.sha256(p.read_bytes()).hexdigest()
 def main(root):
  root=Path(root); report={'checks':[],'fixtures':[],'semantic_tests':[],'legacy_fixture_compatibility':{},'limitations':['Full state machine/event ledger is not implemented.','Migration and backward compatibility are not validated.','No filesystem walk, network retrieval, raw-byte hash recomputation, or JCS directory manifest hash recomputation.','No physics/scientific correctness validation.']}
  def add(n,ok,detail=None): report['checks'].append({'name':n,'status':'PASS' if ok else 'FAIL','detail':detail or {}})
- m=json.loads((root/'manifest.json').read_text()); legacy_idx=json.loads((root/m['fixture_index']).read_text()); idx=json.loads((root/m.get('candidate_fixture_index',m['fixture_index'])).read_text()); schemas={}
+ m=json.loads((root/'manifest.json').read_text()); idx=json.loads((root/m['fixture_index']).read_text()); legacy_idx=json.loads((root/m['legacy_fixture_index']).read_text()); schemas={}
  for rt,e in m['schema_files'].items():
   p=root/e['path']; ok=p.exists() and sha(p)==e['sha256']; add('schema_hash:'+rt,ok)
   if ok:
@@ -16,8 +16,9 @@ def main(root):
    except Exception as ex: add('schema_meta:'+rt,False,{'error':str(ex)})
  add('record_types_match',set(m['record_types'])==set(schemas),{'declared':len(m['record_types']),'loaded':len(schemas)})
  add('fixture_index_hash',sha(root/m['fixture_index'])==m['fixture_index_sha256'])
- add('candidate_fixture_index_hash',sha(root/m['candidate_fixture_index'])==m['candidate_fixture_index_sha256'])
- add('candidate_fixture_index_version',idx.get('schema_version')==m.get('schema_version'),{'index_version':idx.get('schema_version'),'bundle_version':m.get('schema_version')})
+ add('legacy_fixture_index_hash',sha(root/m['legacy_fixture_index'])==m['legacy_fixture_index_sha256'])
+ add('fixture_index_version_matches_bundle',idx.get('schema_version')==m.get('schema_version'),{'index_version':idx.get('schema_version'),'bundle_version':m.get('schema_version')})
+ add('legacy_fixture_index_version_matches_declared_baseline',legacy_idx.get('schema_version')==m.get('legacy_fixture_index_schema_version'),{'index_version':legacy_idx.get('schema_version'),'declared_baseline':m.get('legacy_fixture_index_schema_version')})
  ids=set()
  for x in idx['fixtures']:
   fid=x['fixture_id']; unique=fid not in ids; ids.add(fid)
@@ -42,7 +43,7 @@ def main(root):
   legacy_actual='pass' if not legacy_errors else 'fail'
   if legacy_actual!=x['expected_schema_result']:
    legacy_mismatches.append({'fixture_id':x['fixture_id'],'record_type':x['record_type'],'expected':x['expected_schema_result'],'actual':legacy_actual,'errors':[e.message for e in legacy_errors[:4]]})
- report['legacy_fixture_compatibility']={'index_version':legacy_idx.get('schema_version'),'candidate_schema_version':m.get('schema_version'),'versions_differ':legacy_idx.get('schema_version')!=m.get('schema_version'),'total':len(legacy_idx['fixtures']),'mismatches_against_candidate_schemas':len(legacy_mismatches),'mismatches':legacy_mismatches,'interpretation':'Historical fixture expectations are not silently relabeled. Candidate acceptance uses the separately versioned candidate index.'}
+ report['legacy_fixture_compatibility']={'index_version':legacy_idx.get('schema_version'),'candidate_schema_version':m.get('schema_version'),'versions_differ':legacy_idx.get('schema_version')!=m.get('schema_version'),'total':len(legacy_idx['fixtures']),'mismatches_against_candidate_schemas':len(legacy_mismatches),'mismatches':legacy_mismatches,'interpretation':'The canonical fixture index is version-matched to the candidate bundle; the separately declared legacy index is retained as a historical expectation baseline.'}
  if legacy_mismatches:
   report['limitations'].append(f"Inherited fixture index {legacy_idx.get('schema_version')} has {len(legacy_mismatches)} expected-outcome mismatches when evaluated against {m.get('schema_version')}; see legacy_fixture_compatibility. These do not replace the version-matched candidate fixture suite.")
  # DD-ART-006 cross-record checks over test bundles. These are explicit candidate semantics only.
@@ -93,7 +94,7 @@ def main(root):
    report['semantic_tests'].append({'test_id':case['test_id'],'expected':case['expected'],'actual':actual,'ok':ok,'schema_errors':errs,'semantic_errors':sem_errors})
  add('semantic_test_expectations_match',all(x['ok'] for x in report['semantic_tests']),{'total':len(report['semantic_tests']),'failed':[x['test_id'] for x in report['semantic_tests'] if not x['ok']]})
  bad=[x for x in report['fixtures'] if not x['ok']]; sem_bad=[x for x in report['semantic_tests'] if not x['ok']]
- report['summary']={'checks_total':len(report['checks']),'checks_passed':sum(x['status']=='PASS' for x in report['checks']),'checks_failed':sum(x['status']=='FAIL' for x in report['checks']),'fixtures_total':len(report['fixtures']),'fixtures_expected_result_matched':len(report['fixtures'])-len(bad),'fixtures_mismatched':len(bad),'legacy_fixture_total':len(legacy_idx['fixtures']),'legacy_fixture_mismatches_against_candidate_schemas':len(report['legacy_fixture_compatibility']['mismatches']),'legacy_fixture_index_version':legacy_idx.get('schema_version'),'candidate_fixture_index_version':idx.get('schema_version'),'record_types_loaded':len(schemas),'semantic_tests_total':len(report['semantic_tests']),'semantic_tests_expected_result_matched':len(report['semantic_tests'])-len(sem_bad),'semantic_tests_mismatched':len(sem_bad),'trace_rows':len(rows)}
+ report['summary']={'checks_total':len(report['checks']),'checks_passed':sum(x['status']=='PASS' for x in report['checks']),'checks_failed':sum(x['status']=='FAIL' for x in report['checks']),'fixtures_total':len(report['fixtures']),'fixtures_expected_result_matched':len(report['fixtures'])-len(bad),'fixtures_mismatched':len(bad),'legacy_fixture_total':len(legacy_idx['fixtures']),'legacy_fixture_mismatches_against_candidate_schemas':len(report['legacy_fixture_compatibility']['mismatches']),'legacy_fixture_index_version':legacy_idx.get('schema_version'),'fixture_index_version':idx.get('schema_version'),'record_types_loaded':len(schemas),'semantic_tests_total':len(report['semantic_tests']),'semantic_tests_expected_result_matched':len(report['semantic_tests'])-len(sem_bad),'semantic_tests_mismatched':len(sem_bad),'trace_rows':len(rows)}
  (root/'audit/validation-report.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n')
  print(json.dumps(report['summary'],ensure_ascii=False,indent=2)); return 1 if report['summary']['checks_failed'] or bad or sem_bad else 0
 if __name__=='__main__': sys.exit(main(sys.argv[1]))
