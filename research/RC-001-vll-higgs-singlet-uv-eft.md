@@ -614,14 +614,38 @@ An expanded topology and explicit heavy-mass power-counting ledger is now record
 The census separates four classes that must not be conflated:
 
 1. **Direct mixed-scalar 1PI soft graph at \(O(M_E^{-2})\) in the fixed \(|y_\ell|^2|\lambda_\ell|^2\) sector:** the \(C_{5,\ell}C_{5,\ell}^\ast\) light-fermion bubble. Its PV expression and the specified off-shell/EOM completion are already recorded; independent diagram-level validation remains open.
-2. **Other \(C_5C_5^\ast\) external-state channels:** four crossed two-fermion/two-scalar channels and one four-fermion scalar-loop channel are also one-loop, 1PI, and \(O(M_E^{-2})\). They must be computed separately for a complete dimension-six fermionic Wilson vector.
+2. **Other \(C_5C_5^\ast\) external-state channels:** four crossed two-fermion/two-scalar channels and one four-fermion scalar-loop channel are one-loop and \(O(M_E^{-2})\). Their scalar/vector integral kernels and hard/soft pole cancellations are now analytically checked; the full renormalized operator projection and external diagram-package validation remain open.
 3. **Single \(Q_{LD}\) or \(Q_{RD}\) insertion plus a scalar quartic:** in a four-scalar amplitude the candidate is reducible and contains a scaleless fermion tadpole, so it is not an extra local 1PI scalar coefficient at strict \(O(M_E^{-2})\). In two-fermion/two-scalar amplitudes, however, the corresponding two-scalar-propagator bubbles are non-scaleless one-loop 1PI contributions at the same heavy-mass order.
 4. **Gauge-current exchange and gauge corrections:** current-exchange graphs are reducible in the four-scalar amplitude and belong to a separate current/source ledger. Gauge corrections to \(Q_{LD}/Q_{RD}\) in their fermionic amplitudes are instead one-loop soft corrections at \(O(M_E^{-2})\) and require explicit integrals if those Wilson coefficients are in scope.
 5. **Dimension-eight soft candidates:** \(Q_{LD}^2\), \(Q_{RD}^2\), \(Q_{LD}Q_{RD}\), \(C_5^4\), conditional \(C_5C_7^\ast\), and \(Q_{LD}/Q_{RD}\) VEV wavefunction insertions into the \(C_5C_5^\ast\) bubble carry \(O(M_E^{-4})\) at fixed VEV. They are excluded from a strict dimension-six truncation but must be included in the dimension-eight closure.
 
 The v153 §252.8–§252.10 EOM/source table is a coefficient-mapping obligation rather than a new loop topology. Its dimension-six potential and renormalizable-source companions must be applied exactly once; \(C_5\)-dependent source terms begin at \(O(M_E^{-3})\), and \(C_5C_5^\ast\) source-square terms begin at \(O(M_E^{-4})\). The kinetic-mixing boundary remains unresolved, and the scalar/source projection does not close all fermionic external-state amplitudes.
 
-**Decision:** this census narrows the explicit-integral queue but does not close the model-level Wilson vector. Next, independently validate the existing scalar \(C_5C_5^\ast\) bubble; compute its crossed two-fermion/two-scalar and four-fermion channels; evaluate the \(Q_{LD}/Q_{RD}\)-plus-quartic and gauge-corrected fermionic soft amplitudes required by the frozen basis; then close current/source matching and proceed to the full \(O(M_E^{-4})\) hard/soft calculation. PR #4 remains Draft/Open.
+**Decision:** the scalar bubble, crossed-current hard/soft kernels, four-fermion scalar bubble, and universal Q6-plus-quartic kernel have been independently reduced and checked algebraically. The next blocking tasks are external diagram-level validation, complete gauge corrections/contact terms/counterterms, and the full common-basis EOM/source projection. These remain necessary before the model-level Wilson vector can be called closed. PR #4 remains Draft/Open.
+
+## 10.12 Dimension-six soft integrals: independent hard/soft checks
+
+The detailed calculation is recorded in research/RC-001-dim6-soft-loop-integrals-and-checks.md, with the reproducible script calculations/RC-001-dim6-soft-loop-crosscheck.py and captured output validation/RC-001-dim6-soft-loop-crosscheck.txt. The script passed 36 exact symbolic checks. These are analytic integral/tensor-reduction checks, not CI and not an external diagram-package run.
+
+The massless bubble is independently reproduced as
+\[
+B_0(q^2;0,0)=\Delta_{\rm UV}-\ln\frac{-q^2-i0}{\mu_R^2}+2,
+\]
+with \(\int_0^1\ln[x(1-x)]\,dx=-2\), and the crossed vector integral gives \(\int k^\mu/[k^2(k+q)^2]=-q^\mu B_0/2\).
+
+For the three \(C_5C_5^\ast\) crossed two-fermion/two-scalar channels with loop-dependent heavy propagators, the hard kernel contains
+\[
+\left(1-\frac2d\right)q^\mu J_{22}+\frac2d(p_3-p_1)^\mu J_{13}.
+\]
+Retaining the \(O(\epsilon)\) part of \(1-2/d\) yields the finite hard coefficient \(L_E/2-3/4\); the hard IR pole cancels the EFT soft UV pole. The on-shell \((p_3-p_1)^\mu\) term vanishes. The \(\bar L L H^\dagger H\) bare topology is different: its heavy propagators carry only external-channel momenta, so its \(O(M_E^{-2})\) loop is reproduced by the EFT soft region; counterterm/field/operator renormalization still must be matched.
+
+The \(C_5C_5^\ast\) four-fermion channel has hard local scalar-bilinear coefficient
+\[
+\frac{|C_{5,\ell}|^2}{16\pi^2}(L_\ell-2),
+\]
+and its hard/soft sum has neither an uncancelled pole nor the constants \(\pm2\). In the \(Q_{LD}/Q_{RD}\)-plus-quartic channels, the hard/soft kernel is proportional to \(p+Q/2=(p-p')/2\), so the massless on-shell amplitude is EOM-redundant; its Wilson/source effect must be handled in the declared basis rather than counted as an independent current coefficient.
+
+**Evidence boundary:** no FeynArts/FeynCalc/Mathematica diagram generation has been run. The full gauge-corrected \(Q_{LD}/Q_{RD}\) and current-operator amplitudes, covariant-derivative contact terms, counterterms, all weak-index/EOM source rows, kinetic-mixing dependence, and the remaining dimension-eight hard matching are still open. PR #4 remains Draft/Open.
 
 ## 11. Change history
 
@@ -635,3 +659,4 @@ The v153 §252.8–§252.10 EOM/source table is a coefficient-mapping obligation
 | 2026-10-23 | EFT soft-insertion power counting | Recorded the (Q_{LD},Q_{RD}) tree-level (1/M_E^2) operators and showed their VEV wavefunction insertions into the (C_5^2) bubble begin at (O(M_E^{-4})) | Bound the restricted Yukawa-sector conclusion without claiming that all portal/gauge/scalar soft topologies are closed |
 | 2026-10-23 | Dimension-eight soft-pole reconciliation | Matched the C5-squared constant soft pole to the X^2Y^2 counterterm in master §§262.5 and 264.4; kept full dimension-eight hard matching open | Distinguish the verified subset-level potential counterterm from the complete O(M_E^-4) Wilson vector |
 | 2026-10-23 | EFT soft-topology census | Expanded the structural ledger to 26 scalar, fermionic, current/source, and dimension-eight topology families; added crossed C5-squared fermionic channels and same-order Q6-plus-quartic/gauge soft corrections | Prioritize explicit integrals without overstating model-level Wilson-vector closure |
+| 2026-10-23 | Dimension-six soft-loop cross-check | Added Feynman-parameter Gamma-function checks, crossed-current hard/soft pole cancellation, four-fermion hard/soft cancellation, and the Q6-plus-quartic EOM kernel; saved 36 exact symbolic checks | Advance the dimension-six soft calculation while keeping gauge-sector and model-level closure open |
