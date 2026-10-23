@@ -50,6 +50,7 @@ For each external amplitude and each gauge sector, produce the labeled UV graph 
 4. The additive \(B-A'\) vacuum-polarization trace and finite heavy threshold for the stated charge spectrum.
 5. Exact-algebra scripts for the displayed parameter integrals, partial fractions, charge traces, and \(SU(2)\) contractions.
 6. Signed charge-factor tables for all three pairings at the four conjugate Yukawa vertices, plus a tree-propagator argument showing the complete purely light vertex subfamily cancels from the hard difference at \(O(M_E^{-2})\) when the EFT contact set is included.
+7. A conditional (B-A') input-parameter counterterm sub-block, using an explicit signed off-diagonal propagator coefficient; it remains separate from the complete mixed-gauge amplitude.
 
 ### Not established
 
@@ -76,7 +77,7 @@ For each external amplitude and each gauge sector, produce the labeled UV graph 
 
 ## 6. Claim and downstream impact
 
-- **Claim IDs:** CL-010 (heavy-line/scalar-master subblocks), CL-011 (\(B-A'\) additive pole and threshold), CL-012 (signed conjugate Yukawa-vertex charge factors), CL-013 (light-only vertex hard cancellation), CL-005 (complete Wilson vector; remains unresolved).
+- **Claim IDs:** CL-010 (heavy-line/scalar-master subblocks), CL-011 (\(B-A'\) additive pole and threshold), CL-012 (signed conjugate Yukawa-vertex charge factors), CL-013 (light-only vertex hard cancellation), CL-014 (conditional mixed input-parameter poles), CL-005 (complete Wilson vector; remains unresolved).
 - The new sub-blocks can support only their narrowly stated integral/charge-trace claims.
 - No new finite \(Q_{LD}\) or \(Q_{RD}\) coefficient is authorized for a manuscript, scan, or phenomenological conclusion.
 - Existing bosonic field-strength/current-to-gauge and scalar/source terms in master §§254–255 must not be duplicated.
