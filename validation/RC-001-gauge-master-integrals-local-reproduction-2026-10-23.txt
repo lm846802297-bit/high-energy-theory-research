@@ -5,6 +5,7 @@ Method: independently re-evaluated the Feynman-parameter integrals and epsilon e
 
 Output:
 heavy-line Feynman-parameter epsilon expansion: PASS
+heavy-light vertex d*B0 finite epsilon-times-pole term: PASS
 propagator insertion sign from stated inverse-propagator convention: PASS
 crossed-box partial fractions and hard-soft subtraction: PASS
 equal-mass B-A' threshold cancellation: PASS
