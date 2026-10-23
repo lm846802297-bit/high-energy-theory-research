@@ -161,7 +161,45 @@ for i in range(2):
                 )
                 check(f"SU(2) singlet/triplet tensor completeness {i}{j}{k}{l}", lhs, rhs)
 
-# 7. Explicit power-counting and multiplicity ledger.
+# 7. Chiral Fierz identity in an explicit Weyl/chiral gamma-matrix basis.
+# The matrix identity is positive; the familiar minus sign in
+# (bar L e_R)(bar e_R L) = -1/2 (bar L gamma_mu L)(bar e_R gamma^mu e_R)
+# arises when the Grassmann fields are reordered after applying this identity.
+I2 = sp.eye(2)
+zero2 = sp.zeros(2)
+gamma = [
+    sp.BlockMatrix([[zero2, I2], [I2, zero2]]).as_explicit(),
+    sp.BlockMatrix([[zero2, sigma1], [-sigma1, zero2]]).as_explicit(),
+    sp.BlockMatrix([[zero2, sigma2], [-sigma2, zero2]]).as_explicit(),
+    sp.BlockMatrix([[zero2, sigma3], [-sigma3, zero2]]).as_explicit(),
+]
+gamma5 = sp.I * gamma[0] * gamma[1] * gamma[2] * gamma[3]
+PL = (sp.eye(4) - gamma5) / 2
+PR = (sp.eye(4) + gamma5) / 2
+metric = (1, -1, -1, -1)
+gamma_algebra_failures = 0
+fierz_failures = 0
+for mu in range(4):
+    for nu in range(4):
+        anticommutator = gamma[mu] * gamma[nu] + gamma[nu] * gamma[mu]
+        expected = 2 * metric[mu] * sp.eye(4) if mu == nu else sp.zeros(4)
+        if anticommutator != expected:
+            gamma_algebra_failures += 1
+for a in range(4):
+    for b in range(4):
+        for c in range(4):
+            for d0 in range(4):
+                lhs = PR[a, b] * PL[c, d0]
+                rhs = sp.Rational(1, 2) * sum(
+                    metric[mu] * (gamma[mu] * PL)[a, d0] * (gamma[mu] * PR)[c, b]
+                    for mu in range(4)
+                )
+                if sp.simplify(lhs - rhs) != 0:
+                    fierz_failures += 1
+check("explicit chiral-basis Dirac algebra", gamma_algebra_failures, 0)
+check("explicit chiral Fierz matrix identity (Grassmann sign separate)", fierz_failures, 0)
+
+# 8. Explicit power-counting and multiplicity ledger.
 hard_crossed_channel_multiplicities = {
     "Lbar L Sdag S": 1,
     "lRbar lR Hdag H": 1,
