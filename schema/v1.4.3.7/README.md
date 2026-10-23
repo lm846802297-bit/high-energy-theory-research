@@ -26,7 +26,7 @@ Static implementation findings, version-label questions, and unexecuted regressi
 
 The migration tool uses rules version `v1.4.3.7-migration-rules-3`. Static review tightened source inventory, project/key checks, duplicate-key handling, timestamp validation, record-type-specific aliases, and staging-output safety. These changes have not been executed in tests or CI. Synthetic fixtures still do not establish compatibility with the full historical v1.3 corpus.
 
-- The tool loads the read-only source snapshot first and resolves references only by unique primary key within the same project.
+- The tool inventories `.json`, `.yaml`, and `.yml` source files before resolving references only by unique primary key within the same project. Duplicate JSON/YAML mapping keys, malformed files, non-object records, and unsupported YAML constructs are reported as unresolved rather than silently ignored.
 - A uniquely resolved validation_plan maps to validation_plan_ids.
 - A validation_activity reference maps to validation_activity_ids only when the target is unique in the same project, started_at is a valid timezone-aware ISO date-time, and its source status has an explicit mapping to a v1.4 enum. in_progress is not in the target enum (running is), so it remains unresolved until an explicit mapping is approved.
 - Missing targets, cross-type duplicate IDs, unsupported record types, project mismatches, and insufficient launch evidence remain unresolved.
