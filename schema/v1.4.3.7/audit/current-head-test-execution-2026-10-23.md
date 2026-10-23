@@ -69,3 +69,50 @@ The Schema validator should be considered successful only if its generated repor
 - Do not relabel the current HEAD as tested or passing.
 - Keep PR #6 Open and Draft, keep `commit_allowed=false`, and do not merge or release.
 - Resume code-level diagnosis only after a runner actually starts and reports failing steps, or after the repository is available in an executable local environment.
+
+
+## Follow-up: integration test fixture mismatch (2026-10-23)
+
+### User-provided local results for the pre-fix HEAD
+
+For `52ad314861a9009e19be75475a630854b6537fc4`, the user reports:
+- migration regression tests: 32/32 passed;
+- full Schema validator: 68/68 checks, 83/83 candidate fixture outcomes, 16/16 semantic cases, and 125 trace rows passed;
+- integration tests: 29/30 passed, with only `test_30_validation_ids_resolve_but_invalid_targets_are_withheld` failing;
+- `tests/unit`: 75/75 passed;
+- Python compilation passed.
+
+These are the user's reported local results. They were not reproduced in this execution environment. The local report used environment marker `local`, with no GitHub Actions run ID, so it is not CI provenance evidence.
+
+### Root-cause assessment from source review
+
+The failing test's assertions expected schema-invalid targets, but all three source fixtures were target-schema-complete:
+- `claim.json` contained the required `statement`;
+- `validation-activity.json` contained the required `tool_id`;
+- `validation-plan.json` contained the required `method`.
+
+The migration's observed zero schema failures and zero unresolved items were therefore consistent with those fixtures. The defect was in the test fixture setup, not evidence of a migration implementation defect.
+
+### Minimal corrective change
+
+The three fixture records now each omit exactly one required target property, while retaining the IDs and fields needed to test legacy `validation_ids` resolution:
+- Claim: omit `statement`;
+- validation activity: omit `tool_id`;
+- validation plan: omit `method`.
+
+The integration test now requires exactly three `TARGET_SCHEMA_VALIDATION_FAILED` diagnostics covering those three record types, `migratable_record_count == 0`, and no mapped `target_record_type` for any invalid target. It also preserves the separate assertion that `migrate_record` successfully resolves the Claim's activity and plan references without reference-resolution errors. Thus the test distinguishes successful reference typing from complete target-schema validity.
+
+### New HEAD and verification status
+
+- New HEAD after the fixture/test correction: `b478482f6d94902d239531ce1b0dfcad6599b1d0`.
+- Static reinspection confirms the three fixture fields are absent, each is required by its corresponding target Schema, and the strengthened assertions are present.
+- Workflow [#39961892933](https://github.com/lm846802297-bit/high-energy-theory-research/actions/runs/39961892933) still failed before runner assignment (`runner_id=0`, no runner name, no steps). No Python tests ran on the new HEAD.
+- Therefore the fix is **source-reviewed but not execution-verified**. The user should rerun the integration test and relevant regression suites against this exact new HEAD in the local checkout. Do not claim the previous 29/30 result applies to the modified HEAD.
+
+### Historical Fixture Index mismatch remains separate
+
+The four v1.4.3.6 index entries differ from the candidate index only in paths for valid/conditional `run_plan` and `run_manifest` fixtures. The index audit records that these entries retain their expected schema/semantic outcomes and requirement/error metadata. This historical expectation drift is reported separately by the candidate validator and does not explain the integration failure above, which uses a dedicated three-record migration source directory. The original v1.4.3.6 source archive remains unavailable, so byte-for-byte archive lineage is still unverified.
+
+### Disposition
+
+Keep PR #6 Open and Draft. Keep `commit_allowed=false`. Do not merge or release until the integration test passes on the new HEAD and the required CI evidence is available.
