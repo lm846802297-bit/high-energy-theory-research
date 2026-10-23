@@ -103,7 +103,7 @@ For the heavy-light-fermion vertex, the representative numerator contraction
 \gamma^\mu\slashed k P_{R,L}\slashed k\gamma_\mu
 =d\,k^2 P_{R,L}
 \]
-(up to the chirality relabeling fixed by the vertex orientation) reduces the loop kernel to \(d\,B_0\). For the heavy-scalar vertex, the scalar-gauge vertex supplies \(2k_\mu\); after symmetric integration the term proportional to \(M_E\slashed k\) vanishes and the numerator reduces to \(2k^2\), giving \(2B_0\). These are numerator-reduction kernels before the overall Feynman-rule signs, representation generators, and orientation-dependent charge factors are applied.
+(up to the chirality relabeling fixed by the vertex orientation) reduces the loop kernel to \(d\,B_0\). For the heavy-scalar vertex, the scalar-gauge vertex supplies one internal momentum \(k_\mu\) when the external scalar momentum is set to zero; after symmetric integration the term proportional to \(M_E\slashed k\) vanishes and the numerator reduces to \(k^2\), giving \(B_0\). The sign depends on the consistently assigned scalar-flow orientation and is not fixed by this scalar-kernel statement. These are numerator-reduction kernels before the overall Feynman-rule signs, representation generators, and orientation-dependent charge factors are applied.
 
 The light-fermion–scalar exchange at a Yukawa vertex contains no heavy propagator. At zero external momenta its loop integral is scaleless and belongs to the common soft sector; it cannot be assigned a hard finite coefficient independently of the matched EFT subtraction.
 
