@@ -36,10 +36,10 @@ class SchemaValidationEvidenceTests(unittest.TestCase):
     def test_candidate_fixture_index_baseline_link_matches_manifest(self):
         manifest = json.loads(MANIFEST_PATH.read_text(encoding="utf-8"))
         candidate_index = json.loads(
-            (BUNDLE / manifest["fixture_index"]).read_text(encoding="utf-8")
+            (SCHEMA_ROOT / manifest["fixture_index"]).read_text(encoding="utf-8")
         )
         legacy_index = json.loads(
-            (BUNDLE / manifest["legacy_fixture_index"]).read_text(encoding="utf-8")
+            (SCHEMA_ROOT / manifest["legacy_fixture_index"]).read_text(encoding="utf-8")
         )
         validator = VALIDATOR_PATH.read_text(encoding="utf-8")
 
@@ -73,7 +73,7 @@ class SchemaValidationEvidenceTests(unittest.TestCase):
 
     def test_manifest_declares_the_test_id_pattern_and_strict_field_policy(self):
         manifest = json.loads(MANIFEST_PATH.read_text(encoding="utf-8"))
-        test_case_path = BUNDLE / "schemas" / "test_case.schema.json"
+        test_case_path = SCHEMA_ROOT / "schemas" / "test_case.schema.json"
         test_case = json.loads(test_case_path.read_text(encoding="utf-8"))
         validator = VALIDATOR_PATH.read_text(encoding="utf-8")
 
