@@ -35,7 +35,7 @@ The matching targets in this note are the \(O(g^2/M_E^2)\) corrections to the am
 
 For each tree-level heavy-exchange graph, label the internal heavy line \(E\) and the four external lines \(f,\bar f,\phi,\phi^\ast\). A one-gauge-boson correction is classified by the unordered pair of lines receiving the two gauge endpoints. The 10 distinct pairs among the five line types are enumerated below. Repeated insertions on the heavy line, the two charge-conjugate tree routings, both Yukawa vertices, and both orientations of a complex scalar must be generated separately by a diagram generator; the pair table is an attachment-class census, not a claim that every pair corresponds to exactly one graph.
 
-For diagonal gauge propagators, the nonzero pair tests are \(Y_iY_j\), \(x_ix_j\), and the existence of two \(SU(2)\)-doublet generators. For an off-diagonal \(B\)-\(A'\) propagator induced by kinetic mixing, the charge factor is proportional to
+For diagonal gauge propagators, the nonzero pair tests are \(Y_iY_j\), \(x_ix_j\), and the existence of two \(SU(2)\)-doublet generators. Stable pair IDs are assigned in the order listed in the census output: LD or RD, gauge label, and a two-digit index. Thus the sets are LD-B-01…10, LD-W-01…06, LD-X-01…03, LD-BX-01…09, RD-B-01…03, RD-X-01…10, and RD-BX-01…07. The same structural ID applies to both flavors; the signed coefficient is evaluated separately at \(\eta_\mu=+1\) and \(\eta_\tau=-1\). Self-energy/contact IDs use the line and gauge labels (for example LD-SE-E-B, RD-SE-S-X, LD-CT-B and RD-CT-X). For an off-diagonal \(B\)-\(A'\) propagator induced by kinetic mixing, the charge factor is proportional to
 \[
 Y_i x_j+x_iY_j
 \]
