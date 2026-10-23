@@ -76,6 +76,16 @@ class ProjectRegistryValidatorTests(unittest.TestCase):
         report = validate_registry(self.registry, self.root)
         self.assertTrue(any(e["code"] == "CANONICAL_RECORD_OUTSIDE_ROOT" for e in report["errors"]))
 
+    def test_duplicate_yaml_mapping_key_is_rejected(self):
+        self.registry.write_text(
+            "registry_version: 1\n"
+            "registry_version: 1\n"
+            "projects: []\n",
+            encoding="utf-8",
+        )
+        report = validate_registry(self.registry, self.root)
+        self.assertTrue(any(e["code"] == "REGISTRY_PARSE_ERROR" for e in report["errors"]))
+
     def test_duplicate_project_id_is_rejected(self):
         self._write_registry()
         text = self.registry.read_text(encoding="utf-8")
