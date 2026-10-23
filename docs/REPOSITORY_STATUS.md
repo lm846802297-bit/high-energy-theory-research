@@ -21,7 +21,7 @@
 
 The repository has historical green software-test results for pre-integration SHAs, including the candidate schema suite and migration unit tests. Those results remain valid only for their recorded commits.
 
-The latest completed main run checked during this update is run 39896401710 for SHA 35d854699b652d69a1e51335dfaff1fe27dda0cd. It failed before any workflow step was recorded because no runner was assigned. This is not evidence of a code-test failure, but it is not a passing CI result either. The governance-fix branch also requires its own validation.
+The latest completed main run checked during this update is run 39896401710 for SHA 35d854699b652d69a1e51335dfaff1fe27dda0cd. It failed before any workflow step was recorded because no runner was assigned. This is not evidence of a code-test failure, but it is not a passing CI result either. A manual dispatch of the Schema-only workflow for PR #6 HEAD `531497c0e6e45ce4316e77266530856fe9544f26` was accepted as [run 39898913319](https://github.com/lm846802297-bit/high-energy-theory-research/actions/runs/39898913319), but GitHub blocked job execution because of account-level billing/payment or spending-limit status. No steps or artifacts were produced; the governance-fix branch remains unvalidated.
 
 ## Release gates
 
