@@ -45,6 +45,19 @@ Each row is to be populated with explicit UV graphs, EFT graphs, UV and IR poles
 | RD-CUR (see `research/RC-001-dim6-current-form-factor-atlas.md`) | \(\bar\ell_R\ell_R V\) and \(S^\dagger S V\) current/form-factor amplitudes | \(B,A'\), and conditional mixed current sets | EFT current insertions, contact terms and counterterms | Use the same \(U(1)\) current and kinetic-mixing convention | NOT EVALUATED |
 | BASIS | Full common-basis coefficient vector | Sum only amplitudes at the same coupling order and external-state projection | Apply EOM/IBP/Fierz once to the summed coefficients | Record redundant coefficients, nonredundant coefficients, source/potential companions and four-fermion shifts separately | OPEN |
 
+### 2.1 Evaluated diagonal-gauge input-parameter counterterms
+
+The pure diagonal-gauge \(\overline{\mathrm{MS}}\) parameter-renormalization sub-block is derived in `research/RC-001-dim6-gauge-parameter-counterterms.md`. With \(Y_L=-1/2\), \(Y_E=-1\), \(C_2(L)=3/4\), \(C_2(E)=0\), and \(Q_X(L)=Q_X(E)=\eta_\ell Q_\ell\),
+\[
+\left.\frac{\delta C_{LD}}{C_{LD}}\right|_{y,M;\,\mathrm{diag}}
+=\frac{1}{16\pi^2\epsilon}\left(\frac94g_Y^2-\frac94g_2^2+0\cdot g_X^2\right).
+\]
+For the \(\lambda_\ell\bar E_{\ell L}S_\ell\ell_R\) coupling, \(E\) and \(\ell_R\) have equal-magnitude hypercharge and opposite \(X\)-charge, so
+\[
+\left.\frac{\delta C_{RD}}{C_{RD}}\right|_{\lambda,M;\,\mathrm{diag}}=0.
+\]
+These are **only** the \(y,\lambda,M_E\) parameter-counterterm pieces. They are not the complete UV pole of the four-point amplitude, not the EFT operator counterterm, and not a finite matching coefficient. Mixed \(B-A'\) kinetic-mixing terms are not included in these expressions and remain conditional on the declared gauge-field basis/boundary.
+
 ## 3. Pole and finite-part table to fill per diagram family
 
 For every graph family \(a\), store the amplitude in a fixed common normalization:
