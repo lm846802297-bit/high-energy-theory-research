@@ -274,25 +274,53 @@ def migrate(input_dir, schemas_dir=None, output_dir=None, unknown_policy="quaran
         input_resolved=inp.resolve(); output_resolved=outroot.resolve()
         if output_resolved==input_resolved or input_resolved in output_resolved.parents:
             raise ValueError("staging output must be outside the input tree to prevent recursive re-ingestion")
+        if outroot.is_symlink(): raise ValueError("staging output path must not be a symlink")
         if outroot.exists():
             if not outroot.is_dir(): raise ValueError("staging output path exists and is not a directory")
             if any(outroot.iterdir()): raise ValueError("refusing to write staging output into a non-empty directory; use a new empty path")
+    mapping_contract,mapping_contract_sha256=load_mapping_contract()
     records=[]; all_changes=[]; all_unresolved=[]; all_warnings=[]; idmap=[]
     schema_props={}
     schema_root=Path(schemas_dir) if schemas_dir else Path(__file__).resolve().parents[1]/"schemas"
     if not schema_root.is_dir(): raise ValueError(f"candidate schemas directory not found: {schema_root}")
+    bundle_root=schema_root.parent
+    if schema_root.resolve()!=(bundle_root/"schemas").resolve(): raise ValueError("schemas_dir must be the schemas directory adjacent to its bundle manifest")
+    manifest_path=bundle_root/"manifest.json"
+    if not manifest_path.is_file(): raise ValueError(f"candidate schema manifest not found: {manifest_path}")
+    try:
+        manifest_bytes=manifest_path.read_bytes()
+        manifest=json.loads(manifest_bytes.decode("utf-8"))
+    except Exception as e:
+        raise ValueError(f"candidate schema manifest cannot be loaded: {e}") from e
+    if manifest.get("schema_version")!="1.4.3.7-candidate" or manifest.get("bundle_status")!="candidate" or manifest.get("release_status")!="not_released":
+        raise ValueError("migration requires the unreleased Schema v1.4.3.7 candidate manifest")
+    manifest_schemas=manifest.get("schema_files",{})
+    if set(manifest_schemas)!=KNOWN_TYPES:
+        raise ValueError("manifest schema_files do not match the expected candidate record types")
     schema_files=sorted(schema_root.glob("*.schema.json"))
     if not schema_files: raise ValueError(f"no *.schema.json files found in {schema_root}")
     for p in schema_files:
-        try: schema=json.loads(p.read_text(encoding="utf-8"))
-        except Exception as e: raise ValueError(f"invalid candidate schema JSON {p}: {e}") from e
         record_type=p.name.replace(".schema.json","")
+        entry=manifest_schemas.get(record_type)
+        if not isinstance(entry,dict) or not isinstance(entry.get("path"),str) or not isinstance(entry.get("sha256"),str):
+            raise ValueError(f"manifest schema entry is malformed for {record_type}")
+        if (bundle_root/entry["path"]).resolve()!=p.resolve():
+            raise ValueError(f"manifest schema path does not match file location: {p}")
+        schema_bytes=p.read_bytes()
+        if digest_bytes(schema_bytes)!=entry["sha256"]:
+            raise ValueError(f"candidate schema SHA-256 does not match manifest: {p}")
+        try: schema=json.loads(schema_bytes.decode("utf-8"))
+        except Exception as e: raise ValueError(f"invalid candidate schema JSON {p}: {e}") from e
         props=schema.get("properties")
         if not isinstance(props,dict): raise ValueError(f"schema has no properties object: {p}")
-        if props.get("record_type",{}).get("const")!=record_type: raise ValueError(f"schema record_type does not match filename: {p}")
-        if props.get("schema_version",{}).get("const")!="1.4": raise ValueError(f"schema version const is not 1.4: {p}")
+        record_type_schema=props.get("record_type")
+        version_schema=props.get("schema_version")
+        if not isinstance(record_type_schema,dict) or record_type_schema.get("const")!=record_type:
+            raise ValueError(f"schema record_type does not match filename: {p}")
+        if not isinstance(version_schema,dict) or version_schema.get("const")!="1.4":
+            raise ValueError(f"schema version const is not 1.4: {p}")
         schema_props[record_type]=props
-    if set(schema_props)!=KNOWN_TYPES:
+    if set(schema_props)!=KNOWN_TYPES or len(schema_files)!=len(KNOWN_TYPES):
         raise ValueError(f"candidate schema set mismatch; missing={sorted(KNOWN_TYPES-set(schema_props))}, extra={sorted(set(schema_props)-KNOWN_TYPES)}")
 
     # Load a read-only source snapshot first so legacy references can be resolved
@@ -302,9 +330,11 @@ def migrate(input_dir, schemas_dir=None, output_dir=None, unknown_policy="quaran
     operator_name=operator.strip() if isinstance(operator,str) and operator.strip() else "not_recorded"
     source_files=sorted(list(inp.rglob("*.json"))+list(inp.rglob("*.yaml"))+list(inp.rglob("*.yml")))
     if not source_files:
-        all_unresolved.append({"path":str(inp),"code":"EMPTY_SOURCE_SNAPSHOT","message":"no JSON source files were found"})
+        all_unresolved.append({"path":str(inp),"code":"EMPTY_SOURCE_SNAPSHOT","message":"no JSON/YAML source files were found"})
     source_entries=[]; source_index={}; typed_source_index={}
     for p in source_files:
+        if p.is_symlink():
+            all_unresolved.append({"path":source_relpath(p),"code":"SOURCE_SYMLINK_REJECTED","message":"source records must be regular files inside the input snapshot"}); continue
         try: raw_bytes=p.read_bytes()
         except Exception as e:
             all_unresolved.append({"path":source_relpath(p),"code":"SOURCE_READ_FAILED","message":str(e)}); continue
@@ -358,7 +388,7 @@ def migrate(input_dir, schemas_dir=None, output_dir=None, unknown_policy="quaran
         mapping_basis="unresolved" if unresolved else ("source_reference_resolution" if any(change.get("from")=="validation_ids" for change in changes) else "explicit_rule")
         rewritten_reference_count=sum(change.get("reference_count",0) for change in changes)
         idmap.append({"source_record_uri":source_uri,"source_record_type":rt,"source_primary_key":primary_key(rec) if isinstance(primary_key(rec),str) else None,"source_sha256":src_sha,"target_record_type":rt if target_record is not None else None,"target_primary_key":primary_key(target_record) if target_record is not None else None,"target_sha256":records[-1]["target_sha256"],"candidate_target_record_type":rt if out is not None and unresolved else None,"candidate_target_primary_key":primary_key(out) if out is not None and unresolved and isinstance(primary_key(out),str) else None,"candidate_target_sha256":records[-1]["candidate_target_sha256"],"mapping_basis":mapping_basis,"mapping_rule_id":"MIG-002","applied_field_mapping_ids":sorted({change["rule_id"] for change in changes if change.get("rule_id","").startswith("MAP-")} ),"review_status":"blocked_unresolved" if unresolved else "pending_review","collision_check":collision_check,"rewritten_reference_count":rewritten_reference_count,"unresolved_count":len(unresolved),"mapped_at_utc":generated_at_utc,"operator":operator_name})
-    report={"migration_rule_version":RULE_VERSION,"source_schema_version":"1.3","target_schema_version":"1.4","mode":"write_staging" if write_staging else "dry_run","generated_at_utc":generated_at_utc,"operator":operator_name,"source_count":len(source_files),"migratable_record_count":sum(record["target_record"] is not None for record in records),"loaded_record_count":len(source_entries),"source_files_skipped_count":len(source_files)-len(source_entries),"changes":all_changes,"unresolved":all_unresolved,"warnings":all_warnings,"id_mapping":idmap,"commit_allowed":False,"target_schema_validation":"not_performed_by_migration_prototype","limitations":["Candidate schema files are loaded fail-closed for top-level property filtering and enum checks, but full JSON Schema validation of target records is not performed by this prototype.","Source references are resolved only within the same project and only when primary IDs are unique.","A validation activity reference is typed only when the source activity is uniquely identified, its status is supported by an explicit target mapping, and started_at is a timezone-aware ISO date-time.","Source execution statuses outside the v1.4 target enum remain unresolved until an explicit mapping rule is approved.","Non-object JSON files, missing record_type values, malformed JSON, duplicate typed primary keys, and empty source snapshots block migration.","This prototype does not implement transactional commit or pointer-based rollback.","It does not recalculate TEC contract hashes unless canonical source payload is available.","No migration is considered committed; human approval and full target validation are required."]}
+    report={"migration_rule_version":RULE_VERSION,"source_schema_version":"1.3","target_schema_version":"1.4","mode":"write_staging" if write_staging else "dry_run","generated_at_utc":generated_at_utc,"mapping_contract_sha256":mapping_contract_sha256,"schema_manifest_sha256":digest_bytes(manifest_bytes),"operator":operator_name,"source_count":len(source_files),"migratable_record_count":sum(record["target_record"] is not None for record in records),"loaded_record_count":len(source_entries),"source_files_skipped_count":len(source_files)-len(source_entries),"changes":all_changes,"unresolved":all_unresolved,"warnings":all_warnings,"id_mapping":idmap,"commit_allowed":False,"target_schema_validation":"not_performed_by_migration_prototype","limitations":["Candidate schema files are loaded fail-closed for top-level property filtering and enum checks, but full JSON Schema validation of target records is not performed by this prototype.","Source references are resolved only within the same project and only when primary IDs are unique.","A validation activity reference is typed only when the source activity is uniquely identified, its status is supported by an explicit target mapping, and started_at is a timezone-aware ISO date-time.","Source execution statuses outside the v1.4 target enum remain unresolved until an explicit mapping rule is approved.","Non-object JSON files, missing record_type values, malformed JSON, duplicate typed primary keys, and empty source snapshots block migration.","This prototype does not implement transactional commit or pointer-based rollback.","It does not recalculate TEC contract hashes unless canonical source payload is available.","No migration is considered committed; human approval and full target validation are required."]}
     if write_staging:
         outroot=Path(output_dir)
         outroot.mkdir(parents=True,exist_ok=True)
@@ -368,7 +398,7 @@ def migrate(input_dir, schemas_dir=None, output_dir=None, unknown_policy="quaran
             p.write_text(json.dumps(rec["target_record"],ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
         (outroot/"migration-report.json").write_text(json.dumps(report,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
         with (outroot/"id-mapping.csv").open("w",encoding="utf-8-sig",newline="") as f:
-            fields=list(idmap[0].keys()) if idmap else ["source_path"]
+            fields=ID_MAPPING_FIELDS
             w=csv.DictWriter(f,fieldnames=fields);w.writeheader();w.writerows(idmap)
     return report
 def main():
