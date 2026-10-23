@@ -33,6 +33,25 @@ class SchemaValidationEvidenceTests(unittest.TestCase):
         self.assertTrue(migration["staging_only"])
         self.assertEqual(migration["compatibility_status"], "unverified")
 
+    def test_candidate_fixture_index_baseline_link_matches_manifest(self):
+        manifest = json.loads(MANIFEST_PATH.read_text(encoding="utf-8"))
+        candidate_index = json.loads(
+            (BUNDLE / manifest["fixture_index"]).read_text(encoding="utf-8")
+        )
+        legacy_index = json.loads(
+            (BUNDLE / manifest["legacy_fixture_index"]).read_text(encoding="utf-8")
+        )
+        validator = VALIDATOR_PATH.read_text(encoding="utf-8")
+
+        self.assertEqual(candidate_index["schema_version"], manifest["schema_version"])
+        self.assertEqual(candidate_index["source_baseline_index"], manifest["legacy_fixture_index"])
+        self.assertEqual(
+            candidate_index["source_baseline_schema_version"],
+            manifest["legacy_fixture_index_schema_version"],
+        )
+        self.assertEqual(legacy_index["schema_version"], manifest["legacy_fixture_index_schema_version"])
+        self.assertIn("candidate_index_declares_manifest_legacy_baseline", validator)
+
     def test_validator_emits_run_scoped_provenance_and_count_checks(self):
         validator = VALIDATOR_PATH.read_text(encoding="utf-8")
         for token in (
