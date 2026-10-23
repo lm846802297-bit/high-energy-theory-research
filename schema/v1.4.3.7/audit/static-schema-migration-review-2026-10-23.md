@@ -84,6 +84,12 @@ The follow-up findings began as source-level review conclusions. The latest comp
 
 The candidate Task Execution Contract Schema does not require `alternative_identity_methods`. The migration previously mapped legacy `contract_hash` to `contract_sha256` and could stage the record without recomputing that digest under the candidate payload rule. Because DD-ART-010 remains pending and the matrix says a missing registry must not be silently defaulted, this was a concrete fail-open gap. The migration is now rules v6 and implements MIG-015: missing registries and unverified source contract hashes produce unresolved items and withhold the target. Two regression tests and a contract-rule assertion were added. They have not yet run locally; do not treat the rules-v5 pass as validation of this change.
 
+
+
+### Additional static finding — source-root symlink bypass
+
+The source inventory originally checked `is_symlink()` only on descendants returned by `inp.rglob("*")`, not on `input_dir` itself. A symlinked directory supplied as the migration root could therefore evade the explicit root-level symlink policy. The migrator now checks the input root and descendants; `test_symlinked_source_root_blocks_all_staging_targets` was added. Together with the two MIG-015 Task Execution Contract tests, three new migration tests are pending local execution. This is a correction to the existing MIG-010 source-symlink rule, not a new normative decision.
+
 ### Additional static finding — symlink policy mismatch
 
 The Artifact Schema's `FileEntry.entry_type` enum includes `symlink`, while `directory_manifest.py` rejects symlink entries and the DD-ART-008 recommendation proposes rejecting symlinks by default. This is an unresolved Schema/helper contract mismatch. Keep it open until the owner approves whether symlinks are forbidden in the normative Schema or require a filesystem-aware verifier. No Schema change has been made because DD-ART-008 is still pending.
