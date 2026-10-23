@@ -116,3 +116,40 @@ The four v1.4.3.6 index entries differ from the candidate index only in paths fo
 ### Disposition
 
 Keep PR #6 Open and Draft. Keep `commit_allowed=false`. Do not merge or release until the integration test passes on the new HEAD and the required CI evidence is available.
+
+## Follow-up: owner-reported local verification on corrected HEAD
+
+**Verification target:** `1bb852c85594a6ef0e930e934cd28a438bc28a7c`  
+**Environment:** Python 3.12.14 on the owner's Windows desktop checkout  
+**Working tree:** reported clean; no repository files were modified during the test run.
+
+The owner reports the following actual local execution results for the exact HEAD above:
+
+| Check | Result |
+|---|---:|
+| Migration regression unit tests | 32/32 passed |
+| Integration tests | 30/30 passed |
+| Full `tests/unit` suite | 75/75 passed |
+| Python compilation | Passed |
+| Full Schema validator | 68/68 checks passed |
+| Candidate fixture outcomes | 83/83 matched |
+| Semantic cases | 16/16 matched |
+| Requirement traceability | 125 rows matched |
+
+The previously failing integration test `test_30_validation_ids_resolve_but_invalid_targets_are_withheld` now passes. The corrected fixture/test behavior therefore has local execution evidence on `1bb852c85594a6ef0e930e934cd28a438bc28a7c`; the earlier 29/30 result applies only to the pre-fix HEAD and is superseded for the current code.
+
+The validator initially encountered a Windows default-GBK decoding error. Re-running in UTF-8 mode passed. The generated report was written to a temporary directory and did not overwrite the checked-in historical report:
+`C:\\Users\\84680\\AppData\\Local\\Temp\\schema-validation-final-0a81973c-0aa1-4c35-9869-4dbd55fbe07d\\v1.4.3.7\\audit\\validation-report.json`.
+
+The four legacy `1.4.3.6-candidate` fixture expectation mismatches remain separately reported. They did not cause candidate-index fixture failures. The original `1.4.3.6` archive is still unavailable, so byte-for-byte lineage of the legacy index remains unverified.
+
+### Current evidence classification
+
+- **Locally execution-verified (owner-reported):** the test and validator results in the table above, against the exact HEAD stated above.
+- **Statically reviewed:** migration source-inventory guard, full target-schema validation path, RFC 8785 target digest contract, Fixture Index digest/version/baseline links, and test-to-contract assertions.
+- **Still unverified due to missing historical inputs:** full v1.3 migration compatibility and byte-for-byte lineage to the original v1.4.3.6 archive.
+- **Still pending owner approval:** DD-ART-007 through DD-ART-010 and the Schema `$id`/version identity policy.
+- **Still not implemented / disabled:** full cross-record/state-machine validation and transactional commit, active-pointer switching, and rollback. `commit_allowed=false` remains mandatory.
+
+This follow-up supersedes earlier statements in this record that the corrected integration test had not yet been run. The checked-in `audit/validation-report.json` remains a historical snapshot; the temporary local report is the report from this local run.
+
