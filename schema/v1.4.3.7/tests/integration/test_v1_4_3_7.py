@@ -168,11 +168,27 @@ class MigrationTests(unittest.TestCase):
         self.assertEqual(report["source_count"], 3)
         self.assertFalse(report["commit_allowed"])
         self.assertEqual(report["target_schema_validation"], mig.TARGET_SCHEMA_VALIDATION_POLICY)
-        self.assertGreater(report["schema_validation_failure_count"], 0)
-        self.assertTrue(any(item["code"] == "TARGET_SCHEMA_VALIDATION_FAILED" for item in report["unresolved"]))
+        schema_failures = [
+            item for item in report["unresolved"]
+            if item["code"] == "TARGET_SCHEMA_VALIDATION_FAILED"
+        ]
+        # Each source fixture deliberately omits one required target property:
+        # claim.statement, validation_activity.tool_id, validation_plan.method.
+        # Reference resolution must still work, but complete target-schema validation
+        # must reject all three provisional records and withhold them from staging.
+        self.assertEqual(report["schema_validation_failure_count"], 3)
+        self.assertEqual(len(schema_failures), 3)
+        self.assertEqual(
+            {item["record_type"] for item in schema_failures},
+            {"claim", "validation_activity", "validation_plan"},
+        )
+        self.assertEqual(report["migratable_record_count"], 0)
+        self.assertTrue(all(item["target_record_type"] is None for item in report["id_mapping"]))
+        self.assertEqual(
+            {item["candidate_target_record_type"] for item in report["id_mapping"]},
+            {"claim", "validation_activity", "validation_plan"},
+        )
 
-        # These minimal source fixtures test reference typing, not complete target validity.
-        # Full target validation must block incomplete records even when references resolve.
         claim_mapping = next(item for item in report["id_mapping"] if item["source_record_type"] == "claim")
         self.assertGreater(claim_mapping["unresolved_count"], 0)
 
