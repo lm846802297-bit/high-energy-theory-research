@@ -2,7 +2,7 @@
 """Conservative v1.3 -> v1.4 migration prototype. Dry-run by default.
 Does not overwrite source records. Ambiguous transformations are unresolved, never guessed.
 """
-import argparse, json, hashlib, csv, sys
+import argparse, json, hashlib, csv, sys, re
 from pathlib import Path
 from datetime import datetime, timezone
 
@@ -21,7 +21,7 @@ LEGACY_ALIASES={"sha256":"content_sha256","uri":"path_or_uri","producer_run_id":
 
 def digest_bytes(b): return hashlib.sha256(b).hexdigest()
 def is_timezone_aware_datetime(value):
-    if not isinstance(value,str) or not value.strip(): return False
+    if not isinstance(value,str) or not re.fullmatch(r"\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d+)?(?:Z|[+-]\\d{2}:\\d{2})",value.strip()): return False
     try: parsed=datetime.fromisoformat(value.strip().replace("Z","+00:00"))
     except (TypeError,ValueError): return False
     return parsed.tzinfo is not None and parsed.utcoffset() is not None
