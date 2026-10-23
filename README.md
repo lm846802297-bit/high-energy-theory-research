@@ -42,6 +42,7 @@ Every arrow should be traceable. A change to an upstream assumption or formula m
 - **templates/project-record.md** — template for registering a top-level research project or a nested workstream.
 - **templates/claim-evidence-matrix.md** — generic template for a new claim–evidence ledger.
 - **research/** — active research-change records and their current claim status.
+- **artifacts/** — immutable, hashed snapshots of large or binary research sources (main-document versions, calculation script trees, audit outputs), with provenance and verification status. See [artifacts/README.md](artifacts/README.md).
 - **calculations/** — reproducible symbolic/algebraic calculation scripts; each script states what it does and does not validate.
 - **validation/** — captured calculation outputs and validation logs, kept distinct from planned or unexecuted checks.
 - **schema/v1.4.3.7/** — candidate JSON Schemas, fixtures, validators, migration prototype, audit reports, and requirement/test traceability.
