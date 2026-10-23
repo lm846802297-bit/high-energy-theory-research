@@ -22,7 +22,7 @@ For a connected graph, the topological loop count is \(L=I-V+1\). A self-contrac
 
 The companion script calculations/RC-001-eft-soft-topology-census.py checks 26 candidate topology families, their Euler loop counts, and explicit heavy-mass powers. It is a structural audit, not an integral evaluator or an automatic Feynman-diagram generator.
 
-| ID | Candidate EFT topology | Loops | Explicit heavy-mass order | 1PI w.r.t. external scalars? | Decision at strict \(O(M_E^{-2})\) |
+| ID | Candidate EFT topology | Loops | Explicit heavy-mass order | 1PI w.r.t. stated external amplitude? | Power-counting decision / scope |
 |---|---|---:|---:|---|---|
 | SFT-01 | \(C_5 C_5^\ast\) light-fermion bubble with \(H,S,H^\dagger,S^\dagger\) external legs | 1 | \(M_E^{-2}\) | Yes | **Keep.** This is the direct mixed-scalar soft graph in the fixed \(|y_\ell|^2|\lambda_\ell|^2\) sector. Its PV expression is already recorded; independent diagram-level validation remains open. |
 | SFT-02 | One \(Q_{LD}\) insertion plus a scalar quartic, with one fermion tadpole and one scalar line | 1 | \(M_E^{-2}\) | No | **Do not add to the local 1PI four-scalar coefficient.** In the unbroken massless theory the fermion tadpole is scaleless and vanishes in dimensional regularization. |
