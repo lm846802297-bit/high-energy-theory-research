@@ -13,8 +13,8 @@ The workflow is designed for theoretical particle physics, UV–EFT matching, pe
 1. Read the [detailed User Guide](docs/USER_GUIDE.md) for project setup, workstreams, research changes, evidence, validation, and review.
 2. Read [the workflow specification](docs/scientific-diff-workflow.md).
 3. Copy [the research-change template](templates/research-change.md) for each substantive research change.
-3. Use [the claim–evidence matrix template](templates/claim-evidence-matrix.md) to track the support for important physical statements.
-4. Apply [the review checklist](docs/review-checklist.md) before marking a change complete or synchronizing it into a manuscript.
+4. Use [the claim–evidence matrix template](templates/claim-evidence-matrix.md) to track the support for important physical statements.
+5. Apply [the review checklist](docs/review-checklist.md) before marking a change complete or synchronizing it into a manuscript.
 6. Read the [active research records](research/README.md); the first baseline is [RC-001: VLL–Higgs–Singlet UV–EFT matching](research/RC-001-vll-higgs-singlet-uv-eft.md), with its [record-specific claim–evidence matrix](research/RC-001-claim-evidence-matrix.md).
 7. Use the [project registry](projects/README.md) to distinguish top-level research projects from workstreams and research-change records. The VLL–Higgs–Singlet UV–EFT workstream belongs to the parent project axial-vector-model-building; it is not a separate top-level project.
 8. For the reusable research Skill, start at [SKILL.md](skills/high-energy-theory-research/SKILL.md), then read its reference guides.
@@ -95,6 +95,7 @@ python -m pip install -r requirements-dev.txt
 python schema/v1.4.3.7/tools/schema-v1.4.3.6-validate.py schema/v1.4.3.7
 python schema/v1.4.3.7/tests/integration/test_v1_4_3_7.py
 python -m unittest discover -s tests/unit -v
+python skills/high-energy-theory-research/scripts/validate_project_registry.py --registry projects/registry.yaml --repo-root .
 python skills/high-energy-theory-research/scripts/validate_project_records.py path/to/project/records --project-root path/to/project
 ```
 
