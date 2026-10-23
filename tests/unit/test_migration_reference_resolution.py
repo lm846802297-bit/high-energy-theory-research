@@ -113,5 +113,76 @@ class ValidationReferenceResolutionTests(unittest.TestCase):
         self.assertFalse(report["commit_allowed"])
 
 
+    def test_activity_status_outside_v14_enum_is_unresolved(self):
+        activity = activity_record("VAL-ACT-STATUS", status="in_progress")
+        _, _, unresolved, _ = migration.migrate_record(activity)
+        self.assertTrue(any(item["code"] == "TARGET_ENUM_VALUE_UNMAPPED" for item in unresolved))
+
+    def test_invalid_started_at_does_not_resolve_validation_activity(self):
+        claim = claim_record(["VAL-ACT-BAD-TIME"])
+        activity = activity_record("VAL-ACT-BAD-TIME", status="succeeded", started_at="2026-10-21 00:00:00Z")
+        _, _, unresolved, _ = migration.migrate_record(claim, source_index=make_index(claim, activity))
+        self.assertTrue(any(item["code"] == "VALIDATION_ACTIVITY_LAUNCH_EVIDENCE_INSUFFICIENT" for item in unresolved))
+
+    def test_in_progress_reference_requires_an_explicit_target_status_mapping(self):
+        claim = claim_record(["VAL-ACT-IN-PROGRESS"])
+        activity = activity_record("VAL-ACT-IN-PROGRESS", status="in_progress")
+        _, _, unresolved, _ = migration.migrate_record(claim, source_index=make_index(claim, activity))
+        self.assertTrue(any(item["code"] == "VALIDATION_ACTIVITY_STATUS_UNMAPPED" for item in unresolved))
+
+    def test_missing_project_id_is_unresolved(self):
+        claim = claim_record([])
+        claim.pop("project_id")
+        _, _, unresolved, _ = migration.migrate_record(claim)
+        self.assertTrue(any(item["code"] == "MISSING_OR_INVALID_PROJECT_ID" for item in unresolved))
+
+    def test_non_record_json_files_are_reported_not_skipped(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root / "array.json").write_text("[]", encoding="utf-8")
+            (root / "missing-type.json").write_text(json.dumps({"schema_version": "1.3"}), encoding="utf-8")
+            report = migration.migrate(root)
+        self.assertEqual(report["source_count"], 2)
+        self.assertEqual(report["source_files_skipped_count"], 2)
+        codes = {item["code"] for item in report["unresolved"]}
+        self.assertIn("SOURCE_RECORD_NOT_OBJECT", codes)
+        self.assertIn("SOURCE_RECORD_TYPE_MISSING", codes)
+
+    def test_duplicate_typed_primary_keys_block_dry_run(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root / "claim-a.json").write_text(json.dumps(claim_record([])), encoding="utf-8")
+            (root / "claim-b.json").write_text(json.dumps(claim_record([])), encoding="utf-8")
+            report = migration.migrate(root)
+        self.assertEqual(report["source_count"], 2)
+        self.assertTrue(any(item["code"] == "DUPLICATE_SOURCE_PRIMARY_KEY" for item in report["unresolved"]))
+
+    def test_empty_source_snapshot_is_not_reported_as_clean(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            report = migration.migrate(Path(tmp))
+        self.assertEqual(report["source_count"], 0)
+        self.assertTrue(any(item["code"] == "EMPTY_SOURCE_SNAPSHOT" for item in report["unresolved"]))
+
+    def test_staging_refuses_nonempty_output_directory(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            source = root / "source"
+            source.mkdir()
+            (source / "claim.json").write_text(json.dumps(claim_record([])), encoding="utf-8")
+            output = root / "output"
+            output.mkdir()
+            (output / "stale.json").write_text("{}", encoding="utf-8")
+            with self.assertRaisesRegex(ValueError, "non-empty directory"):
+                migration.migrate(source, output_dir=output, write_staging=True)
+            self.assertTrue((output / "stale.json").exists())
+
+    def test_staging_output_must_be_outside_input_tree(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            source = Path(tmp) / "source"
+            source.mkdir()
+            (source / "claim.json").write_text(json.dumps(claim_record([])), encoding="utf-8")
+            with self.assertRaisesRegex(ValueError, "outside the input tree"):
+                migration.migrate(source, output_dir=source / "staging", write_staging=True)
+
 if __name__ == "__main__":
     unittest.main()
