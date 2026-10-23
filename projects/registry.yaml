@@ -5,6 +5,7 @@ schema_validation: not_applicable
 notes:
   - This file registers project/workstream relationships and canonical record paths.
   - Existing files remain at their current paths; this registry does not authorize or imply migration.
+  - External repository URLs are navigation references; they do not make external files canonical local paths or authorize copying them into this repository.
   - Do not infer scientific completion from project status or repository test status.
 
 projects:
@@ -36,3 +37,27 @@ projects:
           subtraction, common-basis reduction, and independent diagram-level
           validation remain open.
         source_repository: unknown
+      - workstream_id: manuscript-review-response
+        title: Axial-vector manuscript review and revision
+        kind: manuscript_workstream
+        status: active
+        parent_project_id: axial-vector-model-building
+        scope: >-
+          Coordinates referee-comment analysis, response-letter development,
+          manuscript diffs, and supporting checks across the neutrino/PMNS
+          sector, Higgs-portal mixing, kinetic mixing, finite vector couplings,
+          and stellar/supernova constraints. This coordination workstream does
+          not replace canonical calculation records or certify physical claims.
+        current_status: >-
+          The submitted manuscript and referee report are retained in the linked
+          repository. Its current reading guide identifies PMNS construction and
+          associated numerical-fit, anomaly, and lepton-flavour-violation checks
+          as pending; full Higgs-portal UV-EFT matching and degenerate-region
+          observables remain incomplete; the kinetic-mixing estimate remains
+          unresolved; and stellar/supernova constraints require separate
+          assessment for S and A-prime. Keep these items open until supporting
+          evidence is recorded.
+        source_repository: https://github.com/lm846802297-bit/axial-vector-review-response
+        external_entrypoint_url: https://github.com/lm846802297-bit/axial-vector-review-response/blob/main/README-%E5%85%88%E8%AF%BB%E8%BF%99%E9%87%8C.md
+        related_workstreams:
+          - vll-higgs-singlet-uv-eft
