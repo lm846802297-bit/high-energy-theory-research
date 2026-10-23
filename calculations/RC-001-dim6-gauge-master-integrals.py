@@ -15,6 +15,12 @@ def main():
     assert sp.simplify(iv - (D / 2 - L / 2 + sp.Rational(3, 4))) == 0
     assert sp.simplify(is_ - (D - L + 1)) == 0
 
+    # Keep the O(epsilon) part of d=4-2*epsilon against the B0 UV pole.
+    gamma, log4pi = sp.symbols("gamma_E log4pi")
+    Dexpr = 1 / eps - gamma + log4pi
+    dB0 = sp.series((4 - 2 * eps) * (Dexpr + 1 - L), eps, 0, 1).removeO()
+    assert sp.simplify(dB0 - (4 * Dexpr + 2 - 4 * L)) == 0
+
     sig_v_raw = sp.expand((-2 + 2 * eps) * iv)
     sig_s_raw = sp.expand((4 - 2 * eps) * is_)
     # Since D contains 1/epsilon, eps*D contributes +1 to the finite part.
@@ -36,6 +42,7 @@ def main():
     assert sp.simplify(j_full - j_soft - j_hard) == 0
 
     print("Feynman-parameter integrals: PASS")
+    print("Heavy-light vertex numerator d*B0: 4*Delta+2-4*L (O(epsilon)*UV-pole retained)")
     print("Heavy self-energy: Sigma_V(0)=-Delta+L-1/2; Sigma_S(0)=4Delta-4L+2")
     print("Chirality-preserving propagator insertion: -7Delta+7L-7/2")
     print("Crossed-box partial-fraction identity: PASS")
