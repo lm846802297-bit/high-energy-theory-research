@@ -196,6 +196,16 @@ The quartic contractions to retain are:
 
 The first two contractions reduce through the fermion EOM to the corresponding singlet-scalar Yukawa-source operators in a generic theory. In the stated model, master §255.8 records \(\Xi_{L_\ell}^{(4)}=\Xi_{R_\ell}^{(4)}=0\) for the \(\mu,\tau\) fields because their ordinary renormalizable charged-lepton Yukawas are forbidden; consequently these EOM-only terms do not induce a nonzero dimension-six source for those flavors at this order. The \(\lambda_H\) contractions still require the full weak-index EOM projection. This note records the universal loop kernel and tensor multiplicities, not a complete quartic-dependent counterterm calculation.
 
+### 4.1 Independent local re-check (separate script)
+
+A second, deliberately smaller script, calculations/RC-001-dim6-independent-kernel-check.py, was run locally with SymPy. It directly integrates the massless Feynman-parameter logarithm, checks the first parameter moment, verifies the scalar numerator reduction, recomputes the displayed hard-plus-soft pole cancellations for the crossed-current, four-fermion, and \(Q_6\)-plus-quartic stripped kernels, and checks all 16 components of the \(SU(2)\) singlet/triplet completeness identity. All 23 exact symbolic checks passed; the captured output is validation/RC-001-dim6-independent-kernel-check.txt.
+
+This is an independent algebraic cross-check of selected stripped kernels and tensor identities, not a second full loop calculation. It does not independently establish the UV Feynman rules, all diagram multiplicities, gauge/contact contributions, or the full Wilson coefficients.
+
+### 4.2 GitHub Actions status
+
+The workflow run associated with earlier HEAD de35666aeaeec2493fac2c3fa2a69a9dac4109b1 ended with failure, but the GitHub job record has runner_id=0 and an empty steps array. Thus the available run evidence does not show that the Python script started or failed an assertion; it shows no executed job steps. The local 23-check result is separate from repository CI. CI must be rerun on the latest HEAD once a runner is available.
+
 ## 5. What this closes, and what remains open
 
 **Closed by this calculation:** the Feynman-parameter master integrals; the massless scalar bubble and vector tensor reduction; the hard/soft pole cancellation for the three loop-dependent \(C_5C_5^\ast\) current channels; the four-fermion scalar bubble; and the universal \(Q_6\)-plus-quartic hard/soft kernel with its EOM-only on-shell projection. The independent SymPy script passes 41 exact symbolic checks; the captured output is in validation/RC-001-dim6-soft-loop-crosscheck.txt.
