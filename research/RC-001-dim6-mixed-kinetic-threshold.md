@@ -93,6 +93,8 @@ The mixed-propagator four-point graphs in the gauge atlas are conditional on the
 
 By contrast, inserting the *one-loop-generated* threshold \(\Pi_{YX}^{E}\) into another one-loop four-point graph is a two-loop effect. The one-loop two-point threshold above must be matched as its own gauge-sector amplitude; it must not be silently used as an order-one tree-level \(\chi\), nor should the conditional mixed-propagator four-point rows be deleted when the input \(\chi\) is nonzero.
 
+The mixed input-parameter counterterm pole sub-block, under the signed propagator convention defined separately, is recorded in [RC-001-dim6-mixed-parameter-counterterms.md](RC-001-dim6-mixed-parameter-counterterms.md). Do not conflate that parameter-renormalization result with this two-point threshold or with the still-open mixed four-point matching.
+
 ## 5. Scope boundary
 
 This result fixes the additive \(B-A'\) vacuum-polarization pole and the finite heavy-lepton mass-ratio threshold under the stated charge assignments and sign convention. It does not evaluate the mixed-propagator vertex, self-energy, or crossed-box Wilson-coefficient corrections, and it does not choose the model's renormalized boundary value of \(\chi\). Those entries remain conditional until the input scheme is fixed.
