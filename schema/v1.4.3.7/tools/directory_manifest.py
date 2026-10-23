@@ -4,7 +4,6 @@ This is intentionally limited to the FileEntry schema (ASCII keys, strings, ints
 it is NOT a general-purpose RFC 8785 implementation.
 """
 import hashlib, json, unicodedata, re
-from pathlib import PurePosixPath
 
 class ManifestError(ValueError): pass
 
@@ -22,15 +21,19 @@ def normalize_relative_path(path):
     return normalized
 
 def normalize_manifest(entries, allow_symlinks=False):
+    if allow_symlinks:
+        raise ManifestError("allow_symlinks=True is unsupported; this helper cannot verify symlink targets against a filesystem root")
     if not isinstance(entries,list):
         raise ManifestError("manifest must be an array")
     out=[]; seen=set()
+    required={"relative_path","entry_type","size_bytes","content_sha256","symlink_target"}
     for e in entries:
         if not isinstance(e,dict):
             raise ManifestError("each FileEntry must be an object")
-        required={"relative_path","entry_type","size_bytes","content_sha256","symlink_target"}
-        if not required.issubset(e):
-            raise ManifestError("FileEntry missing required keys")
+        if set(e) != required:
+            missing=sorted(required-set(e))
+            extra=sorted(set(e)-required)
+            raise ManifestError(f"FileEntry keys must match the schema exactly; missing={missing}, extra={extra}")
         p=normalize_relative_path(e["relative_path"])
         if p in seen:
             raise ManifestError("duplicate path after NFC normalization: "+p)
