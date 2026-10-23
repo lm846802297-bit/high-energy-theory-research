@@ -197,5 +197,15 @@
     ],
     "operator_policy": "operator is recorded as not_recorded when omitted; this is not an approval identity and cannot authorize commit.",
     "collision_check_policy": "failed for duplicate same-project/same-record-type primary keys; passed_typed_primary_key only when a typed key is present and no duplicate was found; not_checked_missing_identity otherwise."
+  },
+  "source_formats": [
+    ".json",
+    ".yaml",
+    ".yml"
+  ],
+  "source_parser_policy": {
+    "json": "UTF-8 JSON; duplicate object keys and non-finite numeric constants are rejected.",
+    "yaml": "UTF-8 YAML parsed with SafeLoader semantics; duplicate mapping keys, aliases, non-string mapping keys, non-JSON values, and non-finite numbers are rejected. PyYAML must be available or the source file is reported unresolved.",
+    "unsupported_formats": "Unsupported file extensions are not treated as source records. Only JSON/YAML/YML files are inventoried by this prototype."
   }
 }
