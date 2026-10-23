@@ -579,7 +579,7 @@ Since
 \]
 this counterterm reproduces the constant mixed-kernel pole above, including its sign in the convention \(\Gamma_{\rm inv}=p^2-\mathcal M_{\rm loc}^2+\Pi\). Equivalently, if writing a potential counterterm \(V_{\rm CT}\supset\delta c_{8,\ell}X^2Y^2/M_{E_\ell}^4\), then \(\delta c_{8,\ell}=-|y_\ell|^4|\lambda_\ell|^4\Delta_{\rm UV}/(16\pi^2)\); the Lagrangian counterterm has the opposite sign.
 
-The relation is checked by \`calculations/RC-001-dimension8-constant-pole-candidate.py\`; four exact symbolic checks pass, with output in \`validation/RC-001-dimension8-constant-pole-candidate.txt\`. This is a verification of the \(C_5^2\) soft-potential subset counterterm, not a complete dimension-eight matching result.
+The relation is checked by `calculations/RC-001-dimension8-constant-pole-candidate.py`; four exact symbolic checks pass, with output in `validation/RC-001-dimension8-constant-pole-candidate.txt`. This is a verification of the \(C_5^2\) soft-potential subset counterterm, not a complete dimension-eight matching result.
 
 **Remaining boundary:** the master source explicitly leaves the dimension-eight UV hard matching and the full \(O(M_E^{-4})\) prediction incomplete. Higher-dimensional tree-level EFT vertices and their soft insertions must be included at the same retained order. At strict \(O(M_E^{-2})\), the entire \(O(M_E^{-4})\) constant-pole set must be dropped consistently; it cannot be retained selectively and absorbed into the dimension-four portal counterterm.
 
