@@ -1,5 +1,7 @@
 # User Guide — High-Energy Theory Research
 
+简体中文版本：[USER_GUIDE.zh-CN.md](USER_GUIDE.zh-CN.md)。
+
 This guide explains how to use the repository as a **multi-project research platform**. It covers project organization, the research Skill, scientific change records, calculations, evidence, validation, and Git-based change control.
 
 The repository is a research-process and traceability framework. It is not a fully autonomous research agent, and a successful software check does not certify a physical result.
