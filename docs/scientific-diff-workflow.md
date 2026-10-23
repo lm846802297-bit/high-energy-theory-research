@@ -54,6 +54,21 @@ For each record, capture:
 
 Use the template in **templates/research-change.md**.
 
+
+### Project hierarchy: project → workstream → change → run → claim
+
+The project hierarchy is separate from the Scientific Diff change record. Use the following levels consistently:
+
+1. **Project:** a sustained research programme with an independently meaningful scope, such as axial-vector-model-building.
+2. **Workstream:** a coherent branch of work within a project, such as vll-higgs-singlet-uv-eft. A workstream may have its own files, calculations, and status without becoming a separate top-level project.
+3. **Research change:** a scientific change with a baseline, rationale, evidence, and impact review, such as RC-001.
+4. **Run:** one actual execution identified by source revision, inputs, environment, command/configuration, and outputs. Do not invent a run record for a planned or unexecuted check.
+5. **Claim:** a physical statement whose evidence and scope are assessed separately, such as CL-015.
+
+A project may contain multiple workstreams; a workstream may contain multiple research changes; a change may require multiple runs and may affect multiple claims. Do not reuse one identifier namespace for these distinct entities.
+
+The navigation registry in projects/README.md and projects/registry.yaml is currently descriptive metadata only. It is not a new normative schema and is not a substitute for the candidate structured-record system. Registering a project does not migrate files or validate the physics. Before moving existing artifacts, audit relative links, schema path rules, validator assumptions, scripts, tests, and CI references.
+
 ## 5. Recommended workflow
 
 ### Stage 0 — Freeze the baseline
