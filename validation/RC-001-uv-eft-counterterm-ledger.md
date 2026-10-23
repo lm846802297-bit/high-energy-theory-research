@@ -73,6 +73,37 @@ Their difference \(4q_\ell/[3(16\pi^2)]\) is a difference between these represen
 
 Open items are the complete model-level Wilson vector, any remaining EFT soft/source sectors outside the restricted comparison, the gauge-invariant assignment of the higher-order constant pole, and independent diagram-level validation.
 
+## 5. Candidate dimension-eight projection of the constant pole (not final)
+
+At leading seesaw order,
+\[
+q_\ell\simeq\frac{|y_\ell|^2|\lambda_\ell|^2v_hv_s}{2M_{E_\ell}^2},
+\qquad
+x_\ell\simeq\frac{|y_\ell|^2|\lambda_\ell|^2v_h^2v_s^2}{4M_{E_\ell}^2},
+\]
+so the restricted subset's constant inverse-kernel pole scales as
+\[
++\frac{8q_\ell x_\ell}{16\pi^2}\Delta_{\rm UV}
+\simeq
++\frac{|y_\ell|^4|\lambda_\ell|^4v_h^3v_s^3}{16\pi^2M_{E_\ell}^4}
+\Delta_{\rm UV}.
+\]
+For \(X=H^\dagger H\), \(Y=S^\dagger S\),
+\[
+\left.\partial_h\partial_s(X^2Y^2)\right|_{0}=v_h^3v_s^3.
+\]
+Thus one provisional pure-potential representative is
+\[
+V_{\rm CT}^{(8)}\supset
+\delta c_{8,\ell}\frac{X^2Y^2}{M_{E_\ell}^4},
+\qquad
+\delta c_{8,\ell}^{\rm candidate}
+=-\frac{|y_\ell|^4|\lambda_\ell|^4}{16\pi^2}\Delta_{\rm UV}.
+\]
+The sign follows from \(\Gamma_{\rm inv}=p^2-\mathcal M_{\rm loc}^2+\Pi\): a potential counterterm enters the local inverse kernel with minus its mixed Hessian.
+
+The candidate projection is checked by \`calculations/RC-001-dimension8-constant-pole-candidate.py\` (4 exact symbolic checks; captured output in \`validation/RC-001-dimension8-constant-pole-candidate.txt\`). It is **not** a final Wilson coefficient: the complete same-order EFT soft/source insertions are not yet included, and EOM-related dimension-eight derivative, potential, and source operators can redistribute contributions between representatives. Keep the higher-dimensional operator assignment open until the full soft sum and a fixed gauge-invariant basis/EOM convention are available.
+
 ## Reproducibility boundary
 
 The SymPy script at calculations/RC-001-uv-eft-two-point-difference.py checks the stated algebraic identities and the counterterm pole cancellation. Its output is in validation/RC-001-uv-eft-two-point-difference.txt. No numerical loop integration, FeynArts/FeynCalc run, complete higher-dimensional EFT soft-insertion sum, or final finite dimension-six Wilson coefficient is claimed.
