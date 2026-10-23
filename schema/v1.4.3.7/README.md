@@ -22,6 +22,8 @@ The workflow regenerates `audit/validation-report.json` in the runner and upload
 
 ## Migration prototype and validation_ids boundary
 
+Static implementation findings, version-label questions, and unexecuted regression cases are recorded in [the 2026-10-23 static Schema/migration review](audit/static-schema-migration-review-2026-10-23.md). This review does not replace CI or target-schema validation.
+
 The migration tool uses rules version `v1.4.3.7-migration-rules-3`. Static review tightened source inventory, project/key checks, duplicate-key handling, timestamp validation, record-type-specific aliases, and staging-output safety. These changes have not been executed in tests or CI. Synthetic fixtures still do not establish compatibility with the full historical v1.3 corpus.
 
 - The tool loads the read-only source snapshot first and resolves references only by unique primary key within the same project.
