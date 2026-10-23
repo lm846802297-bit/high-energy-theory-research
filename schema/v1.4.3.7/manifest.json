@@ -184,5 +184,6 @@
   "source_bundle": "schema-v1.4.3.6-integrated-candidate-bundle.zip",
   "source_bundle_sha256": "aefb34e68af65daf8277b9553d232cab29ffb5df9c4f18c1cfe126474a06adf1",
   "requirement_traceability_rows": 125,
-  "release_status": "not_released"
+  "release_status": "not_released",
+  "test_id_pattern": "^[A-Z][A-Z0-9]{1,4}-[0-9]{3}$"
 }
