@@ -202,7 +202,7 @@ For both commands, inspect the full report, not only the exit code. Fix errors b
 
 The shared platform layer is for reusable methods, schemas, templates, documentation, tests, and tools. Project-specific physics records and outputs should ultimately be easy to identify by project/workstream.
 
-The current registry is an initial navigation layer. Existing research/, calculations/, and validation/ paths have intentionally not been moved. Before a future migration:
+The current registry is an initial navigation layer. See the [Phase A registry and migration pre-audit](PROJECT_REGISTRY_AUDIT.md) for the scope already checked and the checks that remain unexecuted. Existing research/, calculations/, and validation/ paths have intentionally not been moved. Before a future migration:
 
 1. enumerate all files to be moved;
 2. audit Markdown links, script imports, tests, CI paths, schema path rules, and validator assumptions;
