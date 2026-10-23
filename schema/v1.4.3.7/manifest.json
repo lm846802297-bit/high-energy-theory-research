@@ -147,18 +147,19 @@
   "limitations": [
     "The complete historical v1.3 machine-readable source bundle was not found in the available repository/library; backward compatibility remains unverified.",
     "Schemas are candidate minimal envelopes, not a complete transcription of every normative field in the design document.",
-    "Cross-record semantic validation, state-machine validation, event-ledger verification, and migration execution are not implemented.",
+    "Cross-record semantic validation and migration exist as bounded prototypes; full state-machine validation, event-ledger verification, and transactional migration commit are not implemented.",
     "Conditional fixtures validate schema shape only; semantic guards remain not_run.",
     "v1.4.1 is an audited candidate, not a released baseline.",
     "Only explicit fixes with normative support were applied; many record-specific required fields and conditions remain uncovered.",
     "Cross-record references, full state transition graph, event-chain/checkpoint integrity, directory normalization and scientific validity are not checked by JSON Schema alone.",
     "Compatibility with the historical schema v1.3 bundle has not been verified because that bundle was not available in the current workspace.",
-    "v1.4.3.6 introduces required artifact_storage_kind and alternative_identity keys; no migration has been implemented.",
-    "Strict status interpretation: a hashless external file remains needs_review even if an alternative identity method is verified; byte integrity is not inferred.",
+    "The candidate requires artifact_storage_kind and alternative_identity; a v1.3-to-v1.4 staging migration prototype exists, but historical compatibility is unverified and commit remains disabled.",
+    "Candidate behavior associated with pending DD-ART-009: a hashless external file remains needs_review even if an alternative identity method is verified; this recommendation is not an approved normative decision.",
     "For directories, content_sha256 is null and directory_manifest_sha256 is the integrity digest. This is a proposed clarification of the previous storage-agnostic generated-hash rule.",
-    "Only the DD-ART-006 subset of cross-record semantics is tested; full cross-record validator is not implemented.",
+    "Cross-record semantics cover a bounded subset and do not constitute complete reference/state-machine validation.",
     "Physics correctness is not validated.",
-    "The canonical fixture_index is version-matched to schema_version; legacy_fixture_index preserves the 1.4.3.6-candidate expectation set without relabeling it."
+    "The canonical fixture_index is version-matched to schema_version; legacy_fixture_index preserves the 1.4.3.6-candidate expectation set without relabeling it.",
+    "The checked-in migration staging report was generated with rules v1 and is a historical snapshot, not execution evidence for the current rules-v2 migration prototype."
   ],
   "release_evidence": {
     "schema_meta_validation": "25/25 passed",
