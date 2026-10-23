@@ -190,11 +190,11 @@ The following matrix records which mathematical sub-block is actually evaluated.
 | E-SELF-X | \(C_E^X=Q_\ell^2\) times the same kernel | Same heavy representation and kernel | 1PI kernel evaluated; full amplitude/counterterm sum open |
 | E-SELF-W | Zero: \(E_\ell\) is an \(SU(2)_L\) singlet | Zero | Evaluated by representation theory; this does not remove \(W\)-exchange on light \(L,H\) lines in LD |
 | E-SELF-BX | Conditional factor \(-2\kappa_{BX}g_Yg_X\eta_\ell Q_\ell\) times the same kernel | Same heavy-line factor | Conditional on the off-diagonal propagator convention and input \(\chi\) |
-| LD-YV-E-L | \(B_0(0;0,M_E^2)=\Delta_\epsilon+1-L_\ell\); numerator reduction \(dB_0\) before signs/charges | — | Scalar kernel evaluated; complete vertex coefficient open |
-| LD-YV-E-H | \(B_0\) scalar kernel; \(B\) and conditional \(BX\) | — | Scalar kernel evaluated; complete vertex coefficient open |
+| LD-YV-E-L | FF hard factor \(-F_{\rm FF}dB_0\) included in the evaluated vertex sub-block | — | Heavy-containing vertex sub-block evaluated; full UV–EFT amplitude/counterterm sum open |
+| LD-YV-E-H | FS hard factor \(-F_{\rm FS}B_0\) included in the evaluated vertex sub-block | — | Heavy-containing vertex sub-block evaluated; full UV–EFT amplitude/counterterm sum open |
 | LD-YV-L-H | Purely light loop at zero external momenta | — | Soft/scaleless limit identified; retain in common UV/EFT IR bookkeeping |
 | RD-YV-E-\(\ell_R\) | — | \(B_0\) scalar kernel; numerator reduction \(dB_0\) before signs/charges | Scalar kernel evaluated; complete vertex coefficient open |
-| RD-YV-E-S | — | \(B_0\) scalar kernel for \(A'\) and conditional \(BX\) | Scalar kernel evaluated; complete vertex coefficient open |
+| RD-YV-E-S | — | FS hard factor \(-F_{\rm FS}B_0\) included in the evaluated vertex sub-block | Heavy-containing vertex sub-block evaluated; full UV–EFT amplitude/counterterm sum open |
 | RD-YV-\(\ell_R\)-S | — | Purely light loop at zero external momenta | Soft/scaleless limit identified; retain in common UV/EFT IR bookkeeping |
 | LD/RD-CROSS-BOX | Representative \(J_{\rm hard}=M_E^{-2}(\Delta_{\rm UV}+1-L_\ell)\) | Same scalar master, with distinct numerator/charge routings | Scalar master evaluated; every diagram coefficient and Fierz projection open |
 | MIX-2PT | \(\Pi^E_{YX}(0)=g_Yg_XQ_\ell(12\pi^2)^{-1}\ln(M_{E_\mu}^2/M_{E_\tau}^2)\) | Same two-point threshold; not a four-point Wilson coefficient | Additive pole cancels; finite threshold evaluated separately |
