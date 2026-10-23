@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Charge-compatible attachment-class census for RC-001 dimension-six gauge matching.
 
-This is a structural generator, not a Feynman-diagram generator or loop integrator.
+This is a structural generator, not a Feynman-diagram generator or loop integrator. The dedicated GitHub Actions workflow runs it and compares its stdout with the checked-in validation artifact.
 It enumerates all unordered pairs among the four external line types and the
 internal heavy E line, with exact hypercharge, normalized X-charge, SU(2)
 representation, and mixed B-A' charge factor.
