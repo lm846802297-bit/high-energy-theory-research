@@ -11,7 +11,7 @@
 | Normative decisions | DD-ART-007 through DD-ART-010 pending explicit owner approval |
 | Fixture index | Canonical index is version-matched to v1.4.3.7 candidate; inherited v1.4.3.6 expectations remain separately preserved |
 | Cross-record validation | Prototype available; bounded semantic checks implemented |
-| Migration | Rules-v5 source-aware prototype; full Draft 2020-12 target validation, RFC 8785 JCS target digests, MIG-014 dependent-reference withholding, and fail-closed staging for incomplete source snapshots; owner-reported local validation passed on code/test HEAD `0799dada7eaa8dcd08b8db2f2311a844335d7198` (7/7 directory-manifest, 33/33 migration, 30/30 integration, 83/83 unit tests; Python compilation passed; Schema validator 68/68, 83/83 candidate fixtures, 16/16 semantic cases, 125 trace rows); GitHub Actions unverified for this phase; dry-run/staging only, `commit_allowed=false` |
+| Migration | Rules-v6 source-aware prototype; full Draft 2020-12 target validation, RFC 8785 JCS target digests, MIG-014 dependent-reference withholding, MIG-015 Task Execution Contract hash/registry withholding, and fail-closed staging for incomplete source snapshots. Rules-v5 validation was owner-reported passing on code/test HEAD `0799dada7eaa8dcd08b8db2f2311a844335d7198` (7/7 directory-manifest, 33/33 migration, 30/30 integration, 83/83 unit tests, compilation, Schema validator 68/68, fixtures 83/83, semantic cases 16/16, trace rows 125); rules-v6 changes/tests not yet run; GitHub Actions unverified; staging-only, `commit_allowed=false` |
 | Historical v1.3 compatibility | Unverified; original v1.3 source bundle/corpus unavailable |
 | Requirement/test traceability | CSV traceability data and imported audit reports included; report snapshots are SHA/time scoped |
 | Skill runtime | Initial instruction and reference scaffold added; not yet a complete automated research agent |
@@ -19,7 +19,7 @@
 
 ## Validation evidence and remaining gates
 
-The owner reports that the following checks ran locally on code/test HEAD `0799dada7eaa8dcd08b8db2f2311a844335d7198` (Python version for this run not separately recorded):
+The owner reports that the following rules-v5 checks ran locally on code/test HEAD `0799dada7eaa8dcd08b8db2f2311a844335d7198` (Python version for this run not separately recorded). These results predate the rules-v6 MIG-015 code change:
 
 - Directory-manifest tests: 7/7 passed.
 - Migration regression tests: 33/33 passed.
@@ -37,6 +37,10 @@ These results verify the available local candidate test scope. They do **not** e
 ## Latest static review follow-up
 
 A static review found that `directory_manifest.py` could discard extra FileEntry keys before hashing and accepted an `allow_symlinks=True` argument despite lacking filesystem-root verification. The helper now rejects non-exact FileEntry key sets and explicitly rejects `allow_symlinks=True`. The owner reports that the new directory-manifest tests passed 7/7, and the full local suites passed on code/test HEAD `0799dada7eaa8dcd08b8db2f2311a844335d7198`. These results are local evidence only, not a passing GitHub Actions run. DD-ART-008 remains pending approval; filesystem traversal and byte-for-byte directory verification are still unimplemented.
+
+## Current rules-v6 verification boundary
+
+The migration code and mapping contract have since advanced to `v1.4.3.7-migration-rules-6`, with MIG-015 blocking Task Execution Contract migration when the alternative-identity registry is missing or the source contract hash has not been revalidated under an owner-approved payload rule. Two unit tests and the contract-rule assertion were added. **The rules-v6 code and tests have not yet been run locally.** Do not carry forward the rules-v5 passing counts as proof of rules-v6 behavior. The Artifact Schema/helper symlink mismatch is also recorded for DD-ART-008 review; no normative Schema change was made.
 
 ## Release gates
 
