@@ -15,9 +15,10 @@ The workflow is designed for theoretical particle physics, UV–EFT matching, pe
 3. Use [the claim–evidence matrix template](templates/claim-evidence-matrix.md) to track the support for important physical statements.
 4. Apply [the review checklist](docs/review-checklist.md) before marking a change complete or synchronizing it into a manuscript.
 5. Read the [active research records](research/README.md); the first baseline is [RC-001: VLL–Higgs–Singlet UV–EFT matching](research/RC-001-vll-higgs-singlet-uv-eft.md), with its [record-specific claim–evidence matrix](research/RC-001-claim-evidence-matrix.md).
-6. For the reusable research Skill, start at [SKILL.md](skills/high-energy-theory-research/SKILL.md), then read its reference guides.
-7. Review [repository status](docs/REPOSITORY_STATUS.md), [open issues](docs/OPEN_ISSUES.md), and the [normative decision register](docs/governance/DECISION_REGISTER.md) before changing candidate schemas.
-8. Read the [v1.6.5 design baseline](docs/design/high-energy-theory-research-Skill-v1.6.5.md), the [v1.6.7 consolidated design/implementation report](docs/design/high-energy-theory-research-Skill-v1.6.7.md), and the [v1.6.6 Artifact-identity candidate clarification](schema/v1.4.3.7/audit/高能理论物理研究-Skill-详细设计文档-v1.6.6-Artifact身份语义候选修订.md).
+6. Use the [project registry](projects/README.md) to distinguish top-level research projects from workstreams and research-change records. The VLL–Higgs–Singlet UV–EFT workstream belongs to the parent project axial-vector-model-building; it is not a separate top-level project.
+7. For the reusable research Skill, start at [SKILL.md](skills/high-energy-theory-research/SKILL.md), then read its reference guides.
+8. Review [repository status](docs/REPOSITORY_STATUS.md), [open issues](docs/OPEN_ISSUES.md), and the [normative decision register](docs/governance/DECISION_REGISTER.md) before changing candidate schemas.
+9. Read the [v1.6.5 design baseline](docs/design/high-energy-theory-research-Skill-v1.6.5.md), the [v1.6.7 consolidated design/implementation report](docs/design/high-energy-theory-research-Skill-v1.6.7.md), and the [v1.6.6 Artifact-identity candidate clarification](schema/v1.4.3.7/audit/高能理论物理研究-Skill-详细设计文档-v1.6.6-Artifact身份语义候选修订.md).
 
 ### Core chain
 
@@ -28,10 +29,12 @@ Every arrow should be traceable. A change to an upstream assumption or formula m
 ### Repository layout
 
 - **docs/scientific-diff-workflow.md** — workflow, definitions, status model, and physics-specific guidance.
+- **projects/** — top-level project registry and project/workstream hierarchy; navigation metadata only at this stage.
 - **docs/review-checklist.md** — checks for scientific changes and manuscript synchronization.
 - **docs/design/** — retained design baseline and consolidated implementation report.
 - **docs/governance/** — normative decisions and fingerprint-contract review.
 - **templates/research-change.md** — record for an individual research change.
+- **templates/project-record.md** — template for registering a top-level research project or a nested workstream.
 - **templates/claim-evidence-matrix.md** — generic template for a new claim–evidence ledger.
 - **research/** — active research-change records and their current claim status.
 - **calculations/** — reproducible symbolic/algebraic calculation scripts; each script states what it does and does not validate.
