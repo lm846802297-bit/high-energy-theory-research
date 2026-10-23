@@ -323,7 +323,7 @@ class ValidationReferenceResolutionTests(unittest.TestCase):
         )
         self.assertEqual(mapping_contract["target_digest_algorithm"], "RFC8785-JCS-SHA256")
         declared_migration_rules = {rule["rule_id"] for rule in mapping_contract["rules"]}
-        self.assertTrue({"MIG-012", "MIG-013"}.issubset(declared_migration_rules))
+        self.assertTrue({"MIG-012", "MIG-013", "MIG-014"}.issubset(declared_migration_rules))
         declared_rules_by_id = {rule["rule_id"]: rule["rule"] for rule in mapping_contract["rules"]}
         self.assertEqual(
             declared_rules_by_id["MIG-012"],
@@ -332,6 +332,10 @@ class ValidationReferenceResolutionTests(unittest.TestCase):
         self.assertEqual(
             declared_rules_by_id["MIG-013"],
             "Compute target_record_sha256 as SHA-256 over RFC 8785 JCS canonical UTF-8 bytes; source_sha256 remains the digest of the original source bytes.",
+        )
+        self.assertEqual(
+            declared_rules_by_id["MIG-014"],
+            "Withhold a migrated record when a validation_ids reference resolves to a source Validation Plan or Validation Activity that does not produce a valid target record; report VALIDATION_TARGET_WITHHELD.",
         )
 
     def test_target_schema_missing_required_field_is_blocked_from_staging(self):
