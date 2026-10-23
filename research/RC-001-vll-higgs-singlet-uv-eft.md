@@ -580,7 +580,7 @@ V_{\rm CT}^{(8)}\supset
 would cancel this *subset-level* constant pole under the fixed convention
 \(\Gamma_{\rm inv}=p^2-\mathcal M_{\rm loc}^2+\Pi\), where a potential counterterm contributes minus its mixed Hessian to \(\Pi_{\rm local\,CT}\).
 
-The candidate has been checked by \`calculations/RC-001-dimension8-constant-pole-candidate.py\`; four exact symbolic checks pass, with output in \`validation/RC-001-dimension8-constant-pole-candidate.txt\`.
+The candidate has been checked by `calculations/RC-001-dimension8-constant-pole-candidate.py`; four exact symbolic checks pass, with output in `validation/RC-001-dimension8-constant-pole-candidate.txt`.
 
 **This is not yet the final gauge-invariant assignment.** The calculation uses only the bubble-plus-contact subset. Other same-order EFT soft/source insertions may modify its constant pole, and EOM-related dimension-eight derivative, potential, and source operators can move contributions between representatives. Until the complete soft sum and a fixed gauge-invariant dimension-eight basis/EOM convention are specified, \(\delta c_{8,\ell}^{\rm candidate}\) is a diagnostic projection, not an accepted Wilson coefficient. The PR remains open and in Draft state.
 
