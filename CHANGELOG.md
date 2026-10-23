@@ -58,5 +58,5 @@
 - Added Chinese counterparts for all seven existing README files: design documents, project registry, research records, candidate Schema v1.4.3.7, and both evaluation-pilot directories.
 - Added language-switch links from the corresponding English README files and the English user guide.
 - Preserved source identifiers, paths, commands, equations, schema-field names, and validation caveats; no English original was replaced.
-- Verified that each translated document has the same number of Markdown headings as its English source. Link/path and code-fence checks are recorded separately; no scientific calculation or CI run was performed by this documentation-only change.
+- Verified that each translated document has the same number of Markdown headings as its English source, and checked relative links plus Markdown code-fence pairing in both language versions. No scientific calculation or CI run was performed by this documentation-only change.
 
