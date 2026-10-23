@@ -43,8 +43,8 @@ check("crossed numerator k gives -q/2", -sp.Rational(1, 2), -sp.Rational(1, 2))
 # The scalar four-point numerator reduces as
 # 2 k.(k+q) = k^2 + (k+q)^2 - q^2; the first two terms are scaleless tadpoles.
 k2, q2, kdotq = sp.symbols("k2 q2 kdotq")
-check("scalar bubble numerator identity", 2 * kdotq,
-      k2 + (k2 + 2 * kdotq + q2) - q2 - k2)
+check("scalar bubble numerator identity", 2 * (k2 + kdotq),
+      k2 + (k2 + 2 * kdotq + q2) - q2)
 
 # 2. Independent Feynman-parameter Gamma-function expansions for hard integrals.
 # All values below are normalized by i/(16 pi^2 M^n).
