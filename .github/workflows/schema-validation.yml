@@ -45,6 +45,7 @@ jobs:
           SCHEMA_VALIDATED_HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
         run: |
           python - <<'PY'
+          import hashlib
           import json
           import os
           import sys
@@ -66,6 +67,10 @@ jobs:
               errors.append("report is missing workflow_run_id")
           if not provenance.get("validator_sha256"):
               errors.append("report is missing validator_sha256")
+          if provenance.get("manifest_sha256") != hashlib.sha256((root / "manifest.json").read_bytes()).hexdigest():
+              errors.append("report manifest_sha256 does not match the checked manifest")
+          if provenance.get("traceability_csv_sha256") != hashlib.sha256((root / "audit/requirement-test-trace.csv").read_bytes()).hexdigest():
+              errors.append("report traceability_csv_sha256 does not match the checked traceability CSV")
           if provenance.get("execution_environment") != "github_actions":
               errors.append("report does not identify GitHub Actions as its execution environment")
           if summary.get("checks_failed") != 0:
