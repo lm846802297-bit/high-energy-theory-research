@@ -22,14 +22,14 @@ The workflow regenerates `audit/validation-report.json` in the runner and upload
 
 ## Migration prototype and validation_ids boundary
 
-The migration tool uses rules version `v1.4.3.7-migration-rules-2`. A positive source-graph fixture verifies unique plan/activity resolution; the negative fixture keeps a missing target unresolved. These synthetic cases test the resolver, not the full historical v1.3 corpus.
+The migration tool uses rules version `v1.4.3.7-migration-rules-3`. Static review tightened source inventory, project/key checks, duplicate-key handling, timestamp validation, record-type-specific aliases, and staging-output safety. These changes have not been executed in tests or CI. Synthetic fixtures still do not establish compatibility with the full historical v1.3 corpus.
 
 - The tool loads the read-only source snapshot first and resolves references only by unique primary key within the same project.
 - A uniquely resolved validation_plan maps to validation_plan_ids.
-- A validation_activity maps to validation_activity_ids only when execution_status is in_progress, succeeded, or failed and started_at is non-empty.
+- A validation_activity reference maps to validation_activity_ids only when the target is unique in the same project, started_at is a valid timezone-aware ISO date-time, and its source status has an explicit mapping to a v1.4 enum. in_progress is not in the target enum (running is), so it remains unresolved until an explicit mapping is approved.
 - Missing targets, cross-type duplicate IDs, unsupported record types, project mismatches, and insufficient launch evidence remain unresolved.
 - An empty legacy validation_ids list maps to empty validation_activity_ids and validation_plan_ids arrays.
-- Dry-run and staging remain non-committing. The report always sets commit_allowed=false; transactional commit, active-pointer switching, rollback, and full migration validation are not implemented.
+- Dry-run and staging remain non-committing. The report always sets commit_allowed=false; full JSON Schema validation of target records, transactional commit, active-pointer switching, and rollback are not implemented. The tool requires all candidate schemas to load correctly, reports malformed/non-record inputs and duplicate typed primary keys, and refuses staging output inside the input tree or in a non-empty directory.
 - Regression tests: tests/unit/test_migration_reference_resolution.py. The existing audit/migration-dry-run-summary.json is a historical report generated under rules version 1.
 
 This resolver reduces avoidable ambiguity only when source evidence is complete. The full historical v1.3 source bundle remains unavailable, so compatibility remains unverified. See `audit/v1.3-compatibility-gate.md`. No normative decision is implicitly approved.
