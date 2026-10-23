@@ -261,3 +261,14 @@ These local results apply to pre-sync HEAD `9bebbdf`, not to the merge commit th
 ## Post-sync Actions follow-up — 2026-10-24
 
 After the main-branch merge commit `0f65b17d066126b5a5174230856df05e276c2a05`, GitHub Actions Run [#40016709849](https://github.com/lm846802297-bit/high-energy-theory-research/actions/runs/40016709849) completed with `failure`. The job has `runner_id=0`, an empty runner name, an empty step list, and no artifact. The log endpoint returned an empty response. The same failure pattern was present on main HEAD `d6143c2` in Run [#40014204997](https://github.com/lm846802297-bit/high-energy-theory-research/actions/runs/40014204997). No workflow test step ran, so these runs do not indicate a code-level test failure and are not passing CI evidence. The underlying runner-allocation cause remains unresolved.
+
+
+## Follow-up — test contract commit and post-commit boundary (2026-10-24)
+
+The corresponding workflow-contract test update is committed in [`11d5637`](https://github.com/lm846802297-bit/high-energy-theory-research/commit/11d56378f152f0db12f3b1758b1659decf7f2760). The test now checks the PR-head checkout reference, report provenance including `traceability_csv_sha256`, UV–EFT bundle build command, upload step, artifact name and path, `if-no-files-found: error`, retention, and exclusion of `verify_pv_derivative_mathematica.wl`.
+
+The owner reports that, on the desktop worktree before the remote commit, the targeted test passed, the full unit suite passed 87/87, and `git diff --check` passed. The same local run reports directory-manifest 8/8, migration regression 36/36, integration 30/30, Python compilation passed, UV–EFT bundle 22 records with 0 errors and 0 warnings (human review remains pending), and Schema validator 68/68 checks, 83/83 candidate Fixture outcomes, 16/16 semantic cases, and 125 trace rows. These are owner-reported results and were not independently reproduced. They are not yet evidence for the exact post-commit tree: the local run preceded `11d5637`, and the desktop diff was not directly available to verify byte-for-byte identity with the remote patch.
+
+Four historical v1.4.3.6 Fixture differences remain. Four local temporary directories remain outside the repository because deletion was blocked: `schema-validation-pr6-d442-*`, `schema-validation-pr6-9bebbdf-*`, `schema-validation-pr6-cb736-*`, and `uv-eFT-hard-derivative-bundle-cb736-*`.
+
+Actions Run [#40020290127](https://github.com/lm846802297-bit/high-energy-theory-research/actions/runs/40020290127) targets commit `11d5637` and fails before test execution: `runner_id=0`, empty runner name, empty step list, no artifact. CI therefore remains unverified; this is not a code-level test failure. Keep PR #6 Open / Draft and retain `candidate` / `not_released` plus `commit_allowed=false`.

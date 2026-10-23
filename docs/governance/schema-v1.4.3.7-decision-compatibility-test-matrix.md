@@ -106,3 +106,12 @@ The owner-reported local pass is for pre-sync HEAD `9bebbdf279fefba098fa237915ff
 Actions Run [#40016709849](https://github.com/lm846802297-bit/high-energy-theory-research/actions/runs/40016709849) for `0f65b17` and Run [#40014204997](https://github.com/lm846802297-bit/high-energy-theory-research/actions/runs/40014204997) for main `d6143c2` both failed before runner assignment, with no recorded steps or artifacts. These are not code-level test failures and not passing CI evidence. The runner-allocation root cause remains unresolved.
 
 DD-ART-008 options remain proposals only. No numeric constraint, symlink enum, digest preimage, or historical hash has been changed.
+
+
+## Workflow-contract test follow-up — 2026-10-24
+
+The test that covers the candidate validation workflow is now named `test_schema_ci_builds_and_uploads_uv_eft_bundle` in commit [`11d5637`](https://github.com/lm846802297-bit/high-energy-theory-research/commit/11d56378f152f0db12f3b1758b1659decf7f2760). It checks PR-head checkout, report provenance (including run ID, attempt, validator SHA-256 and traceability CSV SHA-256), the `run_record_chain.py` build step, upload action/name/path, `if-no-files-found: error`, retention, and the independent Mathematica-script exclusion.
+
+The owner reports the targeted test, full unit suite 87/87, and `git diff --check` passed before the remote commit; associated local results are directory-manifest 8/8, migration 36/36, integration 30/30, Python compilation, UV–EFT bundle 22 records/0 errors/0 warnings (human review pending), and Schema validation 68/68 checks, 83/83 candidate Fixture outcomes, 16/16 semantic cases, 125 trace rows. These are local owner-reported results, not GitHub Actions evidence. The desktop diff was not independently available and the local run preceded `11d5637`; rerun at the exact committed tree after syncing the desktop checkout.
+
+Actions Run [#40020290127](https://github.com/lm846802297-bit/high-energy-theory-research/actions/runs/40020290127) failed before any runner step and produced no artifact. The four historical v1.4.3.6 Fixture differences remain. DD-ART-007–010 remain pending owner approval; `commit_allowed=false` remains mandatory.
