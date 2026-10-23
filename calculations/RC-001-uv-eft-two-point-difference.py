@@ -122,5 +122,5 @@ check("historical two-point vs legacy on-shell representative difference is 4q/[
 print(f"RESULT: {len(checks)} exact symbolic/algebraic checks passed")
 print("STATUS: the 4/3 difference is between the two-point result and the legacy on-shell four-point representative.")
 print("STATUS: master-record §301.1-§301.4 attributes this difference to the off-shell external-momentum terms and EOM completion; the coefficients align in the same operator basis after that completion.")
-print("OPEN: full-model Wilson-vector closure, all remaining EFT soft/source sectors, gauge-invariant assignment of the higher-order constant pole, and independent diagram-level validation.")
+print("OPEN: full-model Wilson-vector closure, higher-dimensional EFT soft/source sectors, complete dimension-eight hard matching, and independent diagram-level validation.")
 print("SCOPE: algebraic checks only; no numerical loop integration or FeynArts/FeynCalc/Mathematica/Matchete/Matchmakereft run.")
