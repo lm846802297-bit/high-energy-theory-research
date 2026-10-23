@@ -28,7 +28,7 @@
     },
     {
       "rule_id": "MIG-006",
-      "rule": "Repeated migration of the same source snapshot and rule version must yield identical canonical target hashes."
+      "rule": "Repeated migration of the same source snapshot and rule version must yield identical target SHA-256 values computed over RFC 8785 JCS canonical UTF-8 bytes."
     },
     {
       "rule_id": "MIG-007",
@@ -78,7 +78,7 @@
     "silently_drop_unmapped_fields",
     "auto_merge_multiple_sources_without_review"
   ],
-  "migration_rules_version": "v1.4.3.7-migration-rules-3",
+  "migration_rules_version": "v1.4.3.7-migration-rules-4",
   "commit_allowed": false,
   "staging_only": true,
   "validation_ids_resolution": {
@@ -203,8 +203,8 @@
       "rule_id": "MAP-TASK_EXECUTION_CONTRACT-CONTRACT_HASH"
     }
   ],
-  "target_schema_validation": "not_performed_by_migration_prototype",
-  "staging_output_policy": "Staging output must be outside the input tree and use a new empty directory. The tool refuses non-empty output directories to prevent stale artifacts from being mistaken for current output.",
+  "target_schema_validation": "draft2020-12+format-checker-per-record; invalid-targets-withheld",
+  "staging_output_policy": "Staging output must be outside the input tree and use a new empty directory. The tool refuses non-empty output directories to prevent stale artifacts from being mistaken for current output. Every provisional target must pass full Draft 2020-12 JSON Schema validation with a format checker; any schema-invalid or otherwise unresolved target is withheld from staging.",
   "source_record_uri_semantics": "source_record_uri is a percent-encoded, input-relative URI reference; it is not a machine-specific absolute file URI.",
   "id_mapping_policy": {
     "target_record_policy": "A source record with any unresolved item does not receive a target_record or target_sha256 and is never written to staging. Provisional target identity/digest fields, when present, are explicitly prefixed candidate_target_.",
@@ -229,5 +229,7 @@
   "pending_normative_rules": [
     "Adding alternative_identity=null to a source Artifact remains unresolved until the relevant normative decision is explicitly approved.",
     "Downgrading hashless external Artifact integrity_status from passed to needs_review remains unresolved until the relevant normative decision is explicitly approved."
-  ]
+  ],
+  "target_digest_algorithm": "RFC8785-JCS-SHA256",
+  "target_digest_policy": "SHA-256 over RFC 8785 JSON Canonicalization Scheme canonical UTF-8 bytes of the transformed target record. This does not replace source_sha256, which hashes the original source bytes."
 }
