@@ -1,0 +1,38 @@
+# Navigation registry only. Not a normative Schema v1.4.3.7 record.
+registry_version: 1
+registry_status: draft
+schema_validation: not_applicable
+notes:
+  - This file registers project/workstream relationships and canonical record paths.
+  - Existing files remain at their current paths; this registry does not authorize or imply migration.
+  - Do not infer scientific completion from project status or repository test status.
+
+projects:
+  - project_id: axial-vector-model-building
+    title: Axial-vector model building
+    status: active
+    scope: >-
+      Parent research project covering the axial-vector model construction,
+      UV completion, phenomenology, experimental constraints, and related
+      manuscript/reviewer-response work.
+    workstreams:
+      - workstream_id: vll-higgs-singlet-uv-eft
+        title: VLL-Higgs-Singlet UV-EFT matching
+        kind: research_branch
+        status: active
+        parent_project_id: axial-vector-model-building
+        scope: >-
+          UV-EFT matching and associated dimension-six gauge corrections,
+          soft-loop bookkeeping, counterterms, and higher-dimensional matching.
+        canonical_records:
+          - research/RC-001-vll-higgs-singlet-uv-eft.md
+          - research/RC-001-gauge-subgraph-change-record.md
+        claim_evidence_matrix: research/RC-001-claim-evidence-matrix.md
+        index: research/README.md
+        current_status: >-
+          Verification in progress. Heavy-containing Yukawa-vertex hard
+          sub-blocks and selected integral/algebra checks are recorded;
+          full Wilson-vector closure, crossed-box sum, complete UV-EFT
+          subtraction, common-basis reduction, and independent diagram-level
+          validation remain open.
+        source_repository: unknown
