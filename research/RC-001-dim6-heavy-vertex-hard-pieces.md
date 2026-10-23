@@ -47,7 +47,7 @@ There are two genuinely heavy-containing Yukawa-vertex topologies:
 
 2. **Heavy–scalar exchange (FS):** the gauge boson joins the heavy \(E_\ell\) segment and the scalar leg. The scalar-gauge vertex supplies the internal momentum; after the chiral projection and symmetric integration, the numerator reduces to \(k^2P_{R,L}\), leaving \(B_0\).
 
-With the all-fields-incoming charge factors \(F_B=Y_iY_j\), \(F_X=x_ix_j\), and \(F_{BX}=Y_ix_j+x_iY_j\) used in the RC-001 charge table, the oriented graph factors for these heavy-containing topologies are \(-F\) times the corresponding scalar kernel. This sign follows from the full oriented Feynman-rule product; it is not inferred from the charge table alone. The conjugate Yukawa vertices give the same real gauge correction.
+With the all-fields-incoming charge factors \(F_B=Y_iY_j\), \(F_X=x_ix_j\), and \(F_{BX}=Y_ix_j+x_iY_j\) used in the RC-001 charge table, the oriented graph factors for these heavy-containing topologies are \(-F\) times the corresponding scalar kernel. This sign follows from the full oriented Feynman-rule product; it is not inferred from the charge table alone. The conjugate Yukawa vertices give the same real gauge correction. As an internal sign-convention cross-check, the parent research source's general gauge-kernel table in §273.9 gives the corresponding Feynman-gauge structures \(+d\,q_Lq_E B_0\), \(+d\,q_Rq_E B_0\), \(-q_Eq_H B_0\) for the \(\bar LHE_R\) vertex, and \(+q_Eq_S B_0\) for the \(S\bar E_L\ell_R\) vertex. Translating those oriented line charges to the all-incoming \(F\) factors reproduces \(-F\) for the rows above. This is a convention cross-check against the existing analytic record, not an independent diagram-package validation.
 
 The scalar kernels are
 \[
