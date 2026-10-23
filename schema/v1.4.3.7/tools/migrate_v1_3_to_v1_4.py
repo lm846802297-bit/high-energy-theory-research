@@ -8,8 +8,10 @@ from datetime import datetime, timezone
 from urllib.parse import quote
 try:
     import yaml
+    from yaml.events import AliasEvent
 except ImportError:
     yaml=None
+    AliasEvent=None
 
 RULE_VERSION="v1.4.3.7-migration-rules-3"
 KNOWN_TYPES={"task","task_execution_contract","run_plan","run","run_manifest","artifact_plan","artifact","validation_plan","validation_activity","validation_report","claim","source","source_fragment","configuration","code","environment","convention_set","parameter_point","benchmark_result","evidence_fragment","test_case","test_run","state_transition_event","migration_record","relation_edge"}
@@ -68,7 +70,7 @@ def load_yaml_record(text):
     if yaml is None: raise RuntimeError("PyYAML is unavailable")
     class UniqueKeySafeLoader(yaml.SafeLoader):
         def compose_node(self,parent,index):
-            if self.check_event(yaml.AliasEvent): raise ValueError("YAML aliases are unsupported in migration inputs")
+            if self.check_event(AliasEvent): raise ValueError("YAML aliases are unsupported in migration inputs")
             return super().compose_node(parent,index)
     UniqueKeySafeLoader.yaml_implicit_resolvers={
         key:[(tag,pattern) for tag,pattern in values if tag!="tag:yaml.org,2002:timestamp"]
@@ -333,7 +335,7 @@ def migrate(input_dir, schemas_dir=None, output_dir=None, unknown_policy="quaran
     source_symlinks=sorted(p for p in inp.rglob("*") if p.is_symlink())
     for link in source_symlinks:
         all_unresolved.append({"path":source_relpath(link),"code":"SOURCE_SYMLINK_REJECTED","message":"source snapshot must not contain symlinks"})
-    source_files=sorted(list(inp.rglob("*.json"))+list(inp.rglob("*.yaml"))+list(inp.rglob("*.yml")))
+    source_files=sorted(p for p in inp.rglob("*") if p.suffix.lower() in {".json",".yaml",".yml"} and (p.is_file() or p.is_symlink()))
     if not source_files:
         all_unresolved.append({"path":str(inp),"code":"EMPTY_SOURCE_SNAPSHOT","message":"no JSON/YAML source files were found"})
     source_entries=[]; source_index={}; typed_source_index={}
