@@ -153,3 +153,9 @@ The four legacy `1.4.3.6-candidate` fixture expectation mismatches remain separa
 
 This follow-up supersedes earlier statements in this record that the corrected integration test had not yet been run. The checked-in `audit/validation-report.json` remains a historical snapshot; the temporary local report is the report from this local run.
 
+## Subsequent rules-v5 safety fix — awaiting local execution
+
+A further static review found that a schema-valid Claim could still be staged after its migrated `validation_ids` reference resolved to a Plan/Activity whose target record was later withheld for Schema failure. The migration code now adds MIG-014 and emits `VALIDATION_TARGET_WITHHELD` to withhold such dependent records. A new regression test, `test_valid_claim_is_withheld_when_referenced_plan_fails_target_schema`, covers a valid Claim referencing an invalid Plan.
+
+This follow-up advances the migration rule contract from rules v4 to `v1.4.3.7-migration-rules-5`. The prior owner-reported results (32/32 migration tests, 30/30 integration tests, 75/75 repository unit tests, compilation, and the 68/68 Schema validator) apply to code HEAD `1bb852c85594a6ef0e930e934cd28a438bc28a7c` under rules v4. They do **not** verify the new rules-v5 code. Re-run the migration regression suite, integration tests, full repository unit suite, Python compilation, and Schema validator against the current rules-v5 HEAD before describing this new safety behavior as locally verified. `commit_allowed=false` remains unchanged.
+
