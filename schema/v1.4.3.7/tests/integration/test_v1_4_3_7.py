@@ -119,6 +119,7 @@ class MigrationTests(unittest.TestCase):
         out,ch,un,w=mig.migrate_record(rec,target_properties={"schema_version":{},"record_type":{},"project_id":{},"source_id":{}})
         self.assertNotIn("mystery_field",out)
         self.assertIn("UNKNOWN_FIELDS_QUARANTINED",[x["code"] for x in w])
+        self.assertIn("UNKNOWN_FIELDS_QUARANTINED_REQUIRES_REVIEW",[x["code"] for x in un])
     def test_22_migration_is_deterministic(self):
         rec={"schema_version":"1.3","record_type":"claim","claim_id":"C-1","project_id":"P-1","planned_run_ids":["RPL-1"]}
         a=mig.migrate_record(rec)[0]; b=mig.migrate_record(rec)[0]
