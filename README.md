@@ -32,6 +32,7 @@ Every arrow should be traceable. A change to an upstream assumption or formula m
 - **docs/scientific-diff-workflow.md** — workflow, definitions, status model, and physics-specific guidance.
 - **projects/** — top-level project registry and project/workstream hierarchy; navigation metadata only at this stage.
 - **docs/USER_GUIDE.md** — detailed operating manual for project setup, research changes, calculation evidence, validation, and migration discipline.
+- **docs/PROJECT_REGISTRY_AUDIT.md** — scope and evidence of the Phase A registry/path pre-audit, including explicit limits on unrun tests and future file migration.
 - **docs/review-checklist.md** — checks for scientific changes and manuscript synchronization.
 - **docs/design/** — retained design baseline and consolidated implementation report.
 - **docs/governance/** — normative decisions and fingerprint-contract review.
