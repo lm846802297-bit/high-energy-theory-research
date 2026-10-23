@@ -4,7 +4,7 @@ This directory is the navigation layer for the **High-Energy Theory Research** p
 
 ## Registered projects
 
-The registry is maintained in [registry.yaml](registry.yaml). It is currently navigation metadata, **not** a normative Schema v1.4.3.7 record and not yet consumed by the project-record validator.
+The registry is maintained in [registry.yaml](registry.yaml). It is navigation metadata, **not** a normative Schema v1.4.3.7 record and is intentionally separate from the structured project-record validator. Validate its hierarchy and declared paths with [validate_project_registry.py](../skills/high-energy-theory-research/scripts/validate_project_registry.py). For the complete operating procedure, see the [User Guide](../docs/USER_GUIDE.md).
 
 ### Axial-vector model building
 
