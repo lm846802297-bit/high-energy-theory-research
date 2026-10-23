@@ -184,5 +184,63 @@ class ValidationReferenceResolutionTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "outside the input tree"):
                 migration.migrate(source, output_dir=source / "staging", write_staging=True)
 
+    def test_legacy_aliases_are_scoped_to_their_record_types(self):
+        artifact = {
+            "schema_version": "1.3", "record_type": "artifact", "project_id": "P-1",
+            "artifact_id": "ART-1", "sha256": "a" * 64, "uri": "file:///artifact",
+            "producer_run_id": "RUN-1", "integrity_status": "passed",
+            "version": "not-an-artifact-version", "contract_hash": "not-an-artifact-hash",
+        }
+        artifact_props = {name: {} for name in (
+            "schema_version", "record_type", "project_id", "artifact_id", "content_sha256",
+            "path_or_uri", "generated_by_run_id", "artifact_integrity_status",
+            "artifact_storage_kind", "alternative_identity",
+        )}
+        migrated_artifact, _, _, artifact_warnings = migration.migrate_record(
+            artifact, target_properties=artifact_props
+        )
+        self.assertEqual(migrated_artifact["content_sha256"], "a" * 64)
+        self.assertEqual(migrated_artifact["path_or_uri"], "file:///artifact")
+        self.assertNotIn("contract_version", migrated_artifact)
+        self.assertNotIn("contract_sha256", migrated_artifact)
+        artifact_quarantine = next(item for item in artifact_warnings if item["code"] == "UNKNOWN_FIELDS_QUARANTINED")
+        self.assertIn("version", artifact_quarantine["fields"])
+        self.assertIn("contract_hash", artifact_quarantine["fields"])
+
+        contract = {
+            "schema_version": "1.3", "record_type": "task_execution_contract", "project_id": "P-1",
+            "contract_id": "TEC-1", "task_id": "TASK-1", "version": 3,
+            "contract_hash": "abc", "sha256": "not-a-contract-hash", "uri": "not-a-contract-uri",
+        }
+        contract_props = {name: {} for name in (
+            "schema_version", "record_type", "project_id", "contract_id", "task_id",
+            "contract_version", "contract_sha256",
+        )}
+        migrated_contract, _, _, contract_warnings = migration.migrate_record(
+            contract, target_properties=contract_props
+        )
+        self.assertEqual(migrated_contract["contract_version"], 3)
+        self.assertEqual(migrated_contract["contract_sha256"], "abc")
+        self.assertNotIn("content_sha256", migrated_contract)
+        self.assertNotIn("path_or_uri", migrated_contract)
+        contract_quarantine = next(item for item in contract_warnings if item["code"] == "UNKNOWN_FIELDS_QUARANTINED")
+        self.assertIn("sha256", contract_quarantine["fields"])
+        self.assertIn("uri", contract_quarantine["fields"])
+
+        run = {
+            "schema_version": "1.3", "record_type": "run", "project_id": "P-1",
+            "run_id": "RUN-1", "producer_run_id": "RUN-OLD",
+            "version": "run-version", "contract_hash": "hash",
+        }
+        run_props = {name: {} for name in ("schema_version", "record_type", "project_id", "run_id")}
+        migrated_run, _, _, run_warnings = migration.migrate_record(run, target_properties=run_props)
+        self.assertNotIn("generated_by_run_id", migrated_run)
+        self.assertNotIn("contract_version", migrated_run)
+        self.assertNotIn("contract_sha256", migrated_run)
+        run_quarantine = next(item for item in run_warnings if item["code"] == "UNKNOWN_FIELDS_QUARANTINED")
+        self.assertIn("producer_run_id", run_quarantine["fields"])
+        self.assertIn("version", run_quarantine["fields"])
+        self.assertIn("contract_hash", run_quarantine["fields"])
+
 if __name__ == "__main__":
     unittest.main()
