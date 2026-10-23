@@ -51,7 +51,7 @@ The companion script calculations/RC-001-eft-soft-topology-census.py checks 26 c
 | SFT-25 | \(Q_{LD}\) insertion with gauge-loop corrections in \(\bar L L H^\dagger H\) | 1 | \(M_E^{-2}\) | Yes | Required for the complete one-loop \(Q_{LD}\) coefficient; include gauge vertex, leg, contact, and counterterm contributions. |
 | SFT-26 | \(Q_{RD}\) insertion with gauge-loop corrections in \(\bar\ell_R\ell_R S^\dagger S\) | 1 | \(M_E^{-2}\) | Yes | Required for the complete one-loop \(Q_{RD}\) coefficient; include gauge vertex, leg, contact, and counterterm contributions. |
 
-The table is deliberately split between **direct scalar 1PI topologies** and **reducible current-exchange graphs**. The latter are not to be silently dropped from a full connected amplitude or current-operator analysis, but they are not an extra local 1PI contribution to the scalar derivative coefficient. Whether their form factors are needed explicitly depends on the chosen matching object and whether gauge-current operators are retained or eliminated with gauge-field EOM.
+The table separates direct scalar 1PI graphs, fermionic external-state graphs, reducible current-exchange graphs, and dimension-eight candidates. Reducible current-exchange graphs must not be silently dropped from a full connected amplitude or current-operator analysis, but they are not extra local 1PI contributions to the scalar derivative coefficient. Whether their form factors are needed explicitly depends on the chosen matching object and whether gauge-current operators are retained or eliminated with gauge-field EOM.
 
 ## 3. What is actually required at \(O(M_E^{-2})\)?
 
