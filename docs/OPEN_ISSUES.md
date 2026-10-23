@@ -16,6 +16,9 @@ This list separates verified software behavior from unresolved design, provenanc
 ## P1 — Coverage and implementation gaps
 
 - The schemas are candidate envelopes, not a complete transcription of every normative field and condition in the design document.
+- **Schema identity metadata needs an explicit policy.** Most schema `$id`/title labels retain v1.4.2, while `artifact` and `task_execution_contract` retain v1.4.3.6 labels inside the v1.4.3.7 bundle. This may preserve source lineage; do not normalize identifiers until their identity semantics and downstream consumers are clarified.
+- **Validation Activity time-field semantics need reconciliation.** The candidate schema requires nullable `completed_at` while separately defining optional `finished_at`; compare with the source design before changing either field.
+- The migration prototype does not perform full JSON Schema validation of each staged target. Its top-level property filtering and enum checks are not a substitute for target-schema validation.
 - FingerprintInputs has a candidate contract and deterministic tests, but its normative status still requires review. The fingerprint contract does not establish scientific correctness.
 - Cross-record validation does not cover every polymorphic reference or every state-machine namespace.
 - Event payload hashes are not comprehensively recomputed.
