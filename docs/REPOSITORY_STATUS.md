@@ -21,7 +21,7 @@
 
 The repository has historical green software-test results for pre-integration SHAs, including the candidate schema suite and migration unit tests. Those results remain valid only for their recorded commits.
 
-The latest main HEAD inspected for this work was 954cf50898513aad28cb2d3c88f9099df465327b. Its latest workflow run, https://github.com/lm846802297-bit/high-energy-theory-research/actions/runs/39894348004, failed before any workflow step was recorded; the job had no assigned runner name. This is not evidence of a code-test failure, but it also is not a passing CI result for current main. The governance-fix branch requires its own validation when a runner is available.
+The latest main HEAD inspected after the project-registry updates was d30734fa078a49262c043eb817479dc680d23ee5. Its latest workflow run, https://github.com/lm846802297-bit/high-energy-theory-research/actions/runs/39895811558, failed before any workflow step was recorded; the job had no assigned runner name. This is not evidence of a code-test failure, but it also is not a passing CI result for current main. The governance-fix branch requires its own validation when a runner is available.
 
 ## Release gates
 
