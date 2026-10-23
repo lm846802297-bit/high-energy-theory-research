@@ -23,7 +23,7 @@ The static review in `schema/v1.4.3.7/audit/static-schema-migration-review-2026-
 
 The repository has historical green software-test results for pre-integration SHAs, including the candidate schema suite and migration unit tests. Those results remain valid only for their recorded commits.
 
-The last main-branch run explicitly inspected for this status note was run 39896401710 for SHA 35d854699b652d69a1e51335dfaff1fe27dda0cd. It failed before any workflow step was recorded because no runner was assigned. Main has since advanced to `2c4b443173f58a577cda7d3eb88d32c93fdf0643` through documentation-only changes; this status note does not assert a CI result for that newer SHA. A manual dispatch of the Schema-only workflow for PR #6 HEAD `531497c0e6e45ce4316e77266530856fe9544f26` was accepted as [run 39898913319](https://github.com/lm846802297-bit/high-energy-theory-research/actions/runs/39898913319), but GitHub blocked job execution because of account-level billing/payment or spending-limit status. No steps or artifacts were produced; the governance-fix branch remains unvalidated.
+The latest inspected PR #6 workflow run is [#39943181897](https://github.com/lm846802297-bit/high-energy-theory-research/actions/runs/39943181897) for candidate HEAD `a180a224a7b1d7bf53bc457e44f36baf5fe48b72`. It failed before any workflow step was recorded: the job had no assigned runner and zero steps, so it produced no test result or artifact. The earlier manual dispatch [#39898913319](https://github.com/lm846802297-bit/high-energy-theory-research/actions/runs/39898913319) was blocked by account-level billing/payment or spending-limit status. The governance-fix branch remains unvalidated; no current-HEAD test pass is claimed.
 
 ## Release gates
 
