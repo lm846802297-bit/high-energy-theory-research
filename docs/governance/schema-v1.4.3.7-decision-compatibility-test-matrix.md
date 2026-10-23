@@ -65,8 +65,8 @@ The IDs below are planning identifiers, not claims that tests have run or passed
 | Owner decision on DD-ART-008 | Pending |
 | Owner decision on DD-ART-009 | Pending |
 | Owner decision on DD-ART-010 | Pending |
-| Owner-reported rules-v5 validation at code HEAD `587587ae0b114d9624bfb7b270c8754b7e9cbef0` | Passed: migration 33/33, integration 30/30, repository unit tests 76/76, Schema validator 68/68, candidate fixtures 83/83, semantic cases 16/16, trace rows 125; GitHub Actions excluded from this phase's acceptance |
-| New directory-manifest fail-closed tests after helper patch | Added, not run; rerun the new test and full local suite against current HEAD |
+| Owner-reported local validation on code/test HEAD `0799dada7eaa8dcd08b8db2f2311a844335d7198` | Passed: directory-manifest tests 7/7, migration 33/33, integration 30/30, repository unit tests 83/83, Python compilation, Schema validator 68/68, candidate fixtures 83/83, semantic cases 16/16, trace rows 125; not GitHub Actions evidence |
+| Directory-manifest fail-closed tests | Owner reports 7/7 passed on code/test HEAD `0799dada7eaa8dcd08b8db2f2311a844335d7198` |
 | Historical v1.3 source baseline and compatibility run | Unavailable / unverified |
 | Actual filesystem directory-manifest verification | Not implemented |
 | Transaction/commit/rollback verification | Not implemented; `commit_allowed=false` |
