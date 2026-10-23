@@ -7,7 +7,6 @@
   "task_id": "TASK-HEP-1",
   "subject_ids": [],
   "method": "synthetic migration resolver test",
-  "tool_id": "migration-test",
   "environment_id": null,
   "input_artifact_ids": [],
   "execution_status": "succeeded",
