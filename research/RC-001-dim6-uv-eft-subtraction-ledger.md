@@ -121,7 +121,7 @@ The following matrix records which mathematical sub-block is actually evaluated.
 | RD-YV-E-S | — | \(B_0\) scalar kernel for \(A'\) and conditional \(BX\) | Scalar kernel evaluated; complete vertex coefficient open |
 | RD-YV-\(\ell_R\)-S | — | Purely light loop at zero external momenta | Soft/scaleless limit identified; retain in common UV/EFT IR bookkeeping |
 | LD/RD-CROSS-BOX | Representative \(J_{\rm hard}=M_E^{-2}(\Delta_{\rm UV}+1-L_\ell)\) | Same scalar master, with distinct numerator/charge routings | Scalar master evaluated; every diagram coefficient and Fierz projection open |
-| MIX-2PT | \multicolumn{2}{c|}{\(\Pi^E_{YX}(0)=g_Yg_XQ_\ell(12\pi^2)^{-1}\ln(M_{E_\mu}^2/M_{E_\tau}^2)\)} | Additive pole cancels; finite threshold evaluated separately |
+| MIX-2PT | \(\Pi^E_{YX}(0)=g_Yg_XQ_\ell(12\pi^2)^{-1}\ln(M_{E_\mu}^2/M_{E_\tau}^2)\) | Same two-point threshold; not a four-point Wilson coefficient | Additive pole cancels; finite threshold evaluated separately |
 
 The symbols \(\kappa_{BX}\) and \(\chi\) must not be conflated: \(\kappa_{BX}\) denotes the off-diagonal propagator factor in the subgraph formula, while \(\chi(\mu_R)\) is the renormalized kinetic-mixing input in the Lagrangian convention of `research/RC-001-dim6-mixed-kinetic-threshold.md`. The full \(O(g^2/M_E^2)\) Wilson-coefficient rows above remain **NOT EVALUATED** until their graph numerators, orientations, multiplicities, counterterms, EFT contact graphs, and common-basis projections are summed.
 
