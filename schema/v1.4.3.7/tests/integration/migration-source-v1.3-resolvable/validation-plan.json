@@ -4,7 +4,6 @@
   "project_id": "P-HEP",
   "validation_plan_id": "VAL-PLAN-RESOLVABLE-1",
   "task_id": "TASK-HEP-1",
-  "method": "synthetic migration resolver test",
   "acceptance_criteria": [],
   "required": true,
   "validation_plan_status": "planned",
