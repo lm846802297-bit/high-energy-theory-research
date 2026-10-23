@@ -21,6 +21,8 @@ The workstream's existing records remain at their current paths while this regis
 
 No files have been moved, renamed, or reclassified by introducing this registry. In particular, the RC-001 identifier remains a research-change/record identifier; it is not the parent project ID.
 
+See the [Phase A registry and migration pre-audit](../docs/PROJECT_REGISTRY_AUDIT.md) for the checks performed and the remaining migration gates.
+
 ## Identity and nesting rules
 
 1. **Project** — a sustained research programme with its own scope and top-level status, e.g. axial-vector-model-building.

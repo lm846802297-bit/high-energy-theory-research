@@ -14,6 +14,30 @@ import re
 from pathlib import Path
 
 import yaml
+from yaml.constructor import ConstructorError
+
+
+class UniqueKeyLoader(yaml.SafeLoader):
+    pass
+
+
+def _construct_unique_mapping(loader, node, deep=False):
+    loader.flatten_mapping(node)
+    mapping = {}
+    for key_node, value_node in node.value:
+        key = loader.construct_object(key_node, deep=deep)
+        if key in mapping:
+            raise ConstructorError(
+                "while constructing a mapping", node.start_mark,
+                f"duplicate key {key!r}", key_node.start_mark,
+            )
+        mapping[key] = loader.construct_object(value_node, deep=deep)
+    return mapping
+
+
+UniqueKeyLoader.add_constructor(
+    yaml.resolver.BaseResolver.DEFAULT_MAPPING_TAG, _construct_unique_mapping
+)
 
 ID_PATTERN = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
 PROJECT_STATUSES = {"planned", "active", "blocked", "paused", "complete", "archived"}
@@ -54,7 +78,7 @@ def validate_registry(registry_path: str | Path, repo_root: str | Path) -> dict:
         }
 
     try:
-        data = yaml.safe_load(source.read_text(encoding="utf-8"))
+        data = yaml.load(source.read_text(encoding="utf-8"), Loader=UniqueKeyLoader)
     except (OSError, yaml.YAMLError) as exc:
         return {
             "validator": "project registry validator",
@@ -106,7 +130,7 @@ def validate_registry(registry_path: str | Path, repo_root: str | Path) -> dict:
             if pid in seen_projects:
                 errors.append({"code": "PROJECT_ID_DUPLICATE", "path": ppath, "project_id": pid})
             seen_projects.add(pid)
-        if project.get("status") not in PROJECT_STATUSES:
+        if not isinstance(project.get("status"), str) or project.get("status") not in PROJECT_STATUSES:
             errors.append({"code": "PROJECT_STATUS_INVALID", "path": ppath, "status": project.get("status")})
         if not isinstance(project.get("title"), str) or not project["title"].strip():
             errors.append({"code": "PROJECT_TITLE_MISSING", "path": ppath})
@@ -135,7 +159,7 @@ def validate_registry(registry_path: str | Path, repo_root: str | Path) -> dict:
                     "expected_parent_project_id": pid,
                     "actual_parent_project_id": workstream.get("parent_project_id"),
                 })
-            if workstream.get("status") not in PROJECT_STATUSES:
+            if not isinstance(workstream.get("status"), str) or workstream.get("status") not in PROJECT_STATUSES:
                 errors.append({"code": "WORKSTREAM_STATUS_INVALID", "path": wpath, "status": workstream.get("status")})
             if not isinstance(workstream.get("title"), str) or not workstream["title"].strip():
                 errors.append({"code": "WORKSTREAM_TITLE_MISSING", "path": wpath})

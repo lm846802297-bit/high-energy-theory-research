@@ -37,9 +37,9 @@ A project can contain multiple workstreams. A workstream can contain multiple re
 
 Use this decision rule before creating files:
 
-- **New top-level project:** the scientific programme has an independently meaningful scope, questions, lifecycle, and evidence base. Register it in projects/registry.yaml.
+- **New top-level project:** the scientific programme has an independently meaningful scope, questions, lifecycle, and evidence base. Register it in [projects/registry.yaml](../projects/registry.yaml).
 - **New workstream:** the work belongs to an existing project but needs a coherent scope, separate progress tracking, or a distinct calculation pipeline. Add it beneath that project's entry.
-- **New research change:** one defined derivation, correction, calculation, cross-check, or manuscript-impact task changes the research state. Use templates/research-change.md.
+- **New research change:** one defined derivation, correction, calculation, cross-check, or manuscript-impact task changes the research state. Use the [research-change template](../templates/research-change.md).
 - **New claim:** a physical statement needs its own evidence and validity-domain assessment. Add a row to the appropriate project-level Claim–Evidence Matrix.
 - **New run:** a calculation or test actually executes. Record its exact code revision, inputs/configuration, environment, command, outputs, and status using the run-record conventions available in the project. Do not fabricate a run record for a planned check.
 - **New generic method or tool:** if it is reusable across projects, place it in the shared skills/, schema/, templates/, docs/, tests/, or tools/ area rather than copying it into one project.
@@ -50,7 +50,7 @@ Do not register an unrelated project because its name appears in a paper, a note
 
 ### 4.1 Edit the registry
 
-The navigation registry is projects/registry.yaml. It currently describes the project hierarchy; it is **not** a record in candidate Schema v1.4.3.7 and is deliberately not fed into the structured research-record validator.
+The navigation registry is [projects/registry.yaml](../projects/registry.yaml). It currently describes the project hierarchy; it is **not** a record in candidate Schema v1.4.3.7 and is deliberately not fed into the structured research-record validator.
 
 For a new top-level project, add a new item under projects with a stable project_id, title, status, scope, and optional workstreams. For a workstream, add it under the parent project's workstreams and set parent_project_id to the enclosing project_id.
 
@@ -78,7 +78,7 @@ Do not invent repository URLs, baseline SHAs, completed checks, or scientific st
 
 ### 4.2 Use the project-record template
 
-Start from templates/project-record.md. Fill in:
+Start from the [project-record template](../templates/project-record.md). Fill in:
 
 - identity and parent project;
 - scope, included/excluded questions, model conventions, and baseline;
@@ -114,11 +114,11 @@ For each substantive scientific change:
 9. **Review downstream impact.** Update affected figures, manuscript text, and reviewer responses only to the extent justified by the verified result.
 10. **Close or carry forward.** Mark unresolved work explicitly and identify the next evidence-producing action.
 
-See docs/scientific-diff-workflow.md and docs/review-checklist.md for the full process.
+See the [Scientific Diff workflow](scientific-diff-workflow.md) and [review checklist](review-checklist.md) for the full process.
 
 ## 6. Use the research Skill
 
-The reusable instructions are in skills/high-energy-theory-research/SKILL.md. Use them as the research-method contract for literature work, derivations, loop calculations, parameter scans, experimental constraints, and manuscript verification.
+The reusable instructions are in [skills/high-energy-theory-research/SKILL.md](../skills/high-energy-theory-research/SKILL.md). Use them as the research-method contract for literature work, derivations, loop calculations, parameter scans, experimental constraints, and manuscript verification.
 
 Before starting a task, provide or locate:
 
@@ -150,7 +150,7 @@ For loop matching, record external momenta and flow, Feynman rules and signs, UV
 
 ## 8. Claim–Evidence Matrix
 
-Use templates/claim-evidence-matrix.md to start a matrix for a new project, then keep the live matrix next to that project's canonical records.
+Use the [Claim–Evidence Matrix template](../templates/claim-evidence-matrix.md) to start a matrix for a new project, then keep the live matrix next to that project's canonical records.
 
 Each row should contain one assessable physical statement, its assumptions and validity domain, derivation evidence, computational evidence, independent-check status, manuscript locations, and next action.
 
@@ -183,7 +183,7 @@ This checks project hierarchy metadata and declared paths only.
 python skills/high-energy-theory-research/scripts/validate_project_records.py path/to/project/records --project-root path/to/project
 ~~~
 
-This second command expects a directory containing only JSON/YAML records that follow the current candidate Schema v1.4.3.7 conventions. Do **not** pass projects/registry.yaml or a folder containing Markdown notes to it. The candidate schema remains a development artifact; its validation is not formal schema approval and does not certify physics.
+This second command expects a directory containing only JSON/YAML records that follow the current candidate Schema v1.4.3.7 conventions. Do **not** pass [projects/registry.yaml](../projects/registry.yaml) or a folder containing Markdown notes to it. The candidate schema remains a development artifact; its validation is not formal schema approval and does not certify physics.
 
 For both commands, inspect the full report, not only the exit code. Fix errors based on source evidence; do not suppress failures by weakening the schema or inventing references. The structured-record validator's documented limitations remain applicable, including incomplete state-machine coverage and no scientific-correctness certification.
 
@@ -202,7 +202,7 @@ For both commands, inspect the full report, not only the exit code. Fix errors b
 
 The shared platform layer is for reusable methods, schemas, templates, documentation, tests, and tools. Project-specific physics records and outputs should ultimately be easy to identify by project/workstream.
 
-The current registry is an initial navigation layer. Existing research/, calculations/, and validation/ paths have intentionally not been moved. Before a future migration:
+The current registry is an initial navigation layer. See the [Phase A registry and migration pre-audit](PROJECT_REGISTRY_AUDIT.md) for the scope already checked and the checks that remain unexecuted. Existing research/, calculations/, and validation/ paths have intentionally not been moved. Before a future migration:
 
 1. enumerate all files to be moved;
 2. audit Markdown links, script imports, tests, CI paths, schema path rules, and validator assumptions;
