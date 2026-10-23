@@ -1,5 +1,6 @@
 import importlib.util
 import json
+import shutil
 import tempfile
 import unittest
 from pathlib import Path
@@ -358,6 +359,31 @@ class ValidationReferenceResolutionTests(unittest.TestCase):
         self.assertIn("INVALID_YAML", codes)
         self.assertEqual(report["source_count"], 2)
         self.assertEqual(report["loaded_record_count"], 0)
+
+    def test_empty_snapshot_emits_the_declared_mapping_csv_header(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            source = root / "source"
+            source.mkdir()
+            output = root / "staging"
+            report = migration.migrate(source, output_dir=output, write_staging=True)
+            header = (output / "id-mapping.csv").read_text(encoding="utf-8-sig").splitlines()[0].split(",")
+        self.assertEqual(report["source_count"], 0)
+        self.assertIn("EMPTY_SOURCE_SNAPSHOT", [item["code"] for item in report["unresolved"]])
+        self.assertEqual(header, migration.ID_MAPPING_FIELDS)
+
+    def test_candidate_schema_hash_mismatch_fails_closed(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            bundle = root / "bundle"
+            shutil.copytree(ROOT / "schema" / "v1.4.3.7", bundle)
+            schema_path = bundle / "schemas" / "claim.schema.json"
+            schema_path.write_text(schema_path.read_text(encoding="utf-8") + "\n", encoding="utf-8")
+            source = root / "source"
+            source.mkdir()
+            (source / "claim.json").write_text(json.dumps(claim_record([])), encoding="utf-8")
+            with self.assertRaisesRegex(ValueError, "SHA-256 does not match manifest"):
+                migration.migrate(source, schemas_dir=bundle / "schemas")
 
 if __name__ == "__main__":
     unittest.main()
