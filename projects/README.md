@@ -4,6 +4,8 @@ This directory is the navigation layer for the **High-Energy Theory Research** p
 
 ## Registered projects
 
+At present, this registry contains one confirmed top-level project and its known UV–EFT workstream. Other research topics are not added as top-level projects until their repository presence and parent-project relationship are established; this avoids guessing project boundaries.
+
 The registry is maintained in [registry.yaml](registry.yaml). It is navigation metadata, **not** a normative Schema v1.4.3.7 record and is intentionally separate from the structured project-record validator. Validate its hierarchy and declared paths with [validate_project_registry.py](../skills/high-energy-theory-research/scripts/validate_project_registry.py). For the complete operating procedure, see the [User Guide](../docs/USER_GUIDE.md).
 
 ### Axial-vector model building
