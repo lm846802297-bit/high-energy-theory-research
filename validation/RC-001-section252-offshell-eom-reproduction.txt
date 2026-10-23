@@ -39,7 +39,7 @@ PASS 36 unified source row FH X^1Y^0
 PASS 37 unified source row FH X^0Y^1
 PASS 38 unified source row FS X^0Y^0
 PASS 39 unified source row FS X^1Y^0
-PASS 40 unified source row FS X^1Y^0
+PASS 40 unified source row FS X^0Y^1
 PASS 41 H source square retained once
 PASS 42 S source square retained once
 PASS 43 background mixed kinetic leading term
