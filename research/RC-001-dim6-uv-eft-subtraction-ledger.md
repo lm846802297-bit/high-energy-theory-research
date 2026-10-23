@@ -104,6 +104,27 @@ This is an explicit scalar-integral UV–EFT split, not a complete box amplitude
 
 The parameter integrals, propagator numerator algebra, and box partial fractions pass the local exact-algebra audit in `calculations/RC-001-dim6-gauge-master-integrals.py` (captured output `validation/RC-001-dim6-gauge-master-integrals.txt`). The additive \(B-A'\) vacuum-polarization trace and finite heavy threshold are separately evaluated in `research/RC-001-dim6-mixed-kinetic-threshold.md` and audited in `calculations/RC-001-dim6-mixed-kinetic-threshold.py`. The additive one-loop pole cancels for the stated complete spectrum, while the finite threshold is proportional to \(\ln(M_{E_\mu}^2/M_{E_\tau}^2)\). This does not fix the independent renormalized kinetic-mixing boundary.
 
+### 2.4 Per-subgraph progress matrix
+
+The following matrix records which mathematical sub-block is actually evaluated. **A subgraph-level kernel is not a completed amplitude row.**
+
+| Subgraph ID | \(Q_{LD}\) contribution | \(Q_{RD}\) contribution | Status |
+|---|---|---|---|
+| E-SELF-B | \(C_E^B=1\) times the Feynman-gauge kernel in §2.3 | Same heavy representation and kernel | 1PI kernel evaluated; full amplitude/counterterm sum open |
+| E-SELF-X | \(C_E^X=Q_\ell^2\) times the same kernel | Same heavy representation and kernel | 1PI kernel evaluated; full amplitude/counterterm sum open |
+| E-SELF-W | Zero: \(E_\ell\) is an \(SU(2)_L\) singlet | Zero | Evaluated by representation theory; this does not remove \(W\)-exchange on light \(L,H\) lines in LD |
+| E-SELF-BX | Conditional factor \(-2\kappa_{BX}g_Yg_X\eta_\ell Q_\ell\) times the same kernel | Same heavy-line factor | Conditional on the off-diagonal propagator convention and input \(\chi\) |
+| LD-YV-E-L | \(B_0(0;0,M_E^2)=\Delta_\epsilon+1-L_\ell\); numerator reduction \(dB_0\) before signs/charges | — | Scalar kernel evaluated; complete vertex coefficient open |
+| LD-YV-E-H | \(B_0\) scalar kernel; \(B\) and conditional \(BX\) | — | Scalar kernel evaluated; complete vertex coefficient open |
+| LD-YV-L-H | Purely light loop at zero external momenta | — | Soft/scaleless limit identified; retain in common UV/EFT IR bookkeeping |
+| RD-YV-E-\(\ell_R\) | — | \(B_0\) scalar kernel; numerator reduction \(dB_0\) before signs/charges | Scalar kernel evaluated; complete vertex coefficient open |
+| RD-YV-E-S | — | \(B_0\) scalar kernel for \(A'\) and conditional \(BX\) | Scalar kernel evaluated; complete vertex coefficient open |
+| RD-YV-\(\ell_R\)-S | — | Purely light loop at zero external momenta | Soft/scaleless limit identified; retain in common UV/EFT IR bookkeeping |
+| LD/RD-CROSS-BOX | Representative \(J_{\rm hard}=M_E^{-2}(\Delta_{\rm UV}+1-L_\ell)\) | Same scalar master, with distinct numerator/charge routings | Scalar master evaluated; every diagram coefficient and Fierz projection open |
+| MIX-2PT | \multicolumn{2}{c|}{\(\Pi^E_{YX}(0)=g_Yg_XQ_\ell(12\pi^2)^{-1}\ln(M_{E_\mu}^2/M_{E_\tau}^2)\)} | Additive pole cancels; finite threshold evaluated separately |
+
+The symbols \(\kappa_{BX}\) and \(\chi\) must not be conflated: \(\kappa_{BX}\) denotes the off-diagonal propagator factor in the subgraph formula, while \(\chi(\mu_R)\) is the renormalized kinetic-mixing input in the Lagrangian convention of `research/RC-001-dim6-mixed-kinetic-threshold.md`. The full \(O(g^2/M_E^2)\) Wilson-coefficient rows above remain **NOT EVALUATED** until their graph numerators, orientations, multiplicities, counterterms, EFT contact graphs, and common-basis projections are summed.
+
 ## 3. Pole and finite-part table to fill per diagram family
 
 For every graph family \(a\), store the amplitude in a fixed common normalization:
