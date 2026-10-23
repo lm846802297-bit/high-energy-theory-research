@@ -70,6 +70,8 @@ These are mandatory subfamilies in addition to the distinct-line exchange pairs:
 - Cross-vertex boxes for all allowed pairs joining lines attached to opposite Yukawa vertices; keep the external momentum routing and weak-index tensor for each crossed routing.
 - External-field and parameter counterterms for \(y_\ell,M_{E_\ell},g_Y,g_2,g_X\), and the kinetic-mixing input if it is part of the chosen scheme.
 
+**Evaluated sub-block (not full LD matching):** the Feynman-gauge heavy-\(E_\ell\) self-energy kernel and the zero-momentum Yukawa-vertex/crossed-box scalar masters are recorded in `research/RC-001-dim6-heavy-line-vertex-box-integrals.md`. For the internal heavy line the diagonal factors are \(Y_E^2=1\), \(C_2(E)=0\), and \(x_E^2Q_\ell^2=Q_\ell^2\); the off-diagonal \(B-A'\) factor remains conditional on the declared propagator matrix. The full LD vertex and box numerator/sign/multiplicity sums remain NOT EVALUATED.
+
 ## 4. \(Q_{RD}\): \(\bar\ell_R\ell_R S_\ell^\ast S_\ell\)
 
 The five line types are \(E,\bar\ell_R,\ell_R,S_\ell^\ast,S_\ell\). The exhaustive nonzero pair classes are:
@@ -88,6 +90,8 @@ The five line types are \(E,\bar\ell_R,\ell_R,S_\ell^\ast,S_\ell\). The exhausti
 - \(S_\ell\) external-leg self-energy from \(A'\), including the scalar-gauge seagull; there is no direct \(B S_\ell S_\ell^\ast\) or \(W S_\ell S_\ell^\ast\) vertex in the unbroken representation.
 - \(\lambda_\ell\)-vertex corrections at both conjugate vertices: \(E-\ell_R\) admits \(B,A'\); \(E-S_\ell\) and \(\ell_R-S_\ell\) admit \(A'\) and conditional mixed exchange where the signed mixed factor is nonzero.
 - Cross-vertex boxes and all crossed momentum routings for the nonzero pairs in §4, together with external-field and parameter counterterms for \(\lambda_\ell,M_{E_\ell},g_Y,g_X\) and the kinetic-mixing input.
+
+**Evaluated sub-block (not full RD matching):** the same heavy-\(E_\ell\) self-energy and scalar master kernels apply to the \(Q_{RD}\) exchange because the heavy Dirac representation is the same. The external light-fermion/scalar charge factors and crossed routings differ and must be assembled separately. The additive \(B-A'\) two-point threshold is derived in `research/RC-001-dim6-mixed-kinetic-threshold.md`; it does not determine the conditional mixed-propagator four-point coefficients.
 
 ## 5. EFT-side diagrams and covariant-derivative contact vertices
 
