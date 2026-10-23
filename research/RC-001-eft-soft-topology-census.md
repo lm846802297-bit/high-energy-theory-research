@@ -91,7 +91,7 @@ Therefore:
 
 ### 3.5 Analytic integral results and matching boundary
 
-The independent note research/RC-001-dim6-soft-loop-integrals-and-checks.md records the stripped integrals, momentum routings, hard/soft decompositions, and operator projections. The script calculations/RC-001-dim6-soft-loop-crosscheck.py passes 39 exact symbolic checks, with output saved in validation/RC-001-dim6-soft-loop-crosscheck.txt.
+The independent note research/RC-001-dim6-soft-loop-integrals-and-checks.md records the stripped integrals, momentum routings, hard/soft decompositions, and operator projections. The script calculations/RC-001-dim6-soft-loop-crosscheck.py passes 41 exact symbolic checks, with output saved in validation/RC-001-dim6-soft-loop-crosscheck.txt.
 
 The results sharpen the ledger as follows:
 
