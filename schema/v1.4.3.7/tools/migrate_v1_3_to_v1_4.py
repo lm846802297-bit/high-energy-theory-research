@@ -225,6 +225,7 @@ def migrate_record(rec, target_properties=None, unknown_policy="quarantine", sou
             out["alternative_identity"]=None
             changes.append({"from":"<absent>","to":"alternative_identity","new_value":None,"basis":"explicit migration rule, candidate pending approval","rule_version":RULE_VERSION,"rule_id":"MIG-ART-ALT-ID-NULL-001"})
             warnings.append({"code":"ALTERNATIVE_IDENTITY_EXPLICIT_NULL","reason":"candidate rule; approval required"})
+            unresolved.append({"code":"ARTIFACT_ALTERNATIVE_IDENTITY_RULE_PENDING_APPROVAL","field":"alternative_identity","message":"the candidate null-insertion rule must not be applied to a target record before the relevant normative decision is approved"})
         if out.get("origin_kind")=="ingested_external" and out.get("artifact_storage_kind")=="file" and out.get("content_sha256") is None:
             if not (isinstance(out.get("hash_unavailable_reason"),str) and out["hash_unavailable_reason"].strip()):
                 unresolved.append({"code":"HASH_UNAVAILABLE_REASON_MISSING"})
@@ -232,6 +233,7 @@ def migrate_record(rec, target_properties=None, unknown_policy="quarantine", sou
                 out["artifact_integrity_status"]="needs_review"
                 changes.append({"from":"artifact_integrity_status","to":"artifact_integrity_status","old_value":"passed","new_value":"needs_review","basis":"candidate strict semantics; pending approval","rule_version":RULE_VERSION,"rule_id":"MIG-ART-HASHLESS-REVIEW-001"})
                 warnings.append({"code":"INTEGRITY_DOWNGRADED_PENDING_REVIEW"})
+                unresolved.append({"code":"ARTIFACT_INTEGRITY_DOWNGRADE_RULE_PENDING_APPROVAL","field":"artifact_integrity_status","message":"the candidate downgrade rule is pending normative approval and blocks target staging"})
     if rt=="claim":
         for field in ("validation_activity_ids","validation_plan_ids"):
             if field not in out: continue
