@@ -1,41 +1,40 @@
 # Fixture index version-field audit
 
-**Status:** audited, unresolved; no version label changed.
-**Scope:** `schema/v1.4.3.7/tests/fixture-index.json` and its relationship to the candidate bundle metadata.
+**Status:** Resolved at metadata-contract level. Historical source-archive byte comparison remains unavailable and is not represented as verified.
 
-## Observed evidence
+## Normative metadata contract for this candidate
 
-| Location | Observed value or behavior | Interpretation limit |
+- manifest.schema_version identifies the schema bundle version.
+- manifest.fixture_index points to the canonical fixture index used to validate the current bundle. Its top-level schema_version must equal manifest.schema_version.
+- manifest.legacy_fixture_index points to a retained historical fixture index. Its top-level schema_version must equal manifest.legacy_fixture_index_schema_version.
+- A fixture index's top-level schema_version identifies the target bundle whose fixture expectations it declares. It is not the index metadata format version and does not, by itself, prove the source archive from which the file was imported.
+- Source archive lineage is recorded separately in IMPORT_PROVENANCE.json.
+
+## Repository values
+
+| Item | Value | Meaning |
 |---|---|---|
-| `manifest.json` | `schema_version = 1.4.3.7-candidate` | Labels the integrated candidate bundle. |
-| `tests/fixture-index.json` | Top-level `schema_version = 1.4.3.6-candidate` | The repository contains no schema/document defining the meaning of this top-level index field. |
-| `IMPORT_PROVENANCE.json` | Records lineage from `schema-v1.4.3.6-integrated-candidate-bundle.zip`, SHA-256 `aefb34e68af65daf8277b9553d232cab29ffb5df9c4f18c1cfe126474a06adf1` | The source ZIP itself is not committed in this repository, so its exact fixture-index bytes cannot currently be compared with the imported file. |
-| `manifest.json` | Records `fixture_index_sha256 = fa1047d096208c81e2798af0276cfe0aeccca37dba599e3ef837664c44cc6133` | The bundle validator verifies that the current index file matches this digest. This proves internal digest consistency, not the meaning or original provenance of the version field. |
-| `tools/schema-v1.4.3.6-validate.py` | Checks the fixture-index file hash, fixture IDs, fixture outcomes, and trace links; it does not interpret the top-level `idx["schema_version"]`. | Current CI passing does not resolve the version-field semantics. |
-| Individual fixture entries | Use `schema_version = 1.4` | This is the record-format version; it does not define the top-level fixture-index metadata field. |
+| Candidate bundle | 1.4.3.7-candidate | Current, unreleased candidate |
+| Canonical fixture index | tests/fixture-index-v1.4.3.7.json | Version-matched candidate acceptance suite |
+| Legacy fixture index | tests/fixture-index.json | Preserved 1.4.3.6-candidate expectation baseline |
+| Legacy source archive named in provenance | schema-v1.4.3.6-integrated-candidate-bundle.zip | Lineage record only; archive is not committed in the repository |
+| Candidate index digest | 720a2f450991ecf8518e1fae86c0e17bfa0765aae1d0c7ff684bb71e32de4fc4 | SHA-256 of the canonical candidate index |
+| Legacy index digest | fa1047d096208c81e2798af0276cfe0aeccca37dba599e3ef837664c44cc6133 | SHA-256 of the preserved legacy index |
 
-## Finding
+The repository does not claim byte-for-byte equality between the checked-in legacy index and the unavailable source archive. The current file bytes are identified by the manifest digest; source-archive equality remains unverified.
 
-The mismatch is **consistent with an inherited source-package label**, because the documented source lineage points to a v1.4.3.6 candidate bundle. However, the source archive is not present for byte-level comparison, and no normative contract defines whether the index's top-level `schema_version` means:
+## Validator and regression behavior
 
-1. the bundle version to which the index belongs;
-2. the version of the index metadata format; or
-3. the source bundle version from which the index was inherited.
+The candidate validator checks:
+1. the canonical candidate index digest;
+2. the legacy index digest;
+3. candidate index schema_version equality with the bundle schema_version;
+4. legacy index schema_version equality with the explicitly declared legacy baseline version;
+5. candidate fixture IDs and expected schema/semantic outcomes; and
+6. historical fixture expectations against the candidate schemas, reported separately as compatibility drift.
 
-Therefore, it is not yet justified to replace `1.4.3.6-candidate` with `1.4.3.7-candidate`. Nor is it justified to assert that the old value is a deliberately preserved provenance field.
-
-## Validator behavior
-
-The current validator confirms the file digest recorded in `manifest.json` and checks fixture contents. It does not enforce equality between the manifest's `schema_version` and the fixture index's top-level `schema_version`. The passing CI result is consequently compatible with this metadata mismatch.
-
-## Safe disposition
-
-- Preserve the current index bytes and manifest digest while the field's meaning is unresolved.
-- Keep this issue as a release blocker for metadata clarity; do not interpret it as evidence that the fixture payloads themselves failed.
-- If the original source ZIP becomes available, compare the extracted `tests/fixture-index.json` bytes and digest directly.
-- Then define the field contract explicitly. If it denotes the current bundle, update it to the candidate bundle version and regenerate the manifest digest. If it denotes source lineage or index-format version, rename/document it explicitly in a reviewed metadata change and preserve source provenance.
-- Add a validator regression test for the chosen contract before removing this issue.
+The historical index is not relabeled. Candidate acceptance uses the canonical version-matched index. A mismatch in historical expectations is not silently converted into a candidate pass.
 
 ## Release boundary
 
-This audit does not approve DD-ART-007 through DD-ART-010, unblock `validation_ids` migration, establish full schema coverage, or certify any physical result.
+This resolves the meaning of the metadata field, not the missing source archive. Schema v1.4.3.7 remains an unreleased candidate. DD-ART-007 through DD-ART-010 remain pending explicit owner approval, and historical v1.3 migration compatibility remains unverified.

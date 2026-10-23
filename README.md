@@ -58,6 +58,7 @@ Every arrow should be traceable. A change to an upstream assumption or formula m
 - Consolidated design/implementation report: v1.6.7.
 - Schema package: `schema/v1.4.3.7/`, imported as a candidate bundle.
 - The candidate contains 25 JSON Schema entry points, 83 indexed fixtures, cross-record validation, a conservative migration prototype, a directory-manifest helper, audit reports, and traceability data.
+- The canonical `manifest.fixture_index` is version-matched to `1.4.3.7-candidate`; `manifest.legacy_fixture_index` preserves the `1.4.3.6-candidate` expectation baseline. Both digests and version relationships are checked.
 - The project-record validator is `skills/high-energy-theory-research/scripts/validate_project_records.py`. It supports JSON/YAML parsing, candidate-schema checks, bounded reference and ID validation, status/reason consistency, and local source/artifact path checks.
 - The end-to-end UV–EFT pilot checks a bounded hard-kernel derivative and small-`r` expansion against independent Feynman-parameter quadrature. It does not establish completeness of the full UV diagram set, full dimension-six basis reduction, or scientific acceptance of a final Wilson coefficient.
 
@@ -73,23 +74,9 @@ Every arrow should be traceable. A change to an upstream assumption or formula m
 
 ## Local validation
 
-The latest pre-integration CI run for PR HEAD `5c5b10b6889c2e4146d0a696fde16f2b3ca847bf` passed the candidate validation workflow on 2026-10-21 ([GitHub Actions run](https://github.com/lm846802297-bit/high-energy-theory-research/actions/runs/39542332657)):
+A historical pre-integration CI run for PR HEAD `5c5b10b6889c2e4146d0a696fde16f2b3ca847bf` passed the candidate validation workflow on 2026-10-21 ([GitHub Actions run](https://github.com/lm846802297-bit/high-energy-theory-research/actions/runs/39542332657)). Its bounded results included 25/25 schema entry points, 83/83 fixture expectations, 16/16 semantic cases, 29/29 integration tests, and 36/36 repository unit tests. These results apply only to that SHA; they do not establish full schema completeness, historical migration compatibility, or scientific correctness. The Mathematica verification script was not run in CI.
 
-- Candidate schema-bundle checks: 60/60.
-- Schema entry points and manifest hashes: 25/25.
-- Current candidate fixture expectations: 83/83.
-- Semantic cases: 16/16.
-- Candidate integration tests: 29/29.
-- Repository unit tests: 36/36.
-- Python compilation: passed.
-- Real physics audit cases: 8/8.
-- Research-record graph: 22 records, 0 errors, 0 warnings.
-- Fingerprint recomputation and source-aware migration tests: passed; ambiguous references remain unresolved.
-- Second-order small-`r` residual regression: maximum scaled residual 63.86, below the test threshold of 70.
-
-These are bounded, SHA-specific software-validation results. They do **not** establish full schema completeness, historical migration compatibility, or correctness of a complete physics result. The separate Mathematica verification script is included in the provenance bundle but was **not run in CI** and is not marked passed.
-
-The successful run above targets the pre-integration HEAD `5c5b10b6889c2e4146d0a696fde16f2b3ca847bf`. A later integration attempt at `879996ce13929afdf63e463dced6668df0b691b1` failed before any workflow step was recorded: the job had no assigned runner name and its logs were unavailable. This does not establish a code-test failure, but it also does not provide a passing result for the integrated tree. The output-directory safety regression added in the current candidate tree has not been CI-verified. Rerun the complete workflow for the final HEAD when a runner is available.
+Recent workflow runs for later main commits have repeatedly failed before any workflow step was recorded because no runner was assigned. The latest completed main run checked during this update is [#39896401710](https://github.com/lm846802297-bit/high-energy-theory-research/actions/runs/39896401710) for SHA `35d854699b652d69a1e51335dfaff1fe27dda0cd`. It failed before any workflow step was recorded because no runner was assigned. This is an infrastructure block, not evidence of a code-test failure, but it is not a passing result for the latest candidate. Recheck the exact HEAD's run before release.
 
 ### Validation commands
 
@@ -107,8 +94,8 @@ python skills/high-energy-theory-research/scripts/validate_project_records.py pa
 Do not treat the candidate as an approved release until all release gates have been addressed:
 
 1. DD-ART-007 through DD-ART-010 are recommendations, not approvals; obtain explicit normative decisions.
-2. Resolve the fixture-index version-field mismatch: the inherited index says `1.4.3.6-candidate` while the bundle manifest says `1.4.3.7-candidate`. The source archive needed for byte-for-byte lineage verification is unavailable.
-3. Resolve ambiguous legacy `validation_ids` mappings without guessing target record types. Migration remains staging-only with `commit_allowed=false`; no source overwrite or migration commit is authorized.
+2. Fixture-index semantics are now explicit: the canonical index matches `1.4.3.7-candidate`, and the legacy `1.4.3.6-candidate` index is preserved separately. The unavailable source archive means byte-for-byte source-archive equality remains unverified.
+3. The source-aware `validation_ids` resolver has positive and negative synthetic regression cases. Missing or ambiguous targets remain unresolved; migration stays staging-only with `commit_allowed=false`. Full historical v1.3 compatibility and transactional commit/rollback remain blocked.
 4. Expand semantic/state-machine coverage and verify directory manifests against actual filesystem contents.
 5. Define and review the `FingerprintInputs` field and hashing contract, then complete the structured record coverage needed for full reproducibility acceptance.
 6. Implement scientific acceptance tests for real research tasks before claiming end-to-end scientific reproducibility.
