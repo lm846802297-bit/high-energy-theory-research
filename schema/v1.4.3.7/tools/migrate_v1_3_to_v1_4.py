@@ -403,7 +403,7 @@ def migrate(input_dir, schemas_dir=None, output_dir=None, unknown_policy="quaran
     def source_relpath(p): return p.relative_to(inp).as_posix()
     generated_at_utc=datetime.now(timezone.utc).isoformat(timespec="seconds").replace("+00:00","Z")
     operator_name=operator.strip() if isinstance(operator,str) and operator.strip() else "not_recorded"
-    source_symlinks=sorted(p for p in inp.rglob("*") if p.is_symlink())
+    source_symlinks=(([inp] if inp.is_symlink() else []) + sorted(p for p in inp.rglob("*") if p.is_symlink()))
     for link in source_symlinks:
         all_unresolved.append({"path":source_relpath(link),"code":"SOURCE_SYMLINK_REJECTED","message":"source snapshot must not contain symlinks"})
     source_files=sorted(p for p in inp.rglob("*") if p.suffix.lower() in {".json",".yaml",".yml"} and (p.is_file() or p.is_symlink()))
