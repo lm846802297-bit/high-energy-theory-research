@@ -15,7 +15,7 @@ except ImportError:
     yaml=None
     AliasEvent=None
 
-RULE_VERSION="v1.4.3.7-migration-rules-5"
+RULE_VERSION="v1.4.3.7-migration-rules-6"
 TARGET_SCHEMA_VALIDATION_POLICY="draft2020-12+format-checker-per-record; invalid-targets-withheld"
 TARGET_DIGEST_ALGORITHM="RFC8785-JCS-SHA256"
 KNOWN_TYPES={"task","task_execution_contract","run_plan","run","run_manifest","artifact_plan","artifact","validation_plan","validation_activity","validation_report","claim","source","source_fragment","configuration","code","environment","convention_set","parameter_point","benchmark_result","evidence_fragment","test_case","test_run","state_transition_event","migration_record","relation_edge"}
@@ -142,6 +142,7 @@ def load_mapping_contract():
         "MIG-012":"Validate every provisional target against its complete Draft 2020-12 JSON Schema with a format checker; any target schema error blocks target emission to staging.",
         "MIG-013":"Compute target_record_sha256 as SHA-256 over RFC 8785 JCS canonical UTF-8 bytes; source_sha256 remains the digest of the original source bytes.",
         "MIG-014":"Withhold a migrated record when a validation_ids reference resolves to a source Validation Plan or Validation Activity that does not produce a valid target record; report VALIDATION_TARGET_WITHHELD.",
+        "MIG-015":"Withhold a migrated Task Execution Contract when alternative_identity_methods is absent or contract_sha256 cannot be revalidated under an owner-approved DD-ART-010 payload; do not silently default the registry to an empty array.",
     }
     for rule_id,expected_text in required_rules.items():
         if rules_by_id.get(rule_id)!=expected_text:
@@ -279,6 +280,21 @@ def migrate_record(rec, target_properties=None, unknown_policy="quarantine", sou
                 changes.append({"from":"artifact_integrity_status","to":"artifact_integrity_status","old_value":"passed","new_value":"needs_review","basis":"candidate strict semantics; pending approval","rule_version":RULE_VERSION,"rule_id":"MIG-ART-HASHLESS-REVIEW-001"})
                 warnings.append({"code":"INTEGRITY_DOWNGRADED_PENDING_REVIEW"})
                 unresolved.append({"code":"ARTIFACT_INTEGRITY_DOWNGRADE_RULE_PENDING_APPROVAL","field":"artifact_integrity_status","message":"the candidate downgrade rule is pending normative approval and blocks target staging"})
+    if rt=="task_execution_contract":
+        if "alternative_identity_methods" not in out:
+            unresolved.append({
+                "code":"TEC_ALTERNATIVE_IDENTITY_METHODS_MISSING_PENDING_DD_ART_010",
+                "field":"alternative_identity_methods",
+                "decision":"DD-ART-010",
+                "message":"do not silently default a missing method registry to []; the normative payload rule is pending owner approval",
+            })
+        if "contract_sha256" in out:
+            unresolved.append({
+                "code":"TEC_CONTRACT_HASH_REVALIDATION_PENDING_DD_ART_010",
+                "field":"contract_sha256",
+                "decision":"DD-ART-010",
+                "message":"the source contract hash is preserved as source evidence but cannot be asserted as a validated target hash until the owner approves the payload rule and the target digest is recomputed",
+            })
     if rt=="claim":
         for field in ("validation_activity_ids","validation_plan_ids"):
             if field not in out: continue
@@ -520,7 +536,7 @@ def migrate(input_dir, schemas_dir=None, output_dir=None, unknown_policy="quaran
     if source_files_skipped_count:
         snapshot_blockers.append("SOURCE_FILES_SKIPPED")
     snapshot_blocked=bool(snapshot_blockers)
-    report={"migration_rule_version":RULE_VERSION,"source_schema_version":"1.3","target_schema_version":"1.4","mode":"write_staging" if write_staging else "dry_run","generated_at_utc":generated_at_utc,"mapping_contract_sha256":mapping_contract_sha256,"schema_manifest_sha256":digest_bytes(manifest_bytes),"target_digest_algorithm":TARGET_DIGEST_ALGORITHM,"operator":operator_name,"source_count":len(source_files),"migratable_record_count":sum(record["target_record"] is not None for record in records),"loaded_record_count":len(source_entries),"source_files_skipped_count":source_files_skipped_count,"source_symlink_count":len(source_symlinks),"staging_blocked":snapshot_blocked,"staging_blockers":snapshot_blockers,"staging_written_record_count":0,"schema_validation_failure_count":sum(item.get("code")=="TARGET_SCHEMA_VALIDATION_FAILED" for item in all_unresolved),"canonicalization_failure_count":sum(item.get("code")=="TARGET_CANONICALIZATION_FAILED" for item in all_unresolved),"changes":all_changes,"unresolved":all_unresolved,"warnings":all_warnings,"id_mapping":idmap,"commit_allowed":False,"target_schema_validation":TARGET_SCHEMA_VALIDATION_POLICY,"limitations":["Every provisional target is checked against its complete Draft 2020-12 JSON Schema with a format checker; any schema-invalid target is unresolved and withheld from staging. This does not establish cross-record or historical compatibility.","Source references are resolved only within the same project and only when primary IDs are unique.","A validation activity reference is typed only when the source activity is uniquely identified, its status is supported by an explicit target mapping, and started_at is a timezone-aware ISO date-time.","Source execution statuses outside the v1.4 target enum remain unresolved until an explicit mapping rule is approved.","Non-object JSON files, missing record_type values, malformed JSON, duplicate typed primary keys, and empty source snapshots block migration.","This prototype does not implement transactional commit or pointer-based rollback.","It does not recalculate TEC contract hashes unless canonical source payload is available.","No migration is considered committed; human approval, full cross-record validation, historical compatibility evidence, and transaction safeguards are required."]}
+    report={"migration_rule_version":RULE_VERSION,"source_schema_version":"1.3","target_schema_version":"1.4","mode":"write_staging" if write_staging else "dry_run","generated_at_utc":generated_at_utc,"mapping_contract_sha256":mapping_contract_sha256,"schema_manifest_sha256":digest_bytes(manifest_bytes),"target_digest_algorithm":TARGET_DIGEST_ALGORITHM,"operator":operator_name,"source_count":len(source_files),"migratable_record_count":sum(record["target_record"] is not None for record in records),"loaded_record_count":len(source_entries),"source_files_skipped_count":source_files_skipped_count,"source_symlink_count":len(source_symlinks),"staging_blocked":snapshot_blocked,"staging_blockers":snapshot_blockers,"staging_written_record_count":0,"schema_validation_failure_count":sum(item.get("code")=="TARGET_SCHEMA_VALIDATION_FAILED" for item in all_unresolved),"canonicalization_failure_count":sum(item.get("code")=="TARGET_CANONICALIZATION_FAILED" for item in all_unresolved),"changes":all_changes,"unresolved":all_unresolved,"warnings":all_warnings,"id_mapping":idmap,"commit_allowed":False,"target_schema_validation":TARGET_SCHEMA_VALIDATION_POLICY,"limitations":["Every provisional target is checked against its complete Draft 2020-12 JSON Schema with a format checker; any schema-invalid target is unresolved and withheld from staging. This does not establish cross-record or historical compatibility.","Source references are resolved only within the same project and only when primary IDs are unique.","A validation activity reference is typed only when the source activity is uniquely identified, its status is supported by an explicit target mapping, and started_at is a timezone-aware ISO date-time.","Source execution statuses outside the v1.4 target enum remain unresolved until an explicit mapping rule is approved.","Non-object JSON files, missing record_type values, malformed JSON, duplicate typed primary keys, and empty source snapshots block migration.","This prototype does not implement transactional commit or pointer-based rollback.","Task Execution Contract targets are withheld when the alternative-identity registry is missing or the source contract hash has not been revalidated under an owner-approved DD-ART-010 payload; this prototype does not recompute TEC contract hashes.","No migration is considered committed; human approval, full cross-record validation, historical compatibility evidence, and transaction safeguards are required."]}
     if write_staging:
         outroot=Path(output_dir)
         outroot.mkdir(parents=True,exist_ok=True)
