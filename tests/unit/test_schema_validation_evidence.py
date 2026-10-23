@@ -43,6 +43,8 @@ class SchemaValidationEvidenceTests(unittest.TestCase):
             "workflow_run_id",
             "generated_at_utc",
             "validator_sha256",
+            "manifest_sha256",
+            "traceability_csv_sha256",
             "execution_environment",
         ):
             with self.subTest(token=token):
