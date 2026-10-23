@@ -35,6 +35,10 @@ The migration tool now uses rules version `v1.4.3.7-migration-rules-5`. Static r
 - Any record with unresolved items—including quarantined unknown fields and artifact transformations that depend on pending normative decisions—is withheld from target JSON staging. The ID-mapping report records source/target hashes, candidate-only target hashes when blocked, rule IDs, review state, collision state, rewritten-reference count, UTC timestamp, and operator identifier; an omitted operator is recorded as `not_recorded` and never implies approval.
 - Regression tests: tests/unit/test_migration_reference_resolution.py. The existing audit/migration-dry-run-summary.json is a historical report generated under rules version 1.
 
+### Directory-manifest helper — latest static safety fix
+
+The helper now rejects FileEntry objects with missing or additional keys instead of silently dropping extra data before hashing. Its `allow_symlinks=True` argument is explicitly rejected because this manifest-only helper cannot prove symlink targets remain inside a filesystem root. New unit tests cover exact key sets, path normalization/collisions, deterministic ordering, and symlink rejection; these tests have not yet been run on the latest branch HEAD. The helper still does not verify manifest entries against actual filesystem bytes. DD-ART-008 remains pending owner approval.
+
 This resolver reduces avoidable ambiguity only when source evidence is complete. The full historical v1.3 source bundle remains unavailable, so compatibility remains unverified. See `audit/v1.3-compatibility-gate.md`. No normative decision is implicitly approved.
 
 ## Release constraints
