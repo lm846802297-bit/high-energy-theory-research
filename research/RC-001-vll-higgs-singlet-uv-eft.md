@@ -36,6 +36,19 @@ The primary source is a Library artifact, not a file currently committed to this
 
 The supporting files above were located in the Library and their SHA-256 hashes were recomputed for provenance. The JSON audit log explicitly names v76 and v77, so it is a historical artifact included in the v153 source bundle, not a run performed against v153. Its PASS status applies only to the listed Coleman–Weinberg algebra and artifact-integrity checks; it explicitly says FeynCalc was NOT RUN. The Python audit output likewise records checks of its declared algebraic kernels, not a complete amplitude. In particular, its B1/B3 sign warning remains an open cross-reconciliation item described below. File integrity is verified; physical equivalence across source versions is not implied.
 
+### Committed artifact bundle
+
+The working tree behind an earlier generation of the primary source is committed at [artifacts/higgs-portal-v66-20261019](../artifacts/higgs-portal-v66-20261019/), with its inventory and provenance notes in [artifacts/README.md](../artifacts/README.md).
+
+**This bundle does not supersede the v153 baseline.** It records the v66 main document (2026-10-19) together with the historical `work/` and `计算脚本/` trees. The bundle contains 138 files (12,445,122 bytes; 12.45 MB). Its purpose is to provide a committed, hashable location for this earlier generation's sources and outputs.
+
+| Consequence | Detail |
+|---|---|
+| Hash match | `计算脚本/section273_feyncalc_threshold_workflow.wl` is byte-identical to the hash listed above (`8e2c7a36…053ab`). This establishes file provenance only; the FeynArts/FeynCalc scaffold remains unrun. |
+| Not covered | `section273_feyncalc_audit_log.json` and `uv_eft_audit_suite_output.txt` are not in the v66 bundle; their hashes still refer to the Library copies. |
+| Version gap | Results present only in the v153 source have no committed backing in this v66 bundle. Presence in the bundle does not establish a v153 claim. |
+| Unchanged claims | All claim statuses in §6 and the open B1/B3 item are unaffected. Archiving scripts and outputs does not advance diagram-level verification. |
+
 ## 3. Model, scheme, and scope frozen for this record
 
 The working UV interaction is the flavor-resolved VLL model
@@ -681,3 +694,4 @@ The runtime availability check is recorded in `validation/RC-001-dim6-diagram-to
 | 2026-10-23 | Light-only Yukawa-vertex hard cancellation | Expanded the chirality-preserving heavy propagator through (O(M_E^{-2})) and showed the common purely light loop factor cancels against the gauge-covariant EFT insertion when contact terms and the same IR prescription are included; added CL-013 and a symbolic check | Remove duplicated soft-only terms from the hard-coefficient worklist while retaining them in Ward/contact bookkeeping |
 | 2026-10-23 | Conditional mixed input-parameter poles | Derived the first-order B-A' parameter-only pole sub-block using the signed off-diagonal propagator coefficient rho_BX=-chi+O(chi^2); added CL-014 and an exact charge-algebra check | Keep mixed kinetic renormalization separate from diagonal results and from the still-open mixed vertex/box matching |
 | 2026-10-23 | Heavy-line Yukawa-vertex hard sub-blocks | Evaluated the FF and FS vertex kernels with oriented signs for both conjugate (y) and (lambda) vertices; retained the (O(epsilon)	imes 1/epsilon) term in (dB_0); added CL-015 and exact symbolic checks | Preserve vertex-only poles and finite constants as a sub-block; do not claim complete Wilson coefficients before crossed boxes, EFT contacts, and counterterms are combined |
+| 2026-10-23 | Artifact bundle provenance | Added the immutable v66 (2026-10-19) working-tree snapshot with a 138-file inventory and normalized relocation metadata; preserved the v153 baseline and claim statuses | Give the earlier generation's supporting sources and outputs a repository-addressable location without implying that archive integrity establishes physical validation |
