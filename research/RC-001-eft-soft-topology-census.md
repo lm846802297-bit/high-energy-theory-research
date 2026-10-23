@@ -142,3 +142,22 @@ The existing four-check \(C_5^2\) constant-pole audit verifies only the stated s
 5. Only after the dimension-six gauge/source closure, start the \(O(M_E^{-4})\) dimension-eight hard/soft calculation using the list in §6.
 
 No loop integral is evaluated by the companion census script. No FeynCalc, Mathematica, FeynArts, Matchete, or Matchmakereft execution is claimed. PR #4 remains Draft/Open; no merge is authorized by this topology census.
+
+
+## 8. Dimension-six gauge attachment atlas and subtraction ledger
+
+The next gauge-correction phase now has two linked records:
+
+- `research/RC-001-dim6-gauge-diagram-atlas.md`: charge-compatible one-gauge-boson attachment classes for the \(\bar L L H^\dagger H\) and \(\bar\ell_R\ell_R S^\ast S\) tree-exchange amplitudes, including external-leg self-energies, heavy-line attachments, vertex/box classes, mixed \(B-A'\) charge factors, and EFT derivative-contact vertices.
+- `research/RC-001-dim6-uv-eft-subtraction-ledger.md`: UV/EFT subtraction, pole/finite-part, counterterm, Ward-identity, common-basis, current/source and kinetic-mixing ledger.
+
+The local charge-aware census verifies, for each flavor, the attachment-class counts
+\[
+Q_{LD}: (BB,WW,A'A',BA')=(10,6,3,9),\qquad
+Q_{RD}: (BB,WW,A'A',BA')=(3,0,10,7).
+\]
+These are unordered line-pair classes, not a generated count of individual Feynman diagrams. In particular, the \(Q_{LD}/Q_{RD}\) derivative contact vertices have \(B\) and \(A'\) components but no direct \(W\) component because the differentiated composites are \(SU(2)_L\) singlets.
+
+No \(O(g^2/M_E^2)\) gauge-loop integral or finite Wilson coefficient has yet been evaluated. The runtime availability record `validation/RC-001-dim6-diagram-tool-availability.txt` confirms that the current execution environment lacks Mathematica/Wolfram, FeynCalc, FeynArts, pyfeyn and QGRAF; therefore independent diagram-level validation remains open. The dedicated Actions rerun for the prior HEAD still returned a failure with runner ID zero and no recorded steps, and does not constitute a script-level failure or a successful CI run.
+
+The existing analytic \(C_5C_5^\ast\) soft kernels and master §§252–255 bosonic/source blocks remain separate evidence modules. Do not double-count them when the gauge-corrected fermionic derivative/current sector is eventually summed. PR #4 remains Draft/Open.
