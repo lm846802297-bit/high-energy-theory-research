@@ -63,7 +63,8 @@ def migrate_record(rec, target_properties=None, unknown_policy="quarantine", sou
             unresolved.append({"code":"FIELD_MAPPING_CONFLICT","old_field":old,"new_field":new,"old_value":out[old],"new_value":out[new]})
             continue
         reference_count=len(out[old]) if old.endswith("_ids") and isinstance(out[old],list) else 0
-        out[new]=out[old]; changes.append({"from":old,"to":new,"basis":"explicit_rule","rule_version":RULE_VERSION,"reference_count":reference_count})
+        rule_id=f"MAP-{rt.upper()}-{old.upper()}"
+        out[new]=out[old]; changes.append({"from":old,"to":new,"basis":"explicit_rule","rule_version":RULE_VERSION,"rule_id":rule_id,"reference_count":reference_count})
         if old!=new: out.pop(old,None)
 
     # Resolve validation_ids only when the source graph identifies a unique target
@@ -81,7 +82,7 @@ def migrate_record(rec, target_properties=None, unknown_policy="quarantine", sou
                     out[field]=[]
                 elif not isinstance(out[field],list):
                     unresolved.append({"code":"FIELD_MAPPING_CONFLICT","old_field":"validation_ids","new_field":field,"existing_value":out[field],"mapped_values":[]})
-            changes.append({"from":"validation_ids","to":"validation_activity_ids+validation_plan_ids","source_value":[],"basis":"empty_legacy_reference_list","rule_version":RULE_VERSION,"reference_count":0})
+            changes.append({"from":"validation_ids","to":"validation_activity_ids+validation_plan_ids","source_value":[],"basis":"empty_legacy_reference_list","rule_version":RULE_VERSION,"rule_id":"MIG-VAL-IDS-EMPTY-001","reference_count":0})
         else:
             if any(not isinstance(value,str) or not value.strip() for value in raw_ids):
                 unresolved.append({"code":"VALIDATION_IDS_INVALID_VALUE","field":"validation_ids","source_value":raw_ids})
@@ -102,7 +103,7 @@ def migrate_record(rec, target_properties=None, unknown_policy="quarantine", sou
                 target_type=target.get("record_type")
                 if target_type=="validation_plan":
                     mapped_plans.append(target_id)
-                    changes.append({"from":"validation_ids","to":"validation_plan_ids","target_id":target_id,"basis":"source_record_type","rule_version":RULE_VERSION,"reference_count":1})
+                    changes.append({"from":"validation_ids","to":"validation_plan_ids","target_id":target_id,"basis":"source_record_type","rule_version":RULE_VERSION,"rule_id":"MIG-VAL-IDS-RESOLUTION-001","reference_count":1})
                 elif target_type=="validation_activity":
                     status=target.get("execution_status")
                     started_at=target.get("started_at")
@@ -112,7 +113,7 @@ def migrate_record(rec, target_properties=None, unknown_policy="quarantine", sou
                             unresolved.append({"code":"VALIDATION_ACTIVITY_STATUS_UNMAPPED","field":"execution_status","target_id":target_id,"source_value":status,"required":"an explicit migration rule to a v1.4 target enum value"})
                         else:
                             mapped_activities.append(target_id)
-                            changes.append({"from":"validation_ids","to":"validation_activity_ids","target_id":target_id,"basis":"source_record_type_and_launch_evidence","rule_version":RULE_VERSION,"reference_count":1})
+                            changes.append({"from":"validation_ids","to":"validation_activity_ids","target_id":target_id,"basis":"source_record_type_and_launch_evidence","rule_version":RULE_VERSION,"rule_id":"MIG-VAL-IDS-RESOLUTION-001","reference_count":1})
                     elif status in {"planned","not_run"} and not has_start:
                         unresolved.append({"code":"VALIDATION_ACTIVITY_NOT_STARTED","field":"validation_ids","target_id":target_id,"execution_status":status,"started_at":started_at,"choices":["retain as unresolved","review whether a validation_plan can be constructed from source evidence"]})
                     else:
@@ -140,21 +141,21 @@ def migrate_record(rec, target_properties=None, unknown_policy="quarantine", sou
                         out[field]=[]
 
     out["schema_version"]="1.4"
-    changes.append({"from":"schema_version","to":"schema_version","old_value":sv or None,"new_value":"1.4","basis":"explicit_rule","rule_version":RULE_VERSION})
+    changes.append({"from":"schema_version","to":"schema_version","old_value":sv or None,"new_value":"1.4","basis":"explicit_rule","rule_version":RULE_VERSION,"rule_id":"MIG-SCHEMA-VERSION-001"})
     # Ensure alternative identity fields are explicit but do not invent contract approval or method mappings.
     if rt=="artifact":
         if "artifact_storage_kind" not in out:
             unresolved.append({"code":"ARTIFACT_STORAGE_KIND_UNRESOLVED","field":"artifact_storage_kind","reason":"must be inferred from authoritative source evidence; extension/path guessing forbidden"})
         if "alternative_identity" not in out:
             out["alternative_identity"]=None
-            changes.append({"from":"<absent>","to":"alternative_identity","new_value":None,"basis":"explicit migration rule, candidate pending approval","rule_version":RULE_VERSION})
+            changes.append({"from":"<absent>","to":"alternative_identity","new_value":None,"basis":"explicit migration rule, candidate pending approval","rule_version":RULE_VERSION,"rule_id":"MIG-ART-ALT-ID-NULL-001"})
             warnings.append({"code":"ALTERNATIVE_IDENTITY_EXPLICIT_NULL","reason":"candidate rule; approval required"})
         if out.get("origin_kind")=="ingested_external" and out.get("artifact_storage_kind")=="file" and out.get("content_sha256") is None:
             if not (isinstance(out.get("hash_unavailable_reason"),str) and out["hash_unavailable_reason"].strip()):
                 unresolved.append({"code":"HASH_UNAVAILABLE_REASON_MISSING"})
             if out.get("artifact_integrity_status")=="passed":
                 out["artifact_integrity_status"]="needs_review"
-                changes.append({"from":"artifact_integrity_status","to":"artifact_integrity_status","old_value":"passed","new_value":"needs_review","basis":"candidate strict semantics; pending approval","rule_version":RULE_VERSION})
+                changes.append({"from":"artifact_integrity_status","to":"artifact_integrity_status","old_value":"passed","new_value":"needs_review","basis":"candidate strict semantics; pending approval","rule_version":RULE_VERSION,"rule_id":"MIG-ART-HASHLESS-REVIEW-001"})
                 warnings.append({"code":"INTEGRITY_DOWNGRADED_PENDING_REVIEW"})
     if rt=="claim":
         for field in ("validation_activity_ids","validation_plan_ids"):
@@ -268,7 +269,7 @@ def migrate(input_dir, schemas_dir=None, output_dir=None, unknown_policy="quaran
         records.append({"source_path":relpath,"source_sha256":src_sha,"source_record_key":{"project_id":rec.get("project_id"),"record_type":rt,"primary_key":primary_key(rec)},"target_record":target_record,"target_sha256":target_digest if target_record is not None else None,"candidate_target_sha256":target_digest if out is not None and unresolved else None})
         mapping_basis="unresolved" if unresolved else ("source_reference_resolution" if any(change.get("from")=="validation_ids" for change in changes) else "explicit_rule")
         rewritten_reference_count=sum(change.get("reference_count",0) for change in changes)
-        idmap.append({"source_record_uri":relpath,"source_record_type":rt,"source_primary_key":primary_key(rec) if isinstance(primary_key(rec),str) else None,"source_sha256":src_sha,"target_record_type":rt if target_record is not None else None,"target_primary_key":primary_key(target_record) if target_record is not None else None,"target_sha256":records[-1]["target_sha256"],"candidate_target_record_type":rt if out is not None and unresolved else None,"candidate_target_primary_key":primary_key(out) if out is not None and unresolved else None,"candidate_target_sha256":records[-1]["candidate_target_sha256"],"mapping_basis":mapping_basis,"mapping_rule_id":"MIG-V1.3-TO-V1.4-CANDIDATE","review_status":"blocked_unresolved" if unresolved else "pending_review","collision_check":collision_check,"rewritten_reference_count":rewritten_reference_count,"unresolved_count":len(unresolved),"mapped_at_utc":generated_at_utc,"operator":operator_name})
+        idmap.append({"source_record_uri":relpath,"source_record_type":rt,"source_primary_key":primary_key(rec) if isinstance(primary_key(rec),str) else None,"source_sha256":src_sha,"target_record_type":rt if target_record is not None else None,"target_primary_key":primary_key(target_record) if target_record is not None else None,"target_sha256":records[-1]["target_sha256"],"candidate_target_record_type":rt if out is not None and unresolved else None,"candidate_target_primary_key":primary_key(out) if out is not None and unresolved else None,"candidate_target_sha256":records[-1]["candidate_target_sha256"],"mapping_basis":mapping_basis,"mapping_rule_id":"MIG-002","applied_field_mapping_ids":sorted({change["rule_id"] for change in changes if change.get("rule_id","").startswith("MAP-")} ),"review_status":"blocked_unresolved" if unresolved else "pending_review","collision_check":collision_check,"rewritten_reference_count":rewritten_reference_count,"unresolved_count":len(unresolved),"mapped_at_utc":generated_at_utc,"operator":operator_name})
     report={"migration_rule_version":RULE_VERSION,"source_schema_version":"1.3","target_schema_version":"1.4","mode":"write_staging" if write_staging else "dry_run","generated_at_utc":generated_at_utc,"operator":operator_name,"source_count":len(source_files),"migratable_record_count":sum(record["target_record"] is not None for record in records),"loaded_record_count":len(source_entries),"source_files_skipped_count":len(source_files)-len(source_entries),"changes":all_changes,"unresolved":all_unresolved,"warnings":all_warnings,"id_mapping":idmap,"commit_allowed":False,"target_schema_validation":"not_performed_by_migration_prototype","limitations":["Candidate schema files are loaded fail-closed for top-level property filtering and enum checks, but full JSON Schema validation of target records is not performed by this prototype.","Source references are resolved only within the same project and only when primary IDs are unique.","A validation activity reference is typed only when the source activity is uniquely identified, its status is supported by an explicit target mapping, and started_at is a timezone-aware ISO date-time.","Source execution statuses outside the v1.4 target enum remain unresolved until an explicit mapping rule is approved.","Non-object JSON files, missing record_type values, malformed JSON, duplicate typed primary keys, and empty source snapshots block migration.","This prototype does not implement transactional commit or pointer-based rollback.","It does not recalculate TEC contract hashes unless canonical source payload is available.","No migration is considered committed; human approval and full target validation are required."]}
     if write_staging:
         outroot=Path(output_dir)
