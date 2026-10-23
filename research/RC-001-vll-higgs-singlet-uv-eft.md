@@ -532,6 +532,17 @@ This validation is algebraic only. It does not include numerical loop integratio
 
 **Acceptance decision:** the exact mass-basis kernel, leading hard-self-energy sign, local pole cancellation for the stated EFT subset, and script/log reproducibility are supported. The higher-order constant-pole operator assignment, full model-level Wilson-vector closure, and independent diagram-level validation remain open. PR #4 stays open and in Draft state.
  
+### 10.8 Source-aligned off-shell/EOM reproduction
+
+To make the §301 reconciliation directly reproducible from the repository, two calculation artifacts and their captured outputs have been added:
+
+- \`calculations/RC-001-section252-offshell-eom-reproduction.py\` — extracted from the cumulative master record §252.1–§252.10. It uses exact rational sparse-polynomial arithmetic and explicit tensor/radial integration rules to reproduce the recorded mixed and pure off-shell kernels, operator projections, EOM mapping, and potential/source companion bookkeeping.
+- \`validation/RC-001-section252-offshell-eom-reproduction.txt\` — captured run output: 46 exact symbolic checks passed.
+- \`calculations/RC-001-offshell-eom-completion-audit.py\` — an explicit coefficient-level audit of the §301 off-shell completion, including the \(a_\ell\Sigma/3\) difference, \(\eta_H=\eta_S=-a_\ell/3\), equal \(2a_\ell/3\) shifts of \(c_H,c_S,c_D\), and agreement with the two-point coefficients.
+- \`validation/RC-001-offshell-eom-completion-audit.txt\` — captured run output: 5 exact symbolic checks passed.
+
+These checks support the stated reconciliation between the old on-shell four-point representative and the EOM-completed same-basis coefficients. They are not independent diagram generation or a numerical loop integration. They do not close the complete model-level Wilson vector, every remaining EFT soft/source sector, the higher-order constant-pole operator assignment, or the physical pole/mixing observable.
+
 ## 11. Change history
 
 | Date | Revision | Change | Reason |
