@@ -88,7 +88,7 @@ The cumulative master source §§262.5 and 264.4 gives the same \(C_5^2\) light-
 \]
 Its mixed Hessian is \(v_h^3v_s^3\), so it cancels the subset-level constant pole with the source inverse-kernel convention. The equivalent potential counterterm has the opposite sign.
 
-The four-check audit at \`calculations/RC-001-dimension8-constant-pole-candidate.py\` verifies the leading-seesaw scaling, the \(X^2Y^2\) Hessian, the counterterm sign, and the \(M_E^{-4}\) order; captured output is \`validation/RC-001-dimension8-constant-pole-candidate.txt\`.
+The four-check audit at `calculations/RC-001-dimension8-constant-pole-candidate.py` verifies the leading-seesaw scaling, the \(X^2Y^2\) Hessian, the counterterm sign, and the \(M_E^{-4}\) order; captured output is `validation/RC-001-dimension8-constant-pole-candidate.txt`.
 
 This does **not** complete the dimension-eight hard matching or all \(O(M_E^{-4})\) predictions. Higher-dimensional tree-level EFT vertices and their soft insertions remain outstanding. At a strict \(O(M_E^{-2})\) truncation, this entire constant-pole sector must be dropped consistently.
 
