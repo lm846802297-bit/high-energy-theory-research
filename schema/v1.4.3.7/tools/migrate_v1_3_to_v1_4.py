@@ -454,6 +454,62 @@ def migrate(input_dir, schemas_dir=None, output_dir=None, unknown_policy="quaran
         mapping_basis="unresolved" if unresolved else ("source_reference_resolution" if any(change.get("from")=="validation_ids" for change in changes) else "explicit_rule")
         rewritten_reference_count=sum(change.get("reference_count",0) for change in changes)
         idmap.append({"source_record_uri":source_uri,"source_record_type":rt,"source_primary_key":primary_key(rec) if isinstance(primary_key(rec),str) else None,"source_sha256":src_sha,"target_record_type":rt if target_record is not None else None,"target_primary_key":primary_key(target_record) if target_record is not None else None,"target_sha256":records[-1]["target_sha256"],"candidate_target_record_type":rt if out is not None and unresolved else None,"candidate_target_primary_key":primary_key(out) if out is not None and unresolved and isinstance(primary_key(out),str) else None,"candidate_target_sha256":records[-1]["candidate_target_sha256"],"mapping_basis":mapping_basis,"mapping_rule_id":"MIG-002","applied_field_mapping_ids":sorted({change["rule_id"] for change in changes if change.get("rule_id","").startswith("MAP-")} ),"review_status":"blocked_unresolved" if unresolved else "pending_review","collision_check":collision_check,"rewritten_reference_count":rewritten_reference_count,"unresolved_count":len(unresolved),"mapped_at_utc":generated_at_utc,"operator":operator_name})
+    # Fail closed for migrated validation_ids when a uniquely resolved source
+    # target later fails target validation and therefore will not be emitted.
+    # Without this pass, a schema-valid Claim could be staged with a dangling
+    # validation_plan_ids / validation_activity_ids reference.
+    target_records_by_identity={}
+    for record in records:
+        key=(
+            record["source_record_key"].get("project_id"),
+            record["source_record_key"].get("record_type"),
+            record["source_record_key"].get("primary_key"),
+        )
+        target_records_by_identity.setdefault(key,[]).append(record)
+    for record,idrow in zip(records,idmap):
+        if record["target_record"] is None:
+            continue
+        owner_type=record["source_record_key"].get("record_type")
+        owner_project=record["source_record_key"].get("project_id")
+        mapped_validation_refs=[
+            change for change in all_changes
+            if change.get("path")==record["source_path"]
+            and change.get("record_type")==owner_type
+            and change.get("from")=="validation_ids"
+            and change.get("target_id")
+            and change.get("to") in {"validation_plan_ids","validation_activity_ids"}
+        ]
+        withheld_refs=[]
+        for change in mapped_validation_refs:
+            target_type="validation_plan" if change["to"]=="validation_plan_ids" else "validation_activity"
+            target_key=(owner_project,target_type,change["target_id"])
+            matches=target_records_by_identity.get(target_key,[])
+            if not matches or any(target["target_record"] is None for target in matches):
+                withheld_refs.append({
+                    "path":record["source_path"],
+                    "record_type":owner_type,
+                    "code":"VALIDATION_TARGET_WITHHELD",
+                    "field":change["to"],
+                    "target_id":change["target_id"],
+                    "target_record_type":target_type,
+                    "message":"the uniquely resolved source target did not produce a valid target record; dependent record is withheld to avoid a dangling typed validation reference",
+                })
+        if withheld_refs:
+            all_unresolved.extend(withheld_refs)
+            candidate_digest=record["target_sha256"]
+            candidate_primary_key=primary_key(record["target_record"])
+            record["candidate_target_sha256"]=candidate_digest
+            record["target_sha256"]=None
+            record["target_record"]=None
+            idrow["target_record_type"]=None
+            idrow["target_primary_key"]=None
+            idrow["target_sha256"]=None
+            idrow["candidate_target_record_type"]=owner_type
+            idrow["candidate_target_primary_key"]=candidate_primary_key
+            idrow["candidate_target_sha256"]=candidate_digest
+            idrow["mapping_basis"]="unresolved"
+            idrow["review_status"]="blocked_unresolved"
+            idrow["unresolved_count"]+=len(withheld_refs)
     source_files_skipped_count=len(source_files)-len(source_entries)
     snapshot_blockers=[]
     if not source_files:
