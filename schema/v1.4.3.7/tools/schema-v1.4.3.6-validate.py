@@ -24,6 +24,7 @@ def main(root):
  add('fixture_index_hash',sha(root/m['fixture_index'])==m['fixture_index_sha256'])
  add('legacy_fixture_index_hash',sha(root/m['legacy_fixture_index'])==m['legacy_fixture_index_sha256'])
  add('fixture_index_version_matches_bundle',idx.get('schema_version')==m.get('schema_version'),{'index_version':idx.get('schema_version'),'bundle_version':m.get('schema_version')})
+ add('candidate_index_declares_manifest_legacy_baseline',idx.get('source_baseline_index')==m.get('legacy_fixture_index') and idx.get('source_baseline_schema_version')==m.get('legacy_fixture_index_schema_version'),{'index_source_baseline_index':idx.get('source_baseline_index'),'manifest_legacy_fixture_index':m.get('legacy_fixture_index'),'index_source_baseline_schema_version':idx.get('source_baseline_schema_version'),'manifest_legacy_fixture_index_schema_version':m.get('legacy_fixture_index_schema_version')})
  add('legacy_fixture_index_version_matches_declared_baseline',legacy_idx.get('schema_version')==m.get('legacy_fixture_index_schema_version')=='1.4.3.6-candidate',{'index_version':legacy_idx.get('schema_version'),'declared_baseline':m.get('legacy_fixture_index_schema_version')})
  ids=set()
  for x in idx['fixtures']:
