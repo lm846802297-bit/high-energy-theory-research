@@ -1,0 +1,38 @@
+{
+  "schema_version": "1.4",
+  "record_type": "run_manifest",
+  "project_id": "PILOT-FINGERPRINT-001",
+  "manifest_id": "MANIFEST-FP-VALID-001",
+  "run_id": "PILOT",
+  "task_id": "PILOT",
+  "contract_id": "PILOT",
+  "run_plan_id": "PILOT",
+  "manifest_revision": 1,
+  "execution_status_snapshot": "not_started",
+  "snapshot_at": "2026-10-21T00:00:00Z",
+  "input_refs": {
+    "source_ids": [],
+    "configuration_ids": [],
+    "input_artifact_ids": [],
+    "external_references": []
+  },
+  "configuration": {},
+  "code": {},
+  "environment": {},
+  "fingerprints": {
+    "algorithm": "sha256",
+    "input_set_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "configuration_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "code_tree_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "environment_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "execution_spec_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "dependency_artifact_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "composite_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "fingerprint_profile_version": "PILOT"
+  },
+  "execution": {},
+  "outputs": {},
+  "validation": {},
+  "created_at": "2026-10-21T00:00:00Z",
+  "supersedes_manifest_id": "PILOT"
+}

@@ -1,0 +1,18 @@
+{
+  "schema_version": "1.4",
+  "record_type": "test_run",
+  "project_id": "HEP-RESEARCH",
+  "test_run_id": "TESTRUN-001",
+  "test_id": "TST-001",
+  "fixture_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "code_fingerprint": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "environment_fingerprint": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "execution_status": "succeeded",
+  "check_status": "passed",
+  "started_at": "2026-10-20T12:00:00Z",
+  "completed_at": null,
+  "exit_code": 0,
+  "log_artifact_ids": [],
+  "failure_details": "sample",
+  "__undeclared_field__": "must reject"
+}

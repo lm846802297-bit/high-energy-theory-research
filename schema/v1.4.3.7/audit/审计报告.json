@@ -1,0 +1,673 @@
+{
+  "version": "v1.4.1-candidate",
+  "baseline_zip_sha256": "0122091d280cd923bea7402f33bf8a1b6c173c20ebe24cc5ddeec6b51b98f12b",
+  "design_document": "高能理论物理研究-Skill-详细设计文档-v1.6.5-Schema覆盖与需求追踪闭环版.md",
+  "design_document_sha256": "51445f2a6bec253a3a6bc5e1fc4657880e4edcc4090dc579e0210240f350113e",
+  "candidate_directory": "/mnt/data/schema-v1.4.1-candidate",
+  "validator": "/mnt/data/schema-v1.4.1-validate.py",
+  "validator_exit_code": 0,
+  "validator_stdout": "{\n  \"checks_passed\": 78,\n  \"checks_failed\": 0,\n  \"fixtures_total\": 75,\n  \"fixtures_passed\": 75,\n  \"fixtures_failed\": 0,\n  \"semantic_checks\": \"NOT_RUN\"\n}\nreport: /mnt/data/schema-v1.4.1-validation-report.json\n",
+  "validator_stderr": "",
+  "changes": [
+    "artifact: removed unregistered generic property `metadata`",
+    "artifact: removed unregistered generic property `status`",
+    "test_run: removed unregistered generic property `metadata`",
+    "test_run: removed unregistered generic property `status`",
+    "benchmark_result: removed unregistered generic property `metadata`",
+    "benchmark_result: removed unregistered generic property `status`",
+    "source_fragment: removed unregistered generic property `metadata`",
+    "source_fragment: removed unregistered generic property `status`",
+    "validation_plan: removed unregistered generic property `metadata`",
+    "validation_plan: removed unregistered generic property `status`",
+    "parameter_point: removed unregistered generic property `metadata`",
+    "parameter_point: removed unregistered generic property `status`",
+    "run: removed unregistered generic property `metadata`",
+    "run: removed unregistered generic property `status`",
+    "claim: removed unregistered generic property `metadata`",
+    "claim: removed unregistered generic property `status`",
+    "environment: removed unregistered generic property `metadata`",
+    "environment: removed unregistered generic property `status`",
+    "convention_set: removed unregistered generic property `metadata`",
+    "convention_set: removed unregistered generic property `status`",
+    "code: removed unregistered generic property `metadata`",
+    "code: removed unregistered generic property `status`",
+    "state_transition_event: removed unregistered generic property `metadata`",
+    "state_transition_event: removed unregistered generic property `status`",
+    "test_case: removed unregistered generic property `metadata`",
+    "test_case: removed unregistered generic property `status`",
+    "run_manifest: removed unregistered generic property `metadata`",
+    "run_manifest: removed unregistered generic property `status`",
+    "validation_report: removed unregistered generic property `metadata`",
+    "validation_report: removed unregistered generic property `status`",
+    "migration_record: removed unregistered generic property `metadata`",
+    "migration_record: removed unregistered generic property `status`",
+    "source: removed unregistered generic property `metadata`",
+    "source: removed unregistered generic property `status`",
+    "artifact_plan: removed unregistered generic property `metadata`",
+    "artifact_plan: removed unregistered generic property `status`",
+    "validation_activity: removed unregistered generic property `metadata`",
+    "validation_activity: removed unregistered generic property `status`",
+    "run_plan: removed unregistered generic property `metadata`",
+    "run_plan: removed unregistered generic property `status`",
+    "relation_edge: removed unregistered generic property `metadata`",
+    "relation_edge: removed unregistered generic property `status`",
+    "task: removed unregistered generic property `metadata`",
+    "task: removed unregistered generic property `status`",
+    "task_execution_contract: removed unregistered generic property `metadata`",
+    "task_execution_contract: removed unregistered generic property `status`",
+    "evidence_fragment: removed unregistered generic property `metadata`",
+    "evidence_fragment: removed unregistered generic property `status`",
+    "configuration: removed unregistered generic property `metadata`",
+    "configuration: removed unregistered generic property `status`",
+    "task: restored explicit required fields/types/status enum and two documented conditional constraints",
+    "test_case: applied documented test_id regex and required test_case_id + test_id",
+    "state_transition_event: replaced undocumented event_hash with ledger_id/sequence_number/event_sha256 and strict hash fields",
+    "test_run: constrained execution/check enums and required identity/timing fields; fingerprint fields are typed when present"
+  ],
+  "coverage_rows": 48,
+  "coverage_status_counts": {
+    "PARTIAL": 15,
+    "GAP": 33
+  },
+  "record_type_count": 25,
+  "schema_count": 25,
+  "schema_property_summary": {
+    "artifact": {
+      "required": [
+        "schema_version",
+        "record_type",
+        "project_id",
+        "artifact_id"
+      ],
+      "properties": [
+        "schema_version",
+        "record_type",
+        "project_id",
+        "created_at",
+        "updated_at",
+        "description",
+        "artifact_id",
+        "artifact_type",
+        "sha256",
+        "uri",
+        "producer_run_id",
+        "integrity_status"
+      ],
+      "open_nested_objects": []
+    },
+    "test_run": {
+      "required": [
+        "schema_version",
+        "record_type",
+        "project_id",
+        "test_run_id",
+        "test_case_id",
+        "test_id",
+        "execution_status",
+        "check_status",
+        "started_at",
+        "completed_at"
+      ],
+      "properties": [
+        "schema_version",
+        "record_type",
+        "project_id",
+        "created_at",
+        "updated_at",
+        "description",
+        "test_run_id",
+        "test_case_id",
+        "execution_status",
+        "check_status",
+        "assertion_evidence_id",
+        "test_id",
+        "started_at",
+        "completed_at",
+        "fixture_fingerprint",
+        "code_fingerprint",
+        "environment_fingerprint"
+      ],
+      "open_nested_objects": []
+    },
+    "benchmark_result": {
+      "required": [
+        "schema_version",
+        "record_type",
+        "project_id",
+        "benchmark_result_id"
+      ],
+      "properties": [
+        "schema_version",
+        "record_type",
+        "project_id",
+        "created_at",
+        "updated_at",
+        "description",
+        "benchmark_result_id",
+        "benchmark_id",
+        "expected",
+        "actual",
+        "tolerance",
+        "unit",
+        "comparison_method"
+      ],
+      "open_nested_objects": []
+    },
+    "source_fragment": {
+      "required": [
+        "schema_version",
+        "record_type",
+        "project_id",
+        "source_fragment_id"
+      ],
+      "properties": [
+        "schema_version",
+        "record_type",
+        "project_id",
+        "created_at",
+        "updated_at",
+        "description",
+        "source_fragment_id",
+        "source_id",
+        "locator",
+        "content_sha256"
+      ],
+      "open_nested_objects": []
+    },
+    "validation_plan": {
+      "required": [
+        "schema_version",
+        "record_type",
+        "project_id",
+        "validation_plan_id"
+      ],
+      "properties": [
+        "schema_version",
+        "record_type",
+        "project_id",
+        "created_at",
+        "updated_at",
+        "description",
+        "validation_plan_id",
+        "target_record_id",
+        "validation_profile",
+        "instantiated_activity_id"
+      ],
+      "open_nested_objects": []
+    },
+    "parameter_point": {
+      "required": [
+        "schema_version",
+        "record_type",
+        "project_id",
+        "point_id"
+      ],
+      "properties": [
+        "schema_version",
+        "record_type",
+        "project_id",
+        "created_at",
+        "updated_at",
+        "description",
+        "point_id",
+        "configuration_id",
+        "parameters",
+        "units",
+        "point_status"
+      ],
+      "open_nested_objects": []
+    },
+    "run": {
+      "required": [
+        "schema_version",
+        "record_type",
+        "project_id",
+        "run_id"
+      ],
+      "properties": [
+        "schema_version",
+        "record_type",
+        "project_id",
+        "created_at",
+        "updated_at",
+        "description",
+        "run_id",
+        "run_plan_id",
+        "started_at",
+        "finished_at",
+        "execution_status",
+        "exit_code"
+      ],
+      "open_nested_objects": []
+    },
+    "claim": {
+      "required": [
+        "schema_version",
+        "record_type",
+        "project_id",
+        "claim_id"
+      ],
+      "properties": [
+        "schema_version",
+        "record_type",
+        "project_id",
+        "created_at",
+        "updated_at",
+        "description",
+        "claim_id",
+        "statement",
+        "claim_scope",
+        "evidence_ids",
+        "physics_assessment"
+      ],
+      "open_nested_objects": []
+    },
+    "environment": {
+      "required": [
+        "schema_version",
+        "record_type",
+        "project_id",
+        "environment_id"
+      ],
+      "properties": [
+        "schema_version",
+        "record_type",
+        "project_id",
+        "created_at",
+        "updated_at",
+        "description",
+        "environment_id",
+        "runtime_versions",
+        "lockfile_sha256",
+        "container_digest"
+      ],
+      "open_nested_objects": []
+    },
+    "convention_set": {
+      "required": [
+        "schema_version",
+        "record_type",
+        "project_id",
+        "conventions_id"
+      ],
+      "properties": [
+        "schema_version",
+        "record_type",
+        "project_id",
+        "created_at",
+        "updated_at",
+        "description",
+        "conventions_id",
+        "metric_signature",
+        "unit_system",
+        "phase_convention",
+        "renormalization_scheme"
+      ],
+      "open_nested_objects": []
+    },
+    "code": {
+      "required": [
+        "schema_version",
+        "record_type",
+        "project_id",
+        "code_id"
+      ],
+      "properties": [
+        "schema_version",
+        "record_type",
+        "project_id",
+        "created_at",
+        "updated_at",
+        "description",
+        "code_id",
+        "repository_uri",
+        "commit",
+        "dirty",
+        "diff_sha256",
+        "tree_fingerprint"
+      ],
+      "open_nested_objects": []
+    },
+    "state_transition_event": {
+      "required": [
+        "schema_version",
+        "record_type",
+        "project_id",
+        "event_id",
+        "ledger_id",
+        "sequence_number",
+        "event_sha256",
+        "previous_event_hash"
+      ],
+      "properties": [
+        "schema_version",
+        "record_type",
+        "project_id",
+        "created_at",
+        "updated_at",
+        "description",
+        "event_id",
+        "subject_id",
+        "from_state",
+        "to_state",
+        "sequence_number",
+        "previous_event_hash",
+        "ledger_id",
+        "event_sha256"
+      ],
+      "open_nested_objects": []
+    },
+    "test_case": {
+      "required": [
+        "schema_version",
+        "record_type",
+        "project_id",
+        "test_case_id",
+        "test_id"
+      ],
+      "properties": [
+        "schema_version",
+        "record_type",
+        "project_id",
+        "created_at",
+        "updated_at",
+        "description",
+        "test_case_id",
+        "test_id",
+        "requirement_ids",
+        "fixture_ids",
+        "verification_type"
+      ],
+      "open_nested_objects": []
+    },
+    "run_manifest": {
+      "required": [
+        "schema_version",
+        "record_type",
+        "project_id",
+        "manifest_id"
+      ],
+      "properties": [
+        "schema_version",
+        "record_type",
+        "project_id",
+        "created_at",
+        "updated_at",
+        "description",
+        "manifest_id",
+        "revision",
+        "previous_manifest_id",
+        "content_fingerprint",
+        "snapshot_at"
+      ],
+      "open_nested_objects": []
+    },
+    "validation_report": {
+      "required": [
+        "schema_version",
+        "record_type",
+        "project_id",
+        "validation_report_id"
+      ],
+      "properties": [
+        "schema_version",
+        "record_type",
+        "project_id",
+        "created_at",
+        "updated_at",
+        "description",
+        "validation_report_id",
+        "validation_activity_id",
+        "check_status",
+        "evidence_ids",
+        "reviewer_id"
+      ],
+      "open_nested_objects": []
+    },
+    "migration_record": {
+      "required": [
+        "schema_version",
+        "record_type",
+        "project_id",
+        "migration_record_id"
+      ],
+      "properties": [
+        "schema_version",
+        "record_type",
+        "project_id",
+        "created_at",
+        "updated_at",
+        "description",
+        "migration_record_id",
+        "source_schema_version",
+        "target_schema_version",
+        "source_sha256",
+        "target_sha256",
+        "id_mapping",
+        "migration_status"
+      ],
+      "open_nested_objects": []
+    },
+    "source": {
+      "required": [
+        "schema_version",
+        "record_type",
+        "project_id",
+        "source_id"
+      ],
+      "properties": [
+        "schema_version",
+        "record_type",
+        "project_id",
+        "created_at",
+        "updated_at",
+        "description",
+        "source_id",
+        "uri",
+        "version",
+        "retrieved_at",
+        "sha256"
+      ],
+      "open_nested_objects": []
+    },
+    "artifact_plan": {
+      "required": [
+        "schema_version",
+        "record_type",
+        "project_id",
+        "artifact_plan_id"
+      ],
+      "properties": [
+        "schema_version",
+        "record_type",
+        "project_id",
+        "created_at",
+        "updated_at",
+        "description",
+        "artifact_plan_id",
+        "task_id",
+        "expected_artifact_type",
+        "fulfilled_by_artifact_id"
+      ],
+      "open_nested_objects": []
+    },
+    "validation_activity": {
+      "required": [
+        "schema_version",
+        "record_type",
+        "project_id",
+        "validation_activity_id"
+      ],
+      "properties": [
+        "schema_version",
+        "record_type",
+        "project_id",
+        "created_at",
+        "updated_at",
+        "description",
+        "validation_activity_id",
+        "validation_plan_id",
+        "started_at",
+        "finished_at",
+        "execution_status"
+      ],
+      "open_nested_objects": []
+    },
+    "run_plan": {
+      "required": [
+        "schema_version",
+        "record_type",
+        "project_id",
+        "run_plan_id"
+      ],
+      "properties": [
+        "schema_version",
+        "record_type",
+        "project_id",
+        "created_at",
+        "updated_at",
+        "description",
+        "run_plan_id",
+        "task_id",
+        "input_fingerprint",
+        "planned_run_id"
+      ],
+      "open_nested_objects": []
+    },
+    "relation_edge": {
+      "required": [
+        "schema_version",
+        "record_type",
+        "project_id",
+        "edge_id"
+      ],
+      "properties": [
+        "schema_version",
+        "record_type",
+        "project_id",
+        "created_at",
+        "updated_at",
+        "description",
+        "edge_id",
+        "from_id",
+        "from_type",
+        "to_id",
+        "to_type",
+        "relation_type",
+        "scope"
+      ],
+      "open_nested_objects": []
+    },
+    "task": {
+      "required": [
+        "schema_version",
+        "record_type",
+        "project_id",
+        "task_id",
+        "title",
+        "task_type",
+        "task_status",
+        "active_contract_id",
+        "dependency_task_ids",
+        "claim_ids",
+        "status_reason",
+        "completion_evidence_ids",
+        "created_at",
+        "updated_at"
+      ],
+      "properties": [
+        "schema_version",
+        "record_type",
+        "project_id",
+        "created_at",
+        "updated_at",
+        "description",
+        "task_id",
+        "title",
+        "priority",
+        "owner_id",
+        "active_contract_id",
+        "completion_evidence_ids",
+        "task_type",
+        "task_status",
+        "dependency_task_ids",
+        "claim_ids",
+        "status_reason"
+      ],
+      "open_nested_objects": []
+    },
+    "task_execution_contract": {
+      "required": [
+        "schema_version",
+        "record_type",
+        "project_id",
+        "contract_id"
+      ],
+      "properties": [
+        "schema_version",
+        "record_type",
+        "project_id",
+        "created_at",
+        "updated_at",
+        "description",
+        "contract_id",
+        "task_id",
+        "version",
+        "approved_by",
+        "approved_at",
+        "contract_hash"
+      ],
+      "open_nested_objects": []
+    },
+    "evidence_fragment": {
+      "required": [
+        "schema_version",
+        "record_type",
+        "project_id",
+        "evidence_id"
+      ],
+      "properties": [
+        "schema_version",
+        "record_type",
+        "project_id",
+        "created_at",
+        "updated_at",
+        "description",
+        "evidence_id",
+        "target_record_id",
+        "locator",
+        "scope",
+        "content_sha256"
+      ],
+      "open_nested_objects": []
+    },
+    "configuration": {
+      "required": [
+        "schema_version",
+        "record_type",
+        "project_id",
+        "configuration_id"
+      ],
+      "properties": [
+        "schema_version",
+        "record_type",
+        "project_id",
+        "created_at",
+        "updated_at",
+        "description",
+        "configuration_id",
+        "parameters",
+        "conventions_id",
+        "input_fingerprint"
+      ],
+      "open_nested_objects": []
+    }
+  },
+  "limitations": [
+    "Candidate is not a released schema baseline.",
+    "No available schema v1.3 machine-readable bundle; backwards compatibility not verified.",
+    "Only Task, Test Case, Test Run, and State Transition Event received explicit field-level corrections this round; remaining record types are still incomplete.",
+    "Validator checks JSON Schema meta-validation, local refs, manifest hashes/type routing and fixture shape only.",
+    "Cross-record references, complete state machine, event hash chain/checkpoint, filesystem rules, migration execution and physical/scientific validation not implemented."
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "schema_version": "1.4",
+  "record_type": "validation_plan",
+  "project_id": "HEP-RESEARCH",
+  "validation_plan_id": "VALPLAN-001",
+  "task_id": "TASK-001",
+  "method": "sample",
+  "acceptance_criteria": [],
+  "required": false,
+  "validation_plan_status": "instantiated",
+  "subject_ids": [],
+  "expected_artifact_plan_ids": [],
+  "instantiated_validation_activity_ids": [
+    "VALACT-001"
+  ],
+  "created_at": "2026-10-20T12:00:00Z",
+  "blocked_reason": null
+}

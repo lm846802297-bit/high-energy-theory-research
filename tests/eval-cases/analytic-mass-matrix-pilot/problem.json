@@ -1,0 +1,21 @@
+{
+  "problem_id": "ANALYTIC-MATRIX-PILOT-001",
+  "title": "Diagonalize a real symmetric 2x2 mass-squared matrix",
+  "matrix": [
+    [
+      5,
+      2
+    ],
+    [
+      2,
+      8
+    ]
+  ],
+  "matrix_units": "TeV^2",
+  "mass_units": "TeV",
+  "assumptions": [
+    "The matrix is real and symmetric.",
+    "All matrix entries are expressed in TeV^2.",
+    "This is a mathematical workflow test, not a complete physical model."
+  ]
+}

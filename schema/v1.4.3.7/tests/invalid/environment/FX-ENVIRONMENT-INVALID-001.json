@@ -1,0 +1,15 @@
+{
+  "schema_version": "1.4",
+  "record_type": "environment",
+  "project_id": "HEP-RESEARCH",
+  "environment_id": "ENV-001",
+  "platform": "sample",
+  "runtime_versions": [],
+  "lockfile_sha256": null,
+  "lockfile_unavailable_reason": "No lockfile",
+  "container_digest": null,
+  "container_unavailable_reason": "No container",
+  "environment_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "created_at": "2026-10-20T12:00:00Z",
+  "__undeclared_field__": "must reject"
+}

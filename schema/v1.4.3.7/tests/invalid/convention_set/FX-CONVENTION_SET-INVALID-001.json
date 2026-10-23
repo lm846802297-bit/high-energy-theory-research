@@ -1,0 +1,16 @@
+{
+  "schema_version": "1.4",
+  "record_type": "convention_set",
+  "project_id": "HEP-RESEARCH",
+  "conventions_id": "CONV-001",
+  "notation": "sample",
+  "metric_signature": "sample",
+  "unit_system": "sample",
+  "gauge_conventions": "sample",
+  "renormalization_scheme": "sample",
+  "flavor_basis": "sample",
+  "phase_conventions": "sample",
+  "applicability_notes": "sample",
+  "content_sha256": null,
+  "__undeclared_field__": "must reject"
+}

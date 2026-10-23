@@ -1,0 +1,84 @@
+{
+  "candidate": "schema-v1.4.3.7",
+  "generated_at": "2026-10-21",
+  "source_design_document": "高能理论物理研究-Skill-详细设计文档-v1.6.6-Artifact身份语义候选修订.md",
+  "source_design_sha256": "49b113fe790b413851dbafafc0728426d6de74af05503a728dd687ebcbde2269",
+  "source_bundle": "schema-v1.4.3.6-integrated-candidate-bundle.zip",
+  "source_bundle_sha256": "aefb34e68af65daf8277b9553d232cab29ffb5df9c4f18c1cfe126474a06adf1",
+  "four_decisions_status": "recommended_pending_approval",
+  "base_schema_regression": {
+    "exit_code": 0,
+    "summary": {
+      "checks_total": 58,
+      "checks_passed": 58,
+      "checks_failed": 0,
+      "fixtures_total": 83,
+      "fixtures_expected_result_matched": 83,
+      "fixtures_mismatched": 0,
+      "record_types_loaded": 25,
+      "semantic_tests_total": 16,
+      "semantic_tests_expected_result_matched": 16,
+      "semantic_tests_mismatched": 0,
+      "trace_rows": 125
+    }
+  },
+  "new_unit_tests": {
+    "exit_code": 0,
+    "total": 29,
+    "passed": 29,
+    "failed": 0,
+    "summary": "Ran 29 tests; OK"
+  },
+  "cross_record_smoke": {
+    "exit_code": 0,
+    "summary": {
+      "records": 5,
+      "errors": 0,
+      "warnings": 0,
+      "cross_record_scope": "explicit reference map + alternative identity + event chain continuity + supports-cycle checks",
+      "not_implemented": [
+        "JCS directory manifest hash recomputation",
+        "filesystem traversal/symlink and path-collision checks",
+        "event_sha256 payload recomputation because canonical event payload is not yet specified",
+        "all state-machine transitions for every namespace",
+        "full polymorphic reference coverage for every field",
+        "physics/scientific acceptance"
+      ]
+    }
+  },
+  "migration_dry_run": {
+    "exit_code": 0,
+    "summary": {
+      "source_count": 1,
+      "changes": 4,
+      "unresolved": 1,
+      "warnings": 1,
+      "commit_allowed": false
+    }
+  },
+  "migration_staging": {
+    "exit_code": 0,
+    "summary": {
+      "source_count": 1,
+      "changes": 4,
+      "unresolved": 1,
+      "warnings": 1,
+      "commit_allowed": false
+    },
+    "commit_allowed": false,
+    "unresolved_items": 1,
+    "warnings": 1
+  },
+  "limitations": [
+    "directory_manifest.py implements a restricted FileEntry-only canonicalization profile for a proposed JCS-compatible subset; it is not a general RFC 8785 implementation.",
+    "No filesystem traversal, actual file-byte hashing, symlink resolution, or directory-manifest recomputation from a real tree was executed.",
+    "Event sequence/previous-hash continuity is checked, but event_sha256 payload recomputation is not implemented because canonical event payload is not specified.",
+    "Cross-record validation covers an explicit subset of references, alternate identity, project/type consistency, selected state transitions, event chain continuity and supports cycles; not every polymorphic field/reference is covered.",
+    "Migration prototype is v1.3-to-v1.4 staging only; no transactional commit or pointer-based rollback is implemented.",
+    "Migration test fixture intentionally contains ambiguous validation_ids; unresolved item is expected and blocks commit.",
+    "Physics/scientific acceptance, real HEP benchmark, FeynRules/UFO/Mathematica execution are not implemented or run.",
+    "All four decisions remain recommendations pending explicit approval; schema was not changed in this step.",
+    "Symlinks are rejected by the manifest-only helper; enabling symlinks requires a filesystem-aware verifier that proves resolved targets remain inside the root.",
+    "The state_transition_event schema currently does not expose a separate target record-type field for record_id; the validator checks unique ID resolution and emits a warning, but exact target type validation is incomplete."
+  ]
+}

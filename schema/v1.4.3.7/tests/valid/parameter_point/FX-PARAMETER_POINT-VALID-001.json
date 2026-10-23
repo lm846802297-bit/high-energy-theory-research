@@ -1,0 +1,14 @@
+{
+  "schema_version": "1.4",
+  "record_type": "parameter_point",
+  "project_id": "HEP-RESEARCH",
+  "point_id": "POINT-001",
+  "configuration_id": "CFG-001",
+  "independent_inputs": [],
+  "derived_parameters": [],
+  "failure_reasons": [],
+  "source_run_id": null,
+  "artifact_ids": [],
+  "validation_report_ids": [],
+  "evaluation_note": "sample"
+}

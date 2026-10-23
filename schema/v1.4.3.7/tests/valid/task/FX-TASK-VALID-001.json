@@ -1,0 +1,18 @@
+{
+  "schema_version": "1.4",
+  "record_type": "task",
+  "project_id": "HEP-RESEARCH",
+  "task_id": "TASK-001",
+  "title": "sample",
+  "task_type": "sample",
+  "task_status": "complete",
+  "active_contract_id": null,
+  "dependency_task_ids": [],
+  "claim_ids": [],
+  "status_reason": null,
+  "completion_evidence_ids": [
+    "EVID-001"
+  ],
+  "created_at": "2026-10-20T12:00:00Z",
+  "updated_at": "2026-10-20T12:00:00Z"
+}

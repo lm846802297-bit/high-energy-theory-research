@@ -1,0 +1,15 @@
+{
+  "schema_version": "1.4",
+  "record_type": "migration_record",
+  "project_id": "HEP-RESEARCH",
+  "migration_record_id": "MIG-001",
+  "source_schema_version": "sample",
+  "target_schema_version": "sample",
+  "source_bundle_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "target_bundle_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "migration_status": "staged",
+  "id_mapping": [],
+  "started_at": "2026-10-20T12:00:00Z",
+  "completed_at": null,
+  "review_status": "pending"
+}

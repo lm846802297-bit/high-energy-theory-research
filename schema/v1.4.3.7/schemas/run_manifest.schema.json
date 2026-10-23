@@ -1,0 +1,831 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.example.invalid/high-energy-theory/v1.4.2/run_manifest.schema.json",
+  "title": "run_manifest record schema (v1.4.2 candidate)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "record_type",
+    "project_id",
+    "manifest_id",
+    "run_id",
+    "task_id",
+    "contract_id",
+    "run_plan_id",
+    "manifest_revision",
+    "execution_status_snapshot",
+    "snapshot_at",
+    "input_refs",
+    "configuration",
+    "code",
+    "environment",
+    "fingerprints",
+    "execution",
+    "outputs",
+    "validation",
+    "created_at",
+    "supersedes_manifest_id"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.4"
+    },
+    "record_type": {
+      "const": "run_manifest"
+    },
+    "project_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "description": {
+      "type": "string"
+    },
+    "manifest_id": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[A-Z][A-Z0-9-]{2,80}$"
+    },
+    "revision": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "previous_manifest_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "content_fingerprint": {
+      "type": "string",
+      "minLength": 1
+    },
+    "snapshot_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "run_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "task_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "contract_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "run_plan_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "manifest_revision": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "execution_status_snapshot": {
+      "type": "string",
+      "enum": [
+        "not_started",
+        "running",
+        "succeeded",
+        "failed",
+        "cancelled",
+        "blocked",
+        "partial"
+      ]
+    },
+    "input_refs": {
+      "$ref": "#/$defs/inputRefs"
+    },
+    "configuration": {
+      "$ref": "#/$defs/configurationSnapshot"
+    },
+    "code": {
+      "$ref": "#/$defs/codeSnapshot"
+    },
+    "environment": {
+      "$ref": "#/$defs/environmentSnapshot"
+    },
+    "fingerprints": {
+      "$ref": "#/$defs/fingerprintBundle"
+    },
+    "execution": {
+      "$ref": "#/$defs/executionSnapshot"
+    },
+    "outputs": {
+      "$ref": "#/$defs/runOutputs"
+    },
+    "validation": {
+      "$ref": "#/$defs/validationSnapshot"
+    },
+    "supersedes_manifest_id": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "minLength": 1
+    }
+  },
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "sha256OrNull": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/sha256"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "scope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "included",
+        "excluded",
+        "target_domain",
+        "out_of_scope_behavior"
+      ],
+      "properties": {
+        "included": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "excluded": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "target_domain": {
+          "type": "string",
+          "minLength": 1
+        },
+        "out_of_scope_behavior": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "inputRefs": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source_ids",
+        "configuration_ids",
+        "input_artifact_ids",
+        "external_references"
+      ],
+      "properties": {
+        "source_ids": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "configuration_ids": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "input_artifact_ids": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "external_references": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "external_system",
+              "external_id",
+              "uri",
+              "version_or_revision",
+              "retrieved_at",
+              "content_sha256",
+              "hash_unavailable_reason"
+            ],
+            "properties": {
+              "external_system": {
+                "type": "string",
+                "minLength": 1
+              },
+              "external_id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "uri": {
+                "type": "string",
+                "minLength": 1
+              },
+              "version_or_revision": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "retrieved_at": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "format": "date-time"
+              },
+              "content_sha256": {
+                "$ref": "#/$defs/sha256OrNull"
+              },
+              "hash_unavailable_reason": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "acceptanceCriterion": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "criterion_id",
+        "description",
+        "required",
+        "verification_method",
+        "pass_condition",
+        "failure_condition",
+        "evidence_kind"
+      ],
+      "properties": {
+        "criterion_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1
+        },
+        "required": {
+          "type": "boolean"
+        },
+        "verification_method": {
+          "type": "string",
+          "minLength": 1
+        },
+        "pass_condition": {
+          "type": "string",
+          "minLength": 1
+        },
+        "failure_condition": {
+          "type": "string",
+          "minLength": 1
+        },
+        "evidence_kind": {
+          "type": "string",
+          "minLength": 1
+        },
+        "threshold": {},
+        "comparison_operator": {
+          "type": "string"
+        },
+        "unit": {
+          "type": "string"
+        },
+        "tolerance_basis": {
+          "type": "string"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "required": [
+              "threshold"
+            ]
+          },
+          "then": {
+            "required": [
+              "comparison_operator",
+              "unit",
+              "tolerance_basis"
+            ]
+          }
+        }
+      ]
+    },
+    "assumption": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "assumption_id",
+        "description",
+        "scope",
+        "status",
+        "source_or_rationale"
+      ],
+      "properties": {
+        "assumption_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1
+        },
+        "scope": {
+          "type": "string",
+          "minLength": 1
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "proposed",
+            "accepted",
+            "rejected",
+            "superseded"
+          ]
+        },
+        "source_or_rationale": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "method": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "method_id",
+        "description",
+        "scope",
+        "status",
+        "source_or_rationale"
+      ],
+      "properties": {
+        "method_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1
+        },
+        "scope": {
+          "type": "string",
+          "minLength": 1
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "proposed",
+            "accepted",
+            "rejected",
+            "superseded"
+          ]
+        },
+        "source_or_rationale": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "configurationSnapshot": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "configuration_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "conventions_id": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1
+        },
+        "independent_inputs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "derived_parameters": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "units": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "configuration_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      }
+    },
+    "codeSnapshot": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "code_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "repository_uri": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1
+        },
+        "repository_uri_unavailable_reason": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1
+        },
+        "git_commit": {
+          "type": "string",
+          "minLength": 1
+        },
+        "git_commit_unavailable_reason": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1
+        },
+        "dirty": {
+          "type": "boolean"
+        },
+        "diff_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "code_tree_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      }
+    },
+    "environmentSnapshot": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "environment_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "platform": {
+          "type": "string",
+          "minLength": 1
+        },
+        "runtime_versions": {
+          "type": "object"
+        },
+        "lockfile_sha256": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "lockfile_unavailable_reason": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1
+        },
+        "container_digest": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1
+        },
+        "container_unavailable_reason": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1
+        },
+        "environment_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      }
+    },
+    "fingerprintBundle": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "algorithm": {
+          "const": "sha256"
+        },
+        "input_set_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "configuration_sha256": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "code_tree_sha256": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "environment_sha256": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "execution_spec_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "dependency_artifact_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "composite_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "fingerprint_profile_version": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "algorithm",
+        "input_set_sha256",
+        "configuration_sha256",
+        "code_tree_sha256",
+        "environment_sha256",
+        "execution_spec_sha256",
+        "dependency_artifact_sha256",
+        "composite_sha256",
+        "fingerprint_profile_version"
+      ]
+    },
+    "executionSnapshot": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "tool_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "command_or_notebook": {
+          "type": "string",
+          "minLength": 1
+        },
+        "arguments": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "working_directory": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1
+        },
+        "random_seed": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "precision": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1
+        },
+        "tolerances": {
+          "type": "object"
+        },
+        "parallelism": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1
+        },
+        "locale": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1
+        },
+        "timezone": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1
+        },
+        "started_at": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "completed_at": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "exit_code": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "exit_code_unavailable_reason": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1
+        },
+        "runtime_parameters": {
+          "type": "object"
+        },
+        "log_artifact_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "runOutputs": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "artifact_plan_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "artifact_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "artifact_integrity_status": {
+          "type": "string",
+          "enum": [
+            "not_checked",
+            "in_progress",
+            "passed",
+            "failed",
+            "blocked",
+            "needs_review",
+            "not_applicable"
+          ]
+        },
+        "completeness_check": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "missing",
+            "empty",
+            "parse_errors",
+            "checked_at",
+            "checker_version"
+          ],
+          "properties": {
+            "missing": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "empty": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "parse_errors": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "checked_at": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "checker_version": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        }
+      }
+    },
+    "validationSnapshot": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "overall_check_status": {
+          "type": "string",
+          "enum": [
+            "passed",
+            "failed",
+            "inconclusive",
+            "blocked",
+            "not_applicable",
+            "not_run",
+            "stale"
+          ]
+        },
+        "validation_plan_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "validation_activity_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "validation_report_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "aggregation_profile_version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "aggregated_at": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    }
+  }
+}

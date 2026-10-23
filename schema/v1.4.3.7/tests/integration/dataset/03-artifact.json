@@ -1,0 +1,13 @@
+{
+  "schema_version": "1.4",
+  "record_type": "artifact",
+  "project_id": "P-HEP",
+  "artifact_id": "ART-EVID-1",
+  "artifact_storage_kind": "file",
+  "origin_kind": "generated",
+  "content_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+  "directory_manifest": [],
+  "directory_manifest_sha256": null,
+  "artifact_integrity_status": "passed",
+  "alternative_identity": null
+}

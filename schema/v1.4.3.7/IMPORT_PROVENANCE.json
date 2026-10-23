@@ -1,0 +1,24 @@
+{
+  "import_date": "2026-10-21",
+  "imported_archive": "schema-v1.4.3.7-integrated-candidate-bundle.zip",
+  "imported_archive_sha256": "48bcb33ea100792235f65614ac4fe23c1b2ea0e39b3ab07024f089f8489990d5",
+  "package_status": "candidate",
+  "source_design_sha256": "49b113fe790b413851dbafafc0728426d6de74af05503a728dd687ebcbde2269",
+  "source_lineage_recorded_in_audit": {
+    "archive": "schema-v1.4.3.6-integrated-candidate-bundle.zip",
+    "sha256": "aefb34e68af65daf8277b9553d232cab29ffb5df9c4f18c1cfe126474a06adf1"
+  },
+  "import_changes": [
+    "Extracted the text contents into the repository while excluding Python bytecode caches.",
+    "Corrected the candidate README integration-test count from 27 to 29 based on the executable test file.",
+    "Regenerated audit/validation-report.json using the bundled validator."
+  ],
+  "normative_schema_changes": [],
+  "pending_decisions": [
+    "DD-ART-007",
+    "DD-ART-008",
+    "DD-ART-009",
+    "DD-ART-010"
+  ],
+  "note": "The imported archive was not committed as a binary ZIP; the extracted package files are committed."
+}

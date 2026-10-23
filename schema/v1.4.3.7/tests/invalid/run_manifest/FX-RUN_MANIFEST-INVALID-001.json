@@ -1,0 +1,29 @@
+{
+  "schema_version": "1.4",
+  "record_type": "run_manifest",
+  "project_id": "HEP-RESEARCH",
+  "manifest_id": "MANIFEST-001",
+  "run_id": "RUN-001",
+  "task_id": "TASK-001",
+  "contract_id": "TEC-001",
+  "run_plan_id": "RUNPLAN-001",
+  "manifest_revision": 1,
+  "execution_status_snapshot": "not_started",
+  "snapshot_at": "2026-10-20T12:00:00Z",
+  "input_refs": {
+    "source_ids": [],
+    "configuration_ids": [],
+    "input_artifact_ids": [],
+    "external_references": []
+  },
+  "configuration": {},
+  "code": {},
+  "environment": {},
+  "fingerprints": {},
+  "execution": {},
+  "outputs": {},
+  "validation": {},
+  "created_at": "2026-10-20T12:00:00Z",
+  "supersedes_manifest_id": null,
+  "__undeclared_field__": "must reject"
+}

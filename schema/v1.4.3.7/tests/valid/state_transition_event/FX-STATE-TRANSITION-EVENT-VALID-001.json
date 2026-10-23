@@ -1,0 +1,11 @@
+{
+  "schema_version": "1.4",
+  "record_type": "state_transition_event",
+  "project_id": "PROJECT-DEMO",
+  "event_id": "EVT-001",
+  "created_at": "2026-10-20T00:00:00Z",
+  "ledger_id": "LEDGER-FIXTURE-001",
+  "sequence_number": 1,
+  "event_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "previous_event_hash": null
+}

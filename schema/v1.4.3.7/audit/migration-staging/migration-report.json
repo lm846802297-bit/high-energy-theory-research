@@ -1,0 +1,98 @@
+{
+  "migration_rule_version": "v1.4.3.7-migration-rules-1",
+  "source_schema_version": "1.3",
+  "target_schema_version": "1.4",
+  "mode": "write_staging",
+  "source_count": 1,
+  "changes": [
+    {
+      "path": "/mnt/data/schema-v1.4.3.7-work/schema-v1.4.3.7-candidate/tests/integration/migration-source-v1.3/claim.json",
+      "record_type": "claim",
+      "source_sha256": "1ed9fa7f51b10d2d36d551f55e89a2c8367cbf53e07b95992229e63a6f23a118",
+      "from": "expected_artifact_plan_ids",
+      "to": "artifact_plan_ids",
+      "basis": "explicit_rule",
+      "rule_version": "v1.4.3.7-migration-rules-1"
+    },
+    {
+      "path": "/mnt/data/schema-v1.4.3.7-work/schema-v1.4.3.7-candidate/tests/integration/migration-source-v1.3/claim.json",
+      "record_type": "claim",
+      "source_sha256": "1ed9fa7f51b10d2d36d551f55e89a2c8367cbf53e07b95992229e63a6f23a118",
+      "from": "planned_run_ids",
+      "to": "run_plan_ids",
+      "basis": "explicit_rule",
+      "rule_version": "v1.4.3.7-migration-rules-1"
+    },
+    {
+      "path": "/mnt/data/schema-v1.4.3.7-work/schema-v1.4.3.7-candidate/tests/integration/migration-source-v1.3/claim.json",
+      "record_type": "claim",
+      "source_sha256": "1ed9fa7f51b10d2d36d551f55e89a2c8367cbf53e07b95992229e63a6f23a118",
+      "from": "planned_validation_ids",
+      "to": "validation_plan_ids",
+      "basis": "explicit_rule",
+      "rule_version": "v1.4.3.7-migration-rules-1"
+    },
+    {
+      "path": "/mnt/data/schema-v1.4.3.7-work/schema-v1.4.3.7-candidate/tests/integration/migration-source-v1.3/claim.json",
+      "record_type": "claim",
+      "source_sha256": "1ed9fa7f51b10d2d36d551f55e89a2c8367cbf53e07b95992229e63a6f23a118",
+      "from": "schema_version",
+      "to": "schema_version",
+      "old_value": "1.3",
+      "new_value": "1.4",
+      "basis": "explicit_rule",
+      "rule_version": "v1.4.3.7-migration-rules-1"
+    }
+  ],
+  "unresolved": [
+    {
+      "path": "/mnt/data/schema-v1.4.3.7-work/schema-v1.4.3.7-candidate/tests/integration/migration-source-v1.3/claim.json",
+      "record_type": "claim",
+      "code": "AMBIGUOUS_VALIDATION_IDS",
+      "field": "validation_ids",
+      "source_value": [
+        "VAL-AMBIG-1"
+      ],
+      "choices": [
+        "validation_activity_ids",
+        "validation_plan_ids"
+      ],
+      "basis": "requires target type and launch evidence"
+    }
+  ],
+  "warnings": [
+    {
+      "path": "/mnt/data/schema-v1.4.3.7-work/schema-v1.4.3.7-candidate/tests/integration/migration-source-v1.3/claim.json",
+      "record_type": "claim",
+      "code": "UNKNOWN_FIELDS_QUARANTINED",
+      "fields": [
+        "legacy_extension"
+      ],
+      "values": {
+        "legacy_extension": {
+          "retained": "in report/quarantine"
+        }
+      }
+    }
+  ],
+  "id_mapping": [
+    {
+      "source_path": "/mnt/data/schema-v1.4.3.7-work/schema-v1.4.3.7-candidate/tests/integration/migration-source-v1.3/claim.json",
+      "source_record_type": "claim",
+      "source_id": "CLAIM-1",
+      "target_record_type": "claim",
+      "target_id": "CLAIM-1",
+      "mapping_basis": "unresolved",
+      "unresolved_count": 1,
+      "source_sha256": "1ed9fa7f51b10d2d36d551f55e89a2c8367cbf53e07b95992229e63a6f23a118",
+      "target_sha256": "f51bf23355b67d097ba82e18e266d420a614da3772a630e685088284ceb2c758"
+    }
+  ],
+  "commit_allowed": false,
+  "limitations": [
+    "This prototype does not implement transactional commit or pointer-based rollback.",
+    "It does not resolve ambiguous references without source evidence.",
+    "It does not recalculate TEC contract hashes unless canonical source payload is available.",
+    "No migration is considered committed; human approval and full target validation are required."
+  ]
+}

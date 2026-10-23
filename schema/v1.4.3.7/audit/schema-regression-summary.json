@@ -1,0 +1,13 @@
+{
+  "checks_total": 58,
+  "checks_passed": 58,
+  "checks_failed": 0,
+  "fixtures_total": 83,
+  "fixtures_expected_result_matched": 83,
+  "fixtures_mismatched": 0,
+  "record_types_loaded": 25,
+  "semantic_tests_total": 16,
+  "semantic_tests_expected_result_matched": 16,
+  "semantic_tests_mismatched": 0,
+  "trace_rows": 123
+}

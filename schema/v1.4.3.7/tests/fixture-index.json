@@ -1,0 +1,1148 @@
+{
+  "schema_version": "1.4.3.6-candidate",
+  "fixtures": [
+    {
+      "fixture_id": "FX-TASK-VALID-001",
+      "record_type": "task",
+      "fixture_kind": "valid",
+      "schema_version": "1.4",
+      "file": "tests/valid/task/FX-TASK-VALID-001.json",
+      "expected_schema_result": "pass",
+      "expected_semantic_result": "not_run",
+      "requirement_ids": [
+        "REQ-SCH-TASK-FIELDS-01"
+      ],
+      "expected_error_codes": []
+    },
+    {
+      "fixture_id": "FX-TASK-INVALID-001",
+      "record_type": "task",
+      "fixture_kind": "invalid",
+      "schema_version": "1.4",
+      "file": "tests/invalid/task/FX-TASK-INVALID-001.json",
+      "expected_schema_result": "fail",
+      "expected_semantic_result": "not_run",
+      "requirement_ids": [
+        "REQ-SCH-TASK-STRICT-01"
+      ],
+      "expected_error_codes": [
+        "UNKNOWN_FIELD"
+      ]
+    },
+    {
+      "fixture_id": "FX-TASK-CONDITIONAL-001",
+      "record_type": "task",
+      "fixture_kind": "conditional",
+      "schema_version": "1.4",
+      "file": "tests/conditional/task/FX-TASK-CONDITIONAL-001.json",
+      "expected_schema_result": "pass",
+      "expected_semantic_result": "not_run",
+      "requirement_ids": [
+        "REQ-SCH-TASK-CONDITIONAL-01"
+      ],
+      "expected_error_codes": []
+    },
+    {
+      "fixture_id": "FX-TASK_EXECUTION_CONTRACT-VALID-001",
+      "record_type": "task_execution_contract",
+      "fixture_kind": "valid",
+      "schema_version": "1.4",
+      "file": "tests/valid/task_execution_contract/FX-TASK_EXECUTION_CONTRACT-VALID-001.json",
+      "expected_schema_result": "pass",
+      "expected_semantic_result": "not_run",
+      "requirement_ids": [
+        "REQ-SCH-TASK-EXECUTION-CONTRACT-FIELDS-01"
+      ],
+      "expected_error_codes": []
+    },
+    {
+      "fixture_id": "FX-TASK_EXECUTION_CONTRACT-INVALID-001",
+      "record_type": "task_execution_contract",
+      "fixture_kind": "invalid",
+      "schema_version": "1.4",
+      "file": "tests/invalid/task_execution_contract/FX-TASK_EXECUTION_CONTRACT-INVALID-001.json",
+      "expected_schema_result": "fail",
+      "expected_semantic_result": "not_run",
+      "requirement_ids": [
+        "REQ-SCH-TASK-EXECUTION-CONTRACT-STRICT-01"
+      ],
+      "expected_error_codes": [
+        "UNKNOWN_FIELD"
+      ]
+    },
+    {
+      "fixture_id": "FX-TASK_EXECUTION_CONTRACT-CONDITIONAL-001",
+      "record_type": "task_execution_contract",
+      "fixture_kind": "conditional",
+      "schema_version": "1.4",
+      "file": "tests/conditional/task_execution_contract/FX-TASK_EXECUTION_CONTRACT-CONDITIONAL-001.json",
+      "expected_schema_result": "pass",
+      "expected_semantic_result": "not_run",
+      "requirement_ids": [
+        "REQ-SCH-TASK-EXECUTION-CONTRACT-CONDITIONAL-01"
+      ],
+      "expected_error_codes": []
+    },
+    {
+      "fixture_id": "FX-RUN_PLAN-VALID-001",
+      "record_type": "run_plan",
+      "fixture_kind": "valid",
+      "schema_version": "1.4",
+      "file": "tests/valid/run_plan/FX-RUN_PLAN-VALID-001.json",
+      "expected_schema_result": "pass",
+      "expected_semantic_result": "not_run",
+      "requirement_ids": [
+        "REQ-SCH-RUN-PLAN-FIELDS-01"
+      ],
+      "expected_error_codes": []
+    },
+    {
+      "fixture_id": "FX-RUN_PLAN-INVALID-001",
+      "record_type": "run_plan",
+      "fixture_kind": "invalid",
+      "schema_version": "1.4",
+      "file": "tests/invalid/run_plan/FX-RUN_PLAN-INVALID-001.json",
+      "expected_schema_result": "fail",
+      "expected_semantic_result": "not_run",
+      "requirement_ids": [
+        "REQ-SCH-RUN-PLAN-STRICT-01"
+      ],
+      "expected_error_codes": [
+        "UNKNOWN_FIELD"
+      ]
+    },
+    {
+      "fixture_id": "FX-RUN_PLAN-CONDITIONAL-001",
+      "record_type": "run_plan",
+      "fixture_kind": "conditional",
+      "schema_version": "1.4",
+      "file": "tests/conditional/run_plan/FX-RUN_PLAN-CONDITIONAL-001.json",
+      "expected_schema_result": "pass",
+      "expected_semantic_result": "not_run",
+      "requirement_ids": [
+        "REQ-SCH-RUN-PLAN-CONDITIONAL-01"
+      ],
+      "expected_error_codes": []
+    },
+    {
+      "fixture_id": "FX-RUN-VALID-001",
+      "record_type": "run",
+      "fixture_kind": "valid",
+      "schema_version": "1.4",
+      "file": "tests/valid/run/FX-RUN-VALID-001.json",
+      "expected_schema_result": "pass",
+      "expected_semantic_result": "not_run",
+      "requirement_ids": [
+        "REQ-SCH-RUN-FIELDS-01"
+      ],
+      "expected_error_codes": []
+    },
+    {
+      "fixture_id": "FX-RUN-INVALID-001",
+      "record_type": "run",
+      "fixture_kind": "invalid",
+      "schema_version": "1.4",
+      "file": "tests/invalid/run/FX-RUN-INVALID-001.json",
+      "expected_schema_result": "fail",
+      "expected_semantic_result": "not_run",
+      "requirement_ids": [
+        "REQ-SCH-RUN-STRICT-01"
+      ],
+      "expected_error_codes": [
+        "UNKNOWN_FIELD"
+      ]
+    },
+    {
+      "fixture_id": "FX-RUN-CONDITIONAL-001",
+      "record_type": "run",
+      "fixture_kind": "conditional",
+      "schema_version": "1.4",
+      "file": "tests/conditional/run/FX-RUN-CONDITIONAL-001.json",
+      "expected_schema_result": "pass",
+      "expected_semantic_result": "not_run",
+      "requirement_ids": [
+        "REQ-SCH-RUN-CONDITIONAL-01"
+      ],
+      "expected_error_codes": []
+    },
+    {
+      "fixture_id": "FX-RUN_MANIFEST-VALID-001",
+      "record_type": "run_manifest",
+      "fixture_kind": "valid",
+      "schema_version": "1.4",
+      "file": "tests/valid/run_manifest/FX-RUN_MANIFEST-VALID-001.json",
+      "expected_schema_result": "pass",
+      "expected_semantic_result": "not_run",
+      "requirement_ids": [
+        "REQ-SCH-RUN-MANIFEST-FIELDS-01"
+      ],
+      "expected_error_codes": []
+    },
+    {
+      "fixture_id": "FX-RUN_MANIFEST-INVALID-001",
+      "record_type": "run_manifest",
+      "fixture_kind": "invalid",
+      "schema_version": "1.4",
+      "file": "tests/invalid/run_manifest/FX-RUN_MANIFEST-INVALID-001.json",
+      "expected_schema_result": "fail",
+      "expected_semantic_result": "not_run",
+      "requirement_ids": [
+        "REQ-SCH-RUN-MANIFEST-STRICT-01"
+      ],
+      "expected_error_codes": [
+        "UNKNOWN_FIELD"
+      ]
+    },
+    {
+      "fixture_id": "FX-RUN_MANIFEST-CONDITIONAL-001",
+      "record_type": "run_manifest",
+      "fixture_kind": "conditional",
+      "schema_version": "1.4",
+      "file": "tests/conditional/run_manifest/FX-RUN_MANIFEST-CONDITIONAL-001.json",
+      "expected_schema_result": "pass",
+      "expected_semantic_result": "not_run",
+      "requirement_ids": [
+        "REQ-SCH-RUN-MANIFEST-CONDITIONAL-01"
+      ],
+      "expected_error_codes": []
+    },
+    {
+      "fixture_id": "FX-ARTIFACT_PLAN-VALID-001",
+      "record_type": "artifact_plan",
+      "fixture_kind": "valid",
+      "schema_version": "1.4",
+      "file": "tests/valid/artifact_plan/FX-ARTIFACT_PLAN-VALID-001.json",
+      "expected_schema_result": "pass",
+      "expected_semantic_result": "not_run",
+      "requirement_ids": [
+        "REQ-SCH-ARTIFACT-PLAN-FIELDS-01"
+      ],
+      "expected_error_codes": []
+    },
+    {
+      "fixture_id": "FX-ARTIFACT_PLAN-INVALID-001",
+      "record_type": "artifact_plan",
+      "fixture_kind": "invalid",
+      "schema_version": "1.4",
+      "file": "tests/invalid/artifact_plan/FX-ARTIFACT_PLAN-INVALID-001.json",
+      "expected_schema_result": "fail",
+      "expected_semantic_result": "not_run",
+      "requirement_ids": [
+        "REQ-SCH-ARTIFACT-PLAN-STRICT-01"
+      ],
+      "expected_error_codes": [
+        "UNKNOWN_FIELD"
+      ]
+    },
+    {
+      "fixture_id": "FX-ARTIFACT_PLAN-CONDITIONAL-001",
+      "record_type": "artifact_plan",
+      "fixture_kind": "conditional",
+      "schema_version": "1.4",
+      "file": "tests/conditional/artifact_plan/FX-ARTIFACT_PLAN-CONDITIONAL-001.json",
+      "expected_schema_result": "pass",
+      "expected_semantic_result": "not_run",
+      "requirement_ids": [
+        "REQ-SCH-ARTIFACT-PLAN-CONDITIONAL-01"
+      ],
+      "expected_error_codes": []
+    },
+    {
+      "fixture_id": "FX-ARTIFACT-VALID-001",
+      "record_type": "artifact",
+      "fixture_kind": "valid",
+      "schema_version": "1.4",
+      "file": "tests/valid/artifact/FX-ARTIFACT-VALID-001.json",
+      "expected_schema_result": "pass",
+      "expected_semantic_result": "not_run",
+      "requirement_ids": [
+        "REQ-SCH-ARTIFACT-FIELDS-01"
+      ],
+      "expected_error_codes": []
+    },
+    {
+      "fixture_id": "FX-ARTIFACT-INVALID-001",
+      "record_type": "artifact",
+      "fixture_kind": "invalid",
+      "schema_version": "1.4",
+      "file": "tests/invalid/artifact/FX-ARTIFACT-INVALID-001.json",
+      "expected_schema_result": "fail",
+      "expected_semantic_result": "not_run",
+      "requirement_ids": [
+        "REQ-SCH-ARTIFACT-STRICT-01"
+      ],
+      "expected_error_codes": [
+        "UNKNOWN_FIELD"
+      ]
+    },
+    {
+      "fixture_id": "FX-ARTIFACT-CONDITIONAL-001",
+      "record_type": "artifact",
+      "fixture_kind": "conditional",
+      "schema_version": "1.4",
+      "file": "tests/conditional/artifact/FX-ARTIFACT-CONDITIONAL-001.json",
+      "expected_schema_result": "pass",
+      "expected_semantic_result": "not_run",
+      "requirement_ids": [
+        "REQ-SCH-ARTIFACT-CONDITIONAL-01"
+      ],
+      "expected_error_codes": []
+    },
+    {
+      "fixture_id": "FX-VALIDATION_PLAN-VALID-001",
+      "record_type": "validation_plan",
+      "fixture_kind": "valid",
+      "schema_version": "1.4",
+      "file": "tests/valid/validation_plan/FX-VALIDATION_PLAN-VALID-001.json",
+      "expected_schema_result": "pass",
+      "expected_semantic_result": "not_run",
+      "requirement_ids": [
+        "REQ-SCH-VALIDATION-PLAN-FIELDS-01"
+      ],
+      "expected_error_codes": []
+    },
+    {
+      "fixture_id": "FX-VALIDATION_PLAN-INVALID-001",
+      "record_type": "validation_plan",
+      "fixture_kind": "invalid",
+      "schema_version": "1.4",
+      "file": "tests/invalid/validation_plan/FX-VALIDATION_PLAN-INVALID-001.json",
+      "expected_schema_result": "fail",
+      "expected_semantic_result": "not_run",
+      "requirement_ids": [
+        "REQ-SCH-VALIDATION-PLAN-STRICT-01"
+      ],
+      "expected_error_codes": [
+        "UNKNOWN_FIELD"
+      ]
+    },
+    {
+      "fixture_id": "FX-VALIDATION_PLAN-CONDITIONAL-001",
+      "record_type": "validation_plan",
+      "fixture_kind": "conditional",
+      "schema_version": "1.4",
+      "file": "tests/conditional/validation_plan/FX-VALIDATION_PLAN-CONDITIONAL-001.json",
+      "expected_schema_result": "pass",
+      "expected_semantic_result": "not_run",
+      "requirement_ids": [
+        "REQ-SCH-VALIDATION-PLAN-CONDITIONAL-01"
+      ],
+      "expected_error_codes": []
+    },
+    {
+      "fixture_id": "FX-VALIDATION_ACTIVITY-VALID-001",
+      "record_type": "validation_activity",
+      "fixture_kind": "valid",
+      "schema_version": "1.4",
+      "file": "tests/valid/validation_activity/FX-VALIDATION_ACTIVITY-VALID-001.json",
+      "expected_schema_result": "pass",
+      "expected_semantic_result": "not_run",
+      "requirement_ids": [
+        "REQ-SCH-VALIDATION-ACTIVITY-FIELDS-01"
+      ],
+      "expected_error_codes": []
+    },
+    {
+      "fixture_id": "FX-VALIDATION_ACTIVITY-INVALID-001",
+      "record_type": "validation_activity",
+      "fixture_kind": "invalid",
+      "schema_version": "1.4",
+      "file": "tests/invalid/validation_activity/FX-VALIDATION_ACTIVITY-INVALID-001.json",
+      "expected_schema_result": "fail",
+      "expected_semantic_result": "not_run",
+      "requirement_ids": [
+        "REQ-SCH-VALIDATION-ACTIVITY-STRICT-01"
+      ],
+      "expected_error_codes": [
+        "UNKNOWN_FIELD"
+      ]
+    },
+    {
+      "fixture_id": "FX-VALIDATION_ACTIVITY-CONDITIONAL-001",
+      "record_type": "validation_activity",
+      "fixture_kind": "conditional",
+      "schema_version": "1.4",
+      "file": "tests/conditional/validation_activity/FX-VALIDATION_ACTIVITY-CONDITIONAL-001.json",
+      "expected_schema_result": "pass",
+      "expected_semantic_result": "not_run",
+      "requirement_ids": [
+        "REQ-SCH-VALIDATION-ACTIVITY-CONDITIONAL-01"
+      ],
+      "expected_error_codes": []
+    },
+    {
+      "fixture_id": "FX-VALIDATION_REPORT-VALID-001",
+      "record_type": "validation_report",
+      "fixture_kind": "valid",
+      "schema_version": "1.4",
+      "file": "tests/valid/validation_report/FX-VALIDATION_REPORT-VALID-001.json",
+      "expected_schema_result": "pass",
+      "expected_semantic_result": "not_run",
+      "requirement_ids": [
+        "REQ-SCH-VALIDATION-REPORT-FIELDS-01"
+      ],
+      "expected_error_codes": []
+    },
+    {
+      "fixture_id": "FX-VALIDATION_REPORT-INVALID-001",
+      "record_type": "validation_report",
+      "fixture_kind": "invalid",
+      "schema_version": "1.4",
+      "file": "tests/invalid/validation_report/FX-VALIDATION_REPORT-INVALID-001.json",
+      "expected_schema_result": "fail",
+      "expected_semantic_result": "not_run",
+      "requirement_ids": [
+        "REQ-SCH-VALIDATION-REPORT-STRICT-01"
+      ],
+      "expected_error_codes": [
+        "UNKNOWN_FIELD"
+      ]
+    },
+    {
+      "fixture_id": "FX-VALIDATION_REPORT-CONDITIONAL-001",
+      "record_type": "validation_report",
+      "fixture_kind": "conditional",
+      "schema_version": "1.4",
+      "file": "tests/conditional/validation_report/FX-VALIDATION_REPORT-CONDITIONAL-001.json",
+      "expected_schema_result": "pass",
+      "expected_semantic_result": "not_run",
+      "requirement_ids": [
+        "REQ-SCH-VALIDATION-REPORT-CONDITIONAL-01"
+      ],
+      "expected_error_codes": []
+    },
+    {
+      "fixture_id": "FX-CLAIM-VALID-001",
+      "record_type": "claim",
+      "fixture_kind": "valid",
+      "schema_version": "1.4",
+      "file": "tests/valid/claim/FX-CLAIM-VALID-001.json",
+      "expected_schema_result": "pass",
+      "expected_semantic_result": "not_run",
+      "requirement_ids": [
+        "REQ-SCH-CLAIM-FIELDS-01"
+      ],
+      "expected_error_codes": []
+    },
+    {
+      "fixture_id": "FX-CLAIM-INVALID-001",
+      "record_type": "claim",
+      "fixture_kind": "invalid",
+      "schema_version": "1.4",
+      "file": "tests/invalid/claim/FX-CLAIM-INVALID-001.json",
+      "expected_schema_result": "fail",
+      "expected_semantic_result": "not_run",
+      "requirement_ids": [
+        "REQ-SCH-CLAIM-STRICT-01"
+      ],
+      "expected_error_codes": [
+        "UNKNOWN_FIELD"
+      ]
+    },
+    {
+      "fixture_id": "FX-CLAIM-CONDITIONAL-001",
+      "record_type": "claim",
+      "fixture_kind": "conditional",
+      "schema_version": "1.4",
+      "file": "tests/conditional/claim/FX-CLAIM-CONDITIONAL-001.json",
+      "expected_schema_result": "pass",
+      "expected_semantic_result": "not_run",
+      "requirement_ids": [
+        "REQ-SCH-CLAIM-CONDITIONAL-01"
+      ],
+      "expected_error_codes": []
+    },
+    {
+      "fixture_id": "FX-SOURCE-VALID-001",
+      "record_type": "source",
+      "fixture_kind": "valid",
+      "schema_version": "1.4",
+      "file": "tests/valid/source/FX-SOURCE-VALID-001.json",
+      "expected_schema_result": "pass",
+      "expected_semantic_result": "not_run",
+      "requirement_ids": [
+        "REQ-SCH-SOURCE-FIELDS-01"
+      ],
+      "expected_error_codes": []
+    },
+    {
+      "fixture_id": "FX-SOURCE-INVALID-001",
+      "record_type": "source",
+      "fixture_kind": "invalid",
+      "schema_version": "1.4",
+      "file": "tests/invalid/source/FX-SOURCE-INVALID-001.json",
+      "expected_schema_result": "fail",
+      "expected_semantic_result": "not_run",
+      "requirement_ids": [
+        "REQ-SCH-SOURCE-STRICT-01"
+      ],
+      "expected_error_codes": [
+        "UNKNOWN_FIELD"
+      ]
+    },
+    {
+      "fixture_id": "FX-SOURCE-CONDITIONAL-001",
+      "record_type": "source",
+      "fixture_kind": "conditional",
+      "schema_version": "1.4",
+      "file": "tests/conditional/source/FX-SOURCE-CONDITIONAL-001.json",
+      "expected_schema_result": "pass",
+      "expected_semantic_result": "not_run",
+      "requirement_ids": [
+        "REQ-SCH-SOURCE-CONDITIONAL-01"
+      ],
+      "expected_error_codes": []
+    },
+    {
+      "fixture_id": "FX-SOURCE_FRAGMENT-VALID-001",
+      "record_type": "source_fragment",
+      "fixture_kind": "valid",
+      "schema_version": "1.4",
+      "file": "tests/valid/source_fragment/FX-SOURCE_FRAGMENT-VALID-001.json",
+      "expected_schema_result": "pass",
+      "expected_semantic_result": "not_run",
+      "requirement_ids": [
+        "REQ-SCH-SOURCE-FRAGMENT-FIELDS-01"
+      ],
+      "expected_error_codes": []
+    },
+    {
+      "fixture_id": "FX-SOURCE_FRAGMENT-INVALID-001",
+      "record_type": "source_fragment",
+      "fixture_kind": "invalid",
+      "schema_version": "1.4",
+      "file": "tests/invalid/source_fragment/FX-SOURCE_FRAGMENT-INVALID-001.json",
+      "expected_schema_result": "fail",
+      "expected_semantic_result": "not_run",
+      "requirement_ids": [
+        "REQ-SCH-SOURCE-FRAGMENT-STRICT-01"
+      ],
+      "expected_error_codes": [
+        "UNKNOWN_FIELD"
+      ]
+    },
+    {
+      "fixture_id": "FX-SOURCE_FRAGMENT-CONDITIONAL-001",
+      "record_type": "source_fragment",
+      "fixture_kind": "conditional",
+      "schema_version": "1.4",
+      "file": "tests/conditional/source_fragment/FX-SOURCE_FRAGMENT-CONDITIONAL-001.json",
+      "expected_schema_result": "pass",
+      "expected_semantic_result": "not_run",
+      "requirement_ids": [
+        "REQ-SCH-SOURCE-FRAGMENT-CONDITIONAL-01"
+      ],
+      "expected_error_codes": []
+    },
+    {
+      "fixture_id": "FX-CONFIGURATION-VALID-001",
+      "record_type": "configuration",
+      "fixture_kind": "valid",
+      "schema_version": "1.4",
+      "file": "tests/valid/configuration/FX-CONFIGURATION-VALID-001.json",
+      "expected_schema_result": "pass",
+      "expected_semantic_result": "not_run",
+      "requirement_ids": [
+        "REQ-SCH-CONFIGURATION-FIELDS-01"
+      ],
+      "expected_error_codes": []
+    },
+    {
+      "fixture_id": "FX-CONFIGURATION-INVALID-001",
+      "record_type": "configuration",
+      "fixture_kind": "invalid",
+      "schema_version": "1.4",
+      "file": "tests/invalid/configuration/FX-CONFIGURATION-INVALID-001.json",
+      "expected_schema_result": "fail",
+      "expected_semantic_result": "not_run",
+      "requirement_ids": [
+        "REQ-SCH-CONFIGURATION-STRICT-01"
+      ],
+      "expected_error_codes": [
+        "UNKNOWN_FIELD"
+      ]
+    },
+    {
+      "fixture_id": "FX-CONFIGURATION-CONDITIONAL-001",
+      "record_type": "configuration",
+      "fixture_kind": "conditional",
+      "schema_version": "1.4",
+      "file": "tests/conditional/configuration/FX-CONFIGURATION-CONDITIONAL-001.json",
+      "expected_schema_result": "pass",
+      "expected_semantic_result": "not_run",
+      "requirement_ids": [
+        "REQ-SCH-CONFIGURATION-CONDITIONAL-01"
+      ],
+      "expected_error_codes": []
+    },
+    {
+      "fixture_id": "FX-CODE-VALID-001",
+      "record_type": "code",
+      "fixture_kind": "valid",
+      "schema_version": "1.4",
+      "file": "tests/valid/code/FX-CODE-VALID-001.json",
+      "expected_schema_result": "pass",
+      "expected_semantic_result": "not_run",
+      "requirement_ids": [
+        "REQ-SCH-CODE-FIELDS-01"
+      ],
+      "expected_error_codes": []
+    },
+    {
+      "fixture_id": "FX-CODE-INVALID-001",
+      "record_type": "code",
+      "fixture_kind": "invalid",
+      "schema_version": "1.4",
+      "file": "tests/invalid/code/FX-CODE-INVALID-001.json",
+      "expected_schema_result": "fail",
+      "expected_semantic_result": "not_run",
+      "requirement_ids": [
+        "REQ-SCH-CODE-STRICT-01"
+      ],
+      "expected_error_codes": [
+        "UNKNOWN_FIELD"
+      ]
+    },
+    {
+      "fixture_id": "FX-CODE-CONDITIONAL-001",
+      "record_type": "code",
+      "fixture_kind": "conditional",
+      "schema_version": "1.4",
+      "file": "tests/conditional/code/FX-CODE-CONDITIONAL-001.json",
+      "expected_schema_result": "pass",
+      "expected_semantic_result": "not_run",
+      "requirement_ids": [
+        "REQ-SCH-CODE-CONDITIONAL-01"
+      ],
+      "expected_error_codes": []
+    },
+    {
+      "fixture_id": "FX-ENVIRONMENT-VALID-001",
+      "record_type": "environment",
+      "fixture_kind": "valid",
+      "schema_version": "1.4",
+      "file": "tests/valid/environment/FX-ENVIRONMENT-VALID-001.json",
+      "expected_schema_result": "pass",
+      "expected_semantic_result": "not_run",
+      "requirement_ids": [
+        "REQ-SCH-ENVIRONMENT-FIELDS-01"
+      ],
+      "expected_error_codes": []
+    },
+    {
+      "fixture_id": "FX-ENVIRONMENT-INVALID-001",
+      "record_type": "environment",
+      "fixture_kind": "invalid",
+      "schema_version": "1.4",
+      "file": "tests/invalid/environment/FX-ENVIRONMENT-INVALID-001.json",
+      "expected_schema_result": "fail",
+      "expected_semantic_result": "not_run",
+      "requirement_ids": [
+        "REQ-SCH-ENVIRONMENT-STRICT-01"
+      ],
+      "expected_error_codes": [
+        "UNKNOWN_FIELD"
+      ]
+    },
+    {
+      "fixture_id": "FX-ENVIRONMENT-CONDITIONAL-001",
+      "record_type": "environment",
+      "fixture_kind": "conditional",
+      "schema_version": "1.4",
+      "file": "tests/conditional/environment/FX-ENVIRONMENT-CONDITIONAL-001.json",
+      "expected_schema_result": "pass",
+      "expected_semantic_result": "not_run",
+      "requirement_ids": [
+        "REQ-SCH-ENVIRONMENT-CONDITIONAL-01"
+      ],
+      "expected_error_codes": []
+    },
+    {
+      "fixture_id": "FX-CONVENTION_SET-VALID-001",
+      "record_type": "convention_set",
+      "fixture_kind": "valid",
+      "schema_version": "1.4",
+      "file": "tests/valid/convention_set/FX-CONVENTION_SET-VALID-001.json",
+      "expected_schema_result": "pass",
+      "expected_semantic_result": "not_run",
+      "requirement_ids": [
+        "REQ-SCH-CONVENTION-SET-FIELDS-01"
+      ],
+      "expected_error_codes": []
+    },
+    {
+      "fixture_id": "FX-CONVENTION_SET-INVALID-001",
+      "record_type": "convention_set",
+      "fixture_kind": "invalid",
+      "schema_version": "1.4",
+      "file": "tests/invalid/convention_set/FX-CONVENTION_SET-INVALID-001.json",
+      "expected_schema_result": "fail",
+      "expected_semantic_result": "not_run",
+      "requirement_ids": [
+        "REQ-SCH-CONVENTION-SET-STRICT-01"
+      ],
+      "expected_error_codes": [
+        "UNKNOWN_FIELD"
+      ]
+    },
+    {
+      "fixture_id": "FX-CONVENTION_SET-CONDITIONAL-001",
+      "record_type": "convention_set",
+      "fixture_kind": "conditional",
+      "schema_version": "1.4",
+      "file": "tests/conditional/convention_set/FX-CONVENTION_SET-CONDITIONAL-001.json",
+      "expected_schema_result": "pass",
+      "expected_semantic_result": "not_run",
+      "requirement_ids": [
+        "REQ-SCH-CONVENTION-SET-CONDITIONAL-01"
+      ],
+      "expected_error_codes": []
+    },
+    {
+      "fixture_id": "FX-PARAMETER_POINT-VALID-001",
+      "record_type": "parameter_point",
+      "fixture_kind": "valid",
+      "schema_version": "1.4",
+      "file": "tests/valid/parameter_point/FX-PARAMETER_POINT-VALID-001.json",
+      "expected_schema_result": "pass",
+      "expected_semantic_result": "not_run",
+      "requirement_ids": [
+        "REQ-SCH-PARAMETER-POINT-FIELDS-01"
+      ],
+      "expected_error_codes": []
+    },
+    {
+      "fixture_id": "FX-PARAMETER_POINT-INVALID-001",
+      "record_type": "parameter_point",
+      "fixture_kind": "invalid",
+      "schema_version": "1.4",
+      "file": "tests/invalid/parameter_point/FX-PARAMETER_POINT-INVALID-001.json",
+      "expected_schema_result": "fail",
+      "expected_semantic_result": "not_run",
+      "requirement_ids": [
+        "REQ-SCH-PARAMETER-POINT-STRICT-01"
+      ],
+      "expected_error_codes": [
+        "UNKNOWN_FIELD"
+      ]
+    },
+    {
+      "fixture_id": "FX-PARAMETER_POINT-CONDITIONAL-001",
+      "record_type": "parameter_point",
+      "fixture_kind": "conditional",
+      "schema_version": "1.4",
+      "file": "tests/conditional/parameter_point/FX-PARAMETER_POINT-CONDITIONAL-001.json",
+      "expected_schema_result": "pass",
+      "expected_semantic_result": "not_run",
+      "requirement_ids": [
+        "REQ-SCH-PARAMETER-POINT-CONDITIONAL-01"
+      ],
+      "expected_error_codes": []
+    },
+    {
+      "fixture_id": "FX-BENCHMARK_RESULT-VALID-001",
+      "record_type": "benchmark_result",
+      "fixture_kind": "valid",
+      "schema_version": "1.4",
+      "file": "tests/valid/benchmark_result/FX-BENCHMARK_RESULT-VALID-001.json",
+      "expected_schema_result": "pass",
+      "expected_semantic_result": "not_run",
+      "requirement_ids": [
+        "REQ-SCH-BENCHMARK-RESULT-FIELDS-01"
+      ],
+      "expected_error_codes": []
+    },
+    {
+      "fixture_id": "FX-BENCHMARK_RESULT-INVALID-001",
+      "record_type": "benchmark_result",
+      "fixture_kind": "invalid",
+      "schema_version": "1.4",
+      "file": "tests/invalid/benchmark_result/FX-BENCHMARK_RESULT-INVALID-001.json",
+      "expected_schema_result": "fail",
+      "expected_semantic_result": "not_run",
+      "requirement_ids": [
+        "REQ-SCH-BENCHMARK-RESULT-STRICT-01"
+      ],
+      "expected_error_codes": [
+        "UNKNOWN_FIELD"
+      ]
+    },
+    {
+      "fixture_id": "FX-BENCHMARK_RESULT-CONDITIONAL-001",
+      "record_type": "benchmark_result",
+      "fixture_kind": "conditional",
+      "schema_version": "1.4",
+      "file": "tests/conditional/benchmark_result/FX-BENCHMARK_RESULT-CONDITIONAL-001.json",
+      "expected_schema_result": "pass",
+      "expected_semantic_result": "not_run",
+      "requirement_ids": [
+        "REQ-SCH-BENCHMARK-RESULT-CONDITIONAL-01"
+      ],
+      "expected_error_codes": []
+    },
+    {
+      "fixture_id": "FX-EVIDENCE_FRAGMENT-VALID-001",
+      "record_type": "evidence_fragment",
+      "fixture_kind": "valid",
+      "schema_version": "1.4",
+      "file": "tests/valid/evidence_fragment/FX-EVIDENCE_FRAGMENT-VALID-001.json",
+      "expected_schema_result": "pass",
+      "expected_semantic_result": "not_run",
+      "requirement_ids": [
+        "REQ-SCH-EVIDENCE-FRAGMENT-FIELDS-01"
+      ],
+      "expected_error_codes": []
+    },
+    {
+      "fixture_id": "FX-EVIDENCE_FRAGMENT-INVALID-001",
+      "record_type": "evidence_fragment",
+      "fixture_kind": "invalid",
+      "schema_version": "1.4",
+      "file": "tests/invalid/evidence_fragment/FX-EVIDENCE_FRAGMENT-INVALID-001.json",
+      "expected_schema_result": "fail",
+      "expected_semantic_result": "not_run",
+      "requirement_ids": [
+        "REQ-SCH-EVIDENCE-FRAGMENT-STRICT-01"
+      ],
+      "expected_error_codes": [
+        "UNKNOWN_FIELD"
+      ]
+    },
+    {
+      "fixture_id": "FX-EVIDENCE_FRAGMENT-CONDITIONAL-001",
+      "record_type": "evidence_fragment",
+      "fixture_kind": "conditional",
+      "schema_version": "1.4",
+      "file": "tests/conditional/evidence_fragment/FX-EVIDENCE_FRAGMENT-CONDITIONAL-001.json",
+      "expected_schema_result": "pass",
+      "expected_semantic_result": "not_run",
+      "requirement_ids": [
+        "REQ-SCH-EVIDENCE-FRAGMENT-CONDITIONAL-01"
+      ],
+      "expected_error_codes": []
+    },
+    {
+      "fixture_id": "FX-TEST_CASE-VALID-001",
+      "record_type": "test_case",
+      "fixture_kind": "valid",
+      "schema_version": "1.4",
+      "file": "tests/valid/test_case/FX-TEST_CASE-VALID-001.json",
+      "expected_schema_result": "pass",
+      "expected_semantic_result": "not_run",
+      "requirement_ids": [
+        "REQ-SCH-TEST-CASE-FIELDS-01"
+      ],
+      "expected_error_codes": []
+    },
+    {
+      "fixture_id": "FX-TEST_CASE-INVALID-001",
+      "record_type": "test_case",
+      "fixture_kind": "invalid",
+      "schema_version": "1.4",
+      "file": "tests/invalid/test_case/FX-TEST_CASE-INVALID-001.json",
+      "expected_schema_result": "fail",
+      "expected_semantic_result": "not_run",
+      "requirement_ids": [
+        "REQ-SCH-TEST-CASE-STRICT-01"
+      ],
+      "expected_error_codes": [
+        "UNKNOWN_FIELD"
+      ]
+    },
+    {
+      "fixture_id": "FX-TEST_CASE-CONDITIONAL-001",
+      "record_type": "test_case",
+      "fixture_kind": "conditional",
+      "schema_version": "1.4",
+      "file": "tests/conditional/test_case/FX-TEST_CASE-CONDITIONAL-001.json",
+      "expected_schema_result": "pass",
+      "expected_semantic_result": "not_run",
+      "requirement_ids": [
+        "REQ-SCH-TEST-CASE-CONDITIONAL-01"
+      ],
+      "expected_error_codes": []
+    },
+    {
+      "fixture_id": "FX-TEST_RUN-VALID-001",
+      "record_type": "test_run",
+      "fixture_kind": "valid",
+      "schema_version": "1.4",
+      "file": "tests/valid/test_run/FX-TEST_RUN-VALID-001.json",
+      "expected_schema_result": "pass",
+      "expected_semantic_result": "not_run",
+      "requirement_ids": [
+        "REQ-SCH-TEST-RUN-FIELDS-01"
+      ],
+      "expected_error_codes": []
+    },
+    {
+      "fixture_id": "FX-TEST_RUN-INVALID-001",
+      "record_type": "test_run",
+      "fixture_kind": "invalid",
+      "schema_version": "1.4",
+      "file": "tests/invalid/test_run/FX-TEST_RUN-INVALID-001.json",
+      "expected_schema_result": "fail",
+      "expected_semantic_result": "not_run",
+      "requirement_ids": [
+        "REQ-SCH-TEST-RUN-STRICT-01"
+      ],
+      "expected_error_codes": [
+        "UNKNOWN_FIELD"
+      ]
+    },
+    {
+      "fixture_id": "FX-TEST_RUN-CONDITIONAL-001",
+      "record_type": "test_run",
+      "fixture_kind": "conditional",
+      "schema_version": "1.4",
+      "file": "tests/conditional/test_run/FX-TEST_RUN-CONDITIONAL-001.json",
+      "expected_schema_result": "pass",
+      "expected_semantic_result": "not_run",
+      "requirement_ids": [
+        "REQ-SCH-TEST-RUN-CONDITIONAL-01"
+      ],
+      "expected_error_codes": []
+    },
+    {
+      "fixture_id": "FX-STATE_TRANSITION_EVENT-VALID-001",
+      "record_type": "state_transition_event",
+      "fixture_kind": "valid",
+      "schema_version": "1.4",
+      "file": "tests/valid/state_transition_event/FX-STATE_TRANSITION_EVENT-VALID-001.json",
+      "expected_schema_result": "pass",
+      "expected_semantic_result": "not_run",
+      "requirement_ids": [
+        "REQ-SCH-STATE-TRANSITION-EVENT-FIELDS-01"
+      ],
+      "expected_error_codes": []
+    },
+    {
+      "fixture_id": "FX-STATE_TRANSITION_EVENT-INVALID-001",
+      "record_type": "state_transition_event",
+      "fixture_kind": "invalid",
+      "schema_version": "1.4",
+      "file": "tests/invalid/state_transition_event/FX-STATE_TRANSITION_EVENT-INVALID-001.json",
+      "expected_schema_result": "fail",
+      "expected_semantic_result": "not_run",
+      "requirement_ids": [
+        "REQ-SCH-STATE-TRANSITION-EVENT-STRICT-01"
+      ],
+      "expected_error_codes": [
+        "UNKNOWN_FIELD"
+      ]
+    },
+    {
+      "fixture_id": "FX-STATE_TRANSITION_EVENT-CONDITIONAL-001",
+      "record_type": "state_transition_event",
+      "fixture_kind": "conditional",
+      "schema_version": "1.4",
+      "file": "tests/conditional/state_transition_event/FX-STATE_TRANSITION_EVENT-CONDITIONAL-001.json",
+      "expected_schema_result": "pass",
+      "expected_semantic_result": "not_run",
+      "requirement_ids": [
+        "REQ-SCH-STATE-TRANSITION-EVENT-CONDITIONAL-01"
+      ],
+      "expected_error_codes": []
+    },
+    {
+      "fixture_id": "FX-MIGRATION_RECORD-VALID-001",
+      "record_type": "migration_record",
+      "fixture_kind": "valid",
+      "schema_version": "1.4",
+      "file": "tests/valid/migration_record/FX-MIGRATION_RECORD-VALID-001.json",
+      "expected_schema_result": "pass",
+      "expected_semantic_result": "not_run",
+      "requirement_ids": [
+        "REQ-SCH-MIGRATION-RECORD-FIELDS-01"
+      ],
+      "expected_error_codes": []
+    },
+    {
+      "fixture_id": "FX-MIGRATION_RECORD-INVALID-001",
+      "record_type": "migration_record",
+      "fixture_kind": "invalid",
+      "schema_version": "1.4",
+      "file": "tests/invalid/migration_record/FX-MIGRATION_RECORD-INVALID-001.json",
+      "expected_schema_result": "fail",
+      "expected_semantic_result": "not_run",
+      "requirement_ids": [
+        "REQ-SCH-MIGRATION-RECORD-STRICT-01"
+      ],
+      "expected_error_codes": [
+        "UNKNOWN_FIELD"
+      ]
+    },
+    {
+      "fixture_id": "FX-MIGRATION_RECORD-CONDITIONAL-001",
+      "record_type": "migration_record",
+      "fixture_kind": "conditional",
+      "schema_version": "1.4",
+      "file": "tests/conditional/migration_record/FX-MIGRATION_RECORD-CONDITIONAL-001.json",
+      "expected_schema_result": "pass",
+      "expected_semantic_result": "not_run",
+      "requirement_ids": [
+        "REQ-SCH-MIGRATION-RECORD-CONDITIONAL-01"
+      ],
+      "expected_error_codes": []
+    },
+    {
+      "fixture_id": "FX-RELATION_EDGE-VALID-001",
+      "record_type": "relation_edge",
+      "fixture_kind": "valid",
+      "schema_version": "1.4",
+      "file": "tests/valid/relation_edge/FX-RELATION_EDGE-VALID-001.json",
+      "expected_schema_result": "pass",
+      "expected_semantic_result": "not_run",
+      "requirement_ids": [
+        "REQ-SCH-RELATION-EDGE-FIELDS-01"
+      ],
+      "expected_error_codes": []
+    },
+    {
+      "fixture_id": "FX-RELATION_EDGE-INVALID-001",
+      "record_type": "relation_edge",
+      "fixture_kind": "invalid",
+      "schema_version": "1.4",
+      "file": "tests/invalid/relation_edge/FX-RELATION_EDGE-INVALID-001.json",
+      "expected_schema_result": "fail",
+      "expected_semantic_result": "not_run",
+      "requirement_ids": [
+        "REQ-SCH-RELATION-EDGE-STRICT-01"
+      ],
+      "expected_error_codes": [
+        "UNKNOWN_FIELD"
+      ]
+    },
+    {
+      "fixture_id": "FX-RELATION_EDGE-CONDITIONAL-001",
+      "record_type": "relation_edge",
+      "fixture_kind": "conditional",
+      "schema_version": "1.4",
+      "file": "tests/conditional/relation_edge/FX-RELATION_EDGE-CONDITIONAL-001.json",
+      "expected_schema_result": "pass",
+      "expected_semantic_result": "not_run",
+      "requirement_ids": [
+        "REQ-SCH-RELATION-EDGE-CONDITIONAL-01"
+      ],
+      "expected_error_codes": []
+    },
+    {
+      "fixture_id": "FX-ART-STORAGE-MISSING-001",
+      "record_type": "artifact",
+      "fixture_kind": "invalid",
+      "schema_version": "1.4",
+      "file": "tests/invalid/artifact/FX-ART-STORAGE-MISSING-001.json",
+      "expected_schema_result": "fail",
+      "expected_semantic_result": "not_run",
+      "requirement_ids": [
+        "REQ-ART-STORAGE-KIND-001"
+      ],
+      "expected_error_codes": [
+        "REQUIRED_STORAGE_KIND"
+      ]
+    },
+    {
+      "fixture_id": "FX-ART-DIR-HASH-MISSING-001",
+      "record_type": "artifact",
+      "fixture_kind": "invalid",
+      "schema_version": "1.4",
+      "file": "tests/invalid/artifact/FX-ART-DIR-HASH-MISSING-001.json",
+      "expected_schema_result": "fail",
+      "expected_semantic_result": "not_run",
+      "requirement_ids": [
+        "REQ-ART-DIR-MANIFEST-001"
+      ],
+      "expected_error_codes": [
+        "DIRECTORY_MANIFEST_HASH_REQUIRED"
+      ]
+    },
+    {
+      "fixture_id": "FX-ART-FILE-HAS-DIR-MANIFEST-001",
+      "record_type": "artifact",
+      "fixture_kind": "invalid",
+      "schema_version": "1.4",
+      "file": "tests/invalid/artifact/FX-ART-FILE-HAS-DIR-MANIFEST-001.json",
+      "expected_schema_result": "fail",
+      "expected_semantic_result": "not_run",
+      "requirement_ids": [
+        "REQ-ART-STORAGE-KIND-001"
+      ],
+      "expected_error_codes": [
+        "FILE_DIRECTORY_FIELDS_NOT_APPLICABLE"
+      ]
+    },
+    {
+      "fixture_id": "FX-ART-HASHLESS-NEEDS-REVIEW-001",
+      "record_type": "artifact",
+      "fixture_kind": "valid",
+      "schema_version": "1.4",
+      "file": "tests/valid/artifact/FX-ART-HASHLESS-NEEDS-REVIEW-001.json",
+      "expected_schema_result": "pass",
+      "expected_semantic_result": "not_run",
+      "requirement_ids": [
+        "REQ-ART-HASHLESS-STATUS-001"
+      ],
+      "expected_error_codes": []
+    },
+    {
+      "fixture_id": "FX-ART-HASHLESS-NO-REASON-001",
+      "record_type": "artifact",
+      "fixture_kind": "invalid",
+      "schema_version": "1.4",
+      "file": "tests/invalid/artifact/FX-ART-HASHLESS-NO-REASON-001.json",
+      "expected_schema_result": "fail",
+      "expected_semantic_result": "not_run",
+      "requirement_ids": [
+        "REQ-ART-HASHLESS-STATUS-001"
+      ],
+      "expected_error_codes": [
+        "HASH_MISSING_REASON"
+      ]
+    },
+    {
+      "fixture_id": "FX-ART-ALTID-GENERATED-001",
+      "record_type": "artifact",
+      "fixture_kind": "invalid",
+      "schema_version": "1.4",
+      "file": "tests/invalid/artifact/FX-ART-ALTID-GENERATED-001.json",
+      "expected_schema_result": "fail",
+      "expected_semantic_result": "not_run",
+      "requirement_ids": [
+        "REQ-ART-ALT-ID-ELIGIBILITY-001"
+      ],
+      "expected_error_codes": [
+        "ALT_IDENTITY_SCOPE_INVALID"
+      ]
+    },
+    {
+      "fixture_id": "FX-ART-HASH-AND-ALTID-001",
+      "record_type": "artifact",
+      "fixture_kind": "invalid",
+      "schema_version": "1.4",
+      "file": "tests/invalid/artifact/FX-ART-HASH-AND-ALTID-001.json",
+      "expected_schema_result": "fail",
+      "expected_semantic_result": "not_run",
+      "requirement_ids": [
+        "REQ-ART-ALT-ID-ELIGIBILITY-001"
+      ],
+      "expected_error_codes": [
+        "ALT_IDENTITY_WITH_CONTENT_HASH"
+      ]
+    },
+    {
+      "fixture_id": "FX-TEC-ALTID-METHOD-INCOMPLETE-001",
+      "record_type": "task_execution_contract",
+      "fixture_kind": "invalid",
+      "schema_version": "1.4",
+      "file": "tests/invalid/task_execution_contract/FX-TEC-ALTID-METHOD-INCOMPLETE-001.json",
+      "expected_schema_result": "fail",
+      "expected_semantic_result": "not_run",
+      "requirement_ids": [
+        "REQ-TEC-ALT-ID-METHOD-001"
+      ],
+      "expected_error_codes": [
+        "METHOD_REGISTRY_ENTRY_INVALID"
+      ]
+    }
+  ]
+}
