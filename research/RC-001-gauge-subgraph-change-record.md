@@ -48,7 +48,7 @@ For each external amplitude and each gauge sector, produce the labeled UV graph 
 2. The zero-momentum scalar kernel \(B_0(0;0,M_E^2)=\Delta_\epsilon+1-\ln(M_E^2/\mu_R^2)\) and representative numerator reductions before full Feynman-rule signs and group factors.
 3. A representative crossed-box scalar master with an explicit hard-minus-soft split, retaining separate UV and IR poles.
 4. The additive \(B-A'\) vacuum-polarization trace and finite heavy threshold for the stated charge spectrum.
-5. Exact-algebra scripts for the displayed parameter integrals, partial fractions, charge traces, and \(SU(2)\) contractions.
+5. Exact-algebra scripts for the displayed parameter integrals, partial fractions, charge traces, and \(SU(2)\) contractions. 6. Signed charge-factor tables for all three pairings at the four conjugate Yukawa vertices, plus a tree-propagator argument showing the complete purely light vertex subfamily cancels from the hard difference at \(O(M_E^{-2})\) when the EFT contact set is included.
 
 ### Not established
 
@@ -75,7 +75,7 @@ For each external amplitude and each gauge sector, produce the labeled UV graph 
 
 ## 6. Claim and downstream impact
 
-- **Claim IDs:** CL-010 (heavy-line/scalar-master subblocks), CL-011 (\(B-A'\) additive pole and threshold), CL-005 (complete Wilson vector; remains unresolved).
+- **Claim IDs:** CL-010 (heavy-line/scalar-master subblocks), CL-011 (\(B-A'\) additive pole and threshold), CL-012 (signed conjugate Yukawa-vertex charge factors), CL-013 (light-only vertex hard cancellation), CL-005 (complete Wilson vector; remains unresolved).
 - The new sub-blocks can support only their narrowly stated integral/charge-trace claims.
 - No new finite \(Q_{LD}\) or \(Q_{RD}\) coefficient is authorized for a manuscript, scan, or phenomenological conclusion.
 - Existing bosonic field-strength/current-to-gauge and scalar/source terms in master §§254–255 must not be duplicated.
@@ -83,7 +83,7 @@ For each external amplitude and each gauge sector, produce the labeled UV graph 
 
 ## 7. Next concrete action
 
-Derive and sum the two conjugate Yukawa-vertex amplitudes for the \(Q_{LD}\) and \(Q_{RD}\) external states, starting from the full interaction vertices and fixed momentum/fermion-flow conventions. For each graph, record the numerator reduction, signed gauge-charge factor, UV and IR poles, finite local term, and corresponding EFT graph. Do not update a Wilson coefficient until both vertex orientations, heavy-line self-energy, boxes, counterterms, and EFT contact terms have been combined.
+Use the signed pair factors and kernel map in research/RC-001-dim6-yukawa-vertex-charge-factors.md to calculate the genuinely hard heavy–light-fermion and heavy–scalar vertex graphs for \(Q_{LD}\) and \(Q_{RD}\). Fix momentum and fermion/scalar flow explicitly; for each graph, record the Lorentz numerator, overall Feynman-rule sign, signed gauge factor, UV/IR poles, finite local term, and matched EFT graph. Keep the light-only vertex subfamilies in the Ward/contact bookkeeping but do not assign them a separate hard coefficient at \(O(M_E^{-2})\). Do not update a Wilson coefficient until both conjugate vertices, heavy-line self-energy, boxes, counterterms, and EFT contact terms have been combined.
 
 ## 8. Decision
 
