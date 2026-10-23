@@ -253,7 +253,26 @@ class ValidationReferenceResolutionTests(unittest.TestCase):
         mapping_path = ROOT / "schema" / "v1.4.3.7" / "migrations" / "v1.3-to-v1.4-mapping.json"
         mapping_contract = json.loads(mapping_path.read_text(encoding="utf-8"))
         self.assertEqual(migration.RULE_VERSION, mapping_contract["migration_rules_version"])
-        self.assertTrue(mapping_contract["field_mappings"])
+        declared = {
+            (item["record_type"], item["source_field"], item["target_field"])
+            for item in mapping_contract["field_mappings"]
+        }
+        implemented = {
+            (record_type, source_field, target_field)
+            for record_type, field_map in migration.FIELD_MAPS.items()
+            for source_field, target_field in field_map.items()
+        } | {
+            (record_type, source_field, target_field)
+            for record_type, field_map in migration.LEGACY_ALIASES_BY_TYPE.items()
+            for source_field, target_field in field_map.items()
+        }
+        self.assertEqual(declared, implemented)
+        activity_schema_path = ROOT / "schema" / "v1.4.3.7" / "schemas" / "validation_activity.schema.json"
+        activity_schema = json.loads(activity_schema_path.read_text(encoding="utf-8"))
+        self.assertEqual(
+            migration.TARGET_VALIDATION_ACTIVITY_STATUSES,
+            set(activity_schema["properties"]["execution_status"]["enum"]),
+        )
         self.assertEqual(mapping_contract["target_schema_validation"], "not_performed_by_migration_prototype")
 
 if __name__ == "__main__":
