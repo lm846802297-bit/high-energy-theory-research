@@ -44,3 +44,11 @@
 - Updated the repository landing page, research index, and Scientific Diff workflow to distinguish project, workstream, research-change, run, and claim identities.
 - No existing research files were moved or renamed. The registry is navigation metadata only; no candidate schema was changed and no scientific result was promoted.
 
+## 2026-10-23 — Multi-project user guide and registry validation
+
+- Added docs/USER_GUIDE.md as the detailed operating manual; the root README remains the short onboarding page.
+- Added a dedicated project-registry validator and unit tests for hierarchy consistency, duplicate IDs, missing canonical paths, and path traversal.
+- Updated the research Skill and project registry guide to distinguish navigation metadata from candidate-schema structured research records.
+- Updated the README validation commands and project hierarchy references.
+- No existing research files were moved. The new validator and tests have not been executed in a repository runtime in this change; treat runtime validation as pending until the command/test output is captured.
+

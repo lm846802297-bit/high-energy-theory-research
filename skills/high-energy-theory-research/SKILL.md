@@ -39,6 +39,18 @@ Use this Skill for general high-energy theory and phenomenology research. Review
 
 Report the parameter mapping, scan ranges, priors/sampling method, perturbativity and stability criteria, applicable experiments, likelihood/limit assumptions, and validity domain. Separate theoretical realizability from experimental allowance, exclusion, EFT-inapplicability, and unassessed regions. Label benchmark-dependent results in figures and captions; do not collapse disconnected allowed regions into one interval.
 
+## Project and workstream selection
+
+Before creating a research record, consult projects/README.md and projects/registry.yaml. Identify the parent project and workstream rather than treating every calculation family as a top-level project. The current UV–EFT matching workstream belongs to axial-vector-model-building; do not register it as a separate top-level project.
+
+The registry is navigation metadata, not a record in candidate Schema v1.4.3.7. To validate project/workstream IDs and declared local canonical paths, run:
+
+~~~bash
+python skills/high-energy-theory-research/scripts/validate_project_registry.py --registry projects/registry.yaml --repo-root .
+~~~
+
+Do not pass the navigation registry to validate_project_records.py. Use the structured-record validator only for a directory containing JSON/YAML records that follow the candidate record schemas. Neither validator establishes scientific correctness.
+
 ## Project record validation
 
 When a project stores structured research records as JSON or YAML, run the bundled validator against the project record directory:
