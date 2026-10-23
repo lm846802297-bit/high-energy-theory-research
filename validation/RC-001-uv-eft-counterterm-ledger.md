@@ -102,7 +102,7 @@ V_{\rm CT}^{(8)}\supset
 \]
 The sign follows from \(\Gamma_{\rm inv}=p^2-\mathcal M_{\rm loc}^2+\Pi\): a potential counterterm enters the local inverse kernel with minus its mixed Hessian.
 
-The candidate projection is checked by \`calculations/RC-001-dimension8-constant-pole-candidate.py\` (4 exact symbolic checks; captured output in \`validation/RC-001-dimension8-constant-pole-candidate.txt\`). It is **not** a final Wilson coefficient: the complete same-order EFT soft/source insertions are not yet included, and EOM-related dimension-eight derivative, potential, and source operators can redistribute contributions between representatives. Keep the higher-dimensional operator assignment open until the full soft sum and a fixed gauge-invariant basis/EOM convention are available.
+The candidate projection is checked by `calculations/RC-001-dimension8-constant-pole-candidate.py` (4 exact symbolic checks; captured output in `validation/RC-001-dimension8-constant-pole-candidate.txt`). It is **not** a final Wilson coefficient: the complete same-order EFT soft/source insertions are not yet included, and EOM-related dimension-eight derivative, potential, and source operators can redistribute contributions between representatives. Keep the higher-dimensional operator assignment open until the full soft sum and a fixed gauge-invariant basis/EOM convention are available.
 
 ## Reproducibility boundary
 
