@@ -6,7 +6,7 @@ import argparse, json, hashlib, csv, sys, re
 from pathlib import Path
 from datetime import datetime, timezone
 
-RULE_VERSION="v1.4.3.7-migration-rules-2"
+RULE_VERSION="v1.4.3.7-migration-rules-3"
 KNOWN_TYPES={"task","task_execution_contract","run_plan","run","run_manifest","artifact_plan","artifact","validation_plan","validation_activity","validation_report","claim","source","source_fragment","configuration","code","environment","convention_set","parameter_point","benchmark_result","evidence_fragment","test_case","test_run","state_transition_event","migration_record","relation_edge"}
 TARGET_VALIDATION_ACTIVITY_STATUSES={"not_started","running","succeeded","failed","cancelled","blocked","partial"}
 # Only unambiguous, explicitly documented renames.
@@ -17,7 +17,10 @@ FIELD_MAPS={
  "run_plan":{"expected_artifact_plan_ids":"artifact_plan_ids"},
 }
 AMBIGUOUS={"validation_ids":"validation_activity_ids_or_validation_plan_ids"}
-LEGACY_ALIASES={"sha256":"content_sha256","uri":"path_or_uri","producer_run_id":"generated_by_run_id","integrity_status":"artifact_integrity_status","version":"contract_version","contract_hash":"contract_sha256"}
+LEGACY_ALIASES_BY_TYPE={
+ "artifact":{"sha256":"content_sha256","uri":"path_or_uri","producer_run_id":"generated_by_run_id","integrity_status":"artifact_integrity_status"},
+ "task_execution_contract":{"version":"contract_version","contract_hash":"contract_sha256"},
+}
 
 def digest_bytes(b): return hashlib.sha256(b).hexdigest()
 def is_timezone_aware_datetime(value):
@@ -53,12 +56,7 @@ def migrate_record(rec, target_properties=None, unknown_policy="quarantine", sou
             unresolved.append({"code":"TARGET_ENUM_VALUE_UNMAPPED","field":"execution_status","source_value":status,"allowed_target_values":sorted(allowed_statuses)})
     # Explicit record-type-specific aliases.
     mapping=dict(FIELD_MAPS.get(rt,{}))
-    if rt=="artifact":
-        mapping.update({k:v for k,v in LEGACY_ALIASES.items() if k in out})
-    if rt=="task_execution_contract":
-        mapping.update({k:v for k,v in LEGACY_ALIASES.items() if k in out})
-    if rt=="run":
-        mapping.update({k:v for k,v in LEGACY_ALIASES.items() if k in out})
+    mapping.update({k:v for k,v in LEGACY_ALIASES_BY_TYPE.get(rt,{}).items() if k in out})
     for old,new in mapping.items():
         if old not in out: continue
         if new in out and out[new] != out[old]:
