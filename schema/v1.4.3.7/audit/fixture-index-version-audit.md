@@ -23,6 +23,17 @@
 
 The repository does not claim byte-for-byte equality between the checked-in legacy index and the unavailable source archive. The current file bytes are identified by the manifest digest; source-archive equality remains unverified.
 
+## Static comparison of the two checked-in indexes
+
+A source-level comparison of the current candidate and legacy index JSON found:
+
+- 83 fixture entries in each index; all 83 fixture IDs are unique within each index.
+- The sets of fixture IDs are identical; no ID exists only in one index.
+- Four entries differ in the `file` path only: the valid and conditional fixtures for `run_plan` and `run_manifest` point to versioned `tests/v1.4.3.7/...` paths in the candidate index and the older `tests/valid` / `tests/conditional` paths in the legacy index.
+- The compared entries' record type, fixture kind, expected schema result, expected semantic result, requirement IDs, and expected error codes are unchanged for those four entries.
+
+This is a comparison of the two files currently checked into the branch, not proof that the legacy index is byte-identical to the unavailable v1.4.3.6 source archive. File existence, fixture outcomes, manifest SHA-256 values, and archive lineage still require the candidate validator to run against the checked-out tree and the original archive to be supplied for provenance verification.
+
 ## Validator and regression behavior
 
 The candidate validator checks:
