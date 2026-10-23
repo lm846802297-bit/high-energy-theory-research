@@ -37,6 +37,8 @@ class SchemaValidationEvidenceTests(unittest.TestCase):
         validator = VALIDATOR_PATH.read_text(encoding="utf-8")
         for token in (
             "candidate_release_status",
+            "m.get('schema_version')=='1.4.3.7-candidate'",
+            "=='1.4.3.6-candidate'",
             "manifest_traceability_row_count_matches",
             "manifest_release_evidence_traceability_rows_matches",
             "validated_commit_sha",
