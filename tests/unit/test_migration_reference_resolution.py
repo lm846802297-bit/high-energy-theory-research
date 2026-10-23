@@ -385,5 +385,30 @@ class ValidationReferenceResolutionTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "SHA-256 does not match manifest"):
                 migration.migrate(source, schemas_dir=bundle / "schemas")
 
+    def test_pending_alternative_identity_rule_blocks_artifact_target(self):
+        artifact = {
+            "schema_version": "1.3", "record_type": "artifact", "project_id": "P-TEST",
+            "artifact_id": "ART-PENDING", "artifact_storage_kind": "file",
+            "origin_kind": "generated", "path_or_uri": "artifact.bin", "format": "binary",
+            "artifact_integrity_status": "passed", "artifact_lifecycle_status": "active",
+            "created_at": "2026-10-20T10:00:00Z",
+        }
+        out, _, unresolved, _ = migration.migrate_record(artifact)
+        self.assertIsNotNone(out)
+        self.assertTrue(any(item["code"] == "ARTIFACT_ALTERNATIVE_IDENTITY_RULE_PENDING_APPROVAL" for item in unresolved))
+
+    def test_pending_hashless_integrity_downgrade_blocks_artifact_target(self):
+        artifact = {
+            "schema_version": "1.3", "record_type": "artifact", "project_id": "P-TEST",
+            "artifact_id": "ART-HASHLESS", "artifact_storage_kind": "file",
+            "origin_kind": "ingested_external", "path_or_uri": "external.bin",
+            "format": "binary", "content_sha256": None, "hash_unavailable_reason": "source did not provide bytes",
+            "artifact_integrity_status": "passed", "artifact_lifecycle_status": "active",
+            "alternative_identity": None, "created_at": "2026-10-20T10:00:00Z",
+        }
+        out, _, unresolved, _ = migration.migrate_record(artifact)
+        self.assertEqual(out["artifact_integrity_status"], "needs_review")
+        self.assertTrue(any(item["code"] == "ARTIFACT_INTEGRITY_DOWNGRADE_RULE_PENDING_APPROVAL" for item in unresolved))
+
 if __name__ == "__main__":
     unittest.main()
