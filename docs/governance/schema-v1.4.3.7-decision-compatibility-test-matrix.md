@@ -1,0 +1,73 @@
+# Schema v1.4.3.7 — DD-ART-007–010 Compatibility and Test Matrix
+
+**Status: review aid only.** This matrix does not approve any normative decision. The four recommendations remain pending owner approval. The matrix separates tests that can be implemented now from tests whose expected normative behavior depends on the owner decision or unavailable historical source data.
+
+## Summary
+
+| Decision | Candidate recommendation | Compatibility impact | Required tests | Current evidence / gate |
+|---|---|---|---|---|
+| DD-ART-007 | Require `artifact_storage_kind: file|directory`; never infer it from extension, URI, or artifact type | Legacy records may omit the field; migrate only from source evidence, otherwise quarantine for review | Schema: missing field rejected; enum outside file/directory rejected. Migration: explicit source evidence maps; absent/contradictory evidence is unresolved. Semantic: file and directory hashing policies cannot be interchanged | Recommendation only; owner approval pending; historical corpus unavailable |
+| DD-ART-008 | Normalize relative paths to Unicode NFC and POSIX separators; reject traversal, absolute paths, NFC collisions and disallowed symlinks; hash deterministically serialized normalized manifests with SHA-256 | Existing hashes may change if path normalization, entry ordering, or serialization changes; do not overwrite historical hashes before approval | Unit: NFC-equivalent collision; `..` and absolute paths; backslash normalization; deterministic ordering; symlink rejection; golden canonical bytes/hash. Integration: compare manifest entries with actual filesystem bytes and directory tree | Migration-target JCS is a separate contract and does not approve directory-manifest JCS. Directory helper does not walk the filesystem or prove bytes match disk. Owner approval pending |
+| DD-ART-009 | External file without source-byte SHA-256 remains `needs_review`, even when alternative identity is verified | Legacy records marked `passed` based only on DOI/version/URL identity may need downgrade to `needs_review`; do not claim local bytes equal source bytes | Semantic positive: byte hash present and verified may pass. Negative: hashless external file cannot be `passed`. Alternative identity cannot establish byte equality. State transitions require a new review/check event | Candidate semantic subset exists, but rule remains pending approval; test results on current HEAD are unverified |
+| DD-ART-010 | Include the normalized `alternative_identity_methods` registry in the versioned Task Execution Contract hash payload | Contract hashes may change; if historical payload cannot be reconstructed, retain original hash as source evidence and mark new verification unresolved | Golden vector: registry changes change contract digest. Method order canonicalization is deterministic. Method ID/version must resolve uniquely to an approved applicable method. Missing registry must not be silently defaulted unless an explicit migration rule is approved | Candidate contract and semantic tests exist; no owner approval; original historical contract payloads may be unavailable |
+
+## Cross-cutting compatibility rules
+
+1. Never silently rewrite historical content hashes, contract hashes, or directory-manifest hashes.
+2. Preserve original source bytes and source SHA-256 independently from transformed-target canonical digests.
+3. Any absent, ambiguous, contradictory, or unsupported legacy evidence becomes an explicit unresolved item; no inference from filename extension, URI shape, or current defaults.
+4. Candidate schema validation, cross-record semantics, source-archive lineage, and transaction safety are separate gates.
+5. Test pass on synthetic records is not proof of historical compatibility.
+6. Any normative change requires an explicit decision record before implementation is treated as authoritative.
+
+## Proposed test IDs
+
+The IDs below are planning identifiers, not claims that tests have run or passed.
+
+### DD-ART-007 — Storage kind
+
+- `DDART007-SCHEMA-001`: reject missing `artifact_storage_kind`.
+- `DDART007-SCHEMA-002`: reject values outside `file|directory`.
+- `DDART007-MIG-001`: preserve explicit source-backed value.
+- `DDART007-MIG-002`: absent or conflicting source evidence remains unresolved.
+- `DDART007-SEM-001`: prevent file-byte and directory-manifest integrity rules from being interchanged.
+
+### DD-ART-008 — Path normalization and directory identity
+
+- `DDART008-PATH-001`: NFC-normalize paths and detect post-normalization collisions.
+- `DDART008-PATH-002`: reject absolute paths, empty paths, `.` and `..` segments, and root escape.
+- `DDART008-PATH-003`: normalize separators to POSIX form and sort by normalized path.
+- `DDART008-PATH-004`: reject symlinks by default and do not follow them.
+- `DDART008-HASH-001`: compare canonical UTF-8 bytes and SHA-256 against a reviewed golden vector.
+- `DDART008-FS-001`: recompute size and file SHA-256 from actual bytes and detect missing/extra files.
+- `DDART008-FS-002`: verify empty-directory treatment and directory-entry semantics.
+
+### DD-ART-009 — Hashless external artifacts
+
+- `DDART009-SEM-001`: hashless external file cannot have byte-integrity status `passed`.
+- `DDART009-SEM-002`: alternative identity `verified` does not imply source-byte equality.
+- `DDART009-SEM-003`: `needs_review` can leave that state only with an explicit review/check event.
+- `DDART009-MIG-001`: legacy `passed` without a source-byte hash is flagged for review, not silently trusted.
+
+### DD-ART-010 — Contract hash payload
+
+- `DDART010-HASH-001`: changing a registered identity method changes the contract digest.
+- `DDART010-HASH-002`: canonicalized registry ordering is deterministic.
+- `DDART010-SEM-001`: Artifact references an exact contract ID/version/hash and method ID/version.
+- `DDART010-SEM-002`: unknown, duplicate, unapproved, or inapplicable methods are rejected.
+- `DDART010-MIG-001`: missing registry or unrecoverable original payload is unresolved unless a separately approved migration rule permits an explicit empty registry.
+
+## Approval and execution ledger
+
+| Gate | Status |
+|---|---|
+| Owner decision on DD-ART-007 | Pending |
+| Owner decision on DD-ART-008 | Pending |
+| Owner decision on DD-ART-009 | Pending |
+| Owner decision on DD-ART-010 | Pending |
+| Current-HEAD unit/integration execution | Not run in this review |
+| Historical v1.3 source baseline and compatibility run | Unavailable / unverified |
+| Actual filesystem directory-manifest verification | Not implemented |
+| Transaction/commit/rollback verification | Not implemented; `commit_allowed=false` |
+
+The matrix is intended to guide implementation and review without pre-empting normative approval.
