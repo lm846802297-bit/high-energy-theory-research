@@ -9,6 +9,8 @@ on:
       - validation/RC-001-dim6-soft-loop-crosscheck.txt
       - calculations/RC-001-dim6-independent-kernel-check.py
       - validation/RC-001-dim6-independent-kernel-check.txt
+      - calculations/RC-001-dim6-gauge-atlas-census.py
+      - validation/RC-001-dim6-gauge-atlas-census.txt
       - .github/workflows/rc001-dim6-soft-loop-crosscheck.yml
   pull_request:
     paths:
@@ -16,6 +18,8 @@ on:
       - validation/RC-001-dim6-soft-loop-crosscheck.txt
       - calculations/RC-001-dim6-independent-kernel-check.py
       - validation/RC-001-dim6-independent-kernel-check.txt
+      - calculations/RC-001-dim6-gauge-atlas-census.py
+      - validation/RC-001-dim6-gauge-atlas-census.txt
       - .github/workflows/rc001-dim6-soft-loop-crosscheck.yml
   workflow_dispatch:
 
@@ -42,3 +46,7 @@ jobs:
         run: python calculations/RC-001-dim6-independent-kernel-check.py > /tmp/rc001-dim6-independent-kernel-check.txt
       - name: Compare independent run with checked-in evidence
         run: diff -u validation/RC-001-dim6-independent-kernel-check.txt /tmp/rc001-dim6-independent-kernel-check.txt
+      - name: Run gauge attachment census
+        run: python calculations/RC-001-dim6-gauge-atlas-census.py > /tmp/rc001-dim6-gauge-atlas-census.txt
+      - name: Compare gauge attachment census with checked-in evidence
+        run: diff -u validation/RC-001-dim6-gauge-atlas-census.txt /tmp/rc001-dim6-gauge-atlas-census.txt
