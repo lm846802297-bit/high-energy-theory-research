@@ -8,7 +8,7 @@ Bundles are **immutable**. Adopting a later source revision means adding a new b
 
 | Bundle | Source version | Linked record | Size | Files |
 |---|---|---|---|---|
-| [higgs-portal-v66-20261019](higgs-portal-v66-20261019/) | Main working document v66, dated 2026-10-19 | [RC-001](../research/RC-001-vll-higgs-singlet-uv-eft.md) (earlier source generation) | 12,445,122 bytes (12.45 MB) | 138 |
+| [higgs-portal-v66-20261019](higgs-portal-v66-20261019/) | Main working document v66, dated 2026-10-19 | [RC-001](../research/RC-001-vll-higgs-singlet-uv-eft.md) (earlier source generation) | 12,448,214 bytes (12.45 MB) | 138 |
 
 ---
 
