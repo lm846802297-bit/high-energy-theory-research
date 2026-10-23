@@ -97,3 +97,12 @@ The owner reports the following results on exact pre-sync HEAD `9bebbdf279fefba0
 Actions Run [#40013524904](https://github.com/lm846802297-bit/high-energy-theory-research/actions/runs/40013524904) failed before a runner or step was recorded and has no artifact; it is not a code-level test failure and is not passing CI evidence. The main-branch commit `d6143c2` independently notes runner allocation failure. The exact infrastructure/account-policy cause remains unresolved.
 
 The [DD-ART-008 decision-options comparison](schema-v1.4.3.7-dd-art-008-decision-options-2026-10-24.md) now compares serialization/numeric-domain, path-ordering, digest-scope, and symlink-policy alternatives. It is a proposal, not an approval. DD-ART-007 through DD-ART-010 remain pending; `commit_allowed=false` remains mandatory.
+
+
+## Post-sync execution boundary — 2026-10-24
+
+The owner-reported local pass is for pre-sync HEAD `9bebbdf279fefba098fa237915ff71361103201a`. Main was then merged into the PR branch by two-parent commit `0f65b17d066126b5a5174230856df05e276c2a05`; the final branch has a documentation-only follow-up. Re-run the full suite on the final exact HEAD before describing the synchronized branch as verified.
+
+Actions Run [#40016709849](https://github.com/lm846802297-bit/high-energy-theory-research/actions/runs/40016709849) for `0f65b17` and Run [#40014204997](https://github.com/lm846802297-bit/high-energy-theory-research/actions/runs/40014204997) for main `d6143c2` both failed before runner assignment, with no recorded steps or artifacts. These are not code-level test failures and not passing CI evidence. The runner-allocation root cause remains unresolved.
+
+DD-ART-008 options remain proposals only. No numeric constraint, symlink enum, digest preimage, or historical hash has been changed.

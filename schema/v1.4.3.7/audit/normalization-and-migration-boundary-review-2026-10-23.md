@@ -2,14 +2,14 @@
 
 **Review type:** static source/document review; no code was changed and no test was run in this review.  
 **Observed PR branch:** `fix/schema-governance-20261023`  
-**Observed PR HEAD:** `c69651858a9c0b6155242c25a4c09c1364284823`  
+**Historical observed PR HEAD:** `c69651858a9c0b6155242c25a4c09c1364284823` (superseded by the 2026-10-24 main synchronization)  
 **Status:** candidate-only; PR #6 remains Open/Draft and is not merged.
 
 ## 1. Revision and evidence boundary
 
-The owner-reported local test summary is explicitly associated with code/test HEAD `0799dada7eaa8dcd08b8db2f2311a844335d7198`. That revision contains migration rules v5. GitHub's current PR metadata reports HEAD `c69651858a9c0b6155242c25a4c09c1364284823`; the compare endpoint reports the tested SHA as an ancestor 41 commits behind that HEAD.
+At the time of the initial static review, the only local test summary available was for code/test HEAD `0799dada7eaa8dcd08b8db2f2311a844335d7198` (migration rules v5), and the PR HEAD was `c69651858a9c0b6155242c25a4c09c1364284823`. This historical revision comparison is superseded by the owner-reported 8/8 directory-manifest, 36/36 migration, 30/30 integration, 87/87 unit, compilation, and Schema validation pass on pre-sync HEAD `9bebbdf279fefba098fa237915ff71361103201a`.
 
-The current PR branch contains migration rules v6, including MIG-015 for Task Execution Contract (TEC) registry/hash withholding and a source-root symlink guard. These changes are not validated by the owner-reported rules-v5 results. The current local-test claim must therefore remain SHA-scoped and must not be described as verification of the current remote branch.
+The current PR branch contains migration rules v6, including MIG-015 for Task Execution Contract (TEC) registry/hash withholding and a source-root symlink guard. These changes were not validated by the rules-v5 results. The owner later reported successful local verification of them on pre-sync HEAD `9bebbdf`; those results do not validate the subsequent synchronized merge commit `0f65b17` or the final documentation-only HEAD.
 
 The GitHub Actions runs associated with `0799dada7eaa8dcd08b8db2f2311a844335d7198` and `c69651858a9c0b6155242c25a4c09c1364284823` are recorded as failed runs (run IDs `39969213674` and `39976133434`). The connector returned no step summaries or usable job logs for these runs. They are not passing CI evidence; the available records are also insufficient to attribute the conclusion to a code-level test failure.
 
@@ -97,8 +97,18 @@ The repository owner reports local validation on exact pre-sync HEAD `9bebbdf279
 
 The Schema report was written outside the repository under the desktop environment's `%TEMP%\schema-validation-pr6-*` temporary directories. Two directories remain because recursive deletion was denied; no repository files were deleted. The exact `9bebbdf` path was not supplied and is not guessed.
 
-Actions Run [#40013524904](https://github.com/lm846802297-bit/high-energy-theory-research/actions/runs/40013524904) has `failure` with `runner_id=0`, empty runner name, empty steps and no artifact. The log endpoint has no stored log. Main commit [`d6143c2`](https://github.com/lm846802297-bit/high-energy-theory-research/commit/d6143c2aa15191ac8521e062d90860ba86713f00) also records that Actions could not allocate a runner. The exact account/organization/GitHub-side cause is not visible through the available API. This is runner-allocation evidence, not a code-test failure or a passing CI run.
+Actions Run [#40013524904](https://github.com/lm846802297-bit/high-energy-theory-research/actions/runs/40013524904) for pre-sync HEAD `9bebbdf` and Run [#40016709849](https://github.com/lm846802297-bit/high-energy-theory-research/actions/runs/40016709849) for merge commit `0f65b17` both have `failure`, `runner_id=0`, empty runner name, no recorded steps, and no artifact. The log endpoints returned no stored log. Main commit [`d6143c2`](https://github.com/lm846802297-bit/high-energy-theory-research/commit/d6143c2aa15191ac8521e062d90860ba86713f00) also records that Actions could not allocate a runner. The exact account/organization/GitHub-side cause is not visible through the available API. This is runner-allocation evidence, not a code-test failure or a passing CI run.
 
-The branch is being synchronized by a two-parent merge commit, not a rebase. Only `README.md` was changed on both sides since the common ancestor; the main branch's `artifacts/` navigation line is retained alongside the PR's candidate-governance changes. The PR workflow's main-branch UV–EFT pilot compile/build/artifact steps are restored while retaining the candidate provenance checks. The post-sync merge commit has not yet been locally validated.
+The branch was synchronized by a two-parent merge commit, not a rebase. Only `README.md` was changed on both sides since the common ancestor; the main branch's `artifacts/` navigation line is retained alongside the PR's candidate-governance changes. The PR workflow's main-branch UV–EFT pilot compile/build/artifact steps are restored while retaining the candidate provenance checks. The post-sync merge commit has not yet been locally validated.
 
 For owner review, see [DD-ART-008 decision options](../../../docs/governance/schema-v1.4.3.7-dd-art-008-decision-options-2026-10-24.md). No normative choice is made. The numeric domain, cross-language path comparator, digest payload scope and symlink policy remain open under DD-ART-008; `commit_allowed=false` remains mandatory.
+
+
+## Current synchronized-branch status — 2026-10-24
+
+- Current main at synchronization: `d6143c2aa15191ac8521e062d90860ba86713f00`.
+- Merge commit: `0f65b17d066126b5a5174230856df05e276c2a05`; compare against current main reported 225 commits ahead and 0 behind, with 37 PR-specific changed files.
+- The only shared changed leaf path from the old common ancestor was `README.md`; the `artifacts/` navigation line was reconciled manually. The PR workflow's main-branch UV–EFT pilot compile/build/artifact steps were restored without removing the candidate provenance gate.
+- The owner-reported local test pass remains scoped to pre-sync HEAD `9bebbdf`. No local full-suite result is yet available for merge commit `0f65b17` or the current documentation-only follow-up HEAD.
+- Actions Run [#40016709849](https://github.com/lm846802297-bit/high-energy-theory-research/actions/runs/40016709849) failed before any runner or test step was recorded. The same runner-allocation failure appears on main Run [#40014204997](https://github.com/lm846802297-bit/high-energy-theory-research/actions/runs/40014204997). The exact infrastructure/account-policy cause remains unresolved.
+- DD-ART-008 options are compared in [the decision-options document](../../../docs/governance/schema-v1.4.3.7-dd-art-008-decision-options-2026-10-24.md). No normative decision is implied; `commit_allowed=false` remains mandatory.
