@@ -5,7 +5,7 @@
 > **Work status:** Verification in progress  
 > **Overall model-level claim status:** Unresolved  
 > **Created:** 2026-10-23  
-> **Repository baseline:** main at c992daac633ac9df3d0aad008e104125206cb890
+> **Repository baseline at record creation:** `main` at `c992daac633ac9df3d0aad008e104125206cb890` (historical anchor; not a live pointer to the current `main` HEAD).
 
 ## 1. Scientific question
 
@@ -48,6 +48,19 @@ The working tree behind an earlier generation of the primary source is committed
 | Not covered | `section273_feyncalc_audit_log.json` and `uv_eft_audit_suite_output.txt` are not in the v66 bundle; their hashes still refer to the Library copies. |
 | Version gap | Results present only in the v153 source have no committed backing in this v66 bundle. Presence in the bundle does not establish a v153 claim. |
 | Unchanged claims | All claim statuses in §6 and the open B1/B3 item are unaffected. Archiving scripts and outputs does not advance diagram-level verification. |
+
+### Version lineage and future baseline adoption
+
+This record distinguishes **historical artifact preservation** from **selection of the active research baseline**.
+
+| Version | Role | Status and handling |
+|---|---|---|
+| **v66** (main document dated 2026-10-19) | Earlier research generation archived at [`artifacts/higgs-portal-v66-20261019`](../artifacts/higgs-portal-v66-20261019/) | Historical provenance only. It is not the latest research version and does not supersede v153. Its scripts, logs, and hash matches do not promote a scientific Claim. |
+| **v153** (main source dated 2026-10-21) | Primary source selected in §2 for this record | **Current baseline for RC-001.** The overall model-level claim remains unresolved and the verification gaps in this record remain open. The primary source is currently identified by its Library filename, version metadata, byte count, and SHA-256; it is not yet committed as a complete source bundle here. |
+| **Any later candidate version** | Possible successor to v153 | Not adopted merely because a newer filename or file exists. Review the substantive diff and evidence first. If adopted, update this primary-source entry deliberately; if its files are committed, add a new immutable artifact directory rather than editing v66. Record exact version/date, full filename, source location, byte count, SHA-256, explicit parent baseline, changes from that baseline, and which verification/Claim statuses do or do not change. |
+
+The v66 and v153 labels identify different source states in the same research line; this archive is not, by itself, proof of byte-for-byte ancestry or scientific equivalence between them. Likewise, a future source hash proves the identity of that file, not the validity of its derivations. Preserve earlier bundles unchanged and use a separate versioned snapshot for each subsequently archived source state. The repository-level rules are summarized in [`artifacts/README.md`](../artifacts/README.md).
+
 
 ## 3. Model, scheme, and scope frozen for this record
 
