@@ -22,7 +22,7 @@
 
 迁移工具当前规则版本为 `v1.4.3.7-migration-rules-6`。规则 v5 在代码/测试 HEAD `0799dada7eaa8dcd08b8db2f2311a844335d7198` 上的本地验证由仓库所有者报告为通过：目录清单测试 7/7、迁移回归 33/33、集成测试 30/30、完整单元测试 83/83、Python 编译通过，以及 Schema 验证 68/68 项、候选 Fixture 83/83、语义用例 16/16、追踪记录 125 条。该报告在仓库外的临时目录生成，未覆盖仓库中的历史验证报告。这些结果不是 GitHub Actions 通过证据。
 
-后续静态审查发现 DD-ART-010 的迁移门禁缺口：旧版 Task Execution Contract 的 `contract_hash` 可能被直接映射为 `contract_sha256` 而未按目标载荷重新验证；缺失的 `alternative_identity_methods` 也可能因为候选 Schema 将其设为可选字段而通过迁移。规则 v6 新增 MIG-015，缺失登记表或无法重新验证的契约哈希将产生未解决项，目标记录不会写入 staging。相关代码和两项回归测试已添加，但**尚未在本地执行验证**；不能把规则 v5 的测试结果当作规则 v6 的通过证据。
+后续静态审查发现 DD-ART-010 的迁移门禁缺口：旧版 Task Execution Contract 的 `contract_hash` 可能被直接映射为 `contract_sha256` 而未按目标载荷重新验证；缺失的 `alternative_identity_methods` 也可能因为候选 Schema 将其设为可选字段而通过迁移。规则 v6 新增 MIG-015，缺失登记表或无法重新验证的契约哈希将产生未解决项，目标记录不会写入 staging。相关代码和两项 Task Execution Contract 回归测试已添加；另外还修复了迁移源目录根路径的符号链接检查，并增加第三项回归测试。**规则 v6 代码和这三项迁移测试尚未在本地执行验证**；不能把规则 v5 的测试结果当作规则 v6 的通过证据。
 
 - 工具先加载只读源快照，并且只在同一项目内按唯一主键解析引用。
 - 唯一解析到 `validation_plan` 类型的记录时，映射到 `validation_plan_ids`。
