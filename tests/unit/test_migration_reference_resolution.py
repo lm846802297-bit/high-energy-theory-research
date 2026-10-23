@@ -242,5 +242,19 @@ class ValidationReferenceResolutionTests(unittest.TestCase):
         self.assertIn("version", run_quarantine["fields"])
         self.assertIn("contract_hash", run_quarantine["fields"])
 
+    def test_duplicate_existing_typed_validation_refs_are_unresolved(self):
+        claim = claim_record([])
+        claim["validation_activity_ids"] = ["VAL-ACT-1", "VAL-ACT-1"]
+        claim["validation_plan_ids"] = []
+        _, _, unresolved, _ = migration.migrate_record(claim)
+        self.assertTrue(any(item["code"] == "DUPLICATE_TYPED_VALIDATION_REFERENCES" for item in unresolved))
+
+    def test_migration_rules_version_matches_mapping_contract(self):
+        mapping_path = ROOT / "schema" / "v1.4.3.7" / "migrations" / "v1.3-to-v1.4-mapping.json"
+        mapping_contract = json.loads(mapping_path.read_text(encoding="utf-8"))
+        self.assertEqual(migration.RULE_VERSION, mapping_contract["migration_rules_version"])
+        self.assertTrue(mapping_contract["field_mappings"])
+        self.assertEqual(mapping_contract["target_schema_validation"], "not_performed_by_migration_prototype")
+
 if __name__ == "__main__":
     unittest.main()
