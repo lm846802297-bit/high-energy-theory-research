@@ -176,4 +176,8 @@ The Schema report was generated in a temporary copy at `C:\\Users\\84680\\AppDat
 
 These results verify the available local candidate test scope only. Historical v1.3 compatibility, byte-for-byte lineage of the unavailable v1.4.3.6 archive, pending normative decisions, complete cross-record/state-machine semantics, scientific correctness, and transaction safety remain separate unresolved matters. `commit_allowed=false` remains unchanged.
 
+## Subsequent directory-manifest helper safety fix — awaiting local execution
 
+A later static review found that `directory_manifest.py` accepted FileEntry objects with extra keys, then reconstructed entries using only known fields, silently dropping extra input before hashing. The helper also accepted `allow_symlinks=True` even though it cannot verify symlink containment against a filesystem root. The helper now requires the exact FileEntry key set and rejects `allow_symlinks=True`; `tests/unit/test_directory_manifest.py` was added to cover exact keys, path normalization and NFC collisions, deterministic ordering, and symlink rejection.
+
+These changes occurred after the rules-v5 validation recorded above. The passing rules-v5 results apply to code HEAD `587587ae0b114d9624bfb7b270c8754b7e9cbef0` before the directory-manifest helper patch. The new tests and full local suites must be rerun against the latest branch HEAD before describing the current tree as locally verified. DD-ART-008 remains pending approval, and the helper still does not walk the filesystem or verify manifest sizes/hashes against actual bytes. `commit_allowed=false` remains unchanged.
