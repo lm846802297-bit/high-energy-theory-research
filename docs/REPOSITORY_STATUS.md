@@ -11,13 +11,15 @@
 | Normative decisions | DD-ART-007 through DD-ART-010 pending explicit owner approval |
 | Fixture index | Canonical index is version-matched to v1.4.3.7 candidate; inherited v1.4.3.6 expectations remain separately preserved |
 | Cross-record validation | Prototype available; bounded semantic checks implemented |
-| Migration | Source-aware validation_ids resolver has positive/negative synthetic tests; dry-run/staging only, commit_allowed=false |
+| Migration | Rules-v3 source-aware prototype; malformed inputs, duplicate typed keys, unmapped statuses, invalid timestamps, and unsafe staging paths are now explicit blockers; full target JSON Schema validation is not implemented; dry-run/staging only, commit_allowed=false |
 | Historical v1.3 compatibility | Unverified; original v1.3 source bundle/corpus unavailable |
 | Requirement/test traceability | CSV traceability data and imported audit reports included; report snapshots are SHA/time scoped |
 | Skill runtime | Initial instruction and reference scaffold added; not yet a complete automated research agent |
 | Scientific validation | Not implemented; no physics result is certified by this repository |
 
 ## Validation evidence and CI boundary
+
+The static review in `schema/v1.4.3.7/audit/static-schema-migration-review-2026-10-23.md` records the rules-v3 implementation changes and unresolved schema-contract questions. Regression tests were added but not executed; this review did not run a migration or CI.
 
 The repository has historical green software-test results for pre-integration SHAs, including the candidate schema suite and migration unit tests. Those results remain valid only for their recorded commits.
 
