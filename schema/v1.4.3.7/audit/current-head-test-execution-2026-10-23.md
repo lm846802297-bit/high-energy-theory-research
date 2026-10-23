@@ -153,9 +153,27 @@ The four legacy `1.4.3.6-candidate` fixture expectation mismatches remain separa
 
 This follow-up supersedes earlier statements in this record that the corrected integration test had not yet been run. The checked-in `audit/validation-report.json` remains a historical snapshot; the temporary local report is the report from this local run.
 
-## Subsequent rules-v5 safety fix — awaiting local execution
+## Rules-v5 local verification — owner-reported result
 
-A further static review found that a schema-valid Claim could still be staged after its migrated `validation_ids` reference resolved to a Plan/Activity whose target record was later withheld for Schema failure. The migration code now adds MIG-014 and emits `VALIDATION_TARGET_WITHHELD` to withhold such dependent records. A new regression test, `test_valid_claim_is_withheld_when_referenced_plan_fails_target_schema`, covers a valid Claim referencing an invalid Plan.
+The owner reports that the desktop checkout matched GitHub branch HEAD `587587ae0b114d9624bfb7b270c8754b7e9cbef0`, with a clean working tree, when the following checks were executed under Python 3.12.14:
 
-This follow-up advances the migration rule contract from rules v4 to `v1.4.3.7-migration-rules-5`. The prior owner-reported results (32/32 migration tests, 30/30 integration tests, 75/75 repository unit tests, compilation, and the 68/68 Schema validator) apply to code HEAD `1bb852c85594a6ef0e930e934cd28a438bc28a7c` under rules v4. They do **not** verify the new rules-v5 code. Re-run the migration regression suite, integration tests, full repository unit suite, Python compilation, and Schema validator against the current rules-v5 HEAD before describing this new safety behavior as locally verified. `commit_allowed=false` remains unchanged.
+| Check | Result |
+|---|---:|
+| Migration regression tests | 33/33 passed |
+| Integration tests | 30/30 passed |
+| Full repository unit tests | 76/76 passed |
+| Python compilation | Passed |
+| Full Schema validator | 68/68 checks passed |
+| Candidate Fixture outcomes | 83/83 matched |
+| Semantic cases | 16/16 matched |
+| Requirement traceability | 125 rows passed |
+
+The new regression test `test_valid_claim_is_withheld_when_referenced_plan_fails_target_schema` passed. It covers a Schema-valid Claim that references a Plan which fails target Schema validation; the dependent Claim is withheld to avoid emitting a dangling typed reference.
+
+The Schema report was generated in a temporary copy at `C:\\Users\\84680\\AppData\\Local\\Temp\\schema-validation-rules-v5-de84e1b1-e212-4ac9-b012-44c3bf829fc4\\v1.4.3.7\\audit\\validation-report.json`. The checked-in `audit/validation-report.json` remains a historical snapshot and was not overwritten. Four historical `1.4.3.6-candidate` Fixture expectation differences remain separately recorded; they did not fail the candidate Fixture checks.
+
+**Current acceptance wording:** The current candidate implementation's local validation has passed. GitHub Actions is temporarily excluded from this phase's acceptance and will be supplemented when runners are available. This wording does not assert that a GitHub Actions run has passed.
+
+These results verify the available local candidate test scope only. Historical v1.3 compatibility, byte-for-byte lineage of the unavailable v1.4.3.6 archive, pending normative decisions, complete cross-record/state-machine semantics, scientific correctness, and transaction safety remain separate unresolved matters. `commit_allowed=false` remains unchanged.
+
 
