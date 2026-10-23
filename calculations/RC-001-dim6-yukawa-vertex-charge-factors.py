@@ -63,7 +63,7 @@ def main():
     run_for_eta(+1)
     run_for_eta(-1)
     print("Yukawa-vertex charge conservation: PASS for mu and tau")
-    print("All 24 signed B, X, and mixed BX pair factors: PASS")
+    print("All 12 pair tuples (36 exact B, X, and mixed BX factor entries): PASS")
     print("Mixed BX fermion-pair zeros in RD vertices: PASS")
     print("SCOPE: charge-factor algebra only; no loop amplitudes or Wilson coefficients.")
 
