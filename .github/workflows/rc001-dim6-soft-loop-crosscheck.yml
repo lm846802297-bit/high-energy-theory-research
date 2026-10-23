@@ -7,11 +7,15 @@ on:
     paths:
       - calculations/RC-001-dim6-soft-loop-crosscheck.py
       - validation/RC-001-dim6-soft-loop-crosscheck.txt
+      - calculations/RC-001-dim6-independent-kernel-check.py
+      - validation/RC-001-dim6-independent-kernel-check.txt
       - .github/workflows/rc001-dim6-soft-loop-crosscheck.yml
   pull_request:
     paths:
       - calculations/RC-001-dim6-soft-loop-crosscheck.py
       - validation/RC-001-dim6-soft-loop-crosscheck.txt
+      - calculations/RC-001-dim6-independent-kernel-check.py
+      - validation/RC-001-dim6-independent-kernel-check.txt
       - .github/workflows/rc001-dim6-soft-loop-crosscheck.yml
   workflow_dispatch:
 
@@ -30,7 +34,11 @@ jobs:
           python-version: "3.12"
       - name: Install pinned symbolic dependency
         run: python -m pip install --disable-pip-version-check sympy==1.14.0
-      - name: Run exact symbolic checks
+      - name: Run primary exact symbolic checks
         run: python calculations/RC-001-dim6-soft-loop-crosscheck.py > /tmp/rc001-dim6-soft-loop-crosscheck.txt
-      - name: Compare run with checked-in evidence
+      - name: Compare primary run with checked-in evidence
         run: diff -u validation/RC-001-dim6-soft-loop-crosscheck.txt /tmp/rc001-dim6-soft-loop-crosscheck.txt
+      - name: Run independent compact kernel checks
+        run: python calculations/RC-001-dim6-independent-kernel-check.py > /tmp/rc001-dim6-independent-kernel-check.txt
+      - name: Compare independent run with checked-in evidence
+        run: diff -u validation/RC-001-dim6-independent-kernel-check.txt /tmp/rc001-dim6-independent-kernel-check.txt
