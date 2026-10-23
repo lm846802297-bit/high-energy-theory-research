@@ -58,7 +58,32 @@ No \(W E E\) vertex exists because \(E\) is an \(SU(2)_L\) singlet.
 
 The \(B\) boson attaches to the fermion–fermion pair only. The \(A'\) boson can attach to all three pairs. For mixed propagation, the fermion–fermion factor vanishes exactly at both conjugate vertices, while the two scalar–fermion pair factors have opposite signs.
 
-## 4. What this fixes—and what it does not
+## 4. Vertex-pair to scalar-kernel map
+
+The pair factors above determine which gauge exchange is allowed. The denominator/numerator class is separate:
+
+| Operator / vertex | Pair | Allowed exchange | Scalar-kernel class before overall signs |
+|---|---|---|---|
+| \(Q_{LD}\), \(\bar LHE_R\) | \(\bar L-H\) | \(B,W\), and conditional \(BA'\) | Purely light fermion–scalar loop; zero-momentum limit is scaleless \(\int_k 1/(k^2)^2\), with UV and IR poles kept separate |
+| \(Q_{LD}\), \(\bar LHE_R\) | \(\bar L-E_R\) | \(B,A'\), conditional \(BA'\) | Heavy–light fermion numerator reduces to \(d B_0(0;0,M_E^2)\) |
+| \(Q_{LD}\), \(\bar LHE_R\) | \(H-E_R\) | \(B\), conditional \(BA'\) | Heavy–scalar numerator reduces to \(B_0(0;0,M_E^2)\) |
+| \(Q_{LD}\), \(\bar E_RH^\dagger L\) | \(\bar E_R-H^\dagger\) | \(B\), conditional \(BA'\) | Heavy–scalar kernel \(B_0(0;0,M_E^2)\) |
+| \(Q_{LD}\), \(\bar E_RH^\dagger L\) | \(\bar E_R-L\) | \(B,A'\), conditional \(BA'\) | Heavy–light fermion kernel \(d B_0(0;0,M_E^2)\) |
+| \(Q_{LD}\), \(\bar E_RH^\dagger L\) | \(H^\dagger-L\) | \(B,W\), and conditional \(BA'\) | Purely light, scaleless at zero external momenta; common UV/EFT soft bookkeeping required |
+| \(Q_{RD}\), \(S\bar E_L\ell_R\) | \(S-\bar E_L\) | \(A'\), conditional \(BA'\) | Heavy–scalar kernel \(B_0(0;0,M_E^2)\) |
+| \(Q_{RD}\), \(S\bar E_L\ell_R\) | \(S-\ell_R\) | \(A'\), conditional \(BA'\) | Purely light, scaleless at zero external momenta |
+| \(Q_{RD}\), \(S\bar E_L\ell_R\) | \(\bar E_L-\ell_R\) | \(B,A'\); mixed factor exactly zero | Heavy–light fermion kernel \(d B_0(0;0,M_E^2)\) |
+| \(Q_{RD}\), \(S^\ast\bar\ell_RE_L\) | \(S^\ast-\bar\ell_R\) | \(A'\), conditional \(BA'\) | Purely light, scaleless at zero external momenta |
+| \(Q_{RD}\), \(S^\ast\bar\ell_RE_L\) | \(S^\ast-E_L\) | \(A'\), conditional \(BA'\) | Heavy–scalar kernel \(B_0(0;0,M_E^2)\) |
+| \(Q_{RD}\), \(S^\ast\bar\ell_RE_L\) | \(\bar\ell_R-E_L\) | \(B,A'\); mixed factor exactly zero | Heavy–light fermion kernel \(d B_0(0;0,M_E^2)\) |
+
+Here
+\[
+B_0(0;0,M_E^2)=\Delta_\epsilon+1-\ln\frac{M_E^2}{\mu_R^2}.
+\]
+The \(d B_0\) and \(B_0\) labels denote only the reduced numerator kernels. They do not include the oriented Feynman-rule signs, the full graph symmetry factors, the \(BA'\) propagator normalization, or the corresponding EFT graph. A scaleless light-only vertex graph must not be dropped before its UV/IR poles are matched against the EFT.
+
+## 5. What this fixes—and what it does not
 
 The tables fix the signed representation/charge products to be inserted into the vertex integrals and prevent accidental sign loss when the conjugate vertices are combined. They do not fix the overall sign from the oriented fermion/scalar propagators or the gauge propagator, nor do they determine the Dirac numerator, finite integral, or local operator coefficient.
 
