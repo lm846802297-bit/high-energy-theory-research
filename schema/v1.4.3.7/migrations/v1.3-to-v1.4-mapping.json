@@ -61,6 +61,10 @@
     {
       "rule_id": "MIG-014",
       "rule": "Withhold a migrated record when a validation_ids reference resolves to a source Validation Plan or Validation Activity that does not produce a valid target record; report VALIDATION_TARGET_WITHHELD."
+    },
+    {
+      "rule_id": "MIG-015",
+      "rule": "Withhold a migrated Task Execution Contract when alternative_identity_methods is absent or contract_sha256 cannot be revalidated under an owner-approved DD-ART-010 payload; do not silently default the registry to an empty array."
     }
   ],
   "id_mapping_fields": [
@@ -88,9 +92,10 @@
     "overwrite_source_records",
     "invent_legacy_field_mappings",
     "silently_drop_unmapped_fields",
-    "auto_merge_multiple_sources_without_review"
+    "auto_merge_multiple_sources_without_review",
+    "silently default a missing Task Execution Contract alternative_identity_methods registry to an empty array"
   ],
-  "migration_rules_version": "v1.4.3.7-migration-rules-5",
+  "migration_rules_version": "v1.4.3.7-migration-rules-6",
   "commit_allowed": false,
   "staging_only": true,
   "validation_ids_resolution": {
@@ -113,7 +118,9 @@
       "empty source snapshot",
       "missing/malformed candidate schema directory",
       "artifact alternative_identity null-insertion rule pending normative approval",
-      "hashless artifact integrity downgrade rule pending normative approval"
+      "hashless artifact integrity downgrade rule pending normative approval",
+      "task_execution_contract alternative_identity_methods registry missing while DD-ART-010 is pending",
+      "task_execution_contract contract_sha256 cannot be revalidated under an owner-approved DD-ART-010 payload"
     ],
     "full_historical_compatibility": "unverified_until_original_v1_3_bundle_is_supplied"
   },
