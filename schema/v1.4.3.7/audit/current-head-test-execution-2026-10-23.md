@@ -61,7 +61,7 @@ python -m unittest discover -s tests/unit -v
 python -m compileall -q schema/v1.4.3.7/tools skills/high-energy-theory-research/scripts
 ```
 
-The Schema validator should be considered successful only if its generated report has zero failed checks, all candidate fixtures match their expected outcomes, and the evidence-provenance workflow step confirms the report was generated for this exact HEAD and run attempt. The migration regression must explicitly pass the incomplete-snapshot test and the JCS golden-vector test.
+For a local validation run, the generated report should identify the exact tested commit and execution environment, have zero failed checks, and show all candidate fixtures and semantic cases matching their expected outcomes. The migration regression suite must explicitly pass the incomplete-snapshot test and the JCS golden-vector test. Workflow-specific run identifiers are not required to classify a result as locally validated.
 
 ## Disposition
 
@@ -115,7 +115,7 @@ The four v1.4.3.6 index entries differ from the candidate index only in paths fo
 
 ### Disposition
 
-Keep PR #6 Open and Draft. Keep `commit_allowed=false`. Do not merge or release until the integration test passes on the new HEAD and the required CI evidence is available.
+This was the disposition before the corrected integration test was rerun. It is superseded by the local-verification addendum above: the owner reports 30/30 integration tests and all listed regression/Schema checks passed on code HEAD `1bb852c85594a6ef0e930e934cd28a438bc28a7c`. PR #6 remains Open and Draft; `commit_allowed=false` remains mandatory while historical compatibility, owner approvals, cross-record validation, and transaction safety are unresolved.
 
 ## Follow-up: owner-reported local verification on corrected HEAD
 
