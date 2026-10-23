@@ -41,6 +41,9 @@ The IDs below are planning identifiers, not claims that tests have run or passed
 - `DDART008-HASH-001`: compare canonical UTF-8 bytes and SHA-256 against a reviewed golden vector.
 - `DDART008-FS-001`: recompute size and file SHA-256 from actual bytes and detect missing/extra files.
 - `DDART008-FS-002`: verify empty-directory treatment and directory-entry semantics.
+- `DDART008-HASH-002`: reject or explicitly constrain `size_bytes` outside the RFC 8785 interoperable numeric domain; verify schema/helper contract alignment.
+- `DDART008-PATH-005`: define the path-array sort comparator and test cross-language ordering with supplementary-plane and BMP characters (for example U+1F600 and U+E000).
+- `DDART008-HASH-003`: add a dedicated directory-manifest canonical UTF-8 byte/hash golden vector, separate from the migration target-record JCS vector.
 
 ### DD-ART-009 — Hashless external artifacts
 
@@ -68,6 +71,7 @@ The IDs below are planning identifiers, not claims that tests have run or passed
 | Owner decision on DD-ART-010 | Pending |
 | Owner-reported rules-v5 local validation on code/test HEAD `0799dada7eaa8dcd08b8db2f2311a844335d7198` | Passed: directory-manifest tests 7/7, migration 33/33, integration 30/30, repository unit tests 83/83, Python compilation, Schema validator 68/68, candidate fixtures 83/83, semantic cases 16/16, trace rows 125; not GitHub Actions evidence |
 | Directory-manifest fail-closed tests | Owner reports 7/7 passed on code/test HEAD `0799dada7eaa8dcd08b8db2f2311a844335d7198` |
+| Directory-manifest JCS numeric-domain/path-ordering golden vectors | Static gap identified; not implemented or executed |
 | Rules-v6 MIG-015 TEC hash/registry guard and new tests | Added after the rules-v5 validation above; not yet executed locally |
 | MIG-010 source-root symlink guard | Fixed in code; regression test added, but not yet executed locally |
 | Artifact Schema symlink enum vs helper policy | Mismatch found; DD-ART-008 decision required |
