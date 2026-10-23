@@ -162,16 +162,19 @@ class MigrationTests(unittest.TestCase):
         r=cross.validate_records([e])
         self.assertIn("REF_TARGET_MISSING",[x["code"] for x in r["errors"]])
 
-    def test_30_validation_ids_resolve_from_unique_same_project_source_graph(self):
+    def test_30_validation_ids_resolve_but_invalid_targets_are_withheld(self):
         source_dir = HERE.parent / "migration-source-v1.3-resolvable"
         report = mig.migrate(source_dir)
         self.assertEqual(report["source_count"], 3)
-        self.assertEqual(report["unresolved"], [], report["unresolved"])
         self.assertFalse(report["commit_allowed"])
+        self.assertEqual(report["target_schema_validation"], mig.TARGET_SCHEMA_VALIDATION_POLICY)
+        self.assertGreater(report["schema_validation_failure_count"], 0)
+        self.assertTrue(any(item["code"] == "TARGET_SCHEMA_VALIDATION_FAILED" for item in report["unresolved"]))
 
+        # These minimal source fixtures test reference typing, not complete target validity.
+        # Full target validation must block incomplete records even when references resolve.
         claim_mapping = next(item for item in report["id_mapping"] if item["source_record_type"] == "claim")
-        self.assertEqual(claim_mapping["mapping_basis"], "source_reference_resolution")
-        self.assertEqual(claim_mapping["unresolved_count"], 0)
+        self.assertGreater(claim_mapping["unresolved_count"], 0)
 
         source_records = [json.loads(path.read_text(encoding="utf-8")) for path in source_dir.glob("*.json")]
         source_index = {}
