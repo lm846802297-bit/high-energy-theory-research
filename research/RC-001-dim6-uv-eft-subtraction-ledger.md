@@ -58,6 +58,23 @@ For the \(\lambda_\ell\bar E_{\ell L}S_\ell\ell_R\) coupling, \(E\) and \(\ell_R
 \]
 These are **only** the \(y,\lambda,M_E\) parameter-counterterm pieces. They are not the complete UV pole of the four-point amplitude, not the EFT operator counterterm, and not a finite matching coefficient. Mixed \(B-A'\) kinetic-mixing terms are not included in these expressions and remain conditional on the declared gauge-field basis/boundary.
 
+### 2.2 Common light-external-leg gauge factors
+
+For the pure gauge correction at \(O(g^2/M_E^2)\), light-field self-energy/LSZ factors are common to the UV and EFT amplitudes when the same renormalized light fields, gauge-fixing convention, and input scheme are used. At the matched tree order,
+\[
+\left.\Gamma_{\rm UV}^{(0)}\right|_{M_E^{-2}}
+=\Gamma_{\rm EFT}^{(0)}[C_{LD/RD}],
+\]
+so the common external-leg contribution obeys
+\[
+\Delta\Gamma_{\rm ext,light}^{(1)}
+=\frac12\sum_{i\in\text{light external legs}}\delta Z_i
+\left(\Gamma_{\rm UV}^{(0)}-\Gamma_{\rm EFT}^{(0)}\right)
+=0
+\quad\text{through }O(M_E^{-2}).
+\]
+For \(Q_{LD}\) this common factor is \(\delta Z_L+\delta Z_H\); for \(Q_{RD}\) it is \(\delta Z_{\ell_R}+\delta Z_S\). Keep these graphs in the Ward-identity/LSZ bookkeeping, but do not count the identical light-only factor twice as a new local matching coefficient. This cancellation does **not** apply to heavy-\(E\) self-energy insertions, heavy-light vertex/box graphs, parameter counterterms, or external gauge-field wavefunction/kinetic-mixing thresholds. If the UV/EFT light-field definitions differ by a finite decoupling relation, record that relation explicitly before using this cancellation.
+
 ## 3. Pole and finite-part table to fill per diagram family
 
 For every graph family \(a\), store the amplitude in a fixed common normalization:
