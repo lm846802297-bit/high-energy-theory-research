@@ -159,7 +159,7 @@
     "Cross-record semantics cover a bounded subset and do not constitute complete reference/state-machine validation.",
     "Physics correctness is not validated.",
     "The canonical fixture_index is version-matched to schema_version; legacy_fixture_index preserves the 1.4.3.6-candidate expectation set without relabeling it.",
-    "The checked-in migration staging report was generated with rules v1 and is a historical snapshot, not execution evidence for the current rules-v2 migration prototype."
+    "The checked-in migration staging report was generated with rules v1 and is a historical snapshot, not execution evidence for the current rules-v3 migration prototype."
   ],
   "release_evidence": {
     "schema_meta_validation": "Historical snapshot only (25/25 on a prior SHA); current-HEAD evidence must come from the provenance-bearing CI report artifact.",
