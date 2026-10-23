@@ -267,6 +267,20 @@ class ValidationReferenceResolutionTests(unittest.TestCase):
             for source_field, target_field in field_map.items()
         }
         self.assertEqual(declared, implemented)
+        declared_rule_ids = {
+            (item["record_type"], item["source_field"], item["rule_id"])
+            for item in mapping_contract["field_mappings"]
+        }
+        implemented_rule_ids = {
+            (record_type, source_field, f"MAP-{record_type.upper()}-{source_field.upper()}")
+            for record_type, field_map in migration.FIELD_MAPS.items()
+            for source_field in field_map
+        } | {
+            (record_type, source_field, f"MAP-{record_type.upper()}-{source_field.upper()}")
+            for record_type, field_map in migration.LEGACY_ALIASES_BY_TYPE.items()
+            for source_field in field_map
+        }
+        self.assertEqual(declared_rule_ids, implemented_rule_ids)
         activity_schema_path = ROOT / "schema" / "v1.4.3.7" / "schemas" / "validation_activity.schema.json"
         activity_schema = json.loads(activity_schema_path.read_text(encoding="utf-8"))
         self.assertEqual(
@@ -274,6 +288,45 @@ class ValidationReferenceResolutionTests(unittest.TestCase):
             set(activity_schema["properties"]["execution_status"]["enum"]),
         )
         self.assertEqual(mapping_contract["target_schema_validation"], "not_performed_by_migration_prototype")
+
+    def test_id_mapping_rows_match_declared_contract(self):
+        mapping_path = ROOT / "schema" / "v1.4.3.7" / "migrations" / "v1.3-to-v1.4-mapping.json"
+        mapping_contract = json.loads(mapping_path.read_text(encoding="utf-8"))
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root / "claim.json").write_text(json.dumps(claim_record([])), encoding="utf-8")
+            report = migration.migrate(root, operator="reviewer-id")
+        self.assertEqual(set(report["id_mapping"][0]), set(mapping_contract["id_mapping_fields"]))
+        self.assertEqual(report["id_mapping"][0]["operator"], "reviewer-id")
+        self.assertEqual(report["id_mapping"][0]["review_status"], "pending_review")
+        self.assertEqual(report["id_mapping"][0]["source_record_uri"], "claim.json")
+
+    def test_unresolved_record_is_not_written_to_staging(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            source = root / "source"
+            source.mkdir()
+            (source / "claim.json").write_text(json.dumps(claim_record(["VAL-MISSING"])), encoding="utf-8")
+            output = root / "staging"
+            report = migration.migrate(source, output_dir=output, write_staging=True, operator="reviewer-id")
+            target_files = [path for path in output.glob("*.json") if path.name != "migration-report.json"]
+        self.assertEqual(report["migratable_record_count"], 0)
+        self.assertTrue(any(item["code"] == "VALIDATION_TARGET_NOT_FOUND" for item in report["unresolved"]))
+        self.assertEqual(target_files, [])
+
+    def test_quarantined_unknown_fields_block_staging_target(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            source = root / "source"
+            source.mkdir()
+            record = claim_record([])
+            record["mystery_field"] = "preserve for review"
+            (source / "claim.json").write_text(json.dumps(record), encoding="utf-8")
+            output = root / "staging"
+            report = migration.migrate(source, output_dir=output, write_staging=True)
+            target_files = [path for path in output.glob("*.json") if path.name != "migration-report.json"]
+        self.assertTrue(any(item["code"] == "UNKNOWN_FIELDS_QUARANTINED_REQUIRES_REVIEW" for item in report["unresolved"]))
+        self.assertEqual(target_files, [])
 
 if __name__ == "__main__":
     unittest.main()
