@@ -54,7 +54,7 @@ class SchemaValidationEvidenceTests(unittest.TestCase):
 
     def test_manifest_declares_the_test_id_pattern_and_strict_field_policy(self):
         manifest = json.loads(MANIFEST_PATH.read_text(encoding="utf-8"))
-        test_case_path = SCHEMA_ROOT / "schemas" / "test_case.schema.json"
+        test_case_path = BUNDLE / "schemas" / "test_case.schema.json"
         test_case = json.loads(test_case_path.read_text(encoding="utf-8"))
         validator = VALIDATOR_PATH.read_text(encoding="utf-8")
 
