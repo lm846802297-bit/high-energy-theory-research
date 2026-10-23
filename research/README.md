@@ -1,5 +1,7 @@
 # Research Records
 
+简体中文版本：[README.zh-CN.md](README.zh-CN.md)。
+
 This directory contains active Scientific Diff records for substantive research tasks. Each record distinguishes the calculation that has been performed from the checks that have actually run and the physical claims that remain unresolved.
 
 **Project hierarchy:** these records currently document the vll-higgs-singlet-uv-eft workstream within the parent research project axial-vector-model-building. The workstream is not a separate top-level project. See the [project registry](../projects/README.md). RC-001 remains a research-change/record ID; the gauge-subgraph record is a linked subrecord. Existing paths are intentionally unchanged during Phase A.
