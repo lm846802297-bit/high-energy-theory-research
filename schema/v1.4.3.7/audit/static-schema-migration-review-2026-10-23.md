@@ -47,3 +47,27 @@ The corresponding regression tests were added or updated, but **they have not be
 ## Review disposition
 
 **Keep PR #6 open and Draft. Do not merge or release Schema v1.4.3.7 on the basis of this static review.**
+
+## Follow-up static findings — deterministic migration evidence
+
+The following points were rechecked against the current migration implementation and are not test results.
+
+### P0 — Target records can be written without complete JSON Schema validation
+
+The migration loader reads and hashes all candidate schemas, but retains only each schema's properties object. migrate_record checks unknown properties and top-level enum values; it does not validate the complete output against the schema. Consequently, a record with no unresolved migration rule can be emitted to staging even if a required field is absent or a nested object violates its schema. The report currently states target_schema_validation: not_performed_by_migration_prototype, but the staging writer itself does not make that limitation a hard stop.
+
+**Required correction before staging can be treated as usable:** retain the complete schema objects, validate every candidate target with the declared JSON Schema dialect and format checker, and withhold any schema-invalid record from staging. Add regression cases for missing required properties and invalid nested payloads. Until that is implemented and exercised, staging output must be treated as an unvalidated proposal, not a migration-ready dataset.
+
+### P1 — Target digest serialization is deterministic within this Python implementation, but not specified as cross-language canonical JSON
+
+The migration code computes provisional/target digests using json.dumps(..., sort_keys=True, separators=(",", ":"), allow_nan=False) via stable_json. This is deterministic for the supported Python values, but it is not declared or implemented as RFC 8785 JCS. In particular, Python's JSON number rendering and key ordering are not a general guarantee of JCS-compatible canonical bytes. Therefore, the contract's requirement that repeated migrations yield identical hashes is currently demonstrated only as an implementation-local convention, not a cross-language canonicalization contract.
+
+**Required correction:** either explicitly define the migration digest as a versioned Python-specific serialization (not recommended for portable evidence), or use the repository's pinned RFC 8785 implementation for target digests and publish a golden vector. Keep the fingerprint algorithm's canonicalization contract distinct from migration source-byte hashes.
+
+### P1 — Target schema $id values are not release-ready
+
+The candidate schema files retain schemas.example.invalid identifiers and mixed inherited version labels. These may be intentional source identities, but the repository design requires stable versioned identifiers for a released bundle. No real canonical URI has been approved. Do not invent or rewrite identifiers in this PR; obtain the owner's URI policy and document whether $id preserves immutable source identity or names the integrated candidate.
+
+### Verification boundary
+
+No unit test, integration test, local migration, or CI job was executed for these follow-up findings. They are source-level review conclusions only. PR #6 must remain Draft, and commit_allowed=false must remain unchanged until the P0 staging-validation gap and the other release gates are addressed.
