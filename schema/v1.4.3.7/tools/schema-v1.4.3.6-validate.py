@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-import json,hashlib,csv,sys
+import json,hashlib,csv,sys,os
+from datetime import datetime, timezone
 from pathlib import Path
 from jsonschema import Draft202012Validator,FormatChecker
 
@@ -8,6 +9,7 @@ def main(root):
  root=Path(root); report={'checks':[],'fixtures':[],'semantic_tests':[],'legacy_fixture_compatibility':{},'limitations':['Full state machine/event ledger is not implemented.','Migration and backward compatibility are not validated.','No filesystem walk, network retrieval, raw-byte hash recomputation, or JCS directory manifest hash recomputation.','No physics/scientific correctness validation.']}
  def add(n,ok,detail=None): report['checks'].append({'name':n,'status':'PASS' if ok else 'FAIL','detail':detail or {}})
  m=json.loads((root/'manifest.json').read_text()); idx=json.loads((root/m['fixture_index']).read_text()); legacy_idx=json.loads((root/m['legacy_fixture_index']).read_text()); schemas={}
+ add('candidate_release_status',m.get('bundle_status')=='candidate' and m.get('release_status')=='not_released',{'bundle_status':m.get('bundle_status'),'release_status':m.get('release_status')})
  for rt,e in m['schema_files'].items():
   p=root/e['path']; ok=p.exists() and sha(p)==e['sha256']; add('schema_hash:'+rt,ok)
   if ok:
@@ -30,6 +32,8 @@ def main(root):
   report['fixtures'].append({'fixture_id':fid,'record_type':x['record_type'],'expected':x['expected_schema_result'],'actual':actual,'ok':ok,'errors':[e.message for e in errs[:4]]})
  add('fixture_ids_unique',len(ids)==len(idx['fixtures']))
  with (root/'audit/requirement-test-trace.csv').open(encoding='utf-8-sig',newline='') as f: rows=list(csv.DictReader(f))
+ add('manifest_traceability_row_count_matches',m.get('requirement_traceability_rows')==len(rows),{'manifest_rows':m.get('requirement_traceability_rows'),'actual_rows':len(rows)})
+ add('manifest_release_evidence_traceability_rows_matches',m.get('release_evidence',{}).get('traceability_rows')==len(rows),{'release_evidence_rows':m.get('release_evidence',{}).get('traceability_rows'),'actual_rows':len(rows)})
  req=[x['requirement_id'] for x in rows]; tests=[x['test_id'] for x in rows]
  add('requirement_ids_unique',len(req)==len(set(req))); add('test_ids_unique',len(tests)==len(set(tests)))
  fids={x['fixture_id'] for x in idx['fixtures']}; traced={fid for x in rows for fid in x['fixture_ids'].split(';') if fid}
@@ -95,6 +99,8 @@ def main(root):
  add('semantic_test_expectations_match',all(x['ok'] for x in report['semantic_tests']),{'total':len(report['semantic_tests']),'failed':[x['test_id'] for x in report['semantic_tests'] if not x['ok']]})
  bad=[x for x in report['fixtures'] if not x['ok']]; sem_bad=[x for x in report['semantic_tests'] if not x['ok']]
  report['summary']={'checks_total':len(report['checks']),'checks_passed':sum(x['status']=='PASS' for x in report['checks']),'checks_failed':sum(x['status']=='FAIL' for x in report['checks']),'fixtures_total':len(report['fixtures']),'fixtures_expected_result_matched':len(report['fixtures'])-len(bad),'fixtures_mismatched':len(bad),'legacy_fixture_total':len(legacy_idx['fixtures']),'legacy_fixture_mismatches_against_candidate_schemas':len(report['legacy_fixture_compatibility']['mismatches']),'legacy_fixture_index_version':legacy_idx.get('schema_version'),'fixture_index_version':idx.get('schema_version'),'record_types_loaded':len(schemas),'semantic_tests_total':len(report['semantic_tests']),'semantic_tests_expected_result_matched':len(report['semantic_tests'])-len(sem_bad),'semantic_tests_mismatched':len(sem_bad),'trace_rows':len(rows)}
+ validation_status='passed' if report['summary']['checks_failed']==0 and not bad and not sem_bad else 'failed'
+ report['provenance']={'validation_status':validation_status,'validated_commit_sha':os.environ.get('SCHEMA_VALIDATED_HEAD_SHA') or os.environ.get('GITHUB_SHA'),'workflow_run_id':os.environ.get('GITHUB_RUN_ID'),'workflow_run_attempt':os.environ.get('GITHUB_RUN_ATTEMPT'),'generated_at_utc':datetime.now(timezone.utc).isoformat(timespec='seconds').replace('+00:00','Z'),'validator_path':'schema/v1.4.3.7/tools/schema-v1.4.3.6-validate.py','validator_sha256':sha(Path(__file__).resolve()),'execution_environment':'github_actions' if os.environ.get('GITHUB_ACTIONS')=='true' else 'local'}
  (root/'audit/validation-report.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n')
  print(json.dumps(report['summary'],ensure_ascii=False,indent=2)); return 1 if report['summary']['checks_failed'] or bad or sem_bad else 0
 if __name__=='__main__': sys.exit(main(sys.argv[1]))
