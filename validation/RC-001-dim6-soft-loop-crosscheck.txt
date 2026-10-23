@@ -1,4 +1,4 @@
-RESULT: 39 exact symbolic checks passed
+RESULT: 41 exact symbolic checks passed
 PASS: massless B0 finite parameter integral gives +2
 PASS: crossed numerator k+q gives +q/2
 PASS: crossed numerator k gives -q/2
@@ -37,6 +37,8 @@ PASS: SU(2) singlet/triplet tensor completeness 1100
 PASS: SU(2) singlet/triplet tensor completeness 1101
 PASS: SU(2) singlet/triplet tensor completeness 1110
 PASS: SU(2) singlet/triplet tensor completeness 1111
+PASS: explicit chiral-basis Dirac algebra
+PASS: explicit chiral Fierz matrix identity (Grassmann sign separate)
 PASS: three loop-dependent crossed channels are explicitly counted
 SCOPE: analytic integral kernels and exact symbolic identities only.
 NOT CLAIMED: FeynArts/FeynCalc execution, full gauge-sector matching, or a closed model-level Wilson vector.
