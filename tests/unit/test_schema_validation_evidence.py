@@ -52,6 +52,19 @@ class SchemaValidationEvidenceTests(unittest.TestCase):
             with self.subTest(token=token):
                 self.assertIn(token, validator)
 
+    def test_manifest_declares_the_test_id_pattern_and_strict_field_policy(self):
+        manifest = json.loads(MANIFEST_PATH.read_text(encoding="utf-8"))
+        test_case_path = SCHEMA_ROOT / "schemas" / "test_case.schema.json"
+        test_case = json.loads(test_case_path.read_text(encoding="utf-8"))
+        validator = VALIDATOR_PATH.read_text(encoding="utf-8")
+
+        self.assertEqual(manifest["test_id_pattern"], test_case["properties"]["test_id"]["pattern"])
+        self.assertTrue(manifest["strict_unknown_fields"])
+        self.assertFalse(manifest["extensions_supported"])
+        self.assertIn("manifest_test_id_pattern_matches_schema", validator)
+        self.assertIn("strict_unknown_fields_enabled", validator)
+        self.assertIn("extensions_disabled", validator)
+
     def test_checked_in_report_is_not_misrepresented_as_current_evidence(self):
         report = json.loads(REPORT_PATH.read_text(encoding="utf-8"))
         provenance = report.get("provenance", {})
