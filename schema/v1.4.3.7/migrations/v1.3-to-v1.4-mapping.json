@@ -118,9 +118,7 @@
       "empty source snapshot",
       "missing/malformed candidate schema directory",
       "artifact alternative_identity null-insertion rule pending normative approval",
-      "hashless artifact integrity downgrade rule pending normative approval",
-      "task_execution_contract alternative_identity_methods registry missing while DD-ART-010 is pending",
-      "task_execution_contract contract_sha256 cannot be revalidated under an owner-approved DD-ART-010 payload"
+      "hashless artifact integrity downgrade rule pending normative approval"
     ],
     "full_historical_compatibility": "unverified_until_original_v1_3_bundle_is_supplied"
   },
@@ -247,7 +245,8 @@
   },
   "pending_normative_rules": [
     "Adding alternative_identity=null to a source Artifact remains unresolved until the relevant normative decision is explicitly approved.",
-    "Downgrading hashless external Artifact integrity_status from passed to needs_review remains unresolved until the relevant normative decision is explicitly approved."
+    "Downgrading hashless external Artifact integrity_status from passed to needs_review remains unresolved until the relevant normative decision is explicitly approved.",
+    "Task Execution Contract migration remains unresolved when alternative_identity_methods is missing or contract_sha256 cannot be revalidated under the owner-approved DD-ART-010 payload; do not silently default the registry to an empty array."
   ],
   "target_digest_algorithm": "RFC8785-JCS-SHA256",
   "target_digest_policy": "SHA-256 over RFC 8785 JSON Canonicalization Scheme canonical UTF-8 bytes of the transformed target record. This does not replace source_sha256, which hashes the original source bytes."
