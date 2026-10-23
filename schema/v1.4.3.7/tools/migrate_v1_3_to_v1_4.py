@@ -6,6 +6,10 @@ import argparse, json, hashlib, csv, sys, re
 from pathlib import Path
 from datetime import datetime, timezone
 from urllib.parse import quote
+try:
+    import yaml
+except ImportError:
+    yaml=None
 
 RULE_VERSION="v1.4.3.7-migration-rules-3"
 KNOWN_TYPES={"task","task_execution_contract","run_plan","run","run_manifest","artifact_plan","artifact","validation_plan","validation_activity","validation_report","claim","source","source_fragment","configuration","code","environment","convention_set","parameter_point","benchmark_result","evidence_fragment","test_case","test_run","state_transition_event","migration_record","relation_edge"}
@@ -29,6 +33,33 @@ def is_timezone_aware_datetime(value):
     try: parsed=datetime.fromisoformat(value.strip().replace("Z","+00:00"))
     except (TypeError,ValueError): return False
     return parsed.tzinfo is not None and parsed.utcoffset() is not None
+def reject_duplicate_json_keys(pairs):
+    result={}
+    for key,value in pairs:
+        if key in result: raise ValueError(f"duplicate JSON object key: {key!r}")
+        result[key]=value
+    return result
+def load_yaml_record(text):
+    if yaml is None: raise RuntimeError("PyYAML is unavailable")
+    class UniqueKeySafeLoader(yaml.SafeLoader):
+        def compose_node(self,parent,index):
+            if self.check_event(yaml.AliasEvent): raise ValueError("YAML aliases are unsupported in migration inputs")
+            return super().compose_node(parent,index)
+    UniqueKeySafeLoader.yaml_implicit_resolvers={
+        key:[(tag,pattern) for tag,pattern in values if tag!="tag:yaml.org,2002:timestamp"]
+        for key,values in yaml.SafeLoader.yaml_implicit_resolvers.items()
+    }
+    def construct_mapping(loader,node,deep=False):
+        mapping={}
+        for key_node,value_node in node.value:
+            key=loader.construct_object(key_node,deep=deep)
+            try: duplicate=key in mapping
+            except TypeError as e: raise ValueError("unhashable YAML mapping key") from e
+            if duplicate: raise ValueError(f"duplicate YAML mapping key: {key!r}")
+            mapping[key]=loader.construct_object(value_node,deep=deep)
+        return mapping
+    UniqueKeySafeLoader.add_constructor(yaml.resolver.BaseResolver.DEFAULT_MAPPING_TAG,construct_mapping)
+    return yaml.load(text,Loader=UniqueKeySafeLoader)
 def stable_json(obj): return json.dumps(obj,ensure_ascii=False,sort_keys=True,separators=(",",":"),allow_nan=False)
 def primary_key(rec):
     rt=rec.get("record_type")
@@ -226,7 +257,7 @@ def migrate(input_dir, schemas_dir=None, output_dir=None, unknown_policy="quaran
     def source_relpath(p): return p.relative_to(inp).as_posix()
     generated_at_utc=datetime.now(timezone.utc).isoformat(timespec="seconds").replace("+00:00","Z")
     operator_name=operator.strip() if isinstance(operator,str) and operator.strip() else "not_recorded"
-    source_files=sorted(inp.rglob("*.json"))
+    source_files=sorted(list(inp.rglob("*.json"))+list(inp.rglob("*.yaml"))+list(inp.rglob("*.yml")))
     if not source_files:
         all_unresolved.append({"path":str(inp),"code":"EMPTY_SOURCE_SNAPSHOT","message":"no JSON source files were found"})
     source_entries=[]; source_index={}; typed_source_index={}
@@ -235,9 +266,20 @@ def migrate(input_dir, schemas_dir=None, output_dir=None, unknown_policy="quaran
         except Exception as e:
             all_unresolved.append({"path":source_relpath(p),"code":"SOURCE_READ_FAILED","message":str(e)}); continue
         src_sha=digest_bytes(raw_bytes)
-        try: rec=json.loads(raw_bytes.decode("utf-8"))
+        try:
+            source_text=raw_bytes.decode("utf-8")
+            if p.suffix.lower()==".json":
+                rec=json.loads(source_text,object_pairs_hook=reject_duplicate_json_keys)
+            elif p.suffix.lower() in {".yaml",".yml"}:
+                if yaml is None:
+                    all_unresolved.append({"path":source_relpath(p),"code":"YAML_PARSER_UNAVAILABLE","source_sha256":src_sha}); continue
+                rec=load_yaml_record(source_text)
+                json.dumps(rec,ensure_ascii=False,allow_nan=False)
+            else:
+                all_unresolved.append({"path":source_relpath(p),"code":"UNSUPPORTED_SOURCE_FORMAT","source_sha256":src_sha}); continue
         except Exception as e:
-            all_unresolved.append({"path":source_relpath(p),"code":"INVALID_JSON","source_sha256":src_sha,"message":str(e)}); continue
+            code="INVALID_JSON" if p.suffix.lower()==".json" else "INVALID_YAML"
+            all_unresolved.append({"path":source_relpath(p),"code":code,"source_sha256":src_sha,"message":str(e)}); continue
         if not isinstance(rec,dict):
             all_unresolved.append({"path":source_relpath(p),"code":"SOURCE_RECORD_NOT_OBJECT","source_sha256":src_sha,"actual_type":type(rec).__name__}); continue
         if not isinstance(rec.get("record_type"),str) or not rec.get("record_type","").strip():
