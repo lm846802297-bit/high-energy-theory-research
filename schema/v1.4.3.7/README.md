@@ -1,5 +1,7 @@
 # Schema v1.4.3.7 candidate
 
+简体中文版本：[README.zh-CN.md](README.zh-CN.md)。
+
 This directory contains an unapproved candidate schema bundle. It is not a released normative version.
 
 ## Versioned fixture sets
