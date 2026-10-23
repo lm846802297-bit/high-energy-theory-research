@@ -60,7 +60,7 @@ Use common nonexceptional off-shell external momenta (or one common infrared reg
 - the projection onto the chosen nonredundant current/operator basis;
 - the gauge-EOM image, if used, and all induced current-current/source companions.
 
-For a fermion current, retain a complete off-shell transverse/longitudinal tensor basis until the Ward identity is checked; do not infer a local Wilson coefficient from a single on-shell form factor. For a scalar current, keep the independent \((p+p')^\mu\) and \(q^\mu\) structures until the same projection is performed. The tensor basis and normalization must be identical in UV and EFT.
+For a fermion current, retain a complete off-shell transverse/longitudinal tensor basis until the Ward identity is checked; do not infer a local Wilson coefficient from a single on-shell form factor. For a scalar current, keep the independent \((p+p')^\mu\) and \(q^\mu\) structures until the same projection is performed. The tensor basis and normalization must be identical in UV and EFT. The already-derived diagonal-gauge (y,\lambda,M_E) parameter-counterterm pieces are tabulated in `research/RC-001-dim6-gauge-parameter-counterterms.md`; the (Q_{LD}) internal-(W) weak-index contractions are tabulated in `research/RC-001-dim6-SU2-attachment-projection.md`. Neither record supplies the missing current-form-factor loop integrals.
 
 The Ward-Takahashi/Slavnov-Taylor check is applied to the summed amplitude including external-leg pieces and contact vertices. A stripped vertex graph alone is insufficient. After the UV–EFT difference, separate local 1PI coefficients from gauge-reducible current exchange and apply gauge-field EOM only once.
 
