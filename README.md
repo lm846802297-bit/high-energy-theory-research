@@ -78,6 +78,8 @@ A historical pre-integration CI run for PR HEAD `5c5b10b6889c2e4146d0a696fde16f2
 
 Recent workflow runs for later main commits have repeatedly failed before any workflow step was recorded because no runner was assigned. The latest completed main run checked during this update is [#39896401710](https://github.com/lm846802297-bit/high-energy-theory-research/actions/runs/39896401710) for SHA `35d854699b652d69a1e51335dfaff1fe27dda0cd`. It failed before any workflow step was recorded because no runner was assigned. This is an infrastructure block, not evidence of a code-test failure, but it is not a passing result for the latest candidate. Recheck the exact HEAD's run before release.
 
+A manual dispatch of the Schema-only workflow for PR #6 HEAD `531497c0e6e45ce4316e77266530856fe9544f26` was accepted as run [#39898913319](https://github.com/lm846802297-bit/high-energy-theory-research/actions/runs/39898913319), but GitHub did not start the job because of an account-level billing/payment or spending-limit block. The run has no steps or artifacts and is not a test result.
+
 ### Validation commands
 
 ```bash
