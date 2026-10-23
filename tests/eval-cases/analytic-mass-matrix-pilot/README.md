@@ -1,5 +1,7 @@
 # End-to-end Skill pilot: 2x2 mass-squared matrix
 
+简体中文版本：[README.zh-CN.md](README.zh-CN.md)。
+
 ## Purpose and boundary
 
 This is a small, deterministic workflow pilot for the reusable research Skill. It exercises intake, explicit units/assumptions, analytic calculation, independent checks, result artifact generation, and a synthetic candidate-record chain.
