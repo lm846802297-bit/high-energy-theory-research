@@ -1,4 +1,4 @@
-RESULT: 36 exact symbolic checks passed
+RESULT: 39 exact symbolic checks passed
 PASS: massless B0 finite parameter integral gives +2
 PASS: crossed numerator k+q gives +q/2
 PASS: crossed numerator k gives -q/2
@@ -7,6 +7,8 @@ PASS: J22 hard integral: -Delta_IR + L_E - 2
 PASS: single-heavy K1 integral: +Delta_IR + 1 - L_E
 PASS: J12 finite integral equals -1
 PASS: J13 finite integral equals +1/2
+PASS: Feynman-parameter crossed-current q coefficient independently reproduces -Delta/2+L/2-3/4
+PASS: Feynman-parameter crossed-current EOM coefficient independently gives +1/4
 PASS: crossed-current hard q coefficient retains O(epsilon) x IR pole
 PASS: crossed-current finite J13 vector coefficient
 PASS: crossed-current hard+soft pole cancellation and finite q kernel
@@ -16,6 +18,7 @@ PASS: four-fermion hard+soft poles and finite constants cancel
 PASS: Q6-quartic hard p coefficient
 PASS: Q6-quartic hard Q coefficient
 PASS: Q6-quartic hard polynomial has the required p+Q/2 ratio
+PASS: Feynman-parameter Q6-quartic hard kernel independently gives -Delta+L-3/2
 PASS: Q6-quartic hard+soft pole cancellation and finite EOM kernel
 PASS: Q6-quartic momentum polynomial reduces to fermion EOM
 PASS: SU(2) singlet/triplet tensor completeness 0000
