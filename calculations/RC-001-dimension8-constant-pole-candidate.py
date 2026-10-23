@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
-"""Candidate dimension-eight potential projection of the RC-001 constant pole.
+"""Audit the C5-squared EFT soft-potential pole in the X^2Y^2 representative.
 
-This projects only the already-derived bubble-plus-contact subset pole onto
-one pure-potential representative, (H^dagger H)^2(S^dagger S)^2. It does not
-claim a unique full-basis assignment or include all same-order EFT soft terms.
+This checks the leading-seesaw reduction of the C5^2 light-fermion soft pole
+to the X^2Y^2 potential counterterm identified in master §§262.5 and 264.4.
+It does not determine the complete dimension-eight hard Wilson coefficient
+or include all higher-dimensional EFT soft insertions.
 """
 import sympy as sp
 
@@ -29,11 +30,11 @@ print("PASS 2: mixed Hessian of (H^dagger H)^2(S^dagger S)^2 is v_h^3 v_s^3")
 # Gamma_inv = p^2 - M_loc^2 + Pi. A potential counterterm enters Pi as
 # minus the mixed Hessian of V_ct, since L_ct = -V_ct.
 Pi_ct_from_potential = -c8 * mixed_hessian / ME**4
-c8_candidate = -Y2**2 * Lam2**2 * Delta / (16 * sp.pi**2)
-assert sp.simplify(Pi_ct_from_potential.subs(c8, c8_candidate) - expected_pole) == 0
-print("PASS 3: the candidate pole counterterm is delta c_8 = -|y|^4 |lambda|^4 Delta/(16 pi^2)")
+c8_ct = -Y2**2 * Lam2**2 * Delta / (16 * sp.pi**2)
+assert sp.simplify(Pi_ct_from_potential.subs(c8, c8_ct) - expected_pole) == 0
+print("PASS 3: the C5^2 subset potential CT is delta c_8 = -|y|^4 |lambda|^4 Delta/(16 pi^2) in V, equivalently positive in L")
 
 assert sp.simplify(subset_pole * ME**4 / (vh**3 * vs**3) - Y2**2 * Lam2**2 * Delta / (16 * sp.pi**2)) == 0
 print("PASS 4: the candidate is dimension-eight order O(M_E^-4), not the leading portal threshold")
-print("LIMIT: this is one pure-potential representative for the restricted subset pole, not a unique full-basis assignment.")
-print("OPEN: complete same-order EFT soft/source insertions and freeze the gauge-invariant dimension-eight basis/EOM convention before promoting this coefficient.")
+print("LIMIT: reproduces the C5^2 soft-potential counterterm in the X^2Y^2 representative; not the complete dimension-eight Wilson vector.")
+print("OPEN: higher-dimensional tree-level EFT soft insertions and the complete dimension-eight hard matching remain outstanding.")
