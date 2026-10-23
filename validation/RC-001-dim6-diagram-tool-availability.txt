@@ -1,0 +1,28 @@
+# RC-001 diagram-tool availability check
+
+Date: 2026-10-23
+Purpose: determine whether this execution environment can perform the requested independent diagram-level UV–EFT validation.
+
+The local runtime probe executed:
+
+- `command -v wolframscript`
+- `command -v math`
+- `command -v Mathematica`
+- Python module availability checks for `sympy`, `feyncalc`, `feynarts`, `pyfeyn`, and `qgraf`.
+
+Observed output:
+
+```text
+wolframscript: not found
+math: not found
+Mathematica: not found
+sympy: available
+feyncalc: not available
+feynarts: not available
+pyfeyn: not available
+qgraf: not available
+```
+
+Conclusion: the current environment can execute Python/SymPy algebra and the structural charge-attachment census, but cannot execute FeynCalc/FeynArts or an installed QGRAF generator. Therefore no independent external diagram-level calculation is claimed. The missing tool is an explicit open evidence item, not a pass.
+
+This record does not assert that the user's local computer or other environments lack these tools.
