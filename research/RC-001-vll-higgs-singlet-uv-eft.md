@@ -496,7 +496,7 @@ the pole counterterm is therefore
 \boxed{\delta c_{\partial HS}
 =-\frac{M_*^2q_\ell}{16\pi^2v_hv_s}\Delta_{\rm UV}.}
 \]
-This cancels the derivative pole for the explicitly stated bubble-plus-contact subset. The constant pole is \(+8q_\ell x\Delta_{\rm UV}/(16\pi^2)\) in the local inverse kernel. Since \(q_\ell=O(M_E^{-2})\) and \(x=O(M_E^{-2})\) in the seesaw expansion, it is \(O(M_E^{-4})\), not the leading dimension-four portal divergence. Its gauge-invariant assignment requires a fixed higher-dimensional scalar-potential basis and EOM convention.
+This cancels the derivative pole for the explicitly stated bubble-plus-contact subset. The constant pole is \(+8q_\ell x\Delta_{\rm UV}/(16\pi^2)\) in the local inverse kernel. Since \(q_\ell=O(M_E^{-2})\) and \(x=O(M_E^{-2})\) in the seesaw expansion, it is \(O(M_E^{-4})\), not the leading dimension-four portal divergence. The (C_5^2) soft-determinant pole is assigned to the (X^2Y^2) potential counterterm in the master source §§262.5 and 264.4; the complete dimension-eight hard matching remains open.
 
 A separate ledger is available at validation/RC-001-uv-eft-counterterm-ledger.md. These pole results do not complete the finite matching.
 
@@ -520,7 +520,7 @@ so the difference between these two representatives is
 \]
 This is not the current same-basis matching discrepancy. The cumulative master source v153, §301.1–§301.4, records the off-shell external-leg momentum terms and the redundant operators \(T_H,T_S\), with \(\eta_H=\eta_S=-a_\ell/3\). Their EOM completion shifts the derivative coefficients by \(\Delta c_H=\Delta c_S=\Delta c_D=2a_\ell/3\), making the EOM-reduced four-point coefficients agree with the two-point coefficients in the same operator basis.
 
-Therefore, retain the \(4/3\) result as a documented difference between the older on-shell representative and the two-point representation, but do not label it as an unresolved same-basis difference. Remaining open gates are the complete model-level Wilson vector, any still-unclosed EFT soft/source sectors outside this restricted comparison, the gauge-invariant assignment of the higher-order constant pole, and independent diagram-level validation.
+Therefore, retain the \(4/3\) result as a documented difference between the older on-shell representative and the two-point representation, but do not label it as an unresolved same-basis difference. Remaining open gates are the complete model-level Wilson vector, any still-unclosed higher-dimensional EFT soft/source sectors outside this restricted comparison, the complete dimension-eight hard matching, and independent diagram-level validation.
 
 ### 10.7 Audit artifact status
 
@@ -530,7 +530,7 @@ The cumulative master source v153 §301.1–§301.4 shows that the off-shell ext
 
 This validation is algebraic only. It does not include numerical loop integration, FeynArts/FeynCalc/Mathematica/Matchete/Matchmakereft execution, complete model-level Wilson-vector closure, all remaining EFT soft/source sectors, or a final physical observable.
 
-**Acceptance decision:** the exact mass-basis kernel, leading hard-self-energy sign, local pole cancellation for the stated EFT subset, and script/log reproducibility are supported. The higher-order constant-pole operator assignment, full model-level Wilson-vector closure, and independent diagram-level validation remain open. PR #4 stays open and in Draft state.
+**Acceptance decision:** the exact mass-basis kernel, leading hard-self-energy sign, local pole cancellation for the stated EFT subset, and script/log reproducibility are supported. The complete dimension-eight hard matching, full model-level Wilson-vector closure, and independent diagram-level validation remain open. PR #4 stays open and in Draft state.
  
 ### 10.8 Source-aligned off-shell/EOM reproduction
 
@@ -541,7 +541,7 @@ To make the §301 reconciliation directly reproducible from the repository, two 
 - `calculations/RC-001-offshell-eom-completion-audit.py` — an explicit coefficient-level audit of the §301 off-shell completion, including the \(a_\ell\Sigma/3\) difference, \(\eta_H=\eta_S=-a_\ell/3\), equal \(2a_\ell/3\) shifts of \(c_H,c_S,c_D\), and agreement with the two-point coefficients.
 - `validation/RC-001-offshell-eom-completion-audit.txt` — captured run output: 5 exact symbolic checks passed.
 
-These checks support the stated reconciliation between the old on-shell four-point representative and the EOM-completed same-basis coefficients. They are not independent diagram generation or a numerical loop integration. They do not close the complete model-level Wilson vector, every remaining EFT soft/source sector, the higher-order constant-pole operator assignment, or the physical pole/mixing observable.
+These checks support the stated reconciliation between the old on-shell four-point representative and the EOM-completed same-basis coefficients. They are not independent diagram generation or a numerical loop integration. They do not close the complete model-level Wilson vector, every remaining higher-dimensional EFT soft/source sector, the dimension-eight hard matching, or the physical pole/mixing observable.
 
 ### 10.9 \(C_5^2\) soft constant pole: dimension-eight potential counterterm and truncation boundary
 
