@@ -108,9 +108,15 @@ class ValidationReferenceResolutionTests(unittest.TestCase):
             (root / "activity.json").write_text(json.dumps(activity_record("VAL-ACT-1")), encoding="utf-8")
             report = migration.migrate(root)
         self.assertEqual(report["source_count"], 2)
-        self.assertEqual(report["unresolved"], [])
+        self.assertTrue(any(item["code"] == "TARGET_SCHEMA_VALIDATION_FAILED" for item in report["unresolved"]))
         claim_mapping = next(item for item in report["id_mapping"] if item["source_record_type"] == "claim")
-        self.assertEqual(claim_mapping["mapping_basis"], "source_reference_resolution")
+        self.assertEqual(claim_mapping["mapping_basis"], "unresolved")
+        self.assertTrue(any(
+            change.get("from") == "validation_ids"
+            and change.get("basis") == "source_record_type_and_launch_evidence"
+            for change in report["changes"]
+        ))
+        self.assertEqual(report["migratable_record_count"], 0)
         self.assertFalse(report["commit_allowed"])
 
 
@@ -288,7 +294,62 @@ class ValidationReferenceResolutionTests(unittest.TestCase):
             migration.TARGET_VALIDATION_ACTIVITY_STATUSES,
             set(activity_schema["properties"]["execution_status"]["enum"]),
         )
-        self.assertEqual(mapping_contract["target_schema_validation"], "not_performed_by_migration_prototype")
+        self.assertEqual(
+            mapping_contract["target_schema_validation"],
+            "draft2020-12+format-checker-per-record; invalid-targets-withheld",
+        )
+        self.assertEqual(mapping_contract["target_digest_algorithm"], "RFC8785-JCS-SHA256")
+
+    def test_target_schema_missing_required_field_is_blocked_from_staging(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            source = root / "source"
+            source.mkdir()
+            (source / "claim.json").write_text(json.dumps(claim_record([])), encoding="utf-8")
+            output = root / "staging"
+            report = migration.migrate(source, output_dir=output, write_staging=True)
+            target_files = [path for path in output.glob("*.json") if path.name != "migration-report.json"]
+        failures = [item for item in report["unresolved"] if item["code"] == "TARGET_SCHEMA_VALIDATION_FAILED"]
+        self.assertTrue(failures)
+        self.assertTrue(any("task_id" in item["message"] for item in failures))
+        self.assertEqual(report["migratable_record_count"], 0)
+        self.assertEqual(target_files, [])
+        self.assertFalse(report["commit_allowed"])
+
+    def test_target_schema_invalid_nested_object_is_blocked_from_staging(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            source = root / "source"
+            source.mkdir()
+            record = claim_record([])
+            record["physics_assessment"] = {"theory_result": 17, "unexpected": "not allowed"}
+            (source / "claim.json").write_text(json.dumps(record), encoding="utf-8")
+            output = root / "staging"
+            report = migration.migrate(source, output_dir=output, write_staging=True)
+            target_files = [path for path in output.glob("*.json") if path.name != "migration-report.json"]
+        failures = [item for item in report["unresolved"] if item["code"] == "TARGET_SCHEMA_VALIDATION_FAILED"]
+        self.assertTrue(any(item["instance_path"] == "/physics_assessment/theory_result" for item in failures))
+        self.assertTrue(any(
+            item["instance_path"] == "/physics_assessment"
+            and "unexpected" in item["message"]
+            for item in failures
+        ))
+        self.assertEqual(report["migratable_record_count"], 0)
+        self.assertEqual(target_files, [])
+
+    def test_migration_target_digest_matches_rfc8785_golden_vector(self):
+        vector_path = (
+            ROOT / "schema" / "v1.4.3.7" / "migrations"
+            / "target-digest-jcs-v1.golden.json"
+        )
+        vector = json.loads(vector_path.read_text(encoding="utf-8"))
+        canonical = migration.stable_json(vector["input"])
+        self.assertEqual(canonical, vector["canonical_json"])
+        self.assertEqual(
+            migration.digest_bytes(canonical.encode("utf-8")),
+            vector["sha256"],
+        )
+        self.assertEqual(vector["algorithm"], "RFC8785-JCS-SHA256")
 
     def test_id_mapping_rows_match_declared_contract(self):
         mapping_path = ROOT / "schema" / "v1.4.3.7" / "migrations" / "v1.3-to-v1.4-mapping.json"
