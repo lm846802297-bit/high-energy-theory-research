@@ -155,6 +155,26 @@ def migrate_record(rec, target_properties=None, unknown_policy="quarantine", sou
                 out["artifact_integrity_status"]="needs_review"
                 changes.append({"from":"artifact_integrity_status","to":"artifact_integrity_status","old_value":"passed","new_value":"needs_review","basis":"candidate strict semantics; pending approval","rule_version":RULE_VERSION})
                 warnings.append({"code":"INTEGRITY_DOWNGRADED_PENDING_REVIEW"})
+    if rt=="claim":
+        for field in ("validation_activity_ids","validation_plan_ids"):
+            if field not in out: continue
+            values=out[field]
+            if not isinstance(values,list):
+                unresolved.append({"code":"TYPED_VALIDATION_REFERENCES_INVALID_SHAPE","field":field,"value":values})
+                continue
+            invalid_values=[value for value in values if not isinstance(value,str) or not value.strip()]
+            if invalid_values:
+                unresolved.append({"code":"TYPED_VALIDATION_REFERENCE_INVALID_VALUE","field":field,"values":invalid_values})
+            string_values=[value for value in values if isinstance(value,str)]
+            duplicates=sorted({value for value in string_values if string_values.count(value)>1})
+            if duplicates:
+                unresolved.append({"code":"DUPLICATE_TYPED_VALIDATION_REFERENCES","field":field,"values":duplicates})
+    if target_properties is not None:
+        for field,field_schema in target_properties.items():
+            if rt=="validation_activity" and field=="execution_status": continue
+            enum_values=field_schema.get("enum") if isinstance(field_schema,dict) else None
+            if field in out and isinstance(enum_values,list) and out[field] not in enum_values:
+                unresolved.append({"code":"TARGET_ENUM_VALUE_UNMAPPED","field":field,"source_value":out[field],"allowed_target_values":enum_values})
     # Strict unknown-field strategy: quarantine extras in report, never silently preserve them in schema record.
     if target_properties is not None:
         unknown=sorted(set(out)-set(target_properties))
