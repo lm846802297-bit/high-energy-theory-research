@@ -33,6 +33,22 @@
     {
       "rule_id": "MIG-007",
       "rule": "Rollback restores the active dataset pointer; it never deletes source history."
+    },
+    {
+      "rule_id": "MIG-008",
+      "rule": "If a source record has any unresolved mapping, quarantined unknown field, or unapproved normative artifact transformation, do not emit a target record or target_sha256; report any provisional candidate digest under a candidate-prefixed field only."
+    },
+    {
+      "rule_id": "MIG-009",
+      "rule": "Before migration, verify the exact candidate bundle manifest, all expected record types, each schema path, and every schema SHA-256 against the manifest."
+    },
+    {
+      "rule_id": "MIG-010",
+      "rule": "Inventory JSON/YAML/YML source files; reject duplicate mapping keys, non-JSON YAML values, unsupported YAML aliases, malformed inputs, and source symlinks rather than silently skipping them."
+    },
+    {
+      "rule_id": "MIG-011",
+      "rule": "Emit a complete ID-mapping provenance row with source-relative URI, hashes, rule identifiers, review state, collision status, rewritten-reference count, UTC timestamp, and operator field; omitted operator is not approval."
     }
   ],
   "id_mapping_fields": [
@@ -83,7 +99,9 @@
       "malformed JSON or non-object source file",
       "missing record_type",
       "empty source snapshot",
-      "missing/malformed candidate schema directory"
+      "missing/malformed candidate schema directory",
+      "artifact alternative_identity null-insertion rule pending normative approval",
+      "hashless artifact integrity downgrade rule pending normative approval"
     ],
     "full_historical_compatibility": "unverified_until_original_v1_3_bundle_is_supplied"
   },
@@ -207,5 +225,9 @@
     "json": "UTF-8 JSON; duplicate object keys and non-finite numeric constants are rejected.",
     "yaml": "UTF-8 YAML parsed with SafeLoader semantics; duplicate mapping keys, aliases, non-string mapping keys, non-JSON values, and non-finite numbers are rejected. PyYAML must be available or the source file is reported unresolved.",
     "unsupported_formats": "Unsupported file extensions are not treated as source records. Only JSON/YAML/YML files are inventoried by this prototype."
-  }
+  },
+  "pending_normative_rules": [
+    "Adding alternative_identity=null to a source Artifact remains unresolved until the relevant normative decision is explicitly approved.",
+    "Downgrading hashless external Artifact integrity_status from passed to needs_review remains unresolved until the relevant normative decision is explicitly approved."
+  ]
 }
