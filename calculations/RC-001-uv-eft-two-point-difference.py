@@ -112,12 +112,12 @@ pi_hard_lead = -(-4*q_lead*M2)/(16*sp.pi**2)
 portal_target = vh*vs*y_l2*lam_l2/(8*sp.pi**2)
 check("leading hard Pi_hs(0) has the §274.4 positive sign", pi_hard_lead, portal_target)
 
-# 15. Explicitly detect, but do not resolve, the two-point/four-point finite mismatch.
+# 15. Record the historical difference between the two-point result and the legacy on-shell four-point representative.
 Lheavy = sp.symbols("L_E")
 pi2_slope = q*(Lheavy-sp.Rational(2,3))/(16*sp.pi**2)
-pi4_slope = q*(Lheavy-2)/(16*sp.pi**2)
-check("two-point/four-point finite slope mismatch is 4q/[3(16 pi^2)]",
-      pi2_slope-pi4_slope, 4*q/(3*16*sp.pi**2))
+pi4_old_rep_slope = q*(Lheavy-2)/(16*sp.pi**2)
+check("historical two-point vs legacy on-shell representative difference is 4q/[3(16 pi^2)]",
+      pi2_slope-pi4_old_rep_slope, 4*q/(3*16*sp.pi**2))
 
 print(f"RESULT: {len(checks)} exact symbolic/algebraic checks passed")
 print("STATUS: the 4/3 difference is between the two-point result and the legacy on-shell four-point representative.")
