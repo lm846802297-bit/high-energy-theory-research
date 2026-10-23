@@ -32,7 +32,7 @@ A source-level comparison of the current candidate and legacy index JSON found:
 - Four entries differ in the `file` path only: the valid and conditional fixtures for `run_plan` and `run_manifest` point to versioned `tests/v1.4.3.7/...` paths in the candidate index and the older `tests/valid` / `tests/conditional` paths in the legacy index.
 - The compared entries' record type, fixture kind, expected schema result, expected semantic result, requirement IDs, and expected error codes are unchanged for those four entries.
 
-This is a comparison of the two files currently checked into the branch, not proof that the legacy index is byte-identical to the unavailable v1.4.3.6 source archive. File existence, fixture outcomes, manifest SHA-256 values, and archive lineage still require the candidate validator to run against the checked-out tree and the original archive to be supplied for provenance verification.
+This is a comparison of the two files currently checked into the branch, not proof that the legacy index is byte-identical to the unavailable v1.4.3.6 source archive. The owner subsequently ran the candidate validator locally on code HEAD `1bb852c85594a6ef0e930e934cd28a438bc28a7c`; the report showed 68/68 checks, 83/83 candidate fixture outcomes, 16/16 semantic cases, and 125 trace rows passing. The original archive is still required for byte-for-byte source-lineage verification.
 
 ## Validator and regression behavior
 
@@ -44,7 +44,7 @@ The candidate validator checks:
 5. candidate fixture IDs and expected schema/semantic outcomes; and
 6. historical fixture expectations against the candidate schemas, reported separately as compatibility drift.
 
-The historical index is not relabeled. Candidate acceptance uses the canonical version-matched index. A mismatch in historical expectations is not silently converted into a candidate pass.
+The historical index is not relabeled. Candidate acceptance uses the canonical version-matched index. The owner-reported local validator run passed all 83 candidate fixture outcomes and separately recorded four legacy expectation mismatches against the candidate schemas. A mismatch in historical expectations is not silently converted into a candidate pass.
 
 ## Release boundary
 
