@@ -54,17 +54,21 @@ The corresponding regression tests were added or updated, but **they have not be
 
 The following points were rechecked against the current migration implementation and are not test results.
 
-### P0 — Target records can be written without complete JSON Schema validation
+### P0 — Full target JSON Schema validation before staging
 
-The migration loader reads and hashes all candidate schemas, but retains only each schema's properties object. migrate_record checks unknown properties and top-level enum values; it does not validate the complete output against the schema. Consequently, a record with no unresolved migration rule can be emitted to staging even if a required field is absent or a nested object violates its schema. The report currently states target_schema_validation: not_performed_by_migration_prototype, but the staging writer itself does not make that limitation a hard stop.
+**Code change added; execution and regression results remain unverified.**
 
-**Required correction before staging can be treated as usable:** retain the complete schema objects, validate every candidate target with the declared JSON Schema dialect and format checker, and withhold any schema-invalid record from staging. Add regression cases for missing required properties and invalid nested payloads. Until that is implemented and exercised, staging output must be treated as an unvalidated proposal, not a migration-ready dataset.
+The prior implementation retained only schema properties and could emit a record that lacked a required field or contained an invalid nested object. The current candidate change now retains the complete schema objects, checks the declared Draft 2020-12 dialect and schema metaschema, constructs full validators with a format checker, and validates each transformed target. Schema errors are added to the unresolved report with JSON Pointer paths, and any record with a schema error is withheld from staging.
 
-### P1 — Target digest serialization is deterministic within this Python implementation, but not specified as cross-language canonical JSON
+Regression cases have been added for a missing required Claim field and an invalid nested physics-assessment object. The dependency declaration now requests the pinned jsonschema format extras so optional format implementations are installed rather than silently skipped. **These changes and tests have not been executed**; do not treat the code change as a passing test result. Cross-record semantic validation remains a separate acceptance gate.
 
-The migration code computes provisional/target digests using json.dumps(..., sort_keys=True, separators=(",", ":"), allow_nan=False) via stable_json. This is deterministic for the supported Python values, but it is not declared or implemented as RFC 8785 JCS. In particular, Python's JSON number rendering and key ordering are not a general guarantee of JCS-compatible canonical bytes. Therefore, the contract's requirement that repeated migrations yield identical hashes is currently demonstrated only as an implementation-local convention, not a cross-language canonicalization contract.
+### P1 — Target digest serialization
 
-**Required correction:** either explicitly define the migration digest as a versioned Python-specific serialization (not recommended for portable evidence), or use the repository's pinned RFC 8785 implementation for target digests and publish a golden vector. Keep the fingerprint algorithm's canonicalization contract distinct from migration source-byte hashes.
+**Implementation and contract updated; golden-vector test added but not executed.**
+
+The migration implementation now uses the repository's pinned RFC 8785 package and declares target digests as `RFC8785-JCS-SHA256`: SHA-256 over canonical UTF-8 bytes of the transformed target record. Original `source_sha256` continues to hash the exact source bytes and is not replaced by canonicalization. A machine-readable golden vector and a unit test have been added. The mapping contract and migration rule version were advanced to `v1.4.3.7-migration-rules-4` to make the digest semantic change explicit.
+
+This is an implementation proposal until the test is run and the candidate is reviewed; it does not establish historical compatibility or scientific validity.
 
 ### P1 — Target schema $id values are not release-ready
 
