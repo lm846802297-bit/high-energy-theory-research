@@ -75,6 +75,35 @@ so the common external-leg contribution obeys
 \]
 For \(Q_{LD}\) this common factor is \(\delta Z_L+\delta Z_H\); for \(Q_{RD}\) it is \(\delta Z_{\ell_R}+\delta Z_S\). Keep these graphs in the Ward-identity/LSZ bookkeeping, but do not count the identical light-only factor twice as a new local matching coefficient. This cancellation does **not** apply to heavy-\(E\) self-energy insertions, heavy-light vertex/box graphs, parameter counterterms, or external gauge-field wavefunction/kinetic-mixing thresholds. If the UV/EFT light-field definitions differ by a finite decoupling relation, record that relation explicitly before using this cancellation.
 
+### 2.3 Evaluated heavy-line and scalar master-integral sub-blocks
+
+The explicit Feynman-parameter result for the heavy-\(E_\ell\) self-energy, the zero-momentum Yukawa-vertex scalar kernel, and a representative crossed-box master integral are recorded in `research/RC-001-dim6-heavy-line-vertex-box-integrals.md`. In Feynman gauge and with \(\Delta_\epsilon=1/\epsilon-\gamma_E+\ln4\pi\),
+\[
+\Sigma_V(0)=-\Delta_\epsilon+L_\ell-\frac12,\qquad
+\Sigma_S(0)=4\Delta_\epsilon-4L_\ell+2,
+\]
+so the bare 1PI insertion into the chirality-preserving heavy propagator gives the subgraph factor
+\[
+\left.\frac{\delta S_{E,\rm chir}}{S_{E,\rm chir}^{(0)}}\right|_{\Sigma_E^{1PI}}
+=\frac{g_A^2C_E^A}{16\pi^2}
+\left(-7\Delta_\epsilon+7L_\ell-\frac72\right).
+\]
+This is gauge-dependent and is not a Wilson coefficient. Its heavy-field/mass counterterms cancel the subgraph pole only when counted once in the full amplitude; do not add those same counterterms again through the separate tree-coefficient parameter row.
+
+The zero-momentum Yukawa-vertex kernel reduces to \(B_0(0;0,M_E^2)=\Delta_\epsilon+1-L_\ell\); representative numerator reductions are \(d\,B_0\) for the heavy-light-fermion exchange and \(2B_0\) for the heavy-scalar exchange, before overall Feynman-rule signs and charge generators. For a crossed-box master,
+\[
+J_{\rm full}=\frac1{M_E^2}(\Delta_{\rm IR}+1-L_\ell),\quad
+J_{\rm soft}=\frac1{M_E^2}(-\Delta_{\rm UV}+\Delta_{\rm IR}),
+\]
+and hence
+\[
+J_{\rm hard}=J_{\rm full}-J_{\rm soft}
+=\frac1{M_E^2}(\Delta_{\rm UV}+1-L_\ell).
+\]
+This is an explicit scalar-integral UV–EFT split, not a complete box amplitude: the Lorentz numerator, graph orientation, multiplicity, and common-basis projection still have to be summed for every atlas row.
+
+The parameter integrals, propagator numerator algebra, and box partial fractions pass the local exact-algebra audit in `calculations/RC-001-dim6-gauge-master-integrals.py` (captured output `validation/RC-001-dim6-gauge-master-integrals.txt`). The additive \(B-A'\) vacuum-polarization trace and finite heavy threshold are separately evaluated in `research/RC-001-dim6-mixed-kinetic-threshold.md` and audited in `calculations/RC-001-dim6-mixed-kinetic-threshold.py`. The additive one-loop pole cancels for the stated complete spectrum, while the finite threshold is proportional to \(\ln(M_{E_\mu}^2/M_{E_\tau}^2)\). This does not fix the independent renormalized kinetic-mixing boundary.
+
 ## 3. Pole and finite-part table to fill per diagram family
 
 For every graph family \(a\), store the amplitude in a fixed common normalization:
