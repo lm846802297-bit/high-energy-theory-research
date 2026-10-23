@@ -543,6 +543,47 @@ To make the §301 reconciliation directly reproducible from the repository, two 
 
 These checks support the stated reconciliation between the old on-shell four-point representative and the EOM-completed same-basis coefficients. They are not independent diagram generation or a numerical loop integration. They do not close the complete model-level Wilson vector, every remaining EFT soft/source sector, the higher-order constant-pole operator assignment, or the physical pole/mixing observable.
 
+### 10.9 Candidate dimension-eight projection of the constant pole — not a final operator assignment
+
+The restricted EFT bubble-plus-contact subset gives the local inverse-kernel pole
+\[
+\Pi_{\rm local\,CT}^{\ell}(0)\big|_{\rm pole}
+=+\frac{8q_\ell x_\ell}{16\pi^2}\Delta_{\rm UV},
+\qquad x_\ell=m_\ell^2.
+\]
+At leading seesaw order,
+\[
+q_\ell\simeq\frac{|y_\ell|^2|\lambda_\ell|^2v_hv_s}{2M_{E_\ell}^2},
+\qquad
+x_\ell\simeq\frac{|y_\ell|^2|\lambda_\ell|^2v_h^2v_s^2}{4M_{E_\ell}^2},
+\]
+so
+\[
+\Pi_{\rm local\,CT}^{\ell}(0)\big|_{\rm pole}
+\simeq
++\frac{|y_\ell|^4|\lambda_\ell|^4}{16\pi^2M_{E_\ell}^4}
+v_h^3v_s^3\,\Delta_{\rm UV}.
+\]
+This confirms the \(O(M_E^{-4})\) power counting and identifies a natural pure-potential representative. Define \(X=H^\dagger H\), \(Y=S^\dagger S\). Since
+\[
+\left.\frac{\partial^2(X^2Y^2)}{\partial h\,\partial s}\right|_{h=s=0}
+=v_h^3v_s^3,
+\]
+a provisional counterterm representative
+\[
+V_{\rm CT}^{(8)}\supset
+\delta c_{8,\ell}\frac{X^2Y^2}{M_{E_\ell}^4},
+\qquad
+\delta c_{8,\ell}^{\rm candidate}
+=-\frac{|y_\ell|^4|\lambda_\ell|^4}{16\pi^2}\Delta_{\rm UV}
+\]
+would cancel this *subset-level* constant pole under the fixed convention
+\(\Gamma_{\rm inv}=p^2-\mathcal M_{\rm loc}^2+\Pi\), where a potential counterterm contributes minus its mixed Hessian to \(\Pi_{\rm local\,CT}\).
+
+The candidate has been checked by \`calculations/RC-001-dimension8-constant-pole-candidate.py\`; four exact symbolic checks pass, with output in \`validation/RC-001-dimension8-constant-pole-candidate.txt\`.
+
+**This is not yet the final gauge-invariant assignment.** The calculation uses only the bubble-plus-contact subset. Other same-order EFT soft/source insertions may modify its constant pole, and EOM-related dimension-eight derivative, potential, and source operators can move contributions between representatives. Until the complete soft sum and a fixed gauge-invariant dimension-eight basis/EOM convention are specified, \(\delta c_{8,\ell}^{\rm candidate}\) is a diagnostic projection, not an accepted Wilson coefficient. The PR remains open and in Draft state.
+
 ## 11. Change history
 
 | Date | Revision | Change | Reason |
