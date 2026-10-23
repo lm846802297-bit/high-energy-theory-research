@@ -15,7 +15,7 @@ except ImportError:
     yaml=None
     AliasEvent=None
 
-RULE_VERSION="v1.4.3.7-migration-rules-4"
+RULE_VERSION="v1.4.3.7-migration-rules-5"
 TARGET_SCHEMA_VALIDATION_POLICY="draft2020-12+format-checker-per-record; invalid-targets-withheld"
 TARGET_DIGEST_ALGORITHM="RFC8785-JCS-SHA256"
 KNOWN_TYPES={"task","task_execution_contract","run_plan","run","run_manifest","artifact_plan","artifact","validation_plan","validation_activity","validation_report","claim","source","source_fragment","configuration","code","environment","convention_set","parameter_point","benchmark_result","evidence_fragment","test_case","test_run","state_transition_event","migration_record","relation_edge"}
@@ -141,6 +141,7 @@ def load_mapping_contract():
     required_rules={
         "MIG-012":"Validate every provisional target against its complete Draft 2020-12 JSON Schema with a format checker; any target schema error blocks target emission to staging.",
         "MIG-013":"Compute target_record_sha256 as SHA-256 over RFC 8785 JCS canonical UTF-8 bytes; source_sha256 remains the digest of the original source bytes.",
+        "MIG-014":"Withhold a migrated record when a validation_ids reference resolves to a source Validation Plan or Validation Activity that does not produce a valid target record; report VALIDATION_TARGET_WITHHELD.",
     }
     for rule_id,expected_text in required_rules.items():
         if rules_by_id.get(rule_id)!=expected_text:
