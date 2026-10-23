@@ -360,8 +360,12 @@ class ValidationReferenceResolutionTests(unittest.TestCase):
             report = migration.migrate(root, operator="reviewer-id")
         self.assertEqual(set(report["id_mapping"][0]), set(mapping_contract["id_mapping_fields"]))
         self.assertEqual(report["id_mapping"][0]["operator"], "reviewer-id")
-        self.assertEqual(report["id_mapping"][0]["review_status"], "pending_review")
+        self.assertEqual(report["id_mapping"][0]["review_status"], "blocked_unresolved")
         self.assertEqual(report["id_mapping"][0]["source_record_uri"], "claim.json")
+        self.assertIsNone(report["id_mapping"][0]["target_record_type"])
+        self.assertEqual(report["id_mapping"][0]["candidate_target_record_type"], "claim")
+        self.assertIsNone(report["id_mapping"][0]["target_sha256"])
+        self.assertTrue(report["id_mapping"][0]["candidate_target_sha256"])
 
     def test_unresolved_record_is_not_written_to_staging(self):
         with tempfile.TemporaryDirectory() as tmp:
@@ -399,9 +403,11 @@ class ValidationReferenceResolutionTests(unittest.TestCase):
             )
             report = migration.migrate(root)
         self.assertEqual(report["source_count"], 1)
-        self.assertEqual(report["migratable_record_count"], 1)
+        self.assertEqual(report["loaded_record_count"], 1)
+        self.assertEqual(report["migratable_record_count"], 0)
         self.assertEqual(report["id_mapping"][0]["source_record_uri"], "claim.yaml")
-        self.assertEqual(report["unresolved"], [])
+        self.assertTrue(any(item["code"] == "TARGET_SCHEMA_VALIDATION_FAILED" for item in report["unresolved"]))
+        self.assertFalse(any(item["code"] == "INVALID_YAML" for item in report["unresolved"]))
 
     def test_duplicate_keys_in_json_and_yaml_are_rejected(self):
         with tempfile.TemporaryDirectory() as tmp:
