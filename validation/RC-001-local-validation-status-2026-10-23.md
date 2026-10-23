@@ -14,12 +14,13 @@
 | Additive \(B-A'\) kinetic mixing | PASS (charge-trace algebra only) | \(\operatorname{Tr}(YX)=0\) for the stated light sector and across the \(\mu,\tau\) heavy pair; finite heavy threshold \(\propto\ln(M_{E_\mu}^2/M_{E_\tau}^2)\) | Independent \(\chi\) boundary, full kinetic-matrix scheme, and mixed-propagator four-point amplitudes |
 | Conjugate Yukawa-vertex charge factors | PASS (exact rational algebra) | Hypercharge and \(X\)-charge conservation plus all signed \(F_B,F_X,F_{BX}\) pair factors for the four Yukawa vertices and both flavors | Overall Feynman-rule signs, loop integrals, and full vertex amplitudes |
 | Light-only Yukawa-vertex hard cancellation | ANALYTIC IDENTITY | Tree propagator expansion and common light-loop factor cancel at \(O(M_E^{-2})\) when the full gauge-covariant EFT insertion/contact set is included | Full contact/vertex set has not been independently generated; final summed Ward identity remains open |
-| Conditional mixed input-parameter counterterms | PASS (charge algebra only) | First-order signed (B-A') parameter-only pole combinations for (C_{LD}) and (C_{RD}) under (ho_{BX}=-\chi+O(\chi^2)) | Full kinetic-matrix renormalization, mixed vertex/box amplitudes, EFT operator counterterms, and Ward sum |
+| Conditional mixed input-parameter counterterms | PASS (charge algebra only) | First-order signed \(B-A'\) parameter-only pole combinations for \(C_{LD}\) and \(C_{RD}\) under \(\rho_{BX}=-\chi+O(\chi^2)\) | Full kinetic-matrix renormalization, mixed vertex/box amplitudes, EFT operator counterterms, and Ward sum |
+| Heavy-containing Yukawa-vertex hard sub-block | PASS (symbolic algebra only) | FF/FS numerator kernels, oriented charge factors, the finite \(dB_0\) term, six one-vertex pole/log/finite expressions, and conjugate-vertex doubling | No diagram-package reproduction; crossed boxes, full EFT contacts, common counterterm organization, Ward sum, and final Wilson coefficients remain open |
 
 ## Open physics evidence
 
 - No FeynArts/FeynCalc, QGRAF, FORM, Cadabra, Sage, or equivalent diagram-level package was available in the probed runtime.
-- The heavy-line self-energy and selected scalar master integrals are evaluated, but complete Yukawa-vertex and crossed-box amplitudes have not been summed; the associated LD/RD ledger rows remain NOT EVALUATED.
+- The heavy-line self-energy, selected scalar master integrals, and heavy-containing FF/FS Yukawa-vertex sub-blocks are evaluated. The complete vertex/box amplitudes have not been combined; the LD/RD amplitude ledger rows remain open.
 - The new \(O(g^2/M_E^2)\) UV loop integrals and corresponding EFT soft integrals have not been evaluated as a complete set.
 - No finite gauge-correction Wilson coefficient is claimed.
 - The shared UV/EFT pole tables, counterterm matrix, Ward-identity completion, kinetic-mixing terms, and full EOM/source/current projection remain open.
