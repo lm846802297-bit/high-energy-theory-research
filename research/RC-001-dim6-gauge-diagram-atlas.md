@@ -138,4 +138,4 @@ The current execution environment has no Mathematica/Wolfram executable, FeynCal
 - UV–EFT subtraction matrix: research/RC-001-dim6-uv-eft-subtraction-ledger.md
 - Primary analytic soft kernels: research/RC-001-dim6-soft-loop-integrals-and-checks.md
 
-The diagram-level, integral-level, and model-level statuses must remain distinct. PR #4 stays Draft/Open until the missing amplitudes and CI evidence are closed.
+The diagram-level, integral-level, and model-level statuses must remain distinct. CI is explicitly skipped as an unavailable infrastructure check and is not a closure gate; no CI pass is claimed. PR #4 stays Draft/Open until the missing amplitudes, counterterms, common-basis reduction, and independent diagram-level evidence are closed.
