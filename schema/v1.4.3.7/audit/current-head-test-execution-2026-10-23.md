@@ -176,8 +176,19 @@ The Schema report was generated in a temporary copy at `C:\\Users\\84680\\AppDat
 
 These results verify the available local candidate test scope only. Historical v1.3 compatibility, byte-for-byte lineage of the unavailable v1.4.3.6 archive, pending normative decisions, complete cross-record/state-machine semantics, scientific correctness, and transaction safety remain separate unresolved matters. `commit_allowed=false` remains unchanged.
 
-## Subsequent directory-manifest helper safety fix — awaiting local execution
+## Follow-up local validation after directory-manifest safety fix
 
-A later static review found that `directory_manifest.py` accepted FileEntry objects with extra keys, then reconstructed entries using only known fields, silently dropping extra input before hashing. The helper also accepted `allow_symlinks=True` even though it cannot verify symlink containment against a filesystem root. The helper now requires the exact FileEntry key set and rejects `allow_symlinks=True`; `tests/unit/test_directory_manifest.py` was added to cover exact keys, path normalization and NFC collisions, deterministic ordering, and symlink rejection.
+**Owner-reported result; exact tested code/test HEAD:** `0799dada7eaa8dcd08b8db2f2311a844335d7198`. The desktop checkout reportedly matched GitHub branch HEAD and had a clean working tree when the checks ran.
 
-These changes occurred after the rules-v5 validation recorded above. The passing rules-v5 results apply to code HEAD `587587ae0b114d9624bfb7b270c8754b7e9cbef0` before the directory-manifest helper patch. The new tests and full local suites must be rerun against the latest branch HEAD before describing the current tree as locally verified. DD-ART-008 remains pending approval, and the helper still does not walk the filesystem or verify manifest sizes/hashes against actual bytes. `commit_allowed=false` remains unchanged.
+- Directory-manifest regression tests: **7/7 passed**.
+- Migration regression tests: **33/33 passed**.
+- Integration tests: **30/30 passed**.
+- Full unit-test suite: **83/83 passed**.
+- Python compilation: **passed**.
+- Full Schema validation: **68/68 checks**, **83/83 candidate Fixture outcomes**, **16/16 semantic cases**, and **125 trace rows** passed.
+
+The new directory-manifest tests cover missing/extra FileEntry keys, NFC-equivalent path collisions, traversal/absolute/backslash paths, deterministic sorting, and symlink rejection. The validation report was generated in a temporary directory outside the repository; the checked-in historical `audit/validation-report.json` was not overwritten. Four historical `1.4.3.6-candidate` Fixture expectation differences remain recorded separately and did not fail the candidate Fixture checks.
+
+These are local results reported by the repository owner. They are not evidence of a passing GitHub Actions run. The tested code/test HEAD is recorded explicitly because subsequent documentation-only audit commits may advance the PR branch without changing the validated implementation.
+
+The result verifies the available candidate test scope only. It does not establish historical v1.3 compatibility, byte-for-byte lineage of the unavailable v1.4.3.6 archive, approval of DD-ART-007 through DD-ART-010, complete cross-record/state-machine semantics, scientific correctness, or transaction safety. `commit_allowed=false` remains unchanged.
