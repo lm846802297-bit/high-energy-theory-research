@@ -63,9 +63,20 @@ python 计算脚本/计算输出/section262_reproduce.py
 
 Mathematica entries (`01_HiggsPortal_主验算_纯MMA.m`, `section273_feyncalc_threshold_workflow.wl`) require a local Wolfram Engine. The FeynCalc scaffold additionally requires a custom FeynArts model file and a particle-label mapping that are **not** included.
 
+### Version lineage and adoption policy
+
+| Version | Role in this repository | Rule |
+|---|---|---|
+| **v66** (2026-10-19) | Historical, immutable artifact bundle in this directory | Preserve for provenance; it is not the latest research version and does not replace the active baseline. |
+| **v153** | Current research baseline identified by [RC-001](../research/RC-001-vll-higgs-singlet-uv-eft.md) | Use as the baseline for the current record, while retaining its stated unresolved verification gaps. The primary v153 source is identified by its Library metadata and hash in RC-001. |
+| **Future versions** | New research candidates, including any version later adopted as the baseline | Record the exact version/date, full filename, source location, byte count, SHA-256, and relationship to the previously adopted baseline. If source files are committed, add a new immutable bundle directory; never overwrite v66. Update RC-001 only when the new source is deliberately adopted, and record the substantive diff and evidence status. |
+
+The version labels establish chronology and source identity, not scientific validity. The v66 archive alone does not prove byte-for-byte ancestry or scientific equivalence with v153. Hash agreement establishes file integrity only; it does not close any physics-verification gap or change a Claim status.
+
 ### Known gaps
 
-- `work/latex-build/` is a partial build; the PDF was produced to check pagination and is not a distribution-quality manuscript.
-- The historical `prepare.py`, `markdown_qa.cjs`, and `section261/build_v65.py` now use explicit input/dependency paths. Their original source/input directories are not bundled, so those scripts are not self-contained reproduction commands.
+- The historical validation records `计算脚本/计算输出/version54_validation.json` through `version66_validation.json`, plus `计算脚本/审计结果/DeepSeek66/DeepSeek第66版独立审计-20261020.md` and `audit_evidence.json`, preserve **43 workstation-path references across 15 archived text files**, including original `C:\\Users\\84680\\...` paths. These are historical provenance fields and old local links, not portable bundle paths; they may expose local directory names and will not resolve on another machine. They are retained to preserve the historical audit record. The relocation manifest and the documented portable helpers use bundle-relative paths. Do not rewrite these archived records in place; if sanitized copies are needed later, create separately named derivatives with their own hashes and an explicit note that they are derivatives.
+- `计算脚本/section262/build_v66.py` is also a historical, non-self-contained builder: it expects the v65 and v64 main Markdown files at the bundle root, but those files are not included in this v66 snapshot. It is preserved for traceability, not advertised as a runnable one-command reproduction entry point.
+- Historical `prepare.py`, `markdown_qa.cjs`, and `section261/build_v65.py` now use explicit input/dependency paths. Their original source/input directories are not bundled, so those scripts are not self-contained reproduction commands.
 - Historical intermediate drafts in `work/` (`v57_*.md`) are retained for traceability only and do not reflect current conclusions.
 - `计算脚本/README.md` records one external reference (`work/tsk2_b0.m`) that was already unlocatable at relocation time and was not reconstructed.
