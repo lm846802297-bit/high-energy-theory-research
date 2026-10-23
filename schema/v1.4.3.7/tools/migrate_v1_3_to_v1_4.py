@@ -62,7 +62,8 @@ def migrate_record(rec, target_properties=None, unknown_policy="quarantine", sou
         if new in out and out[new] != out[old]:
             unresolved.append({"code":"FIELD_MAPPING_CONFLICT","old_field":old,"new_field":new,"old_value":out[old],"new_value":out[new]})
             continue
-        out[new]=out[old]; changes.append({"from":old,"to":new,"basis":"explicit_rule","rule_version":RULE_VERSION})
+        reference_count=len(out[old]) if old.endswith("_ids") and isinstance(out[old],list) else 0
+        out[new]=out[old]; changes.append({"from":old,"to":new,"basis":"explicit_rule","rule_version":RULE_VERSION,"reference_count":reference_count})
         if old!=new: out.pop(old,None)
 
     # Resolve validation_ids only when the source graph identifies a unique target
@@ -80,7 +81,7 @@ def migrate_record(rec, target_properties=None, unknown_policy="quarantine", sou
                     out[field]=[]
                 elif not isinstance(out[field],list):
                     unresolved.append({"code":"FIELD_MAPPING_CONFLICT","old_field":"validation_ids","new_field":field,"existing_value":out[field],"mapped_values":[]})
-            changes.append({"from":"validation_ids","to":"validation_activity_ids+validation_plan_ids","source_value":[],"basis":"empty_legacy_reference_list","rule_version":RULE_VERSION})
+            changes.append({"from":"validation_ids","to":"validation_activity_ids+validation_plan_ids","source_value":[],"basis":"empty_legacy_reference_list","rule_version":RULE_VERSION,"reference_count":0})
         else:
             if any(not isinstance(value,str) or not value.strip() for value in raw_ids):
                 unresolved.append({"code":"VALIDATION_IDS_INVALID_VALUE","field":"validation_ids","source_value":raw_ids})
@@ -101,7 +102,7 @@ def migrate_record(rec, target_properties=None, unknown_policy="quarantine", sou
                 target_type=target.get("record_type")
                 if target_type=="validation_plan":
                     mapped_plans.append(target_id)
-                    changes.append({"from":"validation_ids","to":"validation_plan_ids","target_id":target_id,"basis":"source_record_type","rule_version":RULE_VERSION})
+                    changes.append({"from":"validation_ids","to":"validation_plan_ids","target_id":target_id,"basis":"source_record_type","rule_version":RULE_VERSION,"reference_count":1})
                 elif target_type=="validation_activity":
                     status=target.get("execution_status")
                     started_at=target.get("started_at")
@@ -111,7 +112,7 @@ def migrate_record(rec, target_properties=None, unknown_policy="quarantine", sou
                             unresolved.append({"code":"VALIDATION_ACTIVITY_STATUS_UNMAPPED","field":"execution_status","target_id":target_id,"source_value":status,"required":"an explicit migration rule to a v1.4 target enum value"})
                         else:
                             mapped_activities.append(target_id)
-                            changes.append({"from":"validation_ids","to":"validation_activity_ids","target_id":target_id,"basis":"source_record_type_and_launch_evidence","rule_version":RULE_VERSION})
+                            changes.append({"from":"validation_ids","to":"validation_activity_ids","target_id":target_id,"basis":"source_record_type_and_launch_evidence","rule_version":RULE_VERSION,"reference_count":1})
                     elif status in {"planned","not_run"} and not has_start:
                         unresolved.append({"code":"VALIDATION_ACTIVITY_NOT_STARTED","field":"validation_ids","target_id":target_id,"execution_status":status,"started_at":started_at,"choices":["retain as unresolved","review whether a validation_plan can be constructed from source evidence"]})
                     else:
@@ -183,11 +184,12 @@ def migrate_record(rec, target_properties=None, unknown_policy="quarantine", sou
                 unresolved.append({"code":"UNKNOWN_FIELDS","fields":unknown})
             elif unknown_policy=="quarantine":
                 warnings.append({"code":"UNKNOWN_FIELDS_QUARANTINED","fields":unknown,"values":{k:out[k] for k in unknown}})
+                unresolved.append({"code":"UNKNOWN_FIELDS_QUARANTINED_REQUIRES_REVIEW","fields":unknown,"message":"quarantined source fields block generation of a target record until reviewed"})
                 for k in unknown: out.pop(k,None)
             elif unknown_policy=="preserve":
                 unresolved.append({"code":"UNKNOWN_FIELDS_PRESERVE_NOT_SCHEMA_SAFE","fields":unknown})
     return out,changes,unresolved,warnings
-def migrate(input_dir, schemas_dir=None, output_dir=None, unknown_policy="quarantine", write_staging=False):
+def migrate(input_dir, schemas_dir=None, output_dir=None, unknown_policy="quarantine", write_staging=False, operator=None):
     inp=Path(input_dir)
     if not inp.exists() or not inp.is_dir(): raise ValueError(f"input_dir must be an existing directory: {inp}")
     if write_staging:
@@ -219,6 +221,9 @@ def migrate(input_dir, schemas_dir=None, output_dir=None, unknown_policy="quaran
 
     # Load a read-only source snapshot first so legacy references can be resolved
     # by project-scoped primary key and concrete record type.
+    def source_relpath(p): return p.relative_to(inp).as_posix()
+    generated_at_utc=datetime.now(timezone.utc).isoformat(timespec="seconds").replace("+00:00","Z")
+    operator_name=operator.strip() if isinstance(operator,str) and operator.strip() else "not_recorded"
     source_files=sorted(inp.rglob("*.json"))
     if not source_files:
         all_unresolved.append({"path":str(inp),"code":"EMPTY_SOURCE_SNAPSHOT","message":"no JSON source files were found"})
@@ -226,20 +231,20 @@ def migrate(input_dir, schemas_dir=None, output_dir=None, unknown_policy="quaran
     for p in source_files:
         try: raw_bytes=p.read_bytes()
         except Exception as e:
-            all_unresolved.append({"path":str(p),"code":"SOURCE_READ_FAILED","message":str(e)}); continue
+            all_unresolved.append({"path":source_relpath(p),"code":"SOURCE_READ_FAILED","message":str(e)}); continue
         src_sha=digest_bytes(raw_bytes)
         try: rec=json.loads(raw_bytes.decode("utf-8"))
         except Exception as e:
-            all_unresolved.append({"path":str(p),"code":"INVALID_JSON","source_sha256":src_sha,"message":str(e)}); continue
+            all_unresolved.append({"path":source_relpath(p),"code":"INVALID_JSON","source_sha256":src_sha,"message":str(e)}); continue
         if not isinstance(rec,dict):
-            all_unresolved.append({"path":str(p),"code":"SOURCE_RECORD_NOT_OBJECT","source_sha256":src_sha,"actual_type":type(rec).__name__}); continue
+            all_unresolved.append({"path":source_relpath(p),"code":"SOURCE_RECORD_NOT_OBJECT","source_sha256":src_sha,"actual_type":type(rec).__name__}); continue
         if not isinstance(rec.get("record_type"),str) or not rec.get("record_type","").strip():
-            all_unresolved.append({"path":str(p),"code":"SOURCE_RECORD_TYPE_MISSING","source_sha256":src_sha}); continue
+            all_unresolved.append({"path":source_relpath(p),"code":"SOURCE_RECORD_TYPE_MISSING","source_sha256":src_sha}); continue
         source_entries.append((p,rec,src_sha))
         pk=primary_key(rec); project_id=rec.get("project_id"); rt=rec.get("record_type")
         if isinstance(project_id,str) and project_id.strip() and isinstance(pk,str) and pk.strip():
             source_index.setdefault((project_id,pk),[]).append(rec)
-            typed_source_index.setdefault((project_id,rt,pk),[]).append({"path":str(p),"source_sha256":src_sha})
+            typed_source_index.setdefault((project_id,rt,pk),[]).append({"path":source_relpath(p),"source_sha256":src_sha})
     duplicate_source_keys={key:entries for key,entries in typed_source_index.items() if len(entries)>1}
 
     for p,rec,src_sha in source_entries:
@@ -248,13 +253,23 @@ def migrate(input_dir, schemas_dir=None, output_dir=None, unknown_policy="quaran
         identity=(rec.get("project_id"),rt,primary_key(rec))
         if identity in duplicate_source_keys:
             unresolved.append({"code":"DUPLICATE_SOURCE_PRIMARY_KEY","project_id":identity[0],"record_type":identity[1],"primary_key":identity[2],"source_paths":[entry["path"] for entry in duplicate_source_keys[identity]]})
-        all_changes += [{"path":str(p),"record_type":rt,"source_sha256":src_sha,**x} for x in changes]
-        all_unresolved += [{"path":str(p),"record_type":rt,**x} for x in unresolved]
-        all_warnings += [{"path":str(p),"record_type":rt,**x} for x in warnings]
-        records.append({"source_path":str(p),"source_sha256":src_sha,"source_record_key":{"project_id":rec.get("project_id"),"record_type":rt,"primary_key":primary_key(rec)},"target_record":out,"target_sha256":digest_bytes(stable_json(out).encode("utf-8")) if out is not None else None})
+        relpath=source_relpath(p)
+        target_digest=digest_bytes(stable_json(out).encode("utf-8")) if out is not None else None
+        target_record=out if out is not None and not unresolved else None
+        if identity in duplicate_source_keys:
+            collision_check="failed"
+        elif not isinstance(identity[0],str) or not identity[0].strip() or not isinstance(identity[2],str) or not identity[2].strip():
+            collision_check="not_checked_missing_identity"
+        else:
+            collision_check="passed_typed_primary_key"
+        all_changes += [{"path":relpath,"record_type":rt,"source_sha256":src_sha,**x} for x in changes]
+        all_unresolved += [{"path":relpath,"record_type":rt,**x} for x in unresolved]
+        all_warnings += [{"path":relpath,"record_type":rt,**x} for x in warnings]
+        records.append({"source_path":relpath,"source_sha256":src_sha,"source_record_key":{"project_id":rec.get("project_id"),"record_type":rt,"primary_key":primary_key(rec)},"target_record":target_record,"target_sha256":target_digest if target_record is not None else None,"candidate_target_sha256":target_digest if out is not None and unresolved else None})
         mapping_basis="unresolved" if unresolved else ("source_reference_resolution" if any(change.get("from")=="validation_ids" for change in changes) else "explicit_rule")
-        idmap.append({"source_path":str(p),"source_record_type":rt,"source_id":primary_key(rec),"target_record_type":rt,"target_id":primary_key(out or {}),"mapping_basis":mapping_basis,"unresolved_count":len(unresolved),"source_sha256":src_sha,"target_sha256":digest_bytes(stable_json(out).encode("utf-8")) if out else None})
-    report={"migration_rule_version":RULE_VERSION,"source_schema_version":"1.3","target_schema_version":"1.4","mode":"write_staging" if write_staging else "dry_run","source_count":len(source_files),"migratable_record_count":sum(record["target_record"] is not None for record in records),"loaded_record_count":len(source_entries),"source_files_skipped_count":len(source_files)-len(source_entries),"changes":all_changes,"unresolved":all_unresolved,"warnings":all_warnings,"id_mapping":idmap,"commit_allowed":False,"target_schema_validation":"not_performed_by_migration_prototype","limitations":["Candidate schema files are loaded fail-closed for top-level property filtering and enum checks, but full JSON Schema validation of target records is not performed by this prototype.","Source references are resolved only within the same project and only when primary IDs are unique.","A validation activity reference is typed only when the source activity is uniquely identified, its status is supported by an explicit target mapping, and started_at is a timezone-aware ISO date-time.","Source execution statuses outside the v1.4 target enum remain unresolved until an explicit mapping rule is approved.","Non-object JSON files, missing record_type values, malformed JSON, duplicate typed primary keys, and empty source snapshots block migration.","This prototype does not implement transactional commit or pointer-based rollback.","It does not recalculate TEC contract hashes unless canonical source payload is available.","No migration is considered committed; human approval and full target validation are required."]}
+        rewritten_reference_count=sum(change.get("reference_count",0) for change in changes)
+        idmap.append({"source_record_uri":relpath,"source_record_type":rt,"source_primary_key":primary_key(rec) if isinstance(primary_key(rec),str) else None,"source_sha256":src_sha,"target_record_type":rt if target_record is not None else None,"target_primary_key":primary_key(target_record) if target_record is not None else None,"target_sha256":records[-1]["target_sha256"],"candidate_target_record_type":rt if out is not None and unresolved else None,"candidate_target_primary_key":primary_key(out) if out is not None and unresolved else None,"candidate_target_sha256":records[-1]["candidate_target_sha256"],"mapping_basis":mapping_basis,"mapping_rule_id":"MIG-V1.3-TO-V1.4-CANDIDATE","review_status":"blocked_unresolved" if unresolved else "pending_review","collision_check":collision_check,"rewritten_reference_count":rewritten_reference_count,"unresolved_count":len(unresolved),"mapped_at_utc":generated_at_utc,"operator":operator_name})
+    report={"migration_rule_version":RULE_VERSION,"source_schema_version":"1.3","target_schema_version":"1.4","mode":"write_staging" if write_staging else "dry_run","generated_at_utc":generated_at_utc,"operator":operator_name,"source_count":len(source_files),"migratable_record_count":sum(record["target_record"] is not None for record in records),"loaded_record_count":len(source_entries),"source_files_skipped_count":len(source_files)-len(source_entries),"changes":all_changes,"unresolved":all_unresolved,"warnings":all_warnings,"id_mapping":idmap,"commit_allowed":False,"target_schema_validation":"not_performed_by_migration_prototype","limitations":["Candidate schema files are loaded fail-closed for top-level property filtering and enum checks, but full JSON Schema validation of target records is not performed by this prototype.","Source references are resolved only within the same project and only when primary IDs are unique.","A validation activity reference is typed only when the source activity is uniquely identified, its status is supported by an explicit target mapping, and started_at is a timezone-aware ISO date-time.","Source execution statuses outside the v1.4 target enum remain unresolved until an explicit mapping rule is approved.","Non-object JSON files, missing record_type values, malformed JSON, duplicate typed primary keys, and empty source snapshots block migration.","This prototype does not implement transactional commit or pointer-based rollback.","It does not recalculate TEC contract hashes unless canonical source payload is available.","No migration is considered committed; human approval and full target validation are required."]}
     if write_staging:
         outroot=Path(output_dir)
         outroot.mkdir(parents=True,exist_ok=True)
@@ -274,8 +289,9 @@ def main():
     ap.add_argument("--output")
     ap.add_argument("--unknown-fields",choices=["quarantine","reject","preserve"],default="quarantine")
     ap.add_argument("--write-staging",action="store_true",help="write candidate staging outputs; never commits/overwrites")
+    ap.add_argument("--operator",help="operator identifier recorded in the migration report; never implies approval")
     args=ap.parse_args()
-    r=migrate(args.input_dir,args.schemas_dir,args.output,args.unknown_fields,args.write_staging)
+    r=migrate(args.input_dir,args.schemas_dir,args.output,args.unknown_fields,args.write_staging,operator=args.operator)
     print(json.dumps({"source_count":r["source_count"],"changes":len(r["changes"]),"unresolved":len(r["unresolved"]),"warnings":len(r["warnings"]),"commit_allowed":False},ensure_ascii=False,indent=2))
     return 0
 if __name__=="__main__": sys.exit(main())
