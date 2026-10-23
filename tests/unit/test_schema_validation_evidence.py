@@ -99,7 +99,7 @@ class SchemaValidationEvidenceTests(unittest.TestCase):
             self.assertTrue(provenance.get("workflow_run_id"))
             self.assertTrue(provenance.get("validator_sha256"))
 
-    def test_schema_ci_does_not_execute_the_physics_pilot(self):
+    def test_schema_ci_builds_and_uploads_uv_eft_bundle(self):
         workflow = WORKFLOW_PATH.read_text(encoding="utf-8")
         self.assertIn("Remove historical validation report", workflow)
         self.assertIn("Verify generated evidence provenance", workflow)
@@ -107,8 +107,16 @@ class SchemaValidationEvidenceTests(unittest.TestCase):
         self.assertIn("report workflow_run_id does not match this Actions run", workflow)
         self.assertIn("report workflow_run_attempt does not match this Actions attempt", workflow)
         self.assertIn("report validator_sha256 does not match the checked validator", workflow)
+        self.assertIn("report traceability_csv_sha256 does not match the checked traceability CSV", workflow)
         self.assertIn("candidate-schema-validation-report", workflow)
-        self.assertNotIn("run_record_chain.py", workflow)
+        self.assertIn("Build and validate real UV-EFT research-task bundle", workflow)
+        self.assertIn('run_record_chain.py --output-dir "$RUNNER_TEMP/uv-eFT-hard-derivative-bundle"', workflow)
+        self.assertIn("Upload real research-task provenance bundle", workflow)
+        self.assertIn("uses: actions/upload-artifact@v4", workflow)
+        self.assertIn("name: uv-eFT-hard-derivative-provenance-bundle", workflow)
+        self.assertIn("path: ${{ runner.temp }}/uv-eFT-hard-derivative-bundle", workflow)
+        self.assertIn("if-no-files-found: error", workflow)
+        self.assertIn("retention-days: 30", workflow)
         self.assertNotIn("verify_pv_derivative_mathematica.wl", workflow)
 
 
