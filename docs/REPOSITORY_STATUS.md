@@ -11,7 +11,7 @@
 | Normative decisions | DD-ART-007 through DD-ART-010 pending explicit owner approval |
 | Fixture index | Canonical index is version-matched to v1.4.3.7 candidate; inherited v1.4.3.6 expectations remain separately preserved |
 | Cross-record validation | Prototype available; bounded semantic checks implemented |
-| Migration | Rules-v3 source-aware prototype; malformed inputs, duplicate typed keys, unmapped statuses, invalid timestamps, and unsafe staging paths are now explicit blockers; full target JSON Schema validation is not implemented; dry-run/staging only, commit_allowed=false |
+| Migration | Rules-v3 source-aware prototype; JSON/YAML source inventory, duplicate-key rejection, manifest/schema SHA checks, typed-ID collision checks, target-enum/time validation, mapping provenance, and safe staging; unresolved records are withheld; full target JSON Schema validation remains unimplemented; dry-run/staging only, commit_allowed=false |
 | Historical v1.3 compatibility | Unverified; original v1.3 source bundle/corpus unavailable |
 | Requirement/test traceability | CSV traceability data and imported audit reports included; report snapshots are SHA/time scoped |
 | Skill runtime | Initial instruction and reference scaffold added; not yet a complete automated research agent |
