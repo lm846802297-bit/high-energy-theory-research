@@ -625,7 +625,7 @@ The v153 §252.8–§252.10 EOM/source table is a coefficient-mapping obligation
 
 ## 10.12 Dimension-six soft integrals: independent hard/soft checks
 
-The detailed calculation is recorded in research/RC-001-dim6-soft-loop-integrals-and-checks.md, with the reproducible script calculations/RC-001-dim6-soft-loop-crosscheck.py and captured output validation/RC-001-dim6-soft-loop-crosscheck.txt. The script passed 36 exact symbolic checks. These are analytic integral/tensor-reduction checks, not CI and not an external diagram-package run.
+The detailed calculation is recorded in research/RC-001-dim6-soft-loop-integrals-and-checks.md, with the reproducible script calculations/RC-001-dim6-soft-loop-crosscheck.py and captured output validation/RC-001-dim6-soft-loop-crosscheck.txt. The script passed 39 exact symbolic checks. These are analytic integral/tensor-reduction checks, not CI and not an external diagram-package run.
 
 The massless bubble is independently reproduced as
 \[
@@ -659,4 +659,4 @@ and its hard/soft sum has neither an uncancelled pole nor the constants \(\pm2\)
 | 2026-10-23 | EFT soft-insertion power counting | Recorded the (Q_{LD},Q_{RD}) tree-level (1/M_E^2) operators and showed their VEV wavefunction insertions into the (C_5^2) bubble begin at (O(M_E^{-4})) | Bound the restricted Yukawa-sector conclusion without claiming that all portal/gauge/scalar soft topologies are closed |
 | 2026-10-23 | Dimension-eight soft-pole reconciliation | Matched the C5-squared constant soft pole to the X^2Y^2 counterterm in master §§262.5 and 264.4; kept full dimension-eight hard matching open | Distinguish the verified subset-level potential counterterm from the complete O(M_E^-4) Wilson vector |
 | 2026-10-23 | EFT soft-topology census | Expanded the structural ledger to 26 scalar, fermionic, current/source, and dimension-eight topology families; added crossed C5-squared fermionic channels and same-order Q6-plus-quartic/gauge soft corrections | Prioritize explicit integrals without overstating model-level Wilson-vector closure |
-| 2026-10-23 | Dimension-six soft-loop cross-check | Added Feynman-parameter Gamma-function checks, crossed-current hard/soft pole cancellation, four-fermion hard/soft cancellation, and the Q6-plus-quartic EOM kernel; saved 36 exact symbolic checks | Advance the dimension-six soft calculation while keeping gauge-sector and model-level closure open |
+| 2026-10-23 | Dimension-six soft-loop cross-check | Added Feynman-parameter Gamma-function checks, crossed-current hard/soft pole cancellation, four-fermion hard/soft cancellation, and the Q6-plus-quartic EOM kernel; saved 39 exact symbolic checks | Advance the dimension-six soft calculation while keeping gauge-sector and model-level closure open |
