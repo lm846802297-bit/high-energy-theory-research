@@ -18,7 +18,7 @@ def main(root):
    except Exception as ex: add('schema_meta:'+rt,False,{'error':str(ex)})
  add('record_types_match',set(m['record_types'])==set(schemas),{'declared':len(m['record_types']),'loaded':len(schemas)})
  test_case_schema=schemas.get('test_case',{}); test_id_schema=test_case_schema.get('properties',{}).get('test_id',{})
- add('manifest_test_id_pattern_matches_schema',m.get('test_id_pattern')==test_id_schema.get('pattern'),{'manifest_pattern':m.get('test_id_pattern'),'schema_pattern':test_id_schema.get('pattern')})
+ add('manifest_test_id_pattern_matches_schema',isinstance(m.get('test_id_pattern'),str) and bool(m.get('test_id_pattern')) and m.get('test_id_pattern')==test_id_schema.get('pattern'),{'manifest_pattern':m.get('test_id_pattern'),'schema_pattern':test_id_schema.get('pattern')})
  add('strict_unknown_fields_enabled',m.get('strict_unknown_fields') is True)
  add('extensions_disabled',m.get('extensions_supported') is False)
  add('fixture_index_hash',sha(root/m['fixture_index'])==m['fixture_index_sha256'])
