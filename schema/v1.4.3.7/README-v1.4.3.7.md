@@ -25,7 +25,7 @@ python tools/cross_record_validate.py tests/integration/dataset --output audit/c
 python tools/migrate_v1_3_to_v1_4.py tests/integration/migration-source-v1.3 --schemas-dir schemas
 ```
 
-Migration defaults to dry-run. `--write-staging --output PATH` writes a staging result only. No commit or overwrite is implemented.
+Migration defaults to dry-run. `--write-staging --output PATH` writes a staging result only. The output directory must be outside the input tree and empty or new; non-empty output directories are rejected to avoid stale files. Source records are never overwritten, and no commit operation is implemented.
 
 All four normative decisions remain pending approval. See `audit/v1.6.6-four-decisions-review.csv` and `audit/审计报告-v1.4.3.7.md`.
 
