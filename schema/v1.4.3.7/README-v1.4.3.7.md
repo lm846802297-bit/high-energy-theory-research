@@ -35,7 +35,7 @@ The metadata contract is now explicit: `manifest.fixture_index` is the canonical
 
 ## End-to-end Skill pilot
 
-The repository includes a synthetic algebraic pilot under `tests/eval-cases/analytic-mass-matrix-pilot/`. Its mathematical checks pass. Structured execution, Run Manifest, artifact-plan, and Claim evidence payloads are now represented in the candidate schemas. Full reproducibility acceptance remains blocked because the design document names `FingerprintInputs` without defining its fields or hashing semantics. This is recorded in the pilot README and `audit/审计报告-v1.4.3.7.md`.
+The repository includes a synthetic algebraic pilot under `tests/eval-cases/analytic-mass-matrix-pilot/`. Its mathematical checks pass within the stated pilot scope. The candidate-only `FingerprintInputs` contract, deterministic hashing implementation, golden vector, and negative tests are documented in `docs/governance/fingerprint-inputs-contract-review.md` and `tests/unit/test_fingerprint_inputs.py`; that contract's normative status and the end-to-end execution/evidence workflow remain separate release gates. The pilot is not a physical calculation and does not establish complete research reproducibility.
 
 
 ## Historical v1.3 compatibility gate
