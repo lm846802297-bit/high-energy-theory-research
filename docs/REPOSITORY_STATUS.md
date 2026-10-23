@@ -30,7 +30,7 @@ The owner reports that the following rules-v5 checks ran locally on code/test HE
 
 The new MIG-014 regression test `test_valid_claim_is_withheld_when_referenced_plan_fails_target_schema` passed. The Schema report was saved in a temporary directory rather than replacing the checked-in historical `schema/v1.4.3.7/audit/validation-report.json`. See `schema/v1.4.3.7/audit/current-head-test-execution-2026-10-23.md`.
 
-**Current acceptance wording:** The current candidate implementation's local validation has passed. GitHub Actions is temporarily excluded from this phase's acceptance and will be supplemented when runners are available. This is not a claim that GitHub Actions has passed.
+**Current acceptance wording:** The rules-v5 candidate implementation passed the owner-reported local validation on code/test HEAD `0799dada7eaa8dcd08b8db2f2311a844335d7198`. The subsequent rules-v6 MIG-015 and source-root symlink changes have not yet been execution-verified. GitHub Actions is unverified for this phase; this is not a claim that GitHub Actions has passed.
 
 These results verify the available local candidate test scope. They do **not** establish compatibility with the absent historical v1.3 source corpus, byte-for-byte lineage of the unavailable v1.4.3.6 archive, complete cross-record/state-machine semantics, scientific correctness, or transaction safety. Four legacy Fixture Index expectations remain separately recorded as compatibility drift. `commit_allowed=false` remains mandatory.
 
