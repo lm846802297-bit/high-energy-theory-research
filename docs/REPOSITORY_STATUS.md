@@ -11,7 +11,7 @@
 | Normative decisions | DD-ART-007 through DD-ART-010 pending explicit owner approval |
 | Fixture index | Canonical index is version-matched to v1.4.3.7 candidate; inherited v1.4.3.6 expectations remain separately preserved |
 | Cross-record validation | Prototype available; bounded semantic checks implemented |
-| Migration | Rules-v4 source-aware prototype; JSON/YAML inventory, duplicate-key rejection, manifest/schema SHA checks, typed-ID collision checks, target-enum/time validation, full Draft 2020-12 target validation, RFC 8785 JCS target digests, mapping provenance, and fail-closed staging that blocks all target writes for incomplete source snapshots; owner-reported local validation passed on code HEAD `1bb852c85594a6ef0e930e934cd28a438bc28a7c`; dry-run/staging only, `commit_allowed=false` |
+| Migration | Rules-v4 source-aware prototype; JSON/YAML inventory, duplicate-key rejection, manifest/schema SHA checks, typed-ID collision checks, target-enum/time validation, full Draft 2020-12 target validation, RFC 8785 JCS target digests, mapping provenance, and fail-closed staging that blocks all target writes for incomplete source snapshots; owner-reported rules-v4 local validation passed on code HEAD `1bb852c85594a6ef0e930e934cd28a438bc28a7c`; rules-v5 dependent-reference fix is awaiting rerun; dry-run/staging only, `commit_allowed=false` |
 | Historical v1.3 compatibility | Unverified; original v1.3 source bundle/corpus unavailable |
 | Requirement/test traceability | CSV traceability data and imported audit reports included; report snapshots are SHA/time scoped |
 | Skill runtime | Initial instruction and reference scaffold added; not yet a complete automated research agent |
@@ -29,7 +29,7 @@ The owner reports that the following checks ran locally under Python 3.12.14 on 
 
 The validator initially encountered a Windows default-GBK decoding error; it passed when rerun in UTF-8 mode. The resulting report was saved in a temporary directory rather than replacing the checked-in historical `schema/v1.4.3.7/audit/validation-report.json`. The historical report is intentionally not presented as evidence from this local run. See `schema/v1.4.3.7/audit/current-head-test-execution-2026-10-23.md`.
 
-The local results verify the implemented candidate test scope. They do **not** establish compatibility with the absent historical v1.3 source corpus, byte-for-byte lineage of the unavailable v1.4.3.6 archive, complete cross-record/state-machine semantics, scientific correctness, or transaction safety. Four legacy Fixture Index expectations remain separately recorded as compatibility drift.
+The local results verify the rules-v4 candidate test scope. A later rules-v5 change now withholds migrated records that reference a Validation Plan/Activity that fails target validation; that new code and regression test still require local execution. The previous results do **not** establish compatibility with the absent historical v1.3 source corpus, byte-for-byte lineage of the unavailable v1.4.3.6 archive, complete cross-record/state-machine semantics, scientific correctness, or transaction safety. Four legacy Fixture Index expectations remain separately recorded as compatibility drift.
 
 ## Release gates
 
