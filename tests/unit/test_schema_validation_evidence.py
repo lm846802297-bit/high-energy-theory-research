@@ -104,13 +104,18 @@ class SchemaValidationEvidenceTests(unittest.TestCase):
         self.assertIn("Remove historical validation report", workflow)
         self.assertIn("Verify generated evidence provenance", workflow)
         self.assertIn("ref: ${{ github.event.pull_request.head.sha || github.sha }}", workflow)
+        self.assertIn("report does not identify GitHub Actions as its execution environment", workflow)
         self.assertIn("report workflow_run_id does not match this Actions run", workflow)
         self.assertIn("report workflow_run_attempt does not match this Actions attempt", workflow)
         self.assertIn("report validator_sha256 does not match the checked validator", workflow)
         self.assertIn("report traceability_csv_sha256 does not match the checked traceability CSV", workflow)
         self.assertIn("candidate-schema-validation-report", workflow)
         self.assertIn("Build and validate real UV-EFT research-task bundle", workflow)
-        self.assertIn('run_record_chain.py --output-dir "$RUNNER_TEMP/uv-eFT-hard-derivative-bundle"', workflow)
+        self.assertIn(
+            'run: python tests/eval-cases/uv-eFT-hard-derivative-pilot/run_record_chain.py '
+            '--output-dir "$RUNNER_TEMP/uv-eFT-hard-derivative-bundle"',
+            workflow,
+        )
         self.assertIn("Upload real research-task provenance bundle", workflow)
         self.assertIn("uses: actions/upload-artifact@v4", workflow)
         self.assertIn("name: uv-eFT-hard-derivative-provenance-bundle", workflow)
