@@ -24,7 +24,7 @@ The workflow regenerates `audit/validation-report.json` in the runner and upload
 
 Static implementation findings, version-label questions, and unexecuted regression cases are recorded in [the 2026-10-23 static Schema/migration review](audit/static-schema-migration-review-2026-10-23.md). The migration code performs per-record target-schema validation, but this review does not replace executing that path, CI, or full cross-record validation.
 
-The migration tool uses rules version `v1.4.3.7-migration-rules-4`. Static review tightened JSON/YAML source inventory, duplicate-key handling, project/key checks, timestamp and target-enum validation, record-type-specific aliases, manifest SHA verification, mapping-contract parity, ID-mapping provenance, and staging-output safety. Records with unresolved items are withheld from target staging. These changes have not been executed in tests or CI. Synthetic fixtures still do not establish compatibility with the full historical v1.3 corpus.
+The migration tool uses rules version `v1.4.3.7-migration-rules-4`. Static review tightened JSON/YAML source inventory, duplicate-key handling, project/key checks, timestamp and target-enum validation, record-type-specific aliases, manifest SHA verification, mapping-contract parity, ID-mapping provenance, and staging-output safety. Records with unresolved items are withheld from target staging. Full Draft 2020-12 validation with a format checker is applied to every proposed target; schema-invalid targets are withheld from staging. Regression tests are present but have not been executed in a successful CI run. Synthetic fixtures still do not establish compatibility with the full historical v1.3 corpus.
 
 - The tool inventories `.json`, `.yaml`, and `.yml` source files before resolving references only by unique primary key within the same project. Duplicate JSON/YAML mapping keys, malformed files, non-object records, and unsupported YAML constructs are reported as unresolved rather than silently ignored.
 - A uniquely resolved validation_plan maps to validation_plan_ids.
@@ -41,4 +41,5 @@ This resolver reduces avoidable ambiguity only when source evidence is complete.
 
 - DD-ART-007 through DD-ART-010 remain unapproved.
 - `validation_ids` migration remains staging-only and blocked while ambiguous.
+- Target digests use RFC 8785 JCS followed by SHA-256 (`RFC8785-JCS-SHA256`); a fixed canonical-byte/hash regression vector is included in the unit suite.
 - Schema/CI success is not a physics correctness certificate. A real research task must independently verify provenance → configuration → run → artifact → validation → evidence → Claim before any release decision.
