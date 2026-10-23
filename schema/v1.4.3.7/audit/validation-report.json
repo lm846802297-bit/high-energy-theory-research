@@ -1,1271 +1,1289 @@
 {
-  "checks": [
-    {
-      "name": "schema_hash:task",
-      "status": "PASS",
-      "detail": {}
-    },
-    {
-      "name": "schema_meta:task",
-      "status": "PASS",
-      "detail": {}
-    },
-    {
-      "name": "schema_hash:task_execution_contract",
-      "status": "PASS",
-      "detail": {}
-    },
-    {
-      "name": "schema_meta:task_execution_contract",
-      "status": "PASS",
-      "detail": {}
-    },
-    {
-      "name": "schema_hash:run_plan",
-      "status": "PASS",
-      "detail": {}
-    },
-    {
-      "name": "schema_meta:run_plan",
-      "status": "PASS",
-      "detail": {}
-    },
-    {
-      "name": "schema_hash:run",
-      "status": "PASS",
-      "detail": {}
-    },
-    {
-      "name": "schema_meta:run",
-      "status": "PASS",
-      "detail": {}
-    },
-    {
-      "name": "schema_hash:run_manifest",
-      "status": "PASS",
-      "detail": {}
-    },
-    {
-      "name": "schema_meta:run_manifest",
-      "status": "PASS",
-      "detail": {}
-    },
-    {
-      "name": "schema_hash:artifact_plan",
-      "status": "PASS",
-      "detail": {}
-    },
-    {
-      "name": "schema_meta:artifact_plan",
-      "status": "PASS",
-      "detail": {}
-    },
-    {
-      "name": "schema_hash:artifact",
-      "status": "PASS",
-      "detail": {}
-    },
-    {
-      "name": "schema_meta:artifact",
-      "status": "PASS",
-      "detail": {}
-    },
-    {
-      "name": "schema_hash:validation_plan",
-      "status": "PASS",
-      "detail": {}
-    },
-    {
-      "name": "schema_meta:validation_plan",
-      "status": "PASS",
-      "detail": {}
-    },
-    {
-      "name": "schema_hash:validation_activity",
-      "status": "PASS",
-      "detail": {}
-    },
-    {
-      "name": "schema_meta:validation_activity",
-      "status": "PASS",
-      "detail": {}
-    },
-    {
-      "name": "schema_hash:validation_report",
-      "status": "PASS",
-      "detail": {}
-    },
-    {
-      "name": "schema_meta:validation_report",
-      "status": "PASS",
-      "detail": {}
-    },
-    {
-      "name": "schema_hash:claim",
-      "status": "PASS",
-      "detail": {}
-    },
-    {
-      "name": "schema_meta:claim",
-      "status": "PASS",
-      "detail": {}
-    },
-    {
-      "name": "schema_hash:source",
-      "status": "PASS",
-      "detail": {}
-    },
-    {
-      "name": "schema_meta:source",
-      "status": "PASS",
-      "detail": {}
-    },
-    {
-      "name": "schema_hash:source_fragment",
-      "status": "PASS",
-      "detail": {}
-    },
-    {
-      "name": "schema_meta:source_fragment",
-      "status": "PASS",
-      "detail": {}
-    },
-    {
-      "name": "schema_hash:configuration",
-      "status": "PASS",
-      "detail": {}
-    },
-    {
-      "name": "schema_meta:configuration",
-      "status": "PASS",
-      "detail": {}
-    },
-    {
-      "name": "schema_hash:code",
-      "status": "PASS",
-      "detail": {}
-    },
-    {
-      "name": "schema_meta:code",
-      "status": "PASS",
-      "detail": {}
-    },
-    {
-      "name": "schema_hash:environment",
-      "status": "PASS",
-      "detail": {}
-    },
-    {
-      "name": "schema_meta:environment",
-      "status": "PASS",
-      "detail": {}
-    },
-    {
-      "name": "schema_hash:convention_set",
-      "status": "PASS",
-      "detail": {}
-    },
-    {
-      "name": "schema_meta:convention_set",
-      "status": "PASS",
-      "detail": {}
-    },
-    {
-      "name": "schema_hash:parameter_point",
-      "status": "PASS",
-      "detail": {}
-    },
-    {
-      "name": "schema_meta:parameter_point",
-      "status": "PASS",
-      "detail": {}
-    },
-    {
-      "name": "schema_hash:benchmark_result",
-      "status": "PASS",
-      "detail": {}
-    },
-    {
-      "name": "schema_meta:benchmark_result",
-      "status": "PASS",
-      "detail": {}
-    },
-    {
-      "name": "schema_hash:evidence_fragment",
-      "status": "PASS",
-      "detail": {}
-    },
-    {
-      "name": "schema_meta:evidence_fragment",
-      "status": "PASS",
-      "detail": {}
-    },
-    {
-      "name": "schema_hash:test_case",
-      "status": "PASS",
-      "detail": {}
-    },
-    {
-      "name": "schema_meta:test_case",
-      "status": "PASS",
-      "detail": {}
-    },
-    {
-      "name": "schema_hash:test_run",
-      "status": "PASS",
-      "detail": {}
-    },
-    {
-      "name": "schema_meta:test_run",
-      "status": "PASS",
-      "detail": {}
-    },
-    {
-      "name": "schema_hash:state_transition_event",
-      "status": "PASS",
-      "detail": {}
-    },
-    {
-      "name": "schema_meta:state_transition_event",
-      "status": "PASS",
-      "detail": {}
-    },
-    {
-      "name": "schema_hash:migration_record",
-      "status": "PASS",
-      "detail": {}
-    },
-    {
-      "name": "schema_meta:migration_record",
-      "status": "PASS",
-      "detail": {}
-    },
-    {
-      "name": "schema_hash:relation_edge",
-      "status": "PASS",
-      "detail": {}
-    },
-    {
-      "name": "schema_meta:relation_edge",
-      "status": "PASS",
-      "detail": {}
-    },
-    {
-      "name": "record_types_match",
-      "status": "PASS",
-      "detail": {
-        "declared": 25,
-        "loaded": 25
-      }
-    },
-    {
-      "name": "fixture_index_hash",
-      "status": "PASS",
-      "detail": {}
-    },
-    {
-      "name": "fixture_ids_unique",
-      "status": "PASS",
-      "detail": {}
-    },
-    {
-      "name": "requirement_ids_unique",
-      "status": "PASS",
-      "detail": {}
-    },
-    {
-      "name": "test_ids_unique",
-      "status": "PASS",
-      "detail": {}
-    },
-    {
-      "name": "trace_fixture_refs_valid",
-      "status": "PASS",
-      "detail": {
-        "dangling": []
-      }
-    },
-    {
-      "name": "all_fixtures_traced",
-      "status": "PASS",
-      "detail": {
-        "untraced": []
-      }
-    },
-    {
-      "name": "semantic_test_expectations_match",
-      "status": "PASS",
-      "detail": {
-        "total": 16,
-        "failed": []
-      }
-    }
-  ],
-  "fixtures": [
-    {
-      "fixture_id": "FX-TASK-VALID-001",
-      "record_type": "task",
-      "expected": "pass",
-      "actual": "pass",
-      "ok": true,
-      "errors": []
-    },
-    {
-      "fixture_id": "FX-TASK-INVALID-001",
-      "record_type": "task",
-      "expected": "fail",
-      "actual": "fail",
-      "ok": true,
-      "errors": [
-        "Additional properties are not allowed ('__undeclared_field__' was unexpected)"
-      ]
-    },
-    {
-      "fixture_id": "FX-TASK-CONDITIONAL-001",
-      "record_type": "task",
-      "expected": "pass",
-      "actual": "pass",
-      "ok": true,
-      "errors": []
-    },
-    {
-      "fixture_id": "FX-TASK_EXECUTION_CONTRACT-VALID-001",
-      "record_type": "task_execution_contract",
-      "expected": "pass",
-      "actual": "pass",
-      "ok": true,
-      "errors": []
-    },
-    {
-      "fixture_id": "FX-TASK_EXECUTION_CONTRACT-INVALID-001",
-      "record_type": "task_execution_contract",
-      "expected": "fail",
-      "actual": "fail",
-      "ok": true,
-      "errors": [
-        "Additional properties are not allowed ('__undeclared_field__' was unexpected)"
-      ]
-    },
-    {
-      "fixture_id": "FX-TASK_EXECUTION_CONTRACT-CONDITIONAL-001",
-      "record_type": "task_execution_contract",
-      "expected": "pass",
-      "actual": "pass",
-      "ok": true,
-      "errors": []
-    },
-    {
-      "fixture_id": "FX-RUN_PLAN-VALID-001",
-      "record_type": "run_plan",
-      "expected": "pass",
-      "actual": "pass",
-      "ok": true,
-      "errors": []
-    },
-    {
-      "fixture_id": "FX-RUN_PLAN-INVALID-001",
-      "record_type": "run_plan",
-      "expected": "fail",
-      "actual": "fail",
-      "ok": true,
-      "errors": [
-        "Additional properties are not allowed ('__undeclared_field__' was unexpected)"
-      ]
-    },
-    {
-      "fixture_id": "FX-RUN_PLAN-CONDITIONAL-001",
-      "record_type": "run_plan",
-      "expected": "pass",
-      "actual": "pass",
-      "ok": true,
-      "errors": []
-    },
-    {
-      "fixture_id": "FX-RUN-VALID-001",
-      "record_type": "run",
-      "expected": "pass",
-      "actual": "pass",
-      "ok": true,
-      "errors": []
-    },
-    {
-      "fixture_id": "FX-RUN-INVALID-001",
-      "record_type": "run",
-      "expected": "fail",
-      "actual": "fail",
-      "ok": true,
-      "errors": [
-        "Additional properties are not allowed ('__undeclared_field__' was unexpected)"
-      ]
-    },
-    {
-      "fixture_id": "FX-RUN-CONDITIONAL-001",
-      "record_type": "run",
-      "expected": "pass",
-      "actual": "pass",
-      "ok": true,
-      "errors": []
-    },
-    {
-      "fixture_id": "FX-RUN_MANIFEST-VALID-001",
-      "record_type": "run_manifest",
-      "expected": "pass",
-      "actual": "pass",
-      "ok": true,
-      "errors": []
-    },
-    {
-      "fixture_id": "FX-RUN_MANIFEST-INVALID-001",
-      "record_type": "run_manifest",
-      "expected": "fail",
-      "actual": "fail",
-      "ok": true,
-      "errors": [
-        "Additional properties are not allowed ('__undeclared_field__' was unexpected)"
-      ]
-    },
-    {
-      "fixture_id": "FX-RUN_MANIFEST-CONDITIONAL-001",
-      "record_type": "run_manifest",
-      "expected": "pass",
-      "actual": "pass",
-      "ok": true,
-      "errors": []
-    },
-    {
-      "fixture_id": "FX-ARTIFACT_PLAN-VALID-001",
-      "record_type": "artifact_plan",
-      "expected": "pass",
-      "actual": "pass",
-      "ok": true,
-      "errors": []
-    },
-    {
-      "fixture_id": "FX-ARTIFACT_PLAN-INVALID-001",
-      "record_type": "artifact_plan",
-      "expected": "fail",
-      "actual": "fail",
-      "ok": true,
-      "errors": [
-        "Additional properties are not allowed ('__undeclared_field__' was unexpected)"
-      ]
-    },
-    {
-      "fixture_id": "FX-ARTIFACT_PLAN-CONDITIONAL-001",
-      "record_type": "artifact_plan",
-      "expected": "pass",
-      "actual": "pass",
-      "ok": true,
-      "errors": []
-    },
-    {
-      "fixture_id": "FX-ARTIFACT-VALID-001",
-      "record_type": "artifact",
-      "expected": "pass",
-      "actual": "pass",
-      "ok": true,
-      "errors": []
-    },
-    {
-      "fixture_id": "FX-ARTIFACT-INVALID-001",
-      "record_type": "artifact",
-      "expected": "fail",
-      "actual": "fail",
-      "ok": true,
-      "errors": [
-        "Additional properties are not allowed ('__undeclared_field__' was unexpected)"
-      ]
-    },
-    {
-      "fixture_id": "FX-ARTIFACT-CONDITIONAL-001",
-      "record_type": "artifact",
-      "expected": "pass",
-      "actual": "pass",
-      "ok": true,
-      "errors": []
-    },
-    {
-      "fixture_id": "FX-VALIDATION_PLAN-VALID-001",
-      "record_type": "validation_plan",
-      "expected": "pass",
-      "actual": "pass",
-      "ok": true,
-      "errors": []
-    },
-    {
-      "fixture_id": "FX-VALIDATION_PLAN-INVALID-001",
-      "record_type": "validation_plan",
-      "expected": "fail",
-      "actual": "fail",
-      "ok": true,
-      "errors": [
-        "Additional properties are not allowed ('__undeclared_field__' was unexpected)"
-      ]
-    },
-    {
-      "fixture_id": "FX-VALIDATION_PLAN-CONDITIONAL-001",
-      "record_type": "validation_plan",
-      "expected": "pass",
-      "actual": "pass",
-      "ok": true,
-      "errors": []
-    },
-    {
-      "fixture_id": "FX-VALIDATION_ACTIVITY-VALID-001",
-      "record_type": "validation_activity",
-      "expected": "pass",
-      "actual": "pass",
-      "ok": true,
-      "errors": []
-    },
-    {
-      "fixture_id": "FX-VALIDATION_ACTIVITY-INVALID-001",
-      "record_type": "validation_activity",
-      "expected": "fail",
-      "actual": "fail",
-      "ok": true,
-      "errors": [
-        "Additional properties are not allowed ('__undeclared_field__' was unexpected)"
-      ]
-    },
-    {
-      "fixture_id": "FX-VALIDATION_ACTIVITY-CONDITIONAL-001",
-      "record_type": "validation_activity",
-      "expected": "pass",
-      "actual": "pass",
-      "ok": true,
-      "errors": []
-    },
-    {
-      "fixture_id": "FX-VALIDATION_REPORT-VALID-001",
-      "record_type": "validation_report",
-      "expected": "pass",
-      "actual": "pass",
-      "ok": true,
-      "errors": []
-    },
-    {
-      "fixture_id": "FX-VALIDATION_REPORT-INVALID-001",
-      "record_type": "validation_report",
-      "expected": "fail",
-      "actual": "fail",
-      "ok": true,
-      "errors": [
-        "Additional properties are not allowed ('__undeclared_field__' was unexpected)"
-      ]
-    },
-    {
-      "fixture_id": "FX-VALIDATION_REPORT-CONDITIONAL-001",
-      "record_type": "validation_report",
-      "expected": "pass",
-      "actual": "pass",
-      "ok": true,
-      "errors": []
-    },
-    {
-      "fixture_id": "FX-CLAIM-VALID-001",
-      "record_type": "claim",
-      "expected": "pass",
-      "actual": "pass",
-      "ok": true,
-      "errors": []
-    },
-    {
-      "fixture_id": "FX-CLAIM-INVALID-001",
-      "record_type": "claim",
-      "expected": "fail",
-      "actual": "fail",
-      "ok": true,
-      "errors": [
-        "Additional properties are not allowed ('__undeclared_field__' was unexpected)"
-      ]
-    },
-    {
-      "fixture_id": "FX-CLAIM-CONDITIONAL-001",
-      "record_type": "claim",
-      "expected": "pass",
-      "actual": "pass",
-      "ok": true,
-      "errors": []
-    },
-    {
-      "fixture_id": "FX-SOURCE-VALID-001",
-      "record_type": "source",
-      "expected": "pass",
-      "actual": "pass",
-      "ok": true,
-      "errors": []
-    },
-    {
-      "fixture_id": "FX-SOURCE-INVALID-001",
-      "record_type": "source",
-      "expected": "fail",
-      "actual": "fail",
-      "ok": true,
-      "errors": [
-        "Additional properties are not allowed ('__undeclared_field__' was unexpected)"
-      ]
-    },
-    {
-      "fixture_id": "FX-SOURCE-CONDITIONAL-001",
-      "record_type": "source",
-      "expected": "pass",
-      "actual": "pass",
-      "ok": true,
-      "errors": []
-    },
-    {
-      "fixture_id": "FX-SOURCE_FRAGMENT-VALID-001",
-      "record_type": "source_fragment",
-      "expected": "pass",
-      "actual": "pass",
-      "ok": true,
-      "errors": []
-    },
-    {
-      "fixture_id": "FX-SOURCE_FRAGMENT-INVALID-001",
-      "record_type": "source_fragment",
-      "expected": "fail",
-      "actual": "fail",
-      "ok": true,
-      "errors": [
-        "Additional properties are not allowed ('__undeclared_field__' was unexpected)"
-      ]
-    },
-    {
-      "fixture_id": "FX-SOURCE_FRAGMENT-CONDITIONAL-001",
-      "record_type": "source_fragment",
-      "expected": "pass",
-      "actual": "pass",
-      "ok": true,
-      "errors": []
-    },
-    {
-      "fixture_id": "FX-CONFIGURATION-VALID-001",
-      "record_type": "configuration",
-      "expected": "pass",
-      "actual": "pass",
-      "ok": true,
-      "errors": []
-    },
-    {
-      "fixture_id": "FX-CONFIGURATION-INVALID-001",
-      "record_type": "configuration",
-      "expected": "fail",
-      "actual": "fail",
-      "ok": true,
-      "errors": [
-        "Additional properties are not allowed ('__undeclared_field__' was unexpected)"
-      ]
-    },
-    {
-      "fixture_id": "FX-CONFIGURATION-CONDITIONAL-001",
-      "record_type": "configuration",
-      "expected": "pass",
-      "actual": "pass",
-      "ok": true,
-      "errors": []
-    },
-    {
-      "fixture_id": "FX-CODE-VALID-001",
-      "record_type": "code",
-      "expected": "pass",
-      "actual": "pass",
-      "ok": true,
-      "errors": []
-    },
-    {
-      "fixture_id": "FX-CODE-INVALID-001",
-      "record_type": "code",
-      "expected": "fail",
-      "actual": "fail",
-      "ok": true,
-      "errors": [
-        "Additional properties are not allowed ('__undeclared_field__' was unexpected)"
-      ]
-    },
-    {
-      "fixture_id": "FX-CODE-CONDITIONAL-001",
-      "record_type": "code",
-      "expected": "pass",
-      "actual": "pass",
-      "ok": true,
-      "errors": []
-    },
-    {
-      "fixture_id": "FX-ENVIRONMENT-VALID-001",
-      "record_type": "environment",
-      "expected": "pass",
-      "actual": "pass",
-      "ok": true,
-      "errors": []
-    },
-    {
-      "fixture_id": "FX-ENVIRONMENT-INVALID-001",
-      "record_type": "environment",
-      "expected": "fail",
-      "actual": "fail",
-      "ok": true,
-      "errors": [
-        "Additional properties are not allowed ('__undeclared_field__' was unexpected)"
-      ]
-    },
-    {
-      "fixture_id": "FX-ENVIRONMENT-CONDITIONAL-001",
-      "record_type": "environment",
-      "expected": "pass",
-      "actual": "pass",
-      "ok": true,
-      "errors": []
-    },
-    {
-      "fixture_id": "FX-CONVENTION_SET-VALID-001",
-      "record_type": "convention_set",
-      "expected": "pass",
-      "actual": "pass",
-      "ok": true,
-      "errors": []
-    },
-    {
-      "fixture_id": "FX-CONVENTION_SET-INVALID-001",
-      "record_type": "convention_set",
-      "expected": "fail",
-      "actual": "fail",
-      "ok": true,
-      "errors": [
-        "Additional properties are not allowed ('__undeclared_field__' was unexpected)"
-      ]
-    },
-    {
-      "fixture_id": "FX-CONVENTION_SET-CONDITIONAL-001",
-      "record_type": "convention_set",
-      "expected": "pass",
-      "actual": "pass",
-      "ok": true,
-      "errors": []
-    },
-    {
-      "fixture_id": "FX-PARAMETER_POINT-VALID-001",
-      "record_type": "parameter_point",
-      "expected": "pass",
-      "actual": "pass",
-      "ok": true,
-      "errors": []
-    },
-    {
-      "fixture_id": "FX-PARAMETER_POINT-INVALID-001",
-      "record_type": "parameter_point",
-      "expected": "fail",
-      "actual": "fail",
-      "ok": true,
-      "errors": [
-        "Additional properties are not allowed ('__undeclared_field__' was unexpected)"
-      ]
-    },
-    {
-      "fixture_id": "FX-PARAMETER_POINT-CONDITIONAL-001",
-      "record_type": "parameter_point",
-      "expected": "pass",
-      "actual": "pass",
-      "ok": true,
-      "errors": []
-    },
-    {
-      "fixture_id": "FX-BENCHMARK_RESULT-VALID-001",
-      "record_type": "benchmark_result",
-      "expected": "pass",
-      "actual": "pass",
-      "ok": true,
-      "errors": []
-    },
-    {
-      "fixture_id": "FX-BENCHMARK_RESULT-INVALID-001",
-      "record_type": "benchmark_result",
-      "expected": "fail",
-      "actual": "fail",
-      "ok": true,
-      "errors": [
-        "Additional properties are not allowed ('__undeclared_field__' was unexpected)"
-      ]
-    },
-    {
-      "fixture_id": "FX-BENCHMARK_RESULT-CONDITIONAL-001",
-      "record_type": "benchmark_result",
-      "expected": "pass",
-      "actual": "pass",
-      "ok": true,
-      "errors": []
-    },
-    {
-      "fixture_id": "FX-EVIDENCE_FRAGMENT-VALID-001",
-      "record_type": "evidence_fragment",
-      "expected": "pass",
-      "actual": "pass",
-      "ok": true,
-      "errors": []
-    },
-    {
-      "fixture_id": "FX-EVIDENCE_FRAGMENT-INVALID-001",
-      "record_type": "evidence_fragment",
-      "expected": "fail",
-      "actual": "fail",
-      "ok": true,
-      "errors": [
-        "Additional properties are not allowed ('__undeclared_field__' was unexpected)"
-      ]
-    },
-    {
-      "fixture_id": "FX-EVIDENCE_FRAGMENT-CONDITIONAL-001",
-      "record_type": "evidence_fragment",
-      "expected": "pass",
-      "actual": "pass",
-      "ok": true,
-      "errors": []
-    },
-    {
-      "fixture_id": "FX-TEST_CASE-VALID-001",
-      "record_type": "test_case",
-      "expected": "pass",
-      "actual": "pass",
-      "ok": true,
-      "errors": []
-    },
-    {
-      "fixture_id": "FX-TEST_CASE-INVALID-001",
-      "record_type": "test_case",
-      "expected": "fail",
-      "actual": "fail",
-      "ok": true,
-      "errors": [
-        "Additional properties are not allowed ('__undeclared_field__' was unexpected)"
-      ]
-    },
-    {
-      "fixture_id": "FX-TEST_CASE-CONDITIONAL-001",
-      "record_type": "test_case",
-      "expected": "pass",
-      "actual": "pass",
-      "ok": true,
-      "errors": []
-    },
-    {
-      "fixture_id": "FX-TEST_RUN-VALID-001",
-      "record_type": "test_run",
-      "expected": "pass",
-      "actual": "pass",
-      "ok": true,
-      "errors": []
-    },
-    {
-      "fixture_id": "FX-TEST_RUN-INVALID-001",
-      "record_type": "test_run",
-      "expected": "fail",
-      "actual": "fail",
-      "ok": true,
-      "errors": [
-        "Additional properties are not allowed ('__undeclared_field__' was unexpected)"
-      ]
-    },
-    {
-      "fixture_id": "FX-TEST_RUN-CONDITIONAL-001",
-      "record_type": "test_run",
-      "expected": "pass",
-      "actual": "pass",
-      "ok": true,
-      "errors": []
-    },
-    {
-      "fixture_id": "FX-STATE_TRANSITION_EVENT-VALID-001",
-      "record_type": "state_transition_event",
-      "expected": "pass",
-      "actual": "pass",
-      "ok": true,
-      "errors": []
-    },
-    {
-      "fixture_id": "FX-STATE_TRANSITION_EVENT-INVALID-001",
-      "record_type": "state_transition_event",
-      "expected": "fail",
-      "actual": "fail",
-      "ok": true,
-      "errors": [
-        "Additional properties are not allowed ('__undeclared_field__' was unexpected)"
-      ]
-    },
-    {
-      "fixture_id": "FX-STATE_TRANSITION_EVENT-CONDITIONAL-001",
-      "record_type": "state_transition_event",
-      "expected": "pass",
-      "actual": "pass",
-      "ok": true,
-      "errors": []
-    },
-    {
-      "fixture_id": "FX-MIGRATION_RECORD-VALID-001",
-      "record_type": "migration_record",
-      "expected": "pass",
-      "actual": "pass",
-      "ok": true,
-      "errors": []
-    },
-    {
-      "fixture_id": "FX-MIGRATION_RECORD-INVALID-001",
-      "record_type": "migration_record",
-      "expected": "fail",
-      "actual": "fail",
-      "ok": true,
-      "errors": [
-        "Additional properties are not allowed ('__undeclared_field__' was unexpected)"
-      ]
-    },
-    {
-      "fixture_id": "FX-MIGRATION_RECORD-CONDITIONAL-001",
-      "record_type": "migration_record",
-      "expected": "pass",
-      "actual": "pass",
-      "ok": true,
-      "errors": []
-    },
-    {
-      "fixture_id": "FX-RELATION_EDGE-VALID-001",
-      "record_type": "relation_edge",
-      "expected": "pass",
-      "actual": "pass",
-      "ok": true,
-      "errors": []
-    },
-    {
-      "fixture_id": "FX-RELATION_EDGE-INVALID-001",
-      "record_type": "relation_edge",
-      "expected": "fail",
-      "actual": "fail",
-      "ok": true,
-      "errors": [
-        "Additional properties are not allowed ('__undeclared_field__' was unexpected)"
-      ]
-    },
-    {
-      "fixture_id": "FX-RELATION_EDGE-CONDITIONAL-001",
-      "record_type": "relation_edge",
-      "expected": "pass",
-      "actual": "pass",
-      "ok": true,
-      "errors": []
-    },
-    {
-      "fixture_id": "FX-ART-STORAGE-MISSING-001",
-      "record_type": "artifact",
-      "expected": "fail",
-      "actual": "fail",
-      "ok": true,
-      "errors": [
-        "'artifact_storage_kind' is a required property"
-      ]
-    },
-    {
-      "fixture_id": "FX-ART-DIR-HASH-MISSING-001",
-      "record_type": "artifact",
-      "expected": "fail",
-      "actual": "fail",
-      "ok": true,
-      "errors": [
-        "None is not of type 'string'",
-        "None is not of type 'string'"
-      ]
-    },
-    {
-      "fixture_id": "FX-ART-FILE-HAS-DIR-MANIFEST-001",
-      "record_type": "artifact",
-      "expected": "fail",
-      "actual": "fail",
-      "ok": true,
-      "errors": [
-        "[] was expected"
-      ]
-    },
-    {
-      "fixture_id": "FX-ART-HASHLESS-NEEDS-REVIEW-001",
-      "record_type": "artifact",
-      "expected": "pass",
-      "actual": "pass",
-      "ok": true,
-      "errors": []
-    },
-    {
-      "fixture_id": "FX-ART-HASHLESS-NO-REASON-001",
-      "record_type": "artifact",
-      "expected": "fail",
-      "actual": "fail",
-      "ok": true,
-      "errors": [
-        "None is not of type 'string'",
-        "None is not of type 'string'"
-      ]
-    },
-    {
-      "fixture_id": "FX-ART-ALTID-GENERATED-001",
-      "record_type": "artifact",
-      "expected": "fail",
-      "actual": "fail",
-      "ok": true,
-      "errors": [
-        "{'approved_contract_id': 'TEC-ALT-001', 'approved_contract_sha256': 'bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb', 'method_id': 'AIM-PUB-VERSION-001', 'method_version': 1, 'identity_value': 'https://example.invalid/v2', 'evidence_artifact_ids': ['ART-EVID-001'], 'verification_status': 'verified', 'verified_at': '2026-10-20T12:05:00Z', 'verified_by': 'reviewer-1', 'scope_statement': 'Publisher version identity only.', 'limitations': ['Does not prove byte identity.']} is not of type 'null'",
-        "'ingested_external' was expected",
-        "'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa' is not of type 'null'",
-        "None is not of type 'string'"
-      ]
-    },
-    {
-      "fixture_id": "FX-ART-HASH-AND-ALTID-001",
-      "record_type": "artifact",
-      "expected": "fail",
-      "actual": "fail",
-      "ok": true,
-      "errors": [
-        "{'approved_contract_id': 'TEC-ALT-001', 'approved_contract_sha256': 'bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb', 'method_id': 'AIM-PUB-VERSION-001', 'method_version': 1, 'identity_value': 'https://example.invalid/v2', 'evidence_artifact_ids': ['ART-EVID-001'], 'verification_status': 'verified', 'verified_at': '2026-10-20T12:05:00Z', 'verified_by': 'reviewer-1', 'scope_statement': 'Publisher version identity only.', 'limitations': ['Does not prove byte identity.']} is not of type 'null'",
-        "'ingested_external' was expected",
-        "'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa' is not of type 'null'",
-        "None is not of type 'string'"
-      ]
-    },
-    {
-      "fixture_id": "FX-TEC-ALTID-METHOD-INCOMPLETE-001",
-      "record_type": "task_execution_contract",
-      "expected": "fail",
-      "actual": "fail",
-      "ok": true,
-      "errors": [
-        "'method_kind' is a required property",
-        "'method_status' is a required property",
-        "'description' is a required property",
-        "'applicable_source_types' is a required property"
-      ]
-    }
-  ],
-  "semantic_tests": [
-    {
-      "test_id": "SEM-ALTID-001-APPROVED-METHOD",
-      "expected": "pass",
-      "actual": "pass",
-      "ok": true,
-      "schema_errors": [],
-      "semantic_errors": []
-    },
-    {
-      "test_id": "SEM-ALTID-002-METHOD-NOT-REGISTERED",
-      "expected": "semantic_reject",
-      "actual": "semantic_reject",
-      "ok": true,
-      "schema_errors": [],
-      "semantic_errors": [
-        "METHOD_NOT_FOUND_OR_AMBIGUOUS"
-      ]
-    },
-    {
-      "test_id": "SEM-ALTID-003-CONTRACT-NOT-APPROVED",
-      "expected": "semantic_reject",
-      "actual": "semantic_reject",
-      "ok": true,
-      "schema_errors": [],
-      "semantic_errors": [
-        "CONTRACT_NOT_APPROVED"
-      ]
-    },
-    {
-      "test_id": "SEM-ALTID-004-CONTRACT-HASH-MISMATCH",
-      "expected": "semantic_reject",
-      "actual": "semantic_reject",
-      "ok": true,
-      "schema_errors": [],
-      "semantic_errors": [
-        "CONTRACT_HASH_MISMATCH"
-      ]
-    },
-    {
-      "test_id": "SEM-ALTID-005-SOURCE-TYPE-NOT-APPLICABLE",
-      "expected": "semantic_reject",
-      "actual": "semantic_reject",
-      "ok": true,
-      "schema_errors": [],
-      "semantic_errors": [
-        "SOURCE_TYPE_NOT_APPLICABLE"
-      ]
-    },
-    {
-      "test_id": "SEM-ALTID-006-SOURCE-ID-MISMATCH",
-      "expected": "semantic_reject",
-      "actual": "semantic_reject",
-      "ok": true,
-      "schema_errors": [],
-      "semantic_errors": [
-        "SOURCE_ID_MISMATCH"
-      ]
-    },
-    {
-      "test_id": "SEM-ALTID-007-SOURCE-PROJECT-MISMATCH",
-      "expected": "semantic_reject",
-      "actual": "semantic_reject",
-      "ok": true,
-      "schema_errors": [],
-      "semantic_errors": [
-        "SOURCE_PROJECT_MISMATCH"
-      ]
-    },
-    {
-      "test_id": "SEM-ALTID-008-DUPLICATE-METHOD-ID",
-      "expected": "semantic_reject",
-      "actual": "semantic_reject",
-      "ok": true,
-      "schema_errors": [],
-      "semantic_errors": [
-        "DUPLICATE_METHOD_ID_IN_CONTRACT",
-        "METHOD_NOT_FOUND_OR_AMBIGUOUS"
-      ]
-    },
-    {
-      "test_id": "SEM-ALTID-009-UNVERIFIED-CANNOT-PASS",
-      "expected": "schema_reject",
-      "actual": "schema_reject",
-      "ok": true,
-      "schema_errors": [
-        {
-          "record_type": "artifact",
-          "errors": [
-            "'passed' is not one of ['needs_review', 'failed']"
-          ]
-        }
-      ],
-      "semantic_errors": [
-        "HASHLESS_ARTIFACT_CANNOT_PASS_BYTE_INTEGRITY"
-      ]
-    },
-    {
-      "test_id": "SEM-ALTID-010-VERIFICATION-NO-EVIDENCE",
-      "expected": "schema_reject",
-      "actual": "schema_reject",
-      "ok": true,
-      "schema_errors": [
-        {
-          "record_type": "artifact",
-          "errors": [
-            "{'approved_contract_id': 'TEC-ALT-001', 'approved_contract_sha256': 'bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb', 'method_id': 'AIM-PUB-VERSION-001', 'method_version': 1, 'identity_value': 'https://example.invalid/document/v2#version=v2', 'evidence_artifact_ids': [], 'verification_status': 'verified', 'verified_at': '2026-10-20T12:05:00Z', 'verified_by': 'reviewer-1', 'scope_statement': 'Publisher-declared version identity only.', 'limitations': ['No raw-byte SHA-256 is available.', 'Does not prove byte-for-byte identity.']} is not valid under any of the given schemas"
-          ]
-        }
-      ],
-      "semantic_errors": [
-        "VERIFICATION_EVIDENCE_INCOMPLETE"
-      ]
-    },
-    {
-      "test_id": "SEM-ALTID-011-ALT-ID-WITH-CONTENT-HASH",
-      "expected": "schema_reject",
-      "actual": "schema_reject",
-      "ok": true,
-      "schema_errors": [
-        {
-          "record_type": "artifact",
-          "errors": [
-            "{'approved_contract_id': 'TEC-ALT-001', 'approved_contract_sha256': 'bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb', 'method_id': 'AIM-PUB-VERSION-001', 'method_version': 1, 'identity_value': 'https://example.invalid/document/v2#version=v2', 'evidence_artifact_ids': ['ART-EVID-001'], 'verification_status': 'verified', 'verified_at': '2026-10-20T12:05:00Z', 'verified_by': 'reviewer-1', 'scope_statement': 'Publisher-declared version identity only.', 'limitations': ['No raw-byte SHA-256 is available.', 'Does not prove byte-for-byte identity.']} is not of type 'null'",
-            "'No raw-byte digest available from source endpoint.' is not of type 'null'",
-            "'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa' is not of type 'null'"
-          ]
-        }
-      ],
-      "semantic_errors": [
-        "ALT_IDENTITY_WITH_CONTENT_HASH"
-      ]
-    },
-    {
-      "test_id": "SEM-ALTID-012-HASHLESS-NO-ALT-NEEDS-REVIEW",
-      "expected": "pass",
-      "actual": "pass",
-      "ok": true,
-      "schema_errors": [],
-      "semantic_errors": []
-    },
-    {
-      "test_id": "SEM-ALTID-013-HASHLESS-NO-REASON",
-      "expected": "schema_reject",
-      "actual": "schema_reject",
-      "ok": true,
-      "schema_errors": [
-        {
-          "record_type": "artifact",
-          "errors": [
-            "None is not of type 'string'",
-            "None is not of type 'string'"
-          ]
-        }
-      ],
-      "semantic_errors": [
-        "HASH_MISSING_REASON"
-      ]
-    },
-    {
-      "test_id": "SEM-ALTID-014-ALT-ID-GENERATED",
-      "expected": "schema_reject",
-      "actual": "schema_reject",
-      "ok": true,
-      "schema_errors": [
-        {
-          "record_type": "artifact",
-          "errors": [
-            "{'schema_version': '1.4', 'record_type': 'artifact', 'project_id': 'HEP-RESEARCH', 'artifact_id': 'ART-001', 'artifact_type': 'sample', 'origin_kind': 'generated', 'path_or_uri': 'sample', 'format': 'sample', 'content_sha256': None, 'schema_or_structure': {}, 'units': [], 'input_artifact_ids': [], 'configuration_id': None, 'code_id': None, 'environment_id': None, 'artifact_integrity_status': 'needs_review', 'artifact_lifecycle_status': 'active', 'generated_by_run_id': None, 'generated_by_activity_id': None, 'acquired_from_source_id': 'SRC-001', 'ingested_by_activity_id': None, 'required_files': [], 'directory_manifest': [], 'directory_manifest_sha256': None, 'hash_unavailable_reason': 'No raw-byte digest available from source endpoint.', 'created_at': '2026-10-20T12:00:00Z', 'artifact_storage_kind': 'file', 'alternative_identity': {'approved_contract_id': 'TEC-ALT-001', 'approved_contract_sha256': 'bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb', 'method_id': 'AIM-PUB-VERSION-001', 'method_version': 1, 'identity_value': 'https://example.invalid/document/v2#version=v2', 'evidence_artifact_ids': ['ART-EVID-001'], 'verification_status': 'verified', 'verified_at': '2026-10-20T12:05:00Z', 'verified_by': 'reviewer-1', 'scope_statement': 'Publisher-declared version identity only.', 'limitations': ['No raw-byte SHA-256 is available.', 'Does not prove byte-for-byte identity.']}} is not valid under any of the given schemas",
-            "None is not of type 'string'",
-            "'ingested_external' was expected"
-          ]
-        }
-      ],
-      "semantic_errors": [
-        "ALT_IDENTITY_SCOPE_INVALID"
-      ]
-    },
-    {
-      "test_id": "SEM-ALTID-015-DIRECTORY-CANNOT-USE-ALT-ID",
-      "expected": "schema_reject",
-      "actual": "schema_reject",
-      "ok": true,
-      "schema_errors": [
-        {
-          "record_type": "artifact",
-          "errors": [
-            "None is not of type 'string'",
-            "'No raw-byte digest available from source endpoint.' is not of type 'null'",
-            "{'approved_contract_id': 'TEC-ALT-001', 'approved_contract_sha256': 'bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb', 'method_id': 'AIM-PUB-VERSION-001', 'method_version': 1, 'identity_value': 'https://example.invalid/document/v2#version=v2', 'evidence_artifact_ids': ['ART-EVID-001'], 'verification_status': 'verified', 'verified_at': '2026-10-20T12:05:00Z', 'verified_by': 'reviewer-1', 'scope_statement': 'Publisher-declared version identity only.', 'limitations': ['No raw-byte SHA-256 is available.', 'Does not prove byte-for-byte identity.']} is not of type 'null'",
-            "'file' was expected"
-          ]
-        }
-      ],
-      "semantic_errors": [
-        "ALT_IDENTITY_SCOPE_INVALID"
-      ]
-    },
-    {
-      "test_id": "SEM-ART-DIRECTORY-MANIFEST-HASH",
-      "expected": "pass",
-      "actual": "pass",
-      "ok": true,
-      "schema_errors": [],
-      "semantic_errors": []
-    }
-  ],
-  "limitations": [
-    "Full state machine/event ledger is not implemented.",
-    "Migration and backward compatibility are not validated.",
-    "No filesystem walk, network retrieval, raw-byte hash recomputation, or JCS directory manifest hash recomputation.",
-    "No physics/scientific correctness validation."
-  ],
+  "provenance": {
+    "validation_status": "historical_snapshot_not_current_head",
+    "validated_commit_sha": null,
+    "workflow_run_id": null,
+    "workflow_run_attempt": null,
+    "generated_at_utc": null,
+    "validator_path": null,
+    "validator_sha256": null,
+    "execution_environment": "unknown_historical_snapshot",
+    "source_git_blob_sha": "21bed3e8e7020884960cc17b3436774f0cf2ecdf",
+    "note": "The original snapshot did not record a validated commit SHA, workflow run ID, or validator digest. Those values are intentionally not reconstructed. This snapshot is not current-HEAD validation evidence."
+  },
   "summary": {
-    "checks_total": 58,
-    "checks_passed": 58,
-    "checks_failed": 0,
-    "fixtures_total": 83,
-    "fixtures_expected_result_matched": 83,
-    "fixtures_mismatched": 0,
-    "record_types_loaded": 25,
-    "semantic_tests_total": 16,
-    "semantic_tests_expected_result_matched": 16,
-    "semantic_tests_mismatched": 0,
-    "trace_rows": 125
+    "validation_status": "not_run_for_current_head",
+    "note": "Historical counts are preserved under historical_snapshot.summary. The Schema CI workflow removes this marker before execution and generates a fresh report with run provenance."
+  },
+  "historical_snapshot": {
+    "checks": [
+      {
+        "name": "schema_hash:task",
+        "status": "PASS",
+        "detail": {}
+      },
+      {
+        "name": "schema_meta:task",
+        "status": "PASS",
+        "detail": {}
+      },
+      {
+        "name": "schema_hash:task_execution_contract",
+        "status": "PASS",
+        "detail": {}
+      },
+      {
+        "name": "schema_meta:task_execution_contract",
+        "status": "PASS",
+        "detail": {}
+      },
+      {
+        "name": "schema_hash:run_plan",
+        "status": "PASS",
+        "detail": {}
+      },
+      {
+        "name": "schema_meta:run_plan",
+        "status": "PASS",
+        "detail": {}
+      },
+      {
+        "name": "schema_hash:run",
+        "status": "PASS",
+        "detail": {}
+      },
+      {
+        "name": "schema_meta:run",
+        "status": "PASS",
+        "detail": {}
+      },
+      {
+        "name": "schema_hash:run_manifest",
+        "status": "PASS",
+        "detail": {}
+      },
+      {
+        "name": "schema_meta:run_manifest",
+        "status": "PASS",
+        "detail": {}
+      },
+      {
+        "name": "schema_hash:artifact_plan",
+        "status": "PASS",
+        "detail": {}
+      },
+      {
+        "name": "schema_meta:artifact_plan",
+        "status": "PASS",
+        "detail": {}
+      },
+      {
+        "name": "schema_hash:artifact",
+        "status": "PASS",
+        "detail": {}
+      },
+      {
+        "name": "schema_meta:artifact",
+        "status": "PASS",
+        "detail": {}
+      },
+      {
+        "name": "schema_hash:validation_plan",
+        "status": "PASS",
+        "detail": {}
+      },
+      {
+        "name": "schema_meta:validation_plan",
+        "status": "PASS",
+        "detail": {}
+      },
+      {
+        "name": "schema_hash:validation_activity",
+        "status": "PASS",
+        "detail": {}
+      },
+      {
+        "name": "schema_meta:validation_activity",
+        "status": "PASS",
+        "detail": {}
+      },
+      {
+        "name": "schema_hash:validation_report",
+        "status": "PASS",
+        "detail": {}
+      },
+      {
+        "name": "schema_meta:validation_report",
+        "status": "PASS",
+        "detail": {}
+      },
+      {
+        "name": "schema_hash:claim",
+        "status": "PASS",
+        "detail": {}
+      },
+      {
+        "name": "schema_meta:claim",
+        "status": "PASS",
+        "detail": {}
+      },
+      {
+        "name": "schema_hash:source",
+        "status": "PASS",
+        "detail": {}
+      },
+      {
+        "name": "schema_meta:source",
+        "status": "PASS",
+        "detail": {}
+      },
+      {
+        "name": "schema_hash:source_fragment",
+        "status": "PASS",
+        "detail": {}
+      },
+      {
+        "name": "schema_meta:source_fragment",
+        "status": "PASS",
+        "detail": {}
+      },
+      {
+        "name": "schema_hash:configuration",
+        "status": "PASS",
+        "detail": {}
+      },
+      {
+        "name": "schema_meta:configuration",
+        "status": "PASS",
+        "detail": {}
+      },
+      {
+        "name": "schema_hash:code",
+        "status": "PASS",
+        "detail": {}
+      },
+      {
+        "name": "schema_meta:code",
+        "status": "PASS",
+        "detail": {}
+      },
+      {
+        "name": "schema_hash:environment",
+        "status": "PASS",
+        "detail": {}
+      },
+      {
+        "name": "schema_meta:environment",
+        "status": "PASS",
+        "detail": {}
+      },
+      {
+        "name": "schema_hash:convention_set",
+        "status": "PASS",
+        "detail": {}
+      },
+      {
+        "name": "schema_meta:convention_set",
+        "status": "PASS",
+        "detail": {}
+      },
+      {
+        "name": "schema_hash:parameter_point",
+        "status": "PASS",
+        "detail": {}
+      },
+      {
+        "name": "schema_meta:parameter_point",
+        "status": "PASS",
+        "detail": {}
+      },
+      {
+        "name": "schema_hash:benchmark_result",
+        "status": "PASS",
+        "detail": {}
+      },
+      {
+        "name": "schema_meta:benchmark_result",
+        "status": "PASS",
+        "detail": {}
+      },
+      {
+        "name": "schema_hash:evidence_fragment",
+        "status": "PASS",
+        "detail": {}
+      },
+      {
+        "name": "schema_meta:evidence_fragment",
+        "status": "PASS",
+        "detail": {}
+      },
+      {
+        "name": "schema_hash:test_case",
+        "status": "PASS",
+        "detail": {}
+      },
+      {
+        "name": "schema_meta:test_case",
+        "status": "PASS",
+        "detail": {}
+      },
+      {
+        "name": "schema_hash:test_run",
+        "status": "PASS",
+        "detail": {}
+      },
+      {
+        "name": "schema_meta:test_run",
+        "status": "PASS",
+        "detail": {}
+      },
+      {
+        "name": "schema_hash:state_transition_event",
+        "status": "PASS",
+        "detail": {}
+      },
+      {
+        "name": "schema_meta:state_transition_event",
+        "status": "PASS",
+        "detail": {}
+      },
+      {
+        "name": "schema_hash:migration_record",
+        "status": "PASS",
+        "detail": {}
+      },
+      {
+        "name": "schema_meta:migration_record",
+        "status": "PASS",
+        "detail": {}
+      },
+      {
+        "name": "schema_hash:relation_edge",
+        "status": "PASS",
+        "detail": {}
+      },
+      {
+        "name": "schema_meta:relation_edge",
+        "status": "PASS",
+        "detail": {}
+      },
+      {
+        "name": "record_types_match",
+        "status": "PASS",
+        "detail": {
+          "declared": 25,
+          "loaded": 25
+        }
+      },
+      {
+        "name": "fixture_index_hash",
+        "status": "PASS",
+        "detail": {}
+      },
+      {
+        "name": "fixture_ids_unique",
+        "status": "PASS",
+        "detail": {}
+      },
+      {
+        "name": "requirement_ids_unique",
+        "status": "PASS",
+        "detail": {}
+      },
+      {
+        "name": "test_ids_unique",
+        "status": "PASS",
+        "detail": {}
+      },
+      {
+        "name": "trace_fixture_refs_valid",
+        "status": "PASS",
+        "detail": {
+          "dangling": []
+        }
+      },
+      {
+        "name": "all_fixtures_traced",
+        "status": "PASS",
+        "detail": {
+          "untraced": []
+        }
+      },
+      {
+        "name": "semantic_test_expectations_match",
+        "status": "PASS",
+        "detail": {
+          "total": 16,
+          "failed": []
+        }
+      }
+    ],
+    "fixtures": [
+      {
+        "fixture_id": "FX-TASK-VALID-001",
+        "record_type": "task",
+        "expected": "pass",
+        "actual": "pass",
+        "ok": true,
+        "errors": []
+      },
+      {
+        "fixture_id": "FX-TASK-INVALID-001",
+        "record_type": "task",
+        "expected": "fail",
+        "actual": "fail",
+        "ok": true,
+        "errors": [
+          "Additional properties are not allowed ('__undeclared_field__' was unexpected)"
+        ]
+      },
+      {
+        "fixture_id": "FX-TASK-CONDITIONAL-001",
+        "record_type": "task",
+        "expected": "pass",
+        "actual": "pass",
+        "ok": true,
+        "errors": []
+      },
+      {
+        "fixture_id": "FX-TASK_EXECUTION_CONTRACT-VALID-001",
+        "record_type": "task_execution_contract",
+        "expected": "pass",
+        "actual": "pass",
+        "ok": true,
+        "errors": []
+      },
+      {
+        "fixture_id": "FX-TASK_EXECUTION_CONTRACT-INVALID-001",
+        "record_type": "task_execution_contract",
+        "expected": "fail",
+        "actual": "fail",
+        "ok": true,
+        "errors": [
+          "Additional properties are not allowed ('__undeclared_field__' was unexpected)"
+        ]
+      },
+      {
+        "fixture_id": "FX-TASK_EXECUTION_CONTRACT-CONDITIONAL-001",
+        "record_type": "task_execution_contract",
+        "expected": "pass",
+        "actual": "pass",
+        "ok": true,
+        "errors": []
+      },
+      {
+        "fixture_id": "FX-RUN_PLAN-VALID-001",
+        "record_type": "run_plan",
+        "expected": "pass",
+        "actual": "pass",
+        "ok": true,
+        "errors": []
+      },
+      {
+        "fixture_id": "FX-RUN_PLAN-INVALID-001",
+        "record_type": "run_plan",
+        "expected": "fail",
+        "actual": "fail",
+        "ok": true,
+        "errors": [
+          "Additional properties are not allowed ('__undeclared_field__' was unexpected)"
+        ]
+      },
+      {
+        "fixture_id": "FX-RUN_PLAN-CONDITIONAL-001",
+        "record_type": "run_plan",
+        "expected": "pass",
+        "actual": "pass",
+        "ok": true,
+        "errors": []
+      },
+      {
+        "fixture_id": "FX-RUN-VALID-001",
+        "record_type": "run",
+        "expected": "pass",
+        "actual": "pass",
+        "ok": true,
+        "errors": []
+      },
+      {
+        "fixture_id": "FX-RUN-INVALID-001",
+        "record_type": "run",
+        "expected": "fail",
+        "actual": "fail",
+        "ok": true,
+        "errors": [
+          "Additional properties are not allowed ('__undeclared_field__' was unexpected)"
+        ]
+      },
+      {
+        "fixture_id": "FX-RUN-CONDITIONAL-001",
+        "record_type": "run",
+        "expected": "pass",
+        "actual": "pass",
+        "ok": true,
+        "errors": []
+      },
+      {
+        "fixture_id": "FX-RUN_MANIFEST-VALID-001",
+        "record_type": "run_manifest",
+        "expected": "pass",
+        "actual": "pass",
+        "ok": true,
+        "errors": []
+      },
+      {
+        "fixture_id": "FX-RUN_MANIFEST-INVALID-001",
+        "record_type": "run_manifest",
+        "expected": "fail",
+        "actual": "fail",
+        "ok": true,
+        "errors": [
+          "Additional properties are not allowed ('__undeclared_field__' was unexpected)"
+        ]
+      },
+      {
+        "fixture_id": "FX-RUN_MANIFEST-CONDITIONAL-001",
+        "record_type": "run_manifest",
+        "expected": "pass",
+        "actual": "pass",
+        "ok": true,
+        "errors": []
+      },
+      {
+        "fixture_id": "FX-ARTIFACT_PLAN-VALID-001",
+        "record_type": "artifact_plan",
+        "expected": "pass",
+        "actual": "pass",
+        "ok": true,
+        "errors": []
+      },
+      {
+        "fixture_id": "FX-ARTIFACT_PLAN-INVALID-001",
+        "record_type": "artifact_plan",
+        "expected": "fail",
+        "actual": "fail",
+        "ok": true,
+        "errors": [
+          "Additional properties are not allowed ('__undeclared_field__' was unexpected)"
+        ]
+      },
+      {
+        "fixture_id": "FX-ARTIFACT_PLAN-CONDITIONAL-001",
+        "record_type": "artifact_plan",
+        "expected": "pass",
+        "actual": "pass",
+        "ok": true,
+        "errors": []
+      },
+      {
+        "fixture_id": "FX-ARTIFACT-VALID-001",
+        "record_type": "artifact",
+        "expected": "pass",
+        "actual": "pass",
+        "ok": true,
+        "errors": []
+      },
+      {
+        "fixture_id": "FX-ARTIFACT-INVALID-001",
+        "record_type": "artifact",
+        "expected": "fail",
+        "actual": "fail",
+        "ok": true,
+        "errors": [
+          "Additional properties are not allowed ('__undeclared_field__' was unexpected)"
+        ]
+      },
+      {
+        "fixture_id": "FX-ARTIFACT-CONDITIONAL-001",
+        "record_type": "artifact",
+        "expected": "pass",
+        "actual": "pass",
+        "ok": true,
+        "errors": []
+      },
+      {
+        "fixture_id": "FX-VALIDATION_PLAN-VALID-001",
+        "record_type": "validation_plan",
+        "expected": "pass",
+        "actual": "pass",
+        "ok": true,
+        "errors": []
+      },
+      {
+        "fixture_id": "FX-VALIDATION_PLAN-INVALID-001",
+        "record_type": "validation_plan",
+        "expected": "fail",
+        "actual": "fail",
+        "ok": true,
+        "errors": [
+          "Additional properties are not allowed ('__undeclared_field__' was unexpected)"
+        ]
+      },
+      {
+        "fixture_id": "FX-VALIDATION_PLAN-CONDITIONAL-001",
+        "record_type": "validation_plan",
+        "expected": "pass",
+        "actual": "pass",
+        "ok": true,
+        "errors": []
+      },
+      {
+        "fixture_id": "FX-VALIDATION_ACTIVITY-VALID-001",
+        "record_type": "validation_activity",
+        "expected": "pass",
+        "actual": "pass",
+        "ok": true,
+        "errors": []
+      },
+      {
+        "fixture_id": "FX-VALIDATION_ACTIVITY-INVALID-001",
+        "record_type": "validation_activity",
+        "expected": "fail",
+        "actual": "fail",
+        "ok": true,
+        "errors": [
+          "Additional properties are not allowed ('__undeclared_field__' was unexpected)"
+        ]
+      },
+      {
+        "fixture_id": "FX-VALIDATION_ACTIVITY-CONDITIONAL-001",
+        "record_type": "validation_activity",
+        "expected": "pass",
+        "actual": "pass",
+        "ok": true,
+        "errors": []
+      },
+      {
+        "fixture_id": "FX-VALIDATION_REPORT-VALID-001",
+        "record_type": "validation_report",
+        "expected": "pass",
+        "actual": "pass",
+        "ok": true,
+        "errors": []
+      },
+      {
+        "fixture_id": "FX-VALIDATION_REPORT-INVALID-001",
+        "record_type": "validation_report",
+        "expected": "fail",
+        "actual": "fail",
+        "ok": true,
+        "errors": [
+          "Additional properties are not allowed ('__undeclared_field__' was unexpected)"
+        ]
+      },
+      {
+        "fixture_id": "FX-VALIDATION_REPORT-CONDITIONAL-001",
+        "record_type": "validation_report",
+        "expected": "pass",
+        "actual": "pass",
+        "ok": true,
+        "errors": []
+      },
+      {
+        "fixture_id": "FX-CLAIM-VALID-001",
+        "record_type": "claim",
+        "expected": "pass",
+        "actual": "pass",
+        "ok": true,
+        "errors": []
+      },
+      {
+        "fixture_id": "FX-CLAIM-INVALID-001",
+        "record_type": "claim",
+        "expected": "fail",
+        "actual": "fail",
+        "ok": true,
+        "errors": [
+          "Additional properties are not allowed ('__undeclared_field__' was unexpected)"
+        ]
+      },
+      {
+        "fixture_id": "FX-CLAIM-CONDITIONAL-001",
+        "record_type": "claim",
+        "expected": "pass",
+        "actual": "pass",
+        "ok": true,
+        "errors": []
+      },
+      {
+        "fixture_id": "FX-SOURCE-VALID-001",
+        "record_type": "source",
+        "expected": "pass",
+        "actual": "pass",
+        "ok": true,
+        "errors": []
+      },
+      {
+        "fixture_id": "FX-SOURCE-INVALID-001",
+        "record_type": "source",
+        "expected": "fail",
+        "actual": "fail",
+        "ok": true,
+        "errors": [
+          "Additional properties are not allowed ('__undeclared_field__' was unexpected)"
+        ]
+      },
+      {
+        "fixture_id": "FX-SOURCE-CONDITIONAL-001",
+        "record_type": "source",
+        "expected": "pass",
+        "actual": "pass",
+        "ok": true,
+        "errors": []
+      },
+      {
+        "fixture_id": "FX-SOURCE_FRAGMENT-VALID-001",
+        "record_type": "source_fragment",
+        "expected": "pass",
+        "actual": "pass",
+        "ok": true,
+        "errors": []
+      },
+      {
+        "fixture_id": "FX-SOURCE_FRAGMENT-INVALID-001",
+        "record_type": "source_fragment",
+        "expected": "fail",
+        "actual": "fail",
+        "ok": true,
+        "errors": [
+          "Additional properties are not allowed ('__undeclared_field__' was unexpected)"
+        ]
+      },
+      {
+        "fixture_id": "FX-SOURCE_FRAGMENT-CONDITIONAL-001",
+        "record_type": "source_fragment",
+        "expected": "pass",
+        "actual": "pass",
+        "ok": true,
+        "errors": []
+      },
+      {
+        "fixture_id": "FX-CONFIGURATION-VALID-001",
+        "record_type": "configuration",
+        "expected": "pass",
+        "actual": "pass",
+        "ok": true,
+        "errors": []
+      },
+      {
+        "fixture_id": "FX-CONFIGURATION-INVALID-001",
+        "record_type": "configuration",
+        "expected": "fail",
+        "actual": "fail",
+        "ok": true,
+        "errors": [
+          "Additional properties are not allowed ('__undeclared_field__' was unexpected)"
+        ]
+      },
+      {
+        "fixture_id": "FX-CONFIGURATION-CONDITIONAL-001",
+        "record_type": "configuration",
+        "expected": "pass",
+        "actual": "pass",
+        "ok": true,
+        "errors": []
+      },
+      {
+        "fixture_id": "FX-CODE-VALID-001",
+        "record_type": "code",
+        "expected": "pass",
+        "actual": "pass",
+        "ok": true,
+        "errors": []
+      },
+      {
+        "fixture_id": "FX-CODE-INVALID-001",
+        "record_type": "code",
+        "expected": "fail",
+        "actual": "fail",
+        "ok": true,
+        "errors": [
+          "Additional properties are not allowed ('__undeclared_field__' was unexpected)"
+        ]
+      },
+      {
+        "fixture_id": "FX-CODE-CONDITIONAL-001",
+        "record_type": "code",
+        "expected": "pass",
+        "actual": "pass",
+        "ok": true,
+        "errors": []
+      },
+      {
+        "fixture_id": "FX-ENVIRONMENT-VALID-001",
+        "record_type": "environment",
+        "expected": "pass",
+        "actual": "pass",
+        "ok": true,
+        "errors": []
+      },
+      {
+        "fixture_id": "FX-ENVIRONMENT-INVALID-001",
+        "record_type": "environment",
+        "expected": "fail",
+        "actual": "fail",
+        "ok": true,
+        "errors": [
+          "Additional properties are not allowed ('__undeclared_field__' was unexpected)"
+        ]
+      },
+      {
+        "fixture_id": "FX-ENVIRONMENT-CONDITIONAL-001",
+        "record_type": "environment",
+        "expected": "pass",
+        "actual": "pass",
+        "ok": true,
+        "errors": []
+      },
+      {
+        "fixture_id": "FX-CONVENTION_SET-VALID-001",
+        "record_type": "convention_set",
+        "expected": "pass",
+        "actual": "pass",
+        "ok": true,
+        "errors": []
+      },
+      {
+        "fixture_id": "FX-CONVENTION_SET-INVALID-001",
+        "record_type": "convention_set",
+        "expected": "fail",
+        "actual": "fail",
+        "ok": true,
+        "errors": [
+          "Additional properties are not allowed ('__undeclared_field__' was unexpected)"
+        ]
+      },
+      {
+        "fixture_id": "FX-CONVENTION_SET-CONDITIONAL-001",
+        "record_type": "convention_set",
+        "expected": "pass",
+        "actual": "pass",
+        "ok": true,
+        "errors": []
+      },
+      {
+        "fixture_id": "FX-PARAMETER_POINT-VALID-001",
+        "record_type": "parameter_point",
+        "expected": "pass",
+        "actual": "pass",
+        "ok": true,
+        "errors": []
+      },
+      {
+        "fixture_id": "FX-PARAMETER_POINT-INVALID-001",
+        "record_type": "parameter_point",
+        "expected": "fail",
+        "actual": "fail",
+        "ok": true,
+        "errors": [
+          "Additional properties are not allowed ('__undeclared_field__' was unexpected)"
+        ]
+      },
+      {
+        "fixture_id": "FX-PARAMETER_POINT-CONDITIONAL-001",
+        "record_type": "parameter_point",
+        "expected": "pass",
+        "actual": "pass",
+        "ok": true,
+        "errors": []
+      },
+      {
+        "fixture_id": "FX-BENCHMARK_RESULT-VALID-001",
+        "record_type": "benchmark_result",
+        "expected": "pass",
+        "actual": "pass",
+        "ok": true,
+        "errors": []
+      },
+      {
+        "fixture_id": "FX-BENCHMARK_RESULT-INVALID-001",
+        "record_type": "benchmark_result",
+        "expected": "fail",
+        "actual": "fail",
+        "ok": true,
+        "errors": [
+          "Additional properties are not allowed ('__undeclared_field__' was unexpected)"
+        ]
+      },
+      {
+        "fixture_id": "FX-BENCHMARK_RESULT-CONDITIONAL-001",
+        "record_type": "benchmark_result",
+        "expected": "pass",
+        "actual": "pass",
+        "ok": true,
+        "errors": []
+      },
+      {
+        "fixture_id": "FX-EVIDENCE_FRAGMENT-VALID-001",
+        "record_type": "evidence_fragment",
+        "expected": "pass",
+        "actual": "pass",
+        "ok": true,
+        "errors": []
+      },
+      {
+        "fixture_id": "FX-EVIDENCE_FRAGMENT-INVALID-001",
+        "record_type": "evidence_fragment",
+        "expected": "fail",
+        "actual": "fail",
+        "ok": true,
+        "errors": [
+          "Additional properties are not allowed ('__undeclared_field__' was unexpected)"
+        ]
+      },
+      {
+        "fixture_id": "FX-EVIDENCE_FRAGMENT-CONDITIONAL-001",
+        "record_type": "evidence_fragment",
+        "expected": "pass",
+        "actual": "pass",
+        "ok": true,
+        "errors": []
+      },
+      {
+        "fixture_id": "FX-TEST_CASE-VALID-001",
+        "record_type": "test_case",
+        "expected": "pass",
+        "actual": "pass",
+        "ok": true,
+        "errors": []
+      },
+      {
+        "fixture_id": "FX-TEST_CASE-INVALID-001",
+        "record_type": "test_case",
+        "expected": "fail",
+        "actual": "fail",
+        "ok": true,
+        "errors": [
+          "Additional properties are not allowed ('__undeclared_field__' was unexpected)"
+        ]
+      },
+      {
+        "fixture_id": "FX-TEST_CASE-CONDITIONAL-001",
+        "record_type": "test_case",
+        "expected": "pass",
+        "actual": "pass",
+        "ok": true,
+        "errors": []
+      },
+      {
+        "fixture_id": "FX-TEST_RUN-VALID-001",
+        "record_type": "test_run",
+        "expected": "pass",
+        "actual": "pass",
+        "ok": true,
+        "errors": []
+      },
+      {
+        "fixture_id": "FX-TEST_RUN-INVALID-001",
+        "record_type": "test_run",
+        "expected": "fail",
+        "actual": "fail",
+        "ok": true,
+        "errors": [
+          "Additional properties are not allowed ('__undeclared_field__' was unexpected)"
+        ]
+      },
+      {
+        "fixture_id": "FX-TEST_RUN-CONDITIONAL-001",
+        "record_type": "test_run",
+        "expected": "pass",
+        "actual": "pass",
+        "ok": true,
+        "errors": []
+      },
+      {
+        "fixture_id": "FX-STATE_TRANSITION_EVENT-VALID-001",
+        "record_type": "state_transition_event",
+        "expected": "pass",
+        "actual": "pass",
+        "ok": true,
+        "errors": []
+      },
+      {
+        "fixture_id": "FX-STATE_TRANSITION_EVENT-INVALID-001",
+        "record_type": "state_transition_event",
+        "expected": "fail",
+        "actual": "fail",
+        "ok": true,
+        "errors": [
+          "Additional properties are not allowed ('__undeclared_field__' was unexpected)"
+        ]
+      },
+      {
+        "fixture_id": "FX-STATE_TRANSITION_EVENT-CONDITIONAL-001",
+        "record_type": "state_transition_event",
+        "expected": "pass",
+        "actual": "pass",
+        "ok": true,
+        "errors": []
+      },
+      {
+        "fixture_id": "FX-MIGRATION_RECORD-VALID-001",
+        "record_type": "migration_record",
+        "expected": "pass",
+        "actual": "pass",
+        "ok": true,
+        "errors": []
+      },
+      {
+        "fixture_id": "FX-MIGRATION_RECORD-INVALID-001",
+        "record_type": "migration_record",
+        "expected": "fail",
+        "actual": "fail",
+        "ok": true,
+        "errors": [
+          "Additional properties are not allowed ('__undeclared_field__' was unexpected)"
+        ]
+      },
+      {
+        "fixture_id": "FX-MIGRATION_RECORD-CONDITIONAL-001",
+        "record_type": "migration_record",
+        "expected": "pass",
+        "actual": "pass",
+        "ok": true,
+        "errors": []
+      },
+      {
+        "fixture_id": "FX-RELATION_EDGE-VALID-001",
+        "record_type": "relation_edge",
+        "expected": "pass",
+        "actual": "pass",
+        "ok": true,
+        "errors": []
+      },
+      {
+        "fixture_id": "FX-RELATION_EDGE-INVALID-001",
+        "record_type": "relation_edge",
+        "expected": "fail",
+        "actual": "fail",
+        "ok": true,
+        "errors": [
+          "Additional properties are not allowed ('__undeclared_field__' was unexpected)"
+        ]
+      },
+      {
+        "fixture_id": "FX-RELATION_EDGE-CONDITIONAL-001",
+        "record_type": "relation_edge",
+        "expected": "pass",
+        "actual": "pass",
+        "ok": true,
+        "errors": []
+      },
+      {
+        "fixture_id": "FX-ART-STORAGE-MISSING-001",
+        "record_type": "artifact",
+        "expected": "fail",
+        "actual": "fail",
+        "ok": true,
+        "errors": [
+          "'artifact_storage_kind' is a required property"
+        ]
+      },
+      {
+        "fixture_id": "FX-ART-DIR-HASH-MISSING-001",
+        "record_type": "artifact",
+        "expected": "fail",
+        "actual": "fail",
+        "ok": true,
+        "errors": [
+          "None is not of type 'string'",
+          "None is not of type 'string'"
+        ]
+      },
+      {
+        "fixture_id": "FX-ART-FILE-HAS-DIR-MANIFEST-001",
+        "record_type": "artifact",
+        "expected": "fail",
+        "actual": "fail",
+        "ok": true,
+        "errors": [
+          "[] was expected"
+        ]
+      },
+      {
+        "fixture_id": "FX-ART-HASHLESS-NEEDS-REVIEW-001",
+        "record_type": "artifact",
+        "expected": "pass",
+        "actual": "pass",
+        "ok": true,
+        "errors": []
+      },
+      {
+        "fixture_id": "FX-ART-HASHLESS-NO-REASON-001",
+        "record_type": "artifact",
+        "expected": "fail",
+        "actual": "fail",
+        "ok": true,
+        "errors": [
+          "None is not of type 'string'",
+          "None is not of type 'string'"
+        ]
+      },
+      {
+        "fixture_id": "FX-ART-ALTID-GENERATED-001",
+        "record_type": "artifact",
+        "expected": "fail",
+        "actual": "fail",
+        "ok": true,
+        "errors": [
+          "{'approved_contract_id': 'TEC-ALT-001', 'approved_contract_sha256': 'bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb', 'method_id': 'AIM-PUB-VERSION-001', 'method_version': 1, 'identity_value': 'https://example.invalid/v2', 'evidence_artifact_ids': ['ART-EVID-001'], 'verification_status': 'verified', 'verified_at': '2026-10-20T12:05:00Z', 'verified_by': 'reviewer-1', 'scope_statement': 'Publisher version identity only.', 'limitations': ['Does not prove byte identity.']} is not of type 'null'",
+          "'ingested_external' was expected",
+          "'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa' is not of type 'null'",
+          "None is not of type 'string'"
+        ]
+      },
+      {
+        "fixture_id": "FX-ART-HASH-AND-ALTID-001",
+        "record_type": "artifact",
+        "expected": "fail",
+        "actual": "fail",
+        "ok": true,
+        "errors": [
+          "{'approved_contract_id': 'TEC-ALT-001', 'approved_contract_sha256': 'bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb', 'method_id': 'AIM-PUB-VERSION-001', 'method_version': 1, 'identity_value': 'https://example.invalid/v2', 'evidence_artifact_ids': ['ART-EVID-001'], 'verification_status': 'verified', 'verified_at': '2026-10-20T12:05:00Z', 'verified_by': 'reviewer-1', 'scope_statement': 'Publisher version identity only.', 'limitations': ['Does not prove byte identity.']} is not of type 'null'",
+          "'ingested_external' was expected",
+          "'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa' is not of type 'null'",
+          "None is not of type 'string'"
+        ]
+      },
+      {
+        "fixture_id": "FX-TEC-ALTID-METHOD-INCOMPLETE-001",
+        "record_type": "task_execution_contract",
+        "expected": "fail",
+        "actual": "fail",
+        "ok": true,
+        "errors": [
+          "'method_kind' is a required property",
+          "'method_status' is a required property",
+          "'description' is a required property",
+          "'applicable_source_types' is a required property"
+        ]
+      }
+    ],
+    "semantic_tests": [
+      {
+        "test_id": "SEM-ALTID-001-APPROVED-METHOD",
+        "expected": "pass",
+        "actual": "pass",
+        "ok": true,
+        "schema_errors": [],
+        "semantic_errors": []
+      },
+      {
+        "test_id": "SEM-ALTID-002-METHOD-NOT-REGISTERED",
+        "expected": "semantic_reject",
+        "actual": "semantic_reject",
+        "ok": true,
+        "schema_errors": [],
+        "semantic_errors": [
+          "METHOD_NOT_FOUND_OR_AMBIGUOUS"
+        ]
+      },
+      {
+        "test_id": "SEM-ALTID-003-CONTRACT-NOT-APPROVED",
+        "expected": "semantic_reject",
+        "actual": "semantic_reject",
+        "ok": true,
+        "schema_errors": [],
+        "semantic_errors": [
+          "CONTRACT_NOT_APPROVED"
+        ]
+      },
+      {
+        "test_id": "SEM-ALTID-004-CONTRACT-HASH-MISMATCH",
+        "expected": "semantic_reject",
+        "actual": "semantic_reject",
+        "ok": true,
+        "schema_errors": [],
+        "semantic_errors": [
+          "CONTRACT_HASH_MISMATCH"
+        ]
+      },
+      {
+        "test_id": "SEM-ALTID-005-SOURCE-TYPE-NOT-APPLICABLE",
+        "expected": "semantic_reject",
+        "actual": "semantic_reject",
+        "ok": true,
+        "schema_errors": [],
+        "semantic_errors": [
+          "SOURCE_TYPE_NOT_APPLICABLE"
+        ]
+      },
+      {
+        "test_id": "SEM-ALTID-006-SOURCE-ID-MISMATCH",
+        "expected": "semantic_reject",
+        "actual": "semantic_reject",
+        "ok": true,
+        "schema_errors": [],
+        "semantic_errors": [
+          "SOURCE_ID_MISMATCH"
+        ]
+      },
+      {
+        "test_id": "SEM-ALTID-007-SOURCE-PROJECT-MISMATCH",
+        "expected": "semantic_reject",
+        "actual": "semantic_reject",
+        "ok": true,
+        "schema_errors": [],
+        "semantic_errors": [
+          "SOURCE_PROJECT_MISMATCH"
+        ]
+      },
+      {
+        "test_id": "SEM-ALTID-008-DUPLICATE-METHOD-ID",
+        "expected": "semantic_reject",
+        "actual": "semantic_reject",
+        "ok": true,
+        "schema_errors": [],
+        "semantic_errors": [
+          "DUPLICATE_METHOD_ID_IN_CONTRACT",
+          "METHOD_NOT_FOUND_OR_AMBIGUOUS"
+        ]
+      },
+      {
+        "test_id": "SEM-ALTID-009-UNVERIFIED-CANNOT-PASS",
+        "expected": "schema_reject",
+        "actual": "schema_reject",
+        "ok": true,
+        "schema_errors": [
+          {
+            "record_type": "artifact",
+            "errors": [
+              "'passed' is not one of ['needs_review', 'failed']"
+            ]
+          }
+        ],
+        "semantic_errors": [
+          "HASHLESS_ARTIFACT_CANNOT_PASS_BYTE_INTEGRITY"
+        ]
+      },
+      {
+        "test_id": "SEM-ALTID-010-VERIFICATION-NO-EVIDENCE",
+        "expected": "schema_reject",
+        "actual": "schema_reject",
+        "ok": true,
+        "schema_errors": [
+          {
+            "record_type": "artifact",
+            "errors": [
+              "{'approved_contract_id': 'TEC-ALT-001', 'approved_contract_sha256': 'bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb', 'method_id': 'AIM-PUB-VERSION-001', 'method_version': 1, 'identity_value': 'https://example.invalid/document/v2#version=v2', 'evidence_artifact_ids': [], 'verification_status': 'verified', 'verified_at': '2026-10-20T12:05:00Z', 'verified_by': 'reviewer-1', 'scope_statement': 'Publisher-declared version identity only.', 'limitations': ['No raw-byte SHA-256 is available.', 'Does not prove byte-for-byte identity.']} is not valid under any of the given schemas"
+            ]
+          }
+        ],
+        "semantic_errors": [
+          "VERIFICATION_EVIDENCE_INCOMPLETE"
+        ]
+      },
+      {
+        "test_id": "SEM-ALTID-011-ALT-ID-WITH-CONTENT-HASH",
+        "expected": "schema_reject",
+        "actual": "schema_reject",
+        "ok": true,
+        "schema_errors": [
+          {
+            "record_type": "artifact",
+            "errors": [
+              "{'approved_contract_id': 'TEC-ALT-001', 'approved_contract_sha256': 'bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb', 'method_id': 'AIM-PUB-VERSION-001', 'method_version': 1, 'identity_value': 'https://example.invalid/document/v2#version=v2', 'evidence_artifact_ids': ['ART-EVID-001'], 'verification_status': 'verified', 'verified_at': '2026-10-20T12:05:00Z', 'verified_by': 'reviewer-1', 'scope_statement': 'Publisher-declared version identity only.', 'limitations': ['No raw-byte SHA-256 is available.', 'Does not prove byte-for-byte identity.']} is not of type 'null'",
+              "'No raw-byte digest available from source endpoint.' is not of type 'null'",
+              "'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa' is not of type 'null'"
+            ]
+          }
+        ],
+        "semantic_errors": [
+          "ALT_IDENTITY_WITH_CONTENT_HASH"
+        ]
+      },
+      {
+        "test_id": "SEM-ALTID-012-HASHLESS-NO-ALT-NEEDS-REVIEW",
+        "expected": "pass",
+        "actual": "pass",
+        "ok": true,
+        "schema_errors": [],
+        "semantic_errors": []
+      },
+      {
+        "test_id": "SEM-ALTID-013-HASHLESS-NO-REASON",
+        "expected": "schema_reject",
+        "actual": "schema_reject",
+        "ok": true,
+        "schema_errors": [
+          {
+            "record_type": "artifact",
+            "errors": [
+              "None is not of type 'string'",
+              "None is not of type 'string'"
+            ]
+          }
+        ],
+        "semantic_errors": [
+          "HASH_MISSING_REASON"
+        ]
+      },
+      {
+        "test_id": "SEM-ALTID-014-ALT-ID-GENERATED",
+        "expected": "schema_reject",
+        "actual": "schema_reject",
+        "ok": true,
+        "schema_errors": [
+          {
+            "record_type": "artifact",
+            "errors": [
+              "{'schema_version': '1.4', 'record_type': 'artifact', 'project_id': 'HEP-RESEARCH', 'artifact_id': 'ART-001', 'artifact_type': 'sample', 'origin_kind': 'generated', 'path_or_uri': 'sample', 'format': 'sample', 'content_sha256': None, 'schema_or_structure': {}, 'units': [], 'input_artifact_ids': [], 'configuration_id': None, 'code_id': None, 'environment_id': None, 'artifact_integrity_status': 'needs_review', 'artifact_lifecycle_status': 'active', 'generated_by_run_id': None, 'generated_by_activity_id': None, 'acquired_from_source_id': 'SRC-001', 'ingested_by_activity_id': None, 'required_files': [], 'directory_manifest': [], 'directory_manifest_sha256': None, 'hash_unavailable_reason': 'No raw-byte digest available from source endpoint.', 'created_at': '2026-10-20T12:00:00Z', 'artifact_storage_kind': 'file', 'alternative_identity': {'approved_contract_id': 'TEC-ALT-001', 'approved_contract_sha256': 'bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb', 'method_id': 'AIM-PUB-VERSION-001', 'method_version': 1, 'identity_value': 'https://example.invalid/document/v2#version=v2', 'evidence_artifact_ids': ['ART-EVID-001'], 'verification_status': 'verified', 'verified_at': '2026-10-20T12:05:00Z', 'verified_by': 'reviewer-1', 'scope_statement': 'Publisher-declared version identity only.', 'limitations': ['No raw-byte SHA-256 is available.', 'Does not prove byte-for-byte identity.']}} is not valid under any of the given schemas",
+              "None is not of type 'string'",
+              "'ingested_external' was expected"
+            ]
+          }
+        ],
+        "semantic_errors": [
+          "ALT_IDENTITY_SCOPE_INVALID"
+        ]
+      },
+      {
+        "test_id": "SEM-ALTID-015-DIRECTORY-CANNOT-USE-ALT-ID",
+        "expected": "schema_reject",
+        "actual": "schema_reject",
+        "ok": true,
+        "schema_errors": [
+          {
+            "record_type": "artifact",
+            "errors": [
+              "None is not of type 'string'",
+              "'No raw-byte digest available from source endpoint.' is not of type 'null'",
+              "{'approved_contract_id': 'TEC-ALT-001', 'approved_contract_sha256': 'bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb', 'method_id': 'AIM-PUB-VERSION-001', 'method_version': 1, 'identity_value': 'https://example.invalid/document/v2#version=v2', 'evidence_artifact_ids': ['ART-EVID-001'], 'verification_status': 'verified', 'verified_at': '2026-10-20T12:05:00Z', 'verified_by': 'reviewer-1', 'scope_statement': 'Publisher-declared version identity only.', 'limitations': ['No raw-byte SHA-256 is available.', 'Does not prove byte-for-byte identity.']} is not of type 'null'",
+              "'file' was expected"
+            ]
+          }
+        ],
+        "semantic_errors": [
+          "ALT_IDENTITY_SCOPE_INVALID"
+        ]
+      },
+      {
+        "test_id": "SEM-ART-DIRECTORY-MANIFEST-HASH",
+        "expected": "pass",
+        "actual": "pass",
+        "ok": true,
+        "schema_errors": [],
+        "semantic_errors": []
+      }
+    ],
+    "limitations": [
+      "Full state machine/event ledger is not implemented.",
+      "Migration and backward compatibility are not validated.",
+      "No filesystem walk, network retrieval, raw-byte hash recomputation, or JCS directory manifest hash recomputation.",
+      "No physics/scientific correctness validation."
+    ],
+    "summary": {
+      "checks_total": 58,
+      "checks_passed": 58,
+      "checks_failed": 0,
+      "fixtures_total": 83,
+      "fixtures_expected_result_matched": 83,
+      "fixtures_mismatched": 0,
+      "record_types_loaded": 25,
+      "semantic_tests_total": 16,
+      "semantic_tests_expected_result_matched": 16,
+      "semantic_tests_mismatched": 0,
+      "trace_rows": 125
+    }
   }
 }
