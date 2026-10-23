@@ -1,6 +1,6 @@
 # RC-001 — Dimension-six gauge-correction diagram atlas
 
-**Status:** exhaustive charge-compatible attachment-class census for the tree-level heavy-lepton exchange amplitudes has been recorded and locally checked. It is not yet a FeynArts-generated list of individual diagrams. All one-loop gauge integrals, pole tables, finite matching coefficients, and diagram-package validation remain open unless explicitly marked otherwise below. PR #4 remains Draft/Open.
+**Status:** exhaustive charge-compatible attachment-class census for the tree-level heavy-lepton exchange amplitudes has been recorded and locally checked. It is not yet a FeynArts-generated list of individual diagrams. The heavy-line self-energy/master-integral and FF/FS Yukawa-vertex hard sub-blocks are recorded separately; the complete gauge integrals, pole tables, finite matching coefficients, and diagram-package validation remain open unless explicitly marked otherwise below. PR #4 was merged as a provisional integration checkpoint; this does not close the physics gates.
 
 ## 1. Fixed model and matching target
 
