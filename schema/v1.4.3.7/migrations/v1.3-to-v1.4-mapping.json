@@ -49,6 +49,14 @@
     {
       "rule_id": "MIG-011",
       "rule": "Emit a complete ID-mapping provenance row with source-relative URI, hashes, rule identifiers, review state, collision status, rewritten-reference count, UTC timestamp, and operator field; omitted operator is not approval."
+    },
+    {
+      "rule_id": "MIG-012",
+      "rule": "Validate every provisional target against its complete Draft 2020-12 JSON Schema with a format checker; any target schema error blocks target emission to staging."
+    },
+    {
+      "rule_id": "MIG-013",
+      "rule": "Compute target_record_sha256 as SHA-256 over RFC 8785 JCS canonical UTF-8 bytes; source_sha256 remains the digest of the original source bytes."
     }
   ],
   "id_mapping_fields": [
