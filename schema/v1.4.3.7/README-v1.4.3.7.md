@@ -29,7 +29,7 @@ Migration defaults to dry-run. `--write-staging --output PATH` writes a staging 
 
 All four normative decisions remain pending approval. See `audit/v1.6.6-four-decisions-review.csv` and `audit/审计报告-v1.4.3.7.md`.
 
-The migration contract is now rules v6. MIG-015 withholds Task Execution Contract records when `alternative_identity_methods` is missing or the source `contract_hash` has not been revalidated under an owner-approved DD-ART-010 payload. The code and two regression tests were added after the rules-v5 local validation on code/test HEAD `0799dada7eaa8dcd08b8db2f2311a844335d7198`; rules-v6 validation is still pending. The Artifact Schema's symlink enum and the helper's symlink rejection remain a DD-ART-008 contract mismatch.
+The migration contract is now rules v6. MIG-015 withholds Task Execution Contract records when `alternative_identity_methods` is missing or the source `contract_hash` has not been revalidated under an owner-approved DD-ART-010 payload. The code and two Task Execution Contract regression tests were added after the rules-v5 local validation on code/test HEAD `0799dada7eaa8dcd08b8db2f2311a844335d7198`. The source-root symlink guard and a third migration test were also added; rules-v6/source-inventory validation is still pending. The Artifact Schema's symlink enum and the helper's symlink rejection remain a DD-ART-008 contract mismatch.
 
 ## Fixture-index version-field audit
 
