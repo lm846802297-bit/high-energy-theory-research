@@ -46,7 +46,7 @@ At the time of the initial static review, the corresponding regression tests had
 5. Refresh the field/constraint coverage matrix against the current v1.6.6 design and v1.4.3.7 schemas; reconcile the permissive `claim.evidence_ids` type and the `completed_at`/`finished_at` mismatch.
 6. Transactional commit, active-dataset pointer switching, and rollback remain unimplemented. `commit_allowed=false` must remain unchanged.
 7. DD-ART-007 through DD-ART-010 remain pending explicit owner approval.
-8. At the time of this static review, no test result had yet been reported for the corrected fixtures. The owner subsequently reported the local results recorded above; those results apply to code HEAD `1bb852c85594a6ef0e930e934cd28a438bc28a7c`. Later commits update audit documentation only, not migration or Schema code.
+8. At the time of this static review, no test result had yet been reported for the corrected fixtures. The owner subsequently reported the local results recorded above; those results apply to code HEAD `1bb852c85594a6ef0e930e934cd28a438bc28a7c`. This statement is superseded: the current code-bearing PR HEAD `c69651858a9c0b6155242c25a4c09c1364284823` includes rules-v6/MIG-015 and source-root-symlink changes after the rules-v5 tested HEAD `0799dada7eaa8dcd08b8db2f2311a844335d7198`. Those code changes have not been execution-verified by the rules-v5 local results.
 
 ## Review disposition
 
@@ -93,3 +93,7 @@ The source inventory originally checked `is_symlink()` only on descendants retur
 ### Additional static finding — symlink policy mismatch
 
 The Artifact Schema's `FileEntry.entry_type` enum includes `symlink`, while `directory_manifest.py` rejects symlink entries and the DD-ART-008 recommendation proposes rejecting symlinks by default. This is an unresolved Schema/helper contract mismatch. Keep it open until the owner approves whether symlinks are forbidden in the normative Schema or require a filesystem-aware verifier. No Schema change has been made because DD-ART-008 is still pending.
+
+### Follow-up — canonicalization and branch evidence
+
+The latest static review records the exact local/remote revision boundary and the directory-manifest JCS interoperability questions in the [Normalization and migration boundary review](schema/v1.4.3.7/audit/normalization-and-migration-boundary-review-2026-10-23.md). In particular, the current helper accepts unbounded non-negative `size_bytes` integers while the Schema has no maximum, and sorts paths using Python code-point order without a cross-language comparator contract. Dedicated directory-manifest canonical-byte/hash, numeric-domain and Unicode ordering vectors are still needed. These are static contract gaps, not observed test failures. No normative Schema change was made because DD-ART-008 remains pending.
