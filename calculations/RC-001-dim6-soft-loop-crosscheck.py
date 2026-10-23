@@ -63,6 +63,19 @@ check("J12 finite integral equals -1",
 check("J13 finite integral equals +1/2",
       sp.limit(J13n, eps, 0), sp.Rational(1, 2))
 
+# Independent Feynman-parameter evaluation of the crossed-current hard integral.
+# With z=x3+x4, x2=(1-z)u, x3=zt, x4=z(1-t), the simplex measure is
+# z(1-z) dz du dt. The q and (p3-p1) coefficients reduce to these 1D integrals.
+Fq_param = scale * sp.gamma(2 + eps) * (
+    -1 / (2 * eps) - 1 / (2 * (2 - eps))
+)
+Fp_param = scale * sp.gamma(2 + eps) / (2 * (1 - eps) * (2 - eps))
+check("Feynman-parameter crossed-current q coefficient independently reproduces -Delta/2+L/2-3/4",
+      sp.series(Fq_param, eps, 0, 1).removeO(),
+      -Delta / 2 + L / 2 - sp.Rational(3, 4))
+check("Feynman-parameter crossed-current EOM coefficient independently gives +1/4",
+      sp.limit(Fp_param, eps, 0), sp.Rational(1, 4))
+
 # 3. Crossed C5 C5* two-fermion/two-scalar channel.
 # Representative stripped kernel:
 # M^2 (k+q)^mu/[k^2 (k+q)^2 ((k+p1)^2-M^2)((k-p3)^2-M^2)].
@@ -115,6 +128,13 @@ check("Q6-quartic hard Q coefficient",
 check("Q6-quartic hard polynomial has the required p+Q/2 ratio",
       (-Delta + L - sp.Rational(3, 2)) / 2,
       -Delta / 2 + L / 2 - sp.Rational(3, 4))
+
+# Independent Feynman-parameter reduction of the one-heavy-line, two-scalar hard
+# kernel: the remaining z integral is int_0^1 dz z^(-1-eps)(1-z)^2.
+q6_param = scale * sp.gamma(1 + eps) * (-1 / eps - sp.Rational(3, 2))
+check("Feynman-parameter Q6-quartic hard kernel independently gives -Delta+L-3/2",
+      sp.series(q6_param, eps, 0, 1).removeO(),
+      -Delta + L - sp.Rational(3, 2))
 
 # The soft region of the heavy propagator contributes (p+Q/2) B0.
 q6_sum = sp.simplify((-Delta + L - sp.Rational(3, 2)) + (Delta - ell + 2))
