@@ -33,7 +33,7 @@ The corresponding regression tests were added or updated, but **they have not be
 - The existing `字段与约束覆盖差距矩阵.md/.csv` is labelled as a Schema v1.4.1 snapshot based on the v1.6.5 design baseline, not the current v1.4.3.7 bundle and v1.6.6 design. It is useful historical evidence but cannot be treated as the current coverage matrix; regenerate it against the current source design before release.
 - `claim.schema.json` still allows `evidence_ids` to be an array, object, number, string, or null. The current normative Claim contract describes typed evidence references and structured `evidence_status`; this permissive legacy property needs explicit reconciliation rather than being treated as full contract coverage.
 - `validation_activity.schema.json` declares both required `completed_at` (nullable) and an optional `finished_at`. Their intended relationship should be reconciled with the source design before changing the schema.
-- The migration implementation now performs full Draft 2020-12 JSON Schema validation with a format checker on each provisional target before staging. Invalid targets are withheld. This code path and its regression tests have not been executed in the current review.
+- The migration implementation now performs full Draft 2020-12 JSON Schema validation with a format checker on each provisional target before staging. Invalid targets are withheld. An empty source snapshot, any skipped source file, or source symlink now blocks all target writes to staging. The mapping contract binds full target validation and RFC 8785 target digest semantics as MIG-012/MIG-013, and the implementation checks those exact rule texts. Regression tests cover these cases, but the code path and tests have not been executed in the current review.
 
 ## Remaining blockers and decisions
 
@@ -76,4 +76,4 @@ The candidate schema files retain schemas.example.invalid identifiers and mixed 
 
 ### Verification boundary
 
-No unit test, integration test, local migration, or CI job was executed for these follow-up findings. They are source-level review conclusions only. PR #6 must remain Draft, and commit_allowed=false must remain unchanged until the P0 validation implementation is executed and verified and the other release gates are addressed.
+No unit test, integration test, local migration, or CI job was executed for these follow-up findings. They are source-level review conclusions only. PR #6 must remain Draft, and commit_allowed=false must remain unchanged until the target-validation and incomplete-snapshot gates are executed and verified and the other release gates are addressed.
