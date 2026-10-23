@@ -21,7 +21,7 @@
 
 The repository has historical green software-test results for pre-integration SHAs, including the candidate schema suite and migration unit tests. Those results remain valid only for their recorded commits.
 
-Recent main commits continued to arrive while this governance branch was prepared. Several SHA-specific workflow runs failed before any workflow step was recorded because no runner was assigned; at the last check, run 39896198196 for main SHA afa32369b19d95ca2b3c5bb38f6afb0ae0294348 was queued. No passing run for the latest main SHA was observed in this audit. This is not evidence of a code-test failure, but it is not a passing CI result either. The governance-fix branch also requires its own validation.
+The latest completed main run checked during this update is run 39896401710 for SHA 35d854699b652d69a1e51335dfaff1fe27dda0cd. It failed before any workflow step was recorded because no runner was assigned. This is not evidence of a code-test failure, but it is not a passing CI result either. The governance-fix branch also requires its own validation.
 
 ## Release gates
 
