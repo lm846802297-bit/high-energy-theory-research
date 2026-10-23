@@ -11,7 +11,7 @@
 | Normative decisions | DD-ART-007 through DD-ART-010 pending explicit owner approval |
 | Fixture index | Canonical index is version-matched to v1.4.3.7 candidate; inherited v1.4.3.6 expectations remain separately preserved |
 | Cross-record validation | Prototype available; bounded semantic checks implemented |
-| Migration | Rules-v4 source-aware prototype; JSON/YAML inventory, duplicate-key rejection, manifest/schema SHA checks, typed-ID collision checks, target-enum/time validation, full Draft 2020-12 target validation, RFC 8785 JCS target digests, mapping provenance, and safe staging; unresolved/schema-invalid records are withheld; implementation and tests unexecuted; dry-run/staging only, commit_allowed=false |
+| Migration | Rules-v4 source-aware prototype; JSON/YAML inventory, duplicate-key rejection, manifest/schema SHA checks, typed-ID collision checks, target-enum/time validation, full Draft 2020-12 target validation, RFC 8785 JCS target digests, mapping provenance, and fail-closed staging that blocks all target writes for incomplete source snapshots; unresolved/schema-invalid records are withheld; implementation and tests unexecuted; dry-run/staging only, commit_allowed=false |
 | Historical v1.3 compatibility | Unverified; original v1.3 source bundle/corpus unavailable |
 | Requirement/test traceability | CSV traceability data and imported audit reports included; report snapshots are SHA/time scoped |
 | Skill runtime | Initial instruction and reference scaffold added; not yet a complete automated research agent |
@@ -19,7 +19,7 @@
 
 ## Validation evidence and CI boundary
 
-The static review in `schema/v1.4.3.7/audit/static-schema-migration-review-2026-10-23.md` records the rules-v4 target-validation and JCS changes, the proposed `$id` policy, and unresolved schema-contract questions. Regression tests were added but not executed; this review did not run a migration or CI.
+The static review in `schema/v1.4.3.7/audit/static-schema-migration-review-2026-10-23.md` records the rules-v4 target-validation and JCS changes, incomplete-snapshot staging guard, the proposed `$id` policy, and unresolved schema-contract questions. The migration contract binds target validation and JCS semantics as MIG-012/MIG-013. The compatibility/test matrix is in `docs/governance/schema-v1.4.3.7-decision-compatibility-test-matrix.md`. Regression tests were added but not executed; this review did not run a migration or CI.
 
 The repository has historical green software-test results for pre-integration SHAs, including the candidate schema suite and migration unit tests. Those results remain valid only for their recorded commits.
 
