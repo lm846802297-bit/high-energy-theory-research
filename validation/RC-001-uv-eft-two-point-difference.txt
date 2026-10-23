@@ -12,7 +12,7 @@ PASS: dimension-six derivative counterterm cancels the s-pole
 PASS: exact finite p^2=0 UV-minus-EFT subtraction
 PASS: large-mass expansion of the finite hard-minus-soft kernel
 PASS: leading hard Pi_hs(0) has the §274.4 positive sign
-PASS: two-point/four-point finite slope mismatch is 4q/[3(16 pi^2)]
+PASS: historical two-point vs legacy on-shell representative difference is 4q/[3(16 pi^2)]
 RESULT: 15 exact symbolic/algebraic checks passed
 STATUS: the 4/3 difference is between the two-point result and the legacy on-shell four-point representative.
 STATUS: master-record §301.1-§301.4 attributes this difference to the off-shell external-momentum terms and EOM completion; the coefficients align in the same operator basis after that completion.
