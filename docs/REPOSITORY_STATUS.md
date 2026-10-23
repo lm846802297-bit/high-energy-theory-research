@@ -50,3 +50,11 @@ The migration code and mapping contract have since advanced to `v1.4.3.7-migrati
 4. Re-run the local verification suites after any subsequent code or schema changes; retain the report outside the repository's historical snapshot and record the exact tested commit.
 5. Expand semantic/state-machine coverage and test actual filesystem manifests.
 6. Complete normative schema coverage and define scientific acceptance tests for real research tasks before claiming end-to-end reproducibility.
+
+## PR branch reconciliation — 2026-10-23
+
+At review time, GitHub PR #6 reports code-bearing HEAD `c69651858a9c0b6155242c25a4c09c1364284823`; the owner-reported local pass is for `0799dada7eaa8dcd08b8db2f2311a844335d7198`. GitHub's compare endpoint reports the tested SHA as an ancestor 41 commits behind the current PR HEAD. The current code-bearing branch includes rules-v6/MIG-015 and source-root-symlink changes, so the rules-v5 test counts do not validate the current branch.
+
+Actions runs `39969213674` (tested SHA `0799...`) and `39976133434` (current code-bearing SHA `c696...`) both have a `failure` conclusion; the connector returned no usable step summaries or job logs. Neither is a passing CI record, and the available records do not establish a code-level test failure. See the [normalization and migration boundary review](schema/v1.4.3.7/audit/normalization-and-migration-boundary-review-2026-10-23.md) for the exact scope and remaining canonicalization gaps.
+
+This review adds audit documentation only; it does not modify migration code or Schema semantics. PR #6 remains Open/Draft, DD-ART-007 through DD-ART-010 remain pending, and `commit_allowed=false` remains mandatory.
