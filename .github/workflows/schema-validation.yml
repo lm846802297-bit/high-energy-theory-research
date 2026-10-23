@@ -116,5 +116,17 @@ jobs:
       - name: Test Skill scaffold
         run: python -m unittest discover -s tests/unit -v
 
-      - name: Compile candidate Python tools
-        run: python -m compileall -q schema/v1.4.3.7/tools skills/high-energy-theory-research/scripts
+      - name: Compile candidate Python tools and physics pilot
+        run: python -m compileall -q schema/v1.4.3.7/tools skills/high-energy-theory-research/scripts tests/eval-cases/uv-eFT-hard-derivative-pilot
+
+      - name: Build and validate real UV-EFT research-task bundle
+        run: python tests/eval-cases/uv-eFT-hard-derivative-pilot/run_record_chain.py --output-dir "$RUNNER_TEMP/uv-eFT-hard-derivative-bundle"
+
+      - name: Upload real research-task provenance bundle
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: uv-eFT-hard-derivative-provenance-bundle
+          path: ${{ runner.temp }}/uv-eFT-hard-derivative-bundle
+          if-no-files-found: error
+          retention-days: 30

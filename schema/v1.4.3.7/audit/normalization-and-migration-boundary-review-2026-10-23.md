@@ -89,3 +89,16 @@ GitHub Actions Run [#39978741584](https://github.com/lm846802297-bit/high-energy
 A separate vector, `schema/v1.4.3.7/migrations/directory-manifest-candidate-v0.golden.json`, and a unit test now capture the current helper's exact UTF-8 bytes and SHA-256 for NFC normalization and a Unicode-ordering-discriminating input. This is intentionally labelled `provisional_not_normative`. The vector and test have not been executed on the new commit that adds them; the prior results above do not validate this follow-up patch.
 
 The helper's runtime behavior and historical hashes are unchanged by the comment-only clarification. No Schema constraint, symlink policy, or owner decision was changed. The vector does not claim RFC 8785/JCS interoperability and does not settle the safe-integer domain or cross-language path-ordering contract. The Artifact Schema still allows `entry_type: "symlink"` while the helper rejects symlink entries; leave this mismatch open until DD-ART-008 is explicitly approved.
+
+
+## Follow-up — exact pre-sync HEAD and decision comparison (2026-10-24)
+
+The repository owner reports local validation on exact pre-sync HEAD `9bebbdf279fefba098fa237915ff71361103201a`: directory-manifest 8/8, migration regression 36/36, integration 30/30, full unit tests 87/87, Python compilation, Schema validator 68/68, candidate Fixtures 83/83, semantic cases 16/16, and 125 trace rows. The new provisional golden-vector test is included in the 8/8 result. The working tree was clean before and after validation.
+
+The Schema report was written outside the repository under the desktop environment's `%TEMP%\schema-validation-pr6-*` temporary directories. Two directories remain because recursive deletion was denied; no repository files were deleted. The exact `9bebbdf` path was not supplied and is not guessed.
+
+Actions Run [#40013524904](https://github.com/lm846802297-bit/high-energy-theory-research/actions/runs/40013524904) has `failure` with `runner_id=0`, empty runner name, empty steps and no artifact. The log endpoint has no stored log. Main commit [`d6143c2`](https://github.com/lm846802297-bit/high-energy-theory-research/commit/d6143c2aa15191ac8521e062d90860ba86713f00) also records that Actions could not allocate a runner. The exact account/organization/GitHub-side cause is not visible through the available API. This is runner-allocation evidence, not a code-test failure or a passing CI run.
+
+The branch is being synchronized by a two-parent merge commit, not a rebase. Only `README.md` was changed on both sides since the common ancestor; the main branch's `artifacts/` navigation line is retained alongside the PR's candidate-governance changes. The PR workflow's main-branch UV–EFT pilot compile/build/artifact steps are restored while retaining the candidate provenance checks. The post-sync merge commit has not yet been locally validated.
+
+For owner review, see [DD-ART-008 decision options](../../../docs/governance/schema-v1.4.3.7-dd-art-008-decision-options-2026-10-24.md). No normative choice is made. The numeric domain, cross-language path comparator, digest payload scope and symlink policy remain open under DD-ART-008; `commit_allowed=false` remains mandatory.

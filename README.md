@@ -42,6 +42,7 @@ Every arrow should be traceable. A change to an upstream assumption or formula m
 - **templates/project-record.md** — template for registering a top-level research project or a nested workstream.
 - **templates/claim-evidence-matrix.md** — generic template for a new claim–evidence ledger.
 - **research/** — active research-change records and their current claim status.
+- **artifacts/** — immutable, hashed snapshots of large or binary research sources (main-document versions, calculation script trees, audit outputs), with provenance and verification status. See [artifacts/README.md](artifacts/README.md).
 - **calculations/** — reproducible symbolic/algebraic calculation scripts; each script states what it does and does not validate.
 - **validation/** — captured calculation outputs and validation logs, kept distinct from planned or unexecuted checks.
 - **schema/v1.4.3.7/** — candidate JSON Schemas, fixtures, validators, migration prototype, audit reports, and requirement/test traceability.
@@ -87,9 +88,17 @@ The owner reports a rules-v5 local verification on code/test HEAD `0799dada7eaa8
 
 The MIG-014 dependent-reference withholding regression and the new directory-manifest safety tests passed. The Schema report was generated in a temporary directory and did not replace the checked-in historical report. Four legacy `1.4.3.6-candidate` Fixture expectation mismatches remain separately recorded. The original v1.4.3.6 archive is unavailable, so its byte-for-byte lineage remains unverified.
 
-A subsequent static review found a DD-ART-010 migration gap: Task Execution Contract hashes could be carried forward without target-payload revalidation, and a missing `alternative_identity_methods` registry could pass because the candidate Schema makes it optional. The migrator and contract were advanced to rules v6 (MIG-015), with two Task Execution Contract regression tests added to withhold these records. A separate fix now checks the input directory itself for symlinks, with a third regression test. **The rules-v6/source-inventory code and tests have not yet been executed locally.** The rules-v5 pass above does not validate the latest code.
+A subsequent static review found a DD-ART-010 migration gap: Task Execution Contract hashes could be carried forward without target-payload revalidation, and a missing `alternative_identity_methods` registry could pass because the candidate Schema makes it optional. The migrator and contract were advanced to rules v6 (MIG-015), with regression tests for the registry/hash guard and source-root symlink rejection. The owner later reported full local validation on exact pre-sync HEAD `9bebbdf279fefba098fa237915ff71361103201a`: directory-manifest 8/8, migration regression 36/36, integration 30/30, full unit tests 87/87, Python compilation, and Schema validation 68/68 checks, 83/83 candidate Fixture outcomes, 16/16 semantic cases, and 125 trace rows. These are local results, not GitHub Actions evidence; the provisional directory-manifest vector remains non-normative.
 
 GitHub Actions remains unverified for this phase. These local results do not establish full historical v1.3 compatibility, complete cross-record/state-machine semantics, scientific correctness, or transaction safety. The current candidate remains unreleased; DD-ART-007 through DD-ART-010 remain pending owner approval and `commit_allowed=false` remains mandatory.
+
+### Latest local verification and CI boundary — 2026-10-24
+
+The repository owner reports that the pre-sync PR HEAD `9bebbdf279fefba098fa237915ff71361103201a` passed: directory-manifest tests 8/8, migration regression 36/36, integration 30/30, full unit tests 87/87, Python compilation, and Schema validation 68/68 checks, 83/83 candidate Fixture outcomes, 16/16 semantic cases, and 125 trace rows. Four historical `1.4.3.6-candidate` Fixture expectation differences remain; they were not rewritten.
+
+The Schema validation report was generated outside the repository under the desktop environment's `%TEMP%\schema-validation-pr6-*` directories. Two such directories remain because recursive deletion was denied; no repository files were deleted. The exact `9bebbdf` temporary path was not included in the handoff record.
+
+GitHub Actions Run [#40013524904](https://github.com/lm846802297-bit/high-energy-theory-research/actions/runs/40013524904) failed before a runner or any workflow step was recorded (`runner_id=0`, empty runner name, empty steps, no artifact). A main-branch commit also records that GitHub Actions could not allocate a runner. The exact account/organization-level cause is not exposed by the available run evidence. Do not treat this as a code-test failure or a passing CI run.
 
 ### Validation commands
 

@@ -70,10 +70,10 @@ The IDs below are planning identifiers, not claims that tests have run or passed
 | Owner decision on DD-ART-009 | Pending |
 | Owner decision on DD-ART-010 | Pending |
 | Owner-reported rules-v5 local validation on code/test HEAD `0799dada7eaa8dcd08b8db2f2311a844335d7198` | Passed: directory-manifest tests 7/7, migration 33/33, integration 30/30, repository unit tests 83/83, Python compilation, Schema validator 68/68, candidate fixtures 83/83, semantic cases 16/16, trace rows 125; not GitHub Actions evidence |
-| Directory-manifest fail-closed tests | Owner reports 7/7 passed on code/test HEAD `0799dada7eaa8dcd08b8db2f2311a844335d7198` |
-| Directory-manifest JCS numeric-domain/path-ordering golden vectors | Static gap identified; not implemented or executed |
-| Rules-v6 MIG-015 TEC hash/registry guard and new tests | Added after the rules-v5 validation above; not yet executed locally |
-| MIG-010 source-root symlink guard | Fixed in code; regression test added, but not yet executed locally |
+| Directory-manifest fail-closed tests | Historical 7/7 on `0799dada`; owner reports 8/8 including provisional golden-vector test on pre-sync HEAD `9bebbdf`; local evidence only |
+| Directory-manifest provisional golden vector | Owner reports exact-byte/hash vector test passed on pre-sync HEAD `9bebbdf` as part of directory-manifest 8/8; vector remains `provisional_not_normative` and does not settle numeric domain, digest scope, or cross-language ordering |
+| Rules-v6 MIG-015 TEC hash/registry guard and tests | Owner reports migration regression 36/36 and full unit suite 87/87 passed on pre-sync HEAD `9bebbdf`; local evidence only, not GitHub Actions |
+| MIG-010 source-root symlink guard | Owner reports regression suite passed 36/36 on pre-sync HEAD `9bebbdf`; post-sync merge HEAD still requires revalidation |
 | Artifact Schema symlink enum vs helper policy | Mismatch found; DD-ART-008 decision required |
 | Historical v1.3 source baseline and compatibility run | Unavailable / unverified |
 | Actual filesystem directory-manifest verification | Not implemented |
@@ -88,3 +88,12 @@ The matrix is intended to guide implementation and review without pre-empting no
 - Actions Run [#39978741584](https://github.com/lm846802297-bit/high-energy-theory-research/actions/runs/39978741584) is `failure`, but the job has no recorded steps and the run has no artifact. This is not evidence that the tests themselves failed; it is also not passing CI evidence.
 - A provisional directory-manifest golden vector and unit test have been added in a follow-up patch. They have **not** been executed on the resulting new HEAD. The vector is a regression snapshot for current implementation bytes, not an approved normative serialization contract.
 - The numeric domain for `size_bytes`, cross-language ordering of normalized paths, and the Schema/helper symlink mismatch remain open under DD-ART-008. No Schema constraints, historical hashes, or decision approvals were changed. `commit_allowed=false` remains mandatory.
+
+
+## Follow-up owner-reported verification and synchronization — 2026-10-24
+
+The owner reports the following results on exact pre-sync HEAD `9bebbdf279fefba098fa237915ff71361103201a`: directory-manifest 8/8, migration regression 36/36, integration 30/30, full unit tests 87/87, Python compilation passed, Schema validator 68/68, candidate Fixtures 83/83, semantic cases 16/16, trace rows 125. The report is outside the repository in a `%TEMP%\schema-validation-pr6-*` directory. Two such directories remain because recursive deletion was denied. The post-sync merge commit requires a fresh run.
+
+Actions Run [#40013524904](https://github.com/lm846802297-bit/high-energy-theory-research/actions/runs/40013524904) failed before a runner or step was recorded and has no artifact; it is not a code-level test failure and is not passing CI evidence. The main-branch commit `d6143c2` independently notes runner allocation failure. The exact infrastructure/account-policy cause remains unresolved.
+
+The [DD-ART-008 decision-options comparison](schema-v1.4.3.7-dd-art-008-decision-options-2026-10-24.md) now compares serialization/numeric-domain, path-ordering, digest-scope, and symlink-policy alternatives. It is a proposal, not an approval. DD-ART-007 through DD-ART-010 remain pending; `commit_allowed=false` remains mandatory.

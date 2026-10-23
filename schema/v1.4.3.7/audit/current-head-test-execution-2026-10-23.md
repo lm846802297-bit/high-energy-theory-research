@@ -198,7 +198,7 @@ A subsequent static review found that the migration could emit a Task Execution 
 
 The migration prototype has been updated to rules version `v1.4.3.7-migration-rules-6` with rule MIG-015. It now withholds a Task Execution Contract when the registry is absent or its source hash cannot be revalidated under an owner-approved payload rule. Two Task Execution Contract tests, one symlinked-source-root test, and the migration-contract assertion were added. **These rules-v6 changes and tests have not yet been executed locally.** The previous 7/7, 33/33, 30/30, 83/83, and Schema 68/68 results apply to rules-v5 code/test HEAD `0799dada7eaa8dcd08b8db2f2311a844335d7198`, not the current rules-v6 code.
 
-The same static pass identified a source-inventory gap: the migrator checked symlinks inside the input tree but not the input root path itself. The code now includes the source root in the symlink check, and a regression test was added; it is not yet execution-verified. It also identified a remaining DD-ART-008 contract mismatch: the Artifact Schema permits `entry_type: "symlink"`, while the directory-manifest helper rejects all symlink entries. Do not resolve this by silently changing the Schema before the owner approves the symlink policy. Actual filesystem traversal and byte verification remain unimplemented. `commit_allowed=false` remains unchanged.
+The same static pass identified a source-inventory gap: the migrator checked symlinks inside the input tree but not the input root path itself. The code includes the source-root symlink check. The owner reports that the migration regression suite passed 36/36 on pre-sync HEAD `d4424f2` and again on `9bebbdf`; this earlier 'not yet execution-verified' statement is superseded. It also identified a remaining DD-ART-008 contract mismatch: the Artifact Schema permits `entry_type: "symlink"`, while the directory-manifest helper rejects all symlink entries. Do not resolve this by silently changing the Schema before the owner approves the symlink policy. Actual filesystem traversal and byte verification remain unimplemented. `commit_allowed=false` remains unchanged.
 
 ## Follow-up — current PR branch reconciliation
 
@@ -230,4 +230,29 @@ GitHub Actions [Run #39978741584](https://github.com/lm846802297-bit/high-energy
 
 The report cited by the owner was generated outside the repository in a temporary directory. The checked-in historical `schema/v1.4.3.7/audit/validation-report.json` was not overwritten.
 
-A follow-up patch adds a provisional directory-manifest golden vector and a unit test for exact canonical bytes and SHA-256. **That new test has not been run on the post-patch HEAD.** The results above remain tied to `d4424f2` and do not validate the new patch. The vector is implementation-regression evidence only; DD-ART-008 still leaves the JCS numeric domain and cross-language path ordering unresolved. The Schema/helper symlink mismatch is also unresolved pending owner approval. No Schema semantics or historical hashes were changed, and `commit_allowed=false` remains mandatory.
+A follow-up patch adds a provisional directory-manifest golden vector and a unit test for exact canonical bytes and SHA-256. The owner reports that this test passed as part of 8/8 directory-manifest tests on exact pre-sync HEAD `9bebbdf279fefba098fa237915ff71361103201a`. The vector remains `provisional_not_normative` and does not establish cross-language/JCS approval. The vector is implementation-regression evidence only; DD-ART-008 still leaves the JCS numeric domain and cross-language path ordering unresolved. The Schema/helper symlink mismatch is also unresolved pending owner approval. No Schema semantics or historical hashes were changed, and `commit_allowed=false` remains mandatory.
+
+
+## Owner-reported verification — exact pre-sync HEAD 9bebbdf (2026-10-24)
+
+The repository owner reports that the desktop checkout was fast-forwarded from `d4424f2` to exact HEAD `9bebbdf279fefba098fa237915ff71361103201a`. The working tree was clean before validation and remained clean after validation.
+
+| Check | Result |
+|---|---:|
+| Directory-manifest tests | **8/8 passed** |
+| Migration-reference regression tests | **36/36 passed** |
+| Integration tests | **30/30 passed** |
+| Full unit tests | **87/87 passed** |
+| Python compilation | **passed** |
+| Schema validator | **68/68 checks** |
+| Candidate Fixture outcomes | **83/83** |
+| Semantic cases | **16/16** |
+| Traceability rows | **125** |
+
+The migration suite includes the MIG-015 contract registry/hash guards, source-root symlink blocking, and withholding a Claim that references an invalid Plan. The new directory-manifest golden-vector test passed. Four historical `1.4.3.6-candidate` Fixture expectation differences remain recorded; no historical expectations or hashes were rewritten.
+
+The validation report was generated outside the repository under the desktop environment's `%TEMP%\schema-validation-pr6-*` temporary directories. Two such directories remain because recursive deletion was denied; the project repository itself was not cleaned or deleted. The exact path for the `9bebbdf` report was not provided in the handoff, so it is intentionally not guessed.
+
+GitHub Actions Run [#40013524904](https://github.com/lm846802297-bit/high-energy-theory-research/actions/runs/40013524904) corresponds to `9bebbdf` and failed before any runner or workflow step was recorded (`runner_id=0`, empty runner name, empty steps, no artifact). The job-log endpoint has no stored log. A main-branch commit [`d6143c2`](https://github.com/lm846802297-bit/high-energy-theory-research/commit/d6143c2aa15191ac8521e062d90860ba86713f00) independently notes that GitHub Actions could not allocate a runner. This supports an infrastructure/runner-allocation classification, not a code-level test failure; the precise account/organization/GitHub-side cause remains unresolved.
+
+These local results apply to pre-sync HEAD `9bebbdf`, not to the merge commit that incorporates current `main`. The post-sync HEAD must receive a fresh full validation run. The checked-in historical `schema/v1.4.3.7/audit/validation-report.json` was not overwritten.
