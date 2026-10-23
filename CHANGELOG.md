@@ -35,3 +35,12 @@
 - Allowed `schema_or_structure` to carry an opaque object or null, consistent with its design-document type.
 - Updated the two positive Claim fixtures to use `physics_assessment: null` under the object-or-null contract.
 - Left `run_plan.fingerprint_inputs` unchanged because the source design references `FingerprintInputs` without defining its fields or hash semantics; documented this as a release blocker rather than inventing a normative contract.
+
+## 2026-10-23 — Multi-project registry foundation (Phase A)
+
+- Added projects/README.md and projects/registry.yaml to register project/workstream hierarchy.
+- Registered axial-vector-model-building as the parent project and vll-higgs-singlet-uv-eft as a nested workstream, not a separate top-level project.
+- Added templates/project-record.md for future projects and workstreams.
+- Updated the repository landing page, research index, and Scientific Diff workflow to distinguish project, workstream, research-change, run, and claim identities.
+- No existing research files were moved or renamed. The registry is navigation metadata only; no candidate schema was changed and no scientific result was promoted.
+
