@@ -71,7 +71,7 @@ while the older on-shell four-point representative gives
 \]
 Their difference \(4q_\ell/[3(16\pi^2)]\) is a difference between these representatives, not a remaining same-basis mismatch. The cumulative master source v153 §301.1–§301.4 includes the off-shell external-leg terms and EOM completion by \(T_H,T_S\), shifting \(c_H,c_S,c_D\) by \(+2a_\ell/3\) and aligning the specified Yukawa-box derivative coefficients. The contact tadpole itself still has zero momentum derivative.
 
-Open items are the complete model-level Wilson vector, any remaining EFT soft/source sectors outside the restricted comparison, the gauge-invariant assignment of the higher-order constant pole, and independent diagram-level validation.
+Open items are the complete model-level Wilson vector, remaining higher-dimensional EFT soft/source sectors, the complete dimension-eight hard matching, and independent diagram-level validation.
 
 ## 5. \(C_5^2\) soft-potential counterterm at dimension eight (subset only)
 
