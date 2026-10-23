@@ -583,6 +583,30 @@ The relation is checked by `calculations/RC-001-dimension8-constant-pole-candida
 
 **Remaining boundary:** the master source explicitly leaves the dimension-eight UV hard matching and the full \(O(M_E^{-4})\) prediction incomplete. Higher-dimensional tree-level EFT vertices and their soft insertions must be included at the same retained order. At strict \(O(M_E^{-2})\), the entire \(O(M_E^{-4})\) constant-pole set must be dropped consistently; it cannot be retained selectively and absorbed into the dimension-four portal counterterm.
 
+### 10.10 EFT soft-insertion order-counting boundary
+
+The cumulative master source §243.2 gives the tree-level un-reduced dimension-six operators
+\[
+\Delta\mathcal L_{\rm EFT}^{(6)}
+=\frac{|y_\ell|^2}{M_{E_\ell}^2}Q_{LD}
++\frac{|\lambda_\ell|^2}{M_{E_\ell}^2}Q_{RD},
+\]
+with \(Q_{LD}=(\bar L_\ell H)i\slashed D(H^\dagger L_\ell)\) and
+\(Q_{RD}=S_\ell^*\bar\ell_R i\slashed D(S_\ell\ell_R)\). Their VEV wavefunction pieces scale as
+\[
+\delta Z_L=\frac{|y_\ell|^2v_h^2}{2M_{E_\ell}^2},\qquad
+\delta Z_R=\frac{|\lambda_\ell|^2v_s^2}{2M_{E_\ell}^2}.
+\]
+Consequently, within the specific \(C_{5,\ell}C_{5,\ell}^*\) Yukawa bubble,
+\[
+|C_{5,\ell}|^2\delta Z_L
+\sim\frac{|y_\ell|^4|\lambda_\ell|^2v_h^2}{2M_{E_\ell}^4},
+\qquad
+|C_{5,\ell}|^2\delta Z_R
+\sim\frac{|y_\ell|^2|\lambda_\ell|^4v_s^2}{2M_{E_\ell}^4}.
+\]
+These VEV wavefunction insertions are \(O(M_E^{-4})\) at fixed VEV and do not modify the restricted Yukawa-sector coefficient at \(O(M_E^{-2})\). The same order-counting argument does **not** prove that all EFT soft topologies are closed: the source §243.4 explicitly requires separate treatment of portal/scalar/gauge coupling structures and a method-of-regions check wherever inverse light-mass factors could enhance a nominally higher-order insertion. Section §284.3 therefore remains an open gate for any full-model claim.
+
 ## 11. Change history
 
 | Date | Revision | Change | Reason |
