@@ -14,6 +14,7 @@
 | Additive \(B-A'\) kinetic mixing | PASS (charge-trace algebra only) | \(\operatorname{Tr}(YX)=0\) for the stated light sector and across the \(\mu,\tau\) heavy pair; finite heavy threshold \(\propto\ln(M_{E_\mu}^2/M_{E_\tau}^2)\) | Independent \(\chi\) boundary, full kinetic-matrix scheme, and mixed-propagator four-point amplitudes |
 | Conjugate Yukawa-vertex charge factors | PASS (exact rational algebra) | Hypercharge and \(X\)-charge conservation plus all signed \(F_B,F_X,F_{BX}\) pair factors for the four Yukawa vertices and both flavors | Overall Feynman-rule signs, loop integrals, and full vertex amplitudes |
 | Light-only Yukawa-vertex hard cancellation | ANALYTIC IDENTITY | Tree propagator expansion and common light-loop factor cancel at \(O(M_E^{-2})\) when the full gauge-covariant EFT insertion/contact set is included | Full contact/vertex set has not been independently generated; final summed Ward identity remains open |
+| Conditional mixed input-parameter counterterms | PASS (charge algebra only) | First-order signed (B-A') parameter-only pole combinations for (C_{LD}) and (C_{RD}) under (ho_{BX}=-\chi+O(\chi^2)) | Full kinetic-matrix renormalization, mixed vertex/box amplitudes, EFT operator counterterms, and Ward sum |
 
 ## Open physics evidence
 
