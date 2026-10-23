@@ -24,7 +24,7 @@ This list separates verified software behavior from unresolved design, provenanc
 - FingerprintInputs has a candidate contract and deterministic tests, but its normative status still requires review. The fingerprint contract does not establish scientific correctness.
 - Cross-record validation does not cover every polymorphic reference or every state-machine namespace.
 - Event payload hashes are not comprehensively recomputed.
-- The directory-manifest helper validates a restricted FileEntry representation; it does not walk the filesystem or prove that the manifest matches disk contents. Symlinks are rejected by default.
+- The directory-manifest helper validates a restricted FileEntry representation; it does not walk the filesystem or prove that the manifest matches disk contents. A static review found and fixed silent dropping of extra FileEntry keys and made `allow_symlinks=True` fail closed. New unit tests were added but have not yet run on the latest HEAD. Symlinks are rejected.
 - The Skill instruction scaffold is not yet a complete executable workflow for all research tasks.
 
 ## Scientific acceptance — Not yet implemented
