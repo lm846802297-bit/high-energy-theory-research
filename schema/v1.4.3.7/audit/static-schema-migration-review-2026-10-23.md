@@ -82,7 +82,7 @@ The follow-up findings began as source-level review conclusions. The latest comp
 
 ### Additional static finding — DD-ART-010 Task Execution Contract migration
 
-The candidate Task Execution Contract Schema does not require `alternative_identity_methods`. The migration previously mapped legacy `contract_hash` to `contract_sha256` and could stage the record without recomputing that digest under the candidate payload rule. Because DD-ART-010 remains pending and the matrix says a missing registry must not be silently defaulted, this was a concrete fail-open gap. The migration is now rules v6 and implements MIG-015: missing registries and unverified source contract hashes produce unresolved items and withhold the target. Two regression tests and a contract-rule assertion were added. They have not yet run locally; do not treat the rules-v5 pass as validation of this change.
+The candidate Task Execution Contract Schema does not require `alternative_identity_methods`. The migration previously mapped legacy `contract_hash` to `contract_sha256` and could stage the record without recomputing that digest under the candidate payload rule. Because DD-ART-010 remains pending and the matrix says a missing registry must not be silently defaulted, this was a concrete fail-open gap. The migration is now rules v6 and implements MIG-015: missing registries and unverified source contract hashes produce unresolved items and withhold the target. Two Task Execution Contract regression tests and a contract-rule assertion were added. The source-root symlink guard has a third regression test. They have not yet run locally; do not treat the rules-v5 pass as validation of these changes.
 
 
 
