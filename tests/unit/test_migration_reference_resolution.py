@@ -272,6 +272,37 @@ class ValidationReferenceResolutionTests(unittest.TestCase):
         self.assertIn("version", run_quarantine["fields"])
         self.assertIn("contract_hash", run_quarantine["fields"])
 
+    def test_task_execution_contract_without_identity_registry_is_unresolved(self):
+        contract = {
+            "schema_version": "1.3",
+            "record_type": "task_execution_contract",
+            "project_id": "P-TEST",
+            "contract_id": "TEC-TEST",
+            "task_id": "TASK-TEST",
+            "version": 1,
+            "contract_hash": "a" * 64,
+        }
+        _, _, unresolved, _ = migration.migrate_record(contract)
+        codes = {item["code"] for item in unresolved}
+        self.assertIn("TEC_ALTERNATIVE_IDENTITY_METHODS_MISSING_PENDING_DD_ART_010", codes)
+        self.assertIn("TEC_CONTRACT_HASH_REVALIDATION_PENDING_DD_ART_010", codes)
+
+    def test_task_execution_contract_hash_stays_unverified_even_if_registry_exists(self):
+        contract = {
+            "schema_version": "1.3",
+            "record_type": "task_execution_contract",
+            "project_id": "P-TEST",
+            "contract_id": "TEC-TEST",
+            "task_id": "TASK-TEST",
+            "version": 1,
+            "contract_hash": "a" * 64,
+            "alternative_identity_methods": [],
+        }
+        _, _, unresolved, _ = migration.migrate_record(contract)
+        codes = {item["code"] for item in unresolved}
+        self.assertNotIn("TEC_ALTERNATIVE_IDENTITY_METHODS_MISSING_PENDING_DD_ART_010", codes)
+        self.assertIn("TEC_CONTRACT_HASH_REVALIDATION_PENDING_DD_ART_010", codes)
+
     def test_duplicate_existing_typed_validation_refs_are_unresolved(self):
         claim = claim_record([])
         claim["validation_activity_ids"] = ["VAL-ACT-1", "VAL-ACT-1"]
@@ -323,7 +354,7 @@ class ValidationReferenceResolutionTests(unittest.TestCase):
         )
         self.assertEqual(mapping_contract["target_digest_algorithm"], "RFC8785-JCS-SHA256")
         declared_migration_rules = {rule["rule_id"] for rule in mapping_contract["rules"]}
-        self.assertTrue({"MIG-012", "MIG-013", "MIG-014"}.issubset(declared_migration_rules))
+        self.assertTrue({"MIG-012", "MIG-013", "MIG-014", "MIG-015"}.issubset(declared_migration_rules))
         declared_rules_by_id = {rule["rule_id"]: rule["rule"] for rule in mapping_contract["rules"]}
         self.assertEqual(
             declared_rules_by_id["MIG-012"],
@@ -336,6 +367,10 @@ class ValidationReferenceResolutionTests(unittest.TestCase):
         self.assertEqual(
             declared_rules_by_id["MIG-014"],
             "Withhold a migrated record when a validation_ids reference resolves to a source Validation Plan or Validation Activity that does not produce a valid target record; report VALIDATION_TARGET_WITHHELD.",
+        )
+        self.assertEqual(
+            declared_rules_by_id["MIG-015"],
+            "Withhold a migrated Task Execution Contract when alternative_identity_methods is absent or contract_sha256 cannot be revalidated under an owner-approved DD-ART-010 payload; do not silently default the registry to an empty array.",
         )
 
     def test_target_schema_missing_required_field_is_blocked_from_staging(self):
