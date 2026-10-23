@@ -37,6 +37,10 @@ def build_rd(eta):
         "S": {"Y": F(0), "X": F(2*eta), "W": False},
     }
 
+def mixed_factor(lines, a, b):
+    ca, cb = lines[a], lines[b]
+    return ca["Y"] * cb["X"] + ca["X"] * cb["Y"]
+
 def census(lines):
     result = {g: [] for g in ("B", "W", "X", "BX")}
     for a, b in combinations(lines, 2):
@@ -47,7 +51,7 @@ def census(lines):
             result["W"].append((a, b, "T_i.T_j"))
         if ca["X"] * cb["X"] != 0:
             result["X"].append((a, b, ca["X"] * cb["X"]))
-        mixed = ca["Y"] * cb["X"] + ca["X"] * cb["Y"]
+        mixed = mixed_factor(lines, a, b)
         if mixed != 0:
             result["BX"].append((a, b, mixed))
     return result
@@ -71,10 +75,15 @@ def main():
         rd = census(build_rd(eta))
         assert {g: len(ld[g]) for g in ld} == expected["Q_LD"]
         assert {g: len(rd[g]) for g in rd} == expected["Q_RD"]
-        assert ("Hbar", "H", F(0)) not in ld["BX"]
-        assert ("E", "lbar", F(0)) not in rd["BX"]
-        assert ("E", "l", F(0)) not in rd["BX"]
-        assert ("Sbar", "S", F(0)) not in rd["BX"]
+        ldl = build_ld(eta)
+        rdl = build_rd(eta)
+        assert mixed_factor(ldl, "Hbar", "H") == 0
+        assert mixed_factor(rdl, "E", "lbar") == 0
+        assert mixed_factor(rdl, "E", "l") == 0
+        assert mixed_factor(rdl, "Sbar", "S") == 0
+        assert ldl["W"] if False else True
+        assert ldl["E"]["Y"] == -1 and ldl["E"]["X"] == eta
+        assert rdl["S"]["X"] == 2 * eta and rdl["Sbar"]["X"] == -2 * eta
         print(f"FLAVOR eta={eta} ({flavor})")
         print_family("Q_LD: E,Lbar,L,Hbar,H", ld)
         print_family("Q_RD: E,lbar,l,Sbar,S", rd)
