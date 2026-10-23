@@ -1,5 +1,7 @@
 # Real research-task pilot: UV–EFT hard derivative
 
+简体中文版本：[README.zh-CN.md](README.zh-CN.md)。
+
 This case validates the candidate research-record workflow using a bounded subtask from the ongoing Higgs-portal / UV–EFT calculation.
 
 ## Task
