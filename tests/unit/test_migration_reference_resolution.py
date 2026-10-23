@@ -155,6 +155,29 @@ class ValidationReferenceResolutionTests(unittest.TestCase):
         self.assertIn("SOURCE_RECORD_NOT_OBJECT", codes)
         self.assertIn("SOURCE_RECORD_TYPE_MISSING", codes)
 
+    def test_incomplete_source_snapshot_blocks_all_staging_targets(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            source = root / "source"
+            source.mkdir()
+            valid_record = json.loads(
+                (ROOT / "schema" / "v1.4.3.7" / "tests" / "valid" / "task" / "FX-TASK-VALID-001.json").read_text(encoding="utf-8")
+            )
+            valid_record["schema_version"] = "1.3"
+            (source / "task.json").write_text(json.dumps(valid_record), encoding="utf-8")
+            (source / "broken.json").write_text("{ malformed", encoding="utf-8")
+            output = root / "staging"
+            report = migration.migrate(source, output_dir=output, write_staging=True)
+            target_files = [
+                path for path in output.glob("*.json")
+                if path.name != "migration-report.json"
+            ]
+        self.assertTrue(report["staging_blocked"])
+        self.assertIn("SOURCE_FILES_SKIPPED", report["staging_blockers"])
+        self.assertEqual(report["staging_written_record_count"], 0)
+        self.assertEqual(target_files, [])
+        self.assertFalse(report["commit_allowed"])
+
     def test_duplicate_typed_primary_keys_block_dry_run(self):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
@@ -300,7 +323,16 @@ class ValidationReferenceResolutionTests(unittest.TestCase):
         )
         self.assertEqual(mapping_contract["target_digest_algorithm"], "RFC8785-JCS-SHA256")
         declared_migration_rules = {rule["rule_id"] for rule in mapping_contract["rules"]}
-        self.assertTrue({"MIG-010", "MIG-011"}.issubset(declared_migration_rules))
+        self.assertTrue({"MIG-012", "MIG-013"}.issubset(declared_migration_rules))
+        declared_rules_by_id = {rule["rule_id"]: rule["rule"] for rule in mapping_contract["rules"]}
+        self.assertEqual(
+            declared_rules_by_id["MIG-012"],
+            "Validate every provisional target against its complete Draft 2020-12 JSON Schema with a format checker; any target schema error blocks target emission to staging.",
+        )
+        self.assertEqual(
+            declared_rules_by_id["MIG-013"],
+            "Compute target_record_sha256 as SHA-256 over RFC 8785 JCS canonical UTF-8 bytes; source_sha256 remains the digest of the original source bytes.",
+        )
 
     def test_target_schema_missing_required_field_is_blocked_from_staging(self):
         with tempfile.TemporaryDirectory() as tmp:
