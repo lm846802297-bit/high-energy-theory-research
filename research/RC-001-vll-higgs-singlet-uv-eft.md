@@ -621,7 +621,7 @@ The census separates four classes that must not be conflated:
 
 The v153 §252.8–§252.10 EOM/source table is a coefficient-mapping obligation rather than a new loop topology. Its dimension-six potential and renormalizable-source companions must be applied exactly once; \(C_5\)-dependent source terms begin at \(O(M_E^{-3})\), and \(C_5C_5^\ast\) source-square terms begin at \(O(M_E^{-4})\). The kinetic-mixing boundary remains unresolved, and the scalar/source projection does not close all fermionic external-state amplitudes.
 
-**Decision:** the scalar bubble, crossed-current hard/soft kernels, four-fermion scalar bubble, and universal Q6-plus-quartic kernel have been independently reduced and checked algebraically. The next blocking tasks are external diagram-level validation, complete gauge corrections/contact terms/counterterms, and the full common-basis EOM/source projection. These remain necessary before the model-level Wilson vector can be called closed. PR #4 remains Draft/Open.
+**Decision:** the scalar bubble, crossed-current hard/soft kernels, four-fermion scalar bubble, and universal Q6-plus-quartic kernel have been independently reduced and checked algebraically. The next blocking tasks are external diagram-level validation, complete gauge corrections/contact terms/counterterms, and the full common-basis EOM/source projection. These remain necessary before the model-level Wilson vector can be called closed. PR #4 is intended to be integrated as an explicitly provisional research checkpoint; the model-level matching status remains unresolved.
 
 ## 10.12 Dimension-six soft integrals: independent hard/soft checks
 
