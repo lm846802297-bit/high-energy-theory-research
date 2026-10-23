@@ -1,5 +1,7 @@
 # High-Energy Theory Research
 
+简体中文版本：[README.zh-CN.md](README.zh-CN.md)。
+
 A research workspace for high-energy theory, with an explicit workflow for tracing changes from scientific questions to derivations, computations, verified claims, and manuscript revisions. It also includes a reusable research Skill and evidence-aware infrastructure for high-energy theoretical physics and phenomenology; peer-review response is one supported workflow, not the overall objective.
 
 ## Scientific Diff Workflow
