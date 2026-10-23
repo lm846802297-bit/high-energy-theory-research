@@ -51,6 +51,7 @@ For each external amplitude and each gauge sector, produce the labeled UV graph 
 5. Exact-algebra scripts for the displayed parameter integrals, partial fractions, charge traces, and \(SU(2)\) contractions.
 6. Signed charge-factor tables for all three pairings at the four conjugate Yukawa vertices, plus a tree-propagator argument showing the complete purely light vertex subfamily cancels from the hard difference at \(O(M_E^{-2})\) when the EFT contact set is included.
 7. A conditional (B-A') input-parameter counterterm sub-block, using an explicit signed off-diagonal propagator coefficient; it remains separate from the complete mixed-gauge amplitude.
+8. The heavy-containing FF/FS Yukawa-vertex hard sub-block for Q_LD and Q_RD, with oriented -F factors, all six one-vertex pole/log/finite expressions, and the doubled contribution of the two conjugate vertices.
 
 ### Not established
 
@@ -85,7 +86,7 @@ For each external amplitude and each gauge sector, produce the labeled UV graph 
 
 ## 7. Next concrete action
 
-Use the signed pair factors and kernel map in research/RC-001-dim6-yukawa-vertex-charge-factors.md to calculate the genuinely hard heavy–light-fermion and heavy–scalar vertex graphs for \(Q_{LD}\) and \(Q_{RD}\). Fix momentum and fermion/scalar flow explicitly; for each graph, record the Lorentz numerator, overall Feynman-rule sign, signed gauge factor, UV/IR poles, finite local term, and matched EFT graph. Keep the light-only vertex subfamilies in the Ward/contact bookkeeping but do not assign them a separate hard coefficient at \(O(M_E^{-2})\). Do not update a Wilson coefficient until both conjugate vertices, heavy-line self-energy, boxes, counterterms, and EFT contact terms have been combined.
+Compute the crossed-box hard amplitudes for the LD and RD external states, with explicit external momentum routing, fermion-flow signs, numerator reduction, and weak-index/Fierz projection. Use the vertex sub-block already recorded in research/RC-001-dim6-heavy-vertex-hard-pieces.md without recomputing it. Then combine the box, vertex, heavy-line self-energy, parameter/operator counterterms, and EFT soft/contact terms into one common UV/IR pole table and check the summed Ward identity before updating any full Wilson coefficient.
 
 ## 8. Decision
 
