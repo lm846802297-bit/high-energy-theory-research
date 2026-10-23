@@ -645,7 +645,7 @@ The \(C_5C_5^\ast\) four-fermion channel has hard local scalar-bilinear coeffici
 \]
 and its hard/soft sum has neither an uncancelled pole nor the constants \(\pm2\). In the \(Q_{LD}/Q_{RD}\)-plus-quartic channels, the hard/soft kernel is proportional to \(p+Q/2=(p-p')/2\), so the massless on-shell amplitude is EOM-redundant; its Wilson/source effect must be handled in the declared basis rather than counted as an independent current coefficient.
 
-**Evidence boundary:** no FeynArts/FeynCalc/Mathematica diagram generation has been run. The full gauge-corrected \(Q_{LD}/Q_{RD}\) and current-operator amplitudes, covariant-derivative contact terms, counterterms, all weak-index/EOM source rows, kinetic-mixing dependence, and the remaining dimension-eight hard matching are still open. PR #4 remains Draft/Open.
+**Evidence boundary:** no FeynArts/FeynCalc/Mathematica diagram generation has been run. The bosonic field-strength and current-to-gauge matching already recorded in master §254 is separate and is not duplicated here. Remaining fermionic gauge corrections to \(Q_{LD}/Q_{RD}\) and current-current operators, covariant-derivative contact terms, counterterms, the complete weak-index/EOM source ledger, kinetic-mixing dependence, and the remaining dimension-eight hard matching are still open. Master §255.8 gives \(\Xi_{L_\ell}^{(4)}=\Xi_{R_\ell}^{(4)}=0\) for the \(\mu,\tau\) fields; therefore the new Q6-plus-quartic EOM kernels do not generate nonzero dimension-six Yukawa-source rows for those flavors at this order. PR #4 remains Draft/Open.
 
 ## 11. Change history
 
