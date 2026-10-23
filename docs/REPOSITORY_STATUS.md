@@ -33,6 +33,10 @@ The new MIG-014 regression test `test_valid_claim_is_withheld_when_referenced_pl
 
 These results verify the available local candidate test scope. They do **not** establish compatibility with the absent historical v1.3 source corpus, byte-for-byte lineage of the unavailable v1.4.3.6 archive, complete cross-record/state-machine semantics, scientific correctness, or transaction safety. Four legacy Fixture Index expectations remain separately recorded as compatibility drift. `commit_allowed=false` remains mandatory.
 
+## Latest static review follow-up
+
+A static review found that `directory_manifest.py` could discard extra FileEntry keys before hashing and accepted an `allow_symlinks=True` argument despite lacking filesystem-root verification. The helper now rejects non-exact FileEntry key sets and explicitly rejects `allow_symlinks=True`; `tests/unit/test_directory_manifest.py` was added. These latest helper changes and tests have not yet been executed locally. The previous rules-v5 passing results apply to code HEAD `587587ae0b114d9624bfb7b270c8754b7e9cbef0`, before this helper patch. Re-run the new directory-manifest tests and full local validation against the latest branch HEAD before treating the current tree as locally verified. DD-ART-008 remains pending approval; filesystem traversal and byte-for-byte directory verification are still unimplemented.
+
 ## Release gates
 
 1. Obtain explicit owner decisions on DD-ART-007 through DD-ART-010.
