@@ -74,3 +74,18 @@ The migration remains a prototype. It does not implement an atomic transaction, 
 3. Add a directory-manifest canonical-byte/hash golden vector, a numeric-boundary case, and a Unicode path-ordering case; define the serialization/sort contract before changing historical digests.
 4. Reconcile the Schema/helper symlink policy only after DD-ART-008 is approved.
 5. Keep PR #6 open and Draft until current-HEAD evidence and owner decisions are complete. Do not merge or release; retain `commit_allowed=false`.
+
+
+## Addendum — owner-reported validation and provisional vector follow-up (2026-10-24)
+
+### Exact local evidence boundary
+
+The owner reports that local checks ran on PR HEAD `d4424f2012f6ec95e089019c10afb1fa95b6d619` and passed: directory-manifest tests 7/7, migration regression tests 36/36, integration tests 30/30, full unit tests 86/86, Python compilation, and the full Schema validator (68/68 checks, 83/83 candidate Fixture outcomes, 16/16 semantic cases, 125 trace rows). These results are owner-reported and apply only to that SHA.
+
+GitHub Actions Run [#39978741584](https://github.com/lm846802297-bit/high-energy-theory-research/actions/runs/39978741584) has conclusion `failure`; its job record has no steps and the run has no artifacts. This is not a passing CI result and does not establish a code-level test failure.
+
+### Provisional directory-manifest vector
+
+A separate vector, `schema/v1.4.3.7/migrations/directory-manifest-candidate-v0.golden.json`, and a unit test now capture the current helper's exact UTF-8 bytes and SHA-256 for NFC normalization and a Unicode-ordering-discriminating input. This is intentionally labelled `provisional_not_normative`. The vector and test have not been executed on the new commit that adds them; the prior results above do not validate this follow-up patch.
+
+The helper's runtime behavior and historical hashes are unchanged by the comment-only clarification. No Schema constraint, symlink policy, or owner decision was changed. The vector does not claim RFC 8785/JCS interoperability and does not settle the safe-integer domain or cross-language path-ordering contract. The Artifact Schema still allows `entry_type: "symlink"` while the helper rejects symlink entries; leave this mismatch open until DD-ART-008 is explicitly approved.

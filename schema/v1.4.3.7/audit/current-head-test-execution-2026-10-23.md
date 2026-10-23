@@ -211,3 +211,23 @@ The GitHub PR metadata was rechecked after the owner-reported local run:
 - Actions runs [`39969213674`](https://github.com/lm846802297-bit/high-energy-theory-research/actions/runs/39969213674) and [`39976133434`](https://github.com/lm846802297-bit/high-energy-theory-research/actions/runs/39976133434) both report `failure`. The available job records contain no usable step summaries or logs, so neither run is a pass and neither establishes a code-level test failure.
 
 Static normalization findings and required follow-up tests are recorded in the [Normalization and migration boundary review](schema/v1.4.3.7/audit/normalization-and-migration-boundary-review-2026-10-23.md). No migration or Schema code was changed by this audit-document update.
+
+
+## Follow-up owner-reported local validation — exact HEAD d4424f2 (2026-10-24)
+
+The repository owner reports the following checks passed on exact local HEAD `d4424f2012f6ec95e089019c10afb1fa95b6d619`:
+
+- Directory-manifest tests: **7/7**.
+- Migration regression tests: **36/36**.
+- Integration tests: **30/30**.
+- Full unit-test suite: **86/86**.
+- Python compilation: **passed**.
+- Full Schema validation: **68/68 checks**, **83/83 candidate Fixture outcomes**, **16/16 semantic cases**, **125 trace rows**.
+
+The migration regression cases include MIG-015, source-root symlink blocking, and withholding a Claim whose referenced Plan is invalid. Four historical `1.4.3.6-candidate` Fixture expectation differences remain separately recorded and did not fail the candidate Fixture outcomes.
+
+GitHub Actions [Run #39978741584](https://github.com/lm846802297-bit/high-energy-theory-research/actions/runs/39978741584) reports `failure`. Its `validate-candidate` job has no recorded steps; the run has no artifacts. The available evidence therefore does not show that any test ran in Actions. Do not describe the local results as a passing CI run.
+
+The report cited by the owner was generated outside the repository in a temporary directory. The checked-in historical `schema/v1.4.3.7/audit/validation-report.json` was not overwritten.
+
+A follow-up patch adds a provisional directory-manifest golden vector and a unit test for exact canonical bytes and SHA-256. **That new test has not been run on the post-patch HEAD.** The results above remain tied to `d4424f2` and do not validate the new patch. The vector is implementation-regression evidence only; DD-ART-008 still leaves the JCS numeric domain and cross-language path ordering unresolved. The Schema/helper symlink mismatch is also unresolved pending owner approval. No Schema semantics or historical hashes were changed, and `commit_allowed=false` remains mandatory.

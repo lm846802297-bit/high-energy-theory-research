@@ -58,8 +58,10 @@ def normalize_manifest(entries, allow_symlinks=False):
 
 def canonical_manifest_bytes(entries, allow_symlinks=False):
     normalized=normalize_manifest(entries,allow_symlinks)
-    # RFC 8785-compatible for this restricted schema: fixed ASCII object keys, no floats,
-    # integer sizes only, no NaN/Infinity, Unicode emitted as UTF-8. General JCS needs a full implementation.
+    # Provisional deterministic serialization for the current Python implementation only.
+    # This is not an approved cross-language/JCS contract: size_bytes numeric bounds and
+    # the Unicode path ordering rule remain unresolved under DD-ART-008.
+    # Do not use this implementation note or its golden vector to rewrite historical hashes.
     return json.dumps(normalized,ensure_ascii=False,sort_keys=True,separators=(",",":"),allow_nan=False).encode("utf-8")
 
 def directory_manifest_sha256(entries, allow_symlinks=False):

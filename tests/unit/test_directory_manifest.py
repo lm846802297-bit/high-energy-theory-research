@@ -1,9 +1,12 @@
+import hashlib
 import importlib.util
+import json
 import unittest
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 HELPER = ROOT / "schema" / "v1.4.3.7" / "tools" / "directory_manifest.py"
+VECTOR = ROOT / "schema" / "v1.4.3.7" / "migrations" / "directory-manifest-candidate-v0.golden.json"
 SPEC = importlib.util.spec_from_file_location("directory_manifest", HELPER)
 directory_manifest = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(directory_manifest)
@@ -69,6 +72,20 @@ class DirectoryManifestFailClosedTests(unittest.TestCase):
     def test_allow_symlinks_flag_cannot_silently_claim_support(self):
         with self.assertRaisesRegex(directory_manifest.ManifestError, "allow_symlinks=True is unsupported"):
             directory_manifest.normalize_manifest([], allow_symlinks=True)
+
+
+
+    def test_provisional_golden_vector_matches_canonical_bytes_and_sha256(self):
+        vector = json.loads(VECTOR.read_text(encoding="utf-8"))
+        self.assertEqual(vector["status"], "provisional_not_normative")
+        canonical = directory_manifest.canonical_manifest_bytes(vector["input"])
+        normalized = directory_manifest.normalize_manifest(vector["input"])
+        self.assertEqual(
+            [entry["relative_path"] for entry in normalized],
+            vector["normalized_paths"],
+        )
+        self.assertEqual(canonical.hex(), vector["canonical_utf8_hex"])
+        self.assertEqual(hashlib.sha256(canonical).hexdigest(), vector["sha256"])
 
 
 if __name__ == "__main__":

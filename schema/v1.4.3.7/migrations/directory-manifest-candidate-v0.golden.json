@@ -1,0 +1,40 @@
+{
+  "vector_id": "directory-manifest-candidate-v0-unicode-order-001",
+  "profile": "python-json-dumps-restricted-candidate-v0",
+  "status": "provisional_not_normative",
+  "input": [
+    {
+      "relative_path": "😀.txt",
+      "entry_type": "file",
+      "size_bytes": 1,
+      "content_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "symlink_target": null
+    },
+    {
+      "relative_path": "e\u0301.txt",
+      "entry_type": "file",
+      "size_bytes": 2,
+      "content_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "symlink_target": null
+    },
+    {
+      "relative_path": "\uE000.txt",
+      "entry_type": "file",
+      "size_bytes": 3,
+      "content_sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+      "symlink_target": null
+    }
+  ],
+  "normalized_paths": [
+    "\u00e9.txt",
+    "\uE000.txt",
+    "😀.txt"
+  ],
+  "canonical_utf8_hex": "5b7b22636f6e74656e745f736861323536223a2262626262626262626262626262626262626262626262626262626262626262626262626262626262626262626262626262626262626262626262626262626262222c22656e7472795f74797065223a2266696c65222c2272656c61746976655f70617468223a22c3a92e747874222c2273697a655f6279746573223a322c2273796d6c696e6b5f746172676574223a6e756c6c7d2c7b22636f6e74656e745f736861323536223a2263636363636363636363636363636363636363636363636363636363636363636363636363636363636363636363636363636363636363636363636363636363222c22656e7472795f74797065223a2266696c65222c2272656c61746976655f70617468223a22ee80802e747874222c2273697a655f6279746573223a332c2273796d6c696e6b5f746172676574223a6e756c6c7d2c7b22636f6e74656e745f736861323536223a2261616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161222c22656e7472795f74797065223a2266696c65222c2272656c61746976655f70617468223a22f09f98802e747874222c2273697a655f6279746573223a312c2273796d6c696e6b5f746172676574223a6e756c6c7d5d",
+  "sha256": "524af7f8dfdd780e2f1f7d2f262605423b6e5dc773c83a16285084b3b2609072",
+  "limitations": [
+    "Locks the current candidate helper's exact bytes and SHA-256 only; it is not proof of RFC 8785/JCS interoperability.",
+    "Does not decide the cross-language path ordering rule or the safe-integer domain for size_bytes.",
+    "Does not approve the Schema/helper symlink policy or authorize rewriting historical hashes."
+  ]
+}
