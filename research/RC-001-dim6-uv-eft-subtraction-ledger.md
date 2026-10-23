@@ -133,7 +133,31 @@ H^\dagger-L:\left(\frac14,0,-\frac{\eta_\ell}{2}\right).
 \]
 For \(Q_{RD}\), the mixed factor on the fermion–fermion pair vanishes at each \(\lambda_\ell\) vertex; the two scalar–fermion mixed factors are \(+2\eta_\ell\) and \(-2\eta_\ell\), with their orientation exchanged at the conjugate vertex. All four vertices separately conserve hypercharge and \(X\)-charge for both \(\eta_\mu=+1\) and \(\eta_\tau=-1\).
 
-These charge-factor checks fix the group/charge multipliers only. They do not fix overall graph signs, momentum routing, Dirac numerators, or finite loop coefficients. The full vertex rows remain **NOT EVALUATED** until the loop amplitudes and EFT subtractions are computed and combined.
+The charge-factor checks fix the group/charge multipliers; the heavy-containing FF/FS vertex sub-block is now separately evaluated in research/RC-001-dim6-heavy-vertex-hard-pieces.md. Its full UV–EFT four-point sum remains **OPEN** until boxes, self-energy/parameter counterterms, EFT contact graphs, and the Ward/basis projection are combined.
+
+### 2.4.1 Heavy-containing Yukawa-vertex hard sub-blocks
+
+The heavy–light fermion (FF) and heavy–scalar (FS) vertex graphs have now been reduced with their oriented Feynman-rule signs in Feynman gauge. The complete one-vertex results, including the finite \(O(\epsilon)\times 1/\epsilon\) term from \(dB_0\), are in research/RC-001-dim6-heavy-vertex-hard-pieces.md. The exact symbolic checker and captured output are calculations/RC-001-dim6-heavy-vertex-hard-pieces.py and validation/RC-001-dim6-heavy-vertex-hard-pieces.txt.
+
+For a single conjugate Yukawa vertex, define
+\[
+B_0=\Delta_{\rm UV}+1-L_\ell,\qquad dB_0=4\Delta_{\rm UV}+2-4L_\ell.
+\]
+The oriented hard factors are \(-F_{\rm FF}dB_0-F_{\rm FS}B_0\), with the signed factors in §2.4. The results are
+\[
+\begin{array}{c|ccc}
+ & B & A'A' & BA'\\ \hline
+Q_{LD}:v & \frac52\Delta_{\rm UV}+\frac32-\frac52L_\ell &
+4\Delta_{\rm UV}+2-4L_\ell &
+-\frac{13}{2}\eta_\ell\Delta_{\rm UV}-\frac72\eta_\ell+\frac{13}{2}\eta_\ell L_\ell\\[2pt]
+Q_{RD}:v & 4\Delta_{\rm UV}+2-4L_\ell &
+-2\Delta_{\rm UV}+2L_\ell &
+-2\eta_\ell\Delta_{\rm UV}-2\eta_\ell+2\eta_\ell L_\ell
+\end{array}
+\]
+where the coupling prefactors are respectively \(g_Y^2\), \(g_X^2Q_\ell^2\), and \(\rho_{BX}g_Yg_XQ_\ell\). Both conjugate vertices contribute, so the corresponding tree-coefficient sub-block is \(2v/(16\pi^2)\) with those prefactors.
+
+These poles and finite constants are **vertex-sub-block results only**. Do not combine them with the heavy-line self-energy counterterm a second time, and do not interpret the sub-block pole as a physical uncanceled divergence. The amplitude ledger rows LD-B/LD-X/LD-BX and RD-B/RD-X/RD-BX remain open until crossed boxes, EFT soft/contact terms, external-field and operator counterterms, and the summed Ward identity have been incorporated.
 
 ### 2.5 Light-only Yukawa-vertex loops cancel in the hard difference at \(O(M_E^{-2})\)
 
