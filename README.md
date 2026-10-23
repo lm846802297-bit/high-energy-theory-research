@@ -10,15 +10,16 @@ The workflow is designed for theoretical particle physics, UV–EFT matching, pe
 
 ### Start here
 
-1. Read [the workflow specification](docs/scientific-diff-workflow.md).
-2. Copy [the research-change template](templates/research-change.md) for each substantive research change.
+1. Read the [detailed User Guide](docs/USER_GUIDE.md) for project setup, workstreams, research changes, evidence, validation, and review.
+2. Read [the workflow specification](docs/scientific-diff-workflow.md).
+3. Copy [the research-change template](templates/research-change.md) for each substantive research change.
 3. Use [the claim–evidence matrix template](templates/claim-evidence-matrix.md) to track the support for important physical statements.
 4. Apply [the review checklist](docs/review-checklist.md) before marking a change complete or synchronizing it into a manuscript.
-5. Read the [active research records](research/README.md); the first baseline is [RC-001: VLL–Higgs–Singlet UV–EFT matching](research/RC-001-vll-higgs-singlet-uv-eft.md), with its [record-specific claim–evidence matrix](research/RC-001-claim-evidence-matrix.md).
-6. Use the [project registry](projects/README.md) to distinguish top-level research projects from workstreams and research-change records. The VLL–Higgs–Singlet UV–EFT workstream belongs to the parent project axial-vector-model-building; it is not a separate top-level project.
-7. For the reusable research Skill, start at [SKILL.md](skills/high-energy-theory-research/SKILL.md), then read its reference guides.
-8. Review [repository status](docs/REPOSITORY_STATUS.md), [open issues](docs/OPEN_ISSUES.md), and the [normative decision register](docs/governance/DECISION_REGISTER.md) before changing candidate schemas.
-9. Read the [v1.6.5 design baseline](docs/design/high-energy-theory-research-Skill-v1.6.5.md), the [v1.6.7 consolidated design/implementation report](docs/design/high-energy-theory-research-Skill-v1.6.7.md), and the [v1.6.6 Artifact-identity candidate clarification](schema/v1.4.3.7/audit/高能理论物理研究-Skill-详细设计文档-v1.6.6-Artifact身份语义候选修订.md).
+6. Read the [active research records](research/README.md); the first baseline is [RC-001: VLL–Higgs–Singlet UV–EFT matching](research/RC-001-vll-higgs-singlet-uv-eft.md), with its [record-specific claim–evidence matrix](research/RC-001-claim-evidence-matrix.md).
+7. Use the [project registry](projects/README.md) to distinguish top-level research projects from workstreams and research-change records. The VLL–Higgs–Singlet UV–EFT workstream belongs to the parent project axial-vector-model-building; it is not a separate top-level project.
+8. For the reusable research Skill, start at [SKILL.md](skills/high-energy-theory-research/SKILL.md), then read its reference guides.
+9. Review [repository status](docs/REPOSITORY_STATUS.md), [open issues](docs/OPEN_ISSUES.md), and the [normative decision register](docs/governance/DECISION_REGISTER.md) before changing candidate schemas.
+10. Read the [v1.6.5 design baseline](docs/design/high-energy-theory-research-Skill-v1.6.5.md), the [v1.6.7 consolidated design/implementation report](docs/design/high-energy-theory-research-Skill-v1.6.7.md), and the [v1.6.6 Artifact-identity candidate clarification](schema/v1.4.3.7/audit/高能理论物理研究-Skill-详细设计文档-v1.6.6-Artifact身份语义候选修订.md).
 
 ### Core chain
 
@@ -30,6 +31,7 @@ Every arrow should be traceable. A change to an upstream assumption or formula m
 
 - **docs/scientific-diff-workflow.md** — workflow, definitions, status model, and physics-specific guidance.
 - **projects/** — top-level project registry and project/workstream hierarchy; navigation metadata only at this stage.
+- **docs/USER_GUIDE.md** — detailed operating manual for project setup, research changes, calculation evidence, validation, and migration discipline.
 - **docs/review-checklist.md** — checks for scientific changes and manuscript synchronization.
 - **docs/design/** — retained design baseline and consolidated implementation report.
 - **docs/governance/** — normative decisions and fingerprint-contract review.
@@ -40,7 +42,7 @@ Every arrow should be traceable. A change to an upstream assumption or formula m
 - **calculations/** — reproducible symbolic/algebraic calculation scripts; each script states what it does and does not validate.
 - **validation/** — captured calculation outputs and validation logs, kept distinct from planned or unexecuted checks.
 - **schema/v1.4.3.7/** — candidate JSON Schemas, fixtures, validators, migration prototype, audit reports, and requirement/test traceability.
-- **skills/high-energy-theory-research/** — reusable Skill entry point, reference guides, fingerprinting, and project-record validation tools.
+- **skills/high-energy-theory-research/** — reusable Skill entry point, reference guides, fingerprinting, structured-record validation, and project-registry validation tools.
 - **tests/eval-cases/** — bounded analytic-matrix and UV–EFT hard-derivative pilot cases.
 - **tests/unit/** — regression tests for the Skill scaffold, record validator, fingerprints, migration reference resolution, and pilots.
 
