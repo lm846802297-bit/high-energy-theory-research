@@ -52,3 +52,11 @@
 - Updated the README validation commands and project hierarchy references.
 - No existing research files were moved. The new validator and tests have not been executed in a repository runtime in this change; treat runtime validation as pending until the command/test output is captured.
 
+## 2026-10-23 — Simplified Chinese documentation
+
+- Added `README.zh-CN.md` for the repository landing page and `docs/USER_GUIDE.zh-CN.md` as a full Chinese user manual.
+- Added Chinese counterparts for all seven existing README files: design documents, project registry, research records, candidate Schema v1.4.3.7, and both evaluation-pilot directories.
+- Added language-switch links from the corresponding English README files and the English user guide.
+- Preserved source identifiers, paths, commands, equations, schema-field names, and validation caveats; no English original was replaced.
+- Verified that each translated document has the same number of Markdown headings as its English source. Link/path and code-fence checks are recorded separately; no scientific calculation or CI run was performed by this documentation-only change.
+
