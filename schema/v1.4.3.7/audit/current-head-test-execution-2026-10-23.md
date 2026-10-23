@@ -188,7 +188,7 @@ These results verify the available local candidate test scope only. Historical v
 
 The new directory-manifest tests cover missing/extra FileEntry keys, NFC-equivalent path collisions, traversal/absolute/backslash paths, deterministic sorting, and symlink rejection. The validation report was generated in a temporary directory outside the repository; the checked-in historical `audit/validation-report.json` was not overwritten. Four historical `1.4.3.6-candidate` Fixture expectation differences remain recorded separately and did not fail the candidate Fixture checks.
 
-These are local results reported by the repository owner. They are not evidence of a passing GitHub Actions run. The tested code/test HEAD is recorded explicitly because subsequent documentation-only audit commits may advance the PR branch without changing the validated implementation.
+These are local results reported by the repository owner. They are not evidence of a passing GitHub Actions run. The tested code/test HEAD is recorded explicitly. The later PR branch did not advance only through documentation: the current code-bearing HEAD includes rules-v6/MIG-015 and source-root-symlink changes, which are not covered by the rules-v5 results recorded above.
 
 The result verifies the available candidate test scope only. It does not establish historical v1.3 compatibility, byte-for-byte lineage of the unavailable v1.4.3.6 archive, approval of DD-ART-007 through DD-ART-010, complete cross-record/state-machine semantics, scientific correctness, or transaction safety. `commit_allowed=false` remains unchanged.
 
@@ -199,3 +199,15 @@ A subsequent static review found that the migration could emit a Task Execution 
 The migration prototype has been updated to rules version `v1.4.3.7-migration-rules-6` with rule MIG-015. It now withholds a Task Execution Contract when the registry is absent or its source hash cannot be revalidated under an owner-approved payload rule. Two Task Execution Contract tests, one symlinked-source-root test, and the migration-contract assertion were added. **These rules-v6 changes and tests have not yet been executed locally.** The previous 7/7, 33/33, 30/30, 83/83, and Schema 68/68 results apply to rules-v5 code/test HEAD `0799dada7eaa8dcd08b8db2f2311a844335d7198`, not the current rules-v6 code.
 
 The same static pass identified a source-inventory gap: the migrator checked symlinks inside the input tree but not the input root path itself. The code now includes the source root in the symlink check, and a regression test was added; it is not yet execution-verified. It also identified a remaining DD-ART-008 contract mismatch: the Artifact Schema permits `entry_type: "symlink"`, while the directory-manifest helper rejects all symlink entries. Do not resolve this by silently changing the Schema before the owner approves the symlink policy. Actual filesystem traversal and byte verification remain unimplemented. `commit_allowed=false` remains unchanged.
+
+## Follow-up — current PR branch reconciliation
+
+The GitHub PR metadata was rechecked after the owner-reported local run:
+
+- Current code-bearing PR HEAD at review: `c69651858a9c0b6155242c25a4c09c1364284823`.
+- Owner-reported tested HEAD: `0799dada7eaa8dcd08b8db2f2311a844335d7198` (rules v5).
+- GitHub compare reports the tested SHA as an ancestor 41 commits behind the current code-bearing HEAD.
+- The current branch contains rules v6/MIG-015 and a source-root-symlink guard with new regression tests. The 7/7, 33/33, 30/30, 83/83 and Schema 68/68 results belong to the earlier rules-v5 revision and do not validate those later code changes.
+- Actions runs [`39969213674`](https://github.com/lm846802297-bit/high-energy-theory-research/actions/runs/39969213674) and [`39976133434`](https://github.com/lm846802297-bit/high-energy-theory-research/actions/runs/39976133434) both report `failure`. The available job records contain no usable step summaries or logs, so neither run is a pass and neither establishes a code-level test failure.
+
+Static normalization findings and required follow-up tests are recorded in the [Normalization and migration boundary review](schema/v1.4.3.7/audit/normalization-and-migration-boundary-review-2026-10-23.md). No migration or Schema code was changed by this audit-document update.
