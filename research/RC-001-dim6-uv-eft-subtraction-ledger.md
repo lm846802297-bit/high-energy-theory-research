@@ -193,7 +193,7 @@ The following matrix records which mathematical sub-block is actually evaluated.
 | LD-YV-E-L | FF hard factor \(-F_{\rm FF}dB_0\) included in the evaluated vertex sub-block | — | Heavy-containing vertex sub-block evaluated; full UV–EFT amplitude/counterterm sum open |
 | LD-YV-E-H | FS hard factor \(-F_{\rm FS}B_0\) included in the evaluated vertex sub-block | — | Heavy-containing vertex sub-block evaluated; full UV–EFT amplitude/counterterm sum open |
 | LD-YV-L-H | Purely light loop at zero external momenta | — | Soft/scaleless limit identified; retain in common UV/EFT IR bookkeeping |
-| RD-YV-E-\(\ell_R\) | — | \(B_0\) scalar kernel; numerator reduction \(dB_0\) before signs/charges | Scalar kernel evaluated; complete vertex coefficient open |
+| RD-YV-E-\(\ell_R\) | — | FF hard factor \(-F_{\rm FF}dB_0\) included in the evaluated vertex sub-block | Heavy-containing vertex sub-block evaluated; full UV–EFT amplitude/counterterm sum open |
 | RD-YV-E-S | — | FS hard factor \(-F_{\rm FS}B_0\) included in the evaluated vertex sub-block | Heavy-containing vertex sub-block evaluated; full UV–EFT amplitude/counterterm sum open |
 | RD-YV-\(\ell_R\)-S | — | Purely light loop at zero external momenta | Soft/scaleless limit identified; retain in common UV/EFT IR bookkeeping |
 | LD/RD-CROSS-BOX | Representative \(J_{\rm hard}=M_E^{-2}(\Delta_{\rm UV}+1-L_\ell)\) | Same scalar master, with distinct numerator/charge routings | Scalar master evaluated; every diagram coefficient and Fierz projection open |
