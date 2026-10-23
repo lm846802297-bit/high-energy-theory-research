@@ -5,7 +5,6 @@
   "claim_id": "CLAIM-RESOLVABLE-1",
   "task_id": "TASK-HEP-1",
   "claim_type": "methodological",
-  "statement": "Synthetic claim for the validation_ids resolver fixture.",
   "claim_lifecycle_status": "active",
   "evidence_status": {},
   "physics_assessment": null,
