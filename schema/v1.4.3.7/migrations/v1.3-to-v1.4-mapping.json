@@ -53,20 +53,117 @@
     "silently_drop_unmapped_fields",
     "auto_merge_multiple_sources_without_review"
   ],
-  "migration_rules_version": "v1.4.3.7-migration-rules-2",
+  "migration_rules_version": "v1.4.3.7-migration-rules-3",
   "commit_allowed": false,
   "staging_only": true,
   "validation_ids_resolution": {
     "status": "source_aware_prototype",
-    "rule": "Resolve only a unique primary key in the same project; validation_activity additionally requires execution_status in in_progress/succeeded/failed and a non-empty started_at.",
+    "rule": "Resolve only a unique primary key within the same project. A validation_activity reference additionally requires a valid timezone-aware ISO date-time started_at and an execution_status with an explicit mapping to a v1.4 target enum value. The current candidate does not infer that in_progress means running.",
     "unresolved_cases": [
       "missing target",
       "duplicate/cross-type ID",
       "project mismatch",
       "not-started activity",
       "insufficient launch evidence",
-      "invalid source shape"
+      "invalid source shape",
+      "missing or invalid project_id",
+      "non-string or missing primary key",
+      "duplicate same-project typed primary key",
+      "source execution_status without an explicit target-enum mapping",
+      "invalid or timezone-naive started_at",
+      "malformed JSON or non-object source file",
+      "missing record_type",
+      "empty source snapshot",
+      "missing/malformed candidate schema directory"
     ],
     "full_historical_compatibility": "unverified_until_original_v1_3_bundle_is_supplied"
-  }
+  },
+  "field_mappings": [
+    {
+      "record_type": "claim",
+      "source_field": "planned_run_ids",
+      "target_field": "run_plan_ids",
+      "basis": "candidate explicit mapping; historical v1.3 source schema unavailable",
+      "compatibility_status": "unverified_until_original_v1_3_bundle_is_supplied"
+    },
+    {
+      "record_type": "claim",
+      "source_field": "planned_validation_ids",
+      "target_field": "validation_plan_ids",
+      "basis": "candidate explicit mapping; historical v1.3 source schema unavailable",
+      "compatibility_status": "unverified_until_original_v1_3_bundle_is_supplied"
+    },
+    {
+      "record_type": "claim",
+      "source_field": "expected_artifact_plan_ids",
+      "target_field": "artifact_plan_ids",
+      "basis": "candidate explicit mapping; historical v1.3 source schema unavailable",
+      "compatibility_status": "unverified_until_original_v1_3_bundle_is_supplied"
+    },
+    {
+      "record_type": "task",
+      "source_field": "expected_artifact_plan_ids",
+      "target_field": "artifact_plan_ids",
+      "basis": "candidate explicit mapping; historical v1.3 source schema unavailable",
+      "compatibility_status": "unverified_until_original_v1_3_bundle_is_supplied"
+    },
+    {
+      "record_type": "task_execution_contract",
+      "source_field": "expected_artifact_plan_ids",
+      "target_field": "artifact_plan_ids",
+      "basis": "candidate explicit mapping; historical v1.3 source schema unavailable",
+      "compatibility_status": "unverified_until_original_v1_3_bundle_is_supplied"
+    },
+    {
+      "record_type": "run_plan",
+      "source_field": "expected_artifact_plan_ids",
+      "target_field": "artifact_plan_ids",
+      "basis": "candidate explicit mapping; historical v1.3 source schema unavailable",
+      "compatibility_status": "unverified_until_original_v1_3_bundle_is_supplied"
+    },
+    {
+      "record_type": "artifact",
+      "source_field": "sha256",
+      "target_field": "content_sha256",
+      "basis": "candidate record-type-specific alias; historical v1.3 source schema unavailable",
+      "compatibility_status": "unverified_until_original_v1_3_bundle_is_supplied"
+    },
+    {
+      "record_type": "artifact",
+      "source_field": "uri",
+      "target_field": "path_or_uri",
+      "basis": "candidate record-type-specific alias; historical v1.3 source schema unavailable",
+      "compatibility_status": "unverified_until_original_v1_3_bundle_is_supplied"
+    },
+    {
+      "record_type": "artifact",
+      "source_field": "producer_run_id",
+      "target_field": "generated_by_run_id",
+      "basis": "candidate record-type-specific alias; historical v1.3 source schema unavailable",
+      "compatibility_status": "unverified_until_original_v1_3_bundle_is_supplied"
+    },
+    {
+      "record_type": "artifact",
+      "source_field": "integrity_status",
+      "target_field": "artifact_integrity_status",
+      "basis": "candidate record-type-specific alias; historical v1.3 source schema unavailable",
+      "compatibility_status": "unverified_until_original_v1_3_bundle_is_supplied"
+    },
+    {
+      "record_type": "task_execution_contract",
+      "source_field": "version",
+      "target_field": "contract_version",
+      "basis": "candidate record-type-specific alias; historical v1.3 source schema unavailable",
+      "compatibility_status": "unverified_until_original_v1_3_bundle_is_supplied"
+    },
+    {
+      "record_type": "task_execution_contract",
+      "source_field": "contract_hash",
+      "target_field": "contract_sha256",
+      "basis": "candidate record-type-specific alias; historical v1.3 source schema unavailable",
+      "compatibility_status": "unverified_until_original_v1_3_bundle_is_supplied"
+    }
+  ],
+  "target_schema_validation": "not_performed_by_migration_prototype",
+  "staging_output_policy": "Staging output must be outside the input tree and use a new empty directory. The tool refuses non-empty output directories to prevent stale artifacts from being mistaken for current output."
 }
