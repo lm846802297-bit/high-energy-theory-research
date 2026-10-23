@@ -607,6 +607,21 @@ Consequently, within the specific \(C_{5,\ell}C_{5,\ell}^*\) Yukawa bubble,
 \]
 These VEV wavefunction insertions are \(O(M_E^{-4})\) at fixed VEV and do not modify the restricted Yukawa-sector coefficient at \(O(M_E^{-2})\). The same order-counting argument does **not** prove that all EFT soft topologies are closed: the source §243.4 explicitly requires separate treatment of portal/scalar/gauge coupling structures and a method-of-regions check wherever inverse light-mass factors could enhance a nominally higher-order insertion. Section §284.3 therefore remains an open gate for any full-model claim.
 
+### 10.11 EFT soft-topology census and target-order decision
+
+A first-pass topology and explicit heavy-mass power-counting ledger is now recorded in research/RC-001-eft-soft-topology-census.md. The companion structural script calculations/RC-001-eft-soft-topology-census.py and captured output validation/RC-001-eft-soft-topology-census.txt check unique topology IDs, one-loop Euler counts, and explicit inverse-\(M_E\) powers. The script does not evaluate integrals or claim external diagram-package validation.
+
+The census separates four classes that must not be conflated:
+
+1. **Direct mixed-scalar 1PI soft graph at \(O(M_E^{-2})\) in the fixed \(|y_\ell|^2|\lambda_\ell|^2\) sector:** the \(C_{5,\ell}C_{5,\ell}^\ast\) light-fermion bubble. Its PV expression and the specified off-shell/EOM completion are already recorded; independent diagram-level validation remains open.
+2. **Single \(Q_{LD}\) or \(Q_{RD}\) insertion plus a scalar-quartic vertex:** the one-loop candidate is reducible through the scalar line and contains a scaleless one-propagator fermion tadpole in the unbroken massless dimensional-regularization setup. It is not an additional local 1PI scalar coefficient at strict \(O(M_E^{-2})\). Broken-phase mass-dependent pieces require a fresh power count.
+3. **Gauge-current exchange involving one tree-level dimension-six insertion:** these can be one-loop and \(O(M_E^{-2})\), but are reducible through the exchanged gauge propagator in the four-scalar amplitude. Keep them in the current/source ledger and match the corresponding form factors if required by the chosen basis or connected-amplitude target; do not add them as direct local 1PI \(C_{\partial HS}\) terms.
+4. **Dimension-eight soft candidates:** \(Q_{LD}^2\), \(Q_{RD}^2\), \(Q_{LD}Q_{RD}\), \(C_5^4\), conditional \(C_5C_7^\ast\), and \(Q_{LD}/Q_{RD}\) VEV wavefunction insertions into the \(C_5C_5^\ast\) bubble carry \(O(M_E^{-4})\) at fixed VEV. They are excluded from a strict dimension-six truncation but must be included in the dimension-eight closure.
+
+The v153 §252.8–§252.10 EOM/source table is a coefficient-mapping obligation rather than a new loop topology. Its dimension-six potential and renormalizable-source companions must be applied exactly once; \(C_5\)-dependent source terms begin at \(O(M_E^{-3})\), and \(C_5C_5^\ast\) source-square terms begin at \(O(M_E^{-4})\). The kinetic-mixing boundary remains unresolved, and the scalar/source projection does not close all fermionic external-state amplitudes.
+
+**Decision:** this census narrows the explicit-integral queue but does not close the model-level Wilson vector. Next, independently validate the existing \(C_5C_5^\ast\) bubble at diagram level; then determine which current form factors are required by the frozen basis and kinetic-mixing input; enumerate the remaining fermionic amplitudes; only then start the full \(O(M_E^{-4})\) hard/soft matching. PR #4 remains Draft/Open.
+
 ## 11. Change history
 
 | Date | Revision | Change | Reason |
@@ -618,3 +633,4 @@ These VEV wavefunction insertions are \(O(M_E^{-4})\) at fixed VEV and do not mo
 | 2026-10-23 | Off-shell/EOM reproducibility | Added the source-aligned §252 reproduction (46 exact-rational checks) and §301 coefficient audit (5 checks), with captured output logs | Make the finite representative reconciliation and its companion-term bookkeeping directly reproducible from the repository |
 | 2026-10-23 | EFT soft-insertion power counting | Recorded the (Q_{LD},Q_{RD}) tree-level (1/M_E^2) operators and showed their VEV wavefunction insertions into the (C_5^2) bubble begin at (O(M_E^{-4})) | Bound the restricted Yukawa-sector conclusion without claiming that all portal/gauge/scalar soft topologies are closed |
 | 2026-10-23 | Dimension-eight soft-pole reconciliation | Matched the C5-squared constant soft pole to the X^2Y^2 counterterm in master §§262.5 and 264.4; kept full dimension-eight hard matching open | Distinguish the verified subset-level potential counterterm from the complete O(M_E^-4) Wilson vector |
+| 2026-10-23 | EFT soft-topology census | Added a structural one-loop topology and inverse-heavy-mass ledger; separated direct 1PI soft graphs, reducible current exchanges, scaleless quartic-tadpole candidates, and dimension-eight insertions | Prioritize explicit integrals without overstating model-level Wilson-vector closure |
