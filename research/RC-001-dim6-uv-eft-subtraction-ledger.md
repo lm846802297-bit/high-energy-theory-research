@@ -113,6 +113,10 @@ Use the following order; do not apply EOM before the UV-minus-EFT difference and
 6. **Current and four-fermion ledger.** Keep local current operators, reducible gauge-exchange amplitudes, EOM-generated current-current operators, and independently matched four-fermion coefficients as separate entries. Do not add an EOM image on top of the operator it replaces.
 7. **External-field/input scheme.** Record whether coefficients are for amputated 1PI Green functions or LSZ-normalized amplitudes. Parameter counterterms and finite field redefinitions must follow the same scheme on both sides.
 
+### 4.1 Exact \(SU(2)_L\) attachment projection already checked
+
+The six \(WW\) line-pair generator contractions for \(Q_{LD}\) are recorded in `research/RC-001-dim6-SU2-attachment-projection.md`. With \(T_0=\delta_{ij}\delta_{kl}\), \(T_x=\delta_{il}\delta_{kj}\), and \(T_3=2T_x-T_0\), the two same-vertex pairs yield \(-3T_0/4\); the cross-vertex pairs LD-W-02 and LD-W-05 yield \(+T_3/4\), while LD-W-01 and LD-W-06 yield \(-T_3/4\). All six identities pass the local exact SymPy tensor check recorded in `validation/RC-001-dim6-SU2-attachment-projection.txt`. These factors are generator contractions only; the associated loop integrals and their relative diagram signs/multiplicities remain unevaluated.
+
 ## 5. Existing analytic results that are not to be recomputed or double-counted
 
 The current analytic note already records the stripped hard/soft kernels for three loop-dependent \(C_5C_5^\ast\) crossed-current channels, the \(C_5C_5^\ast\) four-fermion scalar bubble, and the \(Q_{LD}/Q_{RD}\)-plus-quartic EOM kernel. The primary SymPy script reports 41 exact checks; the separate compact script reports 23 local exact checks. These validate selected integral kernels and algebraic reductions only.
