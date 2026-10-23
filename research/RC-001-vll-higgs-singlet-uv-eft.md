@@ -543,12 +543,12 @@ To make the §301 reconciliation directly reproducible from the repository, two 
 
 These checks support the stated reconciliation between the old on-shell four-point representative and the EOM-completed same-basis coefficients. They are not independent diagram generation or a numerical loop integration. They do not close the complete model-level Wilson vector, every remaining EFT soft/source sector, the higher-order constant-pole operator assignment, or the physical pole/mixing observable.
 
-### 10.9 Candidate dimension-eight projection of the constant pole — not a final operator assignment
+### 10.9 \(C_5^2\) soft constant pole: dimension-eight potential counterterm and truncation boundary
 
-The restricted EFT bubble-plus-contact subset gives the local inverse-kernel pole
+The EFT bubble-plus-contact subset gives
 \[
-\Pi_{\rm local\,CT}^{\ell}(0)\big|_{\rm pole}
-=+\frac{8q_\ell x_\ell}{16\pi^2}\Delta_{\rm UV},
+\Pi_{\rm local\,CT}^{\ell}(s)\big|_{\rm pole}
+=+\frac{q_\ell}{16\pi^2}(8x_\ell-s)\Delta_{\rm UV},
 \qquad x_\ell=m_\ell^2.
 \]
 At leading seesaw order,
@@ -557,32 +557,31 @@ q_\ell\simeq\frac{|y_\ell|^2|\lambda_\ell|^2v_hv_s}{2M_{E_\ell}^2},
 \qquad
 x_\ell\simeq\frac{|y_\ell|^2|\lambda_\ell|^2v_h^2v_s^2}{4M_{E_\ell}^2},
 \]
-so
+so the constant projection is
 \[
 \Pi_{\rm local\,CT}^{\ell}(0)\big|_{\rm pole}
-\simeq
-+\frac{|y_\ell|^4|\lambda_\ell|^4}{16\pi^2M_{E_\ell}^4}
+\simeq+\frac{|y_\ell|^4|\lambda_\ell|^4}{16\pi^2M_{E_\ell}^4}
 v_h^3v_s^3\,\Delta_{\rm UV}.
 \]
-This confirms the \(O(M_E^{-4})\) power counting and identifies a natural pure-potential representative. Define \(X=H^\dagger H\), \(Y=S^\dagger S\). Since
+This is \(O(M_E^{-4})\), not the leading \(O(M_E^{-2})\) derivative counterterm or the dimension-four portal threshold.
+
+The cumulative master source already identifies the gauge-invariant pure-potential representative in §§262.5 and 264.4. With \(X=H^\dagger H\), \(Y=S^\dagger S\) and \(m_\ell^2=c_\ell^2XY\), the \(C_5^2\) light-fermion determinant has
 \[
-\left.\frac{\partial^2(X^2Y^2)}{\partial h\,\partial s}\right|_{h=s=0}
-=v_h^3v_s^3,
-\]
-a provisional counterterm representative
-\[
-V_{\rm CT}^{(8)}\supset
-\delta c_{8,\ell}\frac{X^2Y^2}{M_{E_\ell}^4},
+V_{1,\rm UV}= \frac{c_\ell^4}{16\pi^2}\Delta_{\rm UV}X^2Y^2,
 \qquad
-\delta c_{8,\ell}^{\rm candidate}
-=-\frac{|y_\ell|^4|\lambda_\ell|^4}{16\pi^2}\Delta_{\rm UV}
+\delta\mathcal L_{\rm pot,8}
+=+\frac{c_\ell^4}{16\pi^2}\Delta_{\rm UV}X^2Y^2,
+\quad c_\ell\simeq\frac{y_\ell\lambda_\ell}{M_{E_\ell}}.
 \]
-would cancel this *subset-level* constant pole under the fixed convention
-\(\Gamma_{\rm inv}=p^2-\mathcal M_{\rm loc}^2+\Pi\), where a potential counterterm contributes minus its mixed Hessian to \(\Pi_{\rm local\,CT}\).
+Since
+\[
+\left.\partial_h\partial_s(X^2Y^2)\right|_{h=s=0}=v_h^3v_s^3,
+\]
+this counterterm reproduces the constant mixed-kernel pole above, including its sign in the convention \(\Gamma_{\rm inv}=p^2-\mathcal M_{\rm loc}^2+\Pi\). Equivalently, if writing a potential counterterm \(V_{\rm CT}\supset\delta c_{8,\ell}X^2Y^2/M_{E_\ell}^4\), then \(\delta c_{8,\ell}=-|y_\ell|^4|\lambda_\ell|^4\Delta_{\rm UV}/(16\pi^2)\); the Lagrangian counterterm has the opposite sign.
 
-The candidate has been checked by `calculations/RC-001-dimension8-constant-pole-candidate.py`; four exact symbolic checks pass, with output in `validation/RC-001-dimension8-constant-pole-candidate.txt`.
+The relation is checked by \`calculations/RC-001-dimension8-constant-pole-candidate.py\`; four exact symbolic checks pass, with output in \`validation/RC-001-dimension8-constant-pole-candidate.txt\`. This is a verification of the \(C_5^2\) soft-potential subset counterterm, not a complete dimension-eight matching result.
 
-**This is not yet the final gauge-invariant assignment.** The calculation uses only the bubble-plus-contact subset. Other same-order EFT soft/source insertions may modify its constant pole, and EOM-related dimension-eight derivative, potential, and source operators can move contributions between representatives. Until the complete soft sum and a fixed gauge-invariant dimension-eight basis/EOM convention are specified, \(\delta c_{8,\ell}^{\rm candidate}\) is a diagnostic projection, not an accepted Wilson coefficient. The PR remains open and in Draft state.
+**Remaining boundary:** the master source explicitly leaves the dimension-eight UV hard matching and the full \(O(M_E^{-4})\) prediction incomplete. Higher-dimensional tree-level EFT vertices and their soft insertions must be included at the same retained order. At strict \(O(M_E^{-2})\), the entire \(O(M_E^{-4})\) constant-pole set must be dropped consistently; it cannot be retained selectively and absorbed into the dimension-four portal counterterm.
 
 ## 11. Change history
 
