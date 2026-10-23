@@ -3,6 +3,7 @@ import json
 import shutil
 import tempfile
 import unittest
+from unittest.mock import patch
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -176,6 +177,41 @@ class ValidationReferenceResolutionTests(unittest.TestCase):
         self.assertIn("SOURCE_FILES_SKIPPED", report["staging_blockers"])
         self.assertEqual(report["staging_written_record_count"], 0)
         self.assertEqual(target_files, [])
+        self.assertFalse(report["commit_allowed"])
+
+    def test_symlinked_source_root_blocks_all_staging_targets(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            source = root / "source"
+            source.mkdir()
+            record = json.loads(
+                (ROOT / "schema" / "v1.4.3.7" / "tests" / "valid" / "claim" / "FX-CLAIM-VALID-001.json").read_text(encoding="utf-8")
+            )
+            record["schema_version"] = "1.3"
+            record["validation_ids"] = []
+            (source / "claim.json").write_text(json.dumps(record), encoding="utf-8")
+            output = root / "staging"
+
+            path_type = type(source)
+            real_is_symlink = path_type.is_symlink
+
+            def mark_source_root_as_symlink(path):
+                if path == source:
+                    return True
+                return real_is_symlink(path)
+
+            with patch.object(path_type, "is_symlink", mark_source_root_as_symlink):
+                report = migration.migrate(source, output_dir=output, write_staging=True)
+            staged_targets = [
+                path for path in output.glob("*.json")
+                if path.name != "migration-report.json"
+            ]
+
+        self.assertTrue(report["staging_blocked"])
+        self.assertIn("SOURCE_SYMLINK_REJECTED", report["staging_blockers"])
+        self.assertEqual(report["source_symlink_count"], 1)
+        self.assertEqual(report["staging_written_record_count"], 0)
+        self.assertEqual(staged_targets, [])
         self.assertFalse(report["commit_allowed"])
 
     def test_duplicate_typed_primary_keys_block_dry_run(self):
