@@ -86,7 +86,7 @@ The owner reports a later local verification under Python 3.12.14 on code HEAD `
 
 The validator initially encountered a Windows default-GBK decoding error and passed when rerun in UTF-8 mode. Its report was saved to a temporary directory rather than replacing the checked-in historical report. The four legacy `1.4.3.6-candidate` Fixture expectation mismatches remain separately recorded. The original v1.4.3.6 archive is unavailable, so its byte-for-byte lineage remains unverified.
 
-These local results verify the available candidate test scope only. They do not establish full historical v1.3 compatibility, complete cross-record/state-machine semantics, scientific correctness, or transaction safety. The current candidate remains unreleased; DD-ART-007 through DD-ART-010 remain pending owner approval and `commit_allowed=false` remains mandatory.
+These local results verify the rules-v4 candidate test scope only. A later rules-v5 change adds MIG-014 to withhold a migrated Claim when its typed validation reference points to a Plan/Activity that fails target validation. That new code and regression test have not yet been rerun locally. The results above do not establish full historical v1.3 compatibility, complete cross-record/state-machine semantics, scientific correctness, or transaction safety. The current candidate remains unreleased; DD-ART-007 through DD-ART-010 remain pending owner approval and `commit_allowed=false` remains mandatory.
 
 ### Validation commands
 
