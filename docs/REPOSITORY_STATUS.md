@@ -11,7 +11,7 @@
 | Normative decisions | DD-ART-007 through DD-ART-010 pending explicit owner approval |
 | Fixture index | Canonical index is version-matched to v1.4.3.7 candidate; inherited v1.4.3.6 expectations remain separately preserved |
 | Cross-record validation | Prototype available; bounded semantic checks implemented |
-| Migration | Rules-v5 source-aware prototype; full Draft 2020-12 target validation, RFC 8785 JCS target digests, MIG-014 dependent-reference withholding, and fail-closed staging for incomplete source snapshots; owner-reported local validation passed on code HEAD `587587ae0b114d9624bfb7b270c8754b7e9cbef0` (33/33 migration, 30/30 integration, 76/76 unit tests; Schema validator 68/68, 83/83 candidate fixtures, 16/16 semantic cases, 125 trace rows); GitHub Actions temporarily excluded from this phase's acceptance and to be supplemented when runners are available; dry-run/staging only, `commit_allowed=false` |
+| Migration | Rules-v5 source-aware prototype; full Draft 2020-12 target validation, RFC 8785 JCS target digests, MIG-014 dependent-reference withholding, and fail-closed staging for incomplete source snapshots; owner-reported local validation passed on code/test HEAD `0799dada7eaa8dcd08b8db2f2311a844335d7198` (7/7 directory-manifest, 33/33 migration, 30/30 integration, 83/83 unit tests; Python compilation passed; Schema validator 68/68, 83/83 candidate fixtures, 16/16 semantic cases, 125 trace rows); GitHub Actions unverified for this phase; dry-run/staging only, `commit_allowed=false` |
 | Historical v1.3 compatibility | Unverified; original v1.3 source bundle/corpus unavailable |
 | Requirement/test traceability | CSV traceability data and imported audit reports included; report snapshots are SHA/time scoped |
 | Skill runtime | Initial instruction and reference scaffold added; not yet a complete automated research agent |
@@ -19,11 +19,12 @@
 
 ## Validation evidence and remaining gates
 
-The owner reports that the following checks ran locally under Python 3.12.14 on code HEAD `587587ae0b114d9624bfb7b270c8754b7e9cbef0`:
+The owner reports that the following checks ran locally on code/test HEAD `0799dada7eaa8dcd08b8db2f2311a844335d7198` (Python version for this run not separately recorded):
 
+- Directory-manifest tests: 7/7 passed.
 - Migration regression tests: 33/33 passed.
 - Integration tests: 30/30 passed.
-- Full `tests/unit` suite: 76/76 passed.
+- Full `tests/unit` suite: 83/83 passed.
 - Python compilation: passed.
 - Full Schema validator: 68/68 checks, 83/83 candidate fixture outcomes, 16/16 semantic cases, and 125 trace rows passed.
 
@@ -35,7 +36,7 @@ These results verify the available local candidate test scope. They do **not** e
 
 ## Latest static review follow-up
 
-A static review found that `directory_manifest.py` could discard extra FileEntry keys before hashing and accepted an `allow_symlinks=True` argument despite lacking filesystem-root verification. The helper now rejects non-exact FileEntry key sets and explicitly rejects `allow_symlinks=True`; `tests/unit/test_directory_manifest.py` was added. These latest helper changes and tests have not yet been executed locally. The previous rules-v5 passing results apply to code HEAD `587587ae0b114d9624bfb7b270c8754b7e9cbef0`, before this helper patch. Re-run the new directory-manifest tests and full local validation against the latest branch HEAD before treating the current tree as locally verified. DD-ART-008 remains pending approval; filesystem traversal and byte-for-byte directory verification are still unimplemented.
+A static review found that `directory_manifest.py` could discard extra FileEntry keys before hashing and accepted an `allow_symlinks=True` argument despite lacking filesystem-root verification. The helper now rejects non-exact FileEntry key sets and explicitly rejects `allow_symlinks=True`. The owner reports that the new directory-manifest tests passed 7/7, and the full local suites passed on code/test HEAD `0799dada7eaa8dcd08b8db2f2311a844335d7198`. These results are local evidence only, not a passing GitHub Actions run. DD-ART-008 remains pending approval; filesystem traversal and byte-for-byte directory verification are still unimplemented.
 
 ## Release gates
 
