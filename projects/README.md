@@ -1,5 +1,7 @@
 # Project Registry
 
+简体中文版本：[README.zh-CN.md](README.zh-CN.md)。
+
 This directory is the navigation layer for the **High-Energy Theory Research** platform. It distinguishes a parent research project from its workstreams, Scientific Diff change records, individual computation runs, and physical claims.
 
 ## Registered projects
