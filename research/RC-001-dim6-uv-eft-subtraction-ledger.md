@@ -124,7 +124,28 @@ For \(Q_{RD}\), the mixed factor on the fermion–fermion pair vanishes at each 
 
 These charge-factor checks fix the group/charge multipliers only. They do not fix overall graph signs, momentum routing, Dirac numerators, or finite loop coefficients. The full vertex rows remain **NOT EVALUATED** until the loop amplitudes and EFT subtractions are computed and combined.
 
-### 2.5 Per-subgraph progress matrix
+### 2.5 Light-only Yukawa-vertex loops cancel in the hard difference at \(O(M_E^{-2})\)
+
+There is a useful exact matching simplification for the same-vertex pairs \(\bar L-H\) in \(Q_{LD}\) and \(S-\ell_R\) in \(Q_{RD}\), including their conjugate vertices. In these graphs the gauge loop is made entirely from retained light fields; the heavy propagator carries the fixed total external momentum \(P\) and is not part of the loop integration.
+
+The chirality-preserving heavy propagator expands as
+\[
+P_R\,\frac{i(\slashed P+M_E)}{P^2-M_E^2}\,P_L
+=-\frac{i\slashed P P_L}{M_E^2}
++O(M_E^{-4}),
+\]
+with the conjugate projection giving the corresponding opposite-chirality term. The EFT tree insertion of \(Q_{LD}\) or \(Q_{RD}\), including the gauge-covariant derivative contact vertices required by the same Ward identity, reproduces exactly this \(O(M_E^{-2})\) term. The light-only loop factor is identical on the two sides when the external momenta, gauge fixing, regulator, and field conventions are held fixed. Thus the *complete gauge-covariant light-only vertex subfamily* cancels in
+\[
+\left[\Gamma_{\rm UV}^{(1)}-\Gamma_{\rm EFT}^{(1)}\right]_{O(M_E^{-2})}=0
+\]
+for this subfamily. This is not a statement that an individual scaleless integral has zero UV or IR pole; keep \(\Delta_{\rm UV}\) and \(\Delta_{\rm IR}\) separate until the matched subfamily is assembled.
+
+Consequences for the remaining hard calculation:
+- The pure-light \(\bar L-H\) and \(H^\dagger-L\) \(Q_{LD}\) vertex corrections need to remain in the Ward/contact bookkeeping but do not require a new hard Wilson coefficient at this order.
+- The pure-light \(S-\ell_R\) and \(S^\ast-\bar\ell_R\) \(Q_{RD}\) vertex corrections have the same status.
+- The genuinely new hard vertex kernels are the heavy–light fermion pairs and heavy–scalar pairs listed in `research/RC-001-dim6-yukawa-vertex-charge-factors.md`. These still require their full oriented amplitudes and counterterm combination.
+
+### 2.6 Per-subgraph progress matrix
 
 The following matrix records which mathematical sub-block is actually evaluated. **A subgraph-level kernel is not a completed amplitude row.**
 
