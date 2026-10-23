@@ -90,7 +90,7 @@ so the bare 1PI insertion into the chirality-preserving heavy propagator gives t
 \]
 This is gauge-dependent and is not a Wilson coefficient. Its heavy-field/mass counterterms cancel the subgraph pole only when counted once in the full amplitude; do not add those same counterterms again through the separate tree-coefficient parameter row.
 
-The zero-momentum Yukawa-vertex kernel reduces to \(B_0(0;0,M_E^2)=\Delta_\epsilon+1-L_\ell\); representative numerator reductions are \(d\,B_0\) for the heavy-light-fermion exchange and \(B_0\) for the heavy-scalar exchange when the external scalar momentum is set to zero, before overall Feynman-rule signs and charge generators. For a crossed-box master,
+The zero-momentum Yukawa-vertex kernel reduces to \(B_0(0;0,M_E^2)=\Delta_\epsilon+1-L_\ell\); representative numerator reductions are \(d\,B_0\) for the heavy-light-fermion exchange and \(B_0\) for the heavy-scalar exchange when the external scalar momentum is set to zero, before overall Feynman-rule signs and charge generators. The finite expansion \(d\,B_0=4\Delta_\epsilon+2-4L_\ell+O(\epsilon)\) is checked explicitly, retaining the \((-2\epsilon)(1/\epsilon)\) contribution. For a crossed-box master,
 \[
 J_{\rm full}=\frac1{M_E^2}(\Delta_{\rm IR}+1-L_\ell),\quad
 J_{\rm soft}=\frac1{M_E^2}(-\Delta_{\rm UV}+\Delta_{\rm IR}),
