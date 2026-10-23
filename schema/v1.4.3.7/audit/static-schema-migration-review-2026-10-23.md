@@ -40,10 +40,9 @@ The corresponding regression tests were added or updated, but **they have not be
 3. Full JSON Schema validation of every staged target and complete cross-record validation remain to be implemented or performed as a separately evidenced gate.
 4. Obtain an owner-approved stable, versioned schema `$id` URI and define whether inherited schema titles/IDs preserve source identity or are versioned to the integrated bundle.
 5. Refresh the field/constraint coverage matrix against the current v1.6.6 design and v1.4.3.7 schemas; reconcile the permissive `claim.evidence_ids` type and the `completed_at`/`finished_at` mismatch.
-4. Transactional commit, active-dataset pointer switching, and rollback remain unimplemented. `commit_allowed=false` must remain unchanged.
-5. The `$id`/title version-label policy and the `completed_at`/`finished_at` relationship need a design-level decision.
-6. DD-ART-007 through DD-ART-010 remain pending explicit owner approval.
-7. No CI or test result is claimed for the current PR HEAD. All newly added regression cases remain unexecuted.
+6. Transactional commit, active-dataset pointer switching, and rollback remain unimplemented. `commit_allowed=false` must remain unchanged.
+7. DD-ART-007 through DD-ART-010 remain pending explicit owner approval.
+8. No CI or test result is claimed for the current PR HEAD. All newly added regression cases remain unexecuted.
 
 ## Review disposition
 
