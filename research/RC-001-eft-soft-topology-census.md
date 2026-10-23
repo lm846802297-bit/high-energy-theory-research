@@ -89,6 +89,18 @@ Therefore:
 - If a basis change uses gauge-field EOM, record the induced operator shifts once, with the same gauge-current conventions on both sides.
 - The kinetic-mixing boundary is not fixed in the baseline. Crossed \(B\)-\(A'\) current contributions are conditional on that input and must not be silently set to zero in a full-model claim.
 
+### 3.5 Analytic integral results and matching boundary
+
+The independent note research/RC-001-dim6-soft-loop-integrals-and-checks.md records the stripped integrals, momentum routings, hard/soft decompositions, and operator projections. The script calculations/RC-001-dim6-soft-loop-crosscheck.py passes 36 exact symbolic checks, with output saved in validation/RC-001-dim6-soft-loop-crosscheck.txt.
+
+The results sharpen the ledger as follows:
+
+- The \(C_5C_5^\ast\) crossed channels \(\bar L L S^\dagger S\), \(\bar\ell_R\ell_R H^\dagger H\), and \(\bar\ell_R\ell_R S^\dagger S\) have loop-dependent heavy propagators and a nonzero hard region. Their routed hard vector kernel has the local coefficient \(\tfrac12L_E-\tfrac34\); the \(O(\epsilon)\) term in \(1-2/d\) is required to recover the finite \(-3/4\). The \(\bar\ell_R\ell_R S^\dagger S\) channel has an internal doublet multiplicity of two.
+- In the \(\bar L L H^\dagger H\) channel, both heavy propagators carry only external-channel momenta in the stated bare topology. Its \(O(M_E^{-2})\) loop is reproduced by the EFT soft integral; the associated current counterterms and operator renormalization must still be matched.
+- The \(C_5C_5^\ast\) four-fermion scalar bubble has hard coefficient \(|C_5|^2(L_E-2)/(16\pi^2)\) in the scalar-bilinear basis. Its hard IR pole cancels the EFT bubble UV pole, and the finite constants \(-2,+2\) cancel in the summed amplitude.
+- A single \(Q_{LD}\) or \(Q_{RD}\) insertion plus a scalar quartic gives a hard/soft kernel proportional to \(p+Q/2=(p-p')/2\). This is an EOM/source structure for massless on-shell external fermions, not an independent on-shell current coefficient. The \(\lambda_H\) weak-index contractions must remain separate until the singlet/triplet and source projection.
+- These checks are analytic integral and tensor-reduction checks, not FeynArts/FeynCalc diagram generation. The full gauge-corrected current/operator matching and the complete EOM/source coefficient vector remain open.
+
 ## 4. Pure-light graphs and cancellation rule
 
 Pure scalar or gauge loops with no heavy-dependent EFT insertion carry \(M_E^0\). When the same light fields, parameters, IR regulator, gauge convention, and external-state normalization are used on both sides, they are reproduced by the EFT and cancel in the UV-minus-EFT Wilson matching difference. They can still enter a physical amplitude or RG calculation. If \(A'\) is also integrated out, or the kinetic-mixing or portal boundary differs between the two theories, the cancellation list must be rebuilt.
@@ -123,10 +135,10 @@ The existing four-check \(C_5^2\) constant-pole audit verifies only the stated s
 **Power-counting decision:** at strict \(O(M_E^{-2})\), keep the \(C_5C_5^\ast\) mixed scalar bubble as the direct 1PI soft subtraction in the fixed \(|y|^2|\lambda|^2\) sector; do not add \(Q_{LD}/Q_{RD}\)-plus-quartic tadpoles to that local 1PI coefficient; keep gauge-current exchange graphs in the separate current/source ledger; and do not import \(Q_6Q_6\), \(C_5C_7^\ast\), or \(C_5^4\) terms into the dimension-six result.
 
 **Explicit-integral priority:**
-1. Independently validate the existing \(C_5C_5^\ast\) scalar bubble and its normalization with a diagram-level tool.
-2. Compute the four \(C_5C_5^\ast\) crossed two-fermion/two-scalar channels and the \(C_5C_5^\ast\) four-fermion scalar bubble at \(O(M_E^{-2})\), with separate operator projections.
-3. Compute the \(Q_{LD}/Q_{RD}\)-plus-quartic scalar bubbles and the gauge-corrected \(Q_{LD}/Q_{RD}\) two-fermion/two-scalar amplitudes needed by the chosen basis. Include the full covariant-derivative contact set and counterterms.
-4. Close the current/source sector and any remaining fermionic amplitudes; state the kinetic-mixing boundary and the parameter/input scheme. Compute one-loop \(C_5\) corrections only if the full dimension-five vector is in scope.
-5. Only then start the \(O(M_E^{-4})\) dimension-eight hard/soft calculation using the list in §6.
+1. Independently generate/check the UV diagrams for the crossed-current and four-fermion kernels with FeynArts/FeynCalc or an equivalent diagram-level tool; confirm field-flow signs, weak-index factors, and the displayed finite coefficients.
+2. Complete the gauge corrections to \(Q_{LD}\), \(Q_{RD}\), and the current operators, including gauge-boson attachments to the heavy line, external legs, covariant-derivative contact terms, and counterterms.
+3. Complete the \(\lambda_H,\lambda_S,\lambda_{HS}\) weak-index projections and the EOM/source mapping, including external-field and parameter renormalization. State the kinetic-mixing boundary and input scheme.
+4. Re-run the structural cross-checks and full repository CI on the final HEAD; a local symbolic pass is not repository CI. Keep PR #4 open until independent diagram-level and CI evidence exists.
+5. Only after the dimension-six gauge/source closure, start the \(O(M_E^{-4})\) dimension-eight hard/soft calculation using the list in §6.
 
 No loop integral is evaluated by the companion census script. No FeynCalc, Mathematica, FeynArts, Matchete, or Matchmakereft execution is claimed. PR #4 remains Draft/Open; no merge is authorized by this topology census.
