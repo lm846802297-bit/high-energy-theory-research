@@ -104,7 +104,27 @@ This is an explicit scalar-integral UV–EFT split, not a complete box amplitude
 
 The parameter integrals, propagator numerator algebra, and box partial fractions pass the local exact-algebra audit in `calculations/RC-001-dim6-gauge-master-integrals.py` (captured output `validation/RC-001-dim6-gauge-master-integrals.txt`). The additive \(B-A'\) vacuum-polarization trace and finite heavy threshold are separately evaluated in `research/RC-001-dim6-mixed-kinetic-threshold.md` and audited in `calculations/RC-001-dim6-mixed-kinetic-threshold.py`. The additive one-loop pole cancels for the stated complete spectrum, while the finite threshold is proportional to \(\ln(M_{E_\mu}^2/M_{E_\tau}^2)\). This does not fix the independent renormalized kinetic-mixing boundary.
 
-### 2.4 Per-subgraph progress matrix
+### 2.4 Signed charge factors for both conjugate Yukawa vertices
+
+The signed all-incoming charge factors for all three line pairs at each of the four \(y_\ell,y_\ell^\ast,\lambda_\ell,\lambda_\ell^\ast\) vertices are now tabulated in `research/RC-001-dim6-yukawa-vertex-charge-factors.md`. The exact rational checker is `calculations/RC-001-dim6-yukawa-vertex-charge-factors.py` and the captured local output is `validation/RC-001-dim6-yukawa-vertex-charge-factors.txt`.
+
+For the \(Q_{LD}\) Yukawa vertex \(\bar LHE_R\), the \(BB\), \(A'A'\), and mixed \(BA'\) pair factors \((F_B,F_X,F_{BX})\) are
+\[
+\bar L-H:\left(\frac14,0,-\frac{\eta_\ell}{2}\right),\quad
+\bar L-E_R:\left(-\frac12,-1,\frac{3\eta_\ell}{2}\right),\quad
+H-E_R:\left(-\frac12,0,\frac{\eta_\ell}{2}\right).
+\]
+At the conjugate vertex \(\bar E_RH^\dagger L\), the corresponding factors are
+\[
+\bar E_R-H^\dagger:\left(-\frac12,0,\frac{\eta_\ell}{2}\right),\quad
+\bar E_R-L:\left(-\frac12,-1,\frac{3\eta_\ell}{2}\right),\quad
+H^\dagger-L:\left(\frac14,0,-\frac{\eta_\ell}{2}\right).
+\]
+For \(Q_{RD}\), the mixed factor on the fermion–fermion pair vanishes at each \(\lambda_\ell\) vertex; the two scalar–fermion mixed factors are \(+2\eta_\ell\) and \(-2\eta_\ell\), with their orientation exchanged at the conjugate vertex. All four vertices separately conserve hypercharge and \(X\)-charge for both \(\eta_\mu=+1\) and \(\eta_\tau=-1\).
+
+These charge-factor checks fix the group/charge multipliers only. They do not fix overall graph signs, momentum routing, Dirac numerators, or finite loop coefficients. The full vertex rows remain **NOT EVALUATED** until the loop amplitudes and EFT subtractions are computed and combined.
+
+### 2.5 Per-subgraph progress matrix
 
 The following matrix records which mathematical sub-block is actually evaluated. **A subgraph-level kernel is not a completed amplitude row.**
 
