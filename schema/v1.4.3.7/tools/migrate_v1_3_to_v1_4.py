@@ -284,6 +284,7 @@ def migrate_record(rec, target_properties=None, unknown_policy="quarantine", sou
         if "alternative_identity_methods" not in out:
             unresolved.append({
                 "code":"TEC_ALTERNATIVE_IDENTITY_METHODS_MISSING_PENDING_DD_ART_010",
+                "rule_id":"MIG-015",
                 "field":"alternative_identity_methods",
                 "decision":"DD-ART-010",
                 "message":"do not silently default a missing method registry to []; the normative payload rule is pending owner approval",
@@ -291,6 +292,7 @@ def migrate_record(rec, target_properties=None, unknown_policy="quarantine", sou
         if "contract_sha256" in out:
             unresolved.append({
                 "code":"TEC_CONTRACT_HASH_REVALIDATION_PENDING_DD_ART_010",
+                "rule_id":"MIG-015",
                 "field":"contract_sha256",
                 "decision":"DD-ART-010",
                 "message":"the source contract hash is preserved as source evidence but cannot be asserted as a validated target hash until the owner approves the payload rule and the target digest is recomputed",
