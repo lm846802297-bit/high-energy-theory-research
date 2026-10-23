@@ -22,7 +22,7 @@ The workflow regenerates `audit/validation-report.json` in the runner and upload
 
 ## Migration prototype and validation_ids boundary
 
-Static implementation findings, version-label questions, and unexecuted regression cases are recorded in [the 2026-10-23 static Schema/migration review](audit/static-schema-migration-review-2026-10-23.md). This review does not replace CI or target-schema validation.
+Static implementation findings, version-label questions, and unexecuted regression cases are recorded in [the 2026-10-23 static Schema/migration review](audit/static-schema-migration-review-2026-10-23.md). The migration code performs per-record target-schema validation, but this review does not replace executing that path, CI, or full cross-record validation.
 
 The migration tool uses rules version `v1.4.3.7-migration-rules-4`. Static review tightened JSON/YAML source inventory, duplicate-key handling, project/key checks, timestamp and target-enum validation, record-type-specific aliases, manifest SHA verification, mapping-contract parity, ID-mapping provenance, and staging-output safety. Records with unresolved items are withheld from target staging. These changes have not been executed in tests or CI. Synthetic fixtures still do not establish compatibility with the full historical v1.3 corpus.
 
