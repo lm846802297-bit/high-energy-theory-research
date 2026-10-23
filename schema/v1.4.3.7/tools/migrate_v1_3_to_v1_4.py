@@ -14,6 +14,7 @@ except ImportError:
 RULE_VERSION="v1.4.3.7-migration-rules-3"
 KNOWN_TYPES={"task","task_execution_contract","run_plan","run","run_manifest","artifact_plan","artifact","validation_plan","validation_activity","validation_report","claim","source","source_fragment","configuration","code","environment","convention_set","parameter_point","benchmark_result","evidence_fragment","test_case","test_run","state_transition_event","migration_record","relation_edge"}
 TARGET_VALIDATION_ACTIVITY_STATUSES={"not_started","running","succeeded","failed","cancelled","blocked","partial"}
+ID_MAPPING_FIELDS=["source_record_uri","source_record_type","source_primary_key","source_sha256","target_record_type","target_primary_key","target_sha256","candidate_target_record_type","candidate_target_primary_key","candidate_target_sha256","mapping_basis","mapping_rule_id","applied_field_mapping_ids","review_status","collision_check","rewritten_reference_count","unresolved_count","mapped_at_utc","operator"]
 # Candidate field mappings are listed in the migration contract; historical semantics remain unverified without the original v1.3 baseline.
 FIELD_MAPS={
  "claim":{"planned_run_ids":"run_plan_ids","planned_validation_ids":"validation_plan_ids","expected_artifact_plan_ids":"artifact_plan_ids"},
@@ -85,6 +86,24 @@ def load_yaml_record(text):
     UniqueKeySafeLoader.add_constructor(yaml.resolver.BaseResolver.DEFAULT_MAPPING_TAG,construct_mapping)
     return yaml.load(text,Loader=UniqueKeySafeLoader)
 def stable_json(obj): return json.dumps(obj,ensure_ascii=False,sort_keys=True,separators=(",",":"),allow_nan=False)
+def load_mapping_contract():
+    path=Path(__file__).resolve().parents[1]/"migrations"/"v1.3-to-v1.4-mapping.json"
+    try:
+        raw=path.read_bytes()
+        contract=json.loads(raw.decode("utf-8"))
+    except Exception as e:
+        raise ValueError(f"migration mapping contract cannot be loaded: {e}") from e
+    if contract.get("migration_rules_version")!=RULE_VERSION:
+        raise ValueError(f"migration rule version mismatch: code={RULE_VERSION}, contract={contract.get('migration_rules_version')}")
+    declared={(item.get("record_type"),item.get("source_field"),item.get("target_field")) for item in contract.get("field_mappings",[])}
+    implemented={(record_type,source_field,target_field) for record_type,field_map in FIELD_MAPS.items() for source_field,target_field in field_map.items()} | {(record_type,source_field,target_field) for record_type,field_map in LEGACY_ALIASES_BY_TYPE.items() for source_field,target_field in field_map.items()}
+    if declared!=implemented: raise ValueError("field_mappings in migration contract do not match the implementation")
+    declared_ids={(item.get("record_type"),item.get("source_field"),item.get("rule_id")) for item in contract.get("field_mappings",[])}
+    implemented_ids={(record_type,source_field,f"MAP-{record_type.upper()}-{source_field.upper()}") for record_type,field_map in FIELD_MAPS.items() for source_field in field_map} | {(record_type,source_field,f"MAP-{record_type.upper()}-{source_field.upper()}") for record_type,field_map in LEGACY_ALIASES_BY_TYPE.items() for source_field in field_map}
+    if declared_ids!=implemented_ids: raise ValueError("field mapping rule IDs in contract do not match the implementation")
+    if contract.get("id_mapping_fields")!=ID_MAPPING_FIELDS: raise ValueError("id_mapping_fields in migration contract do not match the emitted mapping rows")
+    if not any(rule.get("rule_id")=="MIG-002" for rule in contract.get("rules",[])): raise ValueError("migration contract is missing MIG-002")
+    return contract,digest_bytes(raw)
 def primary_key(rec):
     rt=rec.get("record_type")
     return rec.get({"task":"task_id","task_execution_contract":"contract_id","run_plan":"run_plan_id","run":"run_id","run_manifest":"manifest_id","artifact_plan":"artifact_plan_id","artifact":"artifact_id","validation_plan":"validation_plan_id","validation_activity":"validation_activity_id","validation_report":"validation_report_id","claim":"claim_id","source":"source_id","source_fragment":"source_fragment_id","configuration":"configuration_id","code":"code_id","environment":"environment_id","convention_set":"conventions_id","parameter_point":"point_id","benchmark_result":"benchmark_result_id","evidence_fragment":"evidence_id","test_case":"test_case_id","test_run":"test_run_id","state_transition_event":"event_id","migration_record":"migration_record_id","relation_edge":"edge_id"}.get(rt,""))
