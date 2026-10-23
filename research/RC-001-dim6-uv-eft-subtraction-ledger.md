@@ -104,6 +104,17 @@ This is an explicit scalar-integral UV–EFT split, not a complete box amplitude
 
 The parameter integrals, propagator numerator algebra, and box partial fractions pass the local exact-algebra audit in `calculations/RC-001-dim6-gauge-master-integrals.py` (captured output `validation/RC-001-dim6-gauge-master-integrals.txt`). The additive \(B-A'\) vacuum-polarization trace and finite heavy threshold are separately evaluated in `research/RC-001-dim6-mixed-kinetic-threshold.md` and audited in `calculations/RC-001-dim6-mixed-kinetic-threshold.py`. The additive one-loop pole cancels for the stated complete spectrum, while the finite threshold is proportional to \(\ln(M_{E_\mu}^2/M_{E_\tau}^2)\). This does not fix the independent renormalized kinetic-mixing boundary.
 
+### 2.3.1 Conditional mixed \(B-A'\) input-parameter counterterms
+
+The off-diagonal propagator convention and parameter-induced pole terms are derived separately in `research/RC-001-dim6-mixed-parameter-counterterms.md`. With \(\rho_{BX}\) defined by the mixed line-pair factor \(+\rho_{BX}g_Yg_XQ_\ell(Y_ix_j+x_iY_j)\), the parameter-only sub-block is
+\[
+\left.\frac{\delta C_{LD}}{C_{LD}}\right|_{BX,\mathrm{parameter}}
+=-3\frac{\rho_{BX}\eta_\ell g_Yg_XQ_\ell}{16\pi^2\epsilon},\qquad
+\left.\frac{\delta C_{RD}}{C_{RD}}\right|_{BX,\mathrm{parameter}}
+=-12\frac{\rho_{BX}\eta_\ell g_Yg_XQ_\ell}{16\pi^2\epsilon}.
+\]
+For the Lagrangian convention \(-\chi B_{\mu\nu}X^{\mu\nu}/2\), \(\rho_{BX}=-\chi+O(\chi^2)\). These are **not** the complete mixed-gauge matching poles; mixed vertex/box graphs, EFT soft/contact graphs, operator counterterms, and the summed Ward identity remain open. The charge algebra is checked in `calculations/RC-001-dim6-mixed-parameter-counterterms.py` with the captured output `validation/RC-001-dim6-mixed-parameter-counterterms.txt`.
+
 ### 2.4 Signed charge factors for both conjugate Yukawa vertices
 
 The signed all-incoming charge factors for all three line pairs at each of the four \(y_\ell,y_\ell^\ast,\lambda_\ell,\lambda_\ell^\ast\) vertices are now tabulated in `research/RC-001-dim6-yukawa-vertex-charge-factors.md`. The exact rational checker is `calculations/RC-001-dim6-yukawa-vertex-charge-factors.py` and the captured local output is `validation/RC-001-dim6-yukawa-vertex-charge-factors.txt`.
