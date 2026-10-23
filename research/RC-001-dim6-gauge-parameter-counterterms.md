@@ -1,6 +1,6 @@
 # RC-001 — Gauge contribution from UV input-parameter counterterms
 
-**Scope:** a partial analytic sub-block only. This note derives the diagonal-gauge \(\overline{\mathrm{MS}}\) pole contribution induced by renormalizing \(y_\ell,\lambda_\ell,M_{E_\ell}\) in the tree coefficients \(C_{LD}=|y_\ell|^2/M_E^2\) and \(C_{RD}=|\lambda_\ell|^2/M_E^2\). It is **not** the complete UV–EFT matching pole and contains no finite hard matching coefficient. Off-diagonal \(B-A'\) kinetic-mixing counterterms are not included.
+**Scope:** a partial analytic sub-block only. This note derives the diagonal-gauge \(\overline{\mathrm{MS}}\) pole contribution induced by renormalizing \(y_\ell,\lambda_\ell,M_{E_\ell}\) in the tree coefficients \(C_{LD}=|y_\ell|^2/M_E^2\) and \(C_{RD}=|\lambda_\ell|^2/M_E^2\). It is **not** the complete UV–EFT matching pole and contains no finite hard matching coefficient. Off-diagonal \(B-A'\) kinetic-mixing counterterms are not included in this diagonal-only calculation. A separate, explicitly convention-bound parameter-only sub-block is now recorded in [RC-001-dim6-mixed-parameter-counterterms.md](RC-001-dim6-mixed-parameter-counterterms.md); it does not replace the full mixed-gauge UV–EFT amplitude.
 
 ## 1. Conventions and input
 
