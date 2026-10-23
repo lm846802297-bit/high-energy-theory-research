@@ -89,12 +89,12 @@ The current analytic note already records the stripped hard/soft kernels for thr
 
 Master §§252–255 also contain the previously calculated bosonic field-strength/current-to-gauge and scalar/source blocks. They remain existing modules. The missing target here is the one-loop gauge correction to the fermionic derivative/current sector, including heavy-line attachments, external legs, contact vertices, counterterms, and a common-basis sum.
 
-## 6. Independent diagram-level validation and CI state
+## 6. Independent diagram-level validation; CI waived
 
 The current runtime has SymPy but no Mathematica/Wolfram executable, FeynCalc, FeynArts, pyfeyn, or QGRAF installation. The local attachment-census script therefore cannot validate loop numerators, symmetry factors, diagram signs, or finite coefficients. This absence is recorded as missing evidence, not as a successful independent check.
 
-The dedicated GitHub Actions workflow was re-run for the then-current HEAD \(ae7358ab505d4e4c0a6c3bf14aa0f652821dd332\). GitHub still reports the job as failed with no recorded steps and runner ID zero; the combined commit status is empty. This is an infrastructure/runner-level failure signature, not evidence that either symbolic script failed. The workflow must run on the newer commit after the atlas files are integrated. A local pass is not a substitute for that run.
+GitHub Actions was attempted on the updated branch but repeatedly failed before any job step, with runner ID zero and no executed steps. Per explicit project decision, CI is skipped for this iteration and is not a closure gate. This is not a CI pass and does not establish a script-level failure. The ledger's physics requirements remain unchanged: local checks may verify the structural census, but only actual amplitude calculations and independent diagram-level evidence can close the gauge-matching rows.
 
-## 7. Closure criteria
+## 7. Physics closure criteria
 
-Do not close the gauge sector until the diagram-level generated list is reconciled against this attachment census; each amplitude row has UV and EFT pole/finite data; the common-basis projection includes current/source/potential and four-fermion companions; the kinetic-mixing boundary is fixed or explicitly left conditional; and the latest HEAD has a real CI run with executed steps and checked-in-output comparisons. PR #4 remains Draft/Open.
+Do not close the gauge sector until the diagram-level generated list is reconciled against this attachment census; each amplitude row has UV and EFT pole/finite data; the common-basis projection includes current/source/potential and four-fermion companions; and the kinetic-mixing boundary is fixed or explicitly left conditional. CI is explicitly skipped as an unavailable infrastructure check and is not a physics closure criterion; no CI pass is claimed. PR #4 remains Draft/Open until the outstanding amplitude and basis-reduction work is completed.
