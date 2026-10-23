@@ -81,7 +81,6 @@ def main():
         assert mixed_factor(rdl, "E", "lbar") == 0
         assert mixed_factor(rdl, "E", "l") == 0
         assert mixed_factor(rdl, "Sbar", "S") == 0
-        assert ldl["W"] if False else True
         assert ldl["E"]["Y"] == -1 and ldl["E"]["X"] == eta
         assert rdl["S"]["X"] == 2 * eta and rdl["Sbar"]["X"] == -2 * eta
         print(f"FLAVOR eta={eta} ({flavor})")
