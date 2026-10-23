@@ -8,15 +8,15 @@ Bundles are **immutable**. Adopting a later source revision means adding a new b
 
 | Bundle | Source version | Linked record | Size | Files |
 |---|---|---|---|---|
-| [higgs-portal-v66-20261019](higgs-portal-v66-20261019/) | Main working document v66, dated 2026-10-19 | [RC-001](../research/RC-001-vll-higgs-singlet-uv-eft.md) (earlier source generation) | 12,445,122 bytes (12.45 MB) | 138 |
+| [higgs-portal-v66-20261019](higgs-portal-v66-20261019/) | Historical main document v66, dated 2026-10-19 (not the latest research version) | [RC-001](../research/RC-001-vll-higgs-singlet-uv-eft.md) (earlier source generation) | 12,445,122 bytes (12.45 MB) | 138 |
 
 ---
 
 ## higgs-portal-v66-20261019
 
-A snapshot of the local working tree that produced the v66 main document, uploaded so that the derivations, audit scripts, and outputs referenced by the research records have a committed, hashable location instead of a local path or a Library file ID alone.
+A historical snapshot of the local working tree that produced the v66 main document on 2026-10-19. It is committed to provide a stable, hashable provenance trail for the derivations, scripts, audit records, and intermediate outputs associated with that historical state.
 
-> **Scope caveat.** This bundle is a working archive, not a validated result set. The document's own opening "unified conclusion status table" governs: any claim it marks unresolved, in progress, or not yet verified remains so regardless of presence here. Committing a script does not mean its output was independently confirmed, and committing an output does not mean the physical claim built on it is established.
+> **Historical status and scope caveat.** v66 is **not the latest research version** and must not be treated as the current source of truth. The current research baseline remains v153 as identified in [RC-001](../research/RC-001-vll-higgs-singlet-uv-eft.md); this bundle does not supersede it. This is a working archive, not a validated result set. The v66 document's own opening "unified conclusion status table" governs only the claims it records: any claim marked unresolved, in progress, or not yet verified remains so. Committing a script does not mean its output was independently confirmed, and committing an output does not establish the physical claim built on it.
 
 ### Contents
 
@@ -46,7 +46,7 @@ A snapshot of the local working tree that produced the v66 main document, upload
 
 | Item | Status |
 |---|---|
-| Document SHA-256 | `082b9add00b2aecbba9e708cda834033b6c8391679d68ed4b86761ed0d464332` (recorded; full-file rehash pending) |
+| Document size and SHA-256 | 1,611,984 UTF-8 bytes; `082b9add00b2aecbba9e708cda834033b6c8391679d68ed4b86761ed0d464332` — independently recomputed on 2026-10-23 and matched |
 | `计算脚本/section273_feyncalc_threshold_workflow.wl` | `8e2c7a36c5cacecf35194a92cde50e52ec457cb884684c719e5aafc6b67053ab` — annotated FeynArts/FeynCalc scaffold, **not executed** |
 | `计算脚本/higgs_portal_threshold_key_result_audit.wl` | `f6a015c87ed01579703ffe1f4d5b5f1b546b670224fbe46e2571d744369473ed` — added after the v66 snapshot's audit chain |
 | `计算脚本/run_uv_eft_audit_suite.py` | `ab4967866318d139706ee2fd42d1d2122808fa49687d39825f01196b3434ebb5` — orchestration only; see the B1/B3 sign warning in RC-001 |
