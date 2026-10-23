@@ -98,6 +98,11 @@ Then
 \[
 \boxed{B_0(0;0,M_E^2)=\Delta_\epsilon+1-L_\ell.}
 \]
+For the heavy–light fermion numerator, retain \(d=4-2\epsilon\) through the pole multiplication:
+\[
+\boxed{d\,B_0(0;0,M_E^2)=4\Delta_\epsilon+2-4L_\ell+O(\epsilon).}
+\]
+The finite \(+2\) rather than \(+4\) is due to \((-2\epsilon)(1/\epsilon)=-2\). Dropping the \(O(\epsilon)\) part of \(d\) before multiplying the UV pole would therefore corrupt the finite hard term. This remains a numerator kernel before the graph's overall signs and group factors.
 For the heavy-light-fermion vertex, the representative numerator contraction
 \[
 \gamma^\mu\slashed k P_{R,L}\slashed k\gamma_\mu
