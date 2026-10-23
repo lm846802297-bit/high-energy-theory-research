@@ -28,7 +28,7 @@ A historical snapshot of the local working tree that produced the v66 main docum
 | `计算脚本/` | Computational index; see its [README](higgs-portal-v66-20261019/计算脚本/README.md) for the full inventory and the old-to-new path mapping |
 | `计算脚本/section261/`, `计算脚本/section262/` | Per-section working sources, Mathematica sources, logs, manuscript fragments |
 | `计算脚本/计算输出/` | Reproduction scripts and check logs for §§250–262 |
-| `计算脚本/审计结果/DeepSeek66/` | Independent v66 audit report, recomputation sources, evidence |
+| `计算脚本/审计结果/DeepSeek66/` | Independent audit of the separate DeepSeek-generated v66 continuation (SHA-256 `5ded5e1f507af552f1b9c666695f3585821455def628ea8eaf00c2c8c91fe9a1`), plus recomputation sources/evidence; **not** an audit of the bundled main document (SHA-256 `082b9add00b2aecbba9e708cda834033b6c8391679d68ed4b86761ed0d464332`) |
 | `计算脚本/整理记录/` | Pre/post-relocation SHA-256 manifest and path correspondence |
 
 ### Script families in `计算脚本/`
