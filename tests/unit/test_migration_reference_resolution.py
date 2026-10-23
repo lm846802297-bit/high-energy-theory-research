@@ -328,5 +328,36 @@ class ValidationReferenceResolutionTests(unittest.TestCase):
         self.assertTrue(any(item["code"] == "UNKNOWN_FIELDS_QUARANTINED_REQUIRES_REVIEW" for item in report["unresolved"]))
         self.assertEqual(target_files, [])
 
+    def test_yaml_source_records_are_inventoried_and_migrated(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root / "claim.yaml").write_text(
+                'schema_version: "1.3"\nrecord_type: claim\nproject_id: P-TEST\nclaim_id: CLAIM-YAML\nvalidation_ids: []\n',
+                encoding="utf-8",
+            )
+            report = migration.migrate(root)
+        self.assertEqual(report["source_count"], 1)
+        self.assertEqual(report["migratable_record_count"], 1)
+        self.assertEqual(report["id_mapping"][0]["source_record_uri"], "claim.yaml")
+        self.assertEqual(report["unresolved"], [])
+
+    def test_duplicate_keys_in_json_and_yaml_are_rejected(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root / "duplicate.json").write_text(
+                '{"schema_version":"1.3","record_type":"claim","project_id":"P-TEST","claim_id":"A","claim_id":"B","validation_ids":[]}',
+                encoding="utf-8",
+            )
+            (root / "duplicate.yaml").write_text(
+                'schema_version: "1.3"\nrecord_type: claim\nproject_id: P-TEST\nclaim_id: A\nclaim_id: B\nvalidation_ids: []\n',
+                encoding="utf-8",
+            )
+            report = migration.migrate(root)
+        codes = {item["code"] for item in report["unresolved"]}
+        self.assertIn("INVALID_JSON", codes)
+        self.assertIn("INVALID_YAML", codes)
+        self.assertEqual(report["source_count"], 2)
+        self.assertEqual(report["loaded_record_count"], 0)
+
 if __name__ == "__main__":
     unittest.main()
