@@ -76,17 +76,19 @@ Every arrow should be traceable. A change to an upstream assumption or formula m
 
 A historical pre-integration validation run for PR HEAD `5c5b10b6889c2e4146d0a696fde16f2b3ca847bf` passed its bounded candidate workflow on 2026-10-21 ([recorded run](https://github.com/lm846802297-bit/high-energy-theory-research/actions/runs/39542332657)). Its results included 25/25 schema entry points, 83/83 fixture expectations, 16/16 semantic cases, 29/29 integration tests, 36/36 repository unit tests, Python compilation, 8/8 bounded physics-audit cases, and a 22-record project graph with zero errors/warnings. These results apply only to that historical SHA and do not establish complete Schema coverage, historical migration compatibility, or scientific correctness. The separate Mathematica verification script was not run in that historical workflow.
 
-The owner reports a later local verification under Python 3.12.14 on code HEAD `1bb852c85594a6ef0e930e934cd28a438bc28a7c`:
+The owner reports a later local verification under Python 3.12.14 on code HEAD `587587ae0b114d9624bfb7b270c8754b7e9cbef0`:
 
-- Migration regression tests: 32/32 passed.
+- Migration regression tests: 33/33 passed.
 - Integration tests: 30/30 passed.
-- Full `tests/unit` suite: 75/75 passed.
+- Full `tests/unit` suite: 76/76 passed.
 - Python compilation: passed.
 - Full Schema validator: 68/68 checks, 83/83 candidate fixture outcomes, 16/16 semantic cases, and 125 trace rows passed.
 
-The validator initially encountered a Windows default-GBK decoding error and passed when rerun in UTF-8 mode. Its report was saved to a temporary directory rather than replacing the checked-in historical report. The four legacy `1.4.3.6-candidate` Fixture expectation mismatches remain separately recorded. The original v1.4.3.6 archive is unavailable, so its byte-for-byte lineage remains unverified.
+The new MIG-014 regression test `test_valid_claim_is_withheld_when_referenced_plan_fails_target_schema` passed. The Schema report was saved in a temporary directory rather than replacing the checked-in historical report. Four legacy `1.4.3.6-candidate` Fixture expectation mismatches remain separately recorded. The original v1.4.3.6 archive is unavailable, so its byte-for-byte lineage remains unverified.
 
-These local results verify the rules-v4 candidate test scope only. A later rules-v5 change adds MIG-014 to withhold a migrated Claim when its typed validation reference points to a Plan/Activity that fails target validation. That new code and regression test have not yet been rerun locally. The results above do not establish full historical v1.3 compatibility, complete cross-record/state-machine semantics, scientific correctness, or transaction safety. The current candidate remains unreleased; DD-ART-007 through DD-ART-010 remain pending owner approval and `commit_allowed=false` remains mandatory.
+**Current acceptance wording:** The current candidate implementation's local validation has passed. GitHub Actions is temporarily excluded from this phase's acceptance and will be supplemented when runners are available. This is not a claim that GitHub Actions has passed.
+
+These local results do not establish full historical v1.3 compatibility, complete cross-record/state-machine semantics, scientific correctness, or transaction safety. The current candidate remains unreleased; DD-ART-007 through DD-ART-010 remain pending owner approval and `commit_allowed=false` remains mandatory.
 
 ### Validation commands
 
