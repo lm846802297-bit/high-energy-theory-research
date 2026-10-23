@@ -8,7 +8,7 @@ Bundles are **immutable**. Adopting a later source revision means adding a new b
 
 | Bundle | Source version | Linked record | Size | Files |
 |---|---|---|---|---|
-| [higgs-portal-v66-20261019](higgs-portal-v66-20261019/) | Main working document v66, dated 2026-10-19 | [RC-001](../research/RC-001-vll-higgs-singlet-uv-eft.md) (earlier source generation) | 12,448,214 bytes (12.45 MB) | 138 |
+| [higgs-portal-v66-20261019](higgs-portal-v66-20261019/) | Main working document v66, dated 2026-10-19 | [RC-001](../research/RC-001-vll-higgs-singlet-uv-eft.md) (earlier source generation) | 12,445,122 bytes (12.45 MB) | 138 |
 
 ---
 
@@ -53,7 +53,7 @@ A snapshot of the local working tree that produced the v66 main document, upload
 | `计算脚本/计算输出/section262_reproduce.py` | `07ca907b58cad437e9bc1dca5fb3e97a1bb909dcc73ff3ca8ac46d8af0813f5c` |
 | LaTeX intermediate files | Pruned before commit (`.aux`, `.log`, `.toc`, `.out`, `.fls`, `.fdb_latexmk`, `missfont.log`); `main.pdf` and render checks retained |
 
-The 50 `sha256_after` entries in the relocation manifest and the four smaller-file hashes listed above were recomputed against the committed contents and matched. The v66 Markdown source is 1,611,984 bytes; its digest remains recorded consistently in this table and the relocation manifest, but it was not independently recomputed in this review because the available repository content endpoint does not return the full file above 1 MB. To close that final check from a clone, run `sha256sum "artifacts/higgs-portal-v66-20261019/higgs_portal_mixing_unified_reviewer_response_and_uv_eft_UPDATED_v2(8)(20261019)(66).md"` (or PowerShell `Get-FileHash -Algorithm SHA256`). No physics calculation was rerun.
+The 50 `sha256_after` entries in the relocation manifest and the four smaller-file hashes listed above were independently recomputed against the committed contents and matched. In a follow-up audit on 2026-10-23, the full v66 Markdown blob (Git blob `03b094c34177af4b8e864237290e15f7918f5f5d`) was also independently rehashed: its UTF-8 size is 1,611,984 bytes and its SHA-256 is `082b9add00b2aecbba9e708cda834033b6c8391679d68ed4b86761ed0d464332`, matching the recorded digest. The in-bundle manifest is retained as the original snapshot audit record; this later verification is recorded here and in PR #5. No physics calculation was rerun.
 
 Python reproduction is self-contained per section:
 
