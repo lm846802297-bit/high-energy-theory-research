@@ -431,7 +431,7 @@ For the effective-action convention \(\Gamma_f=-i\,\mathrm{Tr}\ln(1+X)\), the fo
 | Routed \(O(p^2)\) candidate coefficients | **Generated and cross-checked** | 576 symbolic rows; reverse-cycle coefficient map passes 1,152/1,152 checks |
 | \(\Gamma(4)\), simplex volume, five Euclidean integral factors | **Verified algebraically** | Exact Gamma-function identities |
 | Determinant-log \(+i/4\) and diagrammatic \(-1\) | **Recorded separately** | Their complete Feynman-rule/Wick reconciliation is still open |
-| Path-dependent simplex integrals | **Not completed** | The generated CSV is a candidate-integrand ledger, not an integrated Wilson coefficient |
+| Path-dependent simplex integrals | **Conditionally completed** | All 576 candidate B-kernel rows have analytic simplex integrals and 288 numerical reverse-cycle checks; this is not a physical Wilson coefficient because the global sign/factors and UV–EFT subtraction remain open |
 | Complete EFT soft diagrams and counterterms | **Not completed** | See §7; the existing two-point audit is not a substitute for full four-scalar matching |
 | Final UV–EFT Wilson coefficient | **Not established** | No final coefficient or exclusion claim is promoted |
 
