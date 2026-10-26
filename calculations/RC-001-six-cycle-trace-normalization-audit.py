@@ -5,7 +5,7 @@ Checks:
   * all 6 labelled scalar cycles x all 16 internal-state paths at exact rational
     routed Minkowski momenta, comparing an explicit 4x4 Dirac trace with an
     independently assembled chiral-projector decomposition;
-  * reverse-cycle path/weight/mass/Delta_0 mappings;
+  * reverse-cycle path/weight/mass mappings (Delta_0 is checked separately in the O(p^2) candidate-kernel ledger);
   * Gamma(4)=6 and four-parameter simplex volume 1/6;
   * the four-propagator Feynman-parameter prefactor;
   * determinant-log coefficient +i/4 at fourth order, kept distinct from the
