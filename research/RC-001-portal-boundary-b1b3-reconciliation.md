@@ -4,7 +4,7 @@
 >
 > **Audit date:** 2026-10-27
 >
-> **Status:** The portal matching relation and a working scalar-suppressed reference boundary are explicit. The tree-level C5 coefficient has a separate derivation and exact symbolic check. All 576 six-cycle candidate-kernel simplex integrals are now evaluated conditionally on the current B1/B2/B3 definitions. The physical B1/B3 sign, common loop factors, complete UV–EFT subtraction, and model-level Wilson-vector closure remain **unresolved**.
+> **Status:** The portal matching relation and a working scalar-suppressed reference boundary are explicit. The tree-level C5 coefficient has a separate derivation and exact symbolic check. All 576 six-cycle candidate-kernel simplex integrals are evaluated conditionally on the current B1/B2/B3 definitions. A new one-cycle zero-mixing calibration independently reproduces the fixed-sector numerator and the relative B2 sign/factor. The physical B1/B3 sign, common loop factors, complete UV–EFT subtraction, and model-level Wilson-vector closure remain **unresolved**.
 
 ## 1. Provenance and version relationship
 
@@ -550,3 +550,44 @@ The refreshed validation record [RC-001-six-cycle-simplex-integration.txt](../va
 **Massless-light-state caveat:** the current simplex integration is performed in exactly \(d=4\) with the two internal masses treated as nonzero symbolic parameters. It does not by itself justify taking the light-state mass to zero in every path. Mixed heavy/light paths can develop endpoint singularities in that limit; the corresponding hard-region IR poles and EFT soft-region UV poles must be distinguished in \(d=4-2\epsilon\). The four-dimensional hypergeometric expressions are therefore conditional finite-mass integrals, not a substitute for a dimensionally regulated method-of-regions expansion. The next matching calculation must keep the light-mass/IR regulator consistent on both sides and retain the \(O(\epsilon)\) numerator and tensor terms that can multiply poles and shift finite constants.
 
 The next blocking step is not another simplex normalization check. The fixed-sector SFT-01 soft bubble and its pole cancellation are algebraically audited, while the topology census classifies the reducible/scaleless SFT-02/03 candidates. The remaining work is to derive the physical UV numerator and denominator expansion from the same labeled diagrams, close the common sign/factor ledger, and perform the complete same-scheme UV–EFT subtraction with the required operator/counterterm projection.
+
+
+### 9.3 One-cycle source-aligned numerator and B2 calibration
+
+The new script [RC-001-one-cycle-fixed-sector-calibration.py](../calculations/RC-001-one-cycle-fixed-sector-calibration.py) independently derives the zero-mixing/unbroken limit of the labeled cycle \(h_1\to s_1\to s_2\to h_2\), exhausting all 16 internal-state paths. Only path \((0,1,0,1)\), with ordered propagator masses \((M_E,0,M_E,0)\), survives. Its exact Dirac trace is
+\[
+\operatorname{tr}[\cdots]
+=2\,y^2\lambda^2M_E^2\,k_2\!\cdot k_4
+=2\,y^2\lambda^2M_E^2\,k\!\cdot(k-q).
+\]
+
+With the external relabeling \(q_2=p_4,\ q_3=p_2,\ q=-(p_1+p_4)=p_2+p_3\), the propagator denominators become
+\[
+k^2(k-q)^2\big[(k-p_2)^2-M_E^2\big]
+\big[(k+p_4)^2-M_E^2\big],
+\]
+which is the fixed-sector UV denominator recorded in §248. This establishes an integrand-level numerator/denominator match for this one path in the zero-mixing limit, not a complete six-cycle amplitude identity.
+
+For the Feynman-parameter shift \(K=k+R\), define
+\[
+d=\sum_i x_i r_i^2-R^2,\qquad
+\Delta_0=M_E^2(x_1+x_3),\qquad
+f=R\cdot(R+q).
+\]
+Then the shifted denominator is \(K_M^2-\Delta_0+d\), so after Wick rotation the Euclidean denominator is \(K_E^2+\Delta_0-d\) and its fourth-power expansion has the \(+4d\) term. The numerator becomes \(2C[K_M^2+f]\) plus a term odd in \(K\), with \(C=y^2\lambda^2M_E^2\). Using
+\[
+I_0^{(4)}=\frac{1}{16\pi^2}\frac{1}{6\Delta_0^2},
+\qquad
+I_1^{(5)}=\frac{1}{16\pi^2}\frac{1}{12\Delta_0^2},
+\]
+the \(O(p^2)\) kernel is
+\[
+\frac{2Cf}{6\Delta_0^2}
+-\frac{8Cd}{12\Delta_0^2}
+=\frac{C(f-2d)}{3\Delta_0^2},
+\]
+i.e. \(B_2=(F-2Sd)/3\) with \(F=Cf\) and \(S=C\). The \(\Gamma(4)=6\) Feynman-parameter prefactor is included once; the simplex volume is \(1/6\).
+
+The companion validation record [RC-001-one-cycle-fixed-sector-calibration.txt](../validation/RC-001-one-cycle-fixed-sector-calibration.txt) records **22 exact symbolic checks**, including the full 16-path limit, numerator, denominator routing, denominator-shift sign, B2 factor, and simplex normalization.
+
+**Boundary:** this path has \(H=0\) and the four-mass term \(M=0\), so \(B_1=B_3=0\). It therefore validates neither historical B1/B3 sign choice. It also omits the global diagrammatic \(i\), closed-fermion-loop sign, and physical graph multiplicity. The hard-region coefficient and EFT soft subtraction are referenced from the source-aligned §248 ledger but are not independently recalculated by this script.
