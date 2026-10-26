@@ -428,7 +428,7 @@ For the effective-action convention \(\Gamma_f=-i\,\mathrm{Tr}\ln(1+X)\), the fo
 |---|---|---|
 | Generic chiral Dirac trace | **Verified symbolically** | Exact identity for arbitrary chiral coefficients, masses, and four independent Minkowski momenta |
 | All six cycles × 16 paths | **Verified at numerator/weight level** | 96 exact rational-point direct-trace comparisons; model-specific weights are assembled symbolically |
-| Routed \(O(p^2)\) candidate coefficients | **Generated and cross-checked** | 576 symbolic rows; reverse-cycle coefficient map passes 1,152/1,152 checks |
+| Routed \(O(p^2)\) candidate coefficients | **Generated and cross-checked; one-path B2 calibrated** | 576 symbolic rows and 1,152/1,152 reverse-cycle checks; one source-aligned zero-mixing path reproduces the numerator and relative B2 sign/factor. B1/B3 vanish in this limit, so their signs remain unresolved |
 | \(\Gamma(4)\), simplex volume, five Euclidean integral factors | **Verified algebraically** | Exact Gamma-function identities |
 | Determinant-log \(+i/4\) and diagrammatic \(-1\) | **Recorded separately** | Their complete Feynman-rule/Wick reconciliation is still open |
 | Path-dependent simplex integrals | **Conditionally completed** | All 576 candidate B-kernel rows have analytic simplex integrals and 288 numerical reverse-cycle checks; this is not a physical Wilson coefficient because the global sign/factors and UV–EFT subtraction remain open |
