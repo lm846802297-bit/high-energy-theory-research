@@ -651,3 +651,11 @@ while the independently calibrated \(B_2=(F_\alpha-2S d_\alpha)/3\) remains unch
 These are exactly opposite to the historical formulas \(B_1=H(2g_\alpha/3-2d_\alpha)\) and \(B_3=-2M d_\alpha/3\). Under the current trace decomposition and \(d=\sum_i x_i r_i^2-R^2\) convention, the historical signs are incompatible with the Wick rotation and loop-integral factors.
 
 **Interpretation boundary:** this resolves the algebraic B1/B3 sign choice in the candidate kernel. It does not by itself establish the final physical Wilson coefficient: the determinant-log-to-diagram multiplicity, complete mixed-mass path sum, flavor-resolved \(s/u\) routing, and same-scheme UV–EFT subtraction remain open.
+
+An independent second implementation, [RC-001-generic-wick-kernel-sign-derivation.py](../calculations/RC-001-generic-wick-kernel-sign-derivation.py), and its [validation log](../validation/RC-001-generic-wick-kernel-sign-derivation.txt), pass **19 exact symbolic checks**. It derives the B terms sector by sector from the generic numerator and the five Euclidean master-integral factors:
+- (2H G): the angular-averaged tensor term gives (-2Hg_alpha/(3Delta_0)), while the denominator insertion gives (+2Hd_alpha/Delta_0);
+- (2sum C_{ij}k_icdot k_j): the local (F_alpha) term gives (+F_alpha/(3Delta_0^2)), and the denominator insertion gives (-2Sd_alpha/(3Delta_0^2));
+- the constant (2M) term gives (+2Md_alpha/(3Delta_0^3)).
+
+This second derivation also explicitly tests the alternative denominator ((K_E^2+Delta_0+d)^{-4}). Reversing the sign of the denominator shift flips the (d_alpha)-insertion terms, but **does not** flip the (g_alpha) tensor term. Thus the historical whole-(B_1) sign flip cannot be explained by a denominator-shift sign change alone. The two scripts provide independent algebraic corroboration under the stated trace and Wick conventions; neither replaces the still-open physical six-cycle amplitude and UV–EFT matching.
+
