@@ -663,62 +663,67 @@ This second derivation also explicitly tests the alternative denominator ((K_E^2
 
 ### 9.6 Fixed-sector EFT soft-graph closure and amplitude-level subtraction
 
-This subsection closes the EFT soft subtraction for the **specified unbroken-phase complex external state** (H,S,H^dagger,S^dagger), at strict (O(M_E^{-2})) and in the fixed (|y_ell|^2|lambda_ell|^2) sector. It does not claim that every fermionic Wilson coefficient or every real-field mass-basis cycle has been matched.
+This subsection closes the EFT soft subtraction for the **muon-channel unbroken-phase external state**
+\[
+H(p_1),\quad S(p_2),\quad H^\dagger(p_3),\quad S^\dagger(p_4),
+\]
+at strict \(O(M_{E\mu}^{-2})\) and fixed \(O(|y_\mu|^2|\lambda_\mu|^2)\). It does not claim that every fermionic Wilson coefficient or every real-field mass-basis cycle has been matched.
 
-| Candidate family | Decision for this target 1PI four-scalar amplitude | Reason / matching role |
+| Candidate family | Decision for this target \(\mu\)-channel 1PI four-scalar amplitude | Reason / matching role |
 |---|---|---|
-| SFT-01: (C_{5,ell}C_{5,ell}^ast) massless chiral-fermion bubble | **Keep; sole direct soft 1PI graph in the declared coupling sector** | The trace is (2kcdot(k+q)). Using (2kcdot(k+q)=k^2+(k+q)^2-s), the two tadpoles are scaleless in dimensional regularization; the remaining term is the massless (B_0(s;0,0)) bubble. |
-| SFT-02/03: (Q_{LD}/Q_{RD}) plus scalar quartic and a fermion tadpole | **Do not add to the local 1PI coefficient** | The massless tadpole vanishes in dimensional regularization and the stated graph is scalar-line reducible. A broken-phase mass/VEV insertion must be power-counted anew. |
+| SFT-01: \(C_{5,\mu}C_{5,\mu}^\ast\) massless chiral-fermion bubble | **Keep; sole direct soft 1PI graph in the declared coupling sector** | The trace is \(2k\cdot(k+q)\). Using \(2k\cdot(k+q)=k^2+(k+q)^2-s\), the two tadpoles are scaleless in dimensional regularization; the remaining term is the massless \(B_0(s;0,0)\) bubble. |
+| SFT-02/03: \(Q_{LD}/Q_{RD}\) plus scalar quartic and a fermion tadpole | **Do not add to the local 1PI coefficient** | The massless tadpole vanishes in dimensional regularization and the stated graph is scalar-line reducible. A broken-phase mass/VEV insertion must be power-counted anew. These are also different coupling orders from the fixed \(|y_\mu|^2|\lambda_\mu|^2\) sector. |
 | Pure-light loops without a heavy-dependent insertion | Cancel in UV-minus-EFT matching | Cancellation requires identical light-field content, external-state normalization, gauge convention, IR regulator, and renormalized light parameters on both sides. |
 | SFT-07–10 gauge-current exchanges | Keep in the separate connected-current/source ledger if that amplitude is matched | They are reducible through the exchanged gauge boson and are not extra local 1PI four-scalar vertices. Kinetic-mixing inputs must be the same in UV and EFT. |
-| SFT-04–06 and SFT-11–13 | Exclude from strict dimension six | Their explicit heavy-mass order is (O(M_E^{-4})); they belong to the dimension-eight or fixed-VEV higher-order closure. |
+| SFT-04–06 and SFT-11–13 | Exclude from strict dimension six | Their explicit heavy-mass order is \(O(M_{E\mu}^{-4})\); they belong to the dimension-eight or fixed-VEV higher-order closure. |
 | SFT-14–22 | Not part of this four-scalar external state | They are required for the full dimension-six fermionic Wilson vector, but have different external amplitudes. |
-| SFT-23–26 | Not an additional direct local scalar 1PI soft graph in this fixed coefficient | They concern one-loop (C_5) and fermionic derivative/current coefficients, with gauge/leg/contact/counterterm closure still needed for those separate claims. |
+| SFT-23–26 | Not an additional direct local scalar 1PI soft graph in this fixed coefficient | They concern one-loop \(C_5\) and fermionic derivative/current coefficients, with gauge/leg/contact/counterterm closure still needed for those separate claims. |
 
-The three relevant amplitudes, after factoring the common (|C_{5,ell}|^2/(16pi^2)), are
+The hard-region amplitude, bare EFT soft bubble, and local EFT counterterm are
 
-[
-iGamma_{mathrm{hard},ell}^{(2)}
-=rac{i|C_{5,ell}|^2}{16pi^2}
-left[(-Delta_{mathrm{IR}}+L_ell-2)s+rac{t}{6}ight],
-qquad
-L_ell=lnrac{M_{E_ell}^2}{mu_R^2},
-]
+\[
+i\Gamma_{\mathrm{hard},\mu}^{(2)}
+=\frac{i|C_{5,\mu}|^2}{16\pi^2}
+\left[(-\Delta_{\mathrm{IR}}+L_\mu-2)s+\frac{t}{6}\right],
+\qquad
+L_\mu=\ln\frac{M_{E\mu}^2}{\mu_R^2},
+\]
 
-[
-iGamma_{mathrm{soft},ell}^{mathrm{bare}}
-=rac{i|C_{5,ell}|^2s}{16pi^2}
-left[Delta_{mathrm{UV}}
--lnrac{-s-i0}{mu_R^2}+2ight],
-qquad
-iGamma_{mathrm{ct},ell}
-=-rac{i|C_{5,ell}|^2s}{16pi^2}Delta_{mathrm{UV}}.
-]
+\[
+i\Gamma_{\mathrm{soft},\mu}^{\mathrm{bare}}
+=\frac{i|C_{5,\mu}|^2s}{16\pi^2}
+\left[\Delta_{\mathrm{UV}}
+-\ln\frac{-s-i0}{\mu_R^2}+2\right],
+\qquad
+i\Gamma_{\mathrm{ct},\mu}
+=-\frac{i|C_{5,\mu}|^2s}{16\pi^2}\Delta_{\mathrm{UV}}.
+\]
 
 The counterterm removes the EFT soft UV pole. Before identifying the region poles, the hard plus bare-soft sum is
 
-[
-iGamma_{mathrm{hard},ell}^{(2)}
-+iGamma_{mathrm{soft},ell}^{mathrm{bare}}
-=rac{i|C_{5,ell}|^2}{16pi^2}
-left[(Delta_{mathrm{UV}}-Delta_{mathrm{IR}}+L_ell
--ln	frac{-s-i0}{mu_R^2})s+rac{t}{6}ight].
-]
+\[
+i\Gamma_{\mathrm{hard},\mu}^{(2)}
++i\Gamma_{\mathrm{soft},\mu}^{\mathrm{bare}}
+=\frac{i|C_{5,\mu}|^2}{16\pi^2}
+\left[(\Delta_{\mathrm{UV}}-\Delta_{\mathrm{IR}}+L_\mu
+-\ln\tfrac{-s-i0}{\mu_R^2})s+\frac{t}{6}\right].
+\]
 
-With the method-of-regions identification (Delta_{mathrm{IR}}=Delta_{mathrm{UV}}), the poles cancel. The renormalized soft loop is proportional to (s[-ln((-s-i0)/mu_R^2)+2]); subtracting that soft matrix element from the renormalized full UV amplitude leaves the local hard matching polynomial
+With the method-of-regions identification \(\Delta_{\mathrm{IR}}=\Delta_{\mathrm{UV}}\), the poles cancel. The renormalized soft loop is proportional to \(s[-\ln((-s-i0)/\mu_R^2)+2]\); subtracting that soft matrix element from the renormalized full UV amplitude leaves the local hard matching polynomial
 
-[
-oxed{
-mathcal A_{mathrm{match},ell}^{mathrm{local}}
-=rac{i|C_{5,ell}|^2}{16pi^2}
-left[(L_ell-2)s+rac{t}{6}ight].
+\[
+\boxed{
+\mathcal A_{\mathrm{match},\mu}^{\mathrm{local}}
+=\frac{i|C_{5,\mu}|^2}{16\pi^2}
+\left[(L_\mu-2)s+\frac{t}{6}\right].
 }
-]
+\]
 
-This is the completed amplitude-level soft subtraction for the single source-aligned fixed-sector channel, including the required local EFT counterterm and the UV/IR pole distinction. It agrees with the independent 10-check (C_5C_5^ast) trace audit and 12-check fixed-sector pole ledger, both rerun from byte-aligned local source copies with their recorded SHA-256 values.
+This is the completed amplitude-level soft subtraction for the single source-aligned \(\mu\)-channel, including the required local EFT counterterm and the UV/IR pole distinction. It agrees with the independent 10-check \(C_5C_5^\ast\) trace audit and 12-check fixed-sector pole ledger.
 
-**Boundary of the closure:** the result does not perform the full operator-basis projection of the local (s,t) structures; it does not prove that the 576 finite-mass simplex integrals can be taken to the massless-light-state limit without a dimensionally regulated regions expansion; and it does not yet match the full real-field six-cycle candidate sum to this complex-field amplitude. The mixed-mass hard-region expansion, flavor-resolved (mu/	au) (s/u) assignment, determinant-log/diagram multiplicity, and full Wilson-vector counterterms remain open. Accordingly, PR #9 remains Draft/Open.
+**Flavor boundary:** the \(\tau\) interaction contains \(S^\ast\), so its corresponding external orientation is \(H,S^\dagger,H^\dagger,S\), its bubble invariant is \(u\), and its local hard polynomial is \((L_\tau-2)u+t/6\). It is a separate oriented channel, not the same \(H,S,H^\dagger,S^\dagger\) amplitude. The source-aligned §248 ledger records that \(\tau\) subtraction separately; it must be combined with the \(\mu\) channel only after the external-state projection and flavor-resolved \(s/u\) routing are fixed.
 
+**Boundary of this closure:** the result does not perform the full operator-basis projection of the local \(s,t\) structures; it does not prove that the 576 finite-mass simplex integrals can be taken to the massless-light-state limit without a dimensionally regulated regions expansion; and it does not yet match the full real-field six-cycle candidate sum to the complex-field amplitudes. The mixed-mass hard-region expansion, flavor-resolved \(\mu/\tau\) \(s/u\) assignment, determinant-log/diagram multiplicity, and full Wilson-vector counterterms remain open. Accordingly, PR #9 remains Draft/Open.
 
 ### 9.7 Exact mass-basis vertex rephasing and mass-matrix reconstruction
 
