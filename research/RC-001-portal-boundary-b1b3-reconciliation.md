@@ -460,6 +460,24 @@ The new [fixed-sector hard/soft pole ledger](../calculations/RC-001-fixed-sector
 
 The new [C5 C5* soft-bubble trace audit](../calculations/RC-001-C5-soft-bubble-trace-audit.py) passes 10 exact symbolic checks. It independently computes the massless chiral trace, reduces the numerator to the scalar B0 bubble using scaleless-tadpole vanishing, multiplies the two vertices, two propagators, and closed-loop sign, and checks the soft UV counterterm and §248 hard/soft pole cancellation. This validates the algebra of the specified SFT-01 bubble under the recorded B0 convention; it does not independently generate the full EFT graph set or integrate the six-cycle UV candidate kernels.
 
+### 7.1 Soft-graph coverage matrix for the target scalar 1PI amplitude
+
+The scope must be fixed before calling the soft sector “complete.” For the target unbroken-phase four-scalar amplitude with external (H,S,H^\dagger,S^\dagger), at strict (O(M_E^{-2})) and in the fixed (|y_\ell|^2|\lambda_\ell|^2) sector, the source-aligned census gives this status:
+
+| Candidate family | Target-amplitude role | Pole / finite-part evidence | Status for this matching task |
+|---|---|---|---|
+| SFT-01: (C_{5,\ell}C_{5,\ell}^\ast) light-fermion bubble | Direct four-scalar 1PI soft graph | The fixed §248 routing has a massless chiral trace; its EFT UV pole cancels the hard-region IR pole after regions identification. The fixed-routing hard local polynomial is ((L_\ell-2)s+t/6), with the soft nonlocal logarithm retained before local matching. | **Analytically checked for the recorded routing.** Still needs flavor-resolved (s/u) routing and the full UV cycle-sum comparison. |
+| SFT-02/03: (Q_{LD}/Q_{RD}) plus scalar quartic with a fermion tadpole | Scalar-line-reducible, not a local 1PI four-scalar contribution | The unbroken massless fermion tadpole is scaleless in dimensional regularization. | Excluded from this local 1PI coefficient under the stated scheme; reconsider if masses/VEVs or a different matching object are retained. |
+| Pure-light scalar/gauge loops with no heavy-dependent insertion | Common UV and EFT contributions | Cancel in the hard matching difference only with identical light-field content, parameters, IR regulator, gauge convention, and external-state normalization. | Cancellation rule stated; not a substitute for checking any heavy-dependent insertion. |
+| SFT-07–10: gauge-current exchanges | Reducible connected-amplitude contributions | They belong to the current/source ledger and depend on the declared gauge/kinetic-mixing inputs; they are not additional local 1PI scalar vertices. | Not added to the local scalar coefficient. Required if claiming the full connected amplitude/current vector. |
+| SFT-04–06, SFT-11–13 | Dimension-eight or (O(M_E^{-4})) insertions | Explicit heavy-mass power counting places them beyond strict dimension six. | Excluded here; must be included in a separate dimension-eight closure. |
+| SFT-14–22 | Two-fermion/two-scalar and four-fermion amplitudes | Several analytic hard/soft kernels and pole cancellations are recorded in the 41-check soft-loop audit; basis projection and/or full counterterm closure remains incomplete. | Not extra four-scalar 1PI graphs, but required for a complete dimension-six fermionic Wilson vector. |
+| SFT-23–26 | (C_5) and gauge corrections to (Q_{LD}/Q_{RD}) | Gauge-covariant vertex, external-leg, contact, and counterterm sets are not fully evaluated at diagram level. | Open for full dimension-five/dimension-six closure; do not fold into the scalar-only hard coefficient without an explicit connected-amplitude matching definition. |
+
+**Target-sector subtraction that is supported:** for the single fixed §248 channel, the hard-region IR residue is (-s), the bare EFT soft UV residue is (+s), and the local EFT counterterm cancels the EFT UV pole. After the method-of-regions identification (Delta_{IR}=\Delta_{UV}), the region sum has no pole and leaves the finite nonlocal logarithm plus the local (t/6) term; the local hard polynomial is ((L_\ell-2)s+t/6).
+
+**What is not yet supported:** the candidate UV kernels have not been integrated over their path-dependent four-parameter simplex; the six labeled external cycles have not been combined with the flavor-resolved (mu/	au) (s/u) assignment in one common amplitude ledger; and the common determinant-log / diagrammatic fermion-loop sign, symmetry factors, and final finite local coefficient have not been closed. Therefore the fixed-channel EFT subtraction cannot yet be promoted to a complete six-cycle UV–EFT matching result.
+
 Accordingly, the fourth requested stage is **not yet complete**. Before promoting any B1/B3 kernel to a physical Wilson coefficient, the remaining work is:
 
 1. derive the complete set of EFT soft graphs and same-order insertions for the selected four-scalar 1PI amplitude from the operator basis, rather than relying only on a topology classification;
