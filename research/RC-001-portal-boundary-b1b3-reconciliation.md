@@ -300,9 +300,9 @@ The working dimension-six result should continue to be quoted only with the scop
 
 Required closure steps:
 
-1. Independently derive the full mass-basis Dirac trace from the actual \(G_h,G_s\) vertices, including conjugation and the parity-odd trace contribution; the existing generic trace identity and path-weight construction do not by themselves prove the complete physical numerator.
-2. Derive the numerator-to-kernel map in one Minkowski convention, including the denominator shift and all \(F_\alpha,H,S,M,d_\alpha\) terms, rather than taking the B-kernel formula as a physical input.
-3. The six labeled cycles and 16 internal paths have been generated, and their conditional simplex integrals are now evaluated. Still close the physical fermion-loop sign, common Minkowski/Wick phase, and graph/symmetry factors; numerical reverse-cycle agreement is a consistency check, not the physical-amplitude sign determination.
+1. **Completed at the trace/convention level:** the exact source \(G_h,G_s\) matrices, signed-light-mass rephasing, chiral trace weights, and parity-odd term have been checked pathwise. The interaction-basis complex projection independently identifies the surviving orientations in the unbroken limit.
+2. **Completed conditionally at the kernel level:** the generic trace/Wick derivation and route-dependent \(f_{ij},g_\alpha,d_\alpha\) now define the B1/B2/B3 kernels in one convention. The fixed complex amplitude has its own B2-only kernel; it must not be identified with the unrestricted real-scalar six-cycle sum.
+3. **Still open at the physical-amplitude level:** reconcile the source-aligned hard-region result with the finite-mixing complex path sum, including the common diagrammatic \(i\)/closed-loop factor and determinant-log/graph multiplicity. The 576 real-scalar candidate integrals are diagnostics, not a single physical complex amplitude.
 4. Map the complete sum to the same complex external states and momentum basis used in §248/§252, including the off-shell \(\Sigma=\sum_i p_i^2\) terms and EOM-generated potential/source companions.
 5. Enumerate and evaluate the complete same-order EFT soft amplitudes, contact terms, and counterterms in the same IR and renormalization prescription; compare UV and IR poles and finite local terms separately.
 6. Only after the analytic map and factor ledger close should the corresponding FeynArts/FeynCalc calculation be executed and archived. An algebra-only script is not a substitute for diagram-level validation.
