@@ -1,9 +1,10 @@
 RC-001 six-cycle O(p^2) candidate-kernel ledger
 Audit date: 2026-10-27
 Repository main baseline: d6143c2aa15191ac8521e062d90860ba86713f00
-PR #9 head before this audit extension: 9c0792079b145583f1d6ea55d8348156c70049cb
+PR #9 head before this audit extension: ae2333c57c390b7ede397d460bd8b9f0b07fef26
 Script: calculations/RC-001-six-cycle-oq2-candidate-kernel-ledger.py
-Script SHA-256 (executed Python source): 731ab3d363946c9dba71568a05889b667de85e8cce6157ce8aafce30303856bf
+Script SHA-256 (executed Python source, byte-aligned with committed file): 731ab3d363946c9dba71568a05889b667de85e8cce6157ce8aafce30303856bf
+GitHub blob SHA: 6e0e657bec0559083393b1b8546f5e08dafcf231
 Runtime: Python 3.13.5; SymPy 1.14.0
 Command: python calculations/RC-001-six-cycle-oq2-candidate-kernel-ledger.py
 Exit code: 0
