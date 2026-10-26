@@ -173,7 +173,7 @@ for i, (exponents, tags, n) in enumerate(quadrature_cases, 1):
         raise AssertionError(f"quadrature moment {i}: symbolic={symbolic}, direct={direct}")
     print(f"PASS: non-degenerate simplex moment vs direct quadrature {i}")
 
-# Build all six labeled-cycle x 16 internal-state path x 6-invariant candidate kernels.
+# Build all six labeled-cycle x 16 path x 6-invariant candidate kernels.
 geometry = {}
 for cycle in cycles:
     qvs = [pvec[label_num[label]] for label in cycle[:3]]
