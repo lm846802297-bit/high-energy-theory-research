@@ -10,22 +10,22 @@
 
 ### 1.1 Repository baseline
 
-- **Repository:** [\`high-energy-theory-research\`](https://github.com/lm846802297-bit/high-energy-theory-research)
-- **Baseline \`main\` HEAD at audit:** [\`d6143c2aa15191ac8521e062d90860ba86713f00\`](https://github.com/lm846802297-bit/high-energy-theory-research/commit/d6143c2aa15191ac8521e062d90860ba86713f00)
-- **RC-001 source record:** [\`research/RC-001-vll-higgs-singlet-uv-eft.md\`](https://github.com/lm846802297-bit/high-energy-theory-research/blob/d6143c2aa15191ac8521e062d90860ba86713f00/research/RC-001-vll-higgs-singlet-uv-eft.md)
-- **Source-record blob SHA:** \`4a334a2ad0ca1ebed9063b9657588c82cdf2f14b\`
-- **Live claim matrix:** [\`research/RC-001-claim-evidence-matrix.md\`](https://github.com/lm846802297-bit/high-energy-theory-research/blob/d6143c2aa15191ac8521e062d90860ba86713f00/research/RC-001-claim-evidence-matrix.md)
+- **Repository:** [`high-energy-theory-research`](https://github.com/lm846802297-bit/high-energy-theory-research)
+- **Baseline `main` HEAD at audit:** [`d6143c2aa15191ac8521e062d90860ba86713f00`](https://github.com/lm846802297-bit/high-energy-theory-research/commit/d6143c2aa15191ac8521e062d90860ba86713f00)
+- **RC-001 source record:** [`research/RC-001-vll-higgs-singlet-uv-eft.md`](https://github.com/lm846802297-bit/high-energy-theory-research/blob/d6143c2aa15191ac8521e062d90860ba86713f00/research/RC-001-vll-higgs-singlet-uv-eft.md)
+- **Source-record blob SHA:** `4a334a2ad0ca1ebed9063b9657588c82cdf2f14b`
+- **Live claim matrix:** [`research/RC-001-claim-evidence-matrix.md`](https://github.com/lm846802297-bit/high-energy-theory-research/blob/d6143c2aa15191ac8521e062d90860ba86713f00/research/RC-001-claim-evidence-matrix.md)
 - **Current source-aligned two-point algebra audit:** [script](https://github.com/lm846802297-bit/high-energy-theory-research/blob/d6143c2aa15191ac8521e062d90860ba86713f00/calculations/RC-001-uv-eft-two-point-difference.py) and [captured output](https://github.com/lm846802297-bit/high-energy-theory-research/blob/d6143c2aa15191ac8521e062d90860ba86713f00/validation/RC-001-uv-eft-two-point-difference.txt).
 
 ### 1.2 Frozen primary working source
 
 The RC-001 record identifies the source baseline as:
 
-- **File:** \`higgs_portal_mixing_unified_reviewer_response_and_uv_eft_UPDATED_v2(8)(20261021)(153)_matchete_mapping_version_history.md\`
-- **Library file ID:** \`file_00000000b7b48230a2ada1957a9ed4a0\`
-- **Version ID:** \`1\`
-- **Size:** \`1,989,214\` bytes
-- **SHA-256:** \`f30af8ccc62feafa3923e8356437e4b80b40e518fc9b1188646b4d763e2791f1\`
+- **File:** `higgs_portal_mixing_unified_reviewer_response_and_uv_eft_UPDATED_v2(8)(20261021)(153)_matchete_mapping_version_history.md`
+- **Library file ID:** `file_00000000b7b48230a2ada1957a9ed4a0`
+- **Version ID:** `1`
+- **Size:** `1,989,214` bytes
+- **SHA-256:** `f30af8ccc62feafa3923e8356437e4b80b40e518fc9b1188646b4d763e2791f1`
 
 Relevant source sections:
 
@@ -232,10 +232,10 @@ The candidate kernel is confined to the immutable historical v66 archive:
 
 | Artifact | Blob SHA | What the recorded check establishes | What it does not establish |
 |---|---|---|---|
-| [\`audit_pathwise_wick_kernel.py\`](https://github.com/lm846802297-bit/high-energy-theory-research/blob/d6143c2aa15191ac8521e062d90860ba86713f00/artifacts/higgs-portal-v66-20261019/%E8%AE%A1%E7%AE%97%E8%84%9A%E6%9C%AC/audit_pathwise_wick_kernel.py) | \`2a7ac2ba589fa99e982c63cb87bcf448c64c8047\` | The 32 path records satisfy the script's declared B1/B3 sign-flip and unchanged-B2 algebra | Does not determine physical signs; omits the complete labeled external-leg sum, pathwise denominator integration, and EFT subtraction |
-| [\`verify_numerator_to_B_kernel.py\`](https://github.com/lm846802297-bit/high-energy-theory-research/blob/d6143c2aa15191ac8521e062d90860ba86713f00/artifacts/higgs-portal-v66-20261019/%E8%AE%A1%E7%AE%97%E8%84%9A%E6%9C%AC/verify_numerator_to_B_kernel.py) | \`304186f8bc70821254c550a88e376615385a0afd\` | Reconstructs the stated \(f_{ij},g,d_\alpha\) polynomials and confirms the **old kernel's internal algebra** | Explicitly does not verify the overall Minkowski diagram sign |
-| [\`audit_minkowski_wick_signs.py\`](https://github.com/lm846802297-bit/high-energy-theory-research/blob/d6143c2aa15191ac8521e062d90860ba86713f00/artifacts/higgs-portal-v66-20261019/%E8%AE%A1%E7%AE%97%E8%84%9A%E6%9C%AC/audit_minkowski_wick_signs.py) | \`3063ed03c6de1aacd4094c9ef7a809dff0ce9886\` | Applies \(J_{M,r}^{(n)}=i(-1)^{n+r}I_{E,r}^{(n)}\) under its stated metric/denominator convention | Takes the numerator coefficients as inputs; does not derive the complete model-specific amplitude |
-| [\`derive_consistent_minkowski_to_euclidean_B.py\`](https://github.com/lm846802297-bit/high-energy-theory-research/blob/d6143c2aa15191ac8521e062d90860ba86713f00/artifacts/higgs-portal-v66-20261019/%E8%AE%A1%E7%AE%97%E8%84%9A%E6%9C%AC/derive_consistent_minkowski_to_euclidean_B.py) | \`4f17b33d648190a8386cfa98dfc20de76b2de5b2\` | Derives the candidate B kernel from the numerator decomposition and Wick rules explicitly listed in that script | Does not independently derive the input numerator, complete all external-leg cycles, or perform EFT subtraction |
+| [`audit_pathwise_wick_kernel.py`](https://github.com/lm846802297-bit/high-energy-theory-research/blob/d6143c2aa15191ac8521e062d90860ba86713f00/artifacts/higgs-portal-v66-20261019/%E8%AE%A1%E7%AE%97%E8%84%9A%E6%9C%AC/audit_pathwise_wick_kernel.py) | `2a7ac2ba589fa99e982c63cb87bcf448c64c8047` | The 32 path records satisfy the script's declared B1/B3 sign-flip and unchanged-B2 algebra | Does not determine physical signs; omits the complete labeled external-leg sum, pathwise denominator integration, and EFT subtraction |
+| [`verify_numerator_to_B_kernel.py`](https://github.com/lm846802297-bit/high-energy-theory-research/blob/d6143c2aa15191ac8521e062d90860ba86713f00/artifacts/higgs-portal-v66-20261019/%E8%AE%A1%E7%AE%97%E8%84%9A%E6%9C%AC/verify_numerator_to_B_kernel.py) | `304186f8bc70821254c550a88e376615385a0afd` | Reconstructs the stated \(f_{ij},g,d_\alpha\) polynomials and confirms the **old kernel's internal algebra** | Explicitly does not verify the overall Minkowski diagram sign |
+| [`audit_minkowski_wick_signs.py`](https://github.com/lm846802297-bit/high-energy-theory-research/blob/d6143c2aa15191ac8521e062d90860ba86713f00/artifacts/higgs-portal-v66-20261019/%E8%AE%A1%E7%AE%97%E8%84%9A%E6%9C%AC/audit_minkowski_wick_signs.py) | `3063ed03c6de1aacd4094c9ef7a809dff0ce9886` | Applies \(J_{M,r}^{(n)}=i(-1)^{n+r}I_{E,r}^{(n)}\) under its stated metric/denominator convention | Takes the numerator coefficients as inputs; does not derive the complete model-specific amplitude |
+| [`derive_consistent_minkowski_to_euclidean_B.py`](https://github.com/lm846802297-bit/high-energy-theory-research/blob/d6143c2aa15191ac8521e062d90860ba86713f00/artifacts/higgs-portal-v66-20261019/%E8%AE%A1%E7%AE%97%E8%84%9A%E6%9C%AC/derive_consistent_minkowski_to_euclidean_B.py) | `4f17b33d648190a8386cfa98dfc20de76b2de5b2` | Derives the candidate B kernel from the numerator decomposition and Wick rules explicitly listed in that script | Does not independently derive the input numerator, complete all external-leg cycles, or perform EFT subtraction |
 
 The historical source states that the earlier Euclidean denominator \(K_E^2+\Delta_0+\delta\Delta\) was inconsistent with the original Minkowski denominator. Under the stated routing,
 
@@ -259,9 +259,9 @@ If the **same** \(d_\alpha\) convention is held fixed, the historical definition
 \[
 \begin{aligned}
 B_{1}^{\mathrm{legacy}}&=H\left(\frac23g_\alpha-2d_\alpha\right),&
-B_{1}^{\mathrm{Wick}}&=H\left(-\frac23g_\alpha+2d_\alpha\right),\\
+B_{1}^{\mathrm{Wick}}&=H\left(-\frac23g_\alpha+2d_\alpha\right),\
 B_{2}^{\mathrm{legacy}}&=\frac13F_\alpha-\frac23S\,d_\alpha,&
-B_{2}^{\mathrm{Wick}}&=\frac13F_\alpha-\frac23S\,d_\alpha,\\
+B_{2}^{\mathrm{Wick}}&=\frac13F_\alpha-\frac23S\,d_\alpha,\
 B_{3}^{\mathrm{legacy}}&=-\frac23M\,d_\alpha,&
 B_{3}^{\mathrm{Wick}}&=+\frac23M\,d_\alpha.
 \end{aligned}
@@ -309,7 +309,7 @@ Required closure steps:
 
 ## 5. Reproducible algebra check
 
-The companion script is [\`calculations/RC-001-portal-boundary-b1b3-reconciliation.py\`](../calculations/RC-001-portal-boundary-b1b3-reconciliation.py). Its captured output is [\`validation/RC-001-portal-boundary-b1b3-reconciliation.txt\`](../validation/RC-001-portal-boundary-b1b3-reconciliation.txt).
+The companion script is [`calculations/RC-001-portal-boundary-b1b3-reconciliation.py`](../calculations/RC-001-portal-boundary-b1b3-reconciliation.py). Its captured output is [`validation/RC-001-portal-boundary-b1b3-reconciliation.txt`](../validation/RC-001-portal-boundary-b1b3-reconciliation.txt).
 
 The script runs 14 exact symbolic checks covering:
 
@@ -322,10 +322,107 @@ The script runs 14 exact symbolic checks covering:
 
 **Scope limitation:** these checks do not integrate loop functions, reconstruct the full model-specific numerator, sum all labeled external legs, complete all EFT soft insertions/counterterms, or run FeynArts/FeynCalc.
 
-## 6. Archiving decision and change control
+
+## 6. Independent trace, six-cycle, and normalization audit (2026-10-27)
+
+### 6.1 New executable evidence
+
+The following new audit artifacts are on this PR branch:
+
+- [Generic trace, six-cycle routing, and normalization script](../calculations/RC-001-six-cycle-trace-normalization-audit.py)
+- [Trace/normalization execution log](../validation/RC-001-six-cycle-trace-normalization-audit.txt)
+- [Symbolic six-cycle O(p^2) candidate-kernel ledger script](../calculations/RC-001-six-cycle-oq2-candidate-kernel-ledger.py)
+- [O(p^2) candidate-kernel execution log](../validation/RC-001-six-cycle-oq2-candidate-kernel-ledger.txt)
+
+The trace audit uses the model matrices
+
+\[
+Y_h=a\begin{pmatrix}c_Ls_R&c_Lc_R\\s_Ls_R&s_Lc_R\end{pmatrix},
+\qquad
+Y_s=b\begin{pmatrix}s_Lc_R&-s_Ls_R\\-c_Lc_R&c_Ls_R\end{pmatrix},
+\]
+
+and the declared real-Yukawa vertex convention \(V_{ij}=Y_{ij}P_R+Y_{ji}P_L\). It tests all six labeled cycles and all 16 internal-state paths at exact rational routed Minkowski momenta, comparing an explicit 4-by-4 Dirac trace with the projector decomposition. The test passes for 96/96 cycle-path cases.
+
+The second script additionally derives the generic trace identity symbolically for arbitrary \(u_i,v_i,m_i,k_i\), then constructs the model-specific \(H_\rho,C_{ij}^{(\rho)},S_\rho,M_\rho\), route-specific \(f_{ij,\alpha},g_\alpha,d_\alpha,\Delta_{0,\rho}\), and conditional \(B^{(1,2,3)}\) coefficients in the common external-invariant basis. It emits 576 rows: 6 labeled cycles × 16 internal paths × 6 invariants.
+
+### 6.2 Six labeled cycles and reverse-loop counting
+
+Fixing \(h_1\) as the representative start point leaves
+
+\[
+\frac{4!}{4}=6
+\]
+
+inequivalent cyclic orderings. The three reverse pairs are already included among these six orderings. The path-level audit checks 48 reverse path pairs, and the O(p²) candidate-kernel audit checks 1,152 exact coefficient comparisons after the path map, Feynman-parameter permutation, and simplex constraint.
+
+This supports the following bookkeeping rules:
+
+- count each of the six labeled cycles once;
+- do not sum all six cycles and then multiply by an extra factor of two for loop reversal;
+- retain the 16 path-dependent mass denominators until the parameter integrations or a proven symmetry reduction justify combining them.
+
+The reverse-kernel checks prove consistency of the generated candidate kernels under the declared mapping. They do not independently establish the physical global loop sign.
+
+### 6.3 \(\Gamma(4)\), simplex normalization, and the fermion-loop sign
+
+The four-propagator Feynman-parameter identity contributes
+
+\[
+\frac{\Gamma(4)}{\prod_{i=1}^4\Gamma(1)}=\Gamma(4)=6,
+\]
+
+while the standard four-parameter simplex has volume \(1/6\). Their product is one. Therefore the factor of six must be included exactly once: if the integral is written with the explicit Feynman-parameter prefactor, do not also normalize the simplex average by six a second time.
+
+The audit also checks the five convergent Euclidean scalar-integral factors used in the candidate-kernel reduction:
+
+\[
+I_0^{(4)}=\frac{1}{6\Delta^2},\quad
+I_1^{(4)}=\frac{1}{3\Delta},\quad
+I_2^{(5)}=\frac{1}{4\Delta},\quad
+I_1^{(5)}=\frac{1}{12\Delta^2},\quad
+I_0^{(5)}=\frac{1}{12\Delta^3},
+\]
+
+each in units of \(1/(16\pi^2)\).
+
+For the effective-action convention \(\Gamma_f=-i\,\mathrm{Tr}\ln(1+X)\), the fourth-order determinant-log coefficient is \(+i/4\). The closed-fermion-loop factor \(-1\) in diagrammatic Feynman rules is a separate bookkeeping item. The audit records both conventions but does not claim to have reconciled them with all four vertex factors, propagator factors, loop integration, and the final common Minkowski/Wick phase. The overall diagrammatic \(i\) and sign therefore remain open.
+
+### 6.4 What has and has not been established
+
+| Layer | Status | Evidence boundary |
+|---|---|---|
+| Generic chiral Dirac trace | **Verified symbolically** | Exact identity for arbitrary chiral coefficients, masses, and four independent Minkowski momenta |
+| All six cycles × 16 paths | **Verified at numerator/weight level** | 96 exact rational-point direct-trace comparisons; model-specific weights are assembled symbolically |
+| Routed \(O(p^2)\) candidate coefficients | **Generated and cross-checked** | 576 symbolic rows; reverse-cycle coefficient map passes 1,152/1,152 checks |
+| \(\Gamma(4)\), simplex volume, five Euclidean integral factors | **Verified algebraically** | Exact Gamma-function identities |
+| Determinant-log \(+i/4\) and diagrammatic \(-1\) | **Recorded separately** | Their complete Feynman-rule/Wick reconciliation is still open |
+| Path-dependent simplex integrals | **Not completed** | The generated CSV is a candidate-integrand ledger, not an integrated Wilson coefficient |
+| Complete EFT soft diagrams and counterterms | **Not completed** | See §7; the existing two-point audit is not a substitute for full four-scalar matching |
+| Final UV–EFT Wilson coefficient | **Not established** | No final coefficient or exclusion claim is promoted |
+
+The O(p²) CSV generated by the script has SHA-256 2a11b12173f983d2055f9ef6ba556e3d64bb042ef057a0f5145232065c14c181 and 990,656 bytes. It is not committed separately; the script regenerates it.
+
+## 7. EFT soft terms, counterterms, and UV–EFT subtraction: remaining closure gate
+
+The repository already contains a source-aligned two-point audit ([script](../calculations/RC-001-uv-eft-two-point-difference.py), [captured result](../validation/RC-001-uv-eft-two-point-difference.txt)) with 15 exact symbolic/algebraic checks. Those checks cover the specified \(h\)-\(s\) two-point kernel, its EFT bubble/contact pole bookkeeping, the local counterterm cancellation within that kernel, and the finite \(p^2=0\) hard-minus-soft expression.
+
+The separate soft-topology census ([script](../calculations/RC-001-eft-soft-topology-census.py), [research note](RC-001-eft-soft-topology-census.md), [captured result](../validation/RC-001-eft-soft-topology-census.txt)) explicitly says that the \(C_5C_5^\ast\) bubble has an existing soft integral but still needs an independent graph-level check. The census is a structural/power-counting audit, not a complete diagrammatic evaluation.
+
+Accordingly, the fourth requested stage is **not yet complete**. Before promoting any B1/B3 kernel to a physical Wilson coefficient, the remaining work is:
+
+1. derive the complete set of EFT soft graphs and same-order insertions for the selected four-scalar 1PI amplitude from the operator basis, rather than relying only on a topology classification;
+2. calculate each graph in the same IR prescription and renormalization scheme as the UV amplitude;
+3. include the required local counterterms and keep UV and IR poles labeled separately until subtraction;
+4. compare UV and EFT pole residues term by term, then compare the finite local \(O(p^2)\) coefficients in the same external-invariant and operator basis;
+5. complete the loop/symmetry-factor and common \(i\)-sign reconciliation, and independently verify the result with FeynArts/FeynCalc or an equivalent diagram-level calculation.
+
+Until those gates pass, the B1/B3 result remains a **conditional candidate-kernel result**, not the final physical matching coefficient. No manuscript result, formal response, or exclusion statement should be changed on the basis of this audit.
+
+## 8. Archiving decision and change control
 
 - Keep the v66 archive unchanged as historical evidence.
-- Keep the B1/B3 candidate scripts in the research repository only; **do not copy them into \`axial-vector-review-response\`** while their physical sign and matching status remain unresolved.
+- Keep the B1/B3 candidate scripts in the research repository only; **do not copy them into `axial-vector-review-response`** while their physical sign and matching status remain unresolved.
 - The existing [review-response PR #7](https://github.com/lm846802297-bit/axial-vector-review-response/pull/7) remains Draft and unmerged. Its evidence note is not a substitute for this calculation ledger.
 - Do not change the formal response letter, manuscript PDF, v5.6 task checkboxes, or final physical conclusions on the basis of this audit.
 - This ledger and its algebra check are a dated supplement on a separate research branch. They do not replace the frozen v153 baseline or assert complete model-level Wilson-vector closure.
