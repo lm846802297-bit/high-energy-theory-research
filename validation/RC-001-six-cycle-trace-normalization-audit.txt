@@ -3,7 +3,7 @@ Audit date: 2026-10-27
 Repository main baseline: d6143c2aa15191ac8521e062d90860ba86713f00
 PR #9 head before this audit extension: 88a982ef8fd6c8587b3ea0ec43b53bbee8d1347c
 Script: calculations/RC-001-six-cycle-trace-normalization-audit.py
-Script SHA-256 (executed source, byte-aligned with committed file): d0a8cc18af7feb1019e6de279e8be6270ebed884bb088eb88c5abe13c60f5cac
+Prior-run SHA-256 recorded in this log: d0a8cc18af7feb1019e6de279e8be6270ebed884bb088eb88c5abe13c60f5cac (not reproducible from current GitHub file bytes). Current fetched UTF-8/LF source SHA-256 independently recomputed: 639e3f8f4f312e7a3916c98dfe550b223f119ba4148266d1aa276876cb4bc32c.
 GitHub blob SHA: 7cf4de28a82e2a43cd259ad25d99eab44d8d6e32
 Runtime: Python 3.13.5; SymPy 1.14.0
 Command: python calculations/RC-001-six-cycle-trace-normalization-audit.py
@@ -29,3 +29,10 @@ Evidence and scope:
 - The separate closed-fermion-loop factor -1 is recorded as a Feynman-rule convention, not derived from the numerator trace. Its reconciliation with the determinant convention and full common i-factor remains open.
 - This audit is not a symbolic extraction of every O(p^2) coefficient for all 96 paths, does not perform full parameter integrations, and does not execute FeynArts/FeynCalc.
 - Complete four-scalar EFT soft-graph and counterterm closure, UV/IR pole cancellation for the full amplitude, and final UV-EFT Wilson coefficient remain unresolved.
+
+
+Provenance correction (2026-10-27 follow-up):
+- The current committed script blob is b456986649751b1976625f09694c763caaa82e89.
+- The previous run's recorded source SHA-256 does not match the UTF-8/LF bytes returned for that same current blob; CRLF normalization does not reproduce the recorded digest either.
+- Therefore the captured stdout/exit-code block above is retained as historical evidence but is not certified as byte-aligned to the current script content until the script is rerun from a checkout and its hash/output are recaptured together.
+- An independent in-session reproduction of the trace/decomposition algorithm on the same rational model setup passed 96/96 direct-trace comparisons and 48/48 reverse-path comparisons; a separate exact calculation passed the Gamma(4), simplex, five scalar-integral normalization, and fixed-sector hard/soft identities. That reproduction was not the byte-for-byte execution of the repository file and is not substituted for the required clean rerun.
