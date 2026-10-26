@@ -4,6 +4,7 @@ Repository main baseline: d6143c2aa15191ac8521e062d90860ba86713f00
 PR #9 head before this audit extension: c5d367a5169de8297848d4c80985764d8e74f489
 Script: calculations/RC-001-C5-soft-bubble-trace-audit.py
 Script SHA-256 (executed source, byte-aligned with committed file): ea8b9c3fc34d682f69bce3b230169c1814b53388ee599f265fd7b92a8a9693fc
+GitHub blob SHA: 1becb98f7942c100c79c2418a48f3d3b623492f3
 Runtime: Python 3.13.5; SymPy 1.14.0
 Command: python calculations/RC-001-C5-soft-bubble-trace-audit.py
 Exit code: 0
