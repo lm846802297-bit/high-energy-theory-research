@@ -346,6 +346,36 @@ and the declared real-Yukawa vertex convention \(V_{ij}=Y_{ij}P_R+Y_{ji}P_L\). I
 
 The second script additionally derives the generic trace identity symbolically for arbitrary \(u_i,v_i,m_i,k_i\), then constructs the model-specific \(H_\rho,C_{ij}^{(\rho)},S_\rho,M_\rho\), route-specific \(f_{ij,\alpha},g_\alpha,d_\alpha,\Delta_{0,\rho}\), and conditional \(B^{(1,2,3)}\) coefficients in the common external-invariant basis. It emits 576 rows: 6 labeled cycles × 16 internal paths × 6 invariants.
 
+### 6.1.1 Positive-light-mass versus signed-light-mass convention
+
+There are two displayed vertex-matrix conventions in the frozen v153 source, and they must not be mixed without the corresponding chiral rephasing.
+
+The Eq. (13) matrices used by the six-cycle candidate kernels are
+
+\[
+Y_h=a\begin{pmatrix}c_Ls_R&c_Lc_R\\s_Ls_R&s_Lc_R\end{pmatrix},
+\qquad
+Y_s=b\begin{pmatrix}s_Lc_R&-s_Ls_R\\-c_Lc_R&c_Ls_R\end{pmatrix}.
+\]
+
+The real-rotation, signed-light-mass convention in v153 §276 instead gives
+
+\[
+G_h=a\begin{pmatrix}-c_Ls_R&c_Lc_R\\-s_Ls_R&s_Lc_R\end{pmatrix},
+\qquad
+G_s=b\begin{pmatrix}-s_Lc_R&-s_Ls_R\\c_Lc_R&c_Ls_R\end{pmatrix}.
+\]
+
+They obey the exact matrix identities
+
+\[
+G_h=Y_hD,\qquad G_s=Y_sD,\qquad D=\operatorname{diag}(-1,1).
+\]
+
+This is the right-handed light-state rephasing associated with switching between the positive-light-mass convention and the signed-light-mass convention. The new trace/normalization script checks these identities symbolically.
+
+The six-cycle candidate ledger uses the Eq. (13) matrices and positive mass symbols in its propagator denominators. The §276 two-point formula keeps the signed light eigenmass in chirality-flip numerators. A comparison between these routes is valid only after the vertex rephasing and the sign of the mass-flip terms are transformed consistently. The matrix identity alone does not prove the full loop amplitudes equal; it removes an avoidable convention ambiguity from the next matching step.
+
 ### 6.2 Six labeled cycles and reverse-loop counting
 
 Fixing \(h_1\) as the representative start point leaves
