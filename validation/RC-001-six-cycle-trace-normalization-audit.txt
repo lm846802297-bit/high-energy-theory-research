@@ -3,7 +3,8 @@ Audit date: 2026-10-27
 Repository main baseline: d6143c2aa15191ac8521e062d90860ba86713f00
 PR #9 head before this audit extension: 88a982ef8fd6c8587b3ea0ec43b53bbee8d1347c
 Script: calculations/RC-001-six-cycle-trace-normalization-audit.py
-Script SHA-256 (executed Python copy): 884c7d3d19d82a825d223128ebe9dc00fc8c0e3dec21214e6b38f40e6206fd89
+Script SHA-256 (executed source, byte-aligned with committed file): dc6a4609781be650ccfe43325cd58332d029773ff8e773406b64ea4b78d16938
+GitHub blob SHA: c155fbe0b04fdab880581035a167f0b7b02d615d
 Runtime: Python 3.13.5; SymPy 1.14.0
 Command: python calculations/RC-001-six-cycle-trace-normalization-audit.py
 Exit code: 0
