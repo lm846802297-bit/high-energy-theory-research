@@ -3,7 +3,8 @@ Audit date: 2026-10-27
 Repository main baseline: d6143c2aa15191ac8521e062d90860ba86713f00
 PR #9 head before this audit extension: 7b0d8f034eeb3fdf5a50e1d5a62bfd8ce0f22c80
 Script: calculations/RC-001-fixed-sector-hard-soft-pole-ledger.py
-Script SHA-256 (executed source): e2da3ec064b0ce45c8aa735a8fe69b08e58ffab0677c75805b0cf60cf92f3424
+Script SHA-256 (executed source, byte-aligned with committed file): e2da3ec064b0ce45c8aa735a8fe69b08e58ffab0677c75805b0cf60cf92f3424
+GitHub blob SHA: a1fe07c7ea9b6de40e79f120677ef8a7b93269ad
 Runtime: Python 3.13.5; SymPy 1.14.0
 Command: python calculations/RC-001-fixed-sector-hard-soft-pole-ledger.py
 Exit code: 0
