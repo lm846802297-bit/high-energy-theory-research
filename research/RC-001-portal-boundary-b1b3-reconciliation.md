@@ -4,7 +4,7 @@
 >
 > **Audit date:** 2026-10-27
 >
-> **Status:** The portal matching relation and a working scalar-suppressed reference boundary are explicit. The tree-level C5 coefficient has a separate derivation and exact symbolic check. All 576 six-cycle candidate-kernel simplex integrals are evaluated conditionally on the current B1/B2/B3 definitions. The one-cycle source-aligned hard-region audit now independently reproduces the §248 polynomial and the vertex/propagator/closed-loop sign product for the fixed-sector box. The physical B1/B3 signs, full six-cycle multiplicities, complete UV–EFT subtraction, and model-level Wilson-vector closure remain **unresolved**.
+> **Status:** The portal matching relation and a working scalar-suppressed reference boundary are explicit. The tree-level C5 coefficient has a separate derivation and exact symbolic check. All 576 six-cycle candidate-kernel simplex integrals are evaluated conditionally on the current B1/B2/B3 definitions. The one-cycle source-aligned hard-region audit reproduces the §248 polynomial and the diagrammatic sign product for the fixed-sector box. The historical B1/B3 sign discrepancy is now resolved at the algebraic kernel level under the declared trace and denominator convention; the complete mixed-mass six-cycle amplitude, graph multiplicities, UV–EFT subtraction, and model-level Wilson-vector closure remain **unresolved**.
 
 ## 1. Provenance and version relationship
 
@@ -428,7 +428,7 @@ For the effective-action convention \(\Gamma_f=-i\,\mathrm{Tr}\ln(1+X)\), the fo
 |---|---|---|
 | Generic chiral Dirac trace | **Verified symbolically** | Exact identity for arbitrary chiral coefficients, masses, and four independent Minkowski momenta |
 | All six cycles × 16 paths | **Verified at numerator/weight level** | 96 exact rational-point direct-trace comparisons; model-specific weights are assembled symbolically |
-| Routed \(O(p^2)\) candidate coefficients | **Generated and cross-checked; one-path B2 calibrated** | 576 symbolic rows and 1,152/1,152 reverse-cycle checks; one source-aligned zero-mixing path reproduces the numerator and relative B2 sign/factor. B1/B3 vanish in this limit, so their signs remain unresolved |
+| Routed \(O(p^2)\) candidate coefficients | **Generated and cross-checked; B2 and B1/B3 signs calibrated** | 576 symbolic rows and 1,152/1,152 reverse-cycle checks; one source-aligned path checks B2, and an 18-check Wick audit derives B1=H(-2g/3+2d) and B3=+2Md/3 for all six routed cycles. The full physical coefficient remains open |
 | \(\Gamma(4)\), simplex volume, five Euclidean integral factors | **Verified algebraically** | Exact Gamma-function identities |
 | Determinant-log \(+i/4\) and diagrammatic \(-1\) | **Recorded separately** | Their complete Feynman-rule/Wick reconciliation is still open |
 | Path-dependent simplex integrals | **Conditionally completed** | All 576 candidate B-kernel rows have analytic simplex integrals and 288 numerical reverse-cycle checks; this is not a physical Wilson coefficient because the global sign/factors and UV–EFT subtraction remain open |
@@ -618,3 +618,36 @@ where \(\Delta_{\mathrm{IR}}=1/\epsilon_{\mathrm{IR}}\) in the stated scale conv
 The script passes **14 exact symbolic checks**, including the \(O(p^2)\) denominator expansion, \(d\)-dimensional tensor reduction, master-integral gamma functions, epsilon expansion, diagrammatic prefactor, and both source coefficients.
 
 **Scope boundary:** this closes the hard-region integral and common diagrammatic prefactor for the one source-aligned box in the unbroken, on-shell massless-external-leg limit. It does not close the complete mixed-mass six-cycle sum, flavor-resolved \(\mu/\tau\) \(s/u\) routing, determinant-log-to-diagram multiplicity, or the full EFT soft/counterterm subtraction. Since \(B_1=B_3=0\) in the calibration path, the historical \(B_1/B_3\) sign discrepancy remains unresolved.
+
+
+### 9.5 Algebraic resolution of the B1/B3 Wick-sign discrepancy
+
+The new [RC-001-B1-B3-Wick-sign-check.py](../calculations/RC-001-B1-B3-Wick-sign-check.py) and [captured validation record](../validation/RC-001-B1-B3-Wick-sign-check.txt) pass **18 exact symbolic checks**. In addition to verifying the Euclidean loop-integral factors, the script checks that the ledger's \(g_\alpha\) expression is the angular-averaged \(K_M^2\) coefficient of the four-slash trace polynomial \(G\) for all six labeled cycles.
+
+With the declared denominator shift
+\[
+K_M^2-\Delta_0+d
+\quad\longrightarrow\quad
+-\big(K_E^2+\Delta_0-d\big),
+\]
+the denominator expansion contributes \(+4d\). Wick rotation gives \(K_M^2\to-K_E^2\) but \(K_M^4\to K_E^4\). The \(2HG\) numerator therefore contributes
+\[
+-2H g_\alpha I_1^{(4)}+8H d_\alpha I_2^{(5)}
+=\frac{1}{16\pi^2\Delta_0}
+H\left(-\frac{2}{3}g_\alpha+2d_\alpha\right),
+\]
+using \(I_1^{(4)}=(16\pi^2\,3\Delta_0)^{-1}\) and \(I_2^{(5)}=(16\pi^2\,4\Delta_0)^{-1}\). The constant \(2M\) numerator contributes
+\[
+2M\,(4d_\alpha)I_0^{(5)}
+=\frac{1}{16\pi^2\Delta_0^3}\frac{2}{3}M d_\alpha,
+\]
+using \(I_0^{(5)}=(16\pi^2\,12\Delta_0^3)^{-1}\). Hence the Wick-consistent kernel signs are
+\[
+\boxed{B_1=H\left(-\frac{2}{3}g_\alpha+2d_\alpha\right),\qquad
+B_3=+\frac{2}{3}M d_\alpha,}
+\]
+while the independently calibrated \(B_2=(F_\alpha-2S d_\alpha)/3\) remains unchanged.
+
+These are exactly opposite to the historical formulas \(B_1=H(2g_\alpha/3-2d_\alpha)\) and \(B_3=-2M d_\alpha/3\). Under the current trace decomposition and \(d=\sum_i x_i r_i^2-R^2\) convention, the historical signs are incompatible with the Wick rotation and loop-integral factors.
+
+**Interpretation boundary:** this resolves the algebraic B1/B3 sign choice in the candidate kernel. It does not by itself establish the final physical Wilson coefficient: the determinant-log-to-diagram multiplicity, complete mixed-mass path sum, flavor-resolved \(s/u\) routing, and same-scheme UV–EFT subtraction remain open.
