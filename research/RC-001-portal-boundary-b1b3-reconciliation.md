@@ -4,7 +4,7 @@
 >
 > **Audit date:** 2026-10-27
 >
-> **Status:** The portal matching relation and a working scalar-suppressed reference boundary are explicit. The tree-level C5 coefficient has a separate derivation and exact symbolic check. All 576 six-cycle candidate-kernel simplex integrals are evaluated conditionally on the current B1/B2/B3 definitions. The one-cycle source-aligned hard-region audit reproduces the §248 polynomial and the diagrammatic sign product for the fixed-sector box. The historical B1/B3 sign discrepancy is now resolved at the algebraic kernel level under the declared trace and denominator convention; the complete mixed-mass six-cycle amplitude, graph multiplicities, UV–EFT subtraction, and model-level Wilson-vector closure remain **unresolved**.
+> **Status:** The portal matching relation and a working scalar-suppressed reference boundary are explicit. The tree-level C5 coefficient has a separate derivation and exact symbolic check. All 576 real-scalar candidate-kernel integrals are evaluated conditionally, and their algebraic B1/B3 Wick signs are resolved under the declared trace convention. A separate complex-external projection now selects one oriented cycle per flavor in the unbroken zero-mixing limit: muon s channel and tau u channel. The source-aligned one-cycle hard-region audit reproduces the §248 polynomial and diagrammatic sign product. The full allowed-path sum beyond this limit, complete EFT soft/counterterm subtraction, and model-level Wilson-vector closure remain **unresolved**.
 
 ## 1. Provenance and version relationship
 
@@ -428,10 +428,11 @@ For the effective-action convention \(\Gamma_f=-i\,\mathrm{Tr}\ln(1+X)\), the fo
 |---|---|---|
 | Generic chiral Dirac trace | **Verified symbolically** | Exact identity for arbitrary chiral coefficients, masses, and four independent Minkowski momenta |
 | All six cycles × 16 paths | **Verified at numerator/weight level** | 96 exact rational-point direct-trace comparisons; model-specific weights are assembled symbolically |
-| Routed \(O(p^2)\) candidate coefficients | **Generated and cross-checked; B2 and B1/B3 signs calibrated** | 576 symbolic rows and 1,152/1,152 reverse-cycle checks; one source-aligned path checks B2, and an 18-check Wick audit derives B1=H(-2g/3+2d) and B3=+2Md/3 for all six routed cycles. The full physical coefficient remains open |
+| Routed \(O(p^2)\) real-scalar candidate coefficients | **Generated and cross-checked; kernel signs calibrated** | 576 symbolic rows and 1,152/1,152 reverse-cycle checks; B2 is source-calibrated and B1/B3 signs follow the declared Wick convention. These rows are not the fixed complex external amplitude without field-orientation projection |
 | \(\Gamma(4)\), simplex volume, five Euclidean integral factors | **Verified algebraically** | Exact Gamma-function identities |
 | Determinant-log \(+i/4\) and diagrammatic \(-1\) | **Partially reconciled** | The fixed-sector one-cycle box reproduces §248 after explicit vertex/propagator/closed-loop factors; determinant-log-to-diagram multiplicity and full six-cycle phase/factors remain open |
 | Path-dependent simplex integrals | **Conditionally completed** | All 576 candidate B-kernel rows have analytic simplex integrals and 288 numerical reverse-cycle checks; this is not a physical Wilson coefficient because the global sign/factors and UV–EFT subtraction remain open |
+| Complex external-field projection | **Verified in the unbroken zero-mixing limit** | 14 exact checks select \(H,S,S^\dagger,H^\dagger\) in the muon \(s\) channel and \(H,S^\dagger,S,H^\dagger\) in the tau \(u\) channel; the fixed-chirality trace is \(2m_1m_3 k_2\!\cdot k_4\). Finite-mixing allowed-path sums remain open |
 | EFT soft diagrams and counterterms | **Partially closed by sector** | The fixed-sector C5 C5* scalar bubble has a separate 10-check trace/sign/pole audit; SFT-02/03 are classified as reducible/scaleless in the unbroken massless scheme. The full common-basis counterterm ledger, current/source sectors, and independent diagram-package validation remain open |
 | Final UV–EFT Wilson coefficient | **Not established** | No final coefficient or exclusion claim is promoted |
 
@@ -839,3 +840,45 @@ using exact rational parametrizations of (U_L,U_R) for which (U_L^TU_L=U_R^TU_R=
 **What this establishes:** if the mass-basis calculation includes every chiral propagator block, every internal mass eigenstate, and each labeled external cycle exactly once, the ordered-loop flavor trace is invariant under the change of basis. The mass-basis sum and the interaction-basis trace are not independent physical amplitudes; they are two representations of the same amplitude.
 
 **What remains open:** this covariance identity does not validate the candidate (B_1/B_2/B_3) momentum kernel by itself, because the kernel also depends on the explicit numerator decomposition and denominator routing. Nor does it replace the (d=4-2epsilon) hard/soft expansion: the finite-mass (d=4) simplex integrals cannot be naively taken to the massless-light-state limit when endpoint singularities are present. The source-aligned §248 calculation supplies the dimensionally regulated hard/soft subtraction for the complex channels; the remaining task is to establish the routed, common-factor mapping from the generated six-cycle candidate kernels to the projected local polynomial in §9.9.
+
+
+### 9.6 Complex external-state projection and flavor-resolved s/u routing
+
+The new [RC-001-complex-external-cycle-projection.py](../calculations/RC-001-complex-external-cycle-projection.py) and [validation record](../validation/RC-001-complex-external-cycle-projection.txt) pass **14 exact checks**. This resolves a distinction that the real-scalar six-cycle ledger alone cannot resolve: a real field \(s\) contains both \(S\) and \(S^\dagger\) orientations, whereas the EFT matching amplitude has fixed complex external legs \(H,S,H^\dagger,S^\dagger\).
+
+For the unbroken, zero-mixing matching benchmark, the chiral complex vertices are
+\[
+V_H=Y_hP_R,\qquad V_{H^\dagger}=Y_h^\dagger P_L.
+\]
+For the muon assignment \(S_\mu=S\),
+\[
+V_S^{(\mu)}=Y_sP_R,\qquad V_{S^\dagger}^{(\mu)}=Y_s^\dagger P_L.
+\]
+For the tau assignment \(S_\tau=S^\dagger\), the \(S\) and \(S^\dagger\) assignments are interchanged. Exhausting all six labeled cycle orderings and 16 internal-state paths for each flavor gives exactly one nonzero cycle/path row per flavor in this limit:
+\[
+\begin{array}{c|c|c|c}
+\text{flavor}&\text{oriented cycle}&\text{path}&\text{channel}\\
+\mu&H\to S\to S^\dagger\to H^\dagger&(0,1,0,1)&s\\
+\tau&H\to S^\dagger\to S\to H^\dagger&(0,1,0,1)&u
+\end{array}
+\]
+Both surviving traces are
+\[
+\operatorname{tr}[\cdots]
+=2y^2\lambda^2M_E^2\,k_2\cdot k_4.
+\]
+With \(q_s=-(p_H+p_S)\) and \(q_u=-(p_H+p_{S^\dagger})\), the light denominators are \(k^2(k-q_{s,u})^2\); the heavy denominators are respectively \([(k+S)^2-M_E^2][(k-S^\dagger)^2-M_E^2]\) and \([(k+S^\dagger)^2-M_E^2][(k-S)^2-M_E^2]\). The one-cycle \(s\)-channel hard-region calculation in §9.4 is therefore the source-aligned muon box; exchanging \(S\leftrightarrow S^\dagger\) gives the tau \(u\)-channel analogue.
+
+The generic fixed-chirality trace is independently verified:
+\[
+\operatorname{tr}\!\left[
+P_R(\slashed k_1+m_1)P_R(\slashed k_2+m_2)
+P_L(\slashed k_3+m_3)P_L(\slashed k_4+m_4)
+\right]
+=2m_1m_3\,k_2\cdot k_4.
+\]
+Thus the fixed complex amplitude contains the two required mass numerators and two slash numerators only. The four-slash \(HG\) and constant four-mass \(M\) sectors that appear in the real-scalar trace decomposition vanish for this specific complex chirality sequence. Consequently, the B1/B3 sign audit remains valid for the real-scalar candidate kernels, but B1/B3 do not enter the fixed complex four-scalar matching amplitude in this unbroken benchmark.
+
+The real-scalar projection has four nonzero cycle/path rows in the same zero-mixing limit: two reverse-order rows for the \(s\) pairing and two for the \(u\) pairing. The complex-field projection selects one oriented row for each flavor. Therefore, the 576 real-scalar candidate integrals must not be summed wholesale as a single physical complex amplitude.
+
+**Next matching step:** retain the source-aligned complex vertices and the flavor-specific cycle, then combine the already checked hard-region polynomial with the corresponding \(C_5C_5^\ast\) EFT soft bubble, contact term, counterterm, and common-basis/EOM projection. At finite mixing, sum all allowed internal mass-eigenstate paths within the fixed complex orientation; do not reintroduce the forbidden real-scalar cycle orientations.
