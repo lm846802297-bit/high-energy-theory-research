@@ -335,6 +335,8 @@ The following new audit artifacts are on this PR branch:
 - [O(p^2) candidate-kernel execution log](../validation/RC-001-six-cycle-oq2-candidate-kernel-ledger.txt)
 - [Fixed-sector hard/soft pole ledger script](../calculations/RC-001-fixed-sector-hard-soft-pole-ledger.py)
 - [Fixed-sector hard/soft pole ledger output](../validation/RC-001-fixed-sector-hard-soft-pole-ledger.txt)
+- [C5 C5* soft-bubble trace audit script](../calculations/RC-001-C5-soft-bubble-trace-audit.py)
+- [C5 C5* soft-bubble trace audit output](../validation/RC-001-C5-soft-bubble-trace-audit.txt)
 
 The trace audit uses the model matrices
 
@@ -442,6 +444,8 @@ The repository already contains a source-aligned two-point audit ([script](../ca
 The separate soft-topology census ([script](../calculations/RC-001-eft-soft-topology-census.py), [research note](RC-001-eft-soft-topology-census.md), [captured result](../validation/RC-001-eft-soft-topology-census.txt)) explicitly says that the \(C_5C_5^\ast\) bubble has an existing soft integral but still needs an independent graph-level check. The census is a structural/power-counting audit, not a complete diagrammatic evaluation.
 
 The new [fixed-sector hard/soft pole ledger](../calculations/RC-001-fixed-sector-hard-soft-pole-ledger.py) passes 12 exact symbolic checks. It keeps the hard-region IR pole and bare EFT soft-loop UV pole separately labeled, verifies their opposite residues in the method-of-regions sum, checks the local counterterm against the soft UV pole, and records the finite hard polynomial \((L-2)s+t/6\) in the source normalization. It also repeats the existing two-point bubble/contact and derivative-counterterm pole identities. This is a stronger fixed-sector bookkeeping check, but it still does not evaluate the full same-order four-scalar EFT soft-graph set or integrate the six-cycle kernels.
+
+The new [C5 C5* soft-bubble trace audit](../calculations/RC-001-C5-soft-bubble-trace-audit.py) passes 10 exact symbolic checks. It independently computes the massless chiral trace, reduces the numerator to the scalar B0 bubble using scaleless-tadpole vanishing, multiplies the two vertices, two propagators, and closed-loop sign, and checks the soft UV counterterm and §248 hard/soft pole cancellation. This validates the algebra of the specified SFT-01 bubble under the recorded B0 convention; it does not independently generate the full EFT graph set or integrate the six-cycle UV candidate kernels.
 
 Accordingly, the fourth requested stage is **not yet complete**. Before promoting any B1/B3 kernel to a physical Wilson coefficient, the remaining work is:
 
