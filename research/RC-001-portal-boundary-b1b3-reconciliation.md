@@ -300,17 +300,12 @@ The working dimension-six result should continue to be quoted only with the scop
 
 Required closure steps:
 
-1. Choose one labeled external cycle and derive its complete mass-basis Dirac trace from the actual \(G_h,G_s\) vertices, including conjugation and the parity-odd trace terms.
-2. Independently derive the full numerator-to-kernel map in one Minkowski convention, including the denominator shift, all F_alpha, H, S, M, d_alpha terms, and the parity-odd trace contribution; the current script's kernel is still conditional on its stated decomposition.
-3. The six labeled cycles and 16 internal paths have been generated and their conditional simplex integrals evaluated. Still independently determine the physical fermion-loop sign, common Minkowski/Wick phase, and graph/symmetry factors; the numerical reverse-cycle checks establish conditional kernel consistency, not the complete physical amplitude.
-4. Map the resulting sum to the same complex external states and momentum basis used in §248/§252, including the off-shell Sigma=sum_i p_i^2 terms and EOM-generated potential/source companions.
-5. Subtract the complete same-order EFT soft amplitudes and counterterms in the same IR and renormalization prescription, then compare UV and IR poles and finite local terms separately.
-
-2. Substitute \(k_i=K+t_i\), retain all terms through second order in external momenta, and derive \(F_\alpha,H,S,M\) and \(d_\alpha\) in one Minkowski convention without taking those coefficients as inputs.
-3. Repeat for all six labeled external cycles, retain each path-dependent \(\Delta_{0,\rho}\), and independently determine the fermion-loop sign, reversed-cycle relation, and graph/symmetry factors.
-4. Map the resulting sum to the same complex external states and momentum basis used in §248/§252, including the off-shell \(\Sigma=\sum_i p_i^2\) terms and EOM-generated potential/source companions.
-5. Subtract the complete same-order EFT soft amplitudes and counterterms in the same IR and renormalization prescription, then compare poles and finite local terms separately.
-6. Only after the analytic mapping passes should the corresponding FeynArts/FeynCalc calculation be executed and archived. A successful algebra-only script is not a substitute for this diagram-level check.
+1. Independently derive the full mass-basis Dirac trace from the actual \(G_h,G_s\) vertices, including conjugation and the parity-odd trace contribution; the existing generic trace identity and path-weight construction do not by themselves prove the complete physical numerator.
+2. Derive the numerator-to-kernel map in one Minkowski convention, including the denominator shift and all \(F_\alpha,H,S,M,d_\alpha\) terms, rather than taking the B-kernel formula as a physical input.
+3. The six labeled cycles and 16 internal paths have been generated, and their conditional simplex integrals are now evaluated. Still close the physical fermion-loop sign, common Minkowski/Wick phase, and graph/symmetry factors; numerical reverse-cycle agreement is a consistency check, not the physical-amplitude sign determination.
+4. Map the complete sum to the same complex external states and momentum basis used in §248/§252, including the off-shell \(\Sigma=\sum_i p_i^2\) terms and EOM-generated potential/source companions.
+5. Enumerate and evaluate the complete same-order EFT soft amplitudes, contact terms, and counterterms in the same IR and renormalization prescription; compare UV and IR poles and finite local terms separately.
+6. Only after the analytic map and factor ledger close should the corresponding FeynArts/FeynCalc calculation be executed and archived. An algebra-only script is not a substitute for diagram-level validation.
 
 ## 5. Reproducible algebra check
 
