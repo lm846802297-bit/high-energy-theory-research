@@ -4,7 +4,7 @@
 >
 > **Audit date:** 2026-10-27
 >
-> **Status:** The portal matching relation and a working scalar-suppressed reference boundary are explicit. The tree-level C5 coefficient has a separate derivation and exact symbolic check. All 576 six-cycle candidate-kernel simplex integrals are evaluated conditionally on the current B1/B2/B3 definitions. A new one-cycle zero-mixing calibration independently reproduces the fixed-sector numerator and the relative B2 sign/factor. The physical B1/B3 sign, common loop factors, complete UV–EFT subtraction, and model-level Wilson-vector closure remain **unresolved**.
+> **Status:** The portal matching relation and a working scalar-suppressed reference boundary are explicit. The tree-level C5 coefficient has a separate derivation and exact symbolic check. All 576 six-cycle candidate-kernel simplex integrals are evaluated conditionally on the current B1/B2/B3 definitions. The one-cycle source-aligned hard-region audit now independently reproduces the §248 polynomial and the vertex/propagator/closed-loop sign product for the fixed-sector box. The physical B1/B3 signs, full six-cycle multiplicities, complete UV–EFT subtraction, and model-level Wilson-vector closure remain **unresolved**.
 
 ## 1. Provenance and version relationship
 
@@ -591,3 +591,30 @@ i.e. \(B_2=(F-2Sd)/3\) with \(F=Cf\) and \(S=C\). The \(\Gamma(4)=6\) Feynman-pa
 The companion validation record [RC-001-one-cycle-fixed-sector-calibration.txt](../validation/RC-001-one-cycle-fixed-sector-calibration.txt) records **22 exact symbolic checks**, including the full 16-path limit, numerator, denominator routing, denominator-shift sign, B2 factor, and simplex normalization.
 
 **Boundary:** this path has \(H=0\) and the four-mass term \(M=0\), so \(B_1=B_3=0\). It therefore validates neither historical B1/B3 sign choice. It also omits the global diagrammatic \(i\), closed-fermion-loop sign, and physical graph multiplicity. The hard-region coefficient and EFT soft subtraction are referenced from the source-aligned §248 ledger but are not independently recalculated by this script.
+
+
+### 9.4 One-cycle hard-region integral and overall diagrammatic sign
+
+The new script [RC-001-one-cycle-hard-region-match.py](../calculations/RC-001-one-cycle-hard-region-match.py) and validation record [RC-001-one-cycle-hard-region-match.txt](../validation/RC-001-one-cycle-hard-region-match.txt) independently expand the source-aligned fixed-sector box through \(O(p^2)\) in \(d=4-2\epsilon\). They start from the numerator and denominator established in §9.3, expand both light and heavy propagators in the hard region, reduce tensor integrals in \(d\) dimensions, and evaluate the three scalar masters \(J_{22},J_{13},J_{04}\) with the declared \(\overline{\mathrm{MS}}\) scale factor.
+
+Before the closed-fermion-loop sign, the hard coefficients are
+\[
+\frac{i|y\lambda|^2}{16\pi^2M_E^2}
+\left[
+\left(\frac1\epsilon+2-L\right)s-\frac{t}{6}
+\right],
+\qquad L=\ln\frac{M_E^2}{\mu_R^2}.
+\]
+The four Yukawa vertices contribute \((-i)^4=+1\), the four fermion propagators contribute \(i^4=+1\), and the closed fermion loop contributes \(-1\). Including this factor gives
+\[
+\boxed{
+i\Gamma_{\mathrm{hard}}^{(2)}
+=\frac{i|C_5|^2}{16\pi^2}
+\left[(-\Delta_{\mathrm{IR}}+L-2)s+\frac{t}{6}\right],
+}
+\]
+where \(\Delta_{\mathrm{IR}}=1/\epsilon_{\mathrm{IR}}\) in the stated scale convention after the standard \(\overline{\mathrm{MS}}\) constants are absorbed. This reproduces the fixed-sector hard polynomial recorded in §248, including the relative \(s\)- and \(t\)-channel signs and the finite \(t/6\) coefficient.
+
+The script passes **14 exact symbolic checks**, including the \(O(p^2)\) denominator expansion, \(d\)-dimensional tensor reduction, master-integral gamma functions, epsilon expansion, diagrammatic prefactor, and both source coefficients.
+
+**Scope boundary:** this closes the hard-region integral and common diagrammatic prefactor for the one source-aligned box in the unbroken, on-shell massless-external-leg limit. It does not close the complete mixed-mass six-cycle sum, flavor-resolved \(\mu/\tau\) \(s/u\) routing, determinant-log-to-diagram multiplicity, or the full EFT soft/counterterm subtraction. Since \(B_1=B_3=0\) in the calibration path, the historical \(B_1/B_3\) sign discrepancy remains unresolved.
