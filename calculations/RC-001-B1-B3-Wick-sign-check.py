@@ -125,4 +125,4 @@ check("Gamma(4) times the simplex volume is one",
 print(f"RESULT: {checks} exact Wick/kernel-sign checks passed.")
 print("RESULTING KERNELS: B1=H(-2 g/3+2 d), B2=(F-2 S d)/3, B3=+2 M d/3.")
 print("SCOPE: resolves the algebraic B1/B3 Wick-sign choice under the declared trace and d conventions.")
-print("OPEN: full mixed-mass six-cycle sum, physical graph multiplicity, determinant-log mapping, and complete EFT soft/counterterm subtraction.")
+print("OPEN: full mixed-mass six-cycle sum, physical graph multiplicity, determinant-log mapping, and complete UV-EFT subtraction.")
