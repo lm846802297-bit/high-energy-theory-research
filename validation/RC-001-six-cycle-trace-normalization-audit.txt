@@ -1,0 +1,28 @@
+RC-001 six-cycle raw-trace and normalization audit
+Audit date: 2026-10-27
+Repository main baseline: d6143c2aa15191ac8521e062d90860ba86713f00
+PR #9 head before this audit extension: 88a982ef8fd6c8587b3ea0ec43b53bbee8d1347c
+Script: calculations/RC-001-six-cycle-trace-normalization-audit.py
+Script SHA-256 (executed Python copy): 884c7d3d19d82a825d223128ebe9dc00fc8c0e3dec21214e6b38f40e6206fd89
+Runtime: Python 3.13.5; SymPy 1.14.0
+Command: python calculations/RC-001-six-cycle-trace-normalization-audit.py
+Exit code: 0
+
+STDOUT:
+PASS: 6 inequivalent labeled cycles = 4!/4; each cycle is represented once.
+PASS: explicit Dirac trace/decomposition for 96 cases = 6 labeled cycles x 16 paths.
+PASS: reverse-cycle path/weight/mass mapping for 48 path pairs across 3 reverse pairs.
+PASS: Gamma(4)=6; four-parameter simplex volume=1/6; their product=1.
+PASS: four-propagator Feynman parameter prefactor Gamma(4)/prod Gamma(1)=6.
+PASS: all five stated Euclidean scalar-integral factors match the Gamma-function formula.
+PASS: determinant-log expansion coefficient at fourth order is +i/4 for Gamma_f=-i Tr ln(1+X).
+CONVENTION: the closed-fermion-loop Feynman-rule sign is -1 and must be reconciled with the determinant expansion; this script does not prove the full diagram's common i/sign.
+LIMIT: exact rational-point trace audit, not a symbolic O(p^2) coefficient proof; no full simplex integration, FeynArts/FeynCalc run, or complete EFT soft/counterterm subtraction.
+
+Evidence and scope:
+- The 96 exact checks use explicit 4x4 Dirac matrices, the actual Y_h/Y_s matrices and vertex convention V_ij=Y_ij P_R+Y_ji P_L for real Yukawas, the frozen route r=(0,-q2,-q2-q3,q1), exact rational external momenta and Feynman parameters, and all 16 internal paths for each of six labeled cycles.
+- The reverse-cycle checks verify 48 path pairs across three reverse-cycle pairs at the path-weight/mass/Delta0 layer.
+- Gamma(4), the simplex volume, the five Euclidean integral normalization factors, and the determinant-log fourth-order coefficient are exact symbolic checks.
+- The separate closed-fermion-loop factor -1 is recorded as a Feynman-rule convention, not derived from the numerator trace. Its reconciliation with the determinant convention and full common i-factor remains open.
+- This audit is not a symbolic extraction of every O(p^2) coefficient for all 96 paths, does not perform full parameter integrations, and does not execute FeynArts/FeynCalc.
+- Complete four-scalar EFT soft-graph and counterterm closure, UV/IR pole cancellation for the full amplitude, and final UV-EFT Wilson coefficient remain unresolved.
