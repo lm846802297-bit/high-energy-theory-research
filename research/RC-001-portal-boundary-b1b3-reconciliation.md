@@ -818,3 +818,24 @@ L_ell=lnrac{M_{E_ell}^2}{mu_R^2}.
 This is a new, explicit external-state projection of the **source-aligned complex local amplitudes**, not the result of integrating the mass-basis six-cycle candidate kernels. It fixes the momentum-crossing map that the next comparison must use and prevents the mistake of identifying the (h_1h_2s_1s_2) amplitude with one complex channel or multiplying one channel by an unjustified factor of four.
 
 **Remaining matching gate:** substitute the on-shell conditions into the 576-row candidate ledger, map its invariant basis to ((s_R,t_R,u_R)), and then compare the mass-basis cycle sum to this projected local polynomial only after the dimensionally regulated mixed-mass hard/soft expansion and common graph factors are fixed. The existing finite-mass simplex integral is not by itself that comparison.
+
+
+### 9.10 Chiral-flavor trace covariance: what it closes and what it does not
+
+The new [chiral-flavor trace basis-invariance script](../calculations/RC-001-chiral-flavor-trace-basis-invariance.py) passes **22 exact symbolic checks**; the captured output is in [validation/RC-001-chiral-flavor-trace-basis-invariance.txt](../validation/RC-001-chiral-flavor-trace-basis-invariance.txt).
+
+For each of the 16 chiral-flow patterns (a_iin{L,R}), the script verifies
+[
+operatorname{tr}!left[
+(U_{a_1}^T X_1 U_{a_2})
+(U_{a_2}^T X_2 U_{a_3})
+(U_{a_3}^T X_3 U_{a_4})
+(U_{a_4}^T X_4 U_{a_1})
+ight]
+=operatorname{tr}(X_1X_2X_3X_4),
+]
+using exact rational parametrizations of (U_L,U_R) for which (U_L^TU_L=U_R^TU_R=mathbf 1) holds identically. It also reproduces the signed-light-mass §276 Yukawa matrices and the right-handed rephasing to the positive-light-mass Eq. (13) matrices.
+
+**What this establishes:** if the mass-basis calculation includes every chiral propagator block, every internal mass eigenstate, and each labeled external cycle exactly once, the ordered-loop flavor trace is invariant under the change of basis. The mass-basis sum and the interaction-basis trace are not independent physical amplitudes; they are two representations of the same amplitude.
+
+**What remains open:** this covariance identity does not validate the candidate (B_1/B_2/B_3) momentum kernel by itself, because the kernel also depends on the explicit numerator decomposition and denominator routing. Nor does it replace the (d=4-2epsilon) hard/soft expansion: the finite-mass (d=4) simplex integrals cannot be naively taken to the massless-light-state limit when endpoint singularities are present. The source-aligned §248 calculation supplies the dimensionally regulated hard/soft subtraction for the complex channels; the remaining task is to establish the routed, common-factor mapping from the generated six-cycle candidate kernels to the projected local polynomial in §9.9.
