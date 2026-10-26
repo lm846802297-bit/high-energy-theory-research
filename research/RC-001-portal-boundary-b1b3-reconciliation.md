@@ -882,3 +882,31 @@ Thus the fixed complex amplitude contains the two required mass numerators and t
 The real-scalar projection has four nonzero cycle/path rows in the same zero-mixing limit: two reverse-order rows for the \(s\) pairing and two for the \(u\) pairing. The complex-field projection selects one oriented row for each flavor. Therefore, the 576 real-scalar candidate integrals must not be summed wholesale as a single physical complex amplitude.
 
 **Next matching step:** retain the source-aligned complex vertices and the flavor-specific cycle, then combine the already checked hard-region polynomial with the corresponding \(C_5C_5^\ast\) EFT soft bubble, contact term, counterterm, and common-basis/EOM projection. At finite mixing, sum all allowed internal mass-eigenstate paths within the fixed complex orientation; do not reintroduce the forbidden real-scalar cycle orientations.
+
+
+### 9.12 Interaction-basis orientation audit and finite-mixing complex B2 path sum — 2026-10-27
+
+Two new calculation records extend the fixed-complex-orientation comparison.
+
+**Interaction-basis flavor flow:** [RC-001-interaction-basis-complex-cycle-flow.py](../calculations/RC-001-interaction-basis-complex-cycle-flow.py) and its [validation record](../validation/RC-001-interaction-basis-complex-cycle-flow.txt) enumerate the four charge-neutral assignments, both flavors, and all six labeled cycles (48 cases). The interaction-basis matrices give 32 cases with no allowed flavor path, 16 cases with a unique path, and within those 16 cases eight identically zero chiral traces and eight nonzero traces. The eight nonzero contributions map to the source-aligned \(\mu\) \(s\)-channel and \(\tau\) \(u\)-channel as dictated by the external assignment. The real-field coupling normalization \(a^2b^2=y^2\lambda^2/4\) is already the \(1/4\) external-field decomposition weight; do not apply another factor of \(1/4\).
+
+**Finite-mixing complex path sum:** [RC-001-fixed-complex-finite-mixing-B2-ledger.py](../calculations/RC-001-fixed-complex-finite-mixing-B2-ledger.py) constructs the fixed complex orientations
+\[
+\mu:\ H,S,S^\dagger,H^\dagger,\qquad
+\tau:\ H,S^\dagger,S,H^\dagger,
+\]
+and retains all 16 internal mass-eigenstate paths for each flavor. Because the fixed chiral sequence is \(P_R,P_R,P_L,P_L\), its trace is
+\[
+\operatorname{tr}\!\left[
+P_R(\slashed k_1+m_a)P_R(\slashed k_2+m_b)
+P_L(\slashed k_3+m_c)P_L(\slashed k_4+m_d)
+\right]
+=2m_a m_c\,k_2\!\cdot k_4,
+\]
+so only the \(C_{13}\) mass-numerator structure and the \(B_2\)-type \(O(p^2)\) kernel occur. The analytic \(d=4\) simplex calculation produces 192 path/invariant rows (2 flavors × 16 paths × 6 invariants) and includes \(\Gamma(4)=6\) once.
+
+In the zero-mixing limit, each fixed complex orientation has only path \((0,1,0,1)\) with coupling product \(y^2\lambda^2\). At the exact rational benchmark \(c_L=c_R=12/13\), \(s_L=s_R=5/13\), \(m_1=1\), \(m_2=144/25\), \(y=2/7\), \(\lambda=3/11\), the triangular \(M_{11}=0\) condition holds. The integrated \(\mu\) and \(\tau\) sums are related by \(S\leftrightarrow S^\dagger\), i.e. \(Q_2\leftrightarrow Q_3\) and \(Q_4\leftrightarrow Q_5\), with \(Q_1,Q_6\) unchanged; the six coefficient comparisons agree numerically at 35-digit precision.
+
+The notebook-generated 192-row CSV is 63,259 bytes with SHA-256 3cd876b6938db7d1d86da179279d94be1554ec271c1a7de16774887be0f9dba7; it is not committed. The validation record explicitly distinguishes this expression-level notebook run from a standalone run of the checked-in script.
+
+**Boundary:** the finite-mixing result is still a finite-mass \(d=4\) kernel sum, not the hard Wilson coefficient. The \(m_1\to0\) limit cannot be taken naively because the endpoint/IR-sensitive terms must be separated from the EFT soft contribution. The next step is the dimensionally regulated \(d=4-2\epsilon\) hard/soft expansion for the fixed complex orientation, followed by subtraction of the corresponding EFT soft bubble, contact term, and counterterm in the same scheme. Common diagrammatic normalization/multiplicity and the final common-basis/EOM projection remain open.
