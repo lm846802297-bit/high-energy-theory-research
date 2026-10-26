@@ -118,7 +118,7 @@ def integrate_poly_over_delta(expr, mass_tags, n):
     total = sp.Integer(0)
     for exponents, coefficient in polynomial.terms():
         total += coefficient * simplex_moment(exponents, mass_tags, n)
-    return sp.expand(total)
+    return total
 
 # Exact equal-mass limit and simplex normalization checks.
 Mtest = sp.symbols("Mtest", nonzero=True)
@@ -189,6 +189,7 @@ for cycle in cycles:
 
 rows = []
 kernel_map = {}
+kernel_polynomials = {}
 for cycle in cycles:
     ff, gg, dd = geometry[cycle]
     for path in paths:
@@ -200,11 +201,12 @@ for cycle in cycles:
             B1 = sp.expand(H*(-sp.Rational(2,3)*gg[alpha] + 2*dd[alpha]))
             B2 = sp.expand(sp.Rational(1,3)*F - sp.Rational(2,3)*S*dd[alpha])
             B3 = sp.expand(sp.Rational(2,3)*M*dd[alpha])
+            kernel_polynomials[(cycle, path, alpha)] = (B1, B2, B3, mass_tags)
             I1 = integrate_poly_over_delta(B1, mass_tags, 1)
             I2 = integrate_poly_over_delta(B2, mass_tags, 2)
             I3 = integrate_poly_over_delta(B3, mass_tags, 3)
             # Gamma(4)=6 appears once. Common loop/sign factors remain separate.
-            integrated = sp.expand(6*(I1+I2+I3))
+            integrated = 6*(I1+I2+I3)
             kernel_map[(cycle, path, alpha)] = integrated
             rows.append({
                 "cycle": "-".join(cycle),
@@ -223,14 +225,51 @@ if len(rows) != 576:
     raise AssertionError(f"expected 576 rows, got {len(rows)}")
 print("PASS: analytically integrated all 576 conditional kernels (6 cycles x 16 paths x 6 invariants).")
 
-# Numeric reverse-cycle comparison after the exact path/cycle map. This is a
-# consistency check of the integrated conditional kernels, not a physical sign test.
+# Numeric reverse-cycle comparison after the exact path/cycle map. Evaluate the
+# polynomial moments directly with cached mpmath 2F1 values; this is equivalent
+# to evaluating the expanded symbolic hypergeometric expressions, but avoids
+# repeatedly re-parsing and numerically simplifying the same special functions.
 numeric_subs = {
     cL: sp.Rational(3,5), sL: sp.Rational(4,5),
     cR: sp.Rational(5,13), sR: sp.Rational(12,13),
     a: sp.Rational(2,3), b: sp.Rational(5,7),
     m1: sp.Integer(2), m2: sp.Integer(3),
 }
+mp.mp.dps = 40
+moment_cache = {}
+def numeric_simplex_moment(exponents, mass_tags, n):
+    key = (tuple(exponents), tuple(mass_tags), n)
+    if key in moment_cache:
+        return moment_cache[key]
+    degree = sum(exponents)
+    n_m1 = sum(tag == "m1" for tag in mass_tags)
+    degree_m1 = sum(power for power, tag in zip(exponents, mass_tags) if tag == "m1")
+    factor = mp.mpf(math_prod(factorial(power) for power in exponents)) / factorial(degree + 3)
+    if n_m1 == 0:
+        value = factor / mp.mpf(3)**(2*n)
+    elif n_m1 == 4:
+        value = factor / mp.mpf(2)**(2*n)
+    else:
+        alpha = degree_m1 + n_m1
+        z = 1 - mp.mpf(2)**2 / mp.mpf(3)**2
+        value = factor * mp.mpf(3)**(-2*n) * mp.hyp2f1(n, alpha, degree+4, z)
+    moment_cache[key] = value
+    return value
+
+def numeric_poly_integral(expr, mass_tags, n):
+    polynomial = sp.Poly(sp.expand(expr), *xs)
+    total = mp.mpf("0")
+    for exponents, coefficient in polynomial.terms():
+        coeff_num = mp.mpf(str(sp.N(coefficient.subs(numeric_subs), 40)))
+        total += coeff_num * numeric_simplex_moment(exponents, mass_tags, n)
+    return total
+
+def numeric_integrated_kernel(key):
+    B1, B2, B3, mass_tags = kernel_polynomials[key]
+    return 6 * (numeric_poly_integral(B1, mass_tags, 1)
+                + numeric_poly_integral(B2, mass_tags, 2)
+                + numeric_poly_integral(B3, mass_tags, 3))
+
 reverse_pairs = []
 for cycle in cycles:
     reverse = (cycle[0], cycle[3], cycle[2], cycle[1])
@@ -238,16 +277,16 @@ for cycle in cycles:
         continue
     reverse_pairs.append((cycle, reverse))
 reverse_checks = 0
-max_reverse_difference = 0.0
+max_reverse_difference = mp.mpf("0")
 for cycle, reverse in reverse_pairs:
     for path in paths:
         reverse_path = (path[1], path[0], path[3], path[2])
         for alpha in range(6):
-            left = sp.N(kernel_map[(cycle, path, alpha)].subs(numeric_subs), 25)
-            right = sp.N(kernel_map[(reverse, reverse_path, alpha)].subs(numeric_subs), 25)
-            difference = abs(complex(left-right))
-            scale = max(1.0, abs(complex(left)), abs(complex(right)))
-            if difference > 1e-15*scale:
+            left = numeric_integrated_kernel((cycle, path, alpha))
+            right = numeric_integrated_kernel((reverse, reverse_path, alpha))
+            difference = abs(left-right)
+            scale = max(mp.mpf(1), abs(left), abs(right))
+            if difference > mp.mpf("1e-25")*scale:
                 raise AssertionError(
                     f"integrated reverse-cycle mismatch: {cycle}, {path}, {reverse_path}, {alpha}, {difference}"
                 )
@@ -255,7 +294,8 @@ for cycle, reverse in reverse_pairs:
             reverse_checks += 1
 if reverse_checks != 288:
     raise AssertionError(f"expected 288 reverse checks, got {reverse_checks}")
-print(f"PASS: integrated reverse-cycle numerical checks {reverse_checks}/{reverse_checks}; max abs difference={max_reverse_difference:.3e}")
+print(f"PASS: integrated reverse-cycle numerical checks {reverse_checks}/{reverse_checks}; max abs difference={mp.nstr(max_reverse_difference, 6)}")
+print(f"PASS: cached {len(moment_cache)} distinct numerical simplex moments for the reverse-cycle checks.")
 
 outdir = Path(__import__("os").environ.get("RC001_OUTPUT_DIR", tempfile.gettempdir()))
 outdir.mkdir(parents=True, exist_ok=True)
