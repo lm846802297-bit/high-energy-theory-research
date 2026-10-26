@@ -1,0 +1,32 @@
+RC-001 six-cycle conditional simplex-integration audit
+Audit date: 2026-10-27
+Repository baseline: high-energy-theory-research PR #9 branch research/rc001-portal-boundary-b1b3-reconciliation-2026-10-27
+Script: calculations/RC-001-six-cycle-simplex-integration.py
+Script SHA-256: a34616d31b01c05a09b422505e64a94ad26d4abb86d1d5aa71bf0d438f73e67d
+Runtime: Python 3.13.5; SymPy 1.14.0; mpmath 1.3.0
+Command: python calculations/RC-001-six-cycle-simplex-integration.py
+Exit code: 0
+Elapsed time: 38.53 seconds
+
+RESULTS:
+- 48/48 exact equal-mass simplex moment checks passed (four monomial structures x four mass-tag patterns x n=1,2,3).
+- 4/4 non-degenerate moment formulas agreed with direct one-dimensional numerical quadrature.
+- Analytically integrated all 576 conditional kernel coefficients: 6 labeled cycles x 16 internal mass paths x 6 external invariants.
+- 288/288 numerical reverse-cycle integrated-kernel comparisons passed for three reversal pairs; maximum absolute difference = 0.
+- Gamma(4)=6 was included exactly once in the integrated candidate kernel.
+- Generated CSV: RC-001-six-cycle-integrated-candidate-kernel-ledger.csv
+  Size: 1979932 bytes
+  SHA-256: 7b1466f672f7785fd792d142ca635fdc69d61b854cd958d2cda0119637cfefd2
+- The generated CSV is reproducible and not committed; set RC001_OUTPUT_DIR to choose its output directory.
+
+INTEGRAL REPRESENTATION:
+For each path and invariant, the script integrates
+  6 * integral_simplex [B1/Delta0 + B2/Delta0^2 + B3/Delta0^3]
+using a Beta-weighted Gauss hypergeometric representation, with
+Delta0 = sum_i x_i m_i^2 and x_i >= 0, sum_i x_i = 1.
+
+IMPORTANT LIMITS:
+- This is conditional on the currently declared B1/B2/B3 candidate kernels and the two-mass path assignment.
+- It does not determine the physical B1/B3 sign or the common Minkowski/Wick phase.
+- It does not include the common 1/(16*pi^2), closed-fermion-loop sign, graph/symmetry factors, the full EFT soft-graph/counterterm set, or the final UV-EFT subtraction.
+- It is therefore a completed pathwise simplex integration subtask, not a completed physical Wilson-coefficient match.
