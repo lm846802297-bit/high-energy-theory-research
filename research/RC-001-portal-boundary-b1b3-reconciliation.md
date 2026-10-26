@@ -910,3 +910,22 @@ In the zero-mixing limit, each fixed complex orientation has only path \((0,1,0,
 The notebook-generated 192-row CSV is 63,259 bytes with SHA-256 3cd876b6938db7d1d86da179279d94be1554ec271c1a7de16774887be0f9dba7; it is not committed. The validation record explicitly distinguishes this expression-level notebook run from a standalone run of the checked-in script.
 
 **Boundary:** the finite-mixing result is still a finite-mass \(d=4\) kernel sum, not the hard Wilson coefficient. The \(m_1\to0\) limit cannot be taken naively because the endpoint/IR-sensitive terms must be separated from the EFT soft contribution. The next step is the dimensionally regulated \(d=4-2\epsilon\) hard/soft expansion for the fixed complex orientation, followed by subtraction of the corresponding EFT soft bubble, contact term, and counterterm in the same scheme. Common diagrammatic normalization/multiplicity and the final common-basis/EOM projection remain open.
+
+
+### 9.13 Small-mixing power counting of the finite-complex paths — 2026-10-27
+
+Added [RC-001-fixed-complex-path-power-counting.py](../calculations/RC-001-fixed-complex-path-power-counting.py) and its [validation record](../validation/RC-001-fixed-complex-path-power-counting.txt).
+
+For each of the 16 paths in each fixed complex orientation, the script extracts the exact powers of \(s_L,s_R\) in the four-vertex product. The \(C_{13}\) numerator also contains the two mass numerators on lines 1 and 3. Applying the triangular mass relation
+\[
+\frac{m_1}{m_2}=\frac{s_Ls_R}{c_Lc_R}
+\]
+adds one power of both mixing angles for each light mass among those two numerator factors.
+
+The result is:
+- The unique degree-zero path for both \(\mu\) and \(\tau\) is \((0,1,0,1)\).
+- Its coupling product is \(y^2\lambda^2c_L^4c_R^4\), and its \(C_{13}\) mass weight is \(y^2\lambda^2c_L^4c_R^4m_2^2\).
+- In the zero-mixing limit, this reduces to the source-aligned numerator \(y^2\lambda^2M_E^2\).
+- All 30 other flavor/path rows have total effective mixing degree at least two after enforcing \(M_{11}=0\); the minimum non-leading degree is two.
+
+**Interpretation:** this supports the leading unbroken dimension-six matching being controlled by the source-aligned \((0,1,0,1)\) path, whose \(d=4-2\epsilon\) hard-region and EFT-soft subtraction are already recorded in §§9.4–9.6. The remaining paths are numerator-suppressed by \(s_L^2\), \(s_R^2\), or higher powers and belong to the VEV/mixing-suppressed correction problem. This is not by itself a complete regions proof: the hard-region expansion must verify that no omitted power-enhanced infrared contribution changes the counting, and the finite-mass \(d=4\) simplex sum must not be substituted for that expansion.
