@@ -4,7 +4,7 @@
 >
 > **Audit date:** 2026-10-27
 >
-> **Status:** The portal matching relation and a working scalar-suppressed reference boundary are now explicit. The historical B1/B3 candidate-kernel sign issue remains **unresolved at the physical-amplitude level**.
+> **Status:** The portal matching relation and a working scalar-suppressed reference boundary are explicit. The tree-level C5 coefficient has a separate derivation and exact symbolic check. All 576 six-cycle candidate-kernel simplex integrals are now evaluated conditionally on the current B1/B2/B3 definitions. The physical B1/B3 sign, common loop factors, complete UV–EFT subtraction, and model-level Wilson-vector closure remain **unresolved**.
 
 ## 1. Provenance and version relationship
 
@@ -278,10 +278,10 @@ It is not a physical verdict. The \(d_\alpha\) coefficients are defined by the d
 | External fields | Broken-phase real \(h,s\) fields; mass-eigenstate Yukawa matrices | Unbroken-phase fixed complex legs \(H,S,H^\dagger,S^\dagger\), followed by a separate off-shell/EOM completion | **Not mapped term by term.** The real-field permutations and the complex-field projection need an explicit common-basis map |
 | Internal states/topology | Two vertex-type patterns with 16 internal mass paths each; later six labeled external cycles | One connected UV 1PI box for the fixed complex external legs at the stated Yukawa order, plus its EFT \(C_5C_5^\ast\) bubble | Topological equivalence and multiplicities have not been proven in a shared labeled-amplitude ledger |
 | Numerator | \(H,C_{ij},M\) and \(f,g,d_\alpha\) decomposition; selected-path and fixed-rational-point trace checks exist | Explicit fixed-sector numerator \(2M_E^2\,k\cdot(k-q)\) under the stated chiral routing, with hard expansion | The full mass-basis path sum has not been analytically reduced to the §248 numerator with all phases, conjugations, and external-leg permutations |
-| Denominators | Path-specific \(\Delta_{0,\rho}(x)=\sum_i x_i m_{\mathrm{edge},i}^2\); candidate integrands were generated | Fixed-route UV denominator \(k^2(k-q)^2[(k-p_2)^2-M_E^2][(k+p_4)^2-M_E^2]\), expanded in the hard region | No exact route-by-route identity between the path denominators and the fixed-route hard expansion is recorded |
+| Denominators | Path-specific \(\Delta_{0,\rho}(x)=\sum_i x_i m_{\mathrm{edge},i}^2\); the conditional simplex integrals of all 576 candidate-kernel rows are now evaluated and reproducible | Fixed-route UV denominator \(k^2(k-q)^2[(k-p_2)^2-M_E^2][(k+p_4)^2-M_E^2]\), expanded in the hard region | No exact route-by-route identity between the path denominators and the fixed-route hard expansion is recorded |
 | Wick rotation and loop prefactor | Separate sign ledgers exist, but the candidate numerator-to-kernel chain retains assumptions; historical denominator-shift conventions differ | §248 gives the hard/soft local subtraction under its declared \(i\Gamma\), PV, and \(\overline{\mathrm{MS}}\) conventions | The common loop phase, fermion-loop sign, reversed cycles, and symmetry factors have not been closed in one calculation |
-| UV/IR poles | Candidate path integration does not perform the complete EFT subtraction or counterterm closure | §248 explicitly separates the hard IR pole from the EFT soft UV pole and cancels them by regions | Cannot compare candidate finite integrals directly with the matched coefficient |
-| Finite terms | Numerical path projections are candidate-kernel diagnostics; earlier outputs omit the final common loop and/or graph factors and are not matched coefficients | §248 gives the conditional hard local polynomial; §252 adds off-shell external-leg-square terms and EOM completion | No common-basis, same-IR-prescription finite-term equality has been demonstrated |
+| UV/IR poles | The conditional candidate-kernel simplex integrals do not perform the complete EFT subtraction or counterterm closure | §248 explicitly separates the hard IR pole from the EFT soft UV pole and cancels them by regions | Cannot compare candidate finite integrals directly with the matched coefficient |
+| Finite terms | The new analytic simplex integrals are still conditional candidate-kernel diagnostics; the common loop and graph factors are not closed and these are not matched coefficients | §248 gives the conditional hard local polynomial; §252 adds off-shell external-leg-square terms and EOM completion | No common-basis, same-IR-prescription finite-term equality has been demonstrated |
 | Diagram-package validation | No complete current FeynArts/FeynCalc run is recorded | The source record explicitly says the FeynArts/FeynCalc scaffold remains unrun | **Open** |
 
 ### 4.4 What the existing checks do establish
@@ -301,6 +301,11 @@ The working dimension-six result should continue to be quoted only with the scop
 Required closure steps:
 
 1. Choose one labeled external cycle and derive its complete mass-basis Dirac trace from the actual \(G_h,G_s\) vertices, including conjugation and the parity-odd trace terms.
+2. Independently derive the full numerator-to-kernel map in one Minkowski convention, including the denominator shift, all F_alpha, H, S, M, d_alpha terms, and the parity-odd trace contribution; the current script's kernel is still conditional on its stated decomposition.
+3. The six labeled cycles and 16 internal paths have been generated and their conditional simplex integrals evaluated. Still independently determine the physical fermion-loop sign, common Minkowski/Wick phase, and graph/symmetry factors; the numerical reverse-cycle checks establish conditional kernel consistency, not the complete physical amplitude.
+4. Map the resulting sum to the same complex external states and momentum basis used in §248/§252, including the off-shell Sigma=sum_i p_i^2 terms and EOM-generated potential/source companions.
+5. Subtract the complete same-order EFT soft amplitudes and counterterms in the same IR and renormalization prescription, then compare UV and IR poles and finite local terms separately.
+
 2. Substitute \(k_i=K+t_i\), retain all terms through second order in external momenta, and derive \(F_\alpha,H,S,M\) and \(d_\alpha\) in one Minkowski convention without taking those coefficients as inputs.
 3. Repeat for all six labeled external cycles, retain each path-dependent \(\Delta_{0,\rho}\), and independently determine the fermion-loop sign, reversed-cycle relation, and graph/symmetry factors.
 4. Map the resulting sum to the same complex external states and momentum basis used in §248/§252, including the off-shell \(\Sigma=\sum_i p_i^2\) terms and EOM-generated potential/source companions.
@@ -311,7 +316,7 @@ Required closure steps:
 
 The companion script is [`calculations/RC-001-portal-boundary-b1b3-reconciliation.py`](../calculations/RC-001-portal-boundary-b1b3-reconciliation.py). Its captured output is [`validation/RC-001-portal-boundary-b1b3-reconciliation.txt`](../validation/RC-001-portal-boundary-b1b3-reconciliation.txt).
 
-The script runs 14 exact symbolic checks covering:
+The portal/B-kernel reconciliation script runs 14 exact symbolic checks covering:
 
 - the portal matching relation and the two distinct boundary choices;
 - the potential-Hessian/1PI sign relation;
@@ -320,7 +325,7 @@ The script runs 14 exact symbolic checks covering:
 - the corrected Minkowski-to-Euclidean denominator shift and its \(n=4\) linear expansion;
 - the fixed-sector hard/soft pole-residue and finite-log bookkeeping.
 
-**Scope limitation:** these checks do not integrate loop functions, reconstruct the full model-specific numerator, sum all labeled external legs, complete all EFT soft insertions/counterterms, or run FeynArts/FeynCalc.
+**Scope limitation:** the new simplex-integration script analytically integrates the 576 declared candidate kernels, verifies 48 equal-mass moments, compares four non-degenerate moments with direct quadrature, and passes 288 numerical reverse-cycle comparisons. Neither script independently derives the full physical numerator-to-kernel map, closes the common loop/sign/symmetry factors, completes all EFT soft insertions/counterterms, performs the full UV–EFT subtraction, or runs FeynArts/FeynCalc.
 
 
 ## 6. Independent trace, six-cycle, and normalization audit (2026-10-27)
@@ -495,3 +500,38 @@ Until those gates pass, the B1/B3 result remains a **conditional candidate-kerne
 - The existing [review-response PR #7](https://github.com/lm846802297-bit/axial-vector-review-response/pull/7) remains Draft and unmerged. Its evidence note is not a substitute for this calculation ledger.
 - Do not change the formal response letter, manuscript PDF, v5.6 task checkboxes, or final physical conclusions on the basis of this audit.
 - This ledger and its algebra check are a dated supplement on a separate research branch. They do not replace the frozen v153 baseline or assert complete model-level Wilson-vector closure.
+
+
+## 9. New checked subtasks — 2026-10-27
+
+### 9.1 Tree-level dimension-five input
+
+The standalone record [RC-001-tree-level-C5-matching-derivation.md](RC-001-tree-level-C5-matching-derivation.md) now derives the operator coefficient from the heavy-block Schur complement and cross-checks the propagator expansion. With
+\[
+\mathcal O_{5,\ell}=S_\ell\bar L_\ell H\ell_R,\qquad
+\mathcal L_{\rm EFT}^{(5)}\supset-C_{5,\ell}\mathcal O_{5,\ell}+\mathrm{h.c.},
+\]
+the mass-matrix entry gives
+\[
+C_{5,\ell}^{(0)}=-\frac{y_\ell\lambda_\ell}{M_{E_\ell}}.
+\]
+The companion exact SymPy script passes 10 symbolic checks. This closes the tree-level coefficient and sign in that declared convention only; it does not address one-loop corrections to C5 or any B1/B3 sign.
+
+### 9.2 Conditional pathwise simplex integration
+
+The new script [RC-001-six-cycle-simplex-integration.py](../calculations/RC-001-six-cycle-simplex-integration.py) evaluates the candidate kernel
+\[
+6\int_{\sum_i x_i=1,\;x_i\ge0}d^3x\left[
+\frac{B_1}{\Delta_0}
++\frac{B_2}{\Delta_0^2}
++\frac{B_3}{\Delta_0^3}
+\right],\qquad
+\Delta_0=\sum_i x_i m_i^2,
+\]
+for all six labeled external cycles, 16 internal mass paths, and six external invariants. The integration reduces each monomial to a Beta-weighted Gauss hypergeometric function. The factor \(\Gamma(4)=6\) is included exactly once.
+
+The captured validation record [RC-001-six-cycle-simplex-integration.txt](../validation/RC-001-six-cycle-simplex-integration.txt) records 48/48 exact equal-mass moment checks, 4/4 comparisons against direct non-degenerate quadrature, and 288/288 numerical reverse-cycle comparisons. The generated 1,979,932-byte CSV has SHA-256 7b1466f672f7785fd792d142ca635fdc69d61b854cd958d2cda0119637cfefd2; it is reproducible and not committed.
+
+**Interpretation boundary:** these are analytic integrals of the current candidate B-kernel definitions, not final hard Wilson coefficients. The common \(1/(16\pi^2)\), global Minkowski/Wick phase, closed-fermion-loop sign, graph/symmetry factors, complete same-order EFT soft graphs and counterterms, and the full UV–EFT subtraction are not included. The B1/B3 physical-sign question therefore remains unresolved.
+
+The next blocking step is not another simplex normalization check. It is to derive the candidate numerator and denominator expansion from the same labeled UV diagrams, close the physical sign/factor ledger, and then perform the complete common-scheme UV–EFT subtraction.
