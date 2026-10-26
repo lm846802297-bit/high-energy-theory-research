@@ -294,9 +294,9 @@ It is not a physical verdict. The \(d_\alpha\) coefficients are defined by the d
 
 ### 4.5 Decision on B1/B3
 
-**Status: unresolved; do not promote either candidate kernel to the final Wilson coefficient.**
+**Status: algebraic B1/B3 signs are resolved conditionally under the declared trace/Wick convention; the physical finite-mixing Wilson coefficient remains unresolved. Do not promote either real-scalar candidate kernel to the final coefficient.**
 
-The working dimension-six result should continue to be quoted only with the scope and caveats of the source-aligned §248/§252 ledger and the live CL-001 claim. The historical B1/B3 calculation is a diagnostic branch, not an accepted independent derivation of that coefficient. The evidence does not yet justify calling it physically wrong, nor does it justify declaring it superseded by a proven term-by-term identity.
+The leading unbroken fixed-Yukawa coefficient is supported by the source-aligned §248 hard-region calculation and the corresponding SFT-01 soft subtraction. The real-scalar B1/B3 ledger is a conditional kernel diagnostic, not an independent full finite-mixing Wilson coefficient. The direct trace and pathwise convention audits establish the algebraic kernel signs, while the finite-mixing complex path sum remains a d=4 diagnostic until its regions expansion and common diagrammatic multiplicity are closed. The evidence does not justify calling the historical candidate physically wrong or declaring the complete finite-mixing coefficient superseded by a term-by-term identity.
 
 Required closure steps:
 
@@ -304,7 +304,7 @@ Required closure steps:
 2. **Completed conditionally at the kernel level:** the generic trace/Wick derivation and route-dependent \(f_{ij},g_\alpha,d_\alpha\) now define the B1/B2/B3 kernels in one convention. The fixed complex amplitude has its own B2-only kernel; it must not be identified with the unrestricted real-scalar six-cycle sum.
 3. **Still open at the physical-amplitude level:** reconcile the source-aligned hard-region result with the finite-mixing complex path sum, including the common diagrammatic \(i\)/closed-loop factor and determinant-log/graph multiplicity. The 576 real-scalar candidate integrals are diagnostics, not a single physical complex amplitude.
 4. Map the complete sum to the same complex external states and momentum basis used in §248/§252, including the off-shell \(\Sigma=\sum_i p_i^2\) terms and EOM-generated potential/source companions.
-5. Enumerate and evaluate the complete same-order EFT soft amplitudes, contact terms, and counterterms in the same IR and renormalization prescription; compare UV and IR poles and finite local terms separately.
+5. Keep the source-aligned SFT-01 soft bubble and its pole/counterterm check as closed for the leading fixed Yukawa sector. Complete the remaining finite-mixing and model-sector EFT soft amplitudes, contact terms, and counterterms in the same IR and renormalization prescription; compare UV and IR poles and finite local terms separately.
 6. Only after the analytic map and factor ledger close should the corresponding FeynArts/FeynCalc calculation be executed and archived. An algebra-only script is not a substitute for diagram-level validation.
 
 ## 5. Reproducible algebra check
