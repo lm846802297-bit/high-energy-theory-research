@@ -752,3 +752,26 @@ The original triangular form requires the exact constraint
 This audit therefore removes the mass-basis vertex-phase ambiguity before the pathwise trace is compared with the source-aligned interaction-basis amplitude.
 
 **Scope boundary:** the rotation/rephasing identities are now checked, but the full six-cycle amplitude is not yet proven equal to the fixed complex-field (SFT)-01 channel. The remaining comparison must still include the chiral propagator transformations, labeled external momenta, the (mu/	au) (s/u) assignment, and the complete hard/soft expansion in (d=4-2epsilon). This audit adds no new Wilson coefficient.
+
+
+### 9.8 Real-field to complex-field external-state projection
+
+The new [external-state projection audit](../calculations/RC-001-real-to-complex-external-projection-audit.py) passes four exact combinatoric checks; the captured output is in [validation/RC-001-real-to-complex-external-projection-audit.txt](../validation/RC-001-real-to-complex-external-projection-audit.txt).
+
+For the radial components,
+[
+h_i=rac{H_i+H_i^dagger}{sqrt2},qquad
+s_i=rac{S_i+S_i^dagger}{sqrt2}.
+]
+Expanding the labeled (h_1h_2s_1s_2) external state gives (2^4=16) raw complex-field assignments. Charge neutrality leaves four assignments with one (H), one (H^dagger), one (S), and one (S^dagger). Each has field-decomposition weight
+[
+left(rac1{sqrt2}ight)^4=rac14,
+qquad
+sum_{mathrm{neutral assignments}}rac14=1.
+]
+
+The six labeled real-field cycles still comprise three reverse pairs; the projection ledger records 24 orientation/cycle combinations and introduces no additional reverse-loop factor.
+
+**Important consequence for the next matching step:** the source-aligned (H,S,H^dagger,S^dagger) amplitude is one oriented complex-field channel. It cannot be equated to the full real (h_1h_2s_1s_2) six-cycle amplitude by simply multiplying or dividing by four. The four charge-neutral assignments may route the labeled external momenta into different crossed channels, and the interaction-basis Yukawa vertices determine which orientations vanish. The next required artifact is therefore a momentum-routed projection table for all four assignments, followed by the interaction-basis flavor-flow trace for each allowed cycle. Only then can the mass-basis six-cycle sum be compared term by term to the source-aligned hard/soft result.
+
+This is a combinatoric projection check only; it supplies no new amplitude coefficient and does not close the remaining UV–EFT matching.
