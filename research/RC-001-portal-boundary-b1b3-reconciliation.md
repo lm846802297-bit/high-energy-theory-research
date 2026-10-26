@@ -479,6 +479,23 @@ The scope must be fixed before calling the soft sector “complete.” For the t
 
 **What is not yet supported:** the six labeled candidate UV kernels have been integrated conditionally over their path-dependent four-parameter simplex, but their flavor-resolved \(\mu/\tau\) \(s/u\) routing has not yet been combined with the source-matched UV amplitude and the complete EFT soft/counterterm set in one common amplitude ledger. The determinant-log / diagrammatic fermion-loop sign, common Minkowski/Wick phase, graph/symmetry factors, UV/IR pole comparison for the full amplitude, and final finite local coefficient remain open. Therefore the conditional simplex integration cannot yet be promoted to a complete six-cycle UV–EFT matching result.
 
+### 7.2 EFT soft-graph closure in the fixed mixed-Yukawa sector
+
+The EFT soft sector can be classified more sharply when the matching object is restricted to the source-aligned unbroken-phase 1PI amplitude with external \(H,S,H^\dagger,S^\dagger\), at strict \(O(M_E^{-2})\), and in the coupling sector \(|y_\ell|^2|\lambda_\ell|^2\), with the light fields massless in dimensional regularization.
+
+| EFT contribution | Status in this restricted sector | Reason |
+|---|---|---|
+| One \(C_{5,\ell}\) and one \(C_{5,\ell}^\ast\) insertion (SFT-01) | **Required and evaluated** | The two insertions supply the four external scalar legs; the massless chiral-fermion bubble is the direct 1PI soft graph. Its numerator reduces to the massless \(B_0\) bubble after scaleless tadpoles vanish. |
+| Local \(\lambda_{HS}\) counterterm | **Required and pole-checked** | The EFT soft UV residue is \(+s\); the local counterterm contributes \(-s\). The hard-region IR residue is separately \(-s\), and the hard/soft region sum is finite after \(\Delta_{\rm IR}=\Delta_{\rm UV}\). |
+| One \(Q_{LD}\) or \(Q_{RD}\) insertion plus a scalar quartic (SFT-02/03) | **Not an extra local 1PI coefficient** | The candidate is scalar-line reducible and contains a scaleless one-propagator fermion tadpole in the stated unbroken massless scheme. Its coupling order is also distinct from the fixed \(|y_\ell|^2|\lambda_\ell|^2\) box sector. |
+| Pure-light loops with no heavy-dependent EFT insertion | **Cancel in the matching difference** | They are common to UV and EFT only when the light field content, parameters, IR regulator, gauge convention and external-state normalization are identical. |
+| Gauge-current exchange and gauge corrections | **Outside this restricted coupling/topology sector** | These are separate current/source or higher-order coupling sectors; reducible gauge exchange is not an additional local scalar 1PI vertex. |
+| One-loop correction to \(C_5\) inserted into the \(C_5C_5^\ast\) bubble | **Higher loop order** | It would be a two-loop contribution to this four-scalar amplitude, not part of the one-loop dimension-six matching coefficient. |
+
+**Restricted-sector conclusion:** the EFT soft graph and its local pole counterterm are algebraically closed for the single source-aligned SFT-01 matching channel. The fixed-route hard/soft ledger therefore supports the finite local polynomial \((L_\ell-2)s+t/6\) in the declared normalization for that channel.
+
+This is not a claim that the complete model's EFT soft sector or Wilson vector is closed. In particular, it does **not** prove that the six-cycle real-scalar candidate kernels have been mapped to the same complex external-state amplitude, with the same UV numerator, \(s/u\) routing, common \(i\)-factor, graph multiplicity, and \(d=4-2\epsilon\) tensor terms. That UV-to-source matching is the next blocking calculation.
+
 Accordingly, the fourth requested stage is **not yet complete**. Before promoting any B1/B3 kernel to a physical Wilson coefficient, the remaining work is:
 
 1. derive the complete set of EFT soft graphs and same-order insertions for the selected four-scalar 1PI amplitude from the operator basis, rather than relying only on a topology classification;
