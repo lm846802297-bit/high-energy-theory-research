@@ -718,3 +718,37 @@ left[(L_ell-2)s+rac{t}{6}ight].
 This is the completed amplitude-level soft subtraction for the single source-aligned fixed-sector channel, including the required local EFT counterterm and the UV/IR pole distinction. It agrees with the independent 10-check (C_5C_5^ast) trace audit and 12-check fixed-sector pole ledger, both rerun from byte-aligned local source copies with their recorded SHA-256 values.
 
 **Boundary of the closure:** the result does not perform the full operator-basis projection of the local (s,t) structures; it does not prove that the 576 finite-mass simplex integrals can be taken to the massless-light-state limit without a dimensionally regulated regions expansion; and it does not yet match the full real-field six-cycle candidate sum to this complex-field amplitude. The mixed-mass hard-region expansion, flavor-resolved (mu/	au) (s/u) assignment, determinant-log/diagram multiplicity, and full Wilson-vector counterterms remain open. Accordingly, PR #9 remains Draft/Open.
+
+
+### 9.7 Exact mass-basis vertex rephasing and mass-matrix reconstruction
+
+The new [mass-basis vertex/rephasing audit](../calculations/RC-001-mass-basis-vertex-rephasing-audit.py) passes **11 exact symbolic checks**, with its source-aligned output in [validation/RC-001-mass-basis-vertex-rephasing-audit.txt](../validation/RC-001-mass-basis-vertex-rephasing-audit.txt).
+
+Using
+[
+U_L=egin{pmatrix}c_L&s_L\-s_L&c_Lend{pmatrix},qquad
+U_R=egin{pmatrix}c_R&s_R\-s_R&c_Rend{pmatrix},
+qquad D=operatorname{diag}(-1,1),
+]
+and the interaction-basis Yukawa matrices
+[
+Y_h^{(0)}=aegin{pmatrix}0&1\0&0end{pmatrix},qquad
+Y_s^{(0)}=begin{pmatrix}0&0\1&0end{pmatrix},
+]
+the signed-light-mass convention gives (G_{h,s}=U_L^T Y_{h,s}^{(0)}U_R). The audit reproduces the source §276 matrices and verifies that (Y_{h,s}=G_{h,s}D) yields the positive-light-mass Eq. (13) matrices exactly.
+
+The signed mass matrix reconstructs as
+[
+mathcal M=U_Loperatorname{diag}(-m_1,m_2)U_R^T
+=egin{pmatrix}
+-c_Lc_Rm_1+m_2s_Ls_R & c_Lm_1s_R+c_Rm_2s_L\
+c_Lm_2s_R+c_Rm_1s_L & c_Lc_Rm_2-m_1s_Ls_R
+end{pmatrix}.
+]
+The original triangular form requires the exact constraint
+[
+-c_Lc_Rm_1+m_2s_Ls_R=0.
+]
+This audit therefore removes the mass-basis vertex-phase ambiguity before the pathwise trace is compared with the source-aligned interaction-basis amplitude.
+
+**Scope boundary:** the rotation/rephasing identities are now checked, but the full six-cycle amplitude is not yet proven equal to the fixed complex-field (SFT)-01 channel. The remaining comparison must still include the chiral propagator transformations, labeled external momenta, the (mu/	au) (s/u) assignment, and the complete hard/soft expansion in (d=4-2epsilon). This audit adds no new Wilson coefficient.
