@@ -2,7 +2,7 @@ RC-001 model-vertex trace and signed-mass convention audit
 Audit date: 2026-10-27
 Script: calculations/RC-001-model-vertex-trace-convention-audit.py
 Script Git blob: 5e0d94f1c0d394f997f597b08f45f08d34bf26e4
-Script SHA-256 (fetched UTF-8/LF source): 3b2e74ffb82d45ea885d44abb3b5264b80fd1fe5ea1eccbfdb246045bdb7b320
+Source integrity identifier: Git blob SHA 5e0d94f1c0d394f997f597b08f45f08d34bf26e4. No SHA-256 claim is made in this record.
 Runtime for algebraic expression run: Python/SymPy symbolic notebook; SymPy version 1.14.0
 Execution note: the same exact matrix, path-weight, and rational-point trace expressions were run in the notebook; this turn did not launch the checked-in script as a standalone process. The file hash above is the current GitHub-returned source hash. Do not treat this as a byte-aligned script-process log.
 
