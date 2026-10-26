@@ -42,7 +42,8 @@ def slash(vec):
 def dot4(a,b):
     return a[0]*b[0]-a[1]*b[1]-a[2]*b[2]-a[3]*b[3]
 def simp(z):
-    return sp.factor(sp.expand(z))
+    # Keep exact expanded polynomials; avoid costly repeated factorization across 576 rows.
+    return sp.expand(z)
 
 vertices = [u[i]*PR+v[i]*PL for i in range(4)]
 Ns = [slash(k[i])+m[i]*sp.eye(4) for i in range(4)]
@@ -180,7 +181,7 @@ for cycle in cycles:
             left=coeff_data[(cycle,path)][alpha]
             right=coeff_data[(rev,rpath)][alpha]
             for field in fields:
-                diff=sp.factor(sp.expand(left[field].xreplace(xreverse).subs(simplex_sub)-right[field].subs(simplex_sub)))
+                diff=sp.expand(left[field].xreplace(xreverse).subs(simplex_sub)-right[field].subs(simplex_sub))
                 if diff != 0:
                     raise AssertionError(f"reverse kernel mismatch {cycle=} {path=} {rpath=} {alpha=} {field=}: {diff}")
                 reverse_checks+=1
