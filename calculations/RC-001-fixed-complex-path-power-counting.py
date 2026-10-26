@@ -65,9 +65,10 @@ for flavor,labels in fixed_complex_sequences.items():
     print(f"PASS: {flavor} has a unique degree-zero path 0101.")
 
 # Check the exact coefficient of the leading path and its zero-mixing limit.
+leading_path=(0,1,0,1)
+leading_next=leading_path[1:]+leading_path[:1]
 cp_leading=sp.factor(sp.prod(
-    matrix_sequence[i][(0,1,0,1)[i],(0,1,0,1)[i+1]]
-    for i in range(4)
+    matrix_sequence[i][leading_path[i],leading_next[i]] for i in range(4)
 ))
 check_expr=sp.simplify(cp_leading-y**2*lam**2*cL**4*cR**4)
 if check_expr!=0:
@@ -77,7 +78,7 @@ if sp.simplify(cp_leading.subs(zero_mix)-y**2*lam**2)!=0:
 if sp.simplify((cp_leading*m2**2).subs(zero_mix)-y**2*lam**2*m2**2)!=0:
     raise AssertionError("leading C13 mass weight does not reduce to y^2 lambda^2 M_E^2")
 
-nonleading=[r for r in rows if r["path"]!="2121"]
+nonleading=[r for r in rows if r["path"]!="1212"]
 if len(rows)!=32 or len(nonleading)!=30:
     raise AssertionError(f"expected 32 flavor/path rows, got {len(rows)}")
 min_degree=min(r["total_effective_mixing_degree"] for r in nonleading)
