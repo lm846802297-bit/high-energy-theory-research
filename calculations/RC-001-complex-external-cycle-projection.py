@@ -75,6 +75,24 @@ mom4 = {"H": pH, "Hdag": pHd, "S": pS, "Sdag": pSd}
 K = sp.Matrix([sp.Symbol(f"K_{i}") for i in range(4)])
 C = a**2*b**2*M**2
 
+# Exact generic trace for the fixed complex-field chirality sequence
+# P_R, P_R, P_L, P_L. The two same-chirality edges require mass numerators;
+# the other two edges carry slashed momenta.
+m1, m2, m3, m4 = sp.symbols("m1 m2 m3 m4")
+kgeneric = [sp.Matrix([sp.Symbol(f"kg{i}_{mu}") for mu in range(4)])
+            for i in range(1, 5)]
+Ngeneric = [slash(kgeneric[i]) + (m1,m2,m3,m4)[i]*sp.eye(4)
+            for i in range(4)]
+trace_generic = sp.simplify(sp.expand(sp.trace(
+    PR*Ngeneric[0]*PR*Ngeneric[1]*PL*Ngeneric[2]*PL*Ngeneric[3]
+)))
+dot24 = (kgeneric[1][0]*kgeneric[3][0]
+         - kgeneric[1][1]*kgeneric[3][1]
+         - kgeneric[1][2]*kgeneric[3][2]
+         - kgeneric[1][3]*kgeneric[3][3])
+check("generic P_R,P_R,P_L,P_L trace reduces to 2 m1 m3 k2.k4",
+      trace_generic - 2*m1*m3*dot24)
+
 # Coefficient vectors for the channel invariant. The Gram products are formal;
 # only the coefficient-vector pairing is needed to label s/u/t.
 mom3 = {
