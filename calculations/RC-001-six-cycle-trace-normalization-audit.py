@@ -56,6 +56,16 @@ cL, sL = sp.Rational(3,5), sp.Rational(4,5)
 cR, sR = sp.Rational(5,13), sp.Rational(12,13)
 Yh = a * sp.Matrix([[cL*sR, cL*cR], [sL*sR, sL*cR]])
 Ys = b * sp.Matrix([[sL*cR, -sL*sR], [-cL*cR, cL*sR]])
+# Explicitly map the positive-light-mass Eq.(13) matrices to the signed-light-mass
+# matrices used by the real-rotation two-point convention in source §276.
+a_s,b_s,cLs,sLs,cRs,sRs = sp.symbols("a_s b_s cLs sLs cRs sRs", real=True)
+Yh_s = a_s*sp.Matrix([[cLs*sRs,cLs*cRs],[sLs*sRs,sLs*cRs]])
+Ys_s = b_s*sp.Matrix([[sLs*cRs,-sLs*sRs],[-cLs*cRs,cLs*sRs]])
+Dphase = sp.diag(-1,1)
+Gh_s = a_s*sp.Matrix([[-cLs*sRs,cLs*cRs],[-sLs*sRs,sLs*cRs]])
+Gs_s = b_s*sp.Matrix([[-sLs*cRs,-sLs*sRs],[cLs*cRs,cLs*sRs]])
+assert Gh_s == Yh_s*Dphase
+assert Gs_s == Ys_s*Dphase
 mass = {0: sp.Integer(2), 1: sp.Integer(5)}
 
 labels = ("h1", "h2", "s1", "s2")
@@ -180,6 +190,7 @@ assert sp.expand(series).coeff(z,4) == sp.I/4
 closed_loop_sign = -1
 assert closed_loop_sign == -1
 
+print("PASS: Eq.(13) positive-light-mass Y_h/Y_s map to §276 signed-light-mass G_h/G_s by right rephasing D=diag(-1,1).")
 print(f"PASS: {len(cycles)} inequivalent labeled cycles = 4!/4; each cycle is represented once.")
 print(f"PASS: explicit Dirac trace/decomposition for {trace_checks} cases = 6 labeled cycles x 16 paths.")
 print(f"PASS: reverse-cycle path/weight/mass mapping for {reverse_checks} path pairs across {len(reverse_pairs)} reverse pairs.")
