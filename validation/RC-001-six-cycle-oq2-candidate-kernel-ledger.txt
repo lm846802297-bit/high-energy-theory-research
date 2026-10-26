@@ -1,0 +1,30 @@
+RC-001 six-cycle O(p^2) candidate-kernel ledger
+Audit date: 2026-10-27
+Repository main baseline: d6143c2aa15191ac8521e062d90860ba86713f00
+PR #9 head before this audit extension: 9c0792079b145583f1d6ea55d8348156c70049cb
+Script: calculations/RC-001-six-cycle-oq2-candidate-kernel-ledger.py
+Script SHA-256 (executed Python source): 731ab3d363946c9dba71568a05889b667de85e8cce6157ce8aafce30303856bf
+Runtime: Python 3.13.5; SymPy 1.14.0
+Command: python calculations/RC-001-six-cycle-oq2-candidate-kernel-ledger.py
+Exit code: 0
+Elapsed time: approximately 170.06 seconds
+
+STDOUT:
+PASS: generic Dirac trace identity verified symbolically for arbitrary u_i,v_i,m_i,k_i.
+PASS: built 576 O(p^2) candidate-kernel coefficient rows = 6 cycles x 16 paths x 6 invariants.
+PASS: all six cycle geometries have invertible exact invariant-basis transforms.
+PASS: reverse-cycle coefficient audit 1152/1152 = 3 pairs x 16 paths x 6 invariants x 4 objects.
+PASS: each row retains path-specific Delta0, all C_ij, H, S, M, F_alpha, g_alpha, d_alpha, and B1/B2/B3.
+CONVENTION: B1/B2/B3 use the corrected candidate Wick formulas; this checks the complete path/cycle bookkeeping under that convention, not the physical global loop sign.
+LIMIT: no path-dependent simplex integrations, no FeynArts/FeynCalc run, and no complete EFT soft/counterterm subtraction.
+CSV: /mnt/data/rc001_six_cycle_oq2_candidate_kernel_ledger.csv (990656 bytes)
+SHA256: 2a11b12173f983d2055f9ef6ba556e3d64bb042ef057a0f5145232065c14c181
+
+Interpretation:
+- The generic trace identity is an exact symbolic equality for arbitrary chiral couplings, masses, and four independent Minkowski momenta.
+- Model-specific couplings and all six labeled cycles x 16 internal-state paths are then assembled symbolically in the common external-invariant basis.
+- The 576 rows are coefficient records for the six O(p^2) invariants. They retain path-specific Delta0 and the full C_ij/H/S/M weights rather than prematurely combining mass paths.
+- The 1152 reverse-cycle checks compare Delta0 and B1/B2/B3 coefficient objects under the recorded path map, Feynman-parameter permutation, and simplex constraint.
+- B1/B2/B3 are the candidate kernel derived under the current Minkowski/Wick convention. The check establishes internal algebraic consistency and reverse-cycle bookkeeping, not the final physical overall sign.
+- The generated CSV is not committed; it is reproducible by running the script. Its hash is recorded above.
+- Full path-dependent simplex integration, FeynArts/FeynCalc diagram generation, complete EFT soft graph/counterterm closure, UV/IR pole cancellation for the complete four-scalar amplitude, and final Wilson-coefficient extraction remain open.
