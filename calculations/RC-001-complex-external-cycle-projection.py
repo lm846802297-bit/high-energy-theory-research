@@ -35,6 +35,8 @@ PL = sp.simplify((sp.eye(4) - gamma5) / 2)
 def slash(v):
     return gamma[0]*v[0] - gamma[1]*v[1] - gamma[2]*v[2] - gamma[3]*v[3]
 
+checks = 0
+
 def check(name, expr):
     global checks
     residual = sp.simplify(expr)
@@ -47,7 +49,6 @@ def check(name, expr):
     checks += 1
     print(f"PASS: {name}")
 
-checks = 0
 a, b, M = sp.symbols("y lambda M_E", nonzero=True)
 Yh = a * sp.Matrix([[0, 1], [0, 0]])
 Ys = b * sp.Matrix([[0, 0], [-1, 0]])
