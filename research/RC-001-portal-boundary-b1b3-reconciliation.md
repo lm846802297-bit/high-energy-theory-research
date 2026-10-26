@@ -780,3 +780,41 @@ The six labeled real-field cycles still comprise three reverse pairs; the projec
 **Important consequence for the next matching step:** the source-aligned (H,S,H^dagger,S^dagger) amplitude is one oriented complex-field channel. It cannot be equated to the full real (h_1h_2s_1s_2) six-cycle amplitude by simply multiplying or dividing by four. The four charge-neutral assignments may route the labeled external momenta into different crossed channels, and the interaction-basis Yukawa vertices determine which orientations vanish. The next required artifact is therefore a momentum-routed projection table for all four assignments, followed by the interaction-basis flavor-flow trace for each allowed cycle. Only then can the mass-basis six-cycle sum be compared term by term to the source-aligned hard/soft result.
 
 This is a combinatoric projection check only; it supplies no new amplitude coefficient and does not close the remaining UV–EFT matching.
+
+
+### 9.9 Momentum-routed projection of the source local amplitudes onto (h_1h_2s_1s_2)
+
+The new [momentum-routing projection script](../calculations/RC-001-real-to-complex-momentum-routing-projection.py) passes **8 exact symbolic checks**, with its source-aligned output in [validation/RC-001-real-to-complex-momentum-routing-projection.txt](../validation/RC-001-real-to-complex-momentum-routing-projection.txt).
+
+Take all external momenta incoming and define
+[
+s_R=(p_{h_1}+p_{s_1})^2,qquad
+u_R=(p_{h_1}+p_{s_2})^2,qquad
+t_R=(p_{h_1}+p_{h_2})^2.
+]
+The four charge-neutral field assignments give the following flavor-channel routings:
+
+| Assignment | (mu) channel (s_mu=(p_H+p_S)^2) | (	au) channel (u_	au=(p_H+p_{S^dagger})^2) | Field weight |
+|---|---|---|---:|
+| (h_1:H, h_2:H^dagger, s_1:S, s_2:S^dagger) | (s_R) | (u_R) | (1/4) |
+| (h_1:H, h_2:H^dagger, s_1:S^dagger, s_2:S) | (u_R) | (s_R) | (1/4) |
+| (h_1:H^dagger, h_2:H, s_1:S, s_2:S^dagger) | (u_R) | (s_R) | (1/4) |
+| (h_1:H^dagger, h_2:H, s_1:S^dagger, s_2:S) | (s_R) | (u_R) | (1/4) |
+
+The crossed (t_R) invariant is unchanged under all four assignments. Averaging the source §248 local matching polynomials over these assignments gives the projected local real-field amplitude
+
+[
+oxed{
+mathcal A_{hhss,mathrm{local}}
+=rac{i}{16pi^2}sum_{ell=mu,	au}|C_{5,ell}|^2
+left[
+rac{L_ell-2}{2}(s_R+u_R)+rac{t_R}{6}
+ight],
+qquad
+L_ell=lnrac{M_{E_ell}^2}{mu_R^2}.
+}
+]
+
+This is a new, explicit external-state projection of the **source-aligned complex local amplitudes**, not the result of integrating the mass-basis six-cycle candidate kernels. It fixes the momentum-crossing map that the next comparison must use and prevents the mistake of identifying the (h_1h_2s_1s_2) amplitude with one complex channel or multiplying one channel by an unjustified factor of four.
+
+**Remaining matching gate:** substitute the on-shell conditions into the 576-row candidate ledger, map its invariant basis to ((s_R,t_R,u_R)), and then compare the mass-basis cycle sum to this projected local polynomial only after the dimensionally regulated mixed-mass hard/soft expansion and common graph factors are fixed. The existing finite-mass simplex integral is not by itself that comparison.
