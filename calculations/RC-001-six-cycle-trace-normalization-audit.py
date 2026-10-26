@@ -28,7 +28,7 @@ import sympy as sp
 zero = sp.zeros(2)
 sigmas = [
     sp.Matrix([[0, 1], [1, 0]]),
-    sp.Matrix([[0, -sp.I], [sp.I, 0]]),
+    sp.Matrix([[0,-1],[1,0]])*sp.I,
     sp.Matrix([[1, 0], [0, -1]]),
 ]
 gamma = [sp.diag(1, 1, -1, -1)]
