@@ -43,22 +43,15 @@ Consequently, with the operator ordering acting on the complete \Psi,
 \]
 The derivative on \Omega is the adjoint covariant derivative. The second line is the explicit field-strength sector; neither term may be dropped. The first term also contains gauge interactions through all three covariant derivatives.
 
-For a local connection \(D_\mu=\partial_\mu+\mathcal A_\mu\), the ordered cubic derivative has the exact expansion
+The first term is an ordered product of three covariant derivatives. Its one-, two-, and three-gauge-field vertices are to be generated recursively from
 \[
-D_\rho D_\mu D^\mu
-=\partial_\rho\partial^2
-+(\partial_\rho\mathcal A_\mu)\partial^\mu
-+2\mathcal A_\mu\partial_\rho\partial^\mu
-+(\partial_\rho\partial_\mu\mathcal A^\mu)
-+(\partial_\rho\mathcal A_\mu)\mathcal A^\mu
-+\mathcal A_\mu\partial_\rho\mathcal A^\mu
-+\mathcal A_\rho\partial^2
-+\mathcal A_\rho\mathcal A_\mu\partial^\mu
-+\mathcal A_\rho(\partial_\mu\mathcal A^\mu)
-+\mathcal A_\rho\mathcal A_\mu\mathcal A^\mu
+D_\mu=\partial_\mu+\mathcal A_\mu,\qquad
+D_\rho D_\mu D^\mu\Psi
+=(\partial_\rho+\mathcal A_\rho)
+(\partial_\mu+\mathcal A_\mu)
+(\partial^\mu+\mathcal A^\mu)\Psi,
 \]
-when acting on the field to its right, with the displayed ordering retained. This is a bookkeeping expansion, not a replacement for the manifestly covariant expression above. In particular, the \Omega terms reorganize the antisymmetric field-strength content and prevent treating the three gauge insertions as independent commuting factors.
-
+without commuting adjacent \(D\)'s. This compact ordered expression is the definition used for the vertex expansion. The commutator terms in \(\Omega_{\mu\nu}\) reorganize the antisymmetric field-strength content and must be retained together with the ordered derivative vertices.
 ## 3. Soft topology census at quadratic gauge order
 
 The previously evaluated gauge-free one-insertion scalar tadpole is zero because it is scaleless. The first gauge-corrected contribution to that same two-external-scalar projection is order \(g_A^2 c_a^{(8)}\). It is a **two-loop EFT contribution**: one closed light-fermion loop plus one internal gauge propagator (or an equivalent gauge tadpole contraction). It must not be described as a one-loop Q8 correction.
