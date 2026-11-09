@@ -2,8 +2,8 @@
 """Exact scalar-product audit of the QLD UV triangle Ward contractions."""
 import sympy as sp
 
-K2, Kp2, KKp, Kk, Kpk, kk, kp2, M2 = sp.symbols(
-    "K2 Kp2 KKp Kdotk Kpdotk kdotkp kp2 M2"
+K2, Kp2, KKp, Kk, Kpk, Kpdotk, kk, kp2, M2 = sp.symbols(
+    "K2 Kp2 KKp Kdotk Kdotkp Kpdotk kdotkp kp2 M2"
 )
 # q = k' - k = K' - K. Keep distinct mixed scalar products:
 # K.k=Kk, K.k'=Kpk, K'.k=Kpdotk, k.k'=kk.
