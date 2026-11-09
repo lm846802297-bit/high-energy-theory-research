@@ -29,7 +29,7 @@ The weak generators act on the doublet indices; \(E\) is a weak singlet.
 
 ## 2. Momentum routing
 
-Take all external momenta incoming at the vertices, with the background momentum \(q=p'-p\). Choose the light-fermion loop momentum \(k\). Define
+Use a consistent mixed incoming/outgoing convention: scalar momentum \(p\) enters the first Yukawa vertex, scalar momentum \(p'\) leaves the second, and background momentum \(q\) leaves the fermion loop. Momentum conservation gives \(q=p-p'\). Choose the light-fermion loop momentum \(k\). Define
 \[
 K=k+p,\qquad K'=k+p',\qquad k'=k+q.
 \]
@@ -44,11 +44,11 @@ These are Euclidean denominators. Overall factors of \(i\), the closed-loop minu
 
 ## 2A. Metric convention: keep Minkowski Ward algebra separate from Euclidean hard integrals
 
-The routing/numerator identities in §§2–4 are first defined in Minkowski signature \((+---)\), where the heavy inverse propagator is \(K^2-M_E^2\). Thus the Ward contraction in the heavy attachment is
+The routing/numerator identities in §§2–4 are first defined in Minkowski signature \((+---)\), where the heavy inverse propagator is \(K^2-M_E^2\). Since \(q=K-K'\), the Ward contraction in the heavy attachment is
 \[
 q_\mu N_E^\mu=
-2\left[(K\cdot k)(K'^2-M_E^2)
--(K'\cdot k)(K^2-M_E^2)\right].
+2\left[(K'\cdot k)(K^2-M_E^2)
+-(K\cdot k)(K'^2-M_E^2)\right].
 \]
 The Euclidean hard-region integrals are obtained only after Wick rotation, with
 \[
@@ -75,7 +75,7 @@ P_R(\slashed K+M_E)P_L=\slashed K P_L,
 \]
 with the conjugate identity for the opposite orientation. For the parity-even part, the remaining chiral trace is one half of the corresponding four-component trace.
 
-With the ordered routing above, (k'=k+q) and (K=k+p=k'+p'). For the heavy attachment (K'=k+p'=K-q), so (q=K-K'). With the ordered routing above, define
+With the ordered routing above, \(k'=k+q\) and \(K=k+p=k'+p'\). For the heavy attachment \(K'=k+p'=K-q\), so \(q=K-K'\). Define
 \[
 N_L^\mu=\frac12\operatorname{tr}
 [\slashed K\,\slashed{k'}\,\gamma^\mu\slashed k],
@@ -114,7 +114,7 @@ where \(q_L,q_E\) are replaced by the appropriate representation generators for 
 
 For a fermion line,
 \[
-q_\mu\gamma^\mu=S_0^{-1}(k+q)-S_0^{-1}(k).
+q_\mu\gamma^\mu=S_0^{-1}(k+q)-S_0^{-1}(k),\qquad q=k'-k=K-K'.
 \]
 Contracting the light-line attachment therefore collapses one of its two light propagators and produces the difference of the two heavy-light scalar two-point integrands with the external scalar momentum routed at \(p'\) and \(p\). Contracting the heavy-line attachment similarly collapses one heavy propagator and produces the corresponding difference with the heavy charge \(q_E\).
 
@@ -125,11 +125,7 @@ q_\mu\Gamma^\mu_{A H^\dagger H}(p',p)
 \Gamma_{H^\dagger H}(p')-\Gamma_{H^\dagger H}(p)
 \right],
 \]
-up to the declared all-incoming \(i\)-convention. Equivalently, the constituent charge coefficients must combine using
-\[
-q_E-q_L=-q_H.
-\]
-This relation is a stringent sign/routing test. For \(U(1)_X\), \(q_H=0\), so the light- and heavy-line longitudinal pieces must cancel. For hypercharge and \(SU(2)_L\), the remainder is precisely the scalar-leg transformation term.
+with the outgoing-\(q\) convention above. Equivalently, the constituent charge coefficients combine using \(q_L-q_E=q_H\), which follows from \(-q_L+q_H+q_E=0\). This is a stringent sign/routing test. For \(U(1)_X\), \(q_H=0\) and \(q_L=q_E\), so the light- and heavy-line longitudinal pieces cancel. For hypercharge and \(SU(2)_L\), the remainder is precisely the scalar-leg transformation term.
 
 ## 5. Hard-region expansion target
 
@@ -157,7 +153,7 @@ The expansion written in §5 is incomplete if read as expanding only the heavy p
 =\frac1{k^2+M_E^2}\sum_{n=0}^\infty
 \left[-\frac{2k\cdot p+p^2}{k^2+M_E^2}\right]^n,
 \]
-and similarly for \(p'\). The numerator must also be expanded by its explicit polynomial dependence on \(p,p',q\), with \(q=p'-p\) imposed only after the expansion.
+and similarly for \(p'\). The numerator must also be expanded by its explicit polynomial dependence on \(p,p',q\), with \(q=p-p'\) imposed only after the expansion.
 
 Both trace numerators are polynomials of external-momentum degree at most two (the heavy numerator also contains the mass term \(M_E^2 k^\mu\), of external degree zero). Explicitly, with \(k^2\equiv k_E^2\),
 \[
