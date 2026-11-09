@@ -300,7 +300,7 @@ The reproducible symbolic reduction, including the free-\(k^\mu\) tensor contrib
 ## 6. Acceptance conditions
 
 The QLD one-background matching is accepted only after:
-1. the relative sign and exact chiral numerator of both attachments are fixed from one fermion-flow convention;
+1. the common Wick/Feynman-rule phase and charge-normalization conventions are restored and checked against the fixed fermion-flow/Ward convention;
 2. the complete \(d\)-dimensional hard expansion through degree five is integrated;
 3. the soft expansion is calculated with the same routing and subtraction scheme;
 4. the complete EFT ordinary-line, Q8 contact, and scalar-source terms are summed;
