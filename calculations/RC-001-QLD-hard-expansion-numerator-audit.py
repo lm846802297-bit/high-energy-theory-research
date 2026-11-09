@@ -57,8 +57,8 @@ def reduce_graph(kind,component,numerator):
     target=5 if component=="k" else 4
     result={}
     poly_vars=[k2,*kvars,p2,q2,pp2,pq,ppdotp]
-    for n in range(5):
-        for m in range(5-n):
+    for n in range(target+1):
+        for m in range(target+1-n):
             polynomial=(-1)**(n+m)*sp.expand(shifts[0]**n*shifts[1]**m*numerator)
             poly=sp.Poly(polynomial,*poly_vars,domain="EX")
             for mon,coeff in poly.terms():
