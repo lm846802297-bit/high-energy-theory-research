@@ -204,16 +204,16 @@ J_n(\Delta)=\mu^{2\epsilon}\int\frac{d^{4-2\epsilon}l}{(2\pi)^{4-2\epsilon}}
 Their UV pole parts are
 \[
 J_0\big|_{\rm UV}=\frac{1}{16\pi^2}\frac1\epsilon,\qquad
-J_1\big|_{\rm UV}=-\frac{\Delta}{16\pi^2}\frac1\epsilon,\qquad
-J_2\big|_{\rm UV}=+\frac{\Delta^2}{32\pi^2}\frac1\epsilon.
+J_1\big|_{\rm UV}=-\frac{2\Delta}{16\pi^2}\frac1\epsilon,\qquad
+J_2\big|_{\rm UV}=+\frac{3\Delta^2}{16\pi^2}\frac1\epsilon.
 \]
 Consequently the ordinary-line graph's pole is obtained from
 \[
 \mathcal I_{\rm line}^{\mu}\big|_{\rm UV}
 =\frac{1}{16\pi^2\epsilon}
 \int_0^1 dx\left[
-A_0^\mu(x)-\Delta A_2^\mu(x)
-+\frac{\Delta^2}{2}A_4^\mu(x)
+A_0^\mu(x)-2\Delta A_2^\mu(x)
++3\Delta^2 A_4^\mu(x)
 \right],
 \]
 including the overall trace, gauge generator, coupling, Wilson coefficient, and propagator-convention factors. The \(A_i^\mu\) are to be computed from the explicit numerator in §4A with \(d\)-dimensional tensor reduction; the displayed formula fixes the scalar master normalization but does not claim the \(x\)-integral or the resulting local pole has been evaluated.
