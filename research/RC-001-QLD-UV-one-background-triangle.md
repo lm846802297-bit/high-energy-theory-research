@@ -44,7 +44,7 @@ These are Euclidean denominators. Overall factors of \(i\), the closed-loop minu
 
 ## 3. Exact parity-even chiral numerators
 
-At each Yukawa endpoint the heavy and light propagators are projected onto the same chiral component. The mass numerator of an individual heavy propagator therefore drops out:
+At each Yukawa endpoint the heavy propagator is projected onto its right-handed component, so a single heavy propagator between the two Yukawa endpoints has no mass numerator:
 \[
 P_R(\slashed K+M_E)P_L=\slashed K P_L,
 \]
@@ -56,7 +56,7 @@ N_L^\mu=\frac12\operatorname{tr}
 [\slashed K\,\slashed{k'}\,\gamma^\mu\slashed k],
 \qquad
 N_E^\mu=\frac12\operatorname{tr}
-[\slashed K'\gamma^\mu\slashed K\slashed k].
+[(\slashed K'+M_E)\gamma^\mu(\slashed K+M_E)\slashed k]_{\rm even}.
 \]
 Using \(\frac12\operatorname{tr}(\slashed a\slashed b\slashed c\slashed d)
 =2[(a\cdot b)(c\cdot d)-(a\cdot c)(b\cdot d)+(a\cdot d)(b\cdot c)]\), these become
@@ -69,10 +69,10 @@ N_L^\mu=2\left[
 \[
 N_E^\mu=2\left[
 (K\cdot k)K'^\mu-(K'\cdot K)k^\mu
-+(K'\cdot k)K^\mu
++(K'\cdot k)K^\mu+M_E^2 k^\mu
 \right].
 \]
-**Caution:** the explicit component expansion and routing signs are intentionally left as trace expressions until the symbolic routing audit below is run. Do not copy a guessed expanded numerator into the matching ledger.
+**Caution:** for the heavy-attachment graph the two heavy propagators are separated by a vector vertex. The (M_E^2 k^mu) term in the trace is therefore retained; dropping it would invalidate the heavy-line Ward contraction. The relative overall sign between the two attachment classes still has to be fixed from one explicit fermion-flow convention. The trace definitions above are the numerator starting point, not yet an accepted integrated result.
 
 The UV amplitude has the structural form
 \[
