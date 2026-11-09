@@ -165,13 +165,13 @@ The exact parameter integrals are
 hence
 \[
 \boxed{
-\Pi_W(q^2)=\frac{1}{24\pi^2}\frac16
+\Pi_W(q^2)=\frac{1}{4\pi^2}\frac16
 \left[
 \Delta_{\rm UV}-\ln\frac{-q^2-i0}{\mu_R^2}+\frac53
 \right].
 }
 \]
-Equivalently the coefficient is \(1/(144\pi^2)\) multiplying the bracket. In the \(i/(16\pi^2)\) normalization this is \(2/9\) multiplying the bracket. This normalization is for one Weyl current; it does not include the \(1/2\) from expanding the fermion determinant to second order in the background current source, nor any external Wilson coefficients.
+Equivalently the coefficient is \(1/(24\pi^2)\) multiplying the bracket. In the \(i/(16\pi^2)\) normalization this is \(2/3\) multiplying the bracket. This normalization is for one Weyl current; it does not include the \(1/2\) from expanding the fermion determinant to second order in the background current source, nor any external Wilson coefficients.
 
 For a coefficient \(c_L=|y_\ell|^2/M_{E\ell}^2\) or \(c_R=|\lambda_\ell|^2/M_{E\ell}^2\), the second-order effective action contains the corresponding current-current kernel multiplied by \(c_{L,R}^2/2\), with the full Wick-contraction and weak-index factors retained. The local UV pole is proportional to
 \[
