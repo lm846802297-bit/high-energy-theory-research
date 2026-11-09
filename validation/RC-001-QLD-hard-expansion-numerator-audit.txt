@@ -56,3 +56,26 @@ PASS: exact Ward-difference identity.
 The one-propagator contact tadpole is scaleless in the unbroken massless DR setup and has no logarithmic 1/epsilon UV pole at this order.
 
 Scope: pole-level subgraph check only. Overall Wick/Feynman-rule factors, charge-weighted full amplitude, finite matching, and common-basis Wilson coefficient remain open.
+
+
+EUCLIDEAN WICK-ROTATION CORRECTION FOR THE HEAVY ATTACHMENT (2026-11-10)
+Minkowski trace: N_E^mu contains +M_E^2 k_M^mu.
+After Wick rotation, relative to the momentum-product trace terms:
+  N_E,Euclidean^mu contains -M_E^2 k_E^mu.
+The previous Euclidean generator used the Minkowski sign and is superseded.
+
+Corrected heavy-attachment hard finite form factors:
+  F_p^E = (5P^2+13P Pp+13Pp^2-8P T-14Pp T+6T^2)/(960 pi^2 M_E^4)
+  F_pprime^E = (13P^2+13P Pp+5Pp^2-14P T-8Pp T+6T^2)/(960 pi^2 M_E^4)
+
+For q=p-p', convert the E attachment to the (p,q) basis:
+  F_p^{E,pq} = (15P^2+20PQ-30PR+9Q^2-25QR+20R^2)/(480 pi^2 M_E^4)
+  F_q^{E,pq} = -(15P^2+15PQ-20PR+5Q^2-12QR+10R^2)/(960 pi^2 M_E^4)
+
+PASS: for q_L=q_E (pure U(1)_X), the complete hard finite form factors obey
+  R F_p^{hard}+Q F_q^{hard}=0.
+The total hard result (common couplings/phase omitted) is
+  F_p^hard = Q[30(P-R)/epsilon_IR+30 L_M(P-R)+70P+21Q-70R]/(720 pi^2 M_E^4)
+  F_q^hard = -R[30(P-R)/epsilon_IR+30 L_M(P-R)+70P+21Q-70R]/(720 pi^2 M_E^4)
+
+This replaces the earlier heavy-attachment finite formulas computed with the unrotated +M_E^2 k^mu numerator.
