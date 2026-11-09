@@ -108,6 +108,79 @@ The complete routing and external scalar momenta must be fixed before performing
 
 The first term is the Q8 contact graph. The second is the ordinary background-gauge insertion on the light-fermion line. Both are one-loop graphs. They must be summed before applying the full Green-function Ward identity.
 
+## 4A. Explicit routed one-loop numerator and an important Ward-identity qualification
+
+Choose the routing in which the ordinary gauge vertex carries incoming momentum \(q\), the two massless fermion propagators carry \(k\) and \(k+q\), and the scalar factor inside the differentiated composite carries momentum \(r\). The zero-background Q8 insertion on the segment adjacent to the Q8 vertex is
+\[
+V_8^{(0)}(k;r)=(\slashed k+\slashed r)^3
+=(k+r)^2(\slashed k+\slashed r).
+\]
+The ordinary-line graph therefore has the explicit numerator
+\[
+\begin{aligned}
+N^\mu(k;q,r)
+&=\operatorname{tr}\!\left[
+\slashed{k+q}\gamma^\mu\slashed k
+(\slashed k+\slashed r)^3
+\right]\\
+&=4(k+r)^2\big[
+(k+q)^\mu\,k\!\cdot\!(k+r)
+-(k+q)\!\cdot k\,(k+r)^\mu\\
+&\hspace{37mm}
++(k+q)\!\cdot\!(k+r)\,k^\mu
+\big].
+\end{aligned}
+\]
+Thus, apart from the common \(i\)'s and coupling/charge factors fixed by the chosen propagator convention,
+\[
+\mathcal I_{\rm line}^\mu(q,r)
+=\int\!\frac{d^dk}{(2\pi)^d}
+\frac{N^\mu(k;q,r)}{[k^2+i0][(k+q)^2+i0]}.
+\]
+The Q8 contact graph is
+\[
+\mathcal I_{\rm ct}^\mu(q,r)
+=\int\!\frac{d^dk}{(2\pi)^d}
+\operatorname{tr}\!\left[
+\frac{\slashed k}{k^2+i0}
+V_{8,A}^\mu(k+r,k+r-q)
+\right],
+\]
+with the momentum assignment chosen consistently with the line graph. It has only one massless denominator and is scaleless in dimensional regularization, but setting it to zero before separating UV and IR contributions is not an acceptable UV-pole extraction procedure. Use a common IR rearrangement (for example nonexceptional external momenta or an auxiliary mass, with the same prescription on the hard and soft sides).
+
+Combining denominators in the line graph gives
+\[
+\frac1{k^2(k+q)^2}
+=\int_0^1\!dx\,
+\frac1{\left[(k+xq)^2-x(1-x)q^2+i0\right]^2}.
+\]
+After \(l=k+xq\), the numerator is a polynomial of degree at most five in \(l\). Its odd-\(l\) terms integrate to zero; the remaining rank-zero, rank-two, and rank-four tensor integrals reduce to scalar bubble masters. This is the concrete reduction target for the next calculation.
+
+**Ward-identity qualification.** The direct Q8 contact charge is the charge of the full composite source, not just that of the light fermion:
+\[
+q_{\Psi,A}=q_{f,A}+q_{\phi^\dagger,A}
+\quad(Q_{LD}),\qquad
+q_{\Psi,A}=q_{\ell_R,A}+q_{S,A}
+\quad(Q_{RD}),
+\]
+with the appropriate conjugate/representation generators. The ordinary propagator insertion carries only \(q_{f,A}\). Therefore the line-graph Ward contraction cannot be canceled against the total-composite contact term by simply identifying the two charges. The remaining scalar-constituent charge flow is part of the functional Ward identity for the external scalar legs. In particular, the statement \(q_\mu\Gamma^\mu=0\) must not be imposed diagram by diagram or inferred solely from the scaleless zero-background tadpole. The correct check is the full background-gauge Ward identity with the scalar transformations and all contact pieces included, using a regulator that preserves momentum shifts.
+
+For the model:
+\[
+\begin{array}{c|cc|c}
+& q_{f,Y}&q_{\phi^\dagger,Y}&q_{\Psi,Y}\\\hline
+Q_{LD}&-\frac12&-\frac12&-1\\
+Q_{RD}&-1&0&-1
+\end{array}
+\qquad
+\begin{array}{c|cc|c}
+& q_{f,X}/Q_\ell&q_{\phi^\dagger,X}/Q_\ell&q_{\Psi,X}/Q_\ell\\\hline
+Q_{LD}&\eta_\ell&0&\eta_\ell\\
+Q_{RD}&-\eta_\ell&2\eta_\ell&\eta_\ell
+\end{array}
+\]
+This charge-flow distinction must be retained in the explicit Ward contraction.
+
 ## 5. Model-specific channel ledger
 
 | Sector | Light fermion \(f\) | Scalar factor in \(\Psi\) | Direct Q8 contact | Ordinary gauge insertion |
