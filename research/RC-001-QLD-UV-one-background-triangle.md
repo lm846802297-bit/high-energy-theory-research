@@ -163,6 +163,36 @@ For the light-attachment graph, \(N_L^\mu\) has external-momentum degree zero th
 
 A reproducible expansion generator should represent the external momenta as formal commuting vectors, generate the series to total degree five, reduce tensor integrals using \(d\)-dimensional rotational invariance, and only then perform the radial integrals. In particular, do not impose \(q=p'-p\) before generating the series, because it obscures the independent Taylor coefficients needed to identify the local operator basis.
 
+## 5B. Euclidean hard-region master integrals
+
+After expanding all shifted propagators, every tensor integral is reduced to rotationally invariant scalar masters. For an even-rank tensor,
+\[
+\int_k k^{\mu_1}\cdots k^{\mu_{2n}} f(k^2)
+=\frac{\mathcal S^{\mu_1\cdots\mu_{2n}}}
+{d(d+2)\cdots(d+2n-2)}
+\int_k (k^2)^n f(k^2),
+\]
+where \(\mathcal S\) is the sum over all \((2n-1)!!\) metric pairings. Odd-rank tensors vanish.
+
+A convenient radial master, with \(\int_k\equiv\mu^{2\epsilon}\int d^dk_E/(2\pi)^d\), is
+\[
+J_{a b}^{(t)}
+=\int_k\frac{(k_E^2)^t}
+{(k_E^2)^a(k_E^2+M_E^2)^b}
+=\frac{\mu^{2\epsilon}}{(4\pi)^{d/2}}
+(M_E^2)^{d/2+t-a-b}
+\frac{\Gamma(d/2+t-a)\Gamma(a+b-d/2-t)}
+{\Gamma(d/2)\Gamma(b)}.
+\]
+The formula is understood by analytic continuation in dimensional regularization. It keeps UV and IR singularities visible as separate Gamma-function singularities when a given expanded term has both. It must not be replaced by a four-dimensional cutoff integral.
+
+For the two attachment classes, the denominator-series terms reduce to this master with:
+- light attachment: \(a=2+n_L\), \(b=1+n_E\);
+- heavy attachment: \(a=1\), \(b=2+n_{E1}+n_{E2}\);
+where the nonnegative expansion indices are further constrained by total external degree five, including the explicit numerator degree. The heavy-line \(M_E^2 k^\mu\) term and the cubic trace term must be expanded separately before applying the tensor reduction.
+
+This gives a reproducible route to the hard coefficient, but the finite sums over Taylor partitions and the final \(1/\epsilon\) and finite terms have not yet been evaluated. In particular, a Gamma-function pole in an individual hard Taylor term is not by itself the matched UV pole: it must be combined with the EFT soft region in the same subtraction convention.
+
 ## 6. Acceptance conditions
 
 The QLD one-background matching is accepted only after:
