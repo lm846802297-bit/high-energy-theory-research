@@ -695,6 +695,8 @@ For an Abelian background, convenient local representatives with these stripped 
 \]
 Use the Fourier convention in which \(H\) carries incoming momentum \(p\), \(H^\dagger\) carries outgoing momentum \(p'\), and the background momentum \(q=p-p'\) leaves the vertex. The common gauge coupling/charge and overall 1PI phase are stripped. With that convention, the one-background vertices are respectively \(\mathcal B_P^\mu,\mathcal B_Q^\mu,\mathcal B_S^\mu\). The first two representatives are useful Abelian lifts of the transverse columns; \(\mathcal O_S\) is the covariant scalar-source representative whose two-point kernel is \(P^3\). A non-Abelian completion requires the appropriate adjoint-generator insertion and covariant derivative on the field strength and is not claimed here.
 
+Do not identify \(\mathcal O_S\) with \(Q_{LD}^{(8)}\). The latter is the fermionic Green-basis operator \((\bar L H)(i\slashed D)^3(H^\dagger L)\); \(\mathcal O_S\) is the bosonic scalar two-point source representative whose \(p^6\) inverse-kernel term is gauged to produce \(\mathcal B_S^\mu\). The \(Q_{LD}^{(8)}\) one-background contact/tadpole discussed in §5F is a separate EFT topology. The Ward identity fixes the source coefficient in the current amplitude, but an independent extraction of the \(p^6/M_E^4\) scalar two-point coefficient from the exact two-point loop is still required before treating this as a cross-validated source matching result.
+
 Flatten the two form factors into the six independent quadratic monomials \((P^2,PQ,PR,Q^2,QR,R^2)\), first for \(F_p\) and then for \(F_q\). The exact polynomial projection matrix is
 \[
 M_{\rm amp}=
