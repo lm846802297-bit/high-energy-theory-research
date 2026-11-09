@@ -2,7 +2,6 @@
 """Exact charge and inverse-ME-order audit for the original axial Higgs source."""
 from __future__ import annotations
 
-from fractions import Fraction
 import json
 
 
@@ -42,8 +41,8 @@ def audit():
     assert q_mu_source == 0 and q_tau_source == 0
 
     # The source insertion is multiplied by an O(M_E^-4) operator coefficient.
-    order_cross = Fraction(1, 4) + Fraction(1, 1)  # M^-4 * C5(M^-1) -> M^-5
-    order_square = Fraction(1, 4) + Fraction(2, 1)  # M^-4 * C5^2(M^-2) -> M^-6
+    order_cross = 4 + 1  # M^-4 * C5(M^-1) -> M^-5
+    order_square = 4 + 2  # M^-4 * C5^2(M^-2) -> M^-6
     assert order_cross == 5 and order_square == 6
 
     return {
