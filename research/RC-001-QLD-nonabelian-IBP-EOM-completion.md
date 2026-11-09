@@ -289,7 +289,7 @@ For an external weak field, \(j_H^{A\mu}=j_H^{a\mu}\) is the adjoint Higgs curre
 \partial_\mu f_H=2\lambda_H\partial_\mu X
 +\lambda_{HS}\partial_\mu Y.
 \]
-The Yukawa-source and source-square companions remain those listed in §5K; no source term is discarded by the non-Abelian extension.
+The Yukawa-source and source-square companions remain those listed in §5K; no source term is discarded by the non-Abelian extension. For the original axial model, the charged-lepton source uses the flavor-diagonal assumption: the \\(\bar L_\mu H\tau_R\\) and \\(\bar L_\tau H\mu_R\\) entries are gauge-allowed but set to zero by the block-diagonal model definition, whereas the diagonal \\(\mu,\tau\\) renormalizable entries are gauge-forbidden. See [RC-001-QLD-Higgs-source-EOM-model-map.md](RC-001-QLD-Higgs-source-EOM-model-map.md) for the explicit charge matrix and the dimension-five source.
 
 ## 7. Hard coefficient map and interpretation
 
