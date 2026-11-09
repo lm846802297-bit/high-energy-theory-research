@@ -182,7 +182,7 @@ N_E^\mu=2\left[
 +(k^2+k\cdot p)p'^\mu
 \right].
 \]
-The Lorentz vector itself carries one external momentum after tensor reduction. Therefore the degree-five vector amplitude requires degree-four scalar form factors. For the surviving explicit-vector components, the contributions come from degree-four denominator-series terms times degree-zero numerator coefficients, degree-three denominator terms times degree-one numerator coefficients, and degree-two denominator terms times degree-two numerator coefficients. The free-\(k^\mu\) components vanish in this projection by odd-rank rotational invariance. Expanding only the heavy denominators misses terms and cannot yield the complete hard coefficient.
+The Lorentz vector itself carries one external momentum after tensor reduction. Therefore the degree-five vector amplitude requires degree-four scalar form factors. For explicit external-vector components, the contributions come from degree-four denominator-series terms times degree-zero numerator coefficients, degree-three denominator terms times degree-one numerator coefficients, and degree-two denominator terms times degree-two numerator coefficients. For a free \(k^\mu\) component, the loop vector itself is converted into an external vector by the angular average; its scalar coefficient must therefore be extracted at degree five, and its odd-rank tensor average can be nonzero. Expanding only the heavy denominators misses terms and cannot yield the complete hard coefficient.
 
 A reproducible expansion generator should represent the external momenta as formal commuting vectors, generate the series to total degree five, reduce tensor integrals using \(d\)-dimensional rotational invariance, and only then perform the radial integrals. In particular, do not impose \(q=p'-p\) before generating the series, because it obscures the independent Taylor coefficients needed to identify the local operator basis.
 
@@ -212,7 +212,7 @@ The formula is understood by analytic continuation in dimensional regularization
 For the two attachment classes, the denominator-series terms reduce to this master with:
 - light attachment: \(a=2+n_L\), \(b=1+n_E\);
 - heavy attachment: \(a=1\), \(b=2+n_{E1}+n_{E2}\);
-where the nonnegative expansion indices are constrained by scalar form-factor degree four. The \(M_E^2 k^\mu\) and other free-\(k^\mu\) terms vanish in this particular degree-five vector projection after the odd-rank angular average; they must nevertheless be retained until that average is performed.
+where the nonnegative expansion indices are constrained by scalar form-factor degree four. The \(M_E^2 k^\mu\) and other free-\(k^\mu\) terms must be retained: at scalar degree five their odd number of loop-momentum contractions combines with the free vector index to give an even-rank rotational tensor and can contribute to the external-vector form factors.
 
 This gives a reproducible route to the hard coefficient, but the finite sums over Taylor partitions and the final \(1/\epsilon\) and finite terms have not yet been evaluated. In particular, a Gamma-function pole in an individual hard Taylor term is not by itself the matched UV pole: it must be combined with the EFT soft region in the same subtraction convention.
 
@@ -222,48 +222,30 @@ The earlier 28/20/20 count treated the scalar coefficient degree as the full vec
 
 For a decomposition \(\Gamma^\mu=p^\mu F_p+q^\mu F_q\), a total degree-five vector amplitude requires degree-four scalar form factors. The corrected generator and radial reduction are in calculations/RC-001-QLD-hard-expansion-numerator-audit.py.
 
-## 5D. Corrected degree-five vector amplitude: d-dimensional radial reduction
+## 5D. Corrected degree-five vector amplitude: complete d-dimensional radial reduction
 
-The corrected extraction uses scalar form-factor degree four, so that the explicit vector supplies the fifth external momentum. All shifted propagators are expanded. The radial denominator indices are assigned separately:
-\[
-L\text{-attachment}:\quad a=2+n_q,\quad b=1+n_p,
-\]
-\[
-E\text{-attachment}:\quad a=1,\quad b=2+n_p+n_{p'}.
-\]
-In particular, the light-graph \(p\)-shift increases the massive denominator power \(b\), not the massless power \(a\). This is essential.
+The corrected tensor reduction treats the two vector structures separately:
+- explicit \(p^\mu,q^\mu,p'^\mu\) numerator components require scalar form-factor degree four;
+- a free \(k^\mu\) component requires scalar coefficient degree five, because its angular average pairs the free index with one external momentum.
 
-After exact \(d\)-dimensional angular averaging, the surviving form-factor structures are:
-\[
-L:\quad F_p^L=\sum_{12\ {\rm terms}}c^L_{p;abt}J_{ab}^{(t)},\qquad
-F_q^L=\sum_{12\ {\rm terms}}c^L_{q;abt}J_{ab}^{(t)},
-\]
-\[
-E:\quad F_p^E=\sum_{3\ {\rm terms}}c^E_{p;abt}J_{ab}^{(t)},\qquad
-F_{p'}^E=\sum_{3\ {\rm terms}}c^E_{p';abt}J_{ab}^{(t)}.
-\]
-The \(k^\mu\) numerator components vanish in this degree-four scalar projection by odd-rank rotational invariance. The complete radial-master inventory is
+After angular averaging, the structures combine into 17 radial terms each for the light-attachment \(p^\mu\) and \(q^\mu\) form factors, and 7 terms each for the heavy-attachment \(p^\mu\) and \(p'^\mu\) form factors. The free-\(k^\mu\) contributions are included in these counts. There are 25 distinct radial masters:
 \[
 \begin{split}
-&(1,4,1),(1,5,2),(1,6,3),\\
-&(2,3,1),(2,4,2),(2,5,3),\\
-&(3,2,1),(3,3,2),(3,4,3),\\
-&(4,1,1),(4,2,2),(4,3,3),\\
-&(5,1,2),(5,2,3),(6,1,3).
+&(1,4,1),(1,5,1),(1,5,2),(1,6,2),(1,6,3),(1,7,3),(1,7,4),\\
+&(2,3,1),(2,4,2),(2,5,3),(2,6,4),\\
+&(3,2,1),(3,3,2),(3,4,3),(3,5,4),\\
+&(4,1,1),(4,2,2),(4,3,3),(4,4,4),\\
+&(5,1,2),(5,2,3),(5,3,4),(6,1,3),(6,2,4),(7,1,4).
 \end{split}
 \]
-Here each tuple is \((a,b,t)\) in \(J_{ab}^{(t)}\).
+Each tuple denotes \((a,b,t)\) in \(J_{ab}^{(t)}\). The denominator indices are
+\[
+L:\quad a=2+n_q,\quad b=1+n_p,\qquad
+E:\quad a=1,\quad b=2+n_p+n_{p'}.
+\]
+The \(p\)-shift in the light graph raises the massive denominator power \(b\), not the massless power \(a\).
 
-For the Euclidean master
-\[
-J_{ab}^{(t)}=\mu^{2\epsilon}\int\frac{d^{4-2\epsilon}k}{(2\pi)^{4-2\epsilon}}
-\frac{(k^2)^t}{(k^2)^a(k^2+M_E^2)^b},
-\]
-define
-\[
-L_M=\ln\frac{\mu^2}{M_E^2}+\ln(4\pi)-\gamma_E.
-\]
-All 15 masters are UV convergent in this hard-region coefficient. Six have an IR pole:
+For all 25 masters, the UV Gamma-function argument \(a+b-2-t\) is positive, so the hard-region integrals are UV convergent. Eight masters have IR poles:
 \[
 \begin{array}{c|c}
 (a,b,t)&J_{ab}^{(t)}\\\hline
@@ -272,48 +254,48 @@ All 15 masters are UV convergent in this hard-region coefficient. Six have an IR
 (4,2,2)&-\dfrac{1}{16\pi^2M_E^4}\left(\dfrac1{\epsilon_{\rm IR}}+L_M+2\right)\\
 (5,1,2)&+\dfrac{1}{16\pi^2M_E^4}\left(\dfrac1{\epsilon_{\rm IR}}+L_M+1\right)\\
 (5,2,3)&-\dfrac{1}{16\pi^2M_E^4}\left(\dfrac1{\epsilon_{\rm IR}}+L_M+2\right)\\
-(6,1,3)&+\dfrac{1}{16\pi^2M_E^4}\left(\dfrac1{\epsilon_{\rm IR}}+L_M+1\right).
+(6,1,3)&+\dfrac{1}{16\pi^2M_E^4}\left(\dfrac1{\epsilon_{\rm IR}}+L_M+1\right)\\
+(6,2,4)&-\dfrac{1}{16\pi^2M_E^4}\left(\dfrac1{\epsilon_{\rm IR}}+L_M+2\right)\\
+(7,1,4)&+\dfrac{1}{16\pi^2M_E^4}\left(\dfrac1{\epsilon_{\rm IR}}+L_M+1\right).
 \end{array}
 \]
-The remaining nine masters are finite:
+The remaining 17 masters are finite. Here
 \[
-\begin{array}{c|c@{\qquad}c|c}
-(a,b,t)&J_{ab}^{(t)}&(a,b,t)&J_{ab}^{(t)}\\\hline
-(1,4,1)&\frac1{96\pi^2M_E^4}&(1,5,2)&\frac1{192\pi^2M_E^4}\\
-(1,6,3)&\frac1{320\pi^2M_E^4}&(2,3,1)&\frac1{32\pi^2M_E^4}\\
-(2,4,2)&\frac1{96\pi^2M_E^4}&(2,5,3)&\frac1{192\pi^2M_E^4}\\
-(3,3,2)&\frac1{32\pi^2M_E^4}&(3,4,3)&\frac1{96\pi^2M_E^4}\\
-(4,3,3)&\frac1{32\pi^2M_E^4}&&
-\end{array}
+L_M=\ln\frac{\mu^2}{M_E^2}+\ln(4\pi)-\gamma_E.
 \]
 
-Summing the radial masters gives the following Euclidean hard-region form factors in the trace/routing convention of §3, **before** inserting \(g_A|y_\ell|^2\), representation charges, the closed-loop sign, and the still-to-be-fixed relative sign of the two attachment classes. Write \(P=p^2\), \(Q=q^2\), \(R=p\cdot q\), \(P'=p'^2\), and \(T=p\cdot p'\). For the light attachment:
+Summing the radial masters gives the following Euclidean hard-region form factors in the trace/routing convention of §3, before restoring the common Wick/Feynman-rule phase, \(g_A|y_\ell|^2\), and representation charges. Let \(P=p^2\), \(Q=q^2\), \(R=p\cdot q\), \(P'=p'^2\), and \(T=p\cdot p'\). For the light attachment:
 \[
 F_p^L\big|_{\rm hard}=
-\frac{Q(P-R)}{32\pi^2M_E^4\epsilon_{\rm IR}}
-+\frac{6L_M Q(P-R)-2P^2+4PR+13PQ-4R^2-11RQ+2Q^2}
-{192\pi^2M_E^4},
+\frac{Q(P-R)}{24\pi^2M_E^4\epsilon_{\rm IR}}
++\frac{12L_MQ(P-R)-9P^2+18PR+16PQ-12R^2-13RQ+3Q^2}
+{288\pi^2M_E^4},
 \]
 \[
 F_q^L\big|_{\rm hard}=
--\frac{3PR+PQ-4R^2}{96\pi^2M_E^4\epsilon_{\rm IR}}
-+\frac{-18L_MPR-6L_MPQ+24L_MR^2+18P^2-87PR+PQ+92R^2-36RQ+6Q^2}
+-\frac{R(P-R)}{24\pi^2M_E^4\epsilon_{\rm IR}}
++\frac{-24L_MPR+24L_MR^2+9P^2-68PR+9PQ+62R^2-24RQ+3Q^2}
 {576\pi^2M_E^4}.
 \]
 For the heavy attachment:
 \[
 F_p^E\big|_{\rm hard}=
-\frac{3P^2+16PP'+3PT+18P'^2-12P'T+2T^2}
+\frac{-9P^2+13PP'+27P'^2-22P'T+6T^2}
 {2880\pi^2M_E^4},
 \]
 \[
 F_{p'}^E\big|_{\rm hard}=
-\frac{18P^2+16PP'-12PT+3P'^2+3P'T+2T^2}
+\frac{27P^2+13PP'-22PT-9P'^2+6T^2}
 {2880\pi^2M_E^4}.
 \]
-The poles shown here are **infrared poles of the hard region**, not UV counterterm poles. They must cancel the corresponding UV poles from the EFT soft region. The heavy-attachment hard contribution is finite in this projection.
 
-These results are an evaluated hard-region subgraph decomposition, not yet the complete UV amplitude: the common Wick/Feynman-rule phase, relative attachment sign, charge-weighted sum, \(q=p'-p\) reduction, EFT soft graphs, and final matching remain to be completed.
+A useful internal check is that the light-attachment hard IR pole is transverse:
+\[
+R\,F_p^{L,\rm pole}+Q\,F_q^{L,\rm pole}=0.
+\]
+The poles are IR poles of the hard region, not UV counterterms. They must cancel UV poles from the complete EFT soft sector. These are subgraph form factors, not yet the charge-weighted full UV amplitude or the matched Wilson coefficient; the EFT contact/source/EOM soft contributions and the full hard-soft cancellation remain open.
+
+The reproducible symbolic reduction, including the free-\(k^\mu\) tensor contributions, is in calculations/RC-001-QLD-hard-expansion-numerator-audit.py, with checks in validation/RC-001-QLD-hard-expansion-numerator-audit.txt.
 
 ## 6. Acceptance conditions
 
