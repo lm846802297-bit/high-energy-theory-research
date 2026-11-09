@@ -184,10 +184,10 @@ EP_pole, EP_finite = pole_and_finite(EP)
 EPP_pole, EPP_finite = pole_and_finite(EPP)
 
 P, Q, R, PP, T = sp.symbols("P Q R PP T")
-assert sp.simplify(LP_pole - Q*(P-R)/(32*sp.pi**2*M2**2)
-                   .subs({P:p2,Q:q2,R:pq})) == 0
-assert sp.simplify(LQ_pole - (-(3*P*R+P*Q-4*R**2)
-                   /(96*sp.pi**2*M2**2)).subs({P:p2,Q:q2,R:pq})) == 0
+expected_LP_pole = (Q*(P-R)/(32*sp.pi**2*M2**2)).subs({P:p2,Q:q2,R:pq})
+expected_LQ_pole = (-(3*P*R+P*Q-4*R**2)/(96*sp.pi**2*M2**2)).subs({P:p2,Q:q2,R:pq})
+assert sp.simplify(LP_pole-expected_LP_pole) == 0
+assert sp.simplify(LQ_pole-expected_LQ_pole) == 0
 assert EP_pole == 0 and EPP_pole == 0
 
 print("HARD FORM FACTORS (Euclidean trace convention; common Feynman-rule factors omitted)")
