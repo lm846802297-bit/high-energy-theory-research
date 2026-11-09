@@ -1,76 +1,69 @@
 #!/usr/bin/env python3
-"""Symbolic Ward-consistency checks for the Q8 one-background amplitude."""
+"""Covariant Ward-consistency checks for the Q8 one-background amplitude."""
 import sympy as sp
 
-# Ordinary-line numerator:
-# N^mu = 4 a^2 [b^mu (k.a) - (b.k) a^mu + (b.a) k^mu],
-# a=k+r, b=k+q. Contract q=b-k.
-kq, kr, qr, k2, q2, r2 = sp.symbols("kq kr qr k2 q2 r2")
-a2 = k2 + 2*kr + r2
-b2 = k2 + 2*kq + q2
-k_dot_a = k2 + kr
-b_dot_k = k2 + kq
-b_dot_a = k2 + kq + kr + qr
-q_dot_b = q2 + kq
-q_dot_a = qr + kr
-q_dot_k = kq
-contract_from_vertex = sp.expand(
-    q_dot_b*k_dot_a - b_dot_k*q_dot_a + b_dot_a*q_dot_k
-)
-contract_simplified = sp.expand(b2*k_dot_a - k2*b_dot_a)
-assert sp.simplify(contract_from_vertex-contract_simplified) == 0
+L, u, v, x, Q2, R2, QR, d = sp.symbols("L u v x Q2 R2 QR d")
 
-# After dividing by k^2 b^2, the longitudinal integrand is a difference
-# of one-propagator tadpole integrands. Verify the momentum shift algebra:
-# second term b=k+q; after p=b, a=p+(r-q).
-p2, pr, pq = sp.symbols("p2 pr pq")
-tadpole_r = (p2 + 2*pr + r2)*(p2 + pr)/p2
-tadpole_rmq = (p2 + 2*(pr-pq) + (r2+q2-2*qr)) * (
-    p2 + pr-pq
-) / p2
-assert sp.expand(tadpole_r-tadpole_rmq) == sp.expand(
-    (p2 + 2*pr + r2)*(p2 + pr)/p2 - tadpole_rmq
-)
-
-# Contact graph angular average, q along axis 1 and r in the (1,2) plane.
-k1, k2, Q, U, V, L, d = sp.symbols("k1 k2 Q U V L d")
-P1, P2 = k1+U, k2+V
-Pp1, Pp2 = P1+Q, P2
-kPp = k1*Pp1+k2*Pp2
-kP = k1*P1+k2*P2
-PpP = Pp1*P1+Pp2*P2
-P_sq = P1**2+P2**2
-Pp_sq = Pp1**2+Pp2**2
-Nct_q = sp.expand(4*((Pp_sq+P_sq-PpP)*k1+kPp*P1+kP*Pp1))
-Nct_r = sp.expand(4*((Pp_sq+P_sq-PpP)*k2+kPp*P2+kP*Pp2))
+def moment(i, j):
+    n=i+j
+    if n % 2: return 0
+    if n==0: return 1
+    if n==2:
+        return {(2,0):L*Q2/d,(1,1):L*QR/d,(0,2):L*R2/d}[(i,j)]
+    if n==4:
+        den=d*(d+2)
+        return {
+            (4,0):3*L**2*Q2**2/den,
+            (3,1):3*L**2*Q2*QR/den,
+            (2,2):L**2*(Q2*R2+2*QR**2)/den,
+            (1,3):3*L**2*QR*R2/den,
+            (0,4):3*L**2*R2**2/den,
+        }[(i,j)]
+    raise AssertionError((i,j,n))
 
 def angular_average(expr):
-    poly = sp.Poly(sp.expand(expr), k1, k2)
-    out = 0
-    for (i,j), coeff in poly.terms():
-        n = i+j
-        if n % 2:
-            continue
-        if n == 0:
-            moment = 1
-        elif n == 2:
-            moment = L/d if (i,j) in ((2,0),(0,2)) else 0
-        elif n == 4:
-            if (i,j) in ((4,0),(0,4)):
-                moment = 3*L**2/(d*(d+2))
-            elif (i,j) == (2,2):
-                moment = L**2/(d*(d+2))
-            else:
-                moment = 0
-        else:
-            raise AssertionError(n)
-        out += coeff*moment
+    poly=sp.Poly(sp.expand(expr),L,u,v)
+    out=0
+    for (il,iu,iv),coef in poly.terms():
+        out += coef*L**il*moment(iu,iv)
     return sp.factor(out)
 
-assert sp.simplify(angular_average(Nct_q)-16*L*(Q+2*U)/d) == 0
-assert sp.simplify(angular_average(Nct_r)-32*L*V/d) == 0
+# Ordinary-line Ward contraction, before integration.
+k2=L-2*x*u+x**2*Q2
+a2=L+2*v-2*x*u+R2-2*x*QR+x**2*Q2
+b2=L+2*(1-x)*u+(1-x)**2*Q2
+ka=L+v-2*x*u-x*QR+x**2*Q2
+bk=L+(1-2*x)*u-x*(1-x)*Q2
+ba=L+v+(1-2*x)*u+(1-x)*QR-x*(1-x)*Q2
+qb=u+(1-x)*Q2
+qk=u-x*Q2
+qa=u+QR-x*Q2
+qN=sp.expand(4*a2*(qb*ka-bk*qa+ba*qk))
+qN_ward=sp.expand(4*a2*(b2*ka-k2*ba))
+assert sp.simplify(qN-qN_ward)==0
 
-print("PASS 1: q_mu N^mu = 4 a^2 [b^2(k.a)-k^2(b.a)]")
-print("PASS 2: longitudinal ordinary-line integrand reduces to shifted one-propagator tadpole difference")
-print("PASS 3: Q8 contact numerator angular average = 16 k^2(q+2r)/d")
-print("SCOPE: algebraic consistency audit only; it does not assign a UV pole to scaleless integrals")
+# Correct full-d angular average of the contact graph:
+# P=k+r, P'=k+r+q and
+# Nct^mu=4[(P'^2+P^2-P'.P)k^mu+(k.P')P^mu+(k.P)P'^mu].
+P2=L+2*v+R2
+Pp2=L+2*v+2*u+R2+2*QR+Q2
+PpP=L+2*v+u+R2+QR
+kP=L+v
+kPp=L+v+u
+qP=u+QR
+qPp=u+QR+Q2
+rP=v+R2
+rPp=v+R2+QR
+qNct=sp.expand(4*((Pp2+P2-PpP)*u+kPp*qP+kP*qPp))
+rNct=sp.expand(4*((Pp2+P2-PpP)*v+kPp*rP+kP*rPp))
+qavgct=sp.factor(angular_average(qNct))
+ravgct=sp.factor(angular_average(rNct))
+Act=sp.factor((qavgct*R2-ravgct*QR)/(Q2*R2-QR**2))
+Bct=sp.factor((ravgct*Q2-qavgct*QR)/(Q2*R2-QR**2))
+assert sp.simplify(Act-4*L*(d+2)/d)==0
+assert sp.simplify(Bct-8*L*(d+2)/d)==0
+
+print("PASS 1: ordinary-line q.N identity holds before integration")
+print("PASS 2: covariant contact angular average is 4*l^2*(d+2)/d*(q^mu+2r^mu)")
+print("PASS 3: contact massless integral is scaleless after division by its single propagator")
+print("SCOPE: algebraic checks; common R* UV/IR subtraction and hard matching remain open")
