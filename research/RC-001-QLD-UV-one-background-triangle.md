@@ -645,7 +645,7 @@ The six derivative-distribution terms and the two field-strength derivative plac
 
 ## 5K. Abelian covariant IBP/EOM reduction of the transverse pair
 
-This subsection reduces the two transverse representatives of §5J before calling them independent operators. It is restricted to an Abelian background, consistently with the operator representatives in §5J. Let
+This subsection reduces the two transverse representatives of §5J before calling them independent operators. It is restricted to a single Abelian background, consistently with the operator representatives in §5J; other gauge backgrounds are set to zero in this commutator subcalculation. Restoring the full SM covariant derivative adds the corresponding other field strengths and mixed two-background contacts, which are not projected here. Let
 \[
 D_\mu=\partial_\mu+i g_A q_H A_\mu,\qquad
 [D_\mu,D_\nu]H=i g_Aq_HF_{\mu\nu}H,
