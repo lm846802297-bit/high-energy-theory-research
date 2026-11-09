@@ -1,68 +1,86 @@
-# RC-001 — Q8 one-background Ward-consistency audit and provisional-pole correction
+# RC-001 — Q8 one-background Ward consistency and corrected tensor reduction
 
-**Status (2026-11-10):** a direct Ward-contraction identity exposes an unresolved inconsistency in the previously recorded ordinary-line UV residue. The displayed line-graph pole must be treated as provisional and must not be used for UV matching until the discrepancy is resolved.
+**Status (2026-11-10):** the apparent conflict between the ordinary-line Ward contraction and its UV residue is resolved. The earlier tensor reduction omitted loop components transverse to the external \(q,r\) plane. A covariant \(d\)-dimensional angular average gives a transverse ordinary-line pole. The contact-graph angular average has also been corrected. Full R* subtraction and UV-hard matching remain open.
 
-## 1. Exact contraction before integration
+## 1. Exact ordinary-line contraction
 
-Let \(a=k+r\), \(b=k+q\). With the ordinary-line numerator
+Let \(a=k+r\), \(b=k+q\). The numerator is
 \[
-N^\mu=4a^2\left[b^\mu(k\cdot a)-(b\cdot k)a^\mu+(b\cdot a)k^\mu\right],
+N^\mu=4a^2[b^\mu(k\cdot a)-(b\cdot k)a^\mu+(b\cdot a)k^\mu].
 \]
-the contraction is exactly
+Using \(q=b-k\),
 \[
-q_\mu N^\mu
-=4a^2\left[b^2(k\cdot a)-k^2(b\cdot a)\right].
+q_\mu N^\mu=4a^2[b^2(k\cdot a)-k^2(b\cdot a)].
+\]
+Hence
+\[
+\frac{q_\mu N^\mu}{k^2b^2}
+=4(k+r)^2\left[\frac{k\cdot(k+r)}{k^2}
+-\frac{(k+q)\cdot(k+r)}{(k+q)^2}\right].
+\]
+A translation-invariant shift in the second term turns the integral into a difference of massless one-propagator tadpole integrals. The complete dimensionally regulated longitudinal integral vanishes. This identity is an integrand-level check and is retained.
+
+## 2. Source of the previous discrepancy
+
+The earlier calculation placed \(q\) and \(r\) in a two-dimensional coordinate plane but evaluated scalar factors such as \((k+r)^2\) using only the two displayed loop components. In \(d=4-2\epsilon\), the remaining \(d-2\) transverse components contribute to \(l^2\) and to all angular averages. Omitting them corrupts the coefficients of \(L=l^2\) and \(L^2\), and produced a spurious nonzero longitudinal pole.
+
+The old planar result is superseded. The corrected script uses invariant variables \(L=l^2\), \(u=l\cdot q\), \(v=l\cdot r\) and full \(d\)-dimensional tensor moments.
+
+## 3. Corrected ordinary-line UV residue
+
+The covariant reduction gives
+\[
+\langle N^\mu\rangle
+=[A_0+A_2L+A_4L^2]q^\mu+
+[B_0+B_2L+B_4L^2]r^\mu.
+\]
+The parameter-integrated coefficients are
+\[
+A_{\rm UV}=\frac43(q\cdot r)[q\cdot r-r^2],\qquad
+B_{\rm UV}=-\frac43q^2[q\cdot r-r^2].
 \]
 Therefore
 \[
-\frac{q_\mu N^\mu}{k^2b^2}
-=4(k+r)^2\left[
-\frac{k\cdot(k+r)}{k^2}
--\frac{(k+q)\cdot(k+r)}{(k+q)^2}
-\right].
+\boxed{
+\mathcal I_{\rm line}^{\mu}\big|_{\rm UV}
+=\frac{1}{16\pi^2\epsilon}\frac43(q\cdot r-r^2)
+[(q\cdot r)q^\mu-q^2r^\mu].
+}
 \]
-After shifting the loop momentum in the second term, this becomes the difference of two one-propagator tadpole integrands, with scalar momenta \(r\) and \(r-q\). In translation-invariant dimensional regularization each is scaleless in the massless theory. Thus the complete dimensionally regulated ordinary-line integral has a vanishing longitudinal contraction before any UV/IR pole split.
-
-This is a stringent algebraic check and is independent of the previous Feynman-parameter tensor reduction.
-
-## 2. Contact-vertex numerator
-
-For the Q8 contact vertex
+It obeys
 \[
-V_8^\mu(P',P)=P'^2\gamma^\mu+\slashed P'\gamma^\mu\slashed P+\gamma^\mu P^2,
+q_\mu\mathcal I_{\rm line}^{\mu}\big|_{\rm UV}=0.
+\]
+This is the ordinary-line graph only, with \(\operatorname{tr}\mathbf1=4\) included and overall Wilson/gauge factors omitted. It is not yet the full Q8 soft pole or a matched Wilson coefficient.
+
+Reproduction: calculations/RC-001-dimension8-Q8-one-background-line-pole-covariant.py. Recorded output: validation/RC-001-dimension8-Q8-one-background-line-pole-covariant.txt.
+
+## 4. Corrected Q8 contact angular average
+
+For
+\[
+N_{\rm ct}^\mu=4[(P'^2+P^2-P'\cdot P)k^\mu
++(k\cdot P')P^\mu+(k\cdot P)P'^\mu],
 \quad P=k+r,\quad P'=k+r+q,
 \]
-the one-propagator loop numerator is
+the full \(d\)-dimensional angular average is
 \[
-N_{\rm ct}^\mu=\operatorname{tr}[\slashed k V_8^\mu(P',P)].
+\boxed{
+\langle N_{\rm ct}^\mu\rangle
+=4\,l^2\,\frac{d+2}{d}(q^\mu+2r^\mu).
+}
 \]
-Its angular average in \(d\) dimensions is
-\[
-\left\langle N_{\rm ct}^\mu\right\rangle
-=\frac{16\,k^2}{d}(q^\mu+2r^\mu).
-\]
-Consequently the massless contact integral is scaleless:
-\[
-\int\frac{d^dk}{(2\pi)^d}\frac{\langle N_{\rm ct}^\mu\rangle}{k^2}
-\propto(q^\mu+2r^\mu)\int\frac{d^dk}{(2\pi)^d}1=0.
-\]
-An auxiliary-mass IR rearrangement generates only regulator-mass-proportional UV poles in this one-propagator integral; such terms vanish when the auxiliary mass is removed. The contact graph by itself therefore does not obviously supply the mass-independent degree-five pole previously attributed to the ordinary-line graph.
+This corrects the earlier coefficient \(16l^2/d\), which came from the same incomplete planar averaging. After division by the single massless propagator, the integral is scaleless in dimensional regularization. With an auxiliary mass, its UV pole is proportional to a positive power of that auxiliary mass and vanishes as the regulator is removed. A common R* prescription is still needed to document the UV/IR split rigorously.
 
-## 3. Consequence: previous line-pole formula is not accepted yet
+Reproduction: calculations/RC-001-dimension8-Q8-one-background-consistency-audit.py. Recorded output: validation/RC-001-dimension8-Q8-one-background-consistency-audit.txt.
 
-The previously recorded result in research/RC-001-dimension8-Q8-one-background-vertex.md has a nonzero longitudinal UV residue. That conflicts with the exact contraction identity above if the same translation-invariant regulator and the same UV/IR separation are used consistently.
+## 5. Remaining matching tasks
 
-The likely failure point is not the Dirac trace alone: it may involve an invalid extraction of UV poles from power-divergent tensor integrals, an omitted contribution in the momentum routing/operator insertion, or an incomplete set of one-loop diagrams/functional derivatives. The scalar constituent charge-flow identity must also be included. No single explanation is selected without a complete re-derivation.
+1. Fix the exact functional-determinant routing and all external scalar momenta.
+2. Apply one common IR rearrangement to line and contact graphs.
+3. Show explicitly that the auxiliary-regulator dependence cancels or vanishes in the massless limit.
+4. Derive the full composite-source Ward identity including scalar transformations.
+5. Compute the UV-hard region with the same regulator/subtraction convention.
+6. Verify soft/hard pole cancellation and then perform EOM/IBP reduction.
 
-**Action:** the old coefficient is explicitly provisional and is not to be used as a dimension-eight Wilson coefficient or as evidence of a nonzero local pole.
-
-## 4. Required resolution sequence
-
-1. Re-derive the one-background amplitude from the fermion functional determinant with all scalar momenta and fermion momentum orientations fixed.
-2. Check the Ward contraction at the integrand level before Feynman parametrization.
-3. Reconcile the two-propagator representation with the difference of one-propagator tadpoles using a regulator that preserves translations.
-4. Perform UV/IR separation with an explicit R* or equivalent prescription, tracking power-divergent and logarithmic terms separately.
-5. Include Q8 contact and scalar constituent charge-flow terms with the exact composite-source charges.
-6. Only after the above agree, recompute the transverse/local form factors and extract the genuine UV pole.
-
-No complete one-loop Q8 soft pole, counterterm, or hard-matched Wilson coefficient is claimed.
+No complete one-loop Q8 matching coefficient is claimed at this stage.
