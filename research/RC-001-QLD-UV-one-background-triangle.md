@@ -1,6 +1,6 @@
 # RC-001 — QLD UV one-background triangle: exact integrands and Ward ledger
 
-**Status (2026-11-10):** the two full-theory attachment classes, their routing, parity-even numerators, and relative sign are fixed at the integrand/Ward level. The complete degree-five Euclidean hard-region subgraph reduction through \(M_E^{-4}\) is evaluated. The corrected ordinary light-line EFT soft UV poles cancel both hard IR poles exactly in the \(p^\mu\) and \(q^\mu\) form factors. The \(Q_{LD}^{(8)}\) covariant one-background contact vertex and its Ward identity are recorded below. Overall Wick/Feynman-rule factors, the charge-weighted full amplitude, finite hard/soft comparison in a common basis, and final Wilson-coefficient projection remain open.
+**Status (2026-11-10):** the two full-theory attachment classes, their routing, parity-even numerators, and relative sign are fixed at the integrand/Ward level. The complete degree-five Euclidean hard-region subgraph reduction through \(M_E^{-4}\) is evaluated with the corrected Wick sign. The ordinary light-line soft form factors are now evaluated through \(O(\epsilon^0)\); their poles cancel both hard IR poles, and the pure-\(U(1)_X\) hard-plus-soft amplitude is transverse and matching-scale independent. Overall 1PI normalization, hypercharge/\(SU(2)_L\) charge projections, full source/EOM basis projection, and the final nonredundant Wilson coefficient remain open.
 
 ## 1. Frozen interaction and charges
 
@@ -328,7 +328,7 @@ A useful internal check is that the light-attachment hard IR pole is transverse:
 \[
 R\,F_p^{L,\rm pole}+Q\,F_q^{L,\rm pole}=0.
 \]
-The poles are IR poles of the hard region, not UV counterterms. They must cancel UV poles from the complete EFT soft sector. These are subgraph form factors, not yet the charge-weighted full UV amplitude or the matched Wilson coefficient; the EFT contact/source/EOM soft contributions and the full hard-soft cancellation remain open.
+The poles are IR poles of the hard region, not UV counterterms. In the pure-\(U(1)_X\) sector they cancel the ordinary-line EFT soft UV poles in both form factors, as shown in §5E. The common coupling/1PI phase and the hypercharge/\(SU(2)_L\) charge-weighted source projections are not yet included.
 
 The reproducible symbolic reduction, including the free-\(k^\mu\) tensor contributions, is in calculations/RC-001-QLD-hard-expansion-numerator-audit.py, with checks in validation/RC-001-QLD-hard-expansion-numerator-audit.txt.
 
@@ -379,7 +379,48 @@ F_{q,\mathrm{hard}}^{\rm IR}
 \]
 Thus **the ordinary light-line soft graph already cancels both hard IR poles** in this parity-even projection. The previously reported \(p^\mu\) remainder is superseded and must not be used to motivate an additional pole counterterm or to assign a pole to a particular Q8/source graph.
 
-The corrected soft calculation and its pole/Ward checks are included in calculations/RC-001-QLD-hard-expansion-numerator-audit.py and the paired validation output. This closes the pole-level hard/soft comparison for the ordinary light-line subgraph only; it does not yet establish the finite, charge-weighted, complete UV–EFT matching coefficient.
+The complete soft form factors through \(O(\epsilon^0)\) are
+\[
+F_{p,\mathrm{soft}}=
+-\frac{Q(P-R)}{24\pi^2M_E^4}
+\left[
+\frac1{\epsilon_{\rm UV}}+
+\ln\frac{\mu^2}{Q}+\ln(4\pi)-\gamma_E+\frac53
+\right],
+\]
+\[
+F_{q,\mathrm{soft}}=
++\frac{R(P-R)}{24\pi^2M_E^4}
+\left[
+\frac1{\epsilon_{\rm UV}}+
+\ln\frac{\mu^2}{Q}+\ln(4\pi)-\gamma_E+\frac53
+\right].
+\]
+They are transverse beyond the pole:
+\[
+R F_{p,\mathrm{soft}}+QF_{q,\mathrm{soft}}=0.
+\]
+
+For \(q_L=q_E\), adding the corrected hard \(L+E\) result in §5D gives the complete method-of-regions amplitude
+\[
+F_{p,\mathrm{UV+soft}}^X=
+\frac{Q}{720\pi^2M_E^4}
+\left[
+30(P-R)\ln\frac{Q}{M_E^2}
++20(P-R)+21Q
+\right],
+\]
+\[
+F_{q,\mathrm{UV+soft}}^X=
+-\frac{R}{720\pi^2M_E^4}
+\left[
+30(P-R)\ln\frac{Q}{M_E^2}
++20(P-R)+21Q
+\right].
+\]
+Both the \(1/\epsilon\) poles and the arbitrary \(\mu\)-dependence cancel, and the full result obeys the \(U(1)_X\) Ward identity. These are still stripped form factors: the common \(g_Xq_\ell|y_\ell|^2\) and 1PI phase are omitted. The hard part alone is the local matching contribution; the soft part is reproduced by the EFT loop and must not be folded into the Wilson coefficient.
+
+The reproducible calculation is in calculations/RC-001-QLD-hard-expansion-numerator-audit.py, with the exact checks and expressions in validation/RC-001-QLD-hard-expansion-numerator-audit.txt. This closes the ordinary-line finite hard/soft comparison for the pure-\(U(1)_X\), parity-even projection. It does not yet establish the hypercharge/\(SU(2)_L\) projections or the full nonredundant Wilson vector.
 
 ## 5F. Covariant \(Q_{LD}^{(8)}\) contact vertex
 
