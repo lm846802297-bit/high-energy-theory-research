@@ -1,0 +1,5 @@
+N_L^mu = 2[(k2+2 k.p+p.q) k^mu -(k2+k.q) p^mu +(k2+k.p) q^mu]
+N_E^mu = 2[(k2+M2-p.p') k^mu +(k2+k.p') p^mu +(k2+k.p) p'^mu]
+PASS: both four-gamma traces expanded exactly in the declared vector basis
+PASS: N_L and N_E have external degree <=2; heavy numerator also has M_E^2 degree 0
+SCOPE: numerator polynomial only; no denominator Taylor expansion or loop integration.
