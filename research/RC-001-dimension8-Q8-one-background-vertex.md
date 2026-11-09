@@ -220,6 +220,43 @@ including the overall trace, gauge generator, coupling, Wilson coefficient, and 
 
 The one-propagator contact graph must be treated with the same IR rearrangement before declaring its UV pole. In particular, a scaleless integral set to zero in dimensional regularization is not by itself a UV-pole audit.
 
+## 4C. Evaluated ordinary-line UV residue
+
+Using the explicit numerator in §4A, the angular averages were decomposed as \(A_n^\mu=a_n(x)q^\mu+b_n(x)r^\mu\). In the \(d\to4\) residue,
+\[
+\begin{aligned}
+a_0={}&-4x(x-1)(q^2x-2q\cdot r)
+(q^2x^2-2xq\cdot r+r^2),\\
+a_2={}&-4[3q^2x^3-2q^2x^2-6(q\cdot r)x^2
++4(q\cdot r)x+2r^2x-r^2],\\
+a_4={}&-\frac43(3x-1),\\
+b_0={}&-4q^2x(x-1)(q^2x^2-2xq\cdot r+r^2),\\
+b_2={}&-4q^2x(x-1),\qquad b_4=\frac43.
+\end{aligned}
+\]
+The Feynman-parameter integral then gives
+\[
+\boxed{
+\begin{aligned}
+\mathcal I_{\rm line}^{\mu}\big|_{\rm UV}
+=\frac{1}{16\pi^2\epsilon}\frac1{15}\bigg\{&
+q^\mu\left[(q^2)^2-8q^2(q\cdot r)+5q^2r^2
++20(q\cdot r)^2-20(q\cdot r)r^2\right]\\
+&+r^\mu q^2\left[q^2-10(q\cdot r)+10r^2\right]\bigg\}.
+\end{aligned}}
+\]
+The trace factor \(\operatorname{tr}\mathbf1=4\) is included in this expression. The overall \(i\)-convention, gauge coupling/generator, and the EFT Wilson coefficient are not included; these multiply the displayed residue according to the fixed Feynman rules. The result is for the ordinary fermion-line graph only.
+
+Its longitudinal contraction is
+\[
+q_\mu\mathcal I_{\rm line}^{\mu}\big|_{\rm UV}
+=\frac{1}{16\pi^2\epsilon}
+\frac{q^2(q^2-2q\cdot r)(q^2-5q\cdot r+5r^2)}{15}.
+\]
+It is not zero. This is not a failure of the Ward identity: this graph carries the light-fermion charge only, while the Q8 contact vertex carries the total composite-source charge. The missing scalar-constituent charge-flow terms and the Q8 contact graph must be included before testing the full background Ward identity. Do not impose transversality on this isolated graph.
+
+The result is reproduced by calculations/RC-001-dimension8-Q8-one-background-line-pole.py. The script independently constructs the angular averages, integrates \(x\), and asserts both vector coefficients and the longitudinal contraction. It intentionally excludes the contact graph and does not claim a complete Q8 amplitude or a matched Wilson coefficient.
+
 ## 5. Model-specific channel ledger
 
 | Sector | Light fermion \(f\) | Scalar factor in \(\Psi\) | Direct Q8 contact | Ordinary gauge insertion |
