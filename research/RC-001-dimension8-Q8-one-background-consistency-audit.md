@@ -98,6 +98,21 @@ This pole vanishes as \(m_{\rm IR}\to0\). It is an auxiliary-mass artifact propo
 
 This explicit mass-regulated tadpole check does not replace the full R* forest subtraction if additional subdivergences or operator insertions are present. It does show that the one-propagator contact tadpole does not contribute a mass-independent UV pole in this projection.
 
+## 4B. R* consistency: nonexceptional line bubble versus scaleless contact tadpole
+
+The ordinary-line graph has two massless denominators \(k^2(k+q)^2\). Keeping a nonexceptional Euclidean background momentum \(q^2>0\) makes this bubble IR finite in four dimensions; its UV pole is therefore extracted directly from the \(J_0,J_1,J_2\) masters without introducing a fermion mass that would break the chiral gauge representation. The full covariant reduction is independently re-evaluated and gives
+\[
+A_{\rm UV}=\frac43(q\cdot r)(q\cdot r-r^2),\qquad
+B_{\rm UV}=-\frac43q^2(q\cdot r-r^2),
+\]
+so the line pole remains transverse.
+
+The one-propagator contact tadpole has no denominator carrying the nonexceptional external momentum. It remains scaleless and needs an R* infrared subtraction. The auxiliary-mass rearrangement in §4A is used only to expose its UV/IR content; it is **not** inserted into the chiral fermion propagators of the line graph. This distinction is deliberate: naively replacing each chiral fermion denominator by \(k^2+m_{\rm IR}^2\) while leaving the massless numerator and gauge vertex unchanged would violate the fermion Ward identity and is not an acceptable common regulator.
+
+For the contact graph the auxiliary-mass UV residue is \(6m_{\rm IR}^4(q^\mu+2r^\mu)/(16\pi^2\epsilon)\), which vanishes in the massless limit. Thus this projection has no mass-independent contact UV pole. The line and contact pieces are treated within one R* subtraction framework, but not by imposing an identical mass deformation on both topologies.
+
+**Scope of this conclusion:** the one-background, two-scalar projection only. The full scalar-source functional Ward identity, including the transformations of both external scalar legs and the complete \(Q_{LD}\)/\(Q_{RD}\) constituent attachments, must still be derived from the same functional determinant before the result is promoted to a complete gauge-covariant Green function.
+
 ## 5. Remaining matching tasks
 
 1. Fix the exact functional-determinant routing and all external scalar momenta.
