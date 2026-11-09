@@ -113,6 +113,22 @@ For the contact graph the auxiliary-mass UV residue is \(6m_{\rm IR}^4(q^\mu+2r^
 
 **Scope of this conclusion:** the one-background, two-scalar projection only. The full scalar-source functional Ward identity, including the transformations of both external scalar legs and the complete \(Q_{LD}\)/\(Q_{RD}\) constituent attachments, must still be derived from the same functional determinant before the result is promoted to a complete gauge-covariant Green function.
 
+## 4C. Functional Ward identity for the scalar two-point projection
+
+For a complex scalar constituent \(\phi\) of charge \(Q_\phi\), background gauge invariance of the renormalized effective action implies, in momentum space and with all momenta incoming,
+\[
+q_\mu\Gamma^\mu_{A\phi^\dagger\phi}(p+q,p)
+=gQ_\phi\left[\Gamma_{\phi^\dagger\phi}(p+q)
+-\Gamma_{\phi^\dagger\phi}(p)\right],
+\]
+up to the overall \(i\)-convention used for the 1PI vertices. The right-hand side is the difference of the scalar two-point 1PI function at the two scalar momenta. In the massless unbroken-phase single-Q8-insertion projection, that two-point function is the scaleless one-propagator fermion tadpole and vanishes in dimensional regularization. Thus the pole-level target is
+\[
+q_\mu\Gamma^\mu_{A\phi^\dagger\phi}\big|_{\rm UV}=0.
+\]
+The corrected ordinary-line pole satisfies this identity. The contact graph has no mass-independent UV pole after its R* infrared subtraction, so it does not alter this pole-level check.
+
+This is a Ward-identity check for the restricted scalar two-point projection and its one-background derivative. It is not a substitute for deriving the complete \(Q_{LD}\) and \(Q_{RD}\) functional identities with all constituent fields, flavor charges, and non-Abelian Slavnov–Taylor terms. Those remain part of the full Green-basis matching.
+
 ## 5. Remaining matching tasks
 
 1. Fix the exact functional-determinant routing and all external scalar momenta.
