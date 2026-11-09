@@ -1,0 +1,6 @@
+PASS 1: q_mu V8^mu = g_A q_Psi [Slash(P+q)^3 - Slash(P)^3]
+PASS 2: one-background Q8 contact vertex contains the three ordered insertion positions
+PASS 3: Q_LD and Q_RD composite charges agree: (Y,x)=(-1,eta_l), mu/tau eta=+1/-1
+PASS 4: direct Q8 contacts are B: -gY, A_prime: eta_l*gX*Q_l, W: 0
+SCOPE: exact one-background contact vertex and algebraic Ward contraction only
+OPEN: full one-loop momentum integral, ordinary constituent-line insertion, two-background amplitude, UV pole, and hard matching
