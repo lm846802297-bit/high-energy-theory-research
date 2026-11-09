@@ -220,6 +220,22 @@ including the overall trace, gauge generator, coupling, Wilson coefficient, and 
 
 The one-propagator contact graph must be treated with the same IR rearrangement before declaring its UV pole. In particular, a scaleless integral set to zero in dimensional regularization is not by itself a UV-pole audit.
 
+## 4D. Status correction after the Ward-consistency audit
+
+**The coefficient in §4C is provisional and is not accepted for matching.** A direct contraction of the unintegrated numerator gives
+\[
+q_\mu N^\mu=4(k+r)^2\left[(k+q)^2\,k\cdot(k+r)-k^2(k+q)\cdot(k+r)\right].
+\]
+After division by the two propagator denominators, this is a difference of two one-propagator tadpole integrands. A translation-invariant shift makes each massless tadpole scaleless. The resulting vanishing longitudinal integral conflicts with the nonzero longitudinal pole quoted in §4C.
+
+The Q8 contact graph has angular-averaged numerator
+\[
+\langle N_{\rm ct}^\mu\rangle=\frac{16k^2}{d}(q^\mu+2r^\mu),
+\]
+and its massless one-propagator integral is also scaleless. A consistent UV/IR rearrangement and the scalar-source Ward terms must be included before assigning separate UV residues.
+
+Until the discrepancy is resolved, the §4C expression is a formal result of the stated tensor-reduction prescription only; it is **not a validated UV pole** and must not be used as a Wilson coefficient or matching input. See research/RC-001-dimension8-Q8-one-background-consistency-audit.md for the exact identity and required re-derivation.
+
 ## 4C. Evaluated ordinary-line UV residue
 
 Using the explicit numerator in §4A, the angular averages were decomposed as \(A_n^\mu=a_n(x)q^\mu+b_n(x)r^\mu\). In the \(d\to4\) residue,
