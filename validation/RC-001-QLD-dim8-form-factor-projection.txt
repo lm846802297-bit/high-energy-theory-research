@@ -67,3 +67,14 @@ Full-amplitude cross-check:
 Scope:
   The three columns are independent in the restricted off-shell one-background amplitude projection. The displayed Abelian operator representatives are not yet a complete non-Abelian or nonredundant SMEFT basis. IBP, Higgs/lepton EOM, gauge EOM, source/current companions, counterterms, and the other O(M_E^-4) channels remain to be reduced.
   The hard-region coefficients retain IR poles and are not finite renormalized Wilson coefficients.
+
+
+Independent scalar two-point source check:
+  B0 = Delta_UV - L + 1 + z/2 + z^2/6 + z^3/12 + O(z^4)
+  [z^3] { -h [Delta_UV-L+1 + (1-z) B0] } = +h/12
+  h=|y_l|^2/(16 pi^2), hence
+  Pi_Hl|p^6 = |y_l|^2 p^6/(192 pi^2 M_E^4)
+  This equals the source coefficient c_S extracted from the QLD hard Ward identity.
+  PASS: exact rational coefficient 1/12
+  PASS: conversion to |y_l|^2/(192 pi^2 M_E^4)
+  LIMIT: this is an analytic extension of the recorded A0/B0 two-point kernel, not a new FeynArts/FeynCalc run.
