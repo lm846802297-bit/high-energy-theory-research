@@ -72,6 +72,18 @@ g_Aq_{\Psi,A}
 \]
 This is the exact one-background Ward identity for the Q8 contact vertex. It is an algebraic identity before loop integration and does not by itself establish the Ward identity of the complete one-loop Green function. The ordinary gauge insertion on the light-fermion propagator and the scalar-source charge flow must also be included.
 
+## 3A. Ordinary fermion-line Ward identity and complete check target
+
+For the massless fermion propagator \(S(k)=\slashed k/(k^2+i0)\), the ordinary gauge vertex obeys
+\[
+S(k+q)\slashed q\,S(k)=S(k)-S(k+q),
+\]
+equivalently \(S_{\rm out}(S_{\rm out}^{-1}-S_{\rm in}^{-1})S_{\rm in}=S_{\rm in}-S_{\rm out}\). Thus contraction of the ordinary-line graph telescopes into the difference of the Q8 insertion evaluated at the two adjacent loop momenta. The contact identity in §3 supplies precisely the corresponding difference of \(\slashed P^3\). After the loop-momentum shift is made with a regulator that preserves translations, the complete one-background amplitude must satisfy the background Ward identity.
+
+For the two-scalar Q8 projection in the massless unbroken theory, the zero-background one-loop two-point integral contains only one massless propagator and polynomial numerators; it is scaleless in dimensional regularization. Hence its renormalized value is zero in this restricted setup. The corresponding full one-background Ward identity therefore requires a transverse amplitude, \(q_\mu\Gamma^\mu_{8,A}=0\), after the ordinary-line and Q8-contact pieces are combined. This is a target for the integrated calculation, not a claim that the integrated amplitude has already been evaluated.
+
+The ordinary-line propagator identity and the Q8 contact identity are both included in the symbolic audit script. The script verifies algebraic building blocks; it does not perform the loop integration or prove the regulated momentum-shift step for a chosen subtraction prescription.
+
 ## 4. One-loop integrand to be evaluated
 
 For a massless light fermion \(f=L_\ell\) or \(\ell_R\), define the zero-background Q8 insertion on the fermion line by
