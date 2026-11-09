@@ -163,3 +163,10 @@ Thus neither \(\mathcal O_{F\mathcal J_H}^{(8)}\) nor \(\mathcal O_{S,\mathrm{sr
 The companion script checks the complete \(3\times3\) charged-lepton Yukawa \(U(1)_X\) charge matrix, distinguishes gauge-forbidden diagonal \(\mu/\tau\) entries from gauge-allowed but model-set-to-zero \(\mu\tau\) off-diagonal entries, verifies the \(C_5\) source neutrality, and checks the inverse-\(M_E\) order of the source insertions.
 
 This closes the **model-specific source inventory and charge classification**. It does not complete the Lorentz/weak/color Fierz reduction, choose a nonredundant fermionic dimension-eight basis, evaluate additional loops, or close the full UV–EFT matching.
+
+
+## 6. Source-square Fierz-channel follow-up
+
+The source-square term is now expanded into its three diagonal source pairs and three cross pairs plus Hermitian conjugates. The chirality, weak-index, and color-channel census is recorded in [RC-001-QLD-source-square-Fierz-channel-census.md](RC-001-QLD-source-square-Fierz-channel-census.md), with an exact bookkeeping audit in [calculations/RC-001-QLD-source-square-Fierz-channel-audit.py](../calculations/RC-001-QLD-source-square-Fierz-channel-audit.py).
+
+This is a pre-Fierz classification only. It does not apply four-dimensional Fierz identities, choose evanescent operators, or close the fermionic dimension-eight basis.
