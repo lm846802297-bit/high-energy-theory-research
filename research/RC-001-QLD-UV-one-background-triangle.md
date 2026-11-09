@@ -297,6 +297,43 @@ The poles are IR poles of the hard region, not UV counterterms. They must cancel
 
 The reproducible symbolic reduction, including the free-\(k^\mu\) tensor contributions, is in calculations/RC-001-QLD-hard-expansion-numerator-audit.py, with checks in validation/RC-001-QLD-hard-expansion-numerator-audit.txt.
 
+## 5E. First EFT-soft comparison: ordinary light-line insertion only
+
+The \(M_E^{-4}\) soft expansion of the light-attachment graph begins with
+\[
+I_{L,\mathrm{soft}}^{(M^{-4}),\mu}
+=-\frac1{M_E^4}\int_k
+\frac{N_L^\mu(k,p,q)(k+p)^2}{k^2(k+q)^2}.
+\]
+Using one Feynman parameter \(x\), shifting \(k=\ell-xq\), retaining the \(d\)-dimensional angular averages, and extracting the UV pole of the radial masters gives the ordinary-line-only soft pole
+\[
+F_{p,\mathrm{soft,line}}^{\rm UV}
+=-\frac{P Q-3P R-2Q R+4R^2}
+{48\pi^2M_E^4\epsilon_{\rm UV}},
+\qquad
+F_{q,\mathrm{soft,line}}^{\rm UV}
+=+\frac{R(P-R)}
+{24\pi^2M_E^4\epsilon_{\rm UV}},
+\]
+where \(P=p^2,\ Q=q^2,\ R=p\cdot q\).
+
+Comparison with the hard poles in §5D shows:
+\[
+F_{q,\mathrm{hard}}^{\rm IR}
++F_{q,\mathrm{soft,line}}^{\rm UV}=0,
+\]
+whereas the \(p^\mu\) coefficient leaves
+\[
+F_{p,\mathrm{hard}}^{\rm IR}
++F_{p,\mathrm{soft,line}}^{\rm UV}
+=
+\frac{P Q+3P R-4R^2}
+{48\pi^2M_E^4\epsilon}.
+\]
+This nonzero remainder is **not** a matching failure: the calculation above includes only the ordinary light-line soft insertion. It is the target that must be cancelled by the remaining EFT soft companions—ordered Q8 background contact terms, scalar-source/constituent attachments, and the dimension-seven EOM-induced \(C_5C_7^*\) terms (plus any required field/source counterterms). No one of these contributions is assigned the residual by assumption.
+
+This is a useful partial check: the \(q^\mu\) pole cancels already in the ordinary-line sector, while the \(p^\mu\) residual isolates the missing local/source contribution. The full soft sum and the UV counterterm matching remain open.
+
 ## 6. Acceptance conditions
 
 The QLD one-background matching is accepted only after:
