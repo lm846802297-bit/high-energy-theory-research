@@ -184,3 +184,80 @@ print("L attachment F_q finite:",LQfinite.subs(sub))
 print("E attachment F_p finite:",EPfinite.subs(sub))
 print("E attachment F_pprime finite:",EPPfinite.subs(sub))
 print("SCOPE: subgraph hard form factors only; common Wick/Feynman-rule factors and EFT-soft matching remain open.")
+
+
+# Ordinary-line EFT-soft UV pole at O(M_E^-4). The soft expansion of the
+# light-attachment heavy propagator contributes -K^2/M_E^4. Feynman combine
+# 1/[k^2(k+q)^2], shift k=l-x q, and retain the total degree-five vector term.
+x = sp.symbols("x")
+ell2, ellp, ellq = sp.symbols("ell2 ellp ellq")
+A = ell2+ellp+(1-2*x)*ellq+(1-x)*R-x*(1-x)*Q       # K.k'
+B = ell2+(1-2*x)*ellq-x*(1-x)*Q                  # k'.k
+C = ell2+ellp-2*x*ellq-x*R+x**2*Q                # K.k
+Ksq = ell2+2*ellp-2*x*ellq+P-2*x*R+x**2*Q
+soft_num = {
+    "ell": sp.expand(2*(A-B+C)*Ksq),
+    "p": sp.expand(2*(-B+C)*Ksq),
+    "q": sp.expand(2*(-x*A+x*B+(1-x)*C)*Ksq),
+}
+soft_vars = [ell2,ellp,ellq,P,Q,R]
+soft_reduced = {"p":{}, "q":{}}
+
+for component, expression in soft_num.items():
+    poly = sp.Poly(expression,*soft_vars,domain="EX")
+    for monomial, coeff in poly.terms():
+        ex = dict(zip(soft_vars,monomial))
+        labels = ["p"]*ex[ellp]+["q"]*ex[ellq]
+        degree = ex[ellp]+ex[ellq]+2*(ex[P]+ex[Q]+ex[R])
+        scalar = coeff*P**ex[P]*Q**ex[Q]*R**ex[R]
+        if component == "ell":
+            if len(labels)%2 != 1:
+                continue
+            r = (len(labels)+1)//2
+            if degree+2*(ex[ell2]+r) != 5:
+                continue
+            den = angular_denominator(r)
+            for i,vec in enumerate(labels):
+                rest = labels[:i]+labels[i+1:]
+                for product,mult in pairings(rest).items():
+                    t = ex[ell2]+r
+                    delta = (x*(1-x)*Q)**t
+                    soft_reduced[vec][t] = soft_reduced[vec].get(t,0) + scalar*mult*product*delta/den
+        else:
+            if len(labels)%2:
+                continue
+            r = len(labels)//2
+            t = ex[ell2]+r
+            if degree+2*t != 4:
+                continue
+            den = angular_denominator(r) if r else 1
+            product = sum(mult*term for term,mult in pairings(tuple(labels)).items())
+            delta = (x*(1-x)*Q)**t
+            soft_reduced[component][t] = soft_reduced[component].get(t,0) + scalar*product*delta/den
+
+soft_uv = {}
+for vector, terms in soft_reduced.items():
+    residue = sum(
+        sp.integrate(sp.expand(expr)*((-1)**t*(t+1)),(x,0,1))
+        for t,expr in terms.items()
+    )/(16*sp.pi**2)
+    # The minus sign is from 1/(M_E^2+K^2)=1/M_E^2-K^2/M_E^4+...
+    soft_uv[vector] = sp.factor(-residue.subs({p2:P,q2:Q,pq:R})/M2**2)
+
+expected_soft_p = -(P*Q-3*P*R-2*Q*R+4*R**2)/(48*sp.pi**2*M2**2)
+expected_soft_q = R*(P-R)/(24*sp.pi**2*M2**2)
+assert sp.simplify(soft_uv["p"]-expected_soft_p)==0
+assert sp.simplify(soft_uv["q"]-expected_soft_q)==0
+
+hard_plus_soft_q = sp.simplify(LQpole.subs(sub)+soft_uv["q"])
+hard_plus_soft_p = sp.factor(LPpole.subs(sub)+soft_uv["p"])
+assert hard_plus_soft_q==0
+expected_residual_p = (P*Q+3*P*R-4*R**2)/(48*sp.pi**2*M2**2)
+assert sp.simplify(hard_plus_soft_p-expected_residual_p)==0
+
+print("SOFT ORDINARY-LINE UV POLES (before the remaining Q8 contacts/source terms)")
+print("F_p soft-line UV:",soft_uv["p"])
+print("F_q soft-line UV:",soft_uv["q"])
+print("PASS: hard IR + ordinary-line soft UV cancels in the q^mu form factor.")
+print("Residual p^mu pole requiring the remaining EFT soft companions:",hard_plus_soft_p)
+print("SCOPE: ordinary light-line soft graph only; Q8 contact/source and C5*C7 EOM companions remain uncomputed.")
