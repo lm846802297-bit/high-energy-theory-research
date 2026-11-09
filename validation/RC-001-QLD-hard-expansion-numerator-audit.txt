@@ -1,33 +1,26 @@
-N_L^mu = 2[(k2+2 k.p+p.q) k^mu -(k2+k.q) p^mu +(k2+k.p) q^mu]
-N_E^mu = 2[(k2+M2-p.p') k^mu +(k2+k.p') p^mu +(k2+k.p) p'^mu]
-PASS: both four-gamma traces expanded exactly in the declared vector basis
-PASS: N_L and N_E have external degree <=2; heavy numerator also has M_E^2 degree 0
-SCOPE: numerator polynomial only; no denominator Taylor expansion or loop integration.
+QLD HARD DEGREE-FIVE RADIAL REDUCTION — corrected 2026-11-10
 
+Momentum convention: q=p-p', q=k'-k=K-K'.
+Scalar form-factor degree:
+  explicit external vector p^mu/q^mu/p'^mu: degree 4;
+  free loop vector k^mu: coefficient degree 5 before angular averaging.
 
-CORRECTED TOTAL-DEGREE-FIVE RADIAL REDUCTION (2026-11-10)
-The Lorentz vector carries one external momentum, so scalar form factors are extracted at degree four.
-PASS: L attachment has 12 radial terms in F_p and 12 in F_q.
-PASS: E attachment has 3 radial terms in F_p and 3 in F_pprime.
-PASS: k^mu components vanish by odd-rank d-dimensional angular averaging at scalar degree four.
-PASS: light graph indices: a=2+n_q, b=1+n_p (the p-shift raises the massive denominator power).
-PASS: heavy graph indices: a=1, b=2+n_p+n_pprime.
-PASS: 15 unique radial masters; all are UV convergent in the hard region.
-IR-singular masters: (3,2,1), (4,1,1), (4,2,2), (5,1,2), (5,2,3), (6,1,3).
-These are hard-region IR poles and must cancel EFT-soft UV poles. No relative graph sign or complete matched coefficient is claimed.
+PASS: all shifted propagators expanded.
+PASS: light graph radial indices a=2+n_q, b=1+n_p.
+PASS: heavy graph radial indices a=1, b=2+n_p+n_pprime.
+PASS: d-dimensional angular average includes free-k vector terms.
+Term counts after tensor reduction:
+  light attachment: F_p 17 radial terms, F_q 17 radial terms;
+  heavy attachment: F_p 7 radial terms, F_pprime 7 radial terms.
+PASS: 25 distinct J[a,b,t] radial masters.
+PASS: all 25 masters are UV convergent in the hard region.
+IR-singular masters:
+  (3,2,1), (4,1,1), (4,2,2), (5,1,2),
+  (5,2,3), (6,1,3), (6,2,4), (7,1,4).
+PASS: hard light-attachment pole:
+  F_p^pole = Q(P-R)/(24 pi^2 M_E^4 epsilon_IR)
+  F_q^pole = -R(P-R)/(24 pi^2 M_E^4 epsilon_IR)
+PASS: transverse pole check R F_p^pole + Q F_q^pole = 0.
+PASS: heavy-attachment hard form factors are finite in this projection.
 
-
-EVALUATED HARD FORM FACTORS (Euclidean trace convention; common couplings/sign omitted)
-Let P=p^2, Q=q^2, R=p.q, Pp=p'^2, T=p.p', and LM=ln(mu^2/M_E^2)+ln(4 pi)-gamma_E.
-
-L attachment:
-F_p pole = Q(P-R)/(32 pi^2 M_E^4 epsilon_IR)
-F_p finite = [6 LM Q(P-R)-2P^2+4PR+13PQ-4R^2-11RQ+2Q^2]/(192 pi^2 M_E^4)
-F_q pole = -(3PR+PQ-4R^2)/(96 pi^2 M_E^4 epsilon_IR)
-F_q finite = [-18 LM PR-6 LM PQ+24 LM R^2+18P^2-87PR+PQ+92R^2-36RQ+6Q^2]/(576 pi^2 M_E^4)
-
-E attachment (finite):
-F_p = [3P^2+16P Pp+3P T+18Pp^2-12Pp T+2T^2]/(2880 pi^2 M_E^4)
-F_pprime = [18P^2+16P Pp-12P T+3Pp^2+3Pp T+2T^2]/(2880 pi^2 M_E^4)
-
-Checks: 12+12 light radial structures; 3+3 heavy radial structures; 15 masters; all masters UV-convergent in the hard region; six light-attachment masters have IR poles; heavy attachment finite. These are subgraph results before restoring common Wick/Feynman-rule factors and charges. Hard IR poles must cancel EFT-soft UV poles. No complete matched coefficient is claimed.
+Scope: Euclidean hard-region subgraphs only. Common Wick/Feynman-rule factors, charge-weighted complete UV amplitude, EFT contact/source/EOM soft contributions, hard-soft pole cancellation, and final Wilson coefficient remain open.
