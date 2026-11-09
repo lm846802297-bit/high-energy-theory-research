@@ -82,3 +82,21 @@ Reproducibility boundary:
   reparameterization, potential derivatives, and charge boundary. The
   covariant product-rule/commutator derivation is displayed above; this
   is not an independent diagram-package run or a complete SMEFT basis.
+
+
+Actual local script output (SymPy exact symbolic arithmetic):
+~~~text
+RC-001 Abelian QLD8 IBP/EOM coefficient audit
+PASS: O_P + O_Q/2 has the exact off-shell vertex (P+P') T^mu/2.
+PASS: the combination is transverse and vanishes on the massless on-shell surface.
+PASS: a O_P + b O_Q -> a O_E,H + (b-a/2) O_Q.
+Hard-region retained O_Q coefficients (IR poles not yet subtracted):
+  U(1)_X: -(15*L_M*eps_IR + 14*eps_IR + 15)/(720*eps_IR) with overall q_E
+  U(1)_Y: (60*L_M*eps_IR + 47*eps_IR + 60)/(5760*eps_IR)
+  SU(2)_L amplitude-level only: -(12*L_M*eps_IR + 13*eps_IR + 12)/(576*eps_IR) (non-Abelian EOM reduction not claimed)
+PASS: f_H and partial_nu f_H generate the stated X,Y companions.
+PASS: q_H=0 removes the A'-commutator terms for U(1)_X.
+PASS: c_S=1/192 is untouched by this transverse IBP step.
+LIMIT: this is an exact coefficient/kinematic audit, not an external
+diagram-package run or a complete non-Abelian SMEFT basis reduction.
+~~~
