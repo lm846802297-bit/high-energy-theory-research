@@ -219,6 +219,48 @@ Adding the soft terms gives the scale-independent matched kernels
 \]
 The constant \(+1/4\) is the difference \(5/3-17/12\). The arbitrary matching scale cancels between the hard logarithm and the soft logarithm.
 
+## 5. P0.1–P0.4: crossed on-shell amplitude and normalization audit
+
+The full on-shell four-scalar expansion and the crossed pairing are now recorded in research/RC-001-dimension8-crossed-on-shell-box-audit.md. This extends the transverse projection above without changing its result.
+
+For one ordered cycle, the complete on-shell hard polynomial is
+\[
+\mathcal H_{\rm hard}(s,u)
+=
+\frac{1}{96\pi^2M_E^4}
+\left[
+(s^2+2su)(\Delta_{\rm IR}-L_E)
++\frac{11}{6}s^2+\frac{10}{3}su-\frac{3}{10}u^2
+\right].
+\]
+The direct soft expansion of the same UV numerator is
+\[
+\mathcal H_{\rm soft}(s,u)
+=
+-\frac{s^2+2su}{96\pi^2M_E^4}
+\left[
+\Delta_{\rm UV}-\ln\frac{s}{\mu_R^2}+\frac53
+\right].
+\]
+The hard IR and soft UV poles cancel. The matched result is independent of \(\mu_R\).
+
+Importantly, the full on-shell hard polynomial contains a finite local remainder beyond the transverse-current projection:
+\[
+\mathcal H_{\rm hard}^{\rm local,rem}
+=
+\frac{1}{96\pi^2M_E^4}
+\left[
+\frac5{12}s^2+\frac12su-\frac3{10}u^2
+\right].
+\]
+Therefore the previously quoted \(c_{8,H}^{\rm hard}\) and \(c_{8,S}^{\rm hard}\) are **transverse-current Green-basis coefficients only**; they are not the complete on-shell dimension-eight hard matching coefficients. The additional polynomial is retained for the later common-basis EOM/IBP reduction.
+
+The crossed external pairing is obtained by \(s\leftrightarrow u\). For the Higgs doublet the two pairings carry \(\delta_{jk}\delta_{li}\) and \(\delta_{lk}\delta_{ji}\), respectively; there is no additional SU(2) multiplicity. The pure-singlet channel has the same scalar kernels without weak tensors. The \(\tau\) conjugation \(S_\tau=S^*\) reverses the current but leaves the quadratic current kernel unchanged.
+
+The direct soft expansion also resolves the current normalization: the full numerator contains both \(2x(1-x)q^2\) and \((4/d-2)l^2\); after tensor integration these combine to \(4x(1-x)q^2\), recovering the \(+5/3\) one-Weyl kernel. The action coefficient \(1/(192\pi^2)\), after the two current assignments and \(J_H=-2P\) matrix elements, gives the fixed-pairing amplitude coefficient \(1/(24\pi^2)\), exactly as in the direct UV soft limit.
+
+This closes P0.1–P0.4 at the **on-shell four-scalar amplitude** level. The off-shell Green-basis tensor decomposition, final EOM/IBP basis, and independent diagram-package validation remain open; no complete dimension-eight Wilson vector is claimed.
+
 ## 5. Reproducibility and acceptance boundary
 
 The exact d-dimensional expansion, angular averages, radial Gamma integrals, soft Feynman-parameter expansion, and pole/finite-term identities are implemented in:
