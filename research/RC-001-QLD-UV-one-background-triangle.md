@@ -62,7 +62,14 @@ Using \(\frac12\operatorname{tr}(\slashed a\slashed b\slashed c\slashed d)
 =2[(a\cdot b)(c\cdot d)-(a\cdot c)(b\cdot d)+(a\cdot d)(b\cdot c)]\), these become
 \[
 N_L^\mu=2\left[
-(K\cdot k')k^\mu-(K\cdot k')? 
+(K\cdot k')k^\mu-(K\cdot k)k'^\mu
++(k'\cdot k)K^\mu
+\right],
+\]
+\[
+N_E^\mu=2\left[
+(K\cdot k)K'^\mu-(K'\cdot K)k^\mu
++(K'\cdot k)K^\mu
 \right].
 \]
 **Caution:** the explicit component expansion and routing signs are intentionally left as trace expressions until the symbolic routing audit below is run. Do not copy a guessed expanded numerator into the matching ledger.
