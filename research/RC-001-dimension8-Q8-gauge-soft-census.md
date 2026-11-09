@@ -25,6 +25,36 @@ Use
 \]
 This definition avoids prematurely fixing the sign convention for \Omega in terms of \(g F_{\mu\nu}^A T^A\). That sign must be matched to the repository's covariant-derivative convention before numerical group factors are inserted.
 
+## 1A. Frozen model representations for the two composite sources
+
+Use the charge table already frozen in the RC-001 dimension-six gauge atlas, with \(\eta_\mu=+1\), \(\eta_\tau=-1\), and \(x=Q_X/Q_\ell\):
+\[
+\begin{array}{c|ccc}
+ & SU(2)_L & Y & x\\ \hline
+H&\mathbf2&+\frac12&0\\
+L_\ell&\mathbf2&-\frac12&\eta_\ell\\
+\ell_R&\mathbf1&-1&-\eta_\ell\\
+S_\ell&\mathbf1&0&+2\eta_\ell\\
+E_\ell&\mathbf1&-1&+\eta_\ell
+\end{array}
+\]
+The complete composite sources therefore transform as
+\[
+\Psi_{L,\ell}=H^\dagger L_\ell:
+\quad (\mathbf1,-1,+\eta_\ell),
+\qquad
+\Psi_{R,\ell}=S_\ell\ell_R:
+\quad (\mathbf1,-1,+\eta_\ell).
+\]
+Thus both source spinors transform in exactly the same gauge representation as \(E_\ell\). This is the representation on which the covariant derivative inside the Q8 operator acts. The exact charge check is archived in calculations/RC-001-dimension8-Q8-representation-audit.py and validation/RC-001-dimension8-Q8-representation-audit.txt.
+
+Important distinction for the diagram ledger:
+- At the **Q8 insertion itself**, the composite connection contains \(B_\mu\) and \(A'_\mu\), but no direct \(W_\mu^I\) connection because \(H^\dagger L_\ell\) is an SU(2) singlet and \(S_\ell\ell_R\) is also a singlet.
+- In the **full QLD soft amplitude**, ordinary \(W\) exchange still attaches separately to the \(L_\ell\) and \(H\) constituent lines. The absence of a direct W contact at the composite Q8 insertion does not remove those diagrams.
+- The QRD amplitude has no W attachments because both \(\ell_R\) and \(S_\ell\) are SU(2) singlets.
+
+The normalized X charges of \(S_\mu=S\) and \(S_\tau=S^*\) are respectively \(+2\) and \(-2\); the corresponding composite source charge is \(+\eta_\ell\) in both flavor sectors. This fixes the relative sign of the \(A'\) vertices before loop integration.
+
 ## 2. Exact covariant expansion
 
 The Clifford identity is
