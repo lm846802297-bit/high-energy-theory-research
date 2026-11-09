@@ -94,6 +94,18 @@ assert sp.simplify(aY + (60/epsIR+60*LM+155)/2880) == 0
 assert sp.simplify(bY + sp.Rational(3,160)) == 0
 assert cY == sp.Rational(1,384)
 
+# Independent scalar two-point source check. Extend the exact B0(p^2;0,M_E^2)
+# expansion by one term beyond the p^4 term displayed in the baseline note.
+z2, DeltaUV, L2, h2, y2 = sp.symbols("z2 DeltaUV L2 h2 y2")
+B0_series = DeltaUV - L2 + 1 + z2/2 + z2**2/6 + z2**3/12
+Pi_over_M2 = -h2*((DeltaUV-L2+1) + (1-z2)*B0_series)
+p6_coefficient = sp.expand(Pi_over_M2).coeff(z2,3)
+assert sp.simplify(p6_coefficient-h2/12) == 0
+assert sp.simplify(
+    p6_coefficient.subs(h2,y2/(16*sp.pi**2))
+    - y2/(192*sp.pi**2)
+) == 0
+
 # Independent finite full-amplitude cross-check against §5G.
 FpX_full = Q*(30*(P-R)*ellQ + 20*(P-R) + 21*Q)/720
 FqX_full = -R*(30*(P-R)*ellQ + 20*(P-R) + 21*Q)/720
@@ -140,6 +152,7 @@ print("PASS: pure-X hard Ward identity is transverse.")
 print("PASS: L-source hard Ward identity equals (P'^3-P^3)/192.")
 print("PASS: hard form factors reconstruct exactly in the three-column basis.")
 print("PASS: finite full amplitudes in §5G reconstruct in the same basis.")
+print("PASS: exact B0 extension gives Pi|p^6 = h_y p^6/(12 M_E^4) = |y|^2 p^6/(192 pi^2 M_E^4).")
 print()
 print("LIMIT: rank 3 establishes independence only in this restricted")
 print("off-shell one-background amplitude projection. It is not an IBP/EOM-")
