@@ -29,7 +29,7 @@ The companion script calculations/RC-001-eft-soft-topology-census.py checks 26 c
 | SFT-03 | One \(Q_{RD}\) insertion plus a scalar quartic, with one fermion tadpole and one scalar line | 1 | \(M_E^{-2}\) | No | Same conclusion as SFT-02. Broken-phase mass-dependent pieces must be re-counted and are not automatically \(O(M_E^{-2})\). |
 | SFT-04 | \(Q_{LD}Q_{LD}\) fermion loop in the pure-Higgs four-scalar channel | 1 | \(M_E^{-4}\) | Yes | Exclude from dimension six; retain for the dimension-eight audit. |
 | SFT-05 | \(Q_{RD}Q_{RD}\) fermion loop in the pure-singlet four-scalar channel | 1 | \(M_E^{-4}\) | Yes | Exclude from dimension six; retain for the dimension-eight audit. |
-| SFT-06 | \(Q_{LD}Q_{RD}\) fermion loop in the mixed four-scalar channel | 1 | \(M_E^{-4}\) | Yes | Exclude from dimension six; retain for the dimension-eight audit. |
+| SFT-06 | \(Q_{LD}Q_{RD}\) candidate in the mixed four-scalar channel | — | — | No | **Remove from the direct one-loop soft list.** \(Q_{LD}\) contains only an \(L_\ell\) bilinear and \(Q_{RD}\) only an \(\ell_R\) bilinear; the unbroken massless EFT has no \(L_\ell\)-\(\ell_R\) propagator. Two insertions cannot form one connected fermion loop. Any mixed contribution requires extra chirality-changing insertions and a fresh loop/order count. |
 | SFT-07 | \(Q_{LD}\) current form factor connected to an external \(S^\dagger S A'\) vertex | 1 | \(g_X^2|y_\ell|^2/M_E^2\) | No, due to the exchanged \(A'\) line | Track in the current/source sector. Do not count it as a direct local 1PI coefficient of \(\partial(H^\dagger H)\partial(S^\dagger S)\). |
 | SFT-08 | \(Q_{RD}\) current form factor connected to an external \(H^\dagger H B_\mu\) vertex | 1 | \(g_Y^2|\lambda_\ell|^2/M_E^2\) | No, due to the exchanged \(B\) line | Track in the current/source sector and in connected-amplitude matching; do not misidentify the reducible exchange as a local 1PI scalar vertex. |
 | SFT-09 | \(Q_{LD}\) current form factor connected to an external \(H^\dagger H B_\mu/W_\mu\) vertex | 1 | \(g_{\rm SM}^2|y_\ell|^2/M_E^2\) | No, due to the exchanged gauge line | Track for the pure-Higgs current/source amplitudes if the corresponding Wilson vector is claimed complete. |
@@ -123,7 +123,7 @@ A complete dimension-eight claim must separately include, without double countin
 
 1. The unbroken-phase \(C_5^4\) eight-scalar soft loop for the \(X^2Y^2\) potential operator.
 2. The broken-phase constant \(h\)-\(s\) projection of the \(C_5^2\) bubble/contact subset as a cross-check of that same potential structure, not as an independent duplicate.
-3. The \(Q_{LD}Q_{LD}\), \(Q_{RD}Q_{RD}\), and \(Q_{LD}Q_{RD}\) soft loops in the pure-Higgs, pure-singlet, and mixed channels.
+3. The \(Q_{LD}Q_{LD}\) and \(Q_{RD}Q_{RD}\) soft loops in the pure-Higgs and pure-singlet channels. The putative \(Q_{LD}Q_{RD}\) one-loop mixed channel is absent in the unbroken massless EFT because the two insertions contain distinct, chirality-preserving fermion species; see research/RC-001-dimension7-eom-and-dimension8-Q6-soft-kernels.md.
 4. \(C_5C_7^\ast\) soft insertions if the \(1/M_E^3\) operator survives the declared EOM reduction, or the corresponding induced source/potential terms if it is eliminated.
 5. \(Q_{LD}/Q_{RD}\) VEV wavefunction insertions into the \(C_5C_5^\ast\) bubble and any other \(O(M_E^{-4})\) tree-level EFT insertion required by the fixed amplitude.
 6. The corresponding dimension-eight UV hard expansion, counterterms, and EOM/source companions.
