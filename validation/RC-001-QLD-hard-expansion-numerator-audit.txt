@@ -24,3 +24,12 @@ PASS: transverse pole check R F_p^pole + Q F_q^pole = 0.
 PASS: heavy-attachment hard form factors are finite in this projection.
 
 Scope: Euclidean hard-region subgraphs only. Common Wick/Feynman-rule factors, charge-weighted complete UV amplitude, EFT contact/source/EOM soft contributions, hard-soft pole cancellation, and final Wilson coefficient remain open.
+
+
+ORDINARY-LINE EFT-SOFT CHECK (2026-11-10)
+Soft expansion: -N_L^mu (k+p)^2/[M_E^4 k^2(k+q)^2].
+F_p soft-line UV = -(P Q-3P R-2Q R+4R^2)/(48 pi^2 M_E^4 epsilon_UV).
+F_q soft-line UV = +R(P-R)/(24 pi^2 M_E^4 epsilon_UV).
+PASS: hard IR + ordinary-line soft UV cancels exactly in the q^mu form factor.
+The p^mu remainder is (P Q+3P R-4R^2)/(48 pi^2 M_E^4 epsilon).
+This remainder is not assigned to a single graph: Q8 ordered background contacts, scalar-source/constituent terms, C5*C7 EOM companions and counterterms remain to be added.
