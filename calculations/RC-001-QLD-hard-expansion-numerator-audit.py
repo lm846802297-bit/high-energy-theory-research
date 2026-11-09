@@ -5,8 +5,10 @@ For Gamma^mu = p^mu F_p + q^mu F_q, explicit-vector coefficients need
 scalar degree four. A free loop-vector term k^mu instead needs scalar degree
 five, because its angular average pairs one k with an external momentum.
 All shifted propagators are expanded and all angular averages are d-dimensional.
-The script evaluates radial masters through O(eps^0), but does not include
-overall Wick/Feynman-rule factors or perform EFT-soft subtraction.
+The script evaluates hard radial masters and the ordinary-line EFT soft
+integral through O(eps^0), and checks the pure-U(1)_X hard-plus-soft Ward
+identity and matching-scale cancellation. Overall 1PI factors and the
+hypercharge/SU(2)_L projections remain outside its scope.
 """
 import sympy as sp
 
@@ -185,7 +187,7 @@ print("L attachment F_q pole:",LQpole.subs(sub))
 print("L attachment F_q finite:",LQfinite.subs(sub))
 print("E attachment F_p finite:",EPfinite.subs(sub))
 print("E attachment F_pprime finite:",EPPfinite.subs(sub))
-print("SCOPE: subgraph hard form factors only; common Wick/Feynman-rule factors and EFT-soft matching remain open.")
+print("SCOPE: hard subgraph form factors are printed above; soft subtraction and full U(1)_X closure are evaluated below.")
 
 
 # Ordinary-line EFT-soft UV pole at O(M_E^-4). The soft expansion of the
