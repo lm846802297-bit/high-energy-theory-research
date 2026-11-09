@@ -176,8 +176,8 @@ N_L^\mu=2\left[
 \right],
 \]
 \[
-N_E^\mu=2\left[
-(k^2+M_E^2-p\cdot p')k^\mu
+N_{E,\mathrm{Euclidean}}^\mu=2\left[
+(k^2-M_E^2-p\cdot p')k^\mu
 +(k^2+k\cdot p')p^\mu
 +(k^2+k\cdot p)p'^\mu
 \right].
@@ -280,14 +280,48 @@ F_q^L\big|_{\rm hard}=
 For the heavy attachment:
 \[
 F_p^E\big|_{\rm hard}=
-\frac{-9P^2+13PP'+27P'^2-22P'T+6T^2}
-{2880\pi^2M_E^4},
+\frac{5P^2+13PP'+13P'^2-8PT-14P'T+6T^2}
+{960\pi^2M_E^4},
 \]
 \[
 F_{p'}^E\big|_{\rm hard}=
-\frac{27P^2+13PP'-22PT-9P'^2+6T^2}
-{2880\pi^2M_E^4}.
+\frac{13P^2+13PP'+5P'^2-14PT-8P'T+6T^2}
+{960\pi^2M_E^4}.
 \]
+
+For the pure \(U(1)_X\) sector, \(q_L=q_E\) and \(q_H=0\). After imposing \(p'=p-q\), the heavy-attachment contribution in the \((p^\mu,q^\mu)\) basis is
+\[
+F_{p}^{E,pq}=
+\frac{15P^2+20PQ-30PR+9Q^2-25QR+20R^2}
+{480\pi^2M_E^4},
+\]
+\[
+F_{q}^{E,pq}=
+-\frac{15P^2+15PQ-20PR+5Q^2-12QR+10R^2}
+{960\pi^2M_E^4}.
+\]
+Adding the light and heavy attachments gives the compact result
+\[
+F_{p,\mathrm{hard}}^{X}=
+\frac{Q}{720\pi^2M_E^4}
+\left[
+\frac{30(P-R)}{\epsilon_{\rm IR}}
++30L_M(P-R)+70P+21Q-70R
+\right],
+\]
+\[
+F_{q,\mathrm{hard}}^{X}=
+-\frac{R}{720\pi^2M_E^4}
+\left[
+\frac{30(P-R)}{\epsilon_{\rm IR}}
++30L_M(P-R)+70P+21Q-70R
+\right].
+\]
+Consequently,
+\[
+R F_{p,\mathrm{hard}}^{X}+QF_{q,\mathrm{hard}}^{X}=0
+\]
+for both the pole and finite terms. This is the charge-resolved hard-region Ward check for \(q_L=q_E\). The common factor \(g_X q_\ell |y_\ell|^2\) and the overall 1PI phase are still omitted.
 
 A useful internal check is that the light-attachment hard IR pole is transverse:
 \[
