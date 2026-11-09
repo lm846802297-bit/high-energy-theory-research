@@ -74,6 +74,30 @@ This corrects the earlier coefficient \(16l^2/d\), which came from the same inco
 
 Reproduction: calculations/RC-001-dimension8-Q8-one-background-consistency-audit.py. Recorded output: validation/RC-001-dimension8-Q8-one-background-consistency-audit.txt.
 
+## 4A. Auxiliary-mass IR rearrangement for the contact tadpole
+
+As a concrete common IR regulator, replace the single massless denominator in the contact graph by \(k^2+m_{\rm IR}^2\). The covariant angular average gives
+\[
+\mathcal I_{\rm ct}^\mu(m_{\rm IR})
+=4\frac{d+2}{d}(q^\mu+2r^\mu)
+\mu^{2\epsilon}\int\frac{d^dk}{(2\pi)^d}
+\frac{k^2}{k^2+m_{\rm IR}^2}.
+\]
+Using \(\int 1=0\) in dimensional regularization,
+\[
+\int\frac{d^dk}{(2\pi)^d}\frac{k^2}{k^2+m^2}
+=-m^2\int\frac{d^dk}{(2\pi)^d}\frac{1}{k^2+m^2},
+\]
+and therefore, in the stated Euclidean convention,
+\[
+\left.\mathcal I_{\rm ct}^\mu(m_{\rm IR})\right|_{\rm UV}
+=\frac{1}{16\pi^2\epsilon}\,
+6m_{\rm IR}^4(q^\mu+2r^\mu)+O(\epsilon^0).
+\]
+This pole vanishes as \(m_{\rm IR}\to0\). It is an auxiliary-mass artifact proportional to the fourth power of the IR regulator, not a mass-independent dimension-eight counterterm. The same \(m_{\rm IR}\) can be used in both fermion denominators of the line graph; the mass-independent part of its UV pole is the transverse polynomial in §4E, while regulator-dependent terms carry positive powers of \(m_{\rm IR}\) and are discarded after the R* subtraction.
+
+This explicit mass-regulated tadpole check does not replace the full R* forest subtraction if additional subdivergences or operator insertions are present. It does show that the one-propagator contact tadpole does not contribute a mass-independent UV pole in this projection.
+
 ## 5. Remaining matching tasks
 
 1. Fix the exact functional-determinant routing and all external scalar momenta.
