@@ -33,3 +33,26 @@ F_q soft-line UV = +R(P-R)/(24 pi^2 M_E^4 epsilon_UV).
 PASS: hard IR + ordinary-line soft UV cancels exactly in the q^mu form factor.
 The p^mu remainder is (P Q+3P R-4R^2)/(48 pi^2 M_E^4 epsilon).
 This remainder is not assigned to a single graph: Q8 ordered background contacts, scalar-source/constituent terms, C5*C7 EOM companions and counterterms remain to be added.
+
+
+CORRECTED EFT-SOFT POLE AUDIT (2026-11-10)
+The shifted numerator is
+  N_L^mu K^2 = 2 K^2[(A-B+C) ell^mu - B p^mu
+                   +(-x A+x B+(1-x)C) q^mu].
+The p-vector coefficient is -B. The earlier -B+C term was an algebraic projection error.
+
+PASS: corrected ordinary-line soft UV pole:
+  F_p^UV = -Q(P-R)/(24 pi^2 M_E^4 epsilon_UV)
+  F_q^UV = +R(P-R)/(24 pi^2 M_E^4 epsilon_UV)
+PASS: soft pole is transverse, R F_p^UV + Q F_q^UV = 0.
+PASS: hard IR + soft UV cancels in both p^mu and q^mu form factors.
+The previously recorded p^mu residual is superseded; it must not be used to motivate an additional pole counterterm.
+
+Q_LD^(8) contact:
+  Q_LD^(8) = (bar L H) (i slash D)^3 (H^dagger L).
+  V^mu = -g_A q_E [K'^2 gamma^mu + slash(K') gamma^mu slash(K) + K^2 gamma^mu].
+  q_mu V^mu = -g_A q_E [K^2 slash(K)-K'^2 slash(K')].
+PASS: exact Ward-difference identity.
+The one-propagator contact tadpole is scaleless in the unbroken massless DR setup and has no logarithmic 1/epsilon UV pole at this order.
+
+Scope: pole-level subgraph check only. Overall Wick/Feynman-rule factors, charge-weighted full amplitude, finite matching, and common-basis Wilson coefficient remain open.
