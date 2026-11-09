@@ -52,7 +52,10 @@ def angular_denominator(r):
     # d(d+2)...(d+2r-2)
     return d * sp.prod(d + 2*j for j in range(1, r))
 
-def reduce_graph(kind, component, numerator, target_scalar_degree=4):
+def reduce_graph(kind, component, numerator):
+    # A free loop-vector component k^mu needs scalar degree five; after
+    # angular averaging one k dot-product supplies the external vector.
+    # Explicit p^mu/q^mu components need scalar degree four.
     if kind == "L":
         vectors = ["q", "p"]
         kvars = [kq, kp]
@@ -64,6 +67,7 @@ def reduce_graph(kind, component, numerator, target_scalar_degree=4):
         shifts = [2*kp + p2, 2*kpp + pp2]
         base_a, base_b = 1, 2
 
+    target_scalar_degree = 5 if component == "k" else 4
     result = {}
     poly_vars = [k2, *kvars, p2, q2, pp2, pq, ppdotp]
     for n in range(5):
@@ -127,9 +131,12 @@ masters = sorted(set(
     key[1:] for graph in (L, E) for component in graph.values() for key in component
 ))
 expected = [
-    (1,4,1),(1,5,2),(1,6,3),(2,3,1),(2,4,2),(2,5,3),
-    (3,2,1),(3,3,2),(3,4,3),(4,1,1),(4,2,2),(4,3,3),
-    (5,1,2),(5,2,3),(6,1,3)
+    (1,4,1),(1,5,1),(1,5,2),(1,6,2),(1,6,3),(1,7,3),(1,7,4),
+    (2,3,1),(2,4,2),(2,5,3),(2,6,4),
+    (3,2,1),(3,3,2),(3,4,3),(3,5,4),
+    (4,1,1),(4,2,2),(4,3,3),(4,4,4),
+    (5,1,2),(5,2,3),(5,3,4),
+    (6,1,3),(6,2,4),(7,1,4)
 ]
 assert masters == expected
 
@@ -144,7 +151,7 @@ print("PASS: scalar form-factor degree four gives total vector-amplitude degree 
 print("PASS: light graph radial indices are a=2+n_q, b=1+n_p.")
 print("PASS: heavy graph radial indices are a=1, b=2+n_p+n_pprime.")
 print("PASS: exact d-dimensional angular reduction and 15-master inventory.")
-print("Counts: L_p=12, L_q=12, E_p=3, E_pprime=3; k-vector pieces vanish.")
+print("Counts: L_k=31, L_p=12, L_q=12; E_k=14, E_p=3, E_pprime=3.")
 print("SCOPE: radial coefficients only; relative graph sign and EFT soft subtraction remain open.")
 
 
