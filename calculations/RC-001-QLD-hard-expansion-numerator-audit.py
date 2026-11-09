@@ -323,8 +323,11 @@ assert sp.simplify(R*(hard_p_finite+hard_p_pole/eps)
 
 # The hard + soft sum is the full-theory amplitude in the method-of-regions
 # decomposition, not the Wilson coefficient by itself.
-full_p = sp.factor(hard_p_finite+soft_full["p"]+hard_p_pole/eps)
-full_q = sp.factor(hard_q_finite+soft_full["q"]+hard_q_pole/eps)
+L_M_expr = sp.log(mu2)-sp.log(M2)+sp.log(4*sp.pi)-sp.EulerGamma
+hard_p_finite_full = hard_p_finite.subs(L_M,L_M_expr)
+hard_q_finite_full = hard_q_finite.subs(L_M,L_M_expr)
+full_p = sp.factor(hard_p_finite_full+soft_full["p"]+hard_p_pole/eps)
+full_q = sp.factor(hard_q_finite_full+soft_full["q"]+hard_q_pole/eps)
 full_scalar = 30*(P-R)*(sp.log(Q)-sp.log(M2))+20*(P-R)+21*Q
 expected_full_p = Q*full_scalar/(720*sp.pi**2*M2**2)
 expected_full_q = -R*full_scalar/(720*sp.pi**2*M2**2)
