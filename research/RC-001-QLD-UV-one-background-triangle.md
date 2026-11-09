@@ -118,6 +118,18 @@ q_\mu\gamma^\mu=S_0^{-1}(k+q)-S_0^{-1}(k),\qquad q=k'-k=K-K'.
 \]
 Contracting the light-line attachment therefore collapses one of its two light propagators and produces the difference of the two heavy-light scalar two-point integrands with the external scalar momentum routed at \(p'\) and \(p\). Contracting the heavy-line attachment similarly collapses one heavy propagator and produces the corresponding difference with the heavy charge \(q_E\).
 
+With \(\Sigma(p)\equiv\int_k (K\cdot k)/[k^2(K^2-M_E^2)]\), the adjacent-propagator reductions give
+\[
+q_\mu I_L^\mu=2[\Sigma(p)-\Sigma(p')],\qquad
+q_\mu I_E^\mu=2[\Sigma(p')-\Sigma(p)].
+\]
+Thus the plus sign between the two attachment classes in the trace convention of §3 is fixed: the charge-weighted sum is proportional to
+\[
+(q_L-q_E)[\Sigma(p)-\Sigma(p')]
+=q_H[\Sigma(p)-\Sigma(p')].
+\]
+This matches the scalar-source Ward identity for the stated outgoing-\(q\) convention.
+
 With the common fermion-flow convention, the two attachment classes enter with the same relative sign in the trace convention of §3: their longitudinal contractions are opposite for equal constituent charges. The sum must obey the scalar-source Ward identity
 \[
 q_\mu\Gamma^\mu_{A H^\dagger H}(p,p')
