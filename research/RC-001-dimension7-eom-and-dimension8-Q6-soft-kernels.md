@@ -173,11 +173,50 @@ hence
 \]
 Equivalently the coefficient is \(1/(24\pi^2)\) multiplying the bracket. In the \(i/(16\pi^2)\) normalization this is \(2/3\) multiplying the bracket. This normalization is for one Weyl current; it does not include the \(1/2\) from expanding the fermion determinant to second order in the background current source, nor any external Wilson coefficients.
 
-For a coefficient \(c_L=|y_\ell|^2/M_{E\ell}^2\) or \(c_R=|\lambda_\ell|^2/M_{E\ell}^2\), the second-order effective action contains the corresponding current-current kernel multiplied by \(c_{L,R}^2/2\), with the full Wick-contraction and weak-index factors retained. The local UV pole is proportional to
+For
 \[
-J_\mu(q)(q^\mu q^\nu-q^2g^{\mu\nu})J_\nu(-q),
+c_{L,\ell}=\frac{|y_\ell|^2}{M_{E\ell}^2},
+\qquad
+c_{R,\ell}=\frac{|\lambda_\ell|^2}{M_{E\ell}^2},
 \]
-which is a dimension-eight four-scalar derivative structure. The nonlocal logarithm is part of the EFT soft amplitude and must be retained when comparing to the UV hard region.
+the connected one-loop soft contributions from two insertions are
+\[
+\Gamma^{(1)}_{L,\mathrm{soft}}
+=\frac12\sum_{\ell=\mu,\tau}c_{L,\ell}^2
+\int\frac{d^dq}{(2\pi)^d}\,
+J^L_{\mu,ij,\ell}(q)
+(q^\mu q^\nu-q^2g^{\mu\nu})\Pi_W(q^2)
+J^L_{\nu,ji,\ell}(-q),
+\]
+\[
+\Gamma^{(1)}_{R,\mathrm{soft}}
+=\frac12\sum_{\ell=\mu,\tau}c_{R,\ell}^2
+\int\frac{d^dq}{(2\pi)^d}\,
+J^R_{\mu,\ell}(q)
+(q^\mu q^\nu-q^2g^{\mu\nu})\Pi_W(q^2)
+J^R_{\nu,\ell}(-q).
+\]
+The factor \(1/2\) is the second-order expansion factor of the fermion determinant. The left-handed result retains the explicit weak-index contraction \(J^L_{ij}J^L_{ji}\); do not append another factor of two after carrying out this index sum. The right-handed result contains one Weyl species per flavor and no weak-doublet multiplicity.
+
+The local UV-pole parts in this correlator convention are therefore
+\[
+\Gamma^{(1),\mathrm{pole}}_{L,\mathrm{soft}}
+=\frac{1}{48\pi^2}\sum_\ell c_{L,\ell}^2\Delta_{\rm UV}
+\int\frac{d^dq}{(2\pi)^d}
+J^L_{\mu,ij}(q)(q^\mu q^\nu-q^2g^{\mu\nu})J^L_{\nu,ji}(-q),
+\]
+\[
+\Gamma^{(1),\mathrm{pole}}_{R,\mathrm{soft}}
+=\frac{1}{48\pi^2}\sum_\ell c_{R,\ell}^2\Delta_{\rm UV}
+\int\frac{d^dq}{(2\pi)^d}
+J^R_\mu(q)(q^\mu q^\nu-q^2g^{\mu\nu})J^R_\nu(-q).
+\]
+The finite nonlocal factor is obtained by replacing \(\Delta_{\rm UV}\) with
+\[
+\Delta_{\rm UV}-\ln\frac{-q^2-i0}{\mu_R^2}+\frac53.
+\]
+These are the evaluated soft current-correlator kernels in the declared current convention. They are not yet the fully projected coefficients of a chosen nonredundant dimension-eight scalar-operator basis; the latter requires expanding the composite currents, integrating by parts, and applying the scalar/gauge EOM consistently.
+
 
 ## 5. Topology correction: the mixed \(Q_{LD}Q_{RD}\) graph is absent at this order
 
