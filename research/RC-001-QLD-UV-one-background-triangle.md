@@ -42,6 +42,31 @@ D_E=k^2(K^2+M_E^2)(K'^2+M_E^2).
 \]
 These are Euclidean denominators. Overall factors of \(i\), the closed-loop minus sign, and the common coupling factor are to be restored consistently when converting the Euclidean integrals to 1PI vertices.
 
+## 2A. Metric convention: keep Minkowski Ward algebra separate from Euclidean hard integrals
+
+The routing/numerator identities in §§2–4 are first defined in Minkowski signature \((+---)\), where the heavy inverse propagator is \(K^2-M_E^2\). Thus the Ward contraction in the heavy attachment is
+\[
+q_\mu N_E^\mu=
+2\left[(K\cdot k)(K'^2-M_E^2)
+-(K'\cdot k)(K^2-M_E^2)\right].
+\]
+The Euclidean hard-region integrals are obtained only after Wick rotation, with
+\[
+K_M^2-M_E^2\longrightarrow -(K_E^2+M_E^2),
+\qquad k_M^2\longrightarrow-k_E^2,
+\]
+and corresponding factors of \(i\) in slash numerators and loop measures. The denominator symbols \(D_L,D_E\) in §2 are therefore Euclidean denominators; they must not be inserted directly into the Minkowski Ward identities of §4.
+
+For clarity, the Euclidean hard expansion is
+\[
+\frac1{(k_E+p_E)^2+M_E^2}
+=\frac1{k_E^2+M_E^2}
+\sum_{n=0}^\infty
+\left[-\frac{2k_E\cdot p_E+p_E^2}
+{k_E^2+M_E^2}\right]^n.
+\]
+The previous shorthand mixed the Minkowski Ward denominators \(K^2-M_E^2\) with Euclidean denominators \(K_E^2+M_E^2\) without displaying the Wick rotation. This subsection fixes that convention. All subsequent tensor integration must be done wholly in Euclidean signature, and the Ward identity checked before Wick rotation in Minkowski signature (or after a fully consistent Euclidean continuation), never by mixing the two.
+
 ## 3. Exact parity-even chiral numerators
 
 At each Yukawa endpoint the heavy propagator is projected onto its right-handed component, so a single heavy propagator between the two Yukawa endpoints has no mass numerator:
