@@ -640,4 +640,140 @@ These expressions define an ordered overcomplete generating set, not yet a nonre
 - integrate by parts with the conjugate representation on \(\bar L_\ell H\), recording each total derivative;
 - keep the generated Yukawa, Higgs-potential, and source operators in the coefficient vector rather than dropping them as “EOM zero” before the off-shell matching projection.
 
-The six derivative-distribution terms and the two field-strength derivative placements above are the starting columns for the one-background amplitude map. Their coefficients are fixed by the single covariant operator \(Q_{LD}^{(8)}\) at tree level; one-loop hard matching can generate additional independent columns. The projection matrix and its rank must be reported before any reduced Wilson coefficient is called final.
+The six derivative-distribution terms and the two field-strength derivative placements above are ordered pieces in the expansion of one covariant operator; they are **not eight independent operators or eight independent Wilson-coefficient columns**. Their coefficients are fixed together by the single tree-level \(Q_{LD}^{(8)}\) coefficient. The independent amplitude columns used for the restricted one-background projection are defined separately in §5J. A full operator-basis reduction still requires IBP/EOM identities and the induced source/current companions.
+
+## 5J. Exact three-column off-shell amplitude projection
+
+The hard form factors can be decomposed before any IBP/EOM reduction. Define
+\[
+P=p^2,\quad Q=q^2,\quad R=p\cdot q,\quad
+P'=p'^2=P+Q-2R,\quad q=p-p',
+\]
+and
+\[
+\Sigma_3=P^2+PP'+P'^2,\qquad
+T^\mu=Qp^\mu-Rq^\mu,\qquad
+S^\mu=-(p+p')^\mu\Sigma_3.
+\]
+The three normalized amplitude columns are
+\[
+\mathcal B_P^\mu=(P-R)T^\mu,\qquad
+\mathcal B_Q^\mu=Q T^\mu,\qquad
+\mathcal B_S^\mu=S^\mu.
+\]
+Their form factors in \(\Gamma^\mu=p^\mu F_p+q^\mu F_q\) are
+\[
+\begin{array}{c|cc}
+ &F_p&F_q\\ \hline
+\mathcal B_P&Q(P-R)&-R(P-R)\\
+\mathcal B_Q&Q^2&-RQ\\
+\mathcal B_S&-2\Sigma_3&+\Sigma_3
+\end{array}
+\]
+with
+\[
+q_\mu\mathcal B_P^\mu=q_\mu\mathcal B_Q^\mu=0,\qquad
+q_\mu\mathcal B_S^\mu=P'^3-P^3.
+\]
+
+For an Abelian background, convenient local representatives with these stripped one-background vertices are
+\[
+\mathcal O_P=
+\frac{i}{2}\left[
+(D_\rho D_\mu H)^\dagger D^\rho D_\nu H
+-(D_\rho D_\nu H)^\dagger D^\rho D_\mu H
+\right]F^{\mu\nu},
+\]
+\[
+\mathcal O_Q=
+-\frac{i}{2}\left[
+(D_\mu H)^\dagger D_\nu H
+-(D_\nu H)^\dagger D_\mu H
+\right]\Box F^{\mu\nu},
+\qquad
+\mathcal O_S=H^\dagger(-D^2)^3H.
+\]
+Use the Fourier convention in which \(H\) carries incoming momentum \(p\), \(H^\dagger\) carries outgoing momentum \(p'\), and the background momentum \(q=p-p'\) leaves the vertex. The common gauge coupling/charge and overall 1PI phase are stripped. With that convention, the one-background vertices are respectively \(\mathcal B_P^\mu,\mathcal B_Q^\mu,\mathcal B_S^\mu\). The first two representatives are useful Abelian lifts of the transverse columns; \(\mathcal O_S\) is the covariant scalar-source representative whose two-point kernel is \(P^3\). A non-Abelian completion requires the appropriate adjoint-generator insertion and covariant derivative on the field strength and is not claimed here.
+
+Flatten the two form factors into the six independent quadratic monomials \((P^2,PQ,PR,Q^2,QR,R^2)\), first for \(F_p\) and then for \(F_q\). The exact polynomial projection matrix is
+\[
+M_{\rm amp}=
+\begin{pmatrix}
+0&0&-6\\
+1&0&-6\\
+0&0&12\\
+0&1&-2\\
+-1&0&8\\
+0&0&-8\\
+0&0&3\\
+0&0&3\\
+-1&0&-6\\
+0&0&1\\
+0&-1&-4\\
+1&0&4
+\end{pmatrix},
+\]
+where the columns are \((\mathcal B_P,\mathcal B_Q,\mathcal B_S)\). Exact SymPy reduction gives
+\[
+\operatorname{rank}M_{\rm amp}=3.
+\]
+For example, the minor formed from rows \((F_p:P^2,F_p:PQ,F_p:Q^2)\) is \(-6\), so all three columns are independent as polynomial functions of generic off-shell kinematics. This is a polynomial-function rank statement; at one fixed kinematic point the two-component vector \((F_p,F_q)\) cannot by itself resolve three coefficients.
+
+In this basis the hard-region form factors of §§5D–5G become
+\[
+\Gamma_{X,\rm hard}^\mu
+=a_X\mathcal B_P^\mu+b_X\mathcal B_Q^\mu,
+\qquad
+\Gamma_{L,\rm hard}^\mu
+=a_L\mathcal B_P^\mu+b_L\mathcal B_Q^\mu+c_S\mathcal B_S^\mu,
+\]
+where the common factor \(g_A|y_\ell|^2/(\pi^2M_E^4)\) and the charge weights are omitted, and
+\[
+a_X=\frac{30/\epsilon_{\rm IR}+30L_M+70}{720},
+\qquad b_X=\frac{21}{720},
+\]
+\[
+a_L=\frac{12/\epsilon_{\rm IR}+12L_M+25}{288},
+\qquad b_L=\frac1{48},
+\qquad c_S=\frac1{192}.
+\]
+The source coefficient is fixed independently by the Ward identity:
+\[
+R F_{p,L,\rm hard}+QF_{q,L,\rm hard}
+=\frac{P'^3-P^3}{192\pi^2M_E^4}.
+\]
+The transverse coefficients follow by subtracting \(c_S\mathcal B_S\) and dividing the remaining \(F_p\) by \(Q\); the \(F_q\) equation gives the same result exactly.
+
+The charge projections are therefore
+\[
+\begin{array}{c|ccc}
+ &\mathcal B_P&\mathcal B_Q&\mathcal B_S\\ \hline
+U(1)_X & q_Ea_X&q_Eb_X&0\\
+U(1)_Y & -a_X+\frac12a_L&-b_X+\frac12b_L&\frac12c_S\\
+SU(2)_L & T^a a_L&T^a b_L&T^a c_S
+\end{array}
+\]
+in the same common normalization. In particular, the hypercharge coefficients are
+\[
+a_Y=-\frac{60/\epsilon_{\rm IR}+60L_M+155}{2880},
+\qquad b_Y=-\frac3{160},
+\qquad c_Y=\frac1{384}.
+\]
+
+As a finite full-amplitude cross-check, after adding the ordinary-line EFT soft contribution the same decomposition gives
+\[
+a_X^{\rm full}=\frac{30\ell_Q+20}{720},\quad
+b_X^{\rm full}=\frac{21}{720},\quad
+c_X^{\rm full}=0,
+\]
+\[
+a_L^{\rm full}=\frac{12\ell_Q+5}{288},\quad
+b_L^{\rm full}=\frac1{48},\quad
+c_L^{\rm full}=\frac1{192},
+\qquad \ell_Q=\ln\frac{Q}{M_E^2},
+\]
+which reconstructs the finite form factors in §5G and preserves the scalar-source Ward difference. The \(\ell_Q\) terms are nonlocal EFT/full-amplitude information and are not local Wilson coefficients.
+
+The reproducible exact projection is in calculations/RC-001-QLD-dim8-form-factor-projection.py; its output is validation/RC-001-QLD-dim8-form-factor-projection.txt.
+
+**Interpretation and limitation.** This closes the polynomial projection of the already-computed one-background hard amplitude onto three independent off-shell amplitude representatives. It does **not** establish a complete nonredundant dimension-eight SMEFT basis. The displayed \(\mathcal O_P,\mathcal O_Q,\mathcal O_S\) are representatives for this restricted amplitude, not proof that no other operator maps onto the same columns or that these representatives survive unchanged after IBP/EOM/gauge-EOM reduction. The hard coefficients retain hard-region IR poles and are not finite renormalized Wilson coefficients. The full two-Higgs/two-lepton Green-basis projection, non-Abelian completion, source/current companions, counterterms, and other \(O(M_E^{-4})\) channels remain open.
