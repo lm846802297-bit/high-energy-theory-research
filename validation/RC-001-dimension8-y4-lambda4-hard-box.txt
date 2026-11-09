@@ -1,8 +1,0 @@
-PASS 1: d-dimensional hard-region expansion isolates the transverse P.P' q^2 projection
-PASS 2: exact radial Gamma integrals give hard = -(Delta_IR - L_E + 17/12)/(24 pi^2 M_E^4) per ordered box
-PASS 3: direct soft Feynman-parameter integral gives +(Delta_UV - ln(q^2/mu^2) + 5/3)/(24 pi^2 M_E^4)
-PASS 4: determinant 1/2 and J=2P conversion give equal-and-opposite hard IR / soft UV poles
-PASS 5: finite hard+soft kernel is [ln(M_E^2/q^2) + 1/4]/(192 pi^2 M_E^4) in the current effective-action basis
-PASS 6: the same one-Weyl kernel applies to Q_LD^2 and Q_RD^2; SU(2) trace and singlet multiplicities are kept separate
-SCOPE: Yukawa-only transverse current channel, one ordered box, NDR parity-even chiral trace
-OPEN: other independent tensor projections, complete crossed-channel/weak-tensor ledger, EOM/source reduction, and FeynArts/FeynCalc validation
