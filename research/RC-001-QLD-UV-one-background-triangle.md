@@ -62,8 +62,8 @@ Using \(\frac12\operatorname{tr}(\slashed a\slashed b\slashed c\slashed d)
 =2[(a\cdot b)(c\cdot d)-(a\cdot c)(b\cdot d)+(a\cdot d)(b\cdot c)]\), these become
 \[
 N_L^\mu=2\left[
-(K\cdot k')k^\mu-(K\cdot k)k'^\mu
-+(k'\cdot k)K^\mu
+(K\cdot k')k^\mu-(k'\cdot k)K^\mu
++(K\cdot k)k'^\mu
 \right],
 \]
 \[
