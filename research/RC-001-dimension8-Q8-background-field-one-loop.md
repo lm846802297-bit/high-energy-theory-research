@@ -68,6 +68,33 @@ Each trace has one independent loop momentum. The three terms in the two-backgro
 
 This expansion is the useful bookkeeping identity for the one-loop calculation. It does not yet provide the momentum-space vertex polynomials or the evaluated loop integrals.
 
+## 2A. Explicit one-background contact vertex
+
+The frozen model convention is \(D_\mu=\partial_\mu-i g_YYB_\mu-i g_XQ_XA'_\mu+\cdots\). For a composite source with charges \(q_{\Psi,A}\), let \(P'=P+q\) be the source momentum after an incoming background gauge field of momentum \(q\). The exact linear contact vertex from the ordered cubic operator is
+\[
+V_{8,A}^{\mu}(P',P)
+=g_Aq_{\Psi,A}
+\left[\slashed P'^{\,2}\gamma^\mu+
+\slashed P'\gamma^\mu\slashed P+
+\gamma^\mu\slashed P^{\,2}\right].
+\]
+Contracting in the actual noncommuting matrix order gives
+\[
+q_\mu V_{8,A}^{\mu}
+=g_Aq_{\Psi,A}
+\left[
+\slashed P'^{\,2}\slashed q+
+\slashed P'\slashed q\slashed P+
+\slashed q\slashed P^{\,2}
+\right]
+=g_Aq_{\Psi,A}(\slashed P'^{\,3}-\slashed P^{\,3}).
+\]
+This is the contact-vertex Ward identity. It is not yet the full one-loop Green-function Ward identity: the ordinary background insertion on the light-fermion propagator and the scalar-source charge flow must also be included.
+
+For QLD and QRD, the direct contacts are \(B_\mu:-g_Y\), \(A'_\mu:+\eta_\ell g_XQ_\ell\), and \(W_\mu^a:0\). The ordinary W insertion on the L constituent line remains in QLD.
+
+The symbolic noncommuting-slash check is in calculations/RC-001-dimension8-Q8-one-background-vertex-audit.py; its recorded output is validation/RC-001-dimension8-Q8-one-background-vertex-audit.txt.
+
 ## 3. Required one-loop amplitudes
 
 For each flavor and gauge factor, calculate:
