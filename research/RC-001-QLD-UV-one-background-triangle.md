@@ -159,7 +159,22 @@ The expansion written in §5 is incomplete if read as expanding only the heavy p
 \]
 and similarly for \(p'\). The numerator must also be expanded by its explicit polynomial dependence on \(p,p',q\), with \(q=p'-p\) imposed only after the expansion.
 
-For the light-attachment graph, \(N_L^\mu\) has external-momentum degree zero through three, while the product of the light and heavy denominator series supplies the remaining degree. For the heavy-attachment graph, the \(M_E^2 k^\mu\) numerator term and the cubic-momentum trace terms have different expansion depths. The coefficient of total external degree five must be assembled from **all** partitions of degree five between numerator, light denominator (where present), and both heavy denominators. Expanding only the heavy denominators misses terms and cannot yield the complete hard coefficient.
+Both trace numerators are polynomials of external-momentum degree at most two (the heavy numerator also contains the mass term \(M_E^2 k^\mu\), of external degree zero). Explicitly, with \(k^2\equiv k_E^2\),
+\[
+N_L^\mu=2\left[
+(k^2+2k\cdot p+p\cdot q)k^\mu
+-(k^2+k\cdot q)p^\mu
++(k^2+k\cdot p)q^\mu
+\right],
+\]
+\[
+N_E^\mu=2\left[
+(k^2+M_E^2-p\cdot p')k^\mu
++(k^2+k\cdot p')p^\mu
++(k^2+k\cdot p)p'^\mu
+\right].
+\]
+The degree-five coefficient therefore comes from degree-five denominator-series terms multiplied by the degree-zero numerator, degree-four denominator terms multiplied by degree-one numerator terms, and so on through degree-three denominator terms multiplied by the degree-two numerator. For the heavy graph the \(M_E^2 k^\mu\) contribution is tracked separately because its radial master has a different power of \(M_E\). The coefficient of total external degree five must be assembled from **all** partitions of degree five between numerator, light denominator (where present), and both heavy denominators. Expanding only the heavy denominators misses terms and cannot yield the complete hard coefficient.
 
 A reproducible expansion generator should represent the external momenta as formal commuting vectors, generate the series to total degree five, reduce tensor integrals using \(d\)-dimensional rotational invariance, and only then perform the radial integrals. In particular, do not impose \(q=p'-p\) before generating the series, because it obscures the independent Taylor coefficients needed to identify the local operator basis.
 
