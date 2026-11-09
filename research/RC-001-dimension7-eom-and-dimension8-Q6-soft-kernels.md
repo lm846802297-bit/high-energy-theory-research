@@ -151,7 +151,7 @@ i\int d^dx\,e^{iqx}
 \]
 For one massless Weyl fermion, the parity-even part is one half of the Dirac result. With \(d=4-2\epsilon\) and the same \(\overline{\rm MS}\) convention,
 \[
-\Pi_W(q^2)=\frac{1}{24\pi^2}
+\Pi_W(q^2)=\frac{1}{4\pi^2}
 \int_0^1dx\,x(1-x)
 \left[
 \Delta_{\rm UV}-\ln\frac{-q^2x(1-x)-i0}{\mu_R^2}
