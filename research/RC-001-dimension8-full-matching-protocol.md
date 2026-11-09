@@ -45,17 +45,28 @@ P_R(i\slashed D-M_E)^{-1}P_R
 -\frac{P_R(i\slashed D)^2}{M_E^3}
 +O(M_E^{-5}),
 \]
-where the operator ordering acts on the complete right-hand source. With the source interaction and \(C_5\) convention above, the induced candidate is therefore
+where the operator ordering acts on the complete right-hand source. The exact Schur complement of the heavy Dirac field is \(\Delta\mathcal L_{\rm tree}=-\bar J(i\slashed D-M_E)^{-1}J\). Its cross-chirality term is
 \[
-\Delta\mathcal L_{\mathrm{EFT}}^{(7)}
-\supset
--\frac{y_\ell\lambda_\ell}{M_{E\ell}^3}
-(\bar L_\ell H)(i\slashed D)^2(S_\ell\ell_R)+\mathrm{h.c.}
-=
-\frac{C_{5,\ell}}{M_{E\ell}^2}
-(\bar L_\ell H)(i\slashed D)^2(S_\ell\ell_R)+\mathrm{h.c.},
+-y_\ell\lambda_\ell(\bar L_\ell H)
+\frac{M_{E\ell}}{(i\slashed D)^2-M_{E\ell}^2}
+(S_\ell\ell_R)+\mathrm{h.c.}
 \]
-subject to confirmation of the overall source/operator sign against the full tree-level Schur complement in the same derivative convention.
+and therefore expands as
+\[
+\Delta\mathcal L_{\mathrm{EFT}}^{(5,7)}
+\supset
++\frac{y_\ell\lambda_\ell}{M_{E\ell}}\mathcal O_{5,\ell}
++\frac{y_\ell\lambda_\ell}{M_{E\ell}^3}\mathcal O_{7,\ell}
++\mathrm{h.c.}
+\]
+where \(\mathcal O_{7,\ell}=(\bar L_\ell H)(i\slashed D)^2(S_\ell\ell_R)\). In the declared convention \(\mathcal L_{\rm EFT}\supset-C_{5,\ell}\mathcal O_{5,\ell}-C_{7,\ell}\mathcal O_{7,\ell}+\mathrm{h.c.}\), with \(C_{5,\ell}=-y_\ell\lambda_\ell/M_{E\ell}\), the correct relation is
+\[
+C_{7,\ell}=\frac{C_{5,\ell}}{M_{E\ell}^2},
+\qquad
+-\;C_{7,\ell}\mathcal O_{7,\ell}
+=+\frac{y_\ell\lambda_\ell}{M_{E\ell}^3}\mathcal O_{7,\ell}.
+\]
+This corrects the sign of the explicit Lagrangian term in the earlier draft of this protocol. The exact Schur-complement and EOM derivation is recorded in \`research/RC-001-dimension8-tree-eom-and-soft-integrals.md\`.
 
 This is a *redundant-basis representative*, not yet an independent dimension-seven Wilson coefficient. The reduction must expand the covariant derivatives, use the light-field equations of motion only after the off-shell matching, and retain all induced terms. In particular, \((i\slashed D)^2\) contains both covariant Laplacian and field-strength pieces; replacing it by an ordinary \(\partial^2\), or setting it to zero by the massless fermion EOM before expanding the derivative on \(S_\ell\), is not allowed. The \(\mu,\tau\) renormalizable Yukawa source vanishes in the frozen model, but derivatives acting on \(S_\ell\) and gauge-field-strength terms need not vanish.
 
