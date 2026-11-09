@@ -68,3 +68,27 @@ The one-propagator contact tadpole is scaleless in the unbroken massless DR setu
 
 SCOPE
 The pure-U(1)_X parity-even one-background subgraph now has a consistent hard reduction, finite soft integral, pole cancellation, Ward identity, and matching-scale-independent hard-plus-soft amplitude. The common 1PI phase/coupling normalization, hypercharge and SU(2)_L charge projections, source/EOM basis mapping, and final nonredundant Wilson coefficient remain open. The displayed values are stripped form factors, not a complete model-level Wilson coefficient.
+
+
+G. CHARGE-RESOLVED COMPLETE AMPLITUDES
+Let ell_Q=ln(Q/M_E^2). Complete light attachment (hard+soft):
+  F_p^L = Q(P-R)ell_Q/(24 pi^2 M_E^4)
+          +(-9P^2-4PQ+18PR+3Q^2+7QR-12R^2)/(288 pi^2 M_E^4)
+  F_q^L = -R(P-R)ell_Q/(24 pi^2 M_E^4)
+          +(9P^2+9PQ-28PR+3Q^2-24QR+22R^2)/(576 pi^2 M_E^4)
+
+Pure U(1)_X:
+  F_p^X = Q[30(P-R)ell_Q+20(P-R)+21Q]/(720 pi^2 M_E^4)
+  F_q^X = -R[30(P-R)ell_Q+20(P-R)+21Q]/(720 pi^2 M_E^4)
+
+Hypercharge q_E=-1, q_H=+1/2:
+  F^Y = -F^X + (1/2)F^L
+  F_p^Y = -[45P^2+60Q(P-R)ell_Q+100PQ-90PR+69Q^2-115QR+60R^2]/(2880 pi^2 M_E^4)
+  F_q^Y = [45P^2+45PQ+120R(P-R)ell_Q+20PR+15Q^2+48QR-50R^2]/(5760 pi^2 M_E^4)
+
+SU(2)_L: q_E=0, q_H=T^a; F^{W^a}=T^a F^L with the correct doublet index ordering.
+
+PASS: R F_p^L + Q F_q^L = (Pp^3-P^3)/(192 pi^2 M_E^4).
+PASS: R F_p^X + Q F_q^X = 0.
+PASS: hypercharge Ward contraction is one half of the light-source difference.
+PASS: weak Ward contraction carries the scalar/doublet generator T^a.
