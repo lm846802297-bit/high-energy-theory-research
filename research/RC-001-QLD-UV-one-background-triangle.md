@@ -1,6 +1,6 @@
 # RC-001 — QLD UV one-background triangle: exact integrands and Ward ledger
 
-**Status (2026-11-10):** the two full-theory attachment classes, their routing, parity-even numerators, and relative sign are fixed at the integrand/Ward level. The complete degree-five Euclidean hard-region subgraph reduction through \(M_E^{-4}\) is evaluated with the corrected Wick sign. The ordinary light-line soft form factors are now evaluated through \(O(\epsilon^0)\); their poles cancel both hard IR poles, and the pure-\(U(1)_X\) hard-plus-soft amplitude is transverse and matching-scale independent. The Abelian transverse-pair IBP/Higgs-EOM reduction and its first potential/source/gauge-current companions are now recorded in §5K. Overall 1PI normalization, the non-Abelian \(SU(2)_L\) completion, the higher-derivative EOM reduction of the scalar-source operator, the full source/current basis projection, and the final nonredundant Wilson coefficients remain open.
+**Status (2026-11-10):** the two full-theory attachment classes, their routing, parity-even numerators, and relative sign are fixed at the integrand/Ward level. The complete degree-five Euclidean hard-region subgraph reduction through \(M_E^{-4}\) is evaluated with the corrected Wick sign. The ordinary light-line soft form factors are now evaluated through \(O(\epsilon^0)\); their poles cancel both hard IR poles, and the pure-\(U(1)_X\) hard-plus-soft amplitude is transverse and matching-scale independent. The Abelian transverse-pair IBP/Higgs-EOM reduction and its first potential/source/gauge-current companions are now recorded in §5K. Overall 1PI normalization, the non-Abelian \(SU(2)_L\) completion, the fermion-EOM/Fierz reduction of the generated scalar-source companions, the full source/current basis projection, and the final nonredundant Wilson coefficients remain open.
 
 ## 1. Frozen interaction and charges
 
@@ -834,6 +834,111 @@ The hard coefficients in this table still contain hard-region IR poles; they are
 The exact polynomial and coefficient checks are in calculations/RC-001-QLD-dim8-IBP-EOM-reduction.py, with captured output in validation/RC-001-QLD-dim8-IBP-EOM-reduction.txt.
 
 **Scope boundary.** This closes the Abelian covariant IBP identity and the first Higgs-EOM/source/current decomposition of the transverse pair. It does not close the full non-Abelian \(SU(2)_L\) completion, the higher-derivative EOM reduction of \(\mathcal O_S\), all two-background operators, the complete gauge-current basis, or the final UV–EFT-renormalized Wilson vector.
+
+
+## 5L. Higher-derivative EOM reduction of the scalar-source representative
+
+The bosonic scalar-source representative of §5J is
+\[
+\mathcal O_S=H^\dagger(-D^2)^3H.
+\]
+It is distinct from the singlet-scalar kinetic operators and from the fermionic \(Q_{LD}^{(8)}\) contact. This subsection reduces only this \(H\)-sector operator.
+
+Define the self-adjoint differential operator \(K=-D^2\) and
+\[
+K_H=f_HH+\mathcal J_H,\qquad
+f_H=-\mu_H^2+2\lambda_HX+\lambda_{HS}Y,
+\qquad D^2H=-f_HH-\mathcal J_H.
+\]
+Using self-adjointness in the action,
+\[
+\begin{aligned}
+\int d^4x\,H^\dagger K^3H
+&=\int d^4x\,(KH)^\dagger K(KH)\\
+&\doteq\int d^4x\,K_H^\dagger(-D^2)K_H\\
+&\doteq\int d^4x\,(D_\mu K_H)^\dagger D^\mu K_H.
+\end{aligned}
+\]
+Therefore the exact leading-EOM replacement is
+\[
+\boxed{\mathcal O_S\doteq
+\left|D_\mu(f_HH+\mathcal J_H)\right|^2.}
+\]
+No commutation of \(D^2\) through a single \(D_\mu\) is used here; the covariant derivative remains on the complete gauge-covariant source \(K_H\).
+
+The product rule gives
+\[
+D_\mu K_H=(\partial_\mu f_H)H+f_HD_\mu H+D_\mu\mathcal J_H.
+\]
+Keeping every term,
+\[
+\boxed{\begin{aligned}
+\mathcal O_S\doteq{}&
+X(\partial_\mu f_H)(\partial^\mu f_H)
++f_H^2(D_\mu H)^\dagger D^\mu H
++f_H(\partial_\mu f_H)\partial^\mu X\\
+&+(\partial_\mu f_H)
+\left[H^\dagger D^\mu\mathcal J_H
++(D^\mu\mathcal J_H)^\dagger H\right]\\
+&+f_H\left[(D_\mu H)^\dagger D^\mu\mathcal J_H
++(D^\mu\mathcal J_H)^\dagger D_\mu H\right]\\
+&+(D_\mu\mathcal J_H)^\dagger D^\mu\mathcal J_H.
+\end{aligned}}
+\]
+The first three lines' first three terms are purely bosonic; the remaining three structures are the Higgs–Yukawa source and source-square companions. They are not discarded by the EOM transformation.
+
+### 5L.1 Explicit pure-bosonic companions
+
+Since
+\[
+\partial_\mu f_H
+=2\lambda_H\partial_\mu X+\lambda_{HS}\partial_\mu Y,
+\]
+the coefficient multiplying the Higgs kinetic structure is
+\[
+\begin{aligned}
+f_H^2={}&
+\mu_H^4-4\mu_H^2\lambda_HX
+-2\mu_H^2\lambda_{HS}Y\\
+&+4\lambda_H^2X^2
++4\lambda_H\lambda_{HS}XY
++\lambda_{HS}^2Y^2.
+\end{aligned}
+\]
+The remaining pure derivative terms combine to
+\[
+\boxed{\begin{aligned}
+X(\partial f_H)^2+f_H\partial_\mu f_H\partial^\mu X
+={}&
+\left[-2\mu_H^2\lambda_H
++8\lambda_H^2X
++2\lambda_H\lambda_{HS}Y\right](\partial X)^2\\
+&+\left[-\mu_H^2\lambda_{HS}
++6\lambda_H\lambda_{HS}X
++\lambda_{HS}^2Y\right]
+\partial_\mu X\partial^\mu Y\\
+&+\lambda_{HS}^2X(\partial Y)^2.
+\end{aligned}}
+\]
+These are the explicit potential/derivative companions of the \(p^6\) scalar two-point source coefficient. They must be multiplied by the same \(c_S=1/192\) and the common UV matching normalization. Further IBP reduction of \((\partial X)^2\), \(\partial X\partial Y\), and the \(f_H^2|DH|^2\) term is a separate basis choice and must carry its own EOM/source ledger.
+
+### 5L.2 Yukawa-source companions and truncation
+
+The complete source contribution is
+\[
+\boxed{\begin{aligned}
+\mathcal O_{S,\mathrm{src}}\doteq{}&
+(\partial_\mu f_H)
+\left[H^\dagger D^\mu\mathcal J_H+\mathrm{h.c.}\right]\\
+&+f_H\left[(D_\mu H)^\dagger D^\mu\mathcal J_H+\mathrm{h.c.}\right]\\
+&+(D_\mu\mathcal J_H)^\dagger D^\mu\mathcal J_H.
+\end{aligned}}
+\]
+At the retained \(M_E^{-4}\) coefficient order, \(\mathcal J_H^{(4)}\), the allowed renormalizable SM Yukawa source, is included. The dimension-five source \(\mathcal J_H^{(5)}\propto C_5\sim M_E^{-1}\) contributes one further inverse heavy mass and hence starts at \(M_E^{-5}\) when multiplied by this coefficient. It is beyond the present strict order, not identically zero. The model's forbidden diagonal \(\mu,\tau\) renormalizable Yukawa entries remain excluded.
+
+The exact algebraic expansion is checked in calculations/RC-001-QLD-dim8-scalar-source-EOM.py, with the captured output in validation/RC-001-QLD-dim8-scalar-source-EOM.txt.
+
+**Scope boundary.** This completes the leading-Higgs-EOM replacement of the bosonic \(p^6\) source representative and lists its pure-bosonic and Yukawa-source companions. It does not yet reduce the generated fermionic source operators with fermion EOM/Fierz identities, select a final dimension-eight bosonic basis, or combine these coefficients with all UV/EFT soft terms and counterterms.
 
 ## 5J. Exact three-column off-shell amplitude projection
 
