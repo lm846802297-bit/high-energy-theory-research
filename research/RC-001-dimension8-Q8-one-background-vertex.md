@@ -236,42 +236,85 @@ and its massless one-propagator integral is also scaleless. A consistent UV/IR r
 
 Until the discrepancy is resolved, the §4C expression is a formal result of the stated tensor-reduction prescription only; it is **not a validated UV pole** and must not be used as a Wilson coefficient or matching input. See research/RC-001-dimension8-Q8-one-background-consistency-audit.md for the exact identity and required re-derivation.
 
-## 4C. Evaluated ordinary-line UV residue
+## 4C. Superseded ordinary-line UV residue
 
-Using the explicit numerator in §4A, the angular averages were decomposed as \(A_n^\mu=a_n(x)q^\mu+b_n(x)r^\mu\). In the \(d\to4\) residue,
+**The expression previously recorded in this section is superseded and must not be used.** Its planar-component angular average omitted loop-momentum components orthogonal to the plane spanned by the external vectors \(q\) and \(r\). In particular, scalar factors such as \((k+r)^2\) contain the full \(l^2\), not merely the two displayed components. This omission generated a spurious nonzero longitudinal residue.
+
+## 4E. Corrected covariant tensor reduction
+
+Use the invariant variables
+\[
+L=l^2,\qquad u=l\cdot q,\qquad v=l\cdot r,
+\quad k=l-xq,\quad a=k+r,\quad b=k+q.
+\]
+The required \(d\)-dimensional angular averages include
+\[
+\langle u^2\rangle=\frac{Lq^2}{d},\quad
+\langle uv\rangle=\frac{L(q\cdot r)}d,\quad
+\langle v^2\rangle=\frac{Lr^2}{d},
+\]
+and
+\[
+\langle u^2v^2\rangle
+=\frac{L^2[q^2r^2+2(q\cdot r)^2]}{d(d+2)},
+\]
+with the corresponding rank-four moments for \(u^4,u^3v,uv^3,v^4\). This retains all transverse components of the loop momentum.
+
+Writing
+\[
+\langle N^\mu\rangle
+=[A_0+A_2L+A_4L^2]q^\mu
++[B_0+B_2L+B_4L^2]r^\mu,
+\]
+the \(d\to4\) coefficients are
 \[
 \begin{aligned}
-a_0={}&-4x(x-1)(q^2x-2q\cdot r)
+A_0={}&-4x(x-1)(q^2x-2q\cdot r)
 (q^2x^2-2xq\cdot r+r^2),\\
-a_2={}&-4[3q^2x^3-2q^2x^2-6(q\cdot r)x^2
-+4(q\cdot r)x+2r^2x-r^2],\\
-a_4={}&-\frac43(3x-1),\\
-b_0={}&-4q^2x(x-1)(q^2x^2-2xq\cdot r+r^2),\\
-b_2={}&-4q^2x(x-1),\qquad b_4=\frac43.
+A_2={}&-2[8q^2x^3-6q^2x^2-16(q\cdot r)x^2
++12(q\cdot r)x+5r^2x-3r^2],\\
+A_4={}&-4(2x-1),\\
+B_0={}&-4q^2x(x-1)(q^2x^2-2xq\cdot r+r^2),\\
+B_2={}&-2[4q^2x^2-3q^2x-2(q\cdot r)x+r^2],\\
+B_4={}&0.
 \end{aligned}
 \]
-The Feynman-parameter integral then gives
+Using the UV residues \(J_0:1\), \(J_1:-2\Delta\), \(J_2:3\Delta^2\), with \(\Delta=x(1-x)q^2\), gives
+\[
+\int_0^1dx\,[A_0-2\Delta A_2+3\Delta^2A_4]
+=\frac43(q\cdot r)[q\cdot r-r^2],
+\]
+\[
+\int_0^1dx\,[B_0-2\Delta B_2+3\Delta^2B_4]
+=-\frac43q^2[q\cdot r-r^2].
+\]
+Thus the corrected ordinary-line UV residue is
 \[
 \boxed{
-\begin{aligned}
 \mathcal I_{\rm line}^{\mu}\big|_{\rm UV}
-=\frac{1}{16\pi^2\epsilon}\frac1{15}\bigg\{&
-q^\mu\left[(q^2)^2-8q^2(q\cdot r)+5q^2r^2
-+20(q\cdot r)^2-20(q\cdot r)r^2\right]\\
-&+r^\mu q^2\left[q^2-10(q\cdot r)+10r^2\right]\bigg\}.
-\end{aligned}}
+=\frac{1}{16\pi^2\epsilon}\,
+\frac43(q\cdot r-r^2)
+\left[(q\cdot r)q^\mu-q^2r^\mu\right].
+}
 \]
-The trace factor \(\operatorname{tr}\mathbf1=4\) is included in this expression. The overall \(i\)-convention, gauge coupling/generator, and the EFT Wilson coefficient are not included; these multiply the displayed residue according to the fixed Feynman rules. The result is for the ordinary fermion-line graph only.
-
-Its longitudinal contraction is
+It is transverse:
 \[
-q_\mu\mathcal I_{\rm line}^{\mu}\big|_{\rm UV}
-=\frac{1}{16\pi^2\epsilon}
-\frac{q^2(q^2-2q\cdot r)(q^2-5q\cdot r+5r^2)}{15}.
+q_\mu\mathcal I_{\rm line}^{\mu}\big|_{\rm UV}=0.
 \]
-It is not zero. This is not a failure of the Ward identity: this graph carries the light-fermion charge only, while the Q8 contact vertex carries the total composite-source charge. The missing scalar-constituent charge-flow terms and the Q8 contact graph must be included before testing the full background Ward identity. Do not impose transversality on this isolated graph.
+The trace \(\operatorname{tr}\mathbf1=4\) is included; the overall EFT coefficient, gauge charge/coupling and convention-dependent \(i\) factors are not. This is the ordinary-line graph only, not the full Q8 amplitude or a matched Wilson coefficient.
 
-The result is reproduced by calculations/RC-001-dimension8-Q8-one-background-line-pole.py. The script independently constructs the angular averages, integrates \(x\), and asserts both vector coefficients and the longitudinal contraction. It intentionally excludes the contact graph and does not claim a complete Q8 amplitude or a matched Wilson coefficient.
+The corrected calculation is independently reproducible with calculations/RC-001-dimension8-Q8-one-background-line-pole-covariant.py; its output is recorded in validation/RC-001-dimension8-Q8-one-background-line-pole-covariant.txt. The earlier file calculations/RC-001-dimension8-Q8-one-background-line-pole.py is retained as historical evidence of the faulty planar reduction and must not be used.
+
+## 4F. Interpretation and remaining R* work
+
+The corrected line-graph pole is a local transverse polynomial of degree five. The earlier apparent conflict with the integrand-level Ward contraction was caused by the incomplete angular average, not by a physical non-transverse UV counterterm. The contact graph still has to be treated with the same IR rearrangement, and the full functional Ward identity must be checked with the correct composite-source charge flow.
+
+The next steps are:
+1. evaluate the Q8 contact graph using the same IR rearrangement and separate its UV and IR poles;
+2. derive the scalar-constituent/background-field terms from the full functional determinant rather than assigning them by charge intuition;
+3. verify the full Ward identity before and after pole extraction;
+4. compute the hard-region partner with the identical IR prescription;
+5. compare the soft and hard poles and only then perform EOM/IBP reduction.
 
 ## 5. Model-specific channel ledger
 
