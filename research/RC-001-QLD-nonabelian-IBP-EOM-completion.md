@@ -239,7 +239,7 @@ J_\mu^b j_{H,\nu}^c
 \]
 and the mixed hypercharge-current term becomes
 \[
--\frac{g'g_2Y_H}{2}W^{a\mu\nu}J_\mu^Y
+-\frac{g'^2Y_H}{2}W^{a\mu\nu}J_\mu^Y
 (\mathcal D_\nu^{\rm adj}X)^a.
 \]
 Each derivative-of-field-strength representative and its gauge-EOM current representative are alternatives; they must not both be retained in the same basis.
@@ -272,8 +272,17 @@ Then
 \doteq f_H\mathcal O_{FH}^{(6),A}
 -\frac12F_A^{\mu\nu}j_{H,\mu}^A\partial_\nu f_H
 +\mathcal O_{F\mathcal J_H}^{(8),A}
-+\mathcal O_{\rm EOM}^A.
-}
++\mathcal O_{\rm EOM}^A,
+\qquad
+\mathcal E_H=D^2H+f_HH+\mathcal J_H,
+\]
+where
+\[
+\mathcal O_{\rm EOM}^A
+=-\frac i2F_A^{\mu\nu}\left[
+(D_\mu\mathcal E_H)^\dagger t_A D_\nu H
++(D_\mu H)^\dagger t_A D_\nu\mathcal E_H
+\right].
 \]
 For an external weak field, \(j_H^{A\mu}=j_H^{a\mu}\) is the adjoint Higgs current. For external \(B\) or \(F_X\), it is the singlet current. The potential companions are obtained from
 \[
