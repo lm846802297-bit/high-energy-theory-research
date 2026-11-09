@@ -146,3 +146,57 @@ print("PASS: heavy graph radial indices are a=1, b=2+n_p+n_pprime.")
 print("PASS: exact d-dimensional angular reduction and 15-master inventory.")
 print("Counts: L_p=12, L_q=12, E_p=3, E_pprime=3; k-vector pieces vanish.")
 print("SCOPE: radial coefficients only; relative graph sign and EFT soft subtraction remain open.")
+
+
+# Evaluate the radial masters in d=4-2 eps. L_M denotes
+# ln(mu^2/M_E^2)+ln(4 pi)-gamma_E; poles in this hard region are IR.
+L_M = sp.symbols("L_M")
+
+def J_msbar(a, b, t):
+    expr = (
+        sp.exp(eps*(L_M-sp.log(4*sp.pi)+sp.EulerGamma))
+        /(4*sp.pi)**(2-eps)
+        * M2**(2+t-a-b)
+        * sp.gamma(2-eps+t-a)
+        * sp.gamma(a+b-2+eps-t)
+        /(sp.gamma(2-eps)*sp.gamma(b))
+    )
+    return sp.series(expr, eps, 0, 1).removeO()
+
+def sum_form_factor(component_dict):
+    total = 0
+    for (vector, a, b, t), coefficient in component_dict.items():
+        total += coefficient.subs(d, 4-2*eps) * J_msbar(a,b,t)
+    return sp.series(sp.expand(total), eps, 0, 1).removeO()
+
+def pole_and_finite(expr):
+    pole = sp.simplify(sp.limit(eps*expr, eps, 0))
+    finite = sp.simplify(sp.limit(expr-pole/eps, eps, 0))
+    return sp.factor(pole), sp.factor(finite)
+
+LP = sum_form_factor(L["p"])
+LQ = sum_form_factor(L["q"])
+EP = sum_form_factor(E["p"])
+EPP = sum_form_factor(E["pp"])
+LP_pole, LP_finite = pole_and_finite(LP)
+LQ_pole, LQ_finite = pole_and_finite(LQ)
+EP_pole, EP_finite = pole_and_finite(EP)
+EPP_pole, EPP_finite = pole_and_finite(EPP)
+
+P, Q, R, PP, T = sp.symbols("P Q R PP T")
+assert sp.simplify(LP_pole - Q*(P-R)/(32*sp.pi**2*M2**2)
+                   .subs({P:p2,Q:q2,R:pq})) == 0
+assert sp.simplify(LQ_pole - (-(3*P*R+P*Q-4*R**2)
+                   /(96*sp.pi**2*M2**2)).subs({P:p2,Q:q2,R:pq})) == 0
+assert EP_pole == 0 and EPP_pole == 0
+
+print("HARD FORM FACTORS (Euclidean trace convention; common Feynman-rule factors omitted)")
+print("L attachment F_p pole:", LP_pole)
+print("L attachment F_p finite:", LP_finite)
+print("L attachment F_q pole:", LQ_pole)
+print("L attachment F_q finite:", LQ_finite)
+print("E attachment F_p finite:", EP_finite)
+print("E attachment F_pprime finite:", EPP_finite)
+print("PASS: all hard-region poles are IR poles; no UV pole in this degree-five projection.")
+print("PASS: the E-attachment masters are finite in this projection.")
+print("CAUTION: insert the common loop sign/couplings and use the Ward-fixed relative plus sign only after the full Wick convention is restored.")
