@@ -601,3 +601,43 @@ For the present one-background two-Higgs/two-lepton channel, the minimum basis l
 No coefficient in this basis is assigned by inspection of the transverse \(U(1)_X\) form factor alone. The \(U(1)_X\) result constrains the transverse combination; hypercharge and \(SU(2)_L\) additionally test the scalar-source Ward term. The hard coefficient must be projected from the hard part only; the soft form factors in §5E are reproduced by EFT loops and are not Wilson coefficients.
 
 **Acceptance gate for the next calculation:** construct the ordered derivative/field-strength operator list, derive its one-background Feynman rules, evaluate each operator on the same independent off-shell \(p,p',q\) kinematics, and solve the resulting linear system for the hard form factors. Only after this map is full-rank (modulo explicitly listed IBP/EOM relations) should the nonredundant Wilson coefficients be quoted.
+
+## 5I. Explicit Leibniz expansion before EOM/IBP
+
+To make the basis projection reproducible, expand the composite derivative without commuting any derivatives. Let \(\Pi_\mu=iD_\mu\) act in the appropriate representation on each factor. The covariant product rule gives
+\[
+\begin{split}
+\Pi^2(H^\dagger L_\ell)={}&
+(\Pi^2H^\dagger)L_\ell
++2(\Pi_\nu H^\dagger)(\Pi^\nu L_\ell)
++H^\dagger\Pi^2L_\ell,\\
+\gamma^\mu\Pi_\mu\Pi^2(H^\dagger L_\ell)={}&
+\gamma^\mu\Big[
+(\Pi_\mu\Pi^2H^\dagger)L_\ell
++(\Pi^2H^\dagger)(\Pi_\mu L_\ell)\\
+&+2(\Pi_\mu\Pi_\nu H^\dagger)(\Pi^\nu L_\ell)
++2(\Pi_\nu H^\dagger)(\Pi_\mu\Pi^\nu L_\ell)\\
+&+(\Pi_\mu H^\dagger)(\Pi^2L_\ell)
++H^\dagger\Pi_\mu\Pi^2L_\ell
+\Big].
+\end{split}
+\]
+The field-strength part must likewise be expanded as
+\[
+-\frac{g_Aq_E}{2}\,
+\bar L_\ell H\,\gamma^\mu
+\left[
+(\Pi_\mu\sigma^{\rho\sigma}F_{\rho\sigma})(H^\dagger L_\ell)
++\sigma^{\rho\sigma}F_{\rho\sigma}\,
+\Pi_\mu(H^\dagger L_\ell)
+\right].
+\]
+Here the first \(\Pi_\mu\) in the square bracket differentiates the field-strength tensor (with its adjoint gauge-covariant derivative), while the second term distributes onto \(H^\dagger\) and \(L_\ell\) by the product rule.
+
+These expressions define an ordered overcomplete generating set, not yet a nonredundant basis. The next reduction must:
+- retain the ordering \(\Pi_\mu\Pi_\nu\) until its antisymmetric part has been converted with \([\Pi_\mu,\Pi_\nu]=-ig_Aq F_{\mu\nu}\);
+- apply the lepton EOM only to \(\Pi^2L_\ell\) or \(\slashed\Pi L_\ell\) combinations after gamma identities, and apply the Higgs EOM to \(\Pi^2H\) terms;
+- integrate by parts with the conjugate representation on \(\bar L_\ell H\), recording each total derivative;
+- keep the generated Yukawa, Higgs-potential, and source operators in the coefficient vector rather than dropping them as “EOM zero” before the off-shell matching projection.
+
+The six derivative-distribution terms and the two field-strength derivative placements above are the starting columns for the one-background amplitude map. Their coefficients are fixed by the single covariant operator \(Q_{LD}^{(8)}\) at tree level; one-loop hard matching can generate additional independent columns. The projection matrix and its rank must be reported before any reduced Wilson coefficient is called final.
