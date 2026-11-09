@@ -731,7 +731,7 @@ where the columns are \((\mathcal B_P,\mathcal B_Q,\mathcal B_S)\). Exact SymPy 
 \[
 \operatorname{rank}M_{\rm amp}=3.
 \]
-For example, the minor formed from rows \((F_p:P^2,F_p:PQ,F_p:Q^2)\) is \(-6\), so all three columns are independent as polynomial functions of generic off-shell kinematics. This is a polynomial-function rank statement; at one fixed kinematic point the two-component vector \((F_p,F_q)\) cannot by itself resolve three coefficients.
+For example, the minor formed from rows \((F_p:P^2,F_p:PQ,F_p:Q^2)\) is \(-6\), so all three columns are independent as polynomial functions of generic off-shell kinematics. This is a polynomial-function rank statement; at one fixed kinematic point the two-component vector \((F_p,F_q)\) cannot by itself resolve three coefficients. This is also why the projection must remain off shell: on the massless on-shell scalar surface \(P=P'=0\), one has \(R=Q/2\), \(\mathcal B_P=-\mathcal B_Q/2\), and \(\mathcal B_S=0\), so the map collapses to rank one.
 
 In this basis the hard-region form factors of §§5D–5G become
 \[
