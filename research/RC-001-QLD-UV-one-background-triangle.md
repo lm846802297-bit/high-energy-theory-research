@@ -97,7 +97,7 @@ N_E^\mu=2\left[
 +(K'\cdot k)K^\mu+M_E^2 k^\mu
 \right].
 \]
-**Caution:** for the heavy-attachment graph the two heavy propagators are separated by a vector vertex. The (M_E^2 k^mu) term in the trace is therefore retained; dropping it would invalidate the heavy-line Ward contraction. The relative overall sign between the two attachment classes still has to be fixed from one explicit fermion-flow convention. The trace definitions above are the numerator starting point, not yet an accepted integrated result.
+**Caution:** for the heavy-attachment graph the two heavy propagators are separated by a vector vertex. The \(M_E^2 k^\mu\) term in the trace is therefore retained; dropping it would invalidate the heavy-line Ward contraction. With the momentum routing and common fermion flow fixed in §2, the Ward contractions below select the same relative sign for the two attachment classes. The trace definitions above are the numerator starting point, not yet an accepted integrated result.
 
 The UV amplitude has the structural form
 \[
@@ -108,7 +108,7 @@ q_L\int_k\frac{N_L^\mu}{D_L}
 +q_E\int_k\frac{N_E^\mu}{D_E}
 \right],
 \]
-where \(q_L,q_E\) are replaced by the appropriate representation generators for \(B_\mu,A'_\mu,W_\mu^a\). The overall relative sign is fixed by a common fermion-flow convention and must be checked together with the Ward contraction; it is not inferred from the denominator list alone.
+where \(q_L,q_E\) are replaced by the appropriate representation generators for \(B_\mu,A'_\mu,W_\mu^a\). The same relative sign is fixed by the common fermion-flow convention and checked by the charge-resolved Ward contraction in §4.
 
 ## 4. Ward contraction and charge relation
 
@@ -120,9 +120,9 @@ Contracting the light-line attachment therefore collapses one of its two light p
 
 With the common fermion-flow convention, the two attachment classes enter with the same relative sign in the trace convention of §3: their longitudinal contractions are opposite for equal constituent charges. The sum must obey the scalar-source Ward identity
 \[
-q_\mu\Gamma^\mu_{A H^\dagger H}(p',p)
+q_\mu\Gamma^\mu_{A H^\dagger H}(p,p')
 =g_Aq_H\left[
-\Gamma_{H^\dagger H}(p')-\Gamma_{H^\dagger H}(p)
+\Gamma_{H^\dagger H}(p)-\Gamma_{H^\dagger H}(p')
 \right],
 \]
 with the outgoing-\(q\) convention above. Equivalently, the constituent charge coefficients combine using \(q_L-q_E=q_H\), which follows from \(-q_L+q_H+q_E=0\). This is a stringent sign/routing test. For \(U(1)_X\), \(q_H=0\) and \(q_L=q_E\), so the light- and heavy-line longitudinal pieces cancel. For hypercharge and \(SU(2)_L\), the remainder is precisely the scalar-leg transformation term.
