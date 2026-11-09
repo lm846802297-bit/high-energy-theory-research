@@ -181,6 +181,45 @@ Q_{RD}&-\eta_\ell&2\eta_\ell&\eta_\ell
 \]
 This charge-flow distinction must be retained in the explicit Ward contraction.
 
+## 4B. Scalar master integrals for the UV-pole extraction
+
+After Wick rotation and the Feynman shift \(l=k+xq_E\), write the angularly reduced numerator as
+\[
+\langle N^\mu(l-xq_E;q_E,r_E)\rangle_{\Omega}
+=A_0^\mu(x)+A_2^\mu(x)\,l^2+A_4^\mu(x)\,(l^2)^2.
+\]
+The odd-rank terms vanish under the symmetric \(l\) integration. With
+\[
+\Delta=x(1-x)q_E^2,
+\]
+the required scalar masters are
+\[
+J_n(\Delta)=\mu^{2\epsilon}\int\frac{d^{4-2\epsilon}l}{(2\pi)^{4-2\epsilon}}
+\frac{(l^2)^n}{(l^2+\Delta)^2}
+=\frac{\mu^{2\epsilon}}{(4\pi)^{2-\epsilon}}
+\Delta^{n-\epsilon}
+\frac{\Gamma(n+2-\epsilon)\Gamma(\epsilon-n)}
+{\Gamma(2-\epsilon)}.
+\]
+Their UV pole parts are
+\[
+J_0\big|_{\rm UV}=\frac{1}{16\pi^2}\frac1\epsilon,\qquad
+J_1\big|_{\rm UV}=-\frac{\Delta}{16\pi^2}\frac1\epsilon,\qquad
+J_2\big|_{\rm UV}=+\frac{\Delta^2}{32\pi^2}\frac1\epsilon.
+\]
+Consequently the ordinary-line graph's pole is obtained from
+\[
+\mathcal I_{\rm line}^{\mu}\big|_{\rm UV}
+=\frac{1}{16\pi^2\epsilon}
+\int_0^1 dx\left[
+A_0^\mu(x)-\Delta A_2^\mu(x)
++\frac{\Delta^2}{2}A_4^\mu(x)
+\right],
+\]
+including the overall trace, gauge generator, coupling, Wilson coefficient, and propagator-convention factors. The \(A_i^\mu\) are to be computed from the explicit numerator in §4A with \(d\)-dimensional tensor reduction; the displayed formula fixes the scalar master normalization but does not claim the \(x\)-integral or the resulting local pole has been evaluated.
+
+The one-propagator contact graph must be treated with the same IR rearrangement before declaring its UV pole. In particular, a scaleless integral set to zero in dimensional regularization is not by itself a UV-pole audit.
+
 ## 5. Model-specific channel ledger
 
 | Sector | Light fermion \(f\) | Scalar factor in \(\Psi\) | Direct Q8 contact | Ordinary gauge insertion |
