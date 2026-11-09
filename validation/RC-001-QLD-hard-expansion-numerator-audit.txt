@@ -1,81 +1,70 @@
-QLD HARD DEGREE-FIVE RADIAL REDUCTION — corrected 2026-11-10
+RC-001 QLD HARD/SOFT ONE-BACKGROUND AUDIT
+Updated: 2026-11-10
+Convention: Euclidean loop integrals; q=p-p'; q_L=q_E for the pure U(1)_X check.
+Common couplings g_X q_l |y_l|^2 and the overall 1PI phase are stripped.
 
-Momentum convention: q=p-p', q=k'-k=K-K'.
-Scalar form-factor degree:
-  explicit external vector p^mu/q^mu/p'^mu: degree 4;
-  free loop vector k^mu: coefficient degree 5 before angular averaging.
-
-PASS: all shifted propagators expanded.
-PASS: light graph radial indices a=2+n_q, b=1+n_p.
-PASS: heavy graph radial indices a=1, b=2+n_p+n_pprime.
-PASS: d-dimensional angular average includes free-k vector terms.
-Term counts after tensor reduction:
-  light attachment: F_p 17 radial terms, F_q 17 radial terms;
-  heavy attachment: F_p 7 radial terms, F_pprime 7 radial terms.
-PASS: 25 distinct J[a,b,t] radial masters.
-PASS: all 25 masters are UV convergent in the hard region.
+A. HARD-REGION TENSOR/RADIAL REDUCTION
+PASS: explicit external-vector components extracted at scalar degree 4.
+PASS: free k^mu components extracted at scalar degree 5 before angular averaging.
+PASS: all shifted propagators expanded with correct radial indices:
+  L attachment: a=2+n_q, b=1+n_p.
+  E attachment: a=1, b=2+n_p+n_pprime.
+PASS: 25 distinct radial masters.
+PASS: all 25 masters UV convergent in the hard region.
 IR-singular masters:
   (3,2,1), (4,1,1), (4,2,2), (5,1,2),
   (5,2,3), (6,1,3), (6,2,4), (7,1,4).
-PASS: hard light-attachment pole:
-  F_p^pole = Q(P-R)/(24 pi^2 M_E^4 epsilon_IR)
-  F_q^pole = -R(P-R)/(24 pi^2 M_E^4 epsilon_IR)
-PASS: transverse pole check R F_p^pole + Q F_q^pole = 0.
-PASS: heavy-attachment hard form factors are finite in this projection.
+Tensor-term counts:
+  L attachment: 31 free-k structures, 12 explicit-p, 12 explicit-q before vector combination;
+  E attachment: 14 free-k structures, 3 explicit-p, 3 explicit-p-prime before vector combination.
 
-Scope: Euclidean hard-region subgraphs only. Common Wick/Feynman-rule factors, charge-weighted complete UV amplitude, EFT contact/source/EOM soft contributions, hard-soft pole cancellation, and final Wilson coefficient remain open.
+B. EUCLIDEAN WICK-ROTATION SIGN
+Minkowski heavy trace contains +M_E^2 k_M^mu.
+After Wick rotation relative to the momentum-product terms, Euclidean N_E contains -M_E^2 k_E^mu.
+The earlier Euclidean +M_E^2 implementation is superseded.
 
-
-ORDINARY-LINE EFT-SOFT CHECK (2026-11-10)
-Soft expansion: -N_L^mu (k+p)^2/[M_E^4 k^2(k+q)^2].
-F_p soft-line UV = -(P Q-3P R-2Q R+4R^2)/(48 pi^2 M_E^4 epsilon_UV).
-F_q soft-line UV = +R(P-R)/(24 pi^2 M_E^4 epsilon_UV).
-PASS: hard IR + ordinary-line soft UV cancels exactly in the q^mu form factor.
-The p^mu remainder is (P Q+3P R-4R^2)/(48 pi^2 M_E^4 epsilon).
-This remainder is not assigned to a single graph: Q8 ordered background contacts, scalar-source/constituent terms, C5*C7 EOM companions and counterterms remain to be added.
-
-
-CORRECTED EFT-SOFT POLE AUDIT (2026-11-10)
-The shifted numerator is
-  N_L^mu K^2 = 2 K^2[(A-B+C) ell^mu - B p^mu
-                   +(-x A+x B+(1-x)C) q^mu].
-The p-vector coefficient is -B. The earlier -B+C term was an algebraic projection error.
-
-PASS: corrected ordinary-line soft UV pole:
-  F_p^UV = -Q(P-R)/(24 pi^2 M_E^4 epsilon_UV)
-  F_q^UV = +R(P-R)/(24 pi^2 M_E^4 epsilon_UV)
-PASS: soft pole is transverse, R F_p^UV + Q F_q^UV = 0.
-PASS: hard IR + soft UV cancels in both p^mu and q^mu form factors.
-The previously recorded p^mu residual is superseded; it must not be used to motivate an additional pole counterterm.
-
-Q_LD^(8) contact:
-  Q_LD^(8) = (bar L H) (i slash D)^3 (H^dagger L).
-  V^mu = -g_A q_E [K'^2 gamma^mu + slash(K') gamma^mu slash(K) + K^2 gamma^mu].
-  q_mu V^mu = -g_A q_E [K^2 slash(K)-K'^2 slash(K')].
-PASS: exact Ward-difference identity.
-The one-propagator contact tadpole is scaleless in the unbroken massless DR setup and has no logarithmic 1/epsilon UV pole at this order.
-
-Scope: pole-level subgraph check only. Overall Wick/Feynman-rule factors, charge-weighted full amplitude, finite matching, and common-basis Wilson coefficient remain open.
-
-
-EUCLIDEAN WICK-ROTATION CORRECTION FOR THE HEAVY ATTACHMENT (2026-11-10)
-Minkowski trace: N_E^mu contains +M_E^2 k_M^mu.
-After Wick rotation, relative to the momentum-product trace terms:
-  N_E,Euclidean^mu contains -M_E^2 k_E^mu.
-The previous Euclidean generator used the Minkowski sign and is superseded.
-
-Corrected heavy-attachment hard finite form factors:
+Corrected heavy hard finite terms:
   F_p^E = (5P^2+13P Pp+13Pp^2-8P T-14Pp T+6T^2)/(960 pi^2 M_E^4)
   F_pprime^E = (13P^2+13P Pp+5Pp^2-14P T-8Pp T+6T^2)/(960 pi^2 M_E^4)
 
-For q=p-p', convert the E attachment to the (p,q) basis:
+C. HARD PURE-U(1)_X WARD CHECK
+For p'=p-q:
   F_p^{E,pq} = (15P^2+20PQ-30PR+9Q^2-25QR+20R^2)/(480 pi^2 M_E^4)
   F_q^{E,pq} = -(15P^2+15PQ-20PR+5Q^2-12QR+10R^2)/(960 pi^2 M_E^4)
 
-PASS: for q_L=q_E (pure U(1)_X), the complete hard finite form factors obey
-  R F_p^{hard}+Q F_q^{hard}=0.
-The total hard result (common couplings/phase omitted) is
+Combined hard form factors:
   F_p^hard = Q[30(P-R)/epsilon_IR+30 L_M(P-R)+70P+21Q-70R]/(720 pi^2 M_E^4)
   F_q^hard = -R[30(P-R)/epsilon_IR+30 L_M(P-R)+70P+21Q-70R]/(720 pi^2 M_E^4)
+PASS: R F_p^hard + Q F_q^hard = 0, including finite terms.
 
-This replaces the earlier heavy-attachment finite formulas computed with the unrotated +M_E^2 k^mu numerator.
+D. CORRECTED ORDINARY-LINE EFT SOFT INTEGRAL
+After k=ell-xq, k'=ell+(1-x)q, K=ell+p-xq:
+  N_L^mu K^2 = 2K^2[(A-B+C)ell^mu - B p^mu
+                   +(-xA+xB+(1-x)C)q^mu].
+The p^mu coefficient is -B. The earlier -B+C projection was incorrect.
+
+Define L_Q=ln(mu^2/Q)+ln(4 pi)-gamma_E.
+Complete soft form factors through O(epsilon^0):
+  F_p^soft = -Q(P-R)/(24 pi^2 M_E^4) [1/epsilon_UV + L_Q + 5/3]
+  F_q^soft = +R(P-R)/(24 pi^2 M_E^4) [1/epsilon_UV + L_Q + 5/3]
+PASS: R F_p^soft + Q F_q^soft = 0.
+PASS: hard IR + soft UV cancels in both p^mu and q^mu components.
+
+E. FULL METHOD-OF-REGIONS AMPLITUDE
+Using L_M=ln(mu^2/M_E^2)+ln(4 pi)-gamma_E:
+  F_p^{hard+soft} = Q[30(P-R)ln(Q/M_E^2)+20(P-R)+21Q]/(720 pi^2 M_E^4)
+  F_q^{hard+soft} = -R[30(P-R)ln(Q/M_E^2)+20(P-R)+21Q]/(720 pi^2 M_E^4)
+PASS: all 1/epsilon poles cancel.
+PASS: arbitrary mu dependence cancels.
+PASS: complete pure-U(1)_X result is transverse.
+Interpretation: hard part is the local matching contribution; soft part is the EFT loop and is not part of the Wilson coefficient.
+
+F. COVARIANT Q_LD^(8) CONTACT
+  Q_LD^(8)=(bar L H)(i slash D)^3(H^dagger L).
+  V^mu=-g_A q_E[K'^2 gamma^mu+slash(K')gamma^mu slash(K)+K^2 gamma^mu].
+  q_mu V^mu=-g_A q_E[K^2 slash(K)-K'^2 slash(K')].
+PASS: exact Ward-difference identity.
+The one-propagator contact tadpole is scaleless in the unbroken massless DR setup and has no logarithmic 1/epsilon UV pole at this order.
+
+SCOPE
+The pure-U(1)_X parity-even one-background subgraph now has a consistent hard reduction, finite soft integral, pole cancellation, Ward identity, and matching-scale-independent hard-plus-soft amplitude. The common 1PI phase/coupling normalization, hypercharge and SU(2)_L charge projections, source/EOM basis mapping, and final nonredundant Wilson coefficient remain open. The displayed values are stripped form factors, not a complete model-level Wilson coefficient.
