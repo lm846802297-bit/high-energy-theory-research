@@ -121,8 +121,16 @@ soft_expected = (
 ) / (24*sp.pi**2)
 assert sp.simplify(soft_series-soft_expected) == 0
 
-hard_effective_pole = -sp.Rational(1,8)/(24*sp.pi**2*M**4)
-soft_effective_pole = sp.Rational(1,8)/(24*sp.pi**2*M**4)
+hard_effective = sp.simplify(hard_expected/8)
+soft_effective = sp.simplify(soft_expected/8)
+assert sp.simplify(
+    hard_effective + (Delta_IR-L_E+sp.Rational(17,12))/(192*sp.pi**2*M**4)
+) == 0
+assert sp.simplify(
+    soft_effective - (Delta_UV-sp.log(q2/mu**2)+sp.Rational(5,3))/(192*sp.pi**2*M**4)
+) == 0
+hard_effective_pole = -sp.Rational(1,192)/(sp.pi**2*M**4)
+soft_effective_pole = sp.Rational(1,192)/(sp.pi**2*M**4)
 assert sp.simplify(hard_effective_pole+soft_effective_pole) == 0
 
 finite = sp.simplify(
