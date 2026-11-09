@@ -456,6 +456,87 @@ Closing the light-lepton pair at this local contact gives a one-propagator tadpo
 
 The heavy-attachment soft expansion likewise has only one massless propagator after both heavy denominators are expanded. In the unbroken massless dimensional-regularization setup it is scaleless at this order and gives no logarithmic soft UV pole. This is a result of the explicit expansion, not a reason to omit the attachment from the full-theory hard calculation.
 
+## 5G. Charge-resolved \(U(1)_X\), hypercharge, and \(SU(2)_L\) projections
+
+For a compact charge decomposition, define
+\[
+\ell_Q=\ln\frac{Q}{M_E^2},\qquad Q=q^2.
+\]
+The complete light-attachment form factors (hard plus its ordinary-line soft EFT loop) are
+\[
+F_p^{L,\mathrm{full}}=
+\frac{Q(P-R)\ell_Q}{24\pi^2M_E^4}
++\frac{-9P^2-4PQ+18PR+3Q^2+7QR-12R^2}
+{288\pi^2M_E^4},
+\]
+\[
+F_q^{L,\mathrm{full}}=
+-\frac{R(P-R)\ell_Q}{24\pi^2M_E^4}
++\frac{9P^2+9PQ-28PR+3Q^2-24QR+22R^2}
+{576\pi^2M_E^4}.
+\]
+The pure-\(U(1)_X\) complete amplitude is
+\[
+F_p^X=
+\frac{Q}{720\pi^2M_E^4}
+\left[30(P-R)\ell_Q+20(P-R)+21Q\right],
+\]
+\[
+F_q^X=
+-\frac{R}{720\pi^2M_E^4}
+\left[30(P-R)\ell_Q+20(P-R)+21Q\right].
+\]
+For a general gauge generator, use \(q_L=q_E+q_H\). Since the soft loop is weighted by \(q_L\), while the heavy-line hard graph is weighted by \(q_E\), the complete stripped amplitude decomposes as
+\[
+\Gamma_A^\mu\ \propto\
+g_A|y_\ell|^2\left[
+q_E\,\Gamma_X^\mu+q_H\,\Gamma_L^\mu
+\right],
+\]
+where \(\Gamma_X^\mu\) is represented by \(F_{p,q}^X\), and \(\Gamma_L^\mu\) by \(F_{p,q}^{L,\mathrm{full}}\). The hard matching contribution is obtained by replacing both complete amplitudes by their hard parts; the soft loop is not included in the Wilson coefficient.
+
+For hypercharge, \(q_E=-1\) and \(q_H=+1/2\), so
+\[
+F_{p,q}^{Y}=-F_{p,q}^{X}+\frac12F_{p,q}^{L,\mathrm{full}}.
+\]
+Explicitly,
+\[
+F_p^Y=
+-\frac{
+45P^2+60Q(P-R)\ell_Q+100PQ-90PR+69Q^2-115QR+60R^2
+}{2880\pi^2M_E^4},
+\]
+\[
+F_q^Y=
+\frac{
+45P^2+45PQ+120R(P-R)\ell_Q+20PR+15Q^2+48QR-50R^2
+}{5760\pi^2M_E^4}.
+\]
+For \(SU(2)_L\), the composite \(H^\dagger L\) is a weak singlet, so \(q_E=0\); the background generator acts on the scalar/doublet source. In a fixed component channel,
+\[
+F_{p,q}^{W^a}=T^a F_{p,q}^{L,\mathrm{full}},
+\]
+with the appropriate fundamental/anti-fundamental index ordering understood.
+
+The charge-resolved Ward check is
+\[
+R F_p^{L,\mathrm{full}}+QF_q^{L,\mathrm{full}}
+=\frac{P'^3-P^3}{192\pi^2M_E^4},
+\qquad P'=P+Q-2R,
+\]
+whereas
+\[
+R F_p^X+QF_q^X=0.
+\]
+Consequently,
+\[
+q_\mu\Gamma_A^\mu
+\ \propto\
+g_A|y_\ell|^2q_H
+\frac{P'^3-P^3}{192\pi^2M_E^4}.
+\]
+This vanishes for \(U(1)_X\), gives one half of the light-source difference for hypercharge, and carries the \(SU(2)_L\) generator for the weak current. The nonzero hypercharge/weak longitudinal part is the scalar-source Ward term, not a failure of transversality. These relations hold for the stripped parity-even form factors; overall 1PI normalization and the full operator-basis projection remain to be restored.
+
 ## 6. Acceptance conditions
 
 The QLD one-background matching is accepted only after:
