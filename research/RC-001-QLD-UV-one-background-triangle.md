@@ -208,28 +208,104 @@ where the nonnegative expansion indices are further constrained by total externa
 
 This gives a reproducible route to the hard coefficient, but the finite sums over Taylor partitions and the final \(1/\epsilon\) and finite terms have not yet been evaluated. In particular, a Gamma-function pole in an individual hard Taylor term is not by itself the matched UV pole: it must be combined with the EFT soft region in the same subtraction convention.
 
-## 5C. Generated total-degree-five hard integrands (P0.1/P0.2)
+## 5C. Superseded first Taylor-count attempt
 
-The numerator polynomials and all shifted-propagator series have now been combined mechanically, retaining independent formal external vectors \(p,p',q\) until after Taylor extraction. The generated coefficient is homogeneous of total external degree five in every vector component.
+The earlier 28/20/20 count treated the scalar coefficient degree as the full vector-amplitude degree and therefore selected degree five before accounting for the explicit external Lorentz vector. It also did not provide the claimed dedicated generator on the PR head. **Those counts are superseded and must not be used for matching.**
 
-The exact generator is `calculations/RC-001-QLD-hard-degree5-integrand.py`; the recorded term-count audit is `validation/RC-001-QLD-hard-degree5-integrand.txt`.
+For a decomposition \(\Gamma^\mu=p^\mu F_p+q^\mu F_q\), a total degree-five vector amplitude requires degree-four scalar form factors. The corrected generator and radial reduction are in calculations/RC-001-QLD-hard-expansion-numerator-audit.py.
 
-The expanded monomial counts are:
+## 5D. Corrected degree-five vector amplitude: d-dimensional radial reduction
+
+The corrected extraction uses scalar form-factor degree four, so that the explicit vector supplies the fifth external momentum. All shifted propagators are expanded. The radial denominator indices are assigned separately:
 \[
-\begin{array}{c|rrr}
-&k^\mu&p^\mu&q^\mu\text{ or }p'^\mu\\\hline
-L\text{-attachment}&28&20&20\\
-E\text{-attachment}&28&20&20
+L\text{-attachment}:\quad a=2+n_q,\quad b=1+n_p,
+\]
+\[
+E\text{-attachment}:\quad a=1,\quad b=2+n_p+n_{p'}.
+\]
+In particular, the light-graph \(p\)-shift increases the massive denominator power \(b\), not the massless power \(a\). This is essential.
+
+After exact \(d\)-dimensional angular averaging, the surviving form-factor structures are:
+\[
+L:\quad F_p^L=\sum_{12\ {\rm terms}}c^L_{p;abt}J_{ab}^{(t)},\qquad
+F_q^L=\sum_{12\ {\rm terms}}c^L_{q;abt}J_{ab}^{(t)},
+\]
+\[
+E:\quad F_p^E=\sum_{3\ {\rm terms}}c^E_{p;abt}J_{ab}^{(t)},\qquad
+F_{p'}^E=\sum_{3\ {\rm terms}}c^E_{p';abt}J_{ab}^{(t)}.
+\]
+The \(k^\mu\) numerator components vanish in this degree-four scalar projection by odd-rank rotational invariance. The complete radial-master inventory is
+\[
+\begin{split}
+&(1,4,1),(1,5,2),(1,6,3),\\
+&(2,3,1),(2,4,2),(2,5,3),\\
+&(3,2,1),(3,3,2),(3,4,3),\\
+&(4,1,1),(4,2,2),(4,3,3),\\
+&(5,1,2),(5,2,3),(6,1,3).
+\end{split}
+\]
+Here each tuple is \((a,b,t)\) in \(J_{ab}^{(t)}\).
+
+For the Euclidean master
+\[
+J_{ab}^{(t)}=\mu^{2\epsilon}\int\frac{d^{4-2\epsilon}k}{(2\pi)^{4-2\epsilon}}
+\frac{(k^2)^t}{(k^2)^a(k^2+M_E^2)^b},
+\]
+define
+\[
+L_M=\ln\frac{\mu^2}{M_E^2}+\ln(4\pi)-\gamma_E.
+\]
+All 15 masters are UV convergent in this hard-region coefficient. Six have an IR pole:
+\[
+\begin{array}{c|c}
+(a,b,t)&J_{ab}^{(t)}\\\hline
+(3,2,1)&-\dfrac{1}{16\pi^2M_E^4}\left(\dfrac1{\epsilon_{\rm IR}}+L_M+2\right)\\
+(4,1,1)&+\dfrac{1}{16\pi^2M_E^4}\left(\dfrac1{\epsilon_{\rm IR}}+L_M+1\right)\\
+(4,2,2)&-\dfrac{1}{16\pi^2M_E^4}\left(\dfrac1{\epsilon_{\rm IR}}+L_M+2\right)\\
+(5,1,2)&+\dfrac{1}{16\pi^2M_E^4}\left(\dfrac1{\epsilon_{\rm IR}}+L_M+1\right)\\
+(5,2,3)&-\dfrac{1}{16\pi^2M_E^4}\left(\dfrac1{\epsilon_{\rm IR}}+L_M+2\right)\\
+(6,1,3)&+\dfrac{1}{16\pi^2M_E^4}\left(\dfrac1{\epsilon_{\rm IR}}+L_M+1\right).
 \end{array}
 \]
-The base radial denominators are
+The remaining nine masters are finite:
 \[
-I_L:\quad \frac{1}{(k^2)^2(k^2+M_E^2)},\qquad
-I_E:\quad \frac{1}{k^2(k^2+M_E^2)^2}.
+\begin{array}{c|c@{\qquad}c|c}
+(a,b,t)&J_{ab}^{(t)}&(a,b,t)&J_{ab}^{(t)}\\\hline
+(1,4,1)&\frac1{96\pi^2M_E^4}&(1,5,2)&\frac1{192\pi^2M_E^4}\\
+(1,6,3)&\frac1{320\pi^2M_E^4}&(2,3,1)&\frac1{32\pi^2M_E^4}\\
+(2,4,2)&\frac1{96\pi^2M_E^4}&(2,5,3)&\frac1{192\pi^2M_E^4}\\
+(3,3,2)&\frac1{32\pi^2M_E^4}&(3,4,3)&\frac1{96\pi^2M_E^4}\\
+(4,3,3)&\frac1{32\pi^2M_E^4}&&
+\end{array}
 \]
-The numerator-degree partitions \(5,4,3\) are included automatically by multiplication before extracting degree five. This corrects any interpretation that only a single denominator Taylor order is needed.
 
-The generator checks homogeneity and expansion completeness at the polynomial level. It does **not** yet perform the \(d\)-dimensional tensor contractions, radial master integrations, or the hard/soft subtraction. The 28/20/20 monomial counts are not Wilson coefficients and are not physical results.
+Summing the radial masters gives the following Euclidean hard-region form factors in the trace/routing convention of §3, **before** inserting \(g_A|y_\ell|^2\), representation charges, the closed-loop sign, and the still-to-be-fixed relative sign of the two attachment classes. Write \(P=p^2\), \(Q=q^2\), \(R=p\cdot q\), \(P'=p'^2\), and \(T=p\cdot p'\). For the light attachment:
+\[
+F_p^L\big|_{\rm hard}=
+\frac{Q(P-R)}{32\pi^2M_E^4\epsilon_{\rm IR}}
++\frac{6L_M Q(P-R)-2P^2+4PR+13PQ-4R^2-11RQ+2Q^2}
+{192\pi^2M_E^4},
+\]
+\[
+F_q^L\big|_{\rm hard}=
+-\frac{3PR+PQ-4R^2}{96\pi^2M_E^4\epsilon_{\rm IR}}
++\frac{-18L_MPR-6L_MPQ+24L_MR^2+18P^2-87PR+PQ+92R^2-36RQ+6Q^2}
+{576\pi^2M_E^4}.
+\]
+For the heavy attachment:
+\[
+F_p^E\big|_{\rm hard}=
+\frac{3P^2+16PP'+3PT+18P'^2-12P'T+2T^2}
+{2880\pi^2M_E^4},
+\]
+\[
+F_{p'}^E\big|_{\rm hard}=
+\frac{18P^2+16PP'-12PT+3P'^2+3P'T+2T^2}
+{2880\pi^2M_E^4}.
+\]
+The poles shown here are **infrared poles of the hard region**, not UV counterterm poles. They must cancel the corresponding UV poles from the EFT soft region. The heavy-attachment hard contribution is finite in this projection.
+
+These results are an evaluated hard-region subgraph decomposition, not yet the complete UV amplitude: the common Wick/Feynman-rule phase, relative attachment sign, charge-weighted sum, \(q=p'-p\) reduction, EFT soft graphs, and final matching remain to be completed.
 
 ## 6. Acceptance conditions
 
