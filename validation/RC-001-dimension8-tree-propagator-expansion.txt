@@ -1,0 +1,10 @@
+RC-001 dimension-eight tree propagator expansion audit
+
+PASS: cross-chirality propagator series M/(z-M^2) = -1/M - z/M^3 - z^2/M^5
+PASS: candidate dimension-seven coefficient C7 = C5/M_E^2
+PASS: next cross-chirality term is C5/M_E^4 at order M_E^-5
+
+Method: exact SymPy series/algebraic identities, independently evaluated locally.
+Convention: z denotes the ordered operator (i Dslash)^2 acting on the complete right-hand source.
+
+LIMIT: this verifies the formal propagator series and inverse-mass counting only. It does not verify the full tree-level Schur-complement matching, integration-by-parts/EOM reduction, field-strength decomposition, or any one-loop dimension-eight amplitude.
