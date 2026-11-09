@@ -70,12 +70,7 @@ This corrects the sign of the explicit Lagrangian term in the earlier draft of t
 
 This is a *redundant-basis representative*, not yet an independent dimension-seven Wilson coefficient. The reduction must expand the covariant derivatives, use the light-field equations of motion only after the off-shell matching, and retain all induced terms. In particular, \((i\slashed D)^2\) contains both covariant Laplacian and field-strength pieces; replacing it by an ordinary \(\partial^2\), or setting it to zero by the massless fermion EOM before expanding the derivative on \(S_\ell\), is not allowed. The \(\mu,\tau\) renormalizable Yukawa source vanishes in the frozen model, but derivatives acting on \(S_\ell\) and gauge-field-strength terms need not vanish.
 
-Acceptance checks for this stage:
-1. Derive the same term from the exact tree-level heavy-field equations of motion and from the momentum-space propagator expansion.
-2. Verify the sign by reproducing \(C_{5,\ell}=-y_\ell\lambda_\ell/M_{E\ell}\) at zeroth derivative order.
-3. Reduce the dimension-seven representative with explicit integration by parts, commutators \([D_\mu,D_\nu]\), and the model-specific light EOM.
-4. Record every generated scalar-derivative, field-strength, current, and source companion, including terms that are EOM-redundant in the chosen basis.
-5. Decide whether a nonzero independent \(C_{7,\ell}\) remains. Only then decide whether the SFT-12 \(C_5C_7^*\) soft topology is an independent graph or is represented by induced companion insertions.
+**Current tree-level result:** the exact Schur complement, the dimension-six (Q_{LD},Q_{RD}) terms, the dimension-eight (mathscr D^3) same-chirality terms, and the dimension-seven cross-chirality term are derived in `research/RC-001-dimension8-tree-eom-and-soft-integrals.md`. The fermion-EOM reduction, including the (C_5)-induced source/current companions through the (M_E^{-4}) order, is also recorded there. The scalar/gauge EOM canonicalization to a unique minimal basis remains open.
 
 ## 3. Required EFT soft sectors at \(M_E^{-4}\)
 
@@ -83,9 +78,9 @@ The following are separate amplitude families. They must be calculated with expl
 
 | ID | EFT insertion family | Target amplitude / structure | Status before this branch |
 |---|---|---|---|
-| D8-S1 | \(Q_{LD}Q_{LD}\) | pure-Higgs four-scalar channel | Identified topologically; integral and projection not evaluated |
-| D8-S2 | \(Q_{RD}Q_{RD}\) | pure-singlet four-scalar channel | Identified topologically; integral and projection not evaluated |
-| D8-S3 | \(Q_{LD}Q_{RD}\) | mixed four-scalar channel | Identified topologically; integral and projection not evaluated |
+| D8-S1 | \\(Q_{LD}Q_{LD}\\) | pure-Higgs derivative-current channel | EOM-reduced soft kernel evaluated; UV hard partner open |
+| D8-S2 | \\(Q_{RD}Q_{RD}\\) | pure-singlet derivative-current channel | EOM-reduced soft kernel evaluated; UV hard partner open |
+| D8-S3 | \\(Q_{LD}Q_{RD}\\) | candidate mixed channel | Proved zero: no connected (L)--\(\\ell_R\) contraction in the massless unbroken EFT |
 | D8-S4 | \(C_5^4\) | eight-scalar \(X^2Y^2\) potential sector | Leading constant-pole subset checked; not the full amplitude matching |
 | D8-S5 | \(C_5C_7^*\) and conjugate | dimension-eight soft/source sector | Conditional on the dimension-seven EOM reduction |
 | D8-S6 | \(C_5C_5^*\) with \(Q_{LD}\) or \(Q_{RD}\) VEV wavefunction insertion | broken-phase \(h\)-\(s\) two-point projection | Power counted; finite and pole pieces not evaluated |
@@ -129,10 +124,10 @@ A sector passes only when the hard/soft IR poles cancel, the UV poles are absorb
 
 ## 7. Execution order
 
-1. Derive and EOM-reduce the tree-level \(M_E^{-3}\) representative in Sec. 2.
-2. Generate the complete tree-level EFT action through \(M_E^{-4}\), not just the named \(Q_{LD},Q_{RD}\) insertions.
-3. Evaluate D8-S1/S2/S3 and D8-S6 soft sectors with explicit tensor and flavor projections.
-4. Resolve D8-S5 using the result of Step 1; include either the surviving \(C_7\) operator or its EOM-induced companions, never both independently.
+1. Complete scalar/gauge EOM canonicalization of the tree-level dimension-seven derivative representative.
+2. Reduce the full tree-level EFT action through \\(M_E^{-4}\\), including (Q_{LD}^{(8)}) and (Q_{RD}^{(8)}).
+3. Match the evaluated D8-S1/S2 soft current kernels to their UV hard partners; D8-S3 is absent at this order.
+4. Resolve D8-S5 using the interacting-EOM companion map; include either the derivative representative or its EOM-induced companions, never both independently.
 5. Re-evaluate D8-S4 in the same common Green basis, keeping its already-validated pole as a cross-check rather than adding a second copy.
 6. Calculate the corresponding UV hard amplitudes and counterterms by method of regions.
 7. Build the common Green-basis subtraction ledger, then perform the EOM/source reduction.
