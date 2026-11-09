@@ -1,6 +1,6 @@
 # RC-001 — QLD UV one-background triangle: exact integrands and Ward ledger
 
-**Status (2026-11-10):** the two full-theory attachment classes, their routing, parity-even numerators, and relative sign are fixed at the integrand/Ward level. The complete degree-five Euclidean hard-region subgraph reduction through \(M_E^{-4}\) is evaluated with the corrected Wick sign. The ordinary light-line soft form factors are now evaluated through \(O(\epsilon^0)\); their poles cancel both hard IR poles, and the pure-\(U(1)_X\) hard-plus-soft amplitude is transverse and matching-scale independent. Overall 1PI normalization, hypercharge/\(SU(2)_L\) charge projections, full source/EOM basis projection, and the final nonredundant Wilson coefficient remain open.
+**Status (2026-11-10):** the two full-theory attachment classes, their routing, parity-even numerators, and relative sign are fixed at the integrand/Ward level. The complete degree-five Euclidean hard-region subgraph reduction through \(M_E^{-4}\) is evaluated with the corrected Wick sign. The ordinary light-line soft form factors are now evaluated through \(O(\epsilon^0)\); their poles cancel both hard IR poles, and the pure-\(U(1)_X\) hard-plus-soft amplitude is transverse and matching-scale independent. The Abelian transverse-pair IBP/Higgs-EOM reduction and its first potential/source/gauge-current companions are now recorded in §5K. Overall 1PI normalization, the non-Abelian \(SU(2)_L\) completion, the higher-derivative EOM reduction of the scalar-source operator, the full source/current basis projection, and the final nonredundant Wilson coefficients remain open.
 
 ## 1. Frozen interaction and charges
 
@@ -641,6 +641,199 @@ These expressions define an ordered overcomplete generating set, not yet a nonre
 - keep the generated Yukawa, Higgs-potential, and source operators in the coefficient vector rather than dropping them as “EOM zero” before the off-shell matching projection.
 
 The six derivative-distribution terms and the two field-strength derivative placements above are ordered pieces in the expansion of one covariant operator; they are **not eight independent operators or eight independent Wilson-coefficient columns**. Their coefficients are fixed together by the single tree-level \(Q_{LD}^{(8)}\) coefficient. The independent amplitude columns used for the restricted one-background projection are defined separately in §5J. A full operator-basis reduction still requires IBP/EOM identities and the induced source/current companions.
+
+
+## 5K. Abelian covariant IBP/EOM reduction of the transverse pair
+
+This subsection reduces the two transverse representatives of §5J before calling them independent operators. It is restricted to an Abelian background, consistently with the operator representatives in §5J. Let
+\[
+D_\mu=\partial_\mu+i g_A q_H A_\mu,\qquad
+[D_\mu,D_\nu]H=i g_Aq_HF_{\mu\nu}H,
+\]
+and abbreviate \(\mathfrak g_A=g_Aq_H\). Define
+\[
+X=H^\dagger H,\quad Y=S^\dagger S,\quad
+j_H^\mu=iH^\dagger\overleftrightarrow D^\mu H.
+\]
+
+Using antisymmetry of \(F^{\mu\nu}\),
+\[
+\mathcal O_P=iF^{\mu\nu}(D_\rho D_\mu H)^\dagger
+D^\rho D_\nu H,\qquad
+\mathcal O_Q=-i(D_\mu H)^\dagger D_\nu H\,\Box F^{\mu\nu}.
+\]
+For an Abelian field strength, two covariant integrations by parts give
+\[
+\mathcal O_Q\doteq
+-iF^{\mu\nu}\Box[(D_\mu H)^\dagger D_\nu H].
+\]
+The product rule is
+\[
+\begin{aligned}
+\Box[(D_\mu H)^\dagger D_\nu H]
+={}&(D^2D_\mu H)^\dagger D_\nu H
++2(D_\rho D_\mu H)^\dagger D^\rho D_\nu H\\
+&+(D_\mu H)^\dagger D^2D_\nu H.
+\end{aligned}
+\]
+Consequently,
+\[
+\boxed{\mathcal O_P+\frac12\mathcal O_Q
+\doteq\mathcal O_{E,H}^{(8)}}
+\]
+with
+\[
+\boxed{
+\mathcal O_{E,H}^{(8)}
+=-\frac i2F^{\mu\nu}\left[
+(D^2D_\mu H)^\dagger D_\nu H
++(D_\mu H)^\dagger D^2D_\nu H
+\right].
+}
+\]
+This is an action-level IBP identity, not merely an on-shell relation. Its one-background vertex is
+\[
+\mathcal B_E^\mu=\mathcal B_P^\mu+\frac12\mathcal B_Q^\mu
+=\frac{P+P'}2\,T^\mu,
+\]
+so it is transverse and vanishes when \(P=P'=0\). This explains the rank-one massless on-shell collapse found in §5J.
+
+### 5K.1 Commutator completion: gauge-EOM and two-background terms
+
+Do not commute \(D^2\) through \(D_\mu\) without recording the field-strength terms:
+\[
+[D^2,D_\mu]H
+=i\mathfrak g_A\left[
+(\partial_\rho F^\rho{}_\mu)H
++2F^\rho{}_\mu D_\rho H
+\right].
+\]
+Writing \(\mathcal O_{E,H}^{(8)}
+=\mathcal O_{E,H,\mathrm{ord}}^{(8)}
++\mathcal O_{\mathrm{comm}}^{(8)}\), where
+\[
+\mathcal O_{E,H,\mathrm{ord}}^{(8)}
+=-\frac i2F^{\mu\nu}\left[
+(D_\mu D^2H)^\dagger D_\nu H
++(D_\mu H)^\dagger D_\nu D^2H
+\right],
+\]
+the commutator contribution is
+\[
+\boxed{\begin{aligned}
+\mathcal O_{\mathrm{comm}}^{(8)}
+={}&-\frac{\mathfrak g_A}{2}
+F^{\mu\nu}(\partial_\rho F^\rho{}_\mu)\partial_\nu X\\
+&-\mathfrak g_A F^{\mu\nu}F^\rho{}_\mu
+\left[(D_\rho H)^\dagger D_\nu H
++(D_\nu H)^\dagger D_\rho H\right].
+\end{aligned}}
+\]
+The first row is a gauge-field-EOM direction; the second is a genuine two-background \(F^2H^2D^2\) contact term. Neither is visible in the one-background form-factor projection alone.
+
+For the convention above and gauge kinetic term \(-F_{\mu\nu}F^{\mu\nu}/4\), the Abelian gauge EOM is
+\[
+\partial_\rho F^\rho{}_\mu=g_AJ_\mu^{\mathrm{tot}},
+\]
+where \(J_\mu^{\mathrm{tot}}\) is the full matter current with charges included but without the overall \(g_A\). Thus one may replace the first commutator term by
+\[
+-\frac{g_A^2q_H}{2}
+F^{\mu\nu}J_\mu^{\mathrm{tot}}\partial_\nu X.
+\]
+This replacement is optional and mutually exclusive with retaining the \(\partial_\rho F^\rho{}_\mu\) operator. The total current must include every charged matter field; it is not just the Higgs current.
+
+### 5K.2 Higgs EOM and its potential/source companions
+
+Use the same source convention as the project baseline:
+\[
+D^2H=-f_HH-\mathcal J_H,\qquad
+f_H=-\mu_H^2+2\lambda_HX+\lambda_{HS}Y.
+\]
+Define the EOM residual
+\[
+\mathcal E_H=D^2H+f_HH+\mathcal J_H.
+\]
+Then
+\[
+\begin{aligned}
+\mathcal O_{E,H,\mathrm{ord}}^{(8)}
+\doteq{}&
+f_H\,\mathcal O_{FH}^{(6)}
+-\frac12F^{\mu\nu}j_{H\mu}\partial_\nu f_H
++\mathcal O_{FJ_H}^{(8)}
++\mathcal O_{\mathrm{EOM}},\\
+\mathcal O_{FH}^{(6)}
+\equiv{}&iF^{\mu\nu}(D_\mu H)^\dagger D_\nu H,\\
+\mathcal O_{FJ_H}^{(8)}
+\equiv{}&\frac i2F^{\mu\nu}\left[
+(D_\mu\mathcal J_H)^\dagger D_\nu H
++(D_\mu H)^\dagger D_\nu\mathcal J_H
+\right],\\
+\mathcal O_{\mathrm{EOM}}
+\equiv{}&-\frac i2F^{\mu\nu}\left[
+(D_\mu\mathcal E_H)^\dagger D_\nu H
++(D_\mu H)^\dagger D_\nu\mathcal E_H
+\right].
+\end{aligned}
+\]
+The derivative-current term follows from
+\[
+(D_\mu H)^\dagger H=\frac12(\partial_\mu X+i j_{H\mu}),
+\qquad
+H^\dagger D_\mu H=\frac12(\partial_\mu X-i j_{H\mu}),
+\]
+and antisymmetry of \(F^{\mu\nu}\). Expanding \(f_H\) gives
+\[
+\boxed{\begin{aligned}
+f_H\mathcal O_{FH}^{(6)}
+={}&-\mu_H^2\mathcal O_{FH}^{(6)}
++2\lambda_HX\mathcal O_{FH}^{(6)}
++\lambda_{HS}Y\mathcal O_{FH}^{(6)},\\
+-\frac12F^{\mu\nu}j_{H\mu}\partial_\nu f_H
+={}&-\lambda_HF^{\mu\nu}j_{H\mu}\partial_\nu X
+-\frac{\lambda_{HS}}2F^{\mu\nu}j_{H\mu}\partial_\nu Y.
+\end{aligned}}
+\]
+The source operator \(\mathcal O_{FJ_H}^{(8)}\) must also be retained. For the model's allowed renormalizable SM Yukawa sources,
+\[
+(\mathcal J_{H,\mathrm{ren}})^k
+=\bar d_RY_d^\dagger Q_L^k
++\bar e_RY_e^\dagger L_L^k
++\epsilon_{ik}\bar Q_L^iY_u u_R,
+\]
+with only the charge-allowed entries. In particular, do not add the \(U(1)_X\)-forbidden diagonal \(\mu,\tau\) renormalizable Yukawas. The dimension-five \(C_5\) source is \(O(M_E^{-1})\); multiplied by this \(O(M_E^{-4})\) coefficient it contributes at \(O(M_E^{-5})\), outside the strict order retained here, and is marked as higher order rather than set to zero. The source conventions and charge restrictions follow the project baseline §245.9.
+
+### 5K.3 Charge boundary and retained transverse coefficient
+
+The operator coefficient map is
+\[
+a\mathcal O_P+b\mathcal O_Q
+\doteq a\mathcal O_{E,H}^{(8)}
++\left(b-\frac a2\right)\mathcal O_Q.
+\]
+After eliminating the Higgs-EOM direction, the retained transverse coefficient is therefore \(b-a/2\), while all companions in §§5K.1–5K.2 are generated with coefficient \(a\).
+
+For the hard-region coefficients of §5J:
+\[
+\begin{array}{c|c|c|c}
+\text{sector}&a&b&b-a/2\\ \hline
+U(1)_X&q_Ea_X&q_Eb_X&
+-q_E\dfrac{30/\epsilon_{\rm IR}+30L_M+28}{1440}\\[2mm]
+U(1)_Y&a_Y&b_Y&
+\dfrac{60/\epsilon_{\rm IR}+60L_M+47}{5760}\\[2mm]
+SU(2)_L&T^aa_L&T^ab_L&
+-T^a\dfrac{12/\epsilon_{\rm IR}+12L_M+13}{576}
+\end{array}
+\]
+The \(SU(2)_L\) last column is only the algebraic amplitude-level combination; its non-Abelian adjoint derivative, generator ordering, and two-background completion are not reduced in this subsection.
+
+The charge dependence in the commutator terms is important. For the external \(U(1)_X\) field, \(q_H=0\), so the commutator-generated \(F_X\,\partial F_X\,\partial X\) and \(F_X^2H^2D^2\) terms vanish. For hypercharge \(q_H=Y_H=+1/2\), they remain and must be included. This is distinct from the \(U(1)_X\) gauge-current dependence of the fermionic fields.
+
+The hard coefficients in this table still contain hard-region IR poles; they are not finite renormalized Wilson coefficients. The scalar-source coefficient \(c_S=1/192\) is not changed by this transverse IBP step. Its higher-derivative EOM reduction is a separate task.
+
+The exact polynomial and coefficient checks are in calculations/RC-001-QLD-dim8-IBP-EOM-reduction.py, with captured output in validation/RC-001-QLD-dim8-IBP-EOM-reduction.txt.
+
+**Scope boundary.** This closes the Abelian covariant IBP identity and the first Higgs-EOM/source/current decomposition of the transverse pair. It does not close the full non-Abelian \(SU(2)_L\) completion, the higher-derivative EOM reduction of \(\mathcal O_S\), all two-background operators, the complete gauge-current basis, or the final UV–EFT-renormalized Wilson vector.
 
 ## 5J. Exact three-column off-shell amplitude projection
 
