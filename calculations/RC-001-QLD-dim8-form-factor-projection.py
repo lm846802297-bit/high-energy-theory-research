@@ -41,6 +41,16 @@ assert minor == -6
 gram_det = sp.factor((matrix.T * matrix).det())
 assert gram_det == 3432
 
+# The massless on-shell scalar restriction P=P'=0 implies R=Q/2.
+# It collapses the three-column map: B_P=-B_Q/2 and B_S=0.
+on_shell = {P: 0, R: Q/2}
+BP_os = tuple(sp.factor(x.subs(on_shell)) for x in BP)
+BQ_os = tuple(sp.factor(x.subs(on_shell)) for x in BQ)
+BS_os = tuple(sp.factor(x.subs(on_shell)) for x in BS)
+assert sp.simplify(BP_os[0] + BQ_os[0]/2) == 0
+assert sp.simplify(BP_os[1] + BQ_os[1]/2) == 0
+assert BS_os == (0, 0)
+
 # Ward identities of the basis columns.
 assert sp.expand(R*BP[0] + Q*BP[1]) == 0
 assert sp.expand(R*BQ[0] + Q*BQ[1]) == 0
@@ -139,6 +149,7 @@ print("12x3 polynomial coefficient matrix (rows: F_p then F_q;")
 print("within each: P^2, P Q, P R, Q^2, Q R, R^2):")
 print(matrix)
 print("PASS: exact amplitude-map rank =", matrix.rank())
+print("PASS: massless on-shell restriction collapses B_P=-B_Q/2 and B_S=0.")
 print("PASS: minor using rows (F_p:P^2, F_p:PQ, F_p:Q^2) =", minor)
 print("PASS: Gram determinant =", gram_det)
 print()
