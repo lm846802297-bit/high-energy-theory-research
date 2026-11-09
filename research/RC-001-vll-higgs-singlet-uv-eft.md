@@ -149,11 +149,12 @@ With the source's \(i\Pi\) convention, the flavor-resolved heavy–light scalar 
 -2M_{E\ell}^2(\Delta_{\mathrm{UV}}-L_\ell+1)
 +p^2(\Delta_{\mathrm{UV}}-L_\ell+\tfrac12)
 +\frac{p^4}{3M_{E\ell}^2}
++\frac{p^6}{12M_{E\ell}^4}
 \right]
-+O(p^6/M_{E\ell}^4),
++O(p^8/M_{E\ell}^6),
 \]
 
-where \(g_{H\ell}=y_\ell\), \(g_{S\ell}=\lambda_\ell\), and \(L_\ell=\ln(M_{E\ell}^2/\mu_R^2)\). The source derives the common integral through \(A_0(M_{E\ell}^2)\) and \(B_0(p^2;0,M_{E\ell}^2)\), fixes the closed-fermion-loop sign, separates UV poles from finite pieces, and records the mass and wave-function counterterms. The \(p^4/M^2\) term is a finite hard coefficient in this sector; it is not a new UV pole at this order.
+where \(g_{H\ell}=y_\ell\), \(g_{S\ell}=\lambda_\ell\), and \(L_\ell=\ln(M_{E\ell}^2/\mu_R^2)\). The source derives the common integral through \(A_0(M_{E\ell}^2)\) and \(B_0(p^2;0,M_{E\ell}^2)\), fixes the closed-fermion-loop sign, separates UV poles from finite pieces, and records the mass and wave-function counterterms. The \(p^4/M^2\) and \(p^6/M^4\) terms are finite hard coefficients; the \(p^6\) coefficient follows by extending the exact \(B_0\) series one term further, \(B_0=\Delta_{\rm UV}-L_\ell+1+z/2+z^2/6+z^3/12+\cdots\), so that the \(z^3\) coefficient in \(A_0+(M^2-p^2)B_0\) is \(1/12-1/6=-1/12\), with the overall self-energy sign giving \(+1/12\). This term has no new UV pole.
 
 **Evidence boundary:** the derivation and exact-arithmetic checks are present in the baseline document. They validate the recorded algebra and conventions under the stated assumptions; they do not replace an external diagram-level implementation or establish the full model's physical pole spectrum.
 
