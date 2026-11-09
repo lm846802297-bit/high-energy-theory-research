@@ -37,7 +37,13 @@ LOW_ENERGY_EXPLICIT_FIELDS = {
 
 def audit():
     assert Y_H == Fraction(1, 2)
-    assert sum((Y[k] for k in ("Q_L", "u_R", "d_R", "L_L", "e_R")), Fraction(0)) == Fraction(0)
+    assert Y == {
+        "Q_L": Fraction(1, 6),
+        "u_R": Fraction(2, 3),
+        "d_R": Fraction(-1, 3),
+        "L_L": Fraction(-1, 2),
+        "e_R": Fraction(-1, 1),
+    }
     assert SU2_DOUBLETS == ("Q_L", "L_L")
     assert all(X[k] == 0 for k in ("H", "Q_L", "u_R", "d_R", "L_e", "e_R"))
     assert X["L_mu"] == 1 and X["mu_R"] == -1
