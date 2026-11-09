@@ -182,7 +182,7 @@ N_E^\mu=2\left[
 +(k^2+k\cdot p)p'^\mu
 \right].
 \]
-The degree-five coefficient therefore comes from degree-five denominator-series terms multiplied by the degree-zero numerator, degree-four denominator terms multiplied by degree-one numerator terms, and so on through degree-three denominator terms multiplied by the degree-two numerator. For the heavy graph the \(M_E^2 k^\mu\) contribution is tracked separately because its radial master has a different power of \(M_E\). The coefficient of total external degree five must be assembled from **all** partitions of degree five between numerator, light denominator (where present), and both heavy denominators. Expanding only the heavy denominators misses terms and cannot yield the complete hard coefficient.
+The Lorentz vector itself carries one external momentum after tensor reduction. Therefore the degree-five vector amplitude requires degree-four scalar form factors. For the surviving explicit-vector components, the contributions come from degree-four denominator-series terms times degree-zero numerator coefficients, degree-three denominator terms times degree-one numerator coefficients, and degree-two denominator terms times degree-two numerator coefficients. The free-\(k^\mu\) components vanish in this projection by odd-rank rotational invariance. Expanding only the heavy denominators misses terms and cannot yield the complete hard coefficient.
 
 A reproducible expansion generator should represent the external momenta as formal commuting vectors, generate the series to total degree five, reduce tensor integrals using \(d\)-dimensional rotational invariance, and only then perform the radial integrals. In particular, do not impose \(q=p'-p\) before generating the series, because it obscures the independent Taylor coefficients needed to identify the local operator basis.
 
@@ -212,7 +212,7 @@ The formula is understood by analytic continuation in dimensional regularization
 For the two attachment classes, the denominator-series terms reduce to this master with:
 - light attachment: \(a=2+n_L\), \(b=1+n_E\);
 - heavy attachment: \(a=1\), \(b=2+n_{E1}+n_{E2}\);
-where the nonnegative expansion indices are further constrained by total external degree five, including the explicit numerator degree. The heavy-line \(M_E^2 k^\mu\) term and the cubic trace term must be expanded separately before applying the tensor reduction.
+where the nonnegative expansion indices are constrained by scalar form-factor degree four. The \(M_E^2 k^\mu\) and other free-\(k^\mu\) terms vanish in this particular degree-five vector projection after the odd-rank angular average; they must nevertheless be retained until that average is performed.
 
 This gives a reproducible route to the hard coefficient, but the finite sums over Taylor partitions and the final \(1/\epsilon\) and finite terms have not yet been evaluated. In particular, a Gamma-function pole in an individual hard Taylor term is not by itself the matched UV pole: it must be combined with the EFT soft region in the same subtraction convention.
 
