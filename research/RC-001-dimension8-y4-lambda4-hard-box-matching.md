@@ -1,6 +1,6 @@
 # RC-001 — Dimension-eight \(|y|^4\) and \(|\lambda|^4\) UV hard boxes
 
-**Status (2026-11-10):** the transverse current-current projection of the one-ordered-cycle heavy/light fermion box has been evaluated by a \(d\)-dimensional hard-region expansion. Its hard IR pole and finite local term are explicitly matched to the previously computed one-Weyl EFT soft kernel. This closes the Yukawa-only transverse-current projection for \(Q_{LD}^2\) and \(Q_{RD}^2\) at the stripped one-cycle level. It is **not** a complete four-scalar amplitude or the full dimension-eight Wilson vector: independent tensor projections, the complete crossed-channel/weak-index ledger, all same-order EFT insertions, final EOM/source reduction, and diagram-package validation remain open.
+**Status (2026-11-10):** the transverse current-current projection and the full on-shell crossed four-scalar amplitude of the one-ordered-cycle heavy/light fermion box have been evaluated by a \(d\)-dimensional hard-region expansion. The direct soft expansion of the same UV numerator reproduces the one-Weyl EFT kernel, and the hard IR / soft UV poles cancel. P0.1–P0.4 are closed at the on-shell amplitude level, including the crossed pairing, weak-index tensors, exact chiral trace, and current/action normalization. The full on-shell hard result also contains a finite local polynomial beyond the transverse-current projection; it is recorded in §5 and must be retained. The off-shell Green-basis tensor decomposition, remaining same-order EFT insertions, final EOM/source reduction, and independent diagram-package validation remain open. No complete dimension-eight Wilson vector is claimed.
 
 ## 1. Scope, conventions, and external projection
 
@@ -261,7 +261,7 @@ The direct soft expansion also resolves the current normalization: the full nume
 
 This closes P0.1–P0.4 at the **on-shell four-scalar amplitude** level. The off-shell Green-basis tensor decomposition, final EOM/IBP basis, and independent diagram-package validation remain open; no complete dimension-eight Wilson vector is claimed.
 
-## 5. Reproducibility and acceptance boundary
+## 6. Reproducibility and acceptance boundary
 
 The exact d-dimensional expansion, angular averages, radial Gamma integrals, soft Feynman-parameter expansion, and pole/finite-term identities are implemented in:
 - calculations/RC-001-dimension8-y4-lambda4-hard-box.py
@@ -269,13 +269,13 @@ The exact d-dimensional expansion, angular averages, radial Gamma integrals, sof
 
 The six local exact checks pass. They verify the displayed stripped transverse projection and its hard/soft pole and finite-term reconciliation. They do not replace an independent diagram-generation package.
 
-**Closed in this note:** the one-ordered-cycle transverse \(y^4\) and \(\lambda^4\) hard kernels; the opposite hard-IR/soft-UV pole residues; the finite local hard coefficient in the current Green basis; and the scale-independent hard-plus-soft transverse kernel.
+**Closed in this note:** the transverse-current hard kernels; the full on-shell hard polynomial for one ordered cycle; the crossed (s/u) pairing; the two Higgs weak-index tensors; the direct soft limit of the same UV numerator; the hard-IR/soft-UV pole cancellation; and the scale-independent matched on-shell amplitude.
 
 **Still open:**
-1. all independent external-momentum tensor projections and the full crossed-channel/weak-index amplitude ledger;
+1. the complete off-shell four-scalar Green-function tensor decomposition and its matching to the same-order EFT soft/contact graphs;
 2. the additional \(O(M_E^{-4})\) soft insertions from \(Q_{LD}^{(8)},Q_{RD}^{(8)}\), \(C_5C_7^*\), VEV/wavefunction insertions, and source/current companions;
-3. the common scalar/gauge EOM and integration-by-parts reduction to a nonredundant dimension-eight basis;
-4. UV parameter, field, and operator counterterms in the complete amplitude set;
+3. the common scalar/gauge EOM and integration-by-parts reduction of the transverse-current term and finite local remainder to a nonredundant dimension-eight basis;
+4. UV parameter, field, and operator counterterms in the complete off-shell amplitude set;
 5. independent FeynArts/FeynCalc or equivalent diagram-level validation.
 
 No complete dimension-eight Wilson vector is claimed by this partial hard/soft closure.
