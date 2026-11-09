@@ -75,7 +75,7 @@ P_R(\slashed K+M_E)P_L=\slashed K P_L,
 \]
 with the conjugate identity for the opposite orientation. For the parity-even part, the remaining chiral trace is one half of the corresponding four-component trace.
 
-With the ordered routing above, define
+With the ordered routing above, (k'=k+q) and (K=k+p=k'+p'). For the heavy attachment (K'=k+p'=K-q), so (q=K-K'). With the ordered routing above, define
 \[
 N_L^\mu=\frac12\operatorname{tr}
 [\slashed K\,\slashed{k'}\,\gamma^\mu\slashed k],
@@ -118,7 +118,7 @@ q_\mu\gamma^\mu=S_0^{-1}(k+q)-S_0^{-1}(k).
 \]
 Contracting the light-line attachment therefore collapses one of its two light propagators and produces the difference of the two heavy-light scalar two-point integrands with the external scalar momentum routed at \(p'\) and \(p\). Contracting the heavy-line attachment similarly collapses one heavy propagator and produces the corresponding difference with the heavy charge \(q_E\).
 
-The sum must obey the scalar-source Ward identity
+With the common fermion-flow convention, the two attachment classes enter with the same relative sign in the trace convention of §3: their longitudinal contractions are opposite for equal constituent charges. The sum must obey the scalar-source Ward identity
 \[
 q_\mu\Gamma^\mu_{A H^\dagger H}(p',p)
 =g_Aq_H\left[
