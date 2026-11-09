@@ -1,7 +1,0 @@
-PASS: integral x(1-x) dx = 1/6
-PASS: integral x(1-x) ln[x(1-x)] dx = -5/18
-PASS: finite logarithmic-weight average = 5/3
-PASS: one-Weyl polarization coefficient = 1/(24 pi^2)
-PASS: same coefficient in i/(16 pi^2) normalization = 2/3
-PASS: Q_LD-Q_RD has no connected one-loop contraction in the unbroken massless EFT
-SCOPE: exact Feynman-parameter scalar factors and contraction logic only; no full SU(2) projection, vertex-sign audit, or UV-hard matching.
