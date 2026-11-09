@@ -17,7 +17,9 @@ L_M = sp.symbols("L_M")
 
 # Numerator coefficients, N^mu=2*(coefficients).
 NL = {"k": k2+2*kp+pq, "p": -(k2+kq), "q": k2+kp}
-NE = {"k": k2+M2-ppdotp, "p": k2+kpp, "pp": k2+kp}
+# Minkowski N_E has +M_E^2 k^mu, but this term flips relative sign
+# under Wick rotation: the Euclidean numerator uses -M_E^2 k_E^mu.
+NE = {"k": k2-M2-ppdotp, "p": k2+kpp, "pp": k2+kp}
 
 DOT = {
     ("p","p"):p2, ("q","q"):q2, ("pp","pp"):pp2,
