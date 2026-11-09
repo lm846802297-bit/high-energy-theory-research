@@ -1,209 +1,186 @@
 #!/usr/bin/env python3
-"""QLD UV-triangle numerator and degree-five hard radial-reduction audit.
+"""QLD one-background hard-region degree-five radial-reduction audit.
 
-The 1PI vector is decomposed in external vectors times scalar form factors.
-For total external momentum degree five, each scalar form factor has degree
-four. The script generates every shifted-propagator Taylor term, performs
-exact d-dimensional rotational averages, and lists radial masters J[a,b,t].
-It does not fix the relative sign of the two UV attachment classes and does
-not claim the hard-soft matched Wilson coefficient.
+For Gamma^mu = p^mu F_p + q^mu F_q, explicit-vector coefficients need
+scalar degree four. A free loop-vector term k^mu instead needs scalar degree
+five, because its angular average pairs one k with an external momentum.
+All shifted propagators are expanded and all angular averages are d-dimensional.
+The script evaluates radial masters through O(eps^0), but does not include
+overall Wick/Feynman-rule factors or perform EFT-soft subtraction.
 """
 import sympy as sp
 
 d, eps, M2 = sp.symbols("d eps M2")
-k2, kq, kp, kpp = sp.symbols("k2 kq kpp")
+k2, kq, kp, kpp = sp.symbols("k2 kq kp kpp")
 p2, q2, pp2, pq, ppdotp = sp.symbols("p2 q2 pp2 pq ppdotp")
+L_M = sp.symbols("L_M")
 
-# Exact parity-even trace coefficients, with N^mu=2*(coefficients).
-NL = {
-    "k": k2 + 2*kp + pq,
-    "p": -(k2 + kq),
-    "q": k2 + kp,
-}
-NE = {
-    "k": k2 + M2 - ppdotp,
-    "p": k2 + kpp,
-    "pp": k2 + kp,
-}
+# Numerator coefficients, N^mu=2*(coefficients).
+NL = {"k": k2+2*kp+pq, "p": -(k2+kq), "q": k2+kp}
+NE = {"k": k2+M2-ppdotp, "p": k2+kpp, "pp": k2+kp}
 
-# Scalar products for rotational tensor pairings.
 DOT = {
-    ("p", "p"): p2, ("q", "q"): q2, ("pp", "pp"): pp2,
-    ("p", "q"): pq, ("q", "p"): pq,
-    ("p", "pp"): ppdotp, ("pp", "p"): ppdotp,
+    ("p","p"):p2, ("q","q"):q2, ("pp","pp"):pp2,
+    ("p","q"):pq, ("q","p"):pq,
+    ("p","pp"):ppdotp, ("pp","p"):ppdotp,
 }
-
 def pairings(labels):
-    labels = tuple(labels)
+    labels=tuple(labels)
     if not labels:
-        return {sp.Integer(1): 1}
-    out = {}
-    first = labels[0]
-    for j in range(1, len(labels)):
-        second = labels[j]
-        rest = labels[1:j] + labels[j+1:]
-        dot = DOT[(first, second)]
-        for product, mult in pairings(rest).items():
-            term = sp.expand(dot * product)
-            out[term] = out.get(term, 0) + mult
+        return {sp.Integer(1):1}
+    out={}
+    first=labels[0]
+    for j in range(1,len(labels)):
+        second=labels[j]
+        rest=labels[1:j]+labels[j+1:]
+        dot=DOT[(first,second)]
+        for product,mult in pairings(rest).items():
+            term=sp.expand(dot*product)
+            out[term]=out.get(term,0)+mult
     return out
 
 def angular_denominator(r):
-    # d(d+2)...(d+2r-2)
-    return d * sp.prod(d + 2*j for j in range(1, r))
+    return d*sp.prod(d+2*j for j in range(1,r))
 
-def reduce_graph(kind, component, numerator):
-    # A free loop-vector component k^mu needs scalar degree five; after
-    # angular averaging one k dot-product supplies the external vector.
-    # Explicit p^mu/q^mu components need scalar degree four.
-    if kind == "L":
-        vectors = ["q", "p"]
-        kvars = [kq, kp]
-        shifts = [2*kq + q2, 2*kp + p2]
-        base_a, base_b = 2, 1
+def reduce_graph(kind,component,numerator):
+    if kind=="L":
+        vectors=["q","p"]; kvars=[kq,kp]
+        shifts=[2*kq+q2,2*kp+p2]
+        base_a,base_b=2,1
     else:
-        vectors = ["p", "pp"]
-        kvars = [kp, kpp]
-        shifts = [2*kp + p2, 2*kpp + pp2]
-        base_a, base_b = 1, 2
+        vectors=["p","pp"]; kvars=[kp,kpp]
+        shifts=[2*kp+p2,2*kpp+pp2]
+        base_a,base_b=1,2
 
-    target_scalar_degree = 5 if component == "k" else 4
-    result = {}
-    poly_vars = [k2, *kvars, p2, q2, pp2, pq, ppdotp]
+    # The free k^mu index is converted to an external vector by angular
+    # averaging, so its scalar coefficient must carry degree five.
+    target=5 if component=="k" else 4
+    result={}
+    poly_vars=[k2,*kvars,p2,q2,pp2,pq,ppdotp]
     for n in range(5):
         for m in range(5-n):
-            # (base+X)^-1 = base^-1 * sum_n (-X/base)^n.
-            polynomial = (-1)**(n+m) * sp.expand(shifts[0]**n * shifts[1]**m * numerator)
-            poly = sp.Poly(polynomial, *poly_vars, domain="EX")
-            for monomial, coeff in poly.terms():
-                ex = dict(zip(poly_vars, monomial))
-                degree = ex[kvars[0]] + ex[kvars[1]] + 2*sum(
-                    ex[s] for s in [p2, q2, pp2, pq, ppdotp]
+            polynomial=(-1)**(n+m)*sp.expand(shifts[0]**n*shifts[1]**m*numerator)
+            poly=sp.Poly(polynomial,*poly_vars,domain="EX")
+            for mon,coeff in poly.terms():
+                ex=dict(zip(poly_vars,mon))
+                degree=ex[kvars[0]]+ex[kvars[1]]+2*sum(
+                    ex[s] for s in [p2,q2,pp2,pq,ppdotp]
                 )
-                if degree != target_scalar_degree:
+                if degree!=target:
                     continue
+                labels=[vectors[0]]*ex[kvars[0]]+[vectors[1]]*ex[kvars[1]]
+                scalar=coeff
+                for sym in [p2,q2,pp2,pq,ppdotp]:
+                    scalar*=sym**ex[sym]
 
-                labels = [vectors[0]]*ex[kvars[0]] + [vectors[1]]*ex[kvars[1]]
-                scalar = coeff
-                for sym in [p2, q2, pp2, pq, ppdotp]:
-                    scalar *= sym**ex[sym]
-
-                # Crucial: the two light-graph Taylor indices enter different
-                # radial denominators: q-shift -> k^2, p-shift -> k^2+M^2.
-                if kind == "L":
-                    a, b = base_a+n, base_b+m
+                # Light graph: q shift belongs to the massless denominator;
+                # p shift belongs to the massive denominator.
+                if kind=="L":
+                    a,b=base_a+n,base_b+m
                 else:
-                    a, b = base_a, base_b+n+m
+                    a,b=base_a,base_b+n+m
 
-                if component == "k":
-                    # A free k^mu requires an odd number of k dot-products.
-                    if len(labels) % 2 != 1:
+                if component=="k":
+                    if len(labels)%2!=1:
                         continue
-                    r = (len(labels)+1)//2
-                    den = angular_denominator(r)
-                    # The free index is paired with each external vector in turn.
-                    for i, vec in enumerate(labels):
-                        rest = labels[:i] + labels[i+1:]
-                        for product, mult in pairings(rest).items():
-                            key = (vec, a, b, ex[k2]+r)
-                            result[key] = result.get(key, 0) + 2*scalar*mult*product/den
+                    r=(len(labels)+1)//2
+                    den=angular_denominator(r)
+                    for i,vec in enumerate(labels):
+                        rest=labels[:i]+labels[i+1:]
+                        for product,mult in pairings(rest).items():
+                            key=(vec,a,b,ex[k2]+r)
+                            result[key]=result.get(key,0)+2*scalar*mult*product/den
                 else:
-                    if len(labels) % 2 != 0:
+                    if len(labels)%2:
                         continue
-                    r = len(labels)//2
-                    den = angular_denominator(r) if r else 1
-                    product = sum(mult*prod for prod, mult in pairings(tuple(labels)).items())
-                    key = (component, a, b, ex[k2]+r)
-                    result[key] = result.get(key, 0) + 2*scalar*product/den
+                    r=len(labels)//2
+                    den=angular_denominator(r) if r else 1
+                    product=sum(mult*term for term,mult in pairings(tuple(labels)).items())
+                    key=(component,a,b,ex[k2]+r)
+                    result[key]=result.get(key,0)+2*scalar*product/den
+    return {key:sp.factor(value) for key,value in result.items() if value!=0}
 
-    return {key: sp.factor(value) for key, value in result.items() if value != 0}
+L={c:reduce_graph("L",c,n) for c,n in NL.items()}
+E={c:reduce_graph("E",c,n) for c,n in NE.items()}
+assert len(L["k"])==31 and len(L["p"])==12 and len(L["q"])==12
+assert len(E["k"])==14 and len(E["p"])==3 and len(E["pp"])==3
 
-L = {c: reduce_graph("L", c, n) for c, n in NL.items()}
-E = {c: reduce_graph("E", c, n) for c, n in NE.items()}
+def combine_vectors(graph):
+    out={"p":{},"q":{},"pp":{}}
+    for component_dict in graph.values():
+        for (vec,a,b,t),coefficient in component_dict.items():
+            key=(a,b,t)
+            out[vec][key]=out[vec].get(key,0)+coefficient
+    return {vec:{key:sp.factor(val) for key,val in dic.items() if val!=0}
+            for vec,dic in out.items()}
 
-# At scalar degree four, the k^mu pieces vanish by odd-rank rotational
-# invariance. The surviving vector form factors have 12+12 and 3+3 terms.
-assert not L["k"] and not E["k"]
-assert len(L["p"]) == 12 and len(L["q"]) == 12
-assert len(E["p"]) == 3 and len(E["pp"]) == 3
-
-masters = sorted(set(
-    key[1:] for graph in (L, E) for component in graph.values() for key in component
+Lvec=combine_vectors(L)
+Evec=combine_vectors(E)
+masters=sorted(set(
+    key for graph in (Lvec,Evec) for component in graph.values() for key in component
 ))
-expected = [
+expected=[
     (1,4,1),(1,5,1),(1,5,2),(1,6,2),(1,6,3),(1,7,3),(1,7,4),
     (2,3,1),(2,4,2),(2,5,3),(2,6,4),
     (3,2,1),(3,3,2),(3,4,3),(3,5,4),
     (4,1,1),(4,2,2),(4,3,3),(4,4,4),
-    (5,1,2),(5,2,3),(5,3,4),
-    (6,1,3),(6,2,4),(7,1,4)
+    (5,1,2),(5,2,3),(5,3,4),(6,1,3),(6,2,4),(7,1,4)
 ]
-assert masters == expected
+assert masters==expected
+for a,b,t in masters:
+    uv_arg=a+b-2-t
+    ir_arg=2+t-a
+    assert uv_arg>0
+    print(f"J[{a},{b},{t}]: UV finite; IR gamma argument={ir_arg} at eps=0")
 
-for a, b, t in masters:
-    uv_gamma = a+b-2-t
-    ir_gamma = 2+t-a
-    assert uv_gamma > 0, (a,b,t,uv_gamma)
-    print(f"J[{a},{b},{t}]: UV finite; IR gamma argument={ir_gamma} at eps=0")
-
-print("PASS: numerator traces reduced to explicit external-vector coefficients.")
-print("PASS: scalar form-factor degree four gives total vector-amplitude degree five.")
-print("PASS: light graph radial indices are a=2+n_q, b=1+n_p.")
-print("PASS: heavy graph radial indices are a=1, b=2+n_p+n_pprime.")
-print("PASS: exact d-dimensional angular reduction and 15-master inventory.")
-print("Counts: L_k=31, L_p=12, L_q=12; E_k=14, E_p=3, E_pprime=3.")
-print("SCOPE: radial coefficients only; relative graph sign and EFT soft subtraction remain open.")
-
-
-# Evaluate the radial masters in d=4-2 eps. L_M denotes
-# ln(mu^2/M_E^2)+ln(4 pi)-gamma_E; poles in this hard region are IR.
-L_M = sp.symbols("L_M")
-
-def J_msbar(a, b, t):
-    expr = (
+def J_msbar(a,b,t):
+    expr=(
         sp.exp(eps*(L_M-sp.log(4*sp.pi)+sp.EulerGamma))
         /(4*sp.pi)**(2-eps)
-        * M2**(2+t-a-b)
-        * sp.gamma(2-eps+t-a)
-        * sp.gamma(a+b-2+eps-t)
+        *M2**(2+t-a-b)
+        *sp.gamma(2-eps+t-a)
+        *sp.gamma(a+b-2+eps-t)
         /(sp.gamma(2-eps)*sp.gamma(b))
     )
-    return sp.series(expr, eps, 0, 1).removeO()
+    return sp.series(expr,eps,0,1).removeO()
 
-def sum_form_factor(component_dict):
-    total = 0
-    for (vector, a, b, t), coefficient in component_dict.items():
-        total += coefficient.subs(d, 4-2*eps) * J_msbar(a,b,t)
-    return sp.series(sp.expand(total), eps, 0, 1).removeO()
+def sum_form_factor(radial_terms):
+    total=0
+    for (a,b,t),coefficient in radial_terms.items():
+        total+=coefficient.subs(d,4-2*eps)*J_msbar(a,b,t)
+    return sp.series(sp.expand(total),eps,0,1).removeO()
 
 def pole_and_finite(expr):
-    pole = sp.simplify(sp.limit(eps*expr, eps, 0))
-    finite = sp.simplify(sp.limit(expr-pole/eps, eps, 0))
-    return sp.factor(pole), sp.factor(finite)
+    pole=sp.factor(sp.limit(eps*expr,eps,0))
+    finite=sp.factor(sp.limit(expr-pole/eps,eps,0))
+    return pole,finite
 
-LP = sum_form_factor(L["p"])
-LQ = sum_form_factor(L["q"])
-EP = sum_form_factor(E["p"])
-EPP = sum_form_factor(E["pp"])
-LP_pole, LP_finite = pole_and_finite(LP)
-LQ_pole, LQ_finite = pole_and_finite(LQ)
-EP_pole, EP_finite = pole_and_finite(EP)
-EPP_pole, EPP_finite = pole_and_finite(EPP)
+LP=sum_form_factor(Lvec["p"])
+LQ=sum_form_factor(Lvec["q"])
+EP=sum_form_factor(Evec["p"])
+EPP=sum_form_factor(Evec["pp"])
+LPpole,LPfinite=pole_and_finite(LP)
+LQpole,LQfinite=pole_and_finite(LQ)
+EPpole,EPfinite=pole_and_finite(EP)
+EPPpole,EPPfinite=pole_and_finite(EPP)
 
-P, Q, R, PP, T = sp.symbols("P Q R PP T")
-expected_LP_pole = (Q*(P-R)/(32*sp.pi**2*M2**2)).subs({P:p2,Q:q2,R:pq})
-expected_LQ_pole = (-(3*P*R+P*Q-4*R**2)/(96*sp.pi**2*M2**2)).subs({P:p2,Q:q2,R:pq})
-assert sp.simplify(LP_pole-expected_LP_pole) == 0
-assert sp.simplify(LQ_pole-expected_LQ_pole) == 0
-assert EP_pole == 0 and EPP_pole == 0
+P,Q,R,PP,T=sp.symbols("P Q R PP T")
+sub={p2:P,q2:Q,pq:R,pp2:PP,ppdotp:T}
+assert sp.simplify(LPpole.subs(sub)-Q*(P-R)/(24*sp.pi**2*M2**2))==0
+assert sp.simplify(LQpole.subs(sub)+R*(P-R)/(24*sp.pi**2*M2**2))==0
+assert EPpole==0 and EPPpole==0
+assert sp.simplify((R*LPpole+Q*LQpole).subs(sub))==0
 
-print("HARD FORM FACTORS (Euclidean trace convention; common Feynman-rule factors omitted)")
-print("L attachment F_p pole:", LP_pole)
-print("L attachment F_p finite:", LP_finite)
-print("L attachment F_q pole:", LQ_pole)
-print("L attachment F_q finite:", LQ_finite)
-print("E attachment F_p finite:", EP_finite)
-print("E attachment F_pprime finite:", EPP_finite)
-print("PASS: all hard-region poles are IR poles; no UV pole in this degree-five projection.")
-print("PASS: the E-attachment masters are finite in this projection.")
-print("CAUTION: insert the common loop sign/couplings and use the Ward-fixed relative plus sign only after the full Wick convention is restored.")
+print("PASS: scalar form factors degree four plus one external vector give degree five.")
+print("PASS: all shifted propagators expanded with correct radial indices.")
+print("PASS: 25 distinct radial masters; all UV convergent in the hard region.")
+print("PASS: L attachment 31 k-vector, 12 p-vector, 12 q-vector structures.")
+print("PASS: E attachment 14 k-vector, 3 p-vector, 3 p'-vector structures.")
+print("PASS: hard light-attachment IR pole is transverse: R*F_p^pole+Q*F_q^pole=0.")
+print("L attachment F_p pole:",LPpole.subs(sub))
+print("L attachment F_p finite:",LPfinite.subs(sub))
+print("L attachment F_q pole:",LQpole.subs(sub))
+print("L attachment F_q finite:",LQfinite.subs(sub))
+print("E attachment F_p finite:",EPfinite.subs(sub))
+print("E attachment F_pprime finite:",EPPfinite.subs(sub))
+print("SCOPE: subgraph hard form factors only; common Wick/Feynman-rule factors and EFT-soft matching remain open.")
