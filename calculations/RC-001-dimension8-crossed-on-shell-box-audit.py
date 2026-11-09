@@ -224,9 +224,17 @@ assert sp.simplify(sp.limit(eps*(hard_cross+soft_cross),eps,0)) == 0
 def delta(i,j):
     return int(i==j)
 for i,j,k,l in product(range(2),repeat=4):
-    tensor_s = delta(j,k)*delta(l,i)
-    tensor_u = delta(l,k)*delta(j,i)
-    assert tensor_s in (0,1) and tensor_u in (0,1)
+    # Expand tr_2[J_ab J_ba] with the s and crossed external assignments.
+    tensor_s = sum(
+        delta(a0,i)*delta(b0,j)*delta(b0,k)*delta(a0,l)
+        for a0 in range(2) for b0 in range(2)
+    )
+    tensor_u = sum(
+        delta(a0,i)*delta(b0,l)*delta(b0,k)*delta(a0,j)
+        for a0 in range(2) for b0 in range(2)
+    )
+    assert tensor_s == delta(j,k)*delta(l,i)
+    assert tensor_u == delta(l,k)*delta(j,i)
 assert delta(1,1)*delta(1,1) == 1  # fixed neutral component; no extra factor 2
 
 # Exact chiral trace: parity-even part is one half the Dirac trace.
