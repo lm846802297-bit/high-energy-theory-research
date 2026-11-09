@@ -794,14 +794,26 @@ f_H\mathcal O_{FH}^{(6)}
 -\frac{\lambda_{HS}}2F^{\mu\nu}j_{H\mu}\partial_\nu Y.
 \end{aligned}}
 \]
-The source operator \(\mathcal O_{FJ_H}^{(8)}\) must also be retained. For the model's allowed renormalizable SM Yukawa sources,
+The source operator \(\mathcal O_{FJ_H}^{(8)}\) must also be retained. In the original flavor-diagonal model, the leading-renormalizable source is
 \[
-(\mathcal J_{H,\mathrm{ren}})^k
+(\mathcal J_{H}^{(4)})^k
 =\bar d_RY_d^\dagger Q_L^k
-+\bar e_RY_e^\dagger L_L^k
-+\epsilon_{ik}\bar Q_L^iY_u u_R,
++\epsilon_{ik}\bar Q_L^iY_u u_R
++y_e^*\bar e_RL_e^k.
 \]
-with only the charge-allowed entries. In particular, do not add the \(U(1)_X\)-forbidden diagonal \(\mu,\tau\) renormalizable Yukawas. The dimension-five \(C_5\) source is \(O(M_E^{-1})\); multiplied by this \(O(M_E^{-4})\) coefficient it contributes at \(O(M_E^{-5})\), outside the strict order retained here, and is marked as higher order rather than set to zero. The source conventions and charge restrictions follow the project baseline §245.9.
+The charged-lepton \(U(1)_X\) charge matrix for \(\bar L_iHe_{Rj}\), with rows \(L_e,L_\mu,L_\tau\) and columns \(e_R,\mu_R,\tau_R\), is
+\[
+\begin{pmatrix}0&-1&+1\\-1&-2&0\\+1&0&+2\end{pmatrix}.
+\]
+Thus the electron diagonal entry is allowed, the diagonal \(\mu,\tau\) entries are forbidden, and the off-diagonal \(\bar L_\mu H\tau_R\), \(\bar L_\tau H\mu_R\) entries are gauge-allowed. The original model sets the latter two to zero by its flavor-diagonal/block-diagonal mass-matrix assumption; they must not be described as gauge-forbidden. If that flavor assumption is relaxed, the Higgs source and charged-lepton mass matrix must be enlarged. The explicit source/charge map is recorded in [RC-001-QLD-Higgs-source-EOM-model-map.md](RC-001-QLD-Higgs-source-EOM-model-map.md).
+
+The dimension-five axial source is
+\[
+(\mathcal J_H^{(5)})^k
+=C_{5,\mu}^*S^*\bar\mu_RL_\mu^k
++C_{5,\tau}^*S\bar\tau_RL_\tau^k,
+\]
+which is separately \(U(1)_X\)-neutral. Since \(C_5=O(M_E^{-1})\), its insertion with this \(O(M_E^{-4})\) coefficient starts at \(O(M_E^{-5})\), outside the strict order retained here; it is marked as higher order rather than set to zero.
 
 ### 5K.3 Charge boundary and retained transverse coefficient
 
