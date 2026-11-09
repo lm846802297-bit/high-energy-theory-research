@@ -3,3 +3,15 @@ N_E^mu = 2[(k2+M2-p.p') k^mu +(k2+k.p') p^mu +(k2+k.p) p'^mu]
 PASS: both four-gamma traces expanded exactly in the declared vector basis
 PASS: N_L and N_E have external degree <=2; heavy numerator also has M_E^2 degree 0
 SCOPE: numerator polynomial only; no denominator Taylor expansion or loop integration.
+
+
+CORRECTED TOTAL-DEGREE-FIVE RADIAL REDUCTION (2026-11-10)
+The Lorentz vector carries one external momentum, so scalar form factors are extracted at degree four.
+PASS: L attachment has 12 radial terms in F_p and 12 in F_q.
+PASS: E attachment has 3 radial terms in F_p and 3 in F_pprime.
+PASS: k^mu components vanish by odd-rank d-dimensional angular averaging at scalar degree four.
+PASS: light graph indices: a=2+n_q, b=1+n_p (the p-shift raises the massive denominator power).
+PASS: heavy graph indices: a=1, b=2+n_p+n_pprime.
+PASS: 15 unique radial masters; all are UV convergent in the hard region.
+IR-singular masters: (3,2,1), (4,1,1), (4,2,2), (5,1,2), (5,2,3), (6,1,3).
+These are hard-region IR poles and must cancel EFT-soft UV poles. No relative graph sign or complete matched coefficient is claimed.
