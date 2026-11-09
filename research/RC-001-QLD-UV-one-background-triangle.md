@@ -181,6 +181,7 @@ N_{E,\mathrm{Euclidean}}^\mu=2\left[
 +(k^2+k\cdot p')p^\mu
 +(k^2+k\cdot p)p'^\mu
 \right].
+The Minkowski trace in §3 has \(+M_E^2 k^\mu\); after Wick rotation this term has the opposite relative sign because the momentum-product trace terms contain one Minkowski scalar product, whereas the mass term does not.
 \]
 The Lorentz vector itself carries one external momentum after tensor reduction. Therefore the degree-five vector amplitude requires degree-four scalar form factors. For explicit external-vector components, the contributions come from degree-four denominator-series terms times degree-zero numerator coefficients, degree-three denominator terms times degree-one numerator coefficients, and degree-two denominator terms times degree-two numerator coefficients. For a free \(k^\mu\) component, the loop vector itself is converted into an external vector by the angular average; its scalar coefficient must therefore be extracted at degree five, and its odd-rank tensor average can be nonzero. Expanding only the heavy denominators misses terms and cannot yield the complete hard coefficient.
 
