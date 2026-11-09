@@ -129,6 +129,59 @@ The corrected ordinary-line pole satisfies this identity. The contact graph has 
 
 This is a Ward-identity check for the restricted scalar two-point projection and its one-background derivative. It is not a substitute for deriving the complete \(Q_{LD}\) and \(Q_{RD}\) functional identities with all constituent fields, flavor charges, and non-Abelian Slavnov–Taylor terms. Those remain part of the full Green-basis matching.
 
+## 4D. Charge-resolved interpretation and UV-hard graph census
+
+The transverse result in §3 is only the ordinary-line subgraph with the light-fermion gauge charge factored out. It must not be identified with the complete \(Q_{LD}\) or \(Q_{RD}\) background vertex.
+
+For \(Q_{LD}\), the gauge charge on the light doublet line is
+\[
+q_{L,Y}=-\frac12,\qquad q_{L,X}=\eta_\ell Q_\ell,
+\]
+whereas the composite source charge is
+\[
+q_{\Psi_L,Y}=-1,\qquad q_{\Psi_L,X}=\eta_\ell Q_\ell.
+\]
+For \(Q_{RD}\),
+\[
+q_{\ell_R,Y}=-1,\qquad q_{\ell_R,X}=-\eta_\ell Q_\ell,
+\]
+while
+\[
+q_{\Psi_R,Y}=-1,\qquad q_{\Psi_R,X}=+\eta_\ell Q_\ell.
+\]
+The difference is carried by the scalar constituent: \(H^\dagger\) for QLD and \(S_\ell\) for QRD. Thus the direct Q8 contact, the ordinary light-fermion insertion, and the scalar-source transformation cannot be assigned a common charge factor. The one-loop background Ward identity is a relation among the complete set of constituent and contact terms.
+
+### UV full-theory one-loop vertex to be matched
+
+For the scalar-current three-point Green function with external \(\phi^\dagger(p')\), \(\phi(p)\), and background gauge field \(A_\mu(q)\), \(q=p'-p\), the full VLL theory has two 1PI fermion-loop attachment classes at order \(g_A |y_\ell|^2\) (or \(g_A|\lambda_\ell|^2\)):
+
+1. **Gauge insertion on the light fermion:** the light propagator is split into two propagators by the background vertex; the loop also contains the heavy \(E_\ell\) propagator.
+2. **Gauge insertion on the heavy VLL:** the heavy propagator is split into two propagators by the background vertex; the loop also contains the light chiral propagator.
+
+The corresponding EFT soft expansion must reproduce the low-momentum expansion of the sum, including the ordinary light-line insertion, the ordered Q8 one-background contact, and the scalar-source/constituent charge flow. For QLD the \(SU(2)_L\) generator acts on the \(L_\ell\) line; for QRD there is no \(SU(2)_L\) contribution. The \(B_\mu\) and \(A'_\mu\) attachments must be kept separate until their representation factors are inserted.
+
+A routing suitable for the hard-region calculation is to take the external scalar momenta \(p,p'\), set \(q=p'-p\), and choose the loop momentum so that the light-line attachment contains denominators
+\[
+k^2,\quad (k+q)^2,\quad (k+p)^2+M_E^2,
+\]
+while the heavy-line attachment contains
+\[
+k^2,\quad (k+p)^2+M_E^2,\quad (k+p')^2+M_E^2.
+\]
+The chiral numerator and momentum shifts must be derived from the actual ordered UV vertices; these denominator lists are routing guides, not yet a claimed evaluated amplitude. Expand the complete sum by regions through the \(M_E^{-4}\) term, retaining nonexceptional Euclidean external momenta. Do not infer the heavy-line numerator by replacing a charge in the light-line result.
+
+### Matching and acceptance rule
+
+The comparison is
+\[
+\Gamma^{\mu,(1)}_{\rm UV,hard}
+-\Gamma^{\mu,(1)}_{\rm EFT,soft}
+=\Gamma^{\mu,(1)}_{\rm local,matched}
+\]
+for the same three-point Green function, flavor, gauge generator, momentum routing, and \(\overline{\rm MS}\) convention. The hard-region IR poles must cancel the soft-region UV poles only after both UV attachment classes and the full EFT contact/constituent set have been summed. A transverse pole of the isolated light-line subgraph is not sufficient evidence of this cancellation.
+
+The next concrete calculation is therefore not another scalar tadpole: derive the two UV numerator polynomials from the chiral Feynman rules, expand each by regions, and compare their soft limits against the charge-resolved EFT set. The one-background hard matching is **not yet completed**.
+
 ## 5. Remaining matching tasks
 
 1. Fix the exact functional-determinant routing and all external scalar momenta.
