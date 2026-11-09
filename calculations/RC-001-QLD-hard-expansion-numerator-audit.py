@@ -271,4 +271,73 @@ print("F_q soft-line UV:",soft_uv["q"])
 print("PASS: soft UV pole is transverse: R*F_p^UV+Q*F_q^UV=0.")
 print("PASS: hard IR + ordinary-line soft UV cancels in both p^mu and q^mu form factors.")
 print("PASS: QLD8 covariant one-background vertex obeys the Ward difference identity.")
-print("SCOPE: pole-level comparison; finite soft terms and full charge/source matching remain open.")
+print("SCOPE: the soft UV-pole comparison is checked above; the finite soft integral is evaluated below.")
+
+
+# Complete ordinary-line soft integral through O(eps^0).
+# I_t(Delta)=mu^(2eps)/(4pi)^(2-eps) *
+# Gamma(2-eps+t) Gamma(eps-t)/Gamma(2-eps) * Delta^(t-eps).
+# soft_reduced already contains Delta^t=(x(1-x)Q)^t from the angular average.
+mu2 = sp.symbols("mu2", positive=True)
+soft_full = {}
+for vector, terms in soft_reduced.items():
+    total = 0
+    for t, expr_with_delta in terms.items():
+        expr_sub = expr_with_delta.subs({p2:P,q2:Q,pq:R})
+        coeff_x = sp.cancel(expr_sub/(x*(1-x)*Q)**t)
+        coeff_x = sp.expand(coeff_x.subs(d,4-2*eps))
+        poly_x = sp.Poly(coeff_x,x,domain="EX")
+        x_integral = 0
+        for (n,), coefficient in poly_x.terms():
+            x_integral += coefficient*sp.beta(n+t+1-eps,t+1-eps)
+        radial_prefactor = (
+            mu2**eps/(4*sp.pi)**(2-eps)
+            *sp.gamma(2-eps+t)*sp.gamma(eps-t)/sp.gamma(2-eps)
+        )
+        total += radial_prefactor*Q**(t-eps)*x_integral
+    soft_full[vector] = sp.factor(
+        sp.simplify(sp.expand_func(
+            sp.series(sp.expand(total),eps,0,1).removeO()
+        ))/(-M2**2)
+    )
+
+L_Q = sp.log(mu2)-sp.log(Q)+sp.log(4*sp.pi)-sp.EulerGamma
+expected_soft_full_p = -Q*(P-R)/(24*sp.pi**2*M2**2)*(1/eps+L_Q+sp.Rational(5,3))
+expected_soft_full_q = R*(P-R)/(24*sp.pi**2*M2**2)*(1/eps+L_Q+sp.Rational(5,3))
+assert sp.simplify(soft_full["p"]-expected_soft_full_p)==0
+assert sp.simplify(soft_full["q"]-expected_soft_full_q)==0
+assert sp.simplify(R*soft_full["p"]+Q*soft_full["q"])==0
+
+# Convert the corrected heavy attachment from (p,p') to (p,q), p'=p-q.
+FpE_pq = sp.factor((EPfinite+EPPfinite).subs(sub).subs({PP:P+Q-2*R,T:P-R}))
+FqE_pq = sp.factor((-EPPfinite).subs(sub).subs({PP:P+Q-2*R,T:P-R}))
+hard_p_finite = sp.factor(LPfinite.subs(sub)+FpE_pq)
+hard_q_finite = sp.factor(LQfinite.subs(sub)+FqE_pq)
+hard_p_pole = sp.factor(LPpole.subs(sub))
+hard_q_pole = sp.factor(LQpole.subs(sub))
+hard_scalar_finite = 30*L_M*(P-R)+70*P+21*Q-70*R
+assert sp.simplify(hard_p_finite-Q*hard_scalar_finite/(720*sp.pi**2*M2**2))==0
+assert sp.simplify(hard_q_finite+R*hard_scalar_finite/(720*sp.pi**2*M2**2))==0
+assert sp.simplify(R*(hard_p_finite+hard_p_pole/eps)
+                   +Q*(hard_q_finite+hard_q_pole/eps))==0
+
+# The hard + soft sum is the full-theory amplitude in the method-of-regions
+# decomposition, not the Wilson coefficient by itself.
+full_p = sp.factor(hard_p_finite+soft_full["p"]+hard_p_pole/eps)
+full_q = sp.factor(hard_q_finite+soft_full["q"]+hard_q_pole/eps)
+full_scalar = 30*(P-R)*(sp.log(Q)-sp.log(M2))+20*(P-R)+21*Q
+expected_full_p = Q*full_scalar/(720*sp.pi**2*M2**2)
+expected_full_q = -R*full_scalar/(720*sp.pi**2*M2**2)
+assert sp.simplify(full_p-expected_full_p)==0
+assert sp.simplify(full_q-expected_full_q)==0
+assert sp.simplify(R*full_p+Q*full_q)==0
+
+print("FINITE SOFT FORM FACTORS")
+print("F_p soft =",soft_full["p"])
+print("F_q soft =",soft_full["q"])
+print("PASS: full soft form factors are transverse through O(eps^0).")
+print("PASS: hard + soft poles cancel in both form factors.")
+print("PASS: hard + soft is mu-independent and transverse for q_L=q_E.")
+print("Full-theory F_p =",full_p)
+print("Full-theory F_q =",full_q)
+print("SCOPE: full one-background U(1)_X amplitude in this parity-even sector; common 1PI phase/couplings and non-U(1)_X charge projections remain to be restored.")
