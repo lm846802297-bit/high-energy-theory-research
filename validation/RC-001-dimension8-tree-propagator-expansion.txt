@@ -1,10 +1,12 @@
-RC-001 dimension-eight tree propagator expansion audit
+RC-001 dimension-eight tree-level VLL Schur-complement audit
 
-PASS: cross-chirality propagator series M/(z-M^2) = -1/M - z/M^3 - z^2/M^5
-PASS: candidate dimension-seven coefficient C7 = C5/M_E^2
-PASS: next cross-chirality term is C5/M_E^4 at order M_E^-5
+PASS: cross-chirality Schur-complement term expands with Lagrangian coefficients +y lambda/M_E and +y lambda/M_E^3
+PASS: in L_EFT = -C5 O5 - C7 O7 + h.c., C5=-y lambda/M_E and C7=C5/M_E^2
+PASS: same-chirality tree terms generate +|y|^2 Q_LD/M_E^2 and +|y|^2 Q_LD^(8)/M_E^4
+PASS: same-chirality tree terms generate +|lambda|^2 Q_RD/M_E^2 and +|lambda|^2 Q_RD^(8)/M_E^4
+PASS: next cross-chirality term is dimension nine and order M_E^-5
 
-Method: exact SymPy series/algebraic identities, independently evaluated locally.
-Convention: z denotes the ordered operator (i Dslash)^2 acting on the complete right-hand source.
+Execution: local SymPy exact series/algebraic checks.
+Convention: Dslash=i gamma.D acts on the complete right-hand source; C5 and C7 are defined through L_EFT=-C5 O5-C7 O7+h.c.
 
-LIMIT: this verifies the formal propagator series and inverse-mass counting only. It does not verify the full tree-level Schur-complement matching, integration-by-parts/EOM reduction, field-strength decomposition, or any one-loop dimension-eight amplitude.
+LIMIT: no scalar/gauge EOM minimal-basis canonicalization, loop matching, or external diagram-package validation is claimed.
