@@ -208,6 +208,29 @@ where the nonnegative expansion indices are further constrained by total externa
 
 This gives a reproducible route to the hard coefficient, but the finite sums over Taylor partitions and the final \(1/\epsilon\) and finite terms have not yet been evaluated. In particular, a Gamma-function pole in an individual hard Taylor term is not by itself the matched UV pole: it must be combined with the EFT soft region in the same subtraction convention.
 
+## 5C. Generated total-degree-five hard integrands (P0.1/P0.2)
+
+The numerator polynomials and all shifted-propagator series have now been combined mechanically, retaining independent formal external vectors \(p,p',q\) until after Taylor extraction. The generated coefficient is homogeneous of total external degree five in every vector component.
+
+The exact generator is `calculations/RC-001-QLD-hard-degree5-integrand.py`; the recorded term-count audit is `validation/RC-001-QLD-hard-degree5-integrand.txt`.
+
+The expanded monomial counts are:
+\[
+\begin{array}{c|rrr}
+&k^\mu&p^\mu&q^\mu\text{ or }p'^\mu\\\hline
+L\text{-attachment}&28&20&20\\
+E\text{-attachment}&28&20&20
+\end{array}
+\]
+The base radial denominators are
+\[
+I_L:\quad \frac{1}{(k^2)^2(k^2+M_E^2)},\qquad
+I_E:\quad \frac{1}{k^2(k^2+M_E^2)^2}.
+\]
+The numerator-degree partitions \(5,4,3\) are included automatically by multiplication before extracting degree five. This corrects any interpretation that only a single denominator Taylor order is needed.
+
+The generator checks homogeneity and expansion completeness at the polynomial level. It does **not** yet perform the \(d\)-dimensional tensor contractions, radial master integrations, or the hard/soft subtraction. The 28/20/20 monomial counts are not Wilson coefficients and are not physical results.
+
 ## 6. Acceptance conditions
 
 The QLD one-background matching is accepted only after:
