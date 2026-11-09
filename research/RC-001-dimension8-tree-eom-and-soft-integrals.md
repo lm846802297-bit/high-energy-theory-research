@@ -290,6 +290,45 @@ so the numerator is zero for every \(k,q,\mu,\nu\). In the actual model \(L_\ell
 \]
 A nonzero chirality-changing contribution requires additional \(C_5\) mass/source insertions; it is higher order in \(1/M_E\) and is not this two-\(Q_6\)-insertion topology.
 
+### 4.4 Single \(Q_{LD}^{(8)}\) or \(Q_{RD}^{(8)}\) insertion: scalar two-point soft tadpole
+
+The exact Schur complement also generates
+\[
+Q_{LD,\ell}^{(8)}=(\bar L_\ell H)(i\slashed D)^3(H^\dagger L_\ell),
+\qquad
+Q_{RD,\ell}^{(8)}=S_\ell^\dagger\bar\ell_R(i\slashed D)^3(S_\ell\ell_R),
+\]
+with coefficients \(|y_\ell|^2/M_{E\ell}^4\) and \(|\lambda_\ell|^2/M_{E\ell}^4\), respectively. These are genuine tree-level dimension-eight Green-basis operators. They must remain in fermionic and current/source amplitudes even when a particular scalar projection vanishes.
+
+For the restricted unbroken-phase scalar two-point projection, close the fermion bilinear at a single \(Q_8\) insertion and keep two external scalar fields. Set gauge backgrounds to zero and take the light fermion massless. If \(p\) is the momentum carried by the external scalar composite and \(k\) the loop momentum, the parity-even numerator is proportional to
+\[
+\frac{\operatorname{tr}[(\slashed k+\slashed p)^3\slashed k]}{k^2}
+=4\,\frac{(k+p)^2(k+p)\cdot k}{k^2}.
+\]
+Writing \(K=k^2\), \(a=k\cdot p\), and \(p^2=p\cdot p\), the scalar integrand reduces to
+\[
+K+3a+\frac{2a^2}{K}+p^2+\frac{p^2a}{K}.
+\]
+Symmetric integration removes the odd terms and gives
+\[
+\int_k\left[K+p^2+\frac{2}{K}(k\cdot p)^2\right]
+=\left(1+\frac2d\right)p^2\int_k1+\int_k k^2=0
+\]
+in dimensional regularization: both remaining integrals are scaleless. The same conclusion holds for the right-handed singlet channel. Thus
+\[
+\Gamma_{\mathrm{soft}}^{(1)}[Q_{LD}^{(8)}]\big|_{\phi^\dagger\phi,\;g=0,\;m_\ell=0}=0,
+\qquad
+\Gamma_{\mathrm{soft}}^{(1)}[Q_{RD}^{(8)}]\big|_{S^\dagger S,\;g=0,\;m_\ell=0}=0.
+\]
+
+This is a zero for the specified one-insertion scalar tadpole, not a statement that \(Q_{LD}^{(8)}\) or \(Q_{RD}^{(8)}\) is a redundant or vanishing operator. In particular:
+- their tree-level fermion–scalar matrix elements are nonzero and are part of the dimension-eight Green basis;
+- the covariant derivatives generate gauge-field and field-strength contact terms; gauge-corrected fermionic/current amplitudes at \(O(g^2/M_E^4)\) have not been evaluated;
+- a \(C_5\)-induced light-fermion mass/source insertion adds at least one further inverse power of \(M_E\), so it is beyond the strict \(M_E^{-4}\) scalar tadpole considered here;
+- the \(Q_8\) insertion must not be counted as an extra copy of the already evaluated \(Q_6Q_6\) current bubble.
+
+The numerator reduction and scaleless-integral classification are checked in calculations/RC-001-dimension8-Q8-soft-tadpole-audit.py; the recorded output is validation/RC-001-dimension8-Q8-soft-tadpole-audit.txt.
+
 ## 5. Local dimension-eight pole operators and matching boundary
 
 The UV pole is local. In the Euclidean Green basis it is proportional to
