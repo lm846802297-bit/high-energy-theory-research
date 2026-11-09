@@ -123,7 +123,7 @@ A complete dimension-eight claim must separately include, without double countin
 
 1. The unbroken-phase \(C_5^4\) eight-scalar soft loop for the \(X^2Y^2\) potential operator.
 2. The broken-phase constant \(h\)-\(s\) projection of the \(C_5^2\) bubble/contact subset as a cross-check of that same potential structure, not as an independent duplicate.
-3. The \(Q_{LD}Q_{LD}\) and \(Q_{RD}Q_{RD}\) soft loops in the pure-Higgs and pure-singlet channels. The putative \(Q_{LD}Q_{RD}\) one-loop mixed channel is absent in the unbroken massless EFT because the two insertions contain distinct, chirality-preserving fermion species; see research/RC-001-dimension7-eom-and-dimension8-Q6-soft-kernels.md.
+3. The \(Q_{LD}Q_{LD}\) and \(Q_{RD}Q_{RD}\) soft loops in the pure-Higgs and pure-singlet channels. The putative \(Q_{LD}Q_{RD}\) one-loop mixed channel is absent in the unbroken massless EFT because the two insertions contain distinct, chirality-preserving fermion species; see research/RC-001-dimension8-tree-eom-and-soft-integrals.md.
 4. \(C_5C_7^\ast\) soft insertions if the \(1/M_E^3\) operator survives the declared EOM reduction, or the corresponding induced source/potential terms if it is eliminated.
 5. \(Q_{LD}/Q_{RD}\) VEV wavefunction insertions into the \(C_5C_5^\ast\) bubble and any other \(O(M_E^{-4})\) tree-level EFT insertion required by the fixed amplitude.
 6. The corresponding dimension-eight UV hard expansion, counterterms, and EOM/source companions.
