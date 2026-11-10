@@ -646,3 +646,6 @@ J_{\alpha\beta}(D)=
 It is symmetric and its \(D=4-2\epsilon\) expansion, including the full \(O(\epsilon)\) tensor, is recorded in research/RC-001-QLD8-cross-source-sign-and-TT-Dirac-reduction.md. The metric-contracted opposite-chirality tensor seed is evanescent in 4D but is retained as a D-dimensional operator. The exact symbolic and 4D matrix/index-sign checks are in calculations/RC-001-QLD8-cross-source-sign-TT-audit.py and validation/RC-001-QLD8-cross-source-sign-TT-audit.txt.
 
 Acceptance boundary: P1.5a and the raw P1.5b TT contraction are closed locally. The merged SS+TS+ST+TT direct-pairing counterterm, external-gluon completion, physical/evanescent \(Z\) block, EOM/IBP reduction, and final anomalous dimension remain open. No CI pass is claimed.
+
+
+Independent follow-up check: the coefficient multiplying \(g_{\alpha\beta}\) in the four-topology TT sum was re-derived by taking both free indices in a formal transverse direction, with all external momentum components zero. The resulting symbolic-\(D\) metric coefficient agrees exactly with the compact \(J_{\alpha\beta}(D)\) expression. This supplements the 16-component symbolic tensor identity and the explicit four-dimensional Dirac-matrix diagnostics.
