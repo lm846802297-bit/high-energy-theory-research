@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
-"""Exact momentum-routing audit for the QLD8 d†d QCD pilot."""
+"""Exact momentum-routing audit for the QLD8 d†d QCD pilot.
+
+For ordered pair (a,b), ell flows from b to a. With all external momenta
+incoming at the insertion, r_a=p_a+ell and r_b=p_b-ell.
+"""
 import sympy as sp
 
 p1 = sp.Matrix(sp.symbols("p1_0:4"))
@@ -30,6 +34,8 @@ pair_shifts = {
     ("bard", "d"): -1,
 }
 
+# ell flows from the second named leg to the first; the source-A shift is
+# +ell for (A,B), -ell for (B,A), and zero within one source.
 for pair, expected_shift in pair_shifts.items():
     derived_shift = (
         (1 if pair[0] in source_A else 0)
