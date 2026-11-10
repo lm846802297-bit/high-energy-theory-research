@@ -1,0 +1,26 @@
+RC-001 Q_LD pure-WW cross-box exact-routing audit
+External ordering: barL(p1) H(p2) Hdag(p3) L(p4)
+Local projection: p1=p3=0, p2=P, p4=-P; q_E=k-P.
+SU(2) weights from the independent attachment projection: (-,+,+,-) T3/4.
+Per-pair Lorentz kernels:
+  LD-W-01: 2(d-2) K/d
+  LD-W-02: -J + 2K/d
+  LD-W-05: (1+2/d) J
+  LD-W-06: -4J/d
+PASS: each pair satisfies full = hard + soft.
+PASS: J_full = J_hard + J_soft; K_soft is a scaleless power integral.
+Weighted hard:
+  A_hard = (3 Delta_UV/8 - 3 L/8 + 11/16)/M_E^2
+Weighted soft:
+  A_soft = 3(-Delta_UV + Delta_IR)/(8 M_E^2)
+Weighted full:
+  A_full = (3 Delta_IR/8 - 3 L/8 + 11/16)/M_E^2
+PASS: the hard UV pole cancels the EFT-soft UV pole; the full amplitude retains only the IR pole.
+PASS: retaining O(eps)*Delta_UV adds +3/16 to the hard finite constant.
+SCOPE: unit multiplicity for one fixed ordered tree contraction only.
+NOT CLAIMED: all charge-conjugate/crossed tree routings, FeynArts/QGRAF multiplicities, full Ward sum, or complete Wilson coefficient.
+
+Local execution record:
+- Exact SymPy algebra checks: 7/7 passed.
+- Regression test source: calculations/test_RC001_dim6_WW_crossbox_exact_routing.py.
+- GitHub Actions: not used as evidence for this result.
