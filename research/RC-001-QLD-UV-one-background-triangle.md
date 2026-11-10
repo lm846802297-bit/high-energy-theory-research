@@ -1108,3 +1108,16 @@ The reproducible exact projection is in calculations/RC-001-QLD-dim8-form-factor
 The Abelian relation in §5K extends to the adjoint-covariant \(SU(2)_L\) field-strength insertion. The matrix-ordered commutator, the \(SU(2)\) \(\delta^{ab}/\epsilon^{abc}\) decomposition, the mixed \(B\)-\(W\) two-background contacts, and the corresponding gauge-EOM current representatives are derived in [the non-Abelian IBP/EOM completion note](RC-001-QLD-nonabelian-IBP-EOM-completion.md). The exact SymPy checks are archived in calculations/RC-001-QLD-nonabelian-IBP-EOM-audit.py and validation/RC-001-QLD-nonabelian-IBP-EOM-audit.txt.
 
 This closes the algebraic non-Abelian IBP/commutator map for the restricted Higgs-current representatives. It does not close the complete current basis, all off-shell mixed-background matching, counterterms, or the final renormalized dimension-eight Wilson vector.
+
+
+## 5N. Derivative-aware source-square Fierz and covariant IBP ledger
+
+The source-square contribution is organized in [RC-001-QLD8-derivative-Fierz-IBP-ledger.md](RC-001-QLD8-derivative-Fierz-IBP-ledger.md). For any two Higgs-doublet sources,
+\[
+(D_\mu J_A^\dagger)(D^\mu J_B)\doteq-J_A^\dagger D^2J_B,
+\]
+because \(J_A^\dagger D^\mu J_B\) is a gauge singlet. Expanding the Laplacian of a bilinear gives the two endpoint-Laplacian terms and the mixed derivative term. This identity applies to the complete product-rule sum; it does not equate the individual four placements.
+
+The ledger tracks the derivative on each original fermion through the crossed spinor Fierz rearrangement. In particular, the \((0,1)\) and \((1,0)\) placements put both derivatives into one of the Fierz-rearranged bilinears. The \(RL,LR,RR,LL\) Fierz-difference evanescents are assigned channel by channel in the fixed open-line NDR convention.
+
+This is a tree-level operator identity and derivative bookkeeping result. It does not evaluate the remaining fermion-EOM reductions, one-loop evanescent mixing, same-order EFT soft insertions, or finite UV-minus-EFT Wilson coefficients.
