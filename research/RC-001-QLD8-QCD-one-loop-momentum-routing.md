@@ -50,7 +50,7 @@ They are not four independent Wilson coefficients or four unrelated insertion ve
 
 ## 3. Loop-momentum routing for the six QCD exchanges
 
-Let a gluon momentum \(\ell\) flow from the first named external leg to the second. The two fermion momenta entering the operator insertion are shifted as
+Let a gluon momentum \(\ell\) flow from the **second named external leg to the first**. With all external momenta incoming at the insertion, the two fermion momenta entering the operator insertion are shifted as
 \[
 p_a\longrightarrow p_a+\ell,\qquad
 p_b\longrightarrow p_b-\ell.
@@ -113,3 +113,16 @@ The companion exact-symbolic audit checks:
 4. \(q_A^{(ab)}+q_B^{(ab)}=0\) and the insertion factor is \([q_A^{(ab)}]^2\) for every topology.
 
 This closes the momentum-routing algebra for the \(d^\dagger d\) QCD pilot. It does not evaluate the Dirac numerators, tensor loop integrals, UV poles, wavefunction counterterms, evanescent mixing, or the \(Z\) matrix.
+
+
+### Momentum-flow convention clarification
+
+The sign convention is fixed as follows: for a listed ordered pair \((a,b)\),
+\(\ell\) flows from leg \(b\) toward leg \(a\). With all external momenta
+\(p_i\) incoming at the operator insertion, momentum conservation at the
+two external QCD vertices then gives the insertion-side fermion momenta
+\(r_a=p_a+\ell\) and \(r_b=p_b-\ell\). This is the convention used by the
+routing table and the symbolic audit. If instead one chooses \(\ell\) to
+flow from \(a\) to \(b\), every \(\ell\) sign in the table is reversed; the
+loop integral is unchanged after \(\ell\mapsto-\ell\), provided the whole
+integrand is transformed consistently.
