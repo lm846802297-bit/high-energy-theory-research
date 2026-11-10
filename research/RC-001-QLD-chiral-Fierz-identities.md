@@ -104,3 +104,78 @@ The existing RC-001 master fixes \(D=4-2\epsilon\) and \(\overline{\mathrm{MS}}\
 The companion SymPy script constructs the Dirac gamma matrices and verifies all four c-number tensor identities component by component (256 components per identity). The operator-level minus signs are then supplied by the Grassmann field interchange, not by the matrix identity itself.
 
 This closes the four-dimensional spinor Fierz algebra used to classify the source pairs. It does not establish the \(d\)-dimensional evanescent mixing matrix, the finite one-loop scheme conversion, the full color/weak basis, the derivative IBP reduction, or the final dimension-eight Wilson vector.
+
+
+## 5. Explicit representative Fierz map for all six source-pair channels
+
+The following expressions suppress the four derivative placements but keep weak and color indices. They are the spinor Fierz projection to apply separately to each derivative placement.
+
+### 5.1 Opposite-projector channels
+
+\[
+\begin{aligned}
+d^\dagger d:\quad
+&(\bar Q_{L,a}^k d_{R,a})(\bar d_{R,b}Q_{L,b}^k)\\
+&\quad=-\frac12
+(\bar Q_{L,a}^k\gamma^\mu Q_{L,b}^k)
+(\bar d_{R,b}\gamma_\mu d_{R,a}),\\[2mm]
+u^\dagger u:\quad
+&(\bar u_{R,a}Q_{L,a}^i)(\bar Q_{L,b}^i u_{R,b})\\
+&\quad=-\frac12
+(\bar u_{R,a}\gamma^\mu u_{R,b})
+(\bar Q_{L,b}^i\gamma_\mu Q_{L,a}^i),\\[2mm]
+e^\dagger e:\quad
+&(\bar L_e^k e_R)(\bar e_R L_e^k)\\
+&\quad=-\frac12
+(\bar L_e^k\gamma^\mu L_e^k)
+(\bar e_R\gamma_\mu e_R),\\[2mm]
+d^\dagger e:\quad
+&(\bar Q_{L,a}^k d_{R,a})(\bar e_R L_e^k)\\
+&\quad=-\frac12
+(\bar Q_{L,a}^k\gamma^\mu L_e^k)
+(\bar e_R\gamma_\mu d_{R,a}).
+\end{aligned}
+\]
+
+### 5.2 Same-projector channels
+
+\[
+\begin{aligned}
+d^\dagger u:\quad
+&\epsilon_{ik}(\bar Q_{L,a}^k d_{R,a})
+(\bar Q_{L,b}^i u_{R,b})\\
+&\quad=-\frac12\epsilon_{ik}
+(\bar Q_{L,a}^k u_{R,b})(\bar Q_{L,b}^i d_{R,a})\\
+&\qquad-\frac18\epsilon_{ik}
+(\bar Q_{L,a}^k\sigma^{\mu\nu}u_{R,b})
+(\bar Q_{L,b}^i\sigma_{\mu\nu}d_{R,a}),\\[2mm]
+u^\dagger e:\quad
+&\epsilon_{ik}(\bar u_{R,a}Q_{L,a}^i)
+(\bar e_R L_e^k)\\
+&\quad=-\frac12\epsilon_{ik}
+(\bar u_{R,a}L_e^k)(\bar e_R Q_{L,a}^i)\\
+&\qquad-\frac18\epsilon_{ik}
+(\bar u_{R,a}\sigma^{\mu\nu}L_e^k)
+(\bar e_R\sigma_{\mu\nu}Q_{L,a}^i).
+\end{aligned}
+\]
+
+The reverse cross channels are the Hermitian conjugates. The \(d^\dagger u\) and \(u^\dagger e\) channels require both scalar and tensor structures; retaining only a scalar Fierz projection would be incomplete.
+
+### 5.3 Color decomposition
+
+For the crossed quark contractions in \(d^\dagger d\) and \(u^\dagger u\), use
+\[
+T^A_{ab}T^A_{cd}
+=\frac12\left(\delta_{ad}\delta_{cb}
+-\frac13\delta_{ab}\delta_{cd}\right).
+\]
+For example,
+\[
+(\bar Q_a\Gamma Q_b)(\bar d_b\Gamma d_a)
+=\frac13(\bar Q\Gamma Q)(\bar d\Gamma d)
++2(\bar QT^A\Gamma Q)(\bar dT^A\Gamma d).
+\]
+The same identity applies to the corresponding \(u_R\) current. The \(d^\dagger u\) scalar/tensor channels also retain crossed color labels after spinor Fierz; their color decomposition must be applied to the rearranged bilinears, not before the spinor-index exchange.
+
+The color decomposition is independent of the spinor Fierz identity. The weak \(\epsilon_{ik}\) contraction and all generation/Yukawa tensors remain attached to their displayed bilinears.
