@@ -43,6 +43,24 @@ class TestRC001Dim6WWCrossboxExactRouting(unittest.TestCase):
         for pair in expected:
             self.assertEqual(sp.simplify(got[pair]-expected[pair]), 0, pair)
 
+    def test_explicit_longitudinal_numerator_reductions(self):
+        derived = MOD.derive_longitudinal_pair_integrands()
+        Jden = 1/(MOD.x**2*(MOD.x-MOD.M2_local))
+        Kden = 1/(MOD.x*(MOD.x-MOD.M2_local)**2)
+        expected = {
+            "LD-W-01": -2*Kden/MOD.d,
+            "LD-W-02": -Jden+2*Kden/MOD.d,
+            "LD-W-05": -2*Kden/MOD.d,
+            "LD-W-06": -Jden+2*Kden/MOD.d,
+        }
+        for pair, (actual, _, _) in derived.items():
+            self.assertEqual(sp.simplify(actual-expected[pair]), 0, pair)
+
+    def test_longitudinal_triplet_projection_vanishes(self):
+        J, K = sp.symbols("J K")
+        longitudinal = MOD.derive_longitudinal_pair_kernels(J, K)
+        self.assertEqual(sp.simplify(MOD.longitudinal_weighted_sum(longitudinal)), 0)
+
     def test_weak_weighted_sum_collapses_to_J_minus_K(self):
         J, K = sp.symbols("J K")
         got = MOD.weak_weighted_sum(MOD.derive_pair_kernels(J, K))
