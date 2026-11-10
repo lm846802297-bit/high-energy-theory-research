@@ -250,7 +250,7 @@ Its expansion is
 \Delta_{\rm IR}+2-L+O(\epsilon)
 \right),
 \]
-which independently reproduces \((J-K)_{\rm full}\) and, after multiplication by \((d-1)/(2d)\), the full finite \(11/16\). This gamma-function check is independent of the separate \(J\) and \(K\) master decomposition, though it uses the same stated \(\overline{\rm MS}\) pole convention.
+which independently reproduces \((J-K)_{\rm full}\) and, after multiplication by \((d-1)/(2d)\), the full finite \(11/16\). This gamma-function check is independent of the separate \(J\) and \(K\) master decomposition, though it uses the same stated \(\overline{\rm MS}\) pole convention. The explicit \((4\pi)^\epsilon\) factor is included to reproduce \(\Delta_\epsilon=1/\epsilon-\gamma_E+\ln4\pi\); the parent master-integral note should make clear whether this factor is absorbed into its definition of \(\mu_R\), since its displayed loop measure does not show it explicitly. The finite \(11/16\) is invariant under the corresponding consistent scale redefinition.
 
 At the master-integral level the soft term is
 \[
