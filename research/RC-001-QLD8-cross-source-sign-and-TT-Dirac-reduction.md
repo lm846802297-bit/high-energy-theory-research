@@ -116,7 +116,7 @@ J_{\alpha\beta}(D)
 \left[D(d^2+R^2)+(D-20)q^2\right].
 \end{aligned}}
 \]
-The combined tensor is exactly symmetric, \(J_{\alpha\beta}=J_{\beta\alpha}\); the antisymmetric pieces of the four individual topology tensors cancel in the full TT sum.
+The combined tensor is exactly symmetric, \(J_{\alpha\beta}=J_{\beta\alpha}\); the antisymmetric pieces of the four individual topology tensors cancel in the full TT sum. An independent symbolic-\(D\) transverse-metric check, with both free indices orthogonal to all external momenta, separately reproduces the coefficient multiplying \(g_{\alpha\beta}\).
 
 ### 3.1 Explicit \(O(\epsilon)\) form
 
@@ -169,7 +169,7 @@ This closes the graph-sign and raw D-dimensional TT-kernel tasks. It does **not*
 
 The companion script
 calculations/RC-001-QLD8-cross-source-sign-TT-audit.py
-checks the exact compact \(J_{\alpha\beta}(D)\) identity, symmetry, the \(D=4-2\epsilon\) expansion, the Feynman-rule phase product, all final sign weights, 64 explicit four-dimensional gamma-index sign identities, a direct 16×16 matrix comparison of the four TT topologies, and the four-dimensional evanescence of \(E_{TT}^{LR}\). The recorded output is
+checks the exact compact \(J_{\alpha\beta}(D)\) identity, symmetry, the independent symbolic-\(D\) transverse-metric coefficient, the \(D=4-2\epsilon\) expansion, the Feynman-rule phase product, all final sign weights, 64 explicit four-dimensional gamma-index sign identities, a direct 16×16 matrix comparison of the four TT topologies, and the four-dimensional evanescence of \(E_{TT}^{LR}\). The recorded output is
 validation/RC-001-QLD8-cross-source-sign-TT-audit.txt.
 
 The matrix checks are finite-dimensional diagnostics of the index/sign algebra only; the UV kernel and its \(D\)-dependence are obtained from the symbolic D-dimensional tensor expression. No CI pass is claimed by this local audit.
