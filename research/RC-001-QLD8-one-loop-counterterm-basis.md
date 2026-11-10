@@ -2,8 +2,8 @@
 
 **Date:** 2026-11-10  
 **Workstream:** PR #11, strict \(O(M_E^{-4})\) Higgs-source-square sector  
-**Stage:** P1.0 basis construction plus P1.1a QCD color-factor block  
-**Status:** source-pair, representation, derivative, rank-3/rank-4 seed, and six QCD color-exchange matrices pass exact checks; no loop kernel or one-loop \(Z\) matrix is yet calculated.
+**Stage:** P1.0 basis construction plus P1.1a–P1.1c QCD pilot setup  
+**Status:** source-pair, representation, derivative, gamma-string, QCD color, and momentum-routing checks pass exact tests; the direct (RL) tensor evanescent is identified. No loop kernel, UV pole, or one-loop (Z) matrix is yet calculated.
 
 ## 1. Scope and non-negotiable boundary
 
@@ -241,3 +241,37 @@ QLD8 workflow now runs the basis, color, and momentum-routing audits.
 This closes the insertion-momentum routing algebra, not the loop calculation:
 the six open-line Dirac numerators, tensor integrals, wavefunction
 counterterms, UV poles, and evanescent projections remain to be evaluated.
+
+
+## 10. P1.1c: direct-pairing \(RL\) tensor evanescent
+
+A two-gamma open-line chain in the direct \(d^\dagger d\) source pairing obeys
+\[
+(\gamma^\mu\gamma^\nu P_R)\otimes(P_L\gamma_\nu\gamma_\mu)
+=
+D\,P_R\otimes P_L
++\sigma^{\mu\nu}P_R\otimes\sigma_{\mu\nu}P_L.
+\]
+The direct opposite-chirality tensor contraction vanishes exactly in four
+dimensions by the self-duality/anti-self-duality of the two chiral tensor
+representations. It is therefore a candidate direct-pairing evanescent
+\[
+E_{T;RL}^{\rm dir}
+=(\bar Q\sigma^{\mu\nu}P_Rd)
+(\bar d\sigma_{\mu\nu}P_LQ).
+\]
+The \(D=4-2\epsilon\) scalar coefficient \(D=4-2\epsilon\) must be retained:
+the \(-2\epsilon\) term can multiply a \(1/\epsilon\) UV pole and contribute
+to the finite matching term.
+
+The exact four-dimensional tensor and gamma-chain checks have been added to
+\`calculations/RC-001-QLD8-counterterm-basis-audit.py\` and its validation
+output. The dedicated interpretation is in
+\`research/RC-001-QLD8-RL-tensor-evanescent-seed.md\`.
+
+This direct-pairing tensor seed must not automatically be counted as
+independent of the existing crossed-pairing \(E_{RL;V}\) and rank-three
+evanescents. Their relation must be determined by the \(d\)-dimensional
+Fierz map, including the Grassmann sign and derivative labels, before the
+independent evanescent basis is fixed. No graph coefficient or UV pole is
+inferred from the gamma identity alone.
