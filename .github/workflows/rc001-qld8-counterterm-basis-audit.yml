@@ -9,6 +9,9 @@ on:
       - "calculations/RC-001-QLD8-counterterm-basis-audit.py"
       - "research/RC-001-QLD8-one-loop-counterterm-basis.md"
       - "validation/RC-001-QLD8-counterterm-basis-audit.txt"
+      - "calculations/RC-001-QLD8-QCD-color-factor-audit.py"
+      - "research/RC-001-QLD8-QCD-color-factor-block.md"
+      - "validation/RC-001-QLD8-QCD-color-factor-audit.txt"
 
 permissions:
   contents: read
@@ -27,3 +30,5 @@ jobs:
         run: python -m pip install --disable-pip-version-check sympy==1.14.0
       - name: Run exact QLD8 basis and gamma-duality audit
         run: python calculations/RC-001-QLD8-counterterm-basis-audit.py
+      - name: Run exact QLD8 QCD color-factor audit
+        run: python calculations/RC-001-QLD8-QCD-color-factor-audit.py
