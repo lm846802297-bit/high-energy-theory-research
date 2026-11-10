@@ -47,6 +47,32 @@ Consequently the single-external-gauge contact from the derivative insertion has
 
 For the mixed \(B-A'\) sector, retain the full gauge kinetic/propagator matrix until the external-field basis and the renormalized mixing boundary are specified. Do not replace a signed mixed charge factor by a Boolean “allowed” flag.
 
+### 3.1 Tree-level \(W\) Ward identity and the partial loop check
+
+For the \(SU(2)_L\) sector define
+\[
+\Psi_L=H^\dagger L_\ell,\qquad \bar\Psi_L=\bar L_\ell H.
+\]
+Both composites are weak singlets, so
+\[
+D_\mu^{SU(2)}\Psi_L=\partial_\mu\Psi_L,\qquad
+D_\mu^{SU(2)}\bar\Psi_L=\partial_\mu\bar\Psi_L.
+\]
+The tree-level EFT insertion \(Q_{LD}=\bar\Psi_L i\slashed D\Psi_L\) therefore has no direct \(W_\mu^I\) contact vertex. The longitudinal external-\(W\) Ward contraction of the emissions from the two composite pairs is proportional to
+\[
+(t_{\bar L}^I+t_H^I)T_0,\qquad
+(t_{H^\dagger}^I+t_L^I)T_0,
+\]
+and both vanish by the singlet identities in research/RC-001-dim6-SU2-attachment-projection.md. Thus the tree-level operator insertion satisfies the \(W\)-current Ward identity without a derivative-contact term.
+
+A separate partial one-loop check is now available for the internal-\(W\) four-point cross-box sub-block. Contracting the four cross-box numerators with the longitudinal propagator projector gives the kernels
+\[
+\left(A_{01}^{(L)},A_{02}^{(L)},A_{05}^{(L)},A_{06}^{(L)}\right)
+=\left(-\frac{2K}{d},-\!J+\frac{2K}{d},
+-\frac{2K}{d},-\!J+\frac{2K}{d}\right),
+\]
+whose \(T_3\) projection vanishes. This establishes gauge-parameter independence of that fixed-routing cross-box subset. It does **not** evaluate the one-loop external-\(W\) form factor, nor the complete Slavnov–Taylor identity including external-leg, gauge-sector, and counterterm contributions. Accordingly, LD-W-FF remains **NOT EVALUATED**.
+
 ## 4. Form-factor decomposition and matching record
 
 Use common nonexceptional off-shell external momenta (or one common infrared regulator) and the same gauge-fixing, \(\overline{\mathrm{MS}}\), and external-field conventions on both sides. For each amplitude, record separately:
