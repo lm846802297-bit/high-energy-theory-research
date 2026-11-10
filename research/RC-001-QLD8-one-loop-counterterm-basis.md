@@ -2,7 +2,7 @@
 
 **Date:** 2026-11-10  
 **Workstream:** PR #11, strict \(O(M_E^{-4})\) Higgs-source-square sector  
-**Stage:** P1.0 basis construction plus P1.1a–P1.1c, P1.2, P1.3a–P1.3b, and P1.4a QCD/evanescent setup  
+**Stage:** P1.0 basis construction plus P1.1a–P1.1c, P1.2, P1.3a–P1.3b, P1.4a, and P1.4b0 QCD/evanescent setup  
 **Status:** source-pair, representation, derivative, gamma-string, QCD color, momentum-routing, and formal \(d\)-dimensional direct-tensor projection checks pass locally. The higher-rank Gram obstruction is identified. No loop kernel, UV pole, or one-loop \(Z\) matrix is yet calculated.
 
 ## 1. Scope and non-negotiable boundary
@@ -498,3 +498,47 @@ The exact convention and derivation are in
 \`research/RC-001-QLD8-QCD-Yukawa-source-renormalization-check.md\`.
 This is a factorized-source identity, not the full QLD8 four-fermion
 counterterm matrix or a finite Wilson coefficient.
+
+
+## 15. P1.4b0: four cross-source graphs, scalar-scalar UV projection
+
+The exact scalar projection of each cross-source open-line numerator is
+\[
+\frac14\operatorname{Tr}_{16}
+[(P_R\otimes P_L)\mathcal N_{ab}]
+=r_a\cdot r_b.
+\]
+This was checked for all four topologies at three independent momentum
+samples (12/12 exact checks). A common auxiliary mass in the three
+denominators separates the zero-momentum IR singularity; the degree-two
+Taylor coefficient then gives the D-dimensional scalar UV kernel recorded
+in \`research/RC-001-QLD8-cross-source-scalar-UV-pole.md\`.
+
+After applying the direct-color tree-vector weights \((-1,+1,+1,-1)\),
+the scalar-scalar projection simplifies to
+\[
+K_{\rm cross}^{SS}(D)
+=\frac{D^2+10D-8}{48}
+(p_1-p_2)\cdot(p_3-p_4).
+\]
+At \(D=4\), this is exactly
+\[
+(p_1-p_2)\cdot(p_3-p_4),
+\]
+the momentum polynomial of a direct-color-octet double-
+\(\overleftrightarrow D\) scalar structure. This is a non-factorizing
+cross-source mixing component; it is not proportional to the original
+source-square polynomial \(q_A^2\).
+
+The reproducible calculation and recorded output are:
+- \`calculations/RC-001-QLD8-cross-source-scalar-UV-audit.py\`;
+- \`validation/RC-001-QLD8-cross-source-scalar-UV-audit.txt\`.
+
+**Boundary:** this is only the \(P_R\otimes P_L\) scalar projection. The
+rank-two\(\otimes\)scalar, scalar\(\otimes\)rank-two, and
+rank-two\(\otimes\)rank-two projections remain to be evaluated. The common
+graph phase/sign must be restored in the full amplitude convention; the
+auxiliary-mass rearrangement has not yet been promoted to a complete
+\(R^*\) subtraction for the full operator basis. No complete QCD \(Z\)
+matrix, anomalous-dimension block, EOM/IBP quotient, or finite
+UV-minus-EFT Wilson coefficient is claimed.
