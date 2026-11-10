@@ -98,8 +98,8 @@ radial_eps = [
 ]
 assert radial_eps == [
     1 - eps / 2,
-    1 + sp.Rational(1, 3) * eps,
-    2 + sp.Rational(11, 6) * eps,
+    1 - sp.Rational(5, 6) * eps,
+    1 - sp.Rational(13, 12) * eps,
 ]
 
 print("RC-001 QLD8 cross-source full tensor UV-Taylor audit")
