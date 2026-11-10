@@ -118,6 +118,30 @@ for x, y in product("RL", repeat=2):
     assert sp.simplify(lhs3 - 6 * eta_xy * rhs_vector) == sp.zeros(16)
     assert sp.simplify(lhs4 - 24 * eta_xy * rhs_scalar) == sp.zeros(16)
 
+# 4. Direct-pairing RL tensor evanescent from a two-gamma chain.
+sigma = {}
+for mu in range(4):
+    for nu in range(4):
+        sigma[mu, nu] = sp.I / 2 * (
+            gamma[mu] * gamma[nu] - gamma[nu] * gamma[mu]
+        )
+tensor_rl = sp.zeros(16)
+gamma_chain_rl = sp.zeros(16)
+for mu, nu in product(range(4), repeat=2):
+    sigma_lower = metric[mu] * metric[nu] * sigma[mu, nu]
+    tensor_rl += kron(
+        sigma[mu, nu] * projectors["R"],
+        sigma_lower * projectors["L"],
+    )
+    gamma_chain_rl += kron(
+        gamma[mu] * gamma[nu] * projectors["R"],
+        projectors["L"] * gamma_lower[nu] * gamma_lower[mu],
+    )
+assert sp.simplify(tensor_rl) == sp.zeros(16)
+assert sp.simplify(
+    gamma_chain_rl - 4 * kron(projectors["R"], projectors["L"]) - tensor_rl
+) == sp.zeros(16)
+
 # 4. SU(3) completeness with tr(T^A T^B)=delta^{AB}/2.
 sqrt3 = sp.sqrt(3)
 gell_mann = [
@@ -212,6 +236,8 @@ print("PASS: contracted Gamma_(3) x Gamma_(3) projections for RR, RL, LR, LL.")
 print("      coefficient = 6 eta_X eta_Y times vector x vector.")
 print("PASS: contracted Gamma_(4) x Gamma_(4) projections for RR, RL, LR, LL.")
 print("      coefficient = 24 eta_X eta_Y times scalar x scalar.")
+print("PASS: direct RL tensor contraction vanishes in 4D (candidate evanescent).")
+print("PASS: two-gamma RL chain = 4 scalar + direct RL tensor in 4D.")
 print(f"PASS: SU(3) completeness: {color_checks}/81 color-index assignments.")
 print("PASS: J_d, J_u, J_e all transform as (1,2,+1/2).")
 print("PASS: SU(2) epsilon is invariant under all three generators.")
