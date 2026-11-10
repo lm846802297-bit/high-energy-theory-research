@@ -191,3 +191,8 @@ The color decomposition is independent of the spinor Fierz identity. The weak \(
 The source-square operator has four product-rule placements for each ordered source pair. The derivative-aware map through the crossed spinor pairing, including the two placements in which both derivatives land in one Fierz-rearranged bilinear, is given in [RC-001-QLD8-derivative-Fierz-IBP-ledger.md](RC-001-QLD8-derivative-Fierz-IBP-ledger.md).
 
 The evanescent differences \(E_{RL}^{(rs)},E_{LR}^{(rs)},E_{RR}^{(rs)},E_{LL}^{(rs)}\) are defined by applying the fixed Fierz-difference convention to each placement, with derivatives remaining on their original fermion fields. The exact covariant-IBP relation applies to the complete source-pair sum, not to each placement separately. This remains an algebraic tree-level reduction; no one-loop evanescent mixing or finite matching is claimed.
+
+
+## 7. Beyond scalar-pair Fierz: EOM-generated vector and tensor structures
+
+The second-order fermion EOM generates \(\gamma^\mu D_\mu H\) and \(\sigma^{\mu\nu}\mathscr F_{\mu\nu}\) spinor structures. Their exact four-dimensional chiral Fierz projections, including Levi-Civita and self-dual tensor terms, are recorded in [RC-001-QLD-EOM-generated-chiral-Fierz-identities.md](RC-001-QLD-EOM-generated-chiral-Fierz-identities.md). The new exact audit verifies 34 identities in 8704/8704 components. The corresponding d-dimensional Fierz differences must be added to the evanescent basis; the original four scalar-pair evanescents alone are not sufficient.
