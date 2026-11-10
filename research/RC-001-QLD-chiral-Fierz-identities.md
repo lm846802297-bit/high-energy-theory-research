@@ -184,3 +184,10 @@ For example,
 The same identity applies to the corresponding \(u_R\) current. The \(d^\dagger u\) scalar/tensor channels also retain crossed color labels after spinor Fierz; their color decomposition must be applied to the rearranged bilinears, not before the spinor-index exchange.
 
 The color decomposition is independent of the spinor Fierz identity. The weak \(\epsilon_{ik}\) contraction and all generation/Yukawa tensors remain attached to their displayed bilinears.
+
+
+## 6. Derivative labels and d-dimensional Fierz differences
+
+The source-square operator has four product-rule placements for each ordered source pair. The derivative-aware map through the crossed spinor pairing, including the two placements in which both derivatives land in one Fierz-rearranged bilinear, is given in [RC-001-QLD8-derivative-Fierz-IBP-ledger.md](RC-001-QLD8-derivative-Fierz-IBP-ledger.md).
+
+The evanescent differences \(E_{RL}^{(rs)},E_{LR}^{(rs)},E_{RR}^{(rs)},E_{LL}^{(rs)}\) are defined by applying the fixed Fierz-difference convention to each placement, with derivatives remaining on their original fermion fields. The exact covariant-IBP relation applies to the complete source-pair sum, not to each placement separately. This remains an algebraic tree-level reduction; no one-loop evanescent mixing or finite matching is claimed.
