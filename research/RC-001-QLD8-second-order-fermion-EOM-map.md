@@ -108,6 +108,12 @@ The middle term
 \]
 is not removed by the first-order Dirac EOM: it contains free-index derivatives, not their gamma traces. It remains an independent derivative class until an explicit IBP/Fierz reduction is completed.
 
+### 4.1 Evanescent-basis enlargement after second-order EOM substitution
+
+The four minimal differences \(E_{RL}^{(0)},E_{LR}^{(0)},E_{RR}^{(0)},E_{LL}^{(0)}\) defined for the original scalar-times-scalar source pairs are **not** a closed evanescent set after applying the second-order EOM. The \(\gamma^\mu D_\mu H\) terms generate scalar/vector spinor products, and the curvature terms generate scalar/tensor products with explicit \(F_{\mu\nu}\). Each new Dirac tensor product must be Fierz-reduced in the same NDR convention and supplied with its own \(D\)-dimensional Fierz-difference evanescent definition. If one-loop renormalization generates longer antisymmetrized gamma strings, those must also be included.
+
+Accordingly, the present note fixes the Dirac-square identity and exposes the operator classes, but does not claim a closed d-dimensional counterterm basis for the EOM-reduced operators. The UV and EFT sides must use the same enlarged evanescent set before finite matching.
+
 Combining §2 with the source-pair Fierz map is mandatory. For example, the curvature terms contain both color and electroweak field strengths for the quark channels; the lepton channel contains only hypercharge and weak field strengths. No \(U(1)_X\) curvature occurs in the retained renormalizable source sector.
 
 ## 5. Consequence for the source-square operator and PR #69
