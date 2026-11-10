@@ -98,7 +98,7 @@ D(r\!\cdot\!s)P_X
 +(D-4)\Gamma^{\mu\nu}r_\mu s_\nu P_X.
 }
 \]
-Thus these same-bilinear vertex corrections also generate only rank zero and rank two on that bilinear.
+Thus these same-bilinear vertex corrections also generate only rank zero and rank two on that bilinear. Since \(D-4=-2\epsilon\), the rank-two term is \(O(\epsilon)\) near four dimensions. It must be retained: when multiplied by a \(1/\epsilon\) UV pole it contributes to the finite local operator coefficient.
 
 This is a useful finite rank bound for the **direct-pairing, one-gluon, Feynman-gauge \(d^\dagger d\) pilot**. It does not assert closure after a spinor Fierz crossing: the crossed representation has the odd-rank tower and the Gram degeneracy described in P1.2. The clean choice is to extract UV poles in the direct pairing and avoid a premature d-dimensional spinor Fierz transformation.
 
