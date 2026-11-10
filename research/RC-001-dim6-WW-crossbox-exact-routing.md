@@ -109,8 +109,8 @@ A_{02}=-J+\frac2dK,
 \]
 \[
 \boxed{
-A_{05}=\left(1+\frac2d\right)J,\qquad
-A_{06}=-\frac4dJ.
+A_{05}=2\left(1-\frac1d\right)J-\frac2dK,\qquad
+A_{06}=-J+\frac2dK.
 }
 \]
 The reduction uses
@@ -118,7 +118,26 @@ The reduction uses
 J=\int_k\frac1{(k^2)^2(k^2-M_E^2)},\qquad
 K=\int_k\frac1{k^2(k^2-M_E^2)^2}.
 \]
-No common-numerator approximation is used.
+In particular, \(A_{02}=A_{06}\) at the retained order: for LD-W-06,
+\[
+-(2P-k)\cdot k=k^2-2k\cdot P=(k-P)^2+O(P^2),
+\]
+so the scalar numerator cancels the \((k-P)^2\) propagator denominator and leaves the same vector integral as LD-W-02.
+
+For LD-W-05, define \(F(x)=1/[x(x-M_E^2)]\). The numerator chain reduces to
+\[
+\frac{(2P-k)^\mu}{k^2}F((k-P)^2).
+\]
+Expanding \((k-P)^2=k^2-2k\cdot P+O(P^2)\), the coefficient of \(\slashed P\) is
+\[
+2J+\frac2d\int_k F'(k^2).
+\]
+Since
+\[
+F'(x)=-\frac1{x^2(x-M_E^2)}
+-\frac1{x(x-M_E^2)^2},
+\]
+this gives \(A_{05}=2J-2(J+K)/d\). The companion exact-rational script performs this vector-tensor reduction before inserting the scalar master values; it does not assume a common numerator.
 
 ## 5. Explicit UV–EFT scalar-master split
 
@@ -135,12 +154,38 @@ J_{\rm hard}=J_{\rm full}-J_{\rm soft}
 \]
 For \(K\), the hard/full contribution is \(-1/M_E^2\); its \(O(M_E^{-2})\) soft expansion is the scaleless power integral \(\int d^dk/k^2\), which vanishes in dimensional regularization and has no logarithmic pole at this order.
 
-Applying the exact kernels pair by pair gives
+The exact weighted sum simplifies before integration:
+\[
+\frac14(-A_{01}+A_{02}+A_{05}-A_{06})
+=\frac{d-1}{2d}(J-K).
+\]
+This is a useful check: the two equal kernels \(A_{02}\) and \(A_{06}\) cancel in the triplet projection, while the \(A_{01}\) and \(A_{05}\) terms combine into \(J-K\).
+
+Using the scalar masters gives
+\[
+(J-K)_{\rm hard}
+=\frac{\Delta_{\rm UV}+2-L}{M_E^2},\qquad
+(J-K)_{\rm soft}
+=\frac{-\Delta_{\rm UV}+\Delta_{\rm IR}}{M_E^2},
+\]
+\[
+(J-K)_{\rm full}
+=\frac{\Delta_{\rm IR}+2-L}{M_E^2}.
+\]
+Therefore
 \[
 A_{WW}^{\rm hard}
-=\frac14(-A_{01}^{\rm hard}+A_{02}^{\rm hard}
-+A_{05}^{\rm hard}-A_{06}^{\rm hard})
+=\frac{d-1}{2d}\frac{\Delta_{\rm UV}+2-L}{M_E^2},
+\qquad
+A_{WW}^{\rm soft}
+=\frac{d-1}{2d}\frac{-\Delta_{\rm UV}+\Delta_{\rm IR}}{M_E^2}.
 \]
+Expanding \(d=4-2\epsilon\) and retaining the \(O(\epsilon)\) coefficient multiplying the pole,
+\[
+\frac{d-1}{2d}
+=\frac38-\frac{\epsilon}{16}+O(\epsilon^2),
+\]
+yields
 \[
 \boxed{
 A_{WW}^{\rm hard}
@@ -149,14 +194,14 @@ A_{WW}^{\rm hard}
 \right).
 }
 \]
-The soft/EFT contribution is
+At the master-integral level the soft term is
 \[
 \boxed{
 A_{WW}^{\rm soft}
-=\frac1{M_E^2}\frac38(-\Delta_{\rm UV}+\Delta_{\rm IR}).
+=\frac1{M_E^2}\frac38(-\Delta_{\rm UV}+\Delta_{\rm IR}),
 }
 \]
-The sum is
+and the un-subtracted full master sum is
 \[
 \boxed{
 A_{WW}^{\rm full}
@@ -165,19 +210,19 @@ A_{WW}^{\rm full}
 \right).
 }
 \]
-Thus the hard UV pole cancels the EFT-soft UV pole, and the full amplitude retains only the IR pole. The pairwise identities \(A_i^{\rm full}=A_i^{\rm hard}+A_i^{\rm soft}\) are checked exactly.
+The hard UV pole cancels the soft/EFT UV pole in the matching difference, leaving the common IR pole. This is a scalar-master expansion-by-regions check, not yet a complete nonexceptional off-shell UV-minus-EFT Green-function calculation.
 
 ### \(O(\epsilon)\) finite term
 
-The coefficient multiplying \(J\) in the weighted sum is \(6/d\):
+The finite \(11/16\) has a different decomposition from the earlier draft. At \(d=4\), the \(J-K\) combination gives the finite constant \(3/4\), because \(J_{\rm hard}\) contributes \(+1\) and \(-K_{\rm hard}\) contributes another \(+1\). The dimensional prefactor contributes
 \[
-\frac6d=\frac32+\frac34\epsilon+O(\epsilon^2).
+-\frac{\epsilon}{16}\Delta_{\rm UV}\longrightarrow-\frac1{16}.
 \]
-Since \(J_{\rm hard}\) contains \(\Delta_{\rm UV}\), the \(+\frac34\epsilon\) term contributes \(+3/16\) to the finite coefficient after the overall \(1/4\) weak-tensor weight. Setting \(d=4\) before multiplying the pole would give \(1/2\), rather than
+Consequently,
 \[
-\frac12+\frac3{16}=\frac{11}{16}.
+\frac34-\frac1{16}=\frac{11}{16}.
 \]
-The same \(O(\epsilon)\) term is retained in the soft split; its UV and IR finite pieces cancel against one another, leaving no additional soft finite constant.
+The previous per-pair expressions \(A_{05}=(1+2/d)J\) and \(A_{06}=-4J/d\), and the associated \(+3/16\) explanation, are superseded. Although they happened to reproduce the same final weighted finite number, they did not represent the individual numerator reductions correctly.
 
 ## 6. Wilson-coefficient interpretation and boundary
 
