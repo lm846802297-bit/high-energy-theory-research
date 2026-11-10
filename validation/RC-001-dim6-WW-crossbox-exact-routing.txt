@@ -42,12 +42,12 @@ Dimensional finite term:
   final finite constant = 11/16
 
 Local execution:
-  8/8 regression tests passed using SymPy.
+  9/9 regression tests passed using SymPy.
   Test source: calculations/test_RC001_dim6_WW_crossbox_exact_routing.py
-  The test suite checks explicit vector-numerator reductions, integrated J/K coefficients, SU(2)-weighted sum, hard/soft/full master split, UV/IR pole bookkeeping, and the O(eps) finite term.
+  The test suite checks explicit vector-numerator reductions, integrated J/K coefficients, SU(2)-weighted sum, hard/soft/full master split, UV/IR pole bookkeeping, the O(eps) finite term, and the Hermitian-conjugate operator identity modulo a total derivative.
 
 Evidence boundary:
   This is one fixed ordered tree contraction with unit multiplicity.
-  No second charge-conjugate/crossed routing factor is assumed.
+  The charge-conjugate operator is identified with the same action operator modulo a total derivative; no extra factor of two is assigned. A diagram-generator enumeration of the graph labels remains outstanding.
   No FeynArts/QGRAF generation, full one-W Ward sum, or complete Wilson coefficient is claimed.
   GitHub Actions was not used as evidence.
