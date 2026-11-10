@@ -107,3 +107,10 @@ Still open:
 - matching these operators against the complete same-order EFT soft graphs and counterterms.
 
 No source-square coefficient is added to the PR #69 scalar two-point functions by this channel census.
+
+
+## 6. Exact four-dimensional chiral Fierz projection
+
+The spinor-only four-dimensional Fierz identities are now checked component by component in [RC-001-QLD-chiral-Fierz-identities.md](RC-001-QLD-chiral-Fierz-identities.md), using the exact SymPy matrix audit. The opposite-projector source pairs project to vector-current structures; the same-projector \(d^\dagger u\) and \(u^\dagger e\) pairs project to scalar-plus-tensor structures. The color and weak-index labels in this census remain attached to each rearranged bilinear.
+
+The four-dimensional algebra is closed. The \(d\)-dimensional evanescent basis, its \(O(\epsilon)\) convention, and any loop-induced evanescent mixing are still open; the current audit does not claim a finite \(\overline{\mathrm{MS}}\) Wilson-vector reduction.
