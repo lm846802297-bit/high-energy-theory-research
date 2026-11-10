@@ -87,6 +87,28 @@ the matrices in \((C_{1,d},C_{8,d})\) are:
 
 The two within-source exchanges \((\bar Q,d)\) and \((Q,\bar d)\) are diagonal in this basis. The four cross-source exchanges mix the direct singlet and octet structures.
 
+Acting on the tree source vector \((1,0)_d\), the six color actions are
+particularly simple:
+\[
+\begin{aligned}
+M_{\bar Q,d}^{(d)}(1,0)^T
+&=M_{Q,\bar d}^{(d)}(1,0)^T
+=-C_F(1,0)^T,\\
+M_{\bar Q,Q}^{(d)}(1,0)^T
+&=M_{\bar d,d}^{(d)}(1,0)^T
+=(0,-1)^T,\\
+M_{\bar Q,\bar d}^{(d)}(1,0)^T
+&=M_{Q,d}^{(d)}(1,0)^T
+=(0,+1)^T.
+\end{aligned}
+\]
+Thus the two within-source graphs are color-singlet diagonal on the tree
+source, while **all singlet-to-octet mixing comes from the four cross-source
+graphs**. The two cross-source color classes carry opposite octet signs;
+their Dirac/momentum kernels must be kept distinct until the explicit
+integrals establish any further relation.
+
+
 ## 4. Color-conservation check
 
 The four external quark/antiquark legs form a total color singlet. Therefore
