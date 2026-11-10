@@ -161,6 +161,42 @@ The exact weighted sum simplifies before integration:
 \]
 This is a useful check: the two equal kernels \(A_{02}\) and \(A_{06}\) cancel in the triplet projection, while the \(A_{01}\) and \(A_{05}\) terms combine into \(J-K\).
 
+### Longitudinal \(R_\zeta\)-propagator check
+
+The same four numerator chains can be contracted with the longitudinal projector in
+\[
+D_{\mu\nu}^{ab}(k)=\frac{-i\delta^{ab}}{k^2+i0}
+\left[g_{\mu\nu}-(1-\zeta)\frac{k_\mu k_\nu}{k^2+i0}\right].
+\]
+Denote the coefficient obtained with \(k_\mu k_\nu/k^2\) by \(A_i^{(L)}\). Direct contraction gives
+\[
+\boxed{
+A_{01}^{(L)}=-\frac2dK,\qquad
+A_{02}^{(L)}=-J+\frac2dK,
+}
+\]
+\[
+\boxed{
+A_{05}^{(L)}=-\frac2dK,\qquad
+A_{06}^{(L)}=-J+\frac2dK.
+}
+\]
+For LD-W-01, \(k_\mu\gamma^\mu(-\slashed k)=-k^2\); the two adjacent \((k-P)\)-slash factors then cancel the corresponding denominator. For LD-W-02 and LD-W-06, the longitudinal contraction reproduces the same numerator as the Feynman-gauge contraction. For LD-W-05, the contraction gives
+\[
+\frac{(2k\cdot P-k^2)\slashed k}{k^2}
+\frac{1}{k^2(k-P)^2[(k-P)^2-M_E^2]},
+\]
+whose local \(\slashed P\) coefficient is \(-2K/d\).
+
+The weak-triplet weighted longitudinal sum therefore vanishes identically:
+\[
+\boxed{
+\frac14\left[-A_{01}^{(L)}+A_{02}^{(L)}
++A_{05}^{(L)}-A_{06}^{(L)}\right]=0.
+}
+\]
+Thus this fixed-routing \(WW\) cross-box triplet sub-block is independent of \(\zeta\). This is a nontrivial gauge-parameter check of the four cross-box diagrams. It is **not** the complete Slavnov–Taylor identity for the full four-point/current amplitude: the same-vertex, external-field, gauge-sector, and one-\(W\) form-factor sectors remain outside this sub-block.
+
 Using the scalar masters gives
 \[
 (J-K)_{\rm hard}
