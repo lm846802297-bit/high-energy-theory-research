@@ -52,6 +52,8 @@ Q_{LD}^\dagger
 \]
 Thus \(Q_{LD}\) is Hermitian modulo a total derivative in the action.
 
+For the internal \(W\) exchange itself, the second-order expansion of \(g_2W_\mu^I J^{I\mu}\) carries \(1/2!\). For a fixed unordered pair of distinct matter lines, the two assignments of the current insertions to \(x\) and \(y\) are related by \(x\leftrightarrow y\); their sum cancels this \(1/2!\). Reversing the momentum assigned to the real \(W\) propagator is a dummy change \(k\to-k\), not another graph. Thus each unordered cross-line pair has unit multiplicity in this manual Wick-contraction count. This fixes the multiplicity of the four displayed cross-box pair classes; it does not replace a generator's enumeration of the full self-energy/vertex/contact atlas.
+
 These identities settle the operator-level relation between the two charge-conjugate tree orientations. The conjugate orientation matches \(Q_{LD}^\dagger\), which is the same integrated action operator as \(Q_{LD}\) modulo the displayed total derivative. Since the coefficient is proportional to \(|y_\ell|^2\) and the pure-\(WW\) hard sub-block is real, the conjugate orientation fixes the same Wilson coefficient; it is **not** an additional factor of two. The \(1/2!\) in the second-order expansion is already canceled by the two dummy vertex-label orderings. This resolves the operator-level multiplicity, but not the exact graph-label census or every Feynman-rule sign; those remain subject to diagram-level validation.
 
 ## 3. \(SU(2)_L\) attachment classes
