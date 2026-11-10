@@ -1143,3 +1143,12 @@ The second-order EOMs in §5O generate scalar–vector products from \(\gamma^\m
 The operator-level projections include the Grassmann reordering minus sign. The corresponding d-dimensional Fierz-difference evanescents are defined by subtracting these four-dimensional operator projections, with all derivative, Higgs, field-strength, color, weak, and flavor labels preserved.
 
 This completes the displayed four-dimensional spinor algebra needed for the second-order EOM-generated Dirac structures. It does not close the full d-dimensional one-loop evanescent counterterm basis, calculate its mixing matrix, or produce finite UV-minus-EFT Wilson coefficients.
+
+
+## 5Q. Explicit d-dimensional Fierz-difference definitions for EOM-generated channels
+
+The EOM-generated scalar–vector and scalar–tensor channels now have explicit minimal Fierz-difference definitions in [RC-001-QLD-EOM-generated-chiral-Fierz-identities.md](RC-001-QLD-EOM-generated-chiral-Fierz-identities.md). The \(E_{XY;V}^{\mu,rs}\) definitions cover all four scalar–vector chiral combinations; \(E_{RL;T}^{\mu\nu,rs}\) and \(E_{LR;T}^{\mu\nu,rs}\) cover the opposite-chirality tensor channels including their Levi-Civita terms; and \(E_{RR;T}^{i,rs}\), \(E_{LL;T}^{i,rs}\) cover the same-chirality tensor channels in the independent three-component chiral basis.
+
+Each evanescent is the original operator minus its four-dimensional operator-level Fierz projection, so the Grassmann reordering sign is included. The definitions use no \(O(\epsilon)\) physical-operator admixture at the definition stage and retain the original derivative/Higgs/curvature labels.
+
+This defines the tree-level Fierz-difference set for the displayed EOM-generated structures. It is not asserted to close the one-loop counterterm basis; UV-generated higher gamma strings and the evanescent mixing matrix remain to be computed.
