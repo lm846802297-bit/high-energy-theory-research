@@ -2,8 +2,8 @@
 
 **Date:** 2026-11-10  
 **Workstream:** PR #11, strict \(O(M_E^{-4})\) Higgs-source-square sector  
-**Stage:** P1.0 basis construction plus P1.1a–P1.1c QCD pilot setup  
-**Status:** source-pair, representation, derivative, gamma-string, QCD color, and momentum-routing checks pass exact tests; the direct (RL) tensor evanescent is identified. No loop kernel, UV pole, or one-loop (Z) matrix is yet calculated.
+**Stage:** P1.0 basis construction plus P1.1a–P1.1c and P1.2 QCD/evanescent setup  
+**Status:** source-pair, representation, derivative, gamma-string, QCD color, momentum-routing, and formal \(d\)-dimensional direct-tensor projection checks pass locally. The higher-rank Gram obstruction is identified. No loop kernel, UV pole, or one-loop \(Z\) matrix is yet calculated.
 
 ## 1. Scope and non-negotiable boundary
 
@@ -269,9 +269,75 @@ The exact four-dimensional tensor and gamma-chain checks have been added to
 output. The dedicated interpretation is in
 \`research/RC-001-QLD8-RL-tensor-evanescent-seed.md\`.
 
-This direct-pairing tensor seed must not automatically be counted as
-independent of the existing crossed-pairing \(E_{RL;V}\) and rank-three
-evanescents. Their relation must be determined by the \(d\)-dimensional
-Fierz map, including the Grassmann sign and derivative labels, before the
-independent evanescent basis is fixed. No graph coefficient or UV pole is
-inferred from the gamma identity alone.
+The scalar–vector difference \(E_{RL;V}^{\mu,rs}\) is not the direct Fierz image of this Lorentz-scalar tensor–tensor structure. Also distinguish the direct-pairing rank-three seed \(E_{3;RL}^{\rm dir}\) from the crossed rank-three channel \(X_3^{RL}\). The formal crossed odd-rank projection is derived in the P1.2 record below. Its rank-five Gram inverse is singular at \(D=4\), so no regular finite rank-one/rank-three-only basis change is available. Keep the direct tensor, direct rank-three, and crossed odd-rank labels separate until the actual one-loop gamma-rank closure and Gram matrix are fixed. No graph coefficient or UV pole is inferred from this algebraic projection.
+
+
+## 11. P1.2: formal \(d\)-dimensional Fierz projection of the direct \(RL\) tensor
+
+The direct-pairing tensor seed
+\[
+\mathcal T_{RL}^{\rm dir}
+=(\sigma^{\mu\nu}P_R)\otimes(\sigma_{\mu\nu}P_L)
+\]
+has a crossed projection onto odd-rank chiral structures
+\[
+X_n^{RL}
+=(\Gamma^{(n)}P_R)\widetilde\otimes
+(\Gamma_{(n)}P_L),\qquad n\ {\rm odd}.
+\]
+For unit-weight antisymmetrized gamma strings, the sandwich identity is
+\[
+\sigma^{\mu\nu}\Gamma^{(n)}\sigma_{\mu\nu}
+=\lambda_n(D)\Gamma^{(n)},\qquad
+\lambda_n(D)=D(D-1)-4n(D-n).
+\]
+The chiral trace norm is
+\[
+t_n(D)=2(-1)^{n(n-1)/2}D(D-1)\cdots(D-n+1).
+\]
+Projecting with the dual crossed tensor gives
+\[
+\boxed{
+f_n(D)=
+\frac{D(D-1)-4n(D-n)}
+{2(-1)^{n(n-1)/2}D(D-1)\cdots(D-n+1)}.
+}
+\]
+These are rank-channel projection coefficients; they are not a proof of finite closure in a rank-one/rank-three basis.
+
+The first channels are
+\[
+f_1(D)=\frac{(D-1)(D-4)}{2D},\qquad
+f_3(D)=-\frac{(D-4)(D-9)}{2D(D-1)(D-2)},
+\]
+\[
+f_5(D)=\frac{D^2-21D+100}
+{2D(D-1)(D-2)(D-3)(D-4)}.
+\]
+For \(D=4-2\epsilon\),
+\[
+f_1=-\frac34\epsilon+O(\epsilon^2),\qquad
+f_3=-\frac5{24}\epsilon+O(\epsilon^2),
+\]
+but
+\[
+f_5=-\frac{1}{3\epsilon}-\frac{239}{144}+O(\epsilon).
+\]
+The \(f_5\) pole is not a loop UV pole: the rank-five Gram norm
+\[
+t_5(D)=2D(D-1)(D-2)(D-3)(D-4)
+\]
+vanishes at \(D=4\), and the singular coefficient comes from inverting this degenerate direction. It exposes why a rank-one/rank-three truncation cannot be used as a regular complete d-dimensional Fierz map.
+
+At operator level, crossing the middle two Grassmann fields contributes one additional minus sign. The crossed color rearrangement is independent and retains both
+\[
+C_X=\frac13C_1+2C_8.
+\]
+The scalar–vector evanescent \(E_{RL;V}^{\mu,rs}\) is a different Lorentz sector; it must not be identified with this tensor–tensor projection. Likewise, the direct-pairing \(E_{3;RL}^{\rm dir}\) and crossed \(X_3^{RL}\) are distinct until the full Fierz map is applied.
+
+The exact symbolic record and audit are:
+- \`research/RC-001-QLD8-d-dimensional-RL-tensor-Fierz-map.md\`;
+- \`calculations/RC-001-QLD8-ddim-Fierz-projection-audit.py\`;
+- \`validation/RC-001-QLD8-ddim-Fierz-projection-audit.txt\`.
+
+The explicit 4D matrix check for the \(\sigma\Gamma^{(n)}\sigma\) eigenvalues and the symbolic \(f_1,f_3,f_5\) checks pass locally. The result fixes the first crossed projections and exposes a higher-rank Gram obstruction. It does not yet select the canonical finite evanescent basis, evaluate a loop integral, extract a UV pole, or calculate any \(Z\)-matrix entry.
