@@ -130,3 +130,77 @@ The exact 4D matrix checks for the four cross-chain decompositions and the same-
 with output in
 \`validation/RC-001-QLD8-QCD-open-line-numerator-audit.txt\`.
 No loop integral, UV pole, \(Z\) matrix, or Wilson coefficient is claimed here.
+
+
+## 6. Explicit rank-zero/rank-two decomposition of the four cross-source chains
+
+For clarity, write
+\[
+\Gamma^{\mu\nu}=\gamma^{[\mu}\gamma^{\nu]}
+=\frac12[\gamma^\mu,\gamma^\nu],
+\qquad
+\gamma^\mu\gamma^\nu=g^{\mu\nu}+\Gamma^{\mu\nu}.
+\]
+The four cross-source numerator chains, after factoring out the two
+momentum components \(r_{a\alpha}r_{b\beta}\), obey the following exact
+Clifford decompositions. \(P_R\) and \(P_L\) commute with each rank-two
+string.
+
+For \((\bar Q,Q)\):
+\[
+\begin{aligned}
+(\gamma^\rho\gamma^\alpha P_R)
+\otimes(P_L\gamma^\beta\gamma_\rho)
+={}&g^{\alpha\beta}P_R\otimes P_L
++P_R\otimes\Gamma^{\beta\alpha}P_L\\
+&+\Gamma^{\beta\alpha}P_R\otimes P_L
++\Gamma^{\rho\alpha}P_R
+ \otimes\Gamma^\beta{}_\rho P_L.
+\end{aligned}
+\]
+
+For \((\bar Q,\bar d)\):
+\[
+\begin{aligned}
+(\gamma^\rho\gamma^\alpha P_R)
+\otimes(\gamma_\rho\gamma^\beta P_L)
+={}&g^{\alpha\beta}P_R\otimes P_L
++P_R\otimes\Gamma^{\alpha\beta}P_L\\
+&+\Gamma^{\beta\alpha}P_R\otimes P_L
++\Gamma^{\rho\alpha}P_R
+ \otimes\Gamma_\rho{}^\beta P_L.
+\end{aligned}
+\]
+
+For \((Q,d)\):
+\[
+\begin{aligned}
+(P_R\gamma^\alpha\gamma^\rho)
+\otimes(P_L\gamma^\beta\gamma_\rho)
+={}&g^{\alpha\beta}P_R\otimes P_L
++P_R\otimes\Gamma^{\beta\alpha}P_L\\
+&+\Gamma^{\alpha\beta}P_R\otimes P_L
++\Gamma^{\alpha\rho}P_R
+ \otimes\Gamma^\beta{}_\rho P_L.
+\end{aligned}
+\]
+
+For \((\bar d,d)\):
+\[
+\begin{aligned}
+(P_R\gamma^\alpha\gamma^\rho)
+\otimes(\gamma_\rho\gamma^\beta P_L)
+={}&g^{\alpha\beta}P_R\otimes P_L
++P_R\otimes\Gamma^{\alpha\beta}P_L\\
+&+\Gamma^{\alpha\beta}P_R\otimes P_L
++\Gamma^{\alpha\rho}P_R
+ \otimes\Gamma_\rho{}^\beta P_L.
+\end{aligned}
+\]
+
+These formulas make explicit that the mixed rank-two\(\otimes\)scalar
+terms are present and generally have different signs/index order in the
+four topologies. They cannot be replaced by a single scalar\(\otimes\)scalar
+plus tensor\(\otimes\)tensor expression before the loop tensor integrals.
+The companion 4D exact-matrix audit checks all four identities for all
+\(4\times4=16\) choices of \((\alpha,\beta)\), i.e. 64/64 assignments.
