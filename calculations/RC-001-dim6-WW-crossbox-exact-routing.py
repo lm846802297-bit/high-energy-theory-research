@@ -71,6 +71,26 @@ def pole_expansion(expr):
     return sp.simplify(sp.series(substituted, eps, 0, 1).removeO())
 
 
+def expected_hard():
+    return (
+        sp.Rational(3,8)*(1/eps + cUV)
+        -sp.Rational(3,8)*L
+        +sp.Rational(11,16)
+    ) / M2
+
+
+def expected_soft():
+    return sp.Rational(3,8)*(cIR-cUV)/M2
+
+
+def expected_full():
+    return (
+        sp.Rational(3,8)*(1/eps + cIR)
+        -sp.Rational(3,8)*L
+        +sp.Rational(11,16)
+    ) / M2
+
+
 def main():
     masters = scalar_masters()
     kernels = {
