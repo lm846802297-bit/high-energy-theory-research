@@ -15,6 +15,9 @@ on:
       - "calculations/RC-001-QLD8-QCD-momentum-routing-audit.py"
       - "research/RC-001-QLD8-QCD-one-loop-momentum-routing.md"
       - "validation/RC-001-QLD8-QCD-momentum-routing-audit.txt"
+      - "calculations/RC-001-QLD8-ddim-Fierz-projection-audit.py"
+      - "research/RC-001-QLD8-d-dimensional-RL-tensor-Fierz-map.md"
+      - "validation/RC-001-QLD8-ddim-Fierz-projection-audit.txt"
 
 permissions:
   contents: read
@@ -37,3 +40,5 @@ jobs:
         run: python calculations/RC-001-QLD8-QCD-color-factor-audit.py
       - name: Run exact QLD8 QCD momentum-routing audit
         run: python calculations/RC-001-QLD8-QCD-momentum-routing-audit.py
+      - name: Run d-dimensional QLD8 direct RL tensor Fierz projection audit
+        run: python calculations/RC-001-QLD8-ddim-Fierz-projection-audit.py
