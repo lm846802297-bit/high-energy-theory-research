@@ -1121,3 +1121,16 @@ because \(J_A^\dagger D^\mu J_B\) is a gauge singlet. Expanding the Laplacian of
 The ledger tracks the derivative on each original fermion through the crossed spinor Fierz rearrangement. In particular, the \((0,1)\) and \((1,0)\) placements put both derivatives into one of the Fierz-rearranged bilinears. The \(RL,LR,RR,LL\) Fierz-difference evanescents are assigned channel by channel in the fixed open-line NDR convention.
 
 This is a tree-level operator identity and derivative bookkeeping result. It does not evaluate the remaining fermion-EOM reductions, one-loop evanescent mixing, same-order EFT soft insertions, or finite UV-minus-EFT Wilson coefficients.
+
+
+## 5O. Second-order fermion EOM for the source-square Laplacians
+
+The endpoint Laplacians in §5N are now mapped using the leading renormalizable fermion EOMs in [RC-001-QLD8-second-order-fermion-EOM-map.md](RC-001-QLD8-second-order-fermion-EOM-map.md). With \(D_\mu=\partial_\mu+i\mathcal A_\mu\), \([D_\mu,D_\nu]=i\mathscr F_{\mu\nu}\), and \(\sigma^{\mu\nu}=i[\gamma^\mu,\gamma^\nu]/2\),
+\[
+D^2\psi=\slashed D^2\psi-\frac12\sigma^{\mu\nu}\mathscr F_{\mu\nu}\psi.
+\]
+For \(Q_L,u_R,d_R,L_e,e_R\), the resulting second-order EOMs produce Higgs-derivative and gauge-field-strength four-fermion structures. The mixed term \(2(D_\mu\bar f)Y D^\mu\chi\) remains because the first-order Dirac EOM fixes only the gamma trace.
+
+The retained source fermions are all neutral under the model \(U(1)_X\); their curvatures contain QCD, \(SU(2)_L\), and/or hypercharge fields, but no \(F_X\). The exact convention audit checks the Minkowski Clifford algebra, the Dirac-square curvature sign, the Higgs hypercharge of each source, and this \(U(1)_X\) neutrality.
+
+Important scheme boundary: the four scalar-pair Fierz-difference evanescents do not close the basis after second-order EOM substitution. New \(\gamma^\mu D_\mu H\) and \(\sigma^{\mu\nu}F_{\mu\nu}\) structures require their own d-dimensional Fierz-difference evanescents before loop renormalization. No complete evanescent mixing matrix or finite Wilson coefficient is claimed.
