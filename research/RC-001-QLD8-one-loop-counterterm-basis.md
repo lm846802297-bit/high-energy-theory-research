@@ -428,7 +428,7 @@ The numerator table preserves the direct spinor pairing
 and carries the insertion factors \(q_A^2\) or \((q_A\pm\ell)^2\) for the
 six topologies. It records the open-line Dirac tensor only; overall graph
 phases and relative Feynman-rule signs still require the complete amplitude
-contraction convention.
+contraction convention. The four cross-source chains are now also decomposed explicitly into scalar, rank-two\(\otimes\)scalar, scalar\(\otimes\)rank-two, and rank-two\(\otimes\)rank-two pieces in the dedicated numerator note; the exact 4D matrix audit checks all 64 Lorentz-index assignments.
 
 A useful exact algebraic result is that, in this direct pairing and in
 Feynman gauge, each one-gluon exchange has gamma rank at most two on each
