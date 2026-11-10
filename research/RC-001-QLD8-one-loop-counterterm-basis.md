@@ -2,7 +2,7 @@
 
 **Date:** 2026-11-10  
 **Workstream:** PR #11, strict \(O(M_E^{-4})\) Higgs-source-square sector  
-**Stage:** P1.0 basis construction plus P1.1a–P1.1c and P1.2 QCD/evanescent setup  
+**Stage:** P1.0 basis construction plus P1.1a–P1.1c, P1.2, and P1.3a QCD/evanescent setup  
 **Status:** source-pair, representation, derivative, gamma-string, QCD color, momentum-routing, and formal \(d\)-dimensional direct-tensor projection checks pass locally. The higher-rank Gram obstruction is identified. No loop kernel, UV pole, or one-loop \(Z\) matrix is yet calculated.
 
 ## 1. Scope and non-negotiable boundary
@@ -349,3 +349,53 @@ incoming at the operator insertion this gives \(r_a=p_a+\ell\) and
 \(r_b=p_b-\ell\), exactly as used in the routing table. Reversing the
 defined flow reverses all \(\ell\) signs and leaves the integral unchanged
 after a consistent \(\ell\mapsto-\ell\) substitution.
+
+
+## 12. P1.3a: align the QCD color basis with the direct spinor pairing
+
+The \(d^\dagger d\) source is naturally in the direct spinor pairing
+\[
+(\bar Q_iP_Rd_i)(\bar d_jP_LQ_j).
+\]
+For the first QCD numerator calculation, there is no need to Fierz the
+spinor indices into \((\bar Q Q)(\bar d d)\) before extracting UV poles.
+Use the direct color basis
+\[
+C_{1,d}^{ij;kl}=\delta_{il}\delta_{kj},\qquad
+C_{8,d}^{ij;kl}=T^A_{il}T^A_{kj},
+\]
+with tree vector \((1,0)_d\).
+
+The direct and crossed color bases are related by
+\[
+\begin{pmatrix}C_{1,d}&C_{8,d}\end{pmatrix}
+=
+\begin{pmatrix}C_{1,x}&C_{8,x}\end{pmatrix}
+\begin{pmatrix}1/3&4/9\\2&-1/3\end{pmatrix}.
+\]
+The six direct-basis color-exchange matrices are:
+\[
+\begin{array}{c|c}
+(\bar Q,Q)&\begin{pmatrix}0&-2/9\\-1&-7/6\end{pmatrix}\\
+(\bar Q,\bar d)&\begin{pmatrix}0&2/9\\1&-1/3\end{pmatrix}\\
+(\bar Q,d)&\begin{pmatrix}-4/3&0\\0&1/6\end{pmatrix}\\
+(Q,\bar d)&\begin{pmatrix}-4/3&0\\0&1/6\end{pmatrix}\\
+(Q,d)&\begin{pmatrix}0&2/9\\1&-1/3\end{pmatrix}\\
+(\bar d,d)&\begin{pmatrix}0&-2/9\\-1&-7/6\end{pmatrix}
+\end{array}
+\]
+They are independently calculated from the Gell-Mann generators and
+satisfy the exact similarity relation \(M_d=R^{-1}M_xR\), as well as
+\[
+\sum_{a<b}M_{ab}^{(d)}=-\frac83\mathbf1.
+\]
+
+This is the preferred color basis for the direct-pairing QCD numerator
+calculation. The crossed basis in P1.1a remains an independent check.
+The record and exact audit are:
+- \`research/RC-001-QLD8-QCD-direct-pairing-color-basis.md\`;
+- \`calculations/RC-001-QLD8-QCD-direct-color-basis-audit.py\`;
+- \`validation/RC-001-QLD8-QCD-direct-color-basis-audit.txt\`.
+
+This changes only the bookkeeping basis. No Dirac numerator, loop kernel,
+UV pole, or counterterm coefficient has been evaluated.
