@@ -22,7 +22,8 @@ for mu in range(4):
 for mu in range(4):
     for nu in range(4):
         anti = sp.simplify(gamma[mu]*gamma[nu] + gamma[nu]*gamma[mu])
-        assert anti == 2*metric[mu]*metric[nu]*sp.eye(4) if mu == nu else anti == sp.zeros(4)
+        expected = 2*metric[mu]*sp.eye(4) if mu == nu else sp.zeros(4)
+        assert anti == expected
 
 # For arbitrary antisymmetric F_{mu nu}, compare
 # 1/4 [gamma^mu,gamma^nu] [D_mu,D_nu]
