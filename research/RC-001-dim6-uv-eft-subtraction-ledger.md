@@ -33,7 +33,7 @@ Each row is to be populated with explicit UV graphs, EFT graphs, UV and IR poles
 | ID | Amplitude / coupling sector | UV contribution to compute | EFT subtraction to compute | Counterterm / projection requirement | Status |
 |---|---|---|---|---|---|
 | LD-B (atlas LD-B-01…10) | \(\bar L L H^\dagger H\), \(y_\ell^2 g_Y^2/M_E^2\) | All \(BB\) attachment classes in gauge atlas §3, heavy-line insertions, vertex/box graphs | \(Q_{LD}\) insertion with \(B\) exchange and its \(B\)-contact graphs; external legs | \(\delta y,\delta M_E,\delta g_Y,\delta Z_L,\delta Z_H,\delta C_{LD}\); singlet projection | NOT EVALUATED |
-| LD-W (atlas LD-W-01…06) | Same amplitude, \(y_\ell^2 g_2^2/M_E^2\) | All six doublet-pair \(WW\) classes, including crossed weak tensors | \(Q_{LD}\) insertion with \(W\) exchange on external doublet lines; no direct \(W\) contact from \(D(H^\dagger L)\) | \(\delta Z_L,\delta Z_H,\delta g_2,\delta C_{LD}\); retain singlet/triplet tensors until projection | NOT EVALUATED |
+| LD-W (atlas LD-W-01…06) | Same amplitude, \(y_\ell^2 g_2^2/M_E^2\) | All six doublet-pair \(WW\) classes; exact-routed unit-multiplicity hard/soft kernels for cross pairs 01/02/05/06 are now recorded | \(Q_{LD}\) insertion with \(W\) exchange on external doublet lines; no direct \(W\) contact from \(D(H^\dagger L)\) | Keep singlet/triplet tensors; include 03/04 light-only cancellation, the second charge-conjugate/crossed routing, \(\delta Z_L,\delta Z_H,\delta g_2,\delta C_{LD}\), and the one-\(W\) Ward sum | **PARTIAL** — fixed ordered cross-box sub-block only; full LD-W matching remains open |
 | LD-X (atlas LD-X-01…03) | Same amplitude, \(y_\ell^2 g_X^2/M_E^2\) | \(A'A'\) pairs among \(E,\bar L,L\), heavy self-energy and vertex corrections | \(Q_{LD}\) insertion with \(A'\) exchange and \(A'\)-contact graphs | \(\delta g_X,\delta Z_L,\delta M_E,\delta C_{LD}\); flavor-resolved \(\eta_\ell\) factors | NOT EVALUATED |
 | LD-BX (atlas LD-BX-01…09) | Same amplitude with mixed propagator | Every nonzero signed \(BA'\) pair from atlas §3; use the full kinetic matrix | EFT mixed-propagator exchange and contact graphs | Fix \(\chi(\mu_R)\)/threshold scheme; mixed charge factor \(Y_i x_j+x_iY_j\) | CONDITIONAL / NOT EVALUATED |
 | RD-B (atlas RD-B-01…03) | \(\bar\ell_R\ell_R S_\ell^\ast S_\ell\), \(|\lambda_\ell|^2 g_Y^2/M_E^2\) | Three \(BB\) pair classes and heavy-line/vertex corrections | \(Q_{RD}\) insertion with \(B\) exchange and \(B\)-contact graphs | \(\delta\lambda,\delta M_E,\delta g_Y,\delta Z_{\ell_R},\delta Z_S,\delta C_{RD}\) | NOT EVALUATED |
@@ -242,6 +242,27 @@ Use the following order; do not apply EOM before the UV-minus-EFT difference and
 ### 4.1 Exact \(SU(2)_L\) attachment projection already checked
 
 The six \(WW\) line-pair generator contractions for \(Q_{LD}\) are recorded in `research/RC-001-dim6-SU2-attachment-projection.md`. With \(T_0=\delta_{ij}\delta_{kl}\), \(T_x=\delta_{il}\delta_{kj}\), and \(T_3=2T_x-T_0\), the two same-vertex pairs yield \(-3T_0/4\); the cross-vertex pairs LD-W-02 and LD-W-05 yield \(+T_3/4\), while LD-W-01 and LD-W-06 yield \(-T_3/4\). All six identities pass the local exact SymPy tensor check recorded in `validation/RC-001-dim6-SU2-attachment-projection.txt`. These factors are generator contractions only; the associated loop integrals and their relative diagram signs/multiplicities remain unevaluated.
+
+### 4.2 Fixed-routing \(Q_{LD}\) pure-\(WW\) cross-box sub-block
+
+The four cross-vertex classes LD-W-01/02/05/06 are now reduced with their own external-momentum routings in research/RC-001-dim6-WW-crossbox-exact-routing.md, with the exact-rational script calculations/RC-001-dim6-WW-crossbox-exact-routing.py and output validation/RC-001-dim6-WW-crossbox-exact-routing.txt. For one fixed ordered \(\bar L H H^\dagger L\) amplitude and unit multiplicity, the Lorentz kernels are
+\[
+A_{01}=\frac{2(d-2)}dK,\quad
+A_{02}=-J+\frac2dK,\quad
+A_{05}=\left(1+\frac2d\right)J,\quad
+A_{06}=-\frac4dJ.
+\]
+With the weak weights \((-1,+1,+1,-1)T_3/4\), the hard/soft/full sums are
+\[
+A_{\rm hard}=\frac1{M_E^2}\left(\frac38\Delta_{\rm UV}-\frac38L+\frac{11}{16}\right),
+\]
+\[
+A_{\rm soft}=\frac1{M_E^2}\frac38(-\Delta_{\rm UV}+\Delta_{\rm IR}),\qquad
+A_{\rm full}=\frac1{M_E^2}\left(\frac38\Delta_{\rm IR}-\frac38L+\frac{11}{16}\right).
+\]
+The hard UV pole cancels the soft/EFT UV pole, leaving the full IR pole. The \(O(\epsilon)\) term in \(6/d\) contributes \(+3/16\) to the hard finite constant; setting \(d=4\) prematurely would give \(1/2\) instead of \(11/16\).
+
+This is a fixed-ordering, unit-multiplicity sub-block only. The atlas's second charge-conjugate/crossed routing has not been proven equivalent or independently summed; no additional factor of two is assumed. The exact diagram count, same-vertex 03/04 and external-field Ward bookkeeping, operator counterterms, one-\(W\) form factor, and common-basis projection remain open. No complete LD-W Wilson coefficient is claimed.
 
 ## 5. Existing analytic results that are not to be recomputed or double-counted
 
