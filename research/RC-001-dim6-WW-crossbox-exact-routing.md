@@ -194,6 +194,26 @@ A_{WW}^{\rm hard}
 \right).
 }
 \]
+An independent direct evaluation of the combined full integral is also available. The weighted integrand is
+\[
+-\frac{d-1}{2d}\frac{M_E^2}{(k^2)^2(k^2-M_E^2)^2}.
+\]
+Using the standard two-denominator gamma-function formula with the same pole normalization,
+\[
+-M_E^2\int_k\frac1{(k^2)^2(k^2-M_E^2)^2}
+=-\frac1{M_E^2}
+\left(\frac{4\pi\mu_R^2}{M_E^2}\right)^\epsilon
+\frac{\Gamma(2+\epsilon)\Gamma(-\epsilon)}
+{\Gamma(2-\epsilon)}.
+\]
+Its expansion is
+\[
+\frac1{M_E^2}\left(
+\Delta_{\rm IR}+2-L+O(\epsilon)
+\right),
+\]
+which independently reproduces \((J-K)_{\rm full}\) and, after multiplication by \((d-1)/(2d)\), the full finite \(11/16\). This gamma-function check is independent of the separate \(J\) and \(K\) master decomposition, though it uses the same stated \(\overline{\rm MS}\) pole convention.
+
 At the master-integral level the soft term is
 \[
 \boxed{
