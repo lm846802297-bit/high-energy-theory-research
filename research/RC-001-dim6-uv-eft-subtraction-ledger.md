@@ -245,14 +245,14 @@ The six \(WW\) line-pair generator contractions for \(Q_{LD}\) are recorded in `
 
 ### 4.2 Fixed-routing \(Q_{LD}\) pure-\(WW\) cross-box sub-block
 
-The four cross-vertex classes LD-W-01/02/05/06 are now reduced with their own external-momentum routings in research/RC-001-dim6-WW-crossbox-exact-routing.md, with the exact-rational script calculations/RC-001-dim6-WW-crossbox-exact-routing.py and output validation/RC-001-dim6-WW-crossbox-exact-routing.txt. For one fixed ordered \(\bar L H H^\dagger L\) amplitude and unit multiplicity, the Lorentz kernels are
+The four cross-vertex classes LD-W-01/02/05/06 are now reduced with their own external-momentum routings in research/RC-001-dim6-WW-crossbox-exact-routing.md, with the exact-rational script calculations/RC-001-dim6-WW-crossbox-exact-routing.py and output validation/RC-001-dim6-WW-crossbox-exact-routing.txt. For one fixed ordered \(\bar L H H^\dagger L\) amplitude and unit multiplicity, the Lorentz kernels derived from the explicit numerator chains are
 \[
 A_{01}=\frac{2(d-2)}dK,\quad
 A_{02}=-J+\frac2dK,\quad
-A_{05}=\left(1+\frac2d\right)J,\quad
-A_{06}=-\frac4dJ.
+A_{05}=2\left(1-\frac1d\right)J-\frac2dK,\quad
+A_{06}=-J+\frac2dK.
 \]
-With the weak weights \((-1,+1,+1,-1)T_3/4\), the hard/soft/full sums are
+In particular \(A_{02}=A_{06}\) after the \(q^2\) cancellation at \(O(P)\). With the weak weights \((-1,+1,+1,-1)T_3/4\), the weighted sum collapses to \((d-1)(J-K)/(2d)\). Its hard/soft/full master sums are
 \[
 A_{\rm hard}=\frac1{M_E^2}\left(\frac38\Delta_{\rm UV}-\frac38L+\frac{11}{16}\right),
 \]
@@ -260,7 +260,7 @@ A_{\rm hard}=\frac1{M_E^2}\left(\frac38\Delta_{\rm UV}-\frac38L+\frac{11}{16}\ri
 A_{\rm soft}=\frac1{M_E^2}\frac38(-\Delta_{\rm UV}+\Delta_{\rm IR}),\qquad
 A_{\rm full}=\frac1{M_E^2}\left(\frac38\Delta_{\rm IR}-\frac38L+\frac{11}{16}\right).
 \]
-The hard UV pole cancels the soft/EFT UV pole, leaving the full IR pole. The \(O(\epsilon)\) term in \(6/d\) contributes \(+3/16\) to the hard finite constant; setting \(d=4\) prematurely would give \(1/2\) instead of \(11/16\).
+The hard UV pole cancels the soft/EFT UV pole at the scalar-master level, leaving the common IR pole. The dimensional prefactor is \((d-1)/(2d)=3/8-\epsilon/16+\cdots\): the \(d=4\) hard finite constant is \(3/4\), and the \(O(\epsilon)\Delta_{\rm UV}\) term shifts it by \(-1/16\), yielding \(11/16\). The complete nonexceptional off-shell UV-minus-EFT Green function remains open.
 
 This is a fixed-ordering, unit-multiplicity sub-block only. The atlas's second charge-conjugate/crossed routing has not been proven equivalent or independently summed; no additional factor of two is assumed. The exact diagram count, same-vertex 03/04 and external-field Ward bookkeeping, operator counterterms, one-\(W\) form factor, and common-basis projection remain open. No complete LD-W Wilson coefficient is claimed.
 
