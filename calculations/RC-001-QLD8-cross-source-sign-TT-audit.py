@@ -65,6 +65,26 @@ for al in range(4):
 assert sp.simplify(J - J_expected) == sp.zeros(4)
 assert sp.simplify(J - J.T) == sp.zeros(4)
 
+# Independent D-dimensional check of the coefficient multiplying g_ab:
+# take both free indices in a formal transverse direction, where all external
+# momentum components vanish, and extract the coefficient of the metric.
+def metric_coefficient_I(A, B, q):
+    Delta = B - A
+    u = dot(A, B)
+    A2, B2, q2 = dot(A, A), dot(B, B), dot(q, q)
+    aD = D / 4
+    bD = D * (D + 2) / 24
+    cD = D * (D + 2) * (D + 4) / 192
+    return sp.simplify(
+        -aD * q2 / D
+        - 4 * bD * dot(q, Delta) / (D * (D + 2))
+        + bD * (A2 + B2) / D
+        - 4 * cD * (A2 + B2 - u) / (D * (D + 2))
+    )
+
+J_metric = sp.simplify(sum(metric_coefficient_I(A, B, q) for A, B in pairs))
+assert sp.simplify(J_metric - Gscalar) == 0
+
 J0 = sp.zeros(4)
 J1 = sp.zeros(4)
 G0 = (dot(d, d) + dot(R, R) - 4 * dot(q, q)) / 12
@@ -187,6 +207,7 @@ print("PASS: color weights = (-1,+1,+1,-1); TT gamma-index signs = (-1,+1,+1,-1)
 print("PASS: fully signed TT weights are (+1,+1,+1,+1), hence I1+I2+I3+I4.")
 print("PASS: mixed TS/ST signed weights reproduce (+,-,+,-) and (+,+,-,-).")
 print("PASS: exact D-dimensional compact J_ab identity and symmetry (16 components).")
+print("PASS: independent symbolic-D transverse-metric coefficient matches Gscalar.")
 print("PASS: D=4-2epsilon expansion retains the full O(epsilon) tensor J1.")
 print(f"PASS: explicit 4D gamma index-sign identities ({index_checks} checks).")
 print("PASS: exact 4D matrix comparison of four TT topologies against compact sum.")
