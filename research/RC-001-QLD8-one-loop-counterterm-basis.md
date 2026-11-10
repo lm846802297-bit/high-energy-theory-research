@@ -628,3 +628,21 @@ gamma/color contraction into the physical/evanescent operator basis,
 complete graph phase, external-gluon gauge completion, and EOM/IBP
 reduction remain open. No full \(Z\) matrix or Wilson coefficient is
 claimed.
+
+
+## 17. P1.5a–P1.5b: signed cross-source graphs and D-dimensional TT reduction
+
+The common pre-loop Feynman-rule phase is fixed to +1 for the four cross-source graphs in the stated convention:
+\((iC)(ig_s)^2(i)^2(-i)=+Cg_s^2\). The anti-quark representation sign is included once, through \(T_{\bar q}^A=-T^{A\,T}\) in the direct color matrices. The direct-color weights are \((-1,+1,+1,-1)\). Combining them with the exact Dirac-chain index signs gives final TT weights \((+1,+1,+1,+1)\); the four TT tensor integrals therefore add, rather than alternate.
+
+With \(q=p_1+p_2\), \(d=p_1-p_2\), and \(R=p_3-p_4\), the exact D-dimensional sum is
+\[
+J_{\alpha\beta}(D)=
+\frac{D}{24}(d_\alpha d_\beta+R_\alpha R_\beta)
+-\frac{D+12}{24}q_\alpha q_\beta
++\frac{g_{\alpha\beta}}{48}
+[D(d^2+R^2)+(D-20)q^2].
+\]
+It is symmetric and its \(D=4-2\epsilon\) expansion, including the full \(O(\epsilon)\) tensor, is recorded in research/RC-001-QLD8-cross-source-sign-and-TT-Dirac-reduction.md. The metric-contracted opposite-chirality tensor seed is evanescent in 4D but is retained as a D-dimensional operator. The exact symbolic and 4D matrix/index-sign checks are in calculations/RC-001-QLD8-cross-source-sign-TT-audit.py and validation/RC-001-QLD8-cross-source-sign-TT-audit.txt.
+
+Acceptance boundary: P1.5a and the raw P1.5b TT contraction are closed locally. The merged SS+TS+ST+TT direct-pairing counterterm, external-gluon completion, physical/evanescent \(Z\) block, EOM/IBP reduction, and final anomalous dimension remain open. No CI pass is claimed.
