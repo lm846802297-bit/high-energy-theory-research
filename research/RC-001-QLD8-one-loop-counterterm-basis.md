@@ -392,6 +392,15 @@ satisfy the exact similarity relation \(M_d=R^{-1}M_xR\), as well as
 
 This is the preferred color basis for the direct-pairing QCD numerator
 calculation. The crossed basis in P1.1a remains an independent check.
+
+On the tree vector \((1,0)_d\), the two within-source exchanges act as
+\(-C_F(1,0)_d\), while the four cross-source exchanges act as
+\((0,-1)_d\) for \((\bar Q,Q)\) and \((\bar d,d)\), and as
+\((0,+1)_d\) for \((\bar Q,\bar d)\) and \((Q,d)\). Hence all
+singlet-to-octet mixing comes from the four cross-source graphs; their
+opposite color signs do not imply cancellation because their Dirac and
+momentum kernels differ and must be integrated before summing.
+
 The record and exact audit are:
 - \`research/RC-001-QLD8-QCD-direct-pairing-color-basis.md\`;
 - \`calculations/RC-001-QLD8-QCD-direct-color-basis-audit.py\`;
