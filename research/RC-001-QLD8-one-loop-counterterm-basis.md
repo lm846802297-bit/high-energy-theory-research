@@ -224,8 +224,8 @@ The two source-current momenta are \(q_A=p_1+p_2\) and
 -q_A\cdot q_B=q_A^2.
 \]
 
-For a gluon momentum \(\ell\) flowing from the first named external leg to
-the second, the six exchange topologies have been routed explicitly.
+For a gluon momentum \(\ell\) flowing from the second named external leg to
+the first, the six exchange topologies have been routed explicitly.
 Exchanges within one original source current leave \(q_A\) unchanged;
 exchanges across the two currents give \(q_A+\ell\) or \(q_A-\ell\).
 Consequently their insertion factors are respectively \(q_A^2\) and
@@ -341,3 +341,11 @@ The exact symbolic record and audit are:
 - \`validation/RC-001-QLD8-ddim-Fierz-projection-audit.txt\`.
 
 The explicit 4D matrix check for the \(\sigma\Gamma^{(n)}\sigma\) eigenvalues and the symbolic \(f_1,f_3,f_5\) checks pass locally. The result fixes the first crossed projections and exposes a higher-rank Gram obstruction. It does not yet select the canonical finite evanescent basis, evaluate a loop integral, extract a UV pole, or calculate any \(Z\)-matrix entry.
+
+
+**Routing-sign clarification:** for each ordered pair \((a,b)\), the loop
+momentum \(\ell\) flows from \(b\) to \(a\). With all external momenta
+incoming at the operator insertion this gives \(r_a=p_a+\ell\) and
+\(r_b=p_b-\ell\), exactly as used in the routing table. Reversing the
+defined flow reverses all \(\ell\) signs and leaves the integral unchanged
+after a consistent \(\ell\mapsto-\ell\) substitution.
