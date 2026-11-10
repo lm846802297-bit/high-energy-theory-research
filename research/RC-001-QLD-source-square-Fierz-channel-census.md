@@ -114,3 +114,14 @@ No source-square coefficient is added to the PR #69 scalar two-point functions b
 The spinor-only four-dimensional Fierz identities are now checked component by component in [RC-001-QLD-chiral-Fierz-identities.md](RC-001-QLD-chiral-Fierz-identities.md), using the exact SymPy matrix audit. The opposite-projector source pairs project to vector-current structures; the same-projector \(d^\dagger u\) and \(u^\dagger e\) pairs project to scalar-plus-tensor structures. The color and weak-index labels in this census remain attached to each rearranged bilinear.
 
 The four-dimensional algebra is closed. The \(d\)-dimensional evanescent basis, its \(O(\epsilon)\) convention, and any loop-induced evanescent mixing are still open; the current audit does not claim a finite \(\overline{\mathrm{MS}}\) Wilson-vector reduction.
+
+
+## 7. Derivative-aware Fierz and covariant-IBP ledger
+
+The complete source-square derivative bookkeeping is now recorded in [RC-001-QLD8-derivative-Fierz-IBP-ledger.md](RC-001-QLD8-derivative-Fierz-IBP-ledger.md). It gives the exact action-level identity
+\[
+(D_\mu J_A^\dagger)(D^\mu J_B)\doteq-J_A^\dagger D^2J_B,
+\]
+the three Leibniz classes in \(D^2(\bar fY\chi)\), and the derivative-label map through the crossed spinor Fierz rearrangement. The four original placements are not individually identified by IBP; the identity applies to their complete sum.
+
+The exact bookkeeping audit confirms nine ordered source pairs, four placements per ordered pair (36 total), and the \(RL/LR/RR/LL\) channel assignment. It is not a d-dimensional loop-mixing calculation and does not close the nonredundant dimension-eight basis.
