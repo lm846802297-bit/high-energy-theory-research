@@ -73,8 +73,7 @@ for a, b, d in samples:
     qq = a + b
     pp = [(a, e), (a, d), (b, e), (b, d)]
     tt = [
-        sp.simplify(sp.Rational(1, 2) * wedge(x, y)
-                    + sp.Rational(1, 2) * wedge(qq, x + y))
+        sp.simplify(sp.Rational(1, 2) * wedge(qq, x + y))
         for x, y in pp
     ]
     ll = tt[0] - tt[1] + tt[2] - tt[3]
