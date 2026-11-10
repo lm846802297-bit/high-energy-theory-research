@@ -141,9 +141,8 @@ For clarity, write
 \qquad
 \gamma^\mu\gamma^\nu=g^{\mu\nu}+\Gamma^{\mu\nu}.
 \]
-The four cross-source numerator chains, after factoring out the two
-momentum components \(r_{a\alpha}r_{b\beta}\), obey the following exact
-Clifford decompositions. \(P_R\) and \(P_L\) commute with each rank-two
+The four cross-source numerator chains, after factoring out the left- and right-bilinear momentum components \(x_\alpha y_\beta\), obey the following exact
+Clifford decompositions. For the first two topologies \(x=r_a\), \(y=r_b\); for the last two topologies \(x=r_b\), \(y=r_a\). This orientation matters for the rank-two projections even though it does not affect the scalar projection \(r_a\cdot r_b\). \(P_R\) and \(P_L\) commute with each rank-two
 string.
 
 For \((\bar Q,Q)\):
