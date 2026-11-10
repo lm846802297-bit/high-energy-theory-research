@@ -24,6 +24,9 @@ on:
       - "calculations/RC-001-QLD8-QCD-open-line-numerator-audit.py"
       - "research/RC-001-QLD8-QCD-d-dagger-d-open-line-numerators.md"
       - "validation/RC-001-QLD8-QCD-open-line-numerator-audit.txt"
+      - "calculations/RC-001-QLD8-cross-source-scalar-UV-audit.py"
+      - "research/RC-001-QLD8-cross-source-scalar-UV-pole.md"
+      - "validation/RC-001-QLD8-cross-source-scalar-UV-audit.txt"
 
 permissions:
   contents: read
@@ -52,3 +55,5 @@ jobs:
         run: python calculations/RC-001-QLD8-QCD-direct-color-basis-audit.py
       - name: Run QLD8 QCD open-line numerator gamma audit
         run: python calculations/RC-001-QLD8-QCD-open-line-numerator-audit.py
+      - name: Run QLD8 cross-source scalar UV Taylor audit
+        run: python calculations/RC-001-QLD8-cross-source-scalar-UV-audit.py
