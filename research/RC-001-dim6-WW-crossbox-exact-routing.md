@@ -52,7 +52,7 @@ Q_{LD}^\dagger
 \]
 Thus \(Q_{LD}\) is Hermitian modulo a total derivative in the action.
 
-These identities settle the dummy vertex-label factor for the displayed ordered contraction. They do **not** by themselves certify that every additional charge-conjugate/crossed external routing in the atlas maps to the same off-shell Green function. No extra multiplicity is assigned here. The other routing must be explicitly mapped or generated before the result is promoted.
+These identities settle the operator-level relation between the two charge-conjugate tree orientations. The conjugate orientation matches \(Q_{LD}^\dagger\), which is the same integrated action operator as \(Q_{LD}\) modulo the displayed total derivative. Since the coefficient is proportional to \(|y_\ell|^2\) and the pure-\(WW\) hard sub-block is real, the conjugate orientation fixes the same Wilson coefficient; it is **not** an additional factor of two. The \(1/2!\) in the second-order expansion is already canceled by the two dummy vertex-label orderings. This resolves the operator-level multiplicity, but not the exact graph-label census or every Feynman-rule sign; those remain subject to diagram-level validation.
 
 ## 3. \(SU(2)_L\) attachment classes
 
@@ -243,7 +243,7 @@ The previous common-numerator candidate \(+3/(4M_E^2)\) is superseded. The curre
 
 ## 7. Remaining acceptance gates
 
-1. Explicitly map the second charge-conjugate/crossed tree routing in the atlas to this ordered amplitude, or evaluate it as a separate Green function. Do not insert a factor of two by assumption.
+1. The operator-level charge-conjugate orientation is mapped by Hermitian conjugation and IBP to the same action operator; no extra factor of two is allowed. Reconcile the diagram generator's labeled orientations against this operator-level identity and verify that no topologically distinct contraction is omitted.
 2. Validate the diagram multiplicities, orientations, and Feynman-rule signs with FeynArts/QGRAF or an independent explicit Wick-contraction derivation. The existing attachment atlas is not an exact diagram count.
 3. Include LD-W-03/04 and the external \(L,H\) LSZ terms in the complete gauge Ward bookkeeping, even though their common light-only matching pieces cancel at \(O(M_E^{-2})\).
 4. Combine the hard UV pole with the EFT operator counterterm and the \(C_{LD}\), \(g_2\), and field-renormalization conventions exactly once.
