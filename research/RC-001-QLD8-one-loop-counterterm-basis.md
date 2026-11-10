@@ -2,7 +2,7 @@
 
 **Date:** 2026-11-10  
 **Workstream:** PR #11, strict \(O(M_E^{-4})\) Higgs-source-square sector  
-**Stage:** P1.0 basis construction plus P1.1a–P1.1c, P1.2, and P1.3a–P1.3b QCD/evanescent setup  
+**Stage:** P1.0 basis construction plus P1.1a–P1.1c, P1.2, P1.3a–P1.3b, and P1.4a QCD/evanescent setup  
 **Status:** source-pair, representation, derivative, gamma-string, QCD color, momentum-routing, and formal \(d\)-dimensional direct-tensor projection checks pass locally. The higher-rank Gram obstruction is identified. No loop kernel, UV pole, or one-loop \(Z\) matrix is yet calculated.
 
 ## 1. Scope and non-negotiable boundary
@@ -450,3 +450,42 @@ No loop integral, UV pole, counterterm coefficient, \(Z\)-matrix entry, or
 finite Wilson coefficient has been calculated. The next step is to fix all
 relative graph signs, generate the complete \(D\)-dimensional tensor
 integrands, and perform the nonexceptional off-shell UV extraction.
+
+
+## 14. P1.4a: factorized QCD renormalization of the Yukawa-weighted source
+
+For the retained Higgs-EOM source,
+\[
+J_d=\bar d_RY_d^\dagger Q_L=Y_d^\dagger S_d,\qquad
+S_d=\bar d_RQ_L,
+\]
+the QCD renormalization of the SM Yukawa matrix and the scalar density
+cancels. In the convention
+\[
+Y_{d,0}=Z_{Y_d}Y_d,\qquad S_{d,0}=Z_SS_d,
+\]
+one-loop \(\overline{\rm MS}\) gives
+\[
+Z_{Y_d}=Z_m
+=1-\frac{3C_Fg_s^2}{16\pi^2\epsilon},\qquad
+Z_S=Z_m^{-1}
+=1+\frac{3C_Fg_s^2}{16\pi^2\epsilon}.
+\]
+Therefore
+\[
+\boxed{Z_{J_d}^{(s)}=Z_{Y_d}Z_S=1+O(g_s^4).}
+\]
+The same holds for \(J_d^\dagger\), and hence the factorized QCD
+renormalization of \((D_\mu J_d^\dagger)(D^\mu J_d)\) vanishes at one loop.
+
+Diagrammatically, the two within-source vertex corrections plus all four
+external-leg self-energy/wavefunction terms reproduce the scalar-density
+renormalization. The SM Yukawa counterterm then cancels it. Thus the
+factorized subset must be grouped with the \(Y_d\) counterterm; it must not
+be counted twice. The four cross-source exchange graphs remain and generate
+the non-factorizing color/Dirac/derivative mixing.
+
+The exact convention and derivation are in
+\`research/RC-001-QLD8-QCD-Yukawa-source-renormalization-check.md\`.
+This is a factorized-source identity, not the full QLD8 four-fermion
+counterterm matrix or a finite Wilson coefficient.
