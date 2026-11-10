@@ -14,8 +14,6 @@ SPEC.loader.exec_module(MOD)
 class TestRC001Dim6WWCrossboxExactRouting(unittest.TestCase):
     def test_scalar_master_hard_soft_full(self):
         m = MOD.scalar_masters()
-        for key in ("J",):
-            pass
         self.assertEqual(sp.simplify(m["full"][0]-m["hard"][0]-m["soft"][0]), 0)
         self.assertEqual(sp.simplify(m["full"][1]-m["hard"][1]-m["soft"][1]), 0)
 
