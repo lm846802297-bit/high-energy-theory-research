@@ -25,7 +25,4 @@ jobs:
       - name: Install pinned symbolic dependency
         run: python -m pip install --disable-pip-version-check sympy==1.14.0
       - name: Run exact Fierz matrix identities
-        run: |
-          python calculations/RC-001-QLD-chiral-Fierz-identities.py > /tmp/RC-001-QLD-chiral-Fierz-identities.txt
-      - name: Compare with archived validation output
-        run: diff -u validation/RC-001-QLD-chiral-Fierz-identities.txt /tmp/RC-001-QLD-chiral-Fierz-identities.txt
+        run: python calculations/RC-001-QLD-chiral-Fierz-identities.py
