@@ -209,3 +209,35 @@ The exact SU(3) calculation is in
 \`calculations/RC-001-QLD8-QCD-color-factor-audit.py\`, with output in
 \`validation/RC-001-QLD8-QCD-color-factor-audit.txt\`. The QLD8 CI workflow
 now runs both the basis/Dirac seed audit and this color-factor audit.
+
+
+## 9. P1.1b: \(d^\dagger d\) QCD insertion momentum and topology routing
+
+The first QCD pilot now has a fixed all-incoming external-momentum convention:
+\[
+\bar Q(p_1),\quad d(p_2),\quad \bar d(p_3),\quad Q(p_4),
+\qquad \sum_i p_i=0.
+\]
+The two source-current momenta are \(q_A=p_1+p_2\) and
+\(q_B=p_3+p_4=-q_A\). The four product-rule placements sum exactly to
+\[
+-q_A\cdot q_B=q_A^2.
+\]
+
+For a gluon momentum \(\ell\) flowing from the first named external leg to
+the second, the six exchange topologies have been routed explicitly.
+Exchanges within one original source current leave \(q_A\) unchanged;
+exchanges across the two currents give \(q_A+\ell\) or \(q_A-\ell\).
+Consequently their insertion factors are respectively \(q_A^2\) and
+\((q_A\pm\ell)^2\). The \(\ell^2\) and \(q_A\cdot\ell\) terms must remain
+in the loop numerator.
+
+The routing derivation and exact symbolic check are in
+\`research/RC-001-QLD8-QCD-one-loop-momentum-routing.md\`,
+\`calculations/RC-001-QLD8-QCD-momentum-routing-audit.py\`, and
+\`validation/RC-001-QLD8-QCD-momentum-routing-audit.txt\`. The updated
+QLD8 workflow now runs the basis, color, and momentum-routing audits.
+
+This closes the insertion-momentum routing algebra, not the loop calculation:
+the six open-line Dirac numerators, tensor integrals, wavefunction
+counterterms, UV poles, and evanescent projections remain to be evaluated.
