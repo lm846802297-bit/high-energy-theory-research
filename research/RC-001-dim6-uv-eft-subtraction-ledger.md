@@ -260,7 +260,9 @@ A_{\rm hard}=\frac1{M_E^2}\left(\frac38\Delta_{\rm UV}-\frac38L+\frac{11}{16}\ri
 A_{\rm soft}=\frac1{M_E^2}\frac38(-\Delta_{\rm UV}+\Delta_{\rm IR}),\qquad
 A_{\rm full}=\frac1{M_E^2}\left(\frac38\Delta_{\rm IR}-\frac38L+\frac{11}{16}\right).
 \]
-The hard UV pole cancels the soft/EFT UV pole at the scalar-master level, leaving the common IR pole. The dimensional prefactor is \((d-1)/(2d)=3/8-\epsilon/16+\cdots\): the \(d=4\) hard finite constant is \(3/4\), and the \(O(\epsilon)\Delta_{\rm UV}\) term shifts it by \(-1/16\), yielding \(11/16\). The complete nonexceptional off-shell UV-minus-EFT Green function remains open.
+The hard UV pole cancels the soft/EFT UV pole at the scalar-master level, leaving the common IR pole. The dimensional prefactor is \((d-1)/(2d)=3/8-\epsilon/16+\cdots\): the \(d=4\) hard finite constant is \(3/4\), and the \(O(\epsilon)\Delta_{\rm UV}\) term shifts it by \(-1/16\), yielding \(11/16\). An independent gamma-function evaluation of the combined full master reproduces \((J-K)_{\rm full}=(\Delta_{\rm IR}+2-L)/M_E^2\).
+
+The same four numerator chains have also been contracted with the longitudinal gauge projector \(k_\mu k_\nu/k^2\). The pair kernels are \((-2K/d,\,-J+2K/d,\,-2K/d,\,-J+2K/d)\) for pairs (01,02,05,06), respectively; their weak-triplet weighted sum vanishes exactly. This establishes gauge-parameter independence of this fixed-routing triplet cross-box sub-block, but is not the complete Slavnov–Taylor identity for the full amplitude. The complete nonexceptional off-shell UV-minus-EFT Green function remains open.
 
 This is a fixed-ordering, unit-multiplicity sub-block only. The atlas's second charge-conjugate/crossed routing has not been proven equivalent or independently summed; no additional factor of two is assumed. The exact diagram count, same-vertex 03/04 and external-field Ward bookkeeping, operator counterterms, one-\(W\) form factor, and common-basis projection remain open. No complete LD-W Wilson coefficient is claimed.
 
