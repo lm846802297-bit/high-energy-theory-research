@@ -82,6 +82,16 @@ class TestRC001Dim6WWCrossboxExactRouting(unittest.TestCase):
         self.assertEqual(sp.simplify(full-MOD.expected_full()), 0)
         self.assertEqual(sp.simplify(hard+soft-full), 0)
 
+    def test_conjugate_operator_is_same_action_operator_mod_total_derivative(self):
+        I = sp.I
+        barpsi, dpsi, dbarpsi, psi = sp.symbols(
+            "barpsi dpsi dbarpsi psi", commutative=False
+        )
+        Q = I*barpsi*dpsi
+        Q_hc = -I*dbarpsi*psi
+        total_derivative = dbarpsi*psi + barpsi*dpsi
+        self.assertEqual(sp.simplify(Q-Q_hc-I*total_derivative), 0)
+
     def test_d_dimensional_finite_term(self):
         eps = MOD.eps
         f = sp.series((MOD.d-1)/(2*MOD.d), eps, 0, 2).removeO()
