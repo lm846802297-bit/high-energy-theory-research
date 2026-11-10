@@ -178,3 +178,46 @@ The recorded output is
 \`validation/RC-001-QLD8-ddim-Fierz-projection-audit.txt\`.
 
 No loop momentum integral, UV pole, physical/evanescent \(Z\) matrix, anomalous dimension, finite matching coefficient, or contribution to the PR #69 \(hh,hs,ss\) two-point functions is calculated here.
+
+
+## 8. Practical resolution: keep the QCD UV calculation in the direct pairing
+
+The rank-five Gram obstruction is a warning against forcing the direct tensor
+through a finite crossed odd-rank basis. It does **not** obstruct the QCD
+renormalization itself.
+
+The six one-gluon Feynman-gauge \(d^\dagger d\) numerator chains have now
+been written in the original direct spinor pairing
+\[
+(\bar Q,d)\otimes(\bar d,Q).
+\]
+Their exact Clifford decomposition has gamma rank at most two on each
+original bilinear. The same-bilinear chain reduces as
+\[
+\gamma^\rho\slashed r\slashed s\gamma_\rho P_X
+=D(r\cdot s)P_X+(D-4)\Gamma^{\mu\nu}r_\mu s_\nu P_X,
+\]
+and the cross-bilinear chains contain only rank-zero/rank-two factors on
+each side. The direct rank-two tensor and mixed rank-two\(\otimes\)scalar
+structures must be retained; no rank-three/five direct string is generated
+by these one-gluon chains.
+
+Therefore the preferred P1.3 calculation basis is:
+- direct spinor pairing, with no d-dimensional spinor Fierz crossing before
+  UV subtraction;
+- direct singlet/octet color basis \(C_{1,d},C_{8,d}\);
+- direct scalar, rank-two, and derivative-correlated tensor structures;
+- the direct \(E_{T;RL}^{\rm dir}\) seed with its \(O(\epsilon)\) coefficients
+  retained.
+
+The crossed \(f_n(D)\) projection remains a diagnostic for translating
+results into a crossed-current basis. It is not needed to compute the
+direct-pairing UV poles. The exact numerator record is
+\`research/RC-001-QLD8-QCD-d-dagger-d-open-line-numerators.md\`, and the
+direct color basis is in
+\`research/RC-001-QLD8-QCD-direct-pairing-color-basis.md\`.
+
+This resolves the immediate basis-choice problem for the first QCD pilot,
+but not the full counterterm closure: derivative-index structures, EOM
+representatives, external-leg terms, and the UV/EFT subtraction still need
+to be calculated.
