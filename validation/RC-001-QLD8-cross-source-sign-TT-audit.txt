@@ -5,6 +5,7 @@ PASS: color weights = (-1,+1,+1,-1); TT gamma-index signs = (-1,+1,+1,-1).
 PASS: fully signed TT weights are (+1,+1,+1,+1), hence I1+I2+I3+I4.
 PASS: mixed TS/ST signed weights reproduce (+,-,+,-) and (+,+,-,-).
 PASS: exact D-dimensional compact J_ab identity and symmetry (16 components).
+PASS: independent symbolic-D transverse-metric coefficient matches Gscalar.
 PASS: D=4-2epsilon expansion retains the full O(epsilon) tensor J1.
 PASS: explicit 4D gamma index-sign identities (64 checks).
 PASS: exact 4D matrix comparison of four TT topologies against compact sum.
