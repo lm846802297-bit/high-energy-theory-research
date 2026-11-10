@@ -4,7 +4,7 @@
 
 - **Research-change ID:** RC-001-GAUGE-SUBGRAPHS (subrecord of RC-001; not a replacement for the parent record)
 - **Title:** Gauge corrections to \(Q_{LD}\), \(Q_{RD}\), and associated current/source operators
-- **Created / updated:** 2026-10-23
+- **Created / updated:** 2026-10-23 / 2026-11-11
 - **Work status:** Verification in progress
 - **Related project:** [RC-001 VLL–Higgs–Singlet UV–EFT matching](RC-001-vll-higgs-singlet-uv-eft.md)
 - **Baseline revision:** `main` at merge commit `65edf2256948056c6b15094e5fb7f2ebe1f3b682`
