@@ -21,6 +21,9 @@ on:
       - "calculations/RC-001-QLD8-QCD-direct-color-basis-audit.py"
       - "research/RC-001-QLD8-QCD-direct-pairing-color-basis.md"
       - "validation/RC-001-QLD8-QCD-direct-color-basis-audit.txt"
+      - "calculations/RC-001-QLD8-QCD-open-line-numerator-audit.py"
+      - "research/RC-001-QLD8-QCD-d-dagger-d-open-line-numerators.md"
+      - "validation/RC-001-QLD8-QCD-open-line-numerator-audit.txt"
 
 permissions:
   contents: read
@@ -47,3 +50,5 @@ jobs:
         run: python calculations/RC-001-QLD8-ddim-Fierz-projection-audit.py
       - name: Run direct-pairing QLD8 QCD color-basis audit
         run: python calculations/RC-001-QLD8-QCD-direct-color-basis-audit.py
+      - name: Run QLD8 QCD open-line numerator gamma audit
+        run: python calculations/RC-001-QLD8-QCD-open-line-numerator-audit.py
