@@ -1134,3 +1134,12 @@ For \(Q_L,u_R,d_R,L_e,e_R\), the resulting second-order EOMs produce Higgs-deriv
 The retained source fermions are all neutral under the model \(U(1)_X\); their curvatures contain QCD, \(SU(2)_L\), and/or hypercharge fields, but no \(F_X\). The exact convention audit checks the Minkowski Clifford algebra, the Dirac-square curvature sign, the Higgs hypercharge of each source, and this \(U(1)_X\) neutrality.
 
 Important scheme boundary: the four scalar-pair Fierz-difference evanescents do not close the basis after second-order EOM substitution. New \(\gamma^\mu D_\mu H\) and \(\sigma^{\mu\nu}F_{\mu\nu}\) structures require their own d-dimensional Fierz-difference evanescents before loop renormalization. No complete evanescent mixing matrix or finite Wilson coefficient is claimed.
+
+
+## 5P. Chiral Fierz projections after second-order EOM substitution
+
+The second-order EOMs in §5O generate scalar–vector products from \(\gamma^\mu D_\mu H\) and scalar–tensor products from \(\sigma^{\mu\nu}\mathscr F_{\mu\nu}\). Their exact four-dimensional Fierz projections are recorded in [RC-001-QLD-EOM-generated-chiral-Fierz-identities.md](RC-001-QLD-EOM-generated-chiral-Fierz-identities.md). The exact matrix audit verifies 16 scalar–vector identities, 12 opposite-chirality scalar–tensor identities, and 6 same-chirality scalar–tensor identities, for 8704/8704 exact components, plus six chiral tensor self-duality relations.
+
+The operator-level projections include the Grassmann reordering minus sign. The corresponding d-dimensional Fierz-difference evanescents are defined by subtracting these four-dimensional operator projections, with all derivative, Higgs, field-strength, color, weak, and flavor labels preserved.
+
+This completes the displayed four-dimensional spinor algebra needed for the second-order EOM-generated Dirac structures. It does not close the full d-dimensional one-loop evanescent counterterm basis, calculate its mixing matrix, or produce finite UV-minus-EFT Wilson coefficients.
