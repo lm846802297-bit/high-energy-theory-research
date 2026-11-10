@@ -129,7 +129,20 @@ C_{Se}^{\rm hard}
 =-2\frac{|C_{5,\ell}|^2}{16\pi^2}
 \left(\frac{L_\ell}{4}-\frac38\right).
 \]
-Here \(O_{LS}=(S^\dagger i\overleftrightarrow D_\mu S)(\bar L\gamma^\mu L)\), \(O_{He}=(H^\dagger i\overleftrightarrow D_\mu H)(\bar\ell_R\gamma^\mu\ell_R)\), and \(O_{Se}=(S^\dagger i\overleftrightarrow D_\mu S)(\bar\ell_R\gamma^\mu\ell_R)\). The \(O_{Se}\) factor of two is the internal electroweak-doublet multiplicity. These are the Yukawa-box-sector hard projections only; they do not include the independent gauge corrections to the current operators or their full renormalization matrix.
+For the flavor-resolved axial model, the operators in these per-flavor formulas are understood first with \(S_\ell\):
+\[
+O_{LS,\ell}^{(\ell)}=(S_\ell^\dagger i\overleftrightarrow D_\mu S_\ell)
+(\bar L_\ell\gamma^\mu L_\ell),\qquad
+O_{Se,\ell}^{(\ell)}=(S_\ell^\dagger i\overleftrightarrow D_\mu S_\ell)
+(\bar\ell_R\gamma^\mu\ell_R),
+\]
+where \(S_\mu=S\), \(S_\tau=S^\ast\). Since
+\[
+S_\ell^\dagger i\overleftrightarrow D_\mu S_\ell
+=\eta_\ell(S^\dagger i\overleftrightarrow D_\mu S),
+\qquad \eta_\mu=+1,\quad\eta_\tau=-1,
+\]
+the displayed \(C_{LS,\ell}\) and \(C_{Se,\ell}\) are flavor-specific-current coefficients. If they are instead reported in a common-\(S\) basis, multiply each by \(\eta_\ell\). The \(O_{He}\) current uses \(H\) in the same orientation for both flavors and has no such factor. The \(O_{Se}\) factor of two is the internal electroweak-doublet multiplicity, separate from the \(\eta_\ell\) orientation sign. These are the Yukawa-box-sector hard projections only; they do not include the independent gauge corrections to the current operators or their full renormalization matrix.
 
 The \(\bar L L H^\dagger H\) soft-only channel has the weak-index tensor \(H_i H^\dagger_j\,\bar L_i\gamma^\mu L_j\). It must be decomposed into singlet and triplet currents using
 \[
