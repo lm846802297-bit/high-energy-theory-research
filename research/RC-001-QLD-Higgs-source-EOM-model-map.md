@@ -170,3 +170,12 @@ This closes the **model-specific source inventory and charge classification**. I
 The source-square term is now expanded into its three diagonal source pairs and three cross pairs plus Hermitian conjugates. The chirality, weak-index, and color-channel census is recorded in [RC-001-QLD-source-square-Fierz-channel-census.md](RC-001-QLD-source-square-Fierz-channel-census.md), with an exact bookkeeping audit in [calculations/RC-001-QLD-source-square-Fierz-channel-audit.py](../calculations/RC-001-QLD-source-square-Fierz-channel-audit.py).
 
 This is a pre-Fierz classification only. It does not apply four-dimensional Fierz identities, choose evanescent operators, or close the fermionic dimension-eight basis.
+
+
+## 7. Derivative-aware source-square reduction
+
+The source-square term is now connected to the explicit covariant-IBP and derivative-aware Fierz ledger in [RC-001-QLD8-derivative-Fierz-IBP-ledger.md](RC-001-QLD8-derivative-Fierz-IBP-ledger.md). In particular,
+\[
+(D_\mu J_A^\dagger)(D^\mu J_B)\doteq-J_A^\dagger D^2J_B,
+\]
+and \(D^2(\bar fY\chi)\) contains the two endpoint Laplacians and the mixed derivative term. This is an action-level identity for the complete product-rule sum; it does not discard the gamma-traceless derivative content or replace it by a zero using the first-order Dirac EOM.
