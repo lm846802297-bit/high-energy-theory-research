@@ -588,3 +588,43 @@ This closes only the two mixed projections. The rank-two\(\otimes\)rank-two
 projection is still required before the complete direct Dirac pole can be
 assembled. The common graph phase, external-gluon completion, and
 EOM/IBP reduction are also outstanding.
+
+
+## 16. P1.4b2: full D-dimensional cross-source Lorentz tensor
+
+The full degree-two UV Taylor tensor \(I_{\alpha\beta}(A,B;q_A)\) is now
+derived in closed form. It contains the scalar, symmetric, and
+antisymmetric Lorentz components required by the complete open-line
+numerator. Two nontrivial cross-checks pass:
+\[
+g^{\alpha\beta}I_{\alpha\beta}
+=K_{ab}^{SS}(D)
+\]
+using the **formal D-dimensional trace** \(g^\alpha{}_\alpha=D\), and
+\[
+\Gamma^{\alpha\beta}I_{\alpha\beta}
+=\frac{D-4}{12}W(A,B)+\frac12W(q_A,A+B),
+\]
+which reproduces both mixed rank-two projections from P1.4b1.
+
+The three radial factors have the expansions
+\[
+\begin{aligned}
+D/4&=1-\epsilon/2+O(\epsilon^2),\\
+D(D+2)/24&=1-5\epsilon/6+O(\epsilon^2),\\
+D(D+2)(D+4)/192&=1-13\epsilon/12+O(\epsilon^2).
+\end{aligned}
+\]
+The raw rank-two\(\otimes\)rank-two terms for all four topologies are now
+written as explicit contractions of \(I_{\alpha\beta}^{(i)}\) with the
+corresponding direct-pairing gamma tensors. The color-weighted sum is
+\(-K_{TT}^{(1)}+K_{TT}^{(2)}+K_{TT}^{(3)}-K_{TT}^{(4)}\).
+
+See
+\`research/RC-001-QLD8-cross-source-rank2xrank2-UV-kernel.md\` and
+\`validation/RC-001-QLD8-cross-source-tensor-integral-audit.txt\`.
+The exact symbolic audit passes. The raw tensor is now available, but its
+gamma/color contraction into the physical/evanescent operator basis,
+complete graph phase, external-gluon gauge completion, and EOM/IBP
+reduction remain open. No full \(Z\) matrix or Wilson coefficient is
+claimed.
