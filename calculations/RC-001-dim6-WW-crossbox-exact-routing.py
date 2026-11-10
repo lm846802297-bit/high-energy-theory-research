@@ -105,6 +105,58 @@ def derive_pair_kernels(J, K):
     return result
 
 
+def derive_longitudinal_pair_integrands():
+    """Derive P-slash kernels after replacing g_munu by k_mu k_nu/k^2.
+
+    This is the longitudinal projector entering a general R_xi W propagator.
+    The returned coefficients are obtained from the same explicit momentum
+    routing and numerator chains as derive_pair_integrands().
+    """
+    q2 = x-2*t
+    heavy = x-M2_local-2*t
+    F = 1/(q2*(q2-M2_local))
+
+    # 01: k_mu gamma^mu (-k/) q/ q/ k_nu gamma^nu / k^2
+    #     = -q^2 k/; cancel q^2 in the two-fermion/heavy denominator.
+    c01 = _slashP_coefficient(-1/(x**2*heavy), 0, d)
+
+    # 02: the fermion and scalar endpoint contractions each supply k^2;
+    #     after the projector 1/k^2, this equals the Feynman-gauge numerator.
+    c02 = _slashP_coefficient(1/(x**2*heavy), -1/(x**2*heavy), d)
+
+    # 05: (a.k) q^2 k/ / k^2 with a=2P-k; retain the O(P) expansion.
+    c05 = _slashP_coefficient((2*t-x)*F/x**2, 0, d)
+
+    # 06: the two scalar endpoint contractions give q^2 at O(P), same as 02.
+    c06 = _slashP_coefficient(1/(x**2*heavy), -1/(x**2*heavy), d)
+
+    Jden = 1/(x**2*(x-M2_local))
+    Kden = 1/(x*(x-M2_local)**2)
+    return {
+        "LD-W-01": (sp.factor(c01), Jden, Kden),
+        "LD-W-02": (sp.factor(c02), Jden, Kden),
+        "LD-W-05": (sp.factor(c05), Jden, Kden),
+        "LD-W-06": (sp.factor(c06), Jden, Kden),
+    }
+
+
+def derive_longitudinal_pair_kernels(J, K):
+    result = {}
+    for pair, (integrand, Jden, Kden) in derive_longitudinal_pair_integrands().items():
+        aJ, aK = _decompose_JK(integrand, Jden, Kden)
+        result[pair] = sp.simplify(aJ*J+aK*K)
+    return result
+
+
+def longitudinal_weighted_sum(kernels):
+    return sp.simplify((
+        -kernels["LD-W-01"]
+        +kernels["LD-W-02"]
+        +kernels["LD-W-05"]
+        -kernels["LD-W-06"]
+    )/4)
+
+
 def scalar_masters():
     """Common scalar-master expansion by regions through O(M_E^-2)."""
     J_hard = (DeltaUV + 1 - L) / M2
@@ -203,6 +255,12 @@ def main():
         for region in ("hard", "soft", "full")
     }
 
+    # The longitudinal R_xi projector cancels in the weak-triplet sum.
+    longitudinal = derive_longitudinal_pair_kernels(
+        sp.Symbol("J"), sp.Symbol("K")
+    )
+    assert sp.simplify(longitudinal_weighted_sum(longitudinal)) == 0
+
     # The weighted integrand collapses to (d-1)/(2d) (J-K).
     for region in ("hard", "soft", "full"):
         J, K = masters[region]
@@ -268,6 +326,12 @@ def main():
     print("  LD-W-06 = -J + 2K/d")
     print("PASS: LD-W-02 and LD-W-06 agree after q^2 cancellation at O(P).")
     print("PASS: weak-weighted sum = (d-1)(J-K)/(2d).")
+    print("Longitudinal R_xi kernels:")
+    print("  LD-W-01: -2K/d")
+    print("  LD-W-02: -J + 2K/d")
+    print("  LD-W-05: -2K/d")
+    print("  LD-W-06: -J + 2K/d")
+    print("PASS: longitudinal triplet projection vanishes; this cross-box sub-block is xi-independent.")
     print("Weighted hard:")
     print("  A_hard = (3 Delta_UV/8 - 3 L/8 + 11/16)/M_E^2")
     print("Weighted soft:")
