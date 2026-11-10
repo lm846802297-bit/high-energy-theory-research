@@ -30,6 +30,9 @@ on:
       - "calculations/RC-001-QLD8-cross-source-mixed-tensor-UV-audit.py"
       - "research/RC-001-QLD8-cross-source-mixed-tensor-UV-poles.md"
       - "validation/RC-001-QLD8-cross-source-mixed-tensor-UV-audit.txt"
+      - "calculations/RC-001-QLD8-cross-source-tensor-integral-audit.py"
+      - "research/RC-001-QLD8-cross-source-rank2xrank2-UV-kernel.md"
+      - "validation/RC-001-QLD8-cross-source-tensor-integral-audit.txt"
 
 permissions:
   contents: read
@@ -62,3 +65,5 @@ jobs:
         run: python calculations/RC-001-QLD8-cross-source-scalar-UV-audit.py
       - name: Run QLD8 cross-source mixed tensor UV Taylor audit
         run: python calculations/RC-001-QLD8-cross-source-mixed-tensor-UV-audit.py
+      - name: Run QLD8 cross-source full tensor UV Taylor audit
+        run: python calculations/RC-001-QLD8-cross-source-tensor-integral-audit.py
