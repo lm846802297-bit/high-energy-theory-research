@@ -2,8 +2,8 @@
 
 **Date:** 2026-11-10  
 **Workstream:** PR #11, strict \(O(M_E^{-4})\) Higgs-source-square sector  
-**Stage:** P1.0 basis construction and exact Dirac/color checks  
-**Status:** source-pair, representation, color, derivative, and rank-3/rank-4 seed checks pass; the one-loop \(Z\) matrix is not yet calculated.
+**Stage:** P1.0 basis construction plus P1.1a QCD color-factor block  
+**Status:** source-pair, representation, derivative, rank-3/rank-4 seed, and six QCD color-exchange matrices pass exact checks; no loop kernel or one-loop \(Z\) matrix is yet calculated.
 
 ## 1. Scope and non-negotiable boundary
 
@@ -181,3 +181,31 @@ The exact companion audit checks:
 - the nine ordered source pairs and 36 derivative placements.
 
 It does **not** evaluate a loop integral, a UV pole, \(Z_{ij}\), an anomalous dimension, or a finite Wilson coefficient. P1.0 closes the bookkeeping and exact four-dimensional projection seeds needed to start P1.1; the complete d-dimensional counterterm basis and one-loop renormalization remain open.
+
+
+## 8. P1.1a: QCD color factors for the \(d^\dagger d\) pilot
+
+The first four-quark QCD pilot is now fixed to the external-leg order
+\((\bar Q,Q,\bar d,d)\). The source-pair color tensor after spinor crossing is
+\[
+C_X^{ij;kl}=\delta_{il}\delta_{kj}
+=\frac13C_1^{ij;kl}+2C_8^{ij;kl},
+\]
+where \(C_1=\delta_{ij}\delta_{kl}\) and
+\(C_8=T^A_{ij}T^A_{kl}\).
+
+The six pairwise color-generator matrices are derived and checked in
+[RC-001-QLD8-QCD-color-factor-block.md](RC-001-QLD8-QCD-color-factor-block.md).
+Their sum satisfies the exact color-singlet identity
+\[
+\sum_{a<b}\mathbf T_a\cdot\mathbf T_b
+=-2C_F\mathbf1=-\frac83\mathbf1.
+\]
+This closes the group-theory factorization of the six QCD exchange topologies
+for the \(d^\dagger d\) pilot. It does not supply their Feynman-rule signs,
+Dirac/momentum kernels, UV poles, or counterterms.
+
+The exact SU(3) calculation is in
+\`calculations/RC-001-QLD8-QCD-color-factor-audit.py\`, with output in
+\`validation/RC-001-QLD8-QCD-color-factor-audit.txt\`. The QLD8 CI workflow
+now runs both the basis/Dirac seed audit and this color-factor audit.
