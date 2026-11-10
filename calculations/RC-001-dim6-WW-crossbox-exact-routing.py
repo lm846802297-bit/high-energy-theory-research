@@ -142,6 +142,19 @@ def pole_expansion(expr):
     return sp.simplify(sp.series(substituted, eps, 0, 1).removeO())
 
 
+def gamma_function_j_minus_k():
+    """Direct gamma-function evaluation of J_full-K_full.
+
+    The explicit (4*pi)^eps factor fixes the same Delta=1/eps-gamma+ln(4*pi)
+    pole convention used by the scalar-master record.
+    """
+    return (
+        -sp.exp(eps*(sp.log(4*sp.pi)-L))
+        *sp.gamma(2+eps)*sp.gamma(-eps)
+        /sp.gamma(2-eps)/M2
+    )
+
+
 def expected_hard():
     return (
         sp.Rational(3,8)*(1/eps+cUV)
@@ -217,6 +230,25 @@ def main():
     assert sp.simplify(soft_exp-expected_soft()) == 0
     assert sp.simplify(full_exp-expected_full()) == 0
     assert sp.simplify(hard_exp+soft_exp-full_exp) == 0
+
+    # Independent direct gamma-function evaluation of the combined full
+    # integral: J-K = -M_E^2 int d^d k/[k^4 (k^2-M_E^2)^2].
+    gamma_master = gamma_function_j_minus_k()
+    gamma_master_exp = sp.simplify(
+        sp.series(gamma_master, eps, 0, 1).removeO()
+    )
+    expected_gamma_master = (
+        1/eps-sp.EulerGamma+sp.log(4*sp.pi)+2-L
+    )/M2
+    assert sp.simplify(gamma_master_exp-expected_gamma_master) == 0
+    gamma_weighted_exp = sp.simplify(
+        sp.series((d-1)/(2*d)*gamma_master, eps, 0, 1).removeO()
+    )
+    expected_gamma_weighted = (
+        sp.Rational(3,8)*(1/eps-sp.EulerGamma+sp.log(4*sp.pi))
+        -sp.Rational(3,8)*L+sp.Rational(11,16)
+    )/M2
+    assert sp.simplify(gamma_weighted_exp-expected_gamma_weighted) == 0
 
     # f(d)=(d-1)/(2d)=3/8-eps/16+... . The hard master J-K has
     # Delta_UV+2-L, so the eps*Delta_UV term is -1/16.
