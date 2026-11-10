@@ -542,3 +542,49 @@ auxiliary-mass rearrangement has not yet been promoted to a complete
 \(R^*\) subtraction for the full operator basis. No complete QCD \(Z\)
 matrix, anomalous-dimension block, EOM/IBP quotient, or finite
 UV-minus-EFT Wilson coefficient is claimed.
+
+
+## 15. P1.4b1: mixed rank-two/scalar cross-source UV projections
+
+The mixed rank-two\(\otimes\)scalar and scalar\(\otimes\)rank-two projections
+of the four cross-source QCD graphs have now been evaluated through the
+degree-two UV Taylor coefficient. A necessary orientation clarification
+was made in the numerator note: for the first two topologies the left/right
+momentum pair is \((r_a,r_b)\), whereas for the last two it is
+\((r_b,r_a)\). The scalar projection is insensitive to this swap, but the
+rank-two projection is not.
+
+With \(W(u,v)=\Gamma^{\mu\nu}u_\mu v_\nu\), the common auxiliary-mass
+tensor integral for a topology with left/right momenta
+\(x=A+s\ell\), \(y=B-s\ell\) gives
+\[
+T_i(D)=\frac{D-4}{12}W(A_i,B_i)
++\frac12W(q_A,A_i+B_i).
+\]
+The four ordered pairs are
+\[
+(A_i,B_i)=(p_1,p_4),(p_1,p_3),(p_2,p_4),(p_2,p_3).
+\]
+Combining the explicit gamma-chain signs with the direct color actions
+\((-1,+1,+1,-1)\) gives
+\[
+K_{T\otimes S}(D)
+=\frac{D+8}{12}W(q_A,p_4-p_3),
+\]
+\[
+K_{S\otimes T}(D)
+=-\frac{D+8}{6}W(p_1,p_2).
+\]
+Both have nonzero \(D\to4\) limits. Their \(D=4-2\epsilon\) common
+prefactor is \(1-\epsilon/6\); retain this \(O(\epsilon)\) term for
+finite-scheme bookkeeping.
+
+The exact symbolic audit verifies the arbitrary-momentum wedge identities
+and independent rational samples (6/6). See
+\`research/RC-001-QLD8-cross-source-mixed-tensor-UV-poles.md\` and
+\`validation/RC-001-QLD8-cross-source-mixed-tensor-UV-audit.txt\`.
+
+This closes only the two mixed projections. The rank-two\(\otimes\)rank-two
+projection is still required before the complete direct Dirac pole can be
+assembled. The common graph phase, external-gluon completion, and
+EOM/IBP reduction are also outstanding.
