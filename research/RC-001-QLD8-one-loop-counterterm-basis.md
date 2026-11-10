@@ -649,3 +649,12 @@ Acceptance boundary: P1.5a and the raw P1.5b TT contraction are closed locally. 
 
 
 Independent follow-up check: the coefficient multiplying \(g_{\alpha\beta}\) in the four-topology TT sum was re-derived by taking both free indices in a formal transverse direction, with all external momentum components zero. The resulting symbolic-\(D\) metric coefficient agrees exactly with the compact \(J_{\alpha\beta}(D)\) expression. This supplements the 16-component symbolic tensor identity and the explicit four-dimensional Dirac-matrix diagnostics.
+
+
+## 18. P1.5c merged direct-pairing cross-source UV kernel
+
+The four sectors are assembled in research/RC-001-QLD8-P1.5c-merged-cross-source-counterterm.md. Exact coefficients are Fss=(D^2+10D-8)/48, Fts=(D+8)/12, Fst=-(D+8)/6, and TT tensor J_ab(D). Their complete D=4-2epsilon expansions are retained. The tree-singlet cross-source subset has zero direct-singlet and nonzero direct-octet projection. Momentum conservation reduces d.R and the left mixed wedge as recorded in the P1.5c note. No Fierz, EOM or IBP quotient is taken.
+
+The symbolic audit and output are calculations/RC-001-QLD8-P1.5c-merged-cross-source-audit.py and validation/RC-001-QLD8-P1.5c-merged-cross-source-audit.txt.
+
+Acceptance boundary: this closes only the merged raw four-sector cross-source kernel. Nonexceptional off-shell/R* subtraction, D-dimensional operator closure, external-gluon Ward identities, EOM/IBP, full physical/evanescent/EOM Z block, same-bilinear sectors and finite UV-minus-EFT matching remain open.
