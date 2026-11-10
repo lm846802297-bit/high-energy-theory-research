@@ -92,6 +92,25 @@ class TestRC001Dim6WWCrossboxExactRouting(unittest.TestCase):
         total_derivative = dbarpsi*psi + barpsi*dpsi
         self.assertEqual(sp.simplify(Q-Q_hc-I*total_derivative), 0)
 
+    def test_gamma_function_master_matches_J_minus_K(self):
+        eps = MOD.eps
+        exact = MOD.gamma_function_j_minus_k()
+        expanded = sp.series(exact, eps, 0, 1).removeO()
+        expected = (
+            1/eps-sp.EulerGamma+sp.log(4*sp.pi)+2-MOD.L
+        )/MOD.M2
+        self.assertEqual(sp.simplify(expanded-expected), 0)
+
+    def test_gamma_function_weighted_full_coefficient(self):
+        eps = MOD.eps
+        exact = (MOD.d-1)/(2*MOD.d)*MOD.gamma_function_j_minus_k()
+        expanded = sp.series(exact, eps, 0, 1).removeO()
+        expected = (
+            sp.Rational(3,8)*(1/eps-sp.EulerGamma+sp.log(4*sp.pi))
+            -sp.Rational(3,8)*MOD.L+sp.Rational(11,16)
+        )/MOD.M2
+        self.assertEqual(sp.simplify(expanded-expected), 0)
+
     def test_d_dimensional_finite_term(self):
         eps = MOD.eps
         f = sp.series((MOD.d-1)/(2*MOD.d), eps, 0, 2).removeO()
