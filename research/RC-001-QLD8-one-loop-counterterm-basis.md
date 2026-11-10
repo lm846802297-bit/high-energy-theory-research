@@ -667,3 +667,12 @@ A formal arbitrary-D Clifford audit establishes that each of the four cross-sour
 The two same-bilinear chains obey \(\gamma^\rho\Gamma_{(n)}\gamma_\rho=(-1)^n(D-2n)\Gamma_{(n)}\), so their direct-pairing structures are rank zero plus rank two on the affected bilinear. In particular, the tensor coefficient is \(D-4=-2\epsilon\) and must be retained for finite local terms.
 
 This is only Dirac-rank closure for the six listed one-gluon Feynman-gauge four-fermion exchange numerators. It does not close the gauge-covariant dimension-eight operator basis or calculate the two same-bilinear loop poles, external-leg counterterms, background-gluon amplitudes, the full \(Z\) block, or matching. See research/RC-001-QLD8-P1.5c-plus-Ddim-Dirac-closure.md and its companion audit script/output.
+
+
+## 19. P1.6a: same-bilinear exchange UV poles
+
+The two within-source graphs have the same external derivative factor q_A^2. Their D-dimensional chain is D(r dot s)P_X+(D-4)Gamma^{mu nu}r_mu s_nu P_X. A nonexceptional off-shell Feynman-parameter calculation gives I_S^UV=-i D/(4(4 pi)^2 epsilon) and [I_T]_UV pole=0. The antisymmetric numerator reduces after the shift to x p1 wedge p2, while the remaining three-propagator loop integral is proportional to Gamma(1+epsilon), not Gamma(epsilon). Thus the D-4 factor does not multiply a UV pole in these graphs.
+
+With the frozen Feynman-rule phase and direct-basis color matrix M_within=diag(-4/3,1/6), the two-graph block is -D^2 M_within/2 = diag(2D^2/3,-D^2/12), multiplying q_A^2(P_R tensor P_L) in the normalized i C g_s^2/(16 pi^2 epsilon) amplitude. On the tree-singlet source, the coefficient is C_F D^2/2 = 8 C_F - 8 C_F epsilon + 2 C_F epsilon^2, equal to 32/3 at the strict SU(3), D=4 pole residue.
+
+The derivation and audit are in research/RC-001-QLD8-P1.6a-same-bilinear-UV-poles.md, calculations/RC-001-QLD8-P1.6a-same-bilinear-UV-audit.py, and validation/RC-001-QLD8-P1.6a-same-bilinear-UV-audit.txt. The earlier P1.5c+ wording is corrected: retain the D-4 numerator through integration, but this specific nonexceptional tensor integral is UV finite and gives no UV-pole-induced finite local term. External-leg counterterms, background-gluon completion, full operator subtraction, EOM/IBP, complete Z block and finite matching remain open.
