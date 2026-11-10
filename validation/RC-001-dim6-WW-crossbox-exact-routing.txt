@@ -21,6 +21,11 @@ The SU(2) triplet weights are (-,+,+,-)/4 for pairs (01,02,05,06).
 The weighted integrand reduces to
   (d-1)/(2d) (J-K).
 
+Independent gamma-function evaluation:
+  J_full-K_full = -(M_E^2) int_k 1/[k^4 (k^2-M_E^2)^2]
+  = [Delta_IR + 2 - L]/M_E^2 at O(eps^0).
+  Multiplication by (d-1)/(2d) reproduces the full IR-pole coefficient and finite 11/16.
+
 Scalar masters:
   J_hard = (Delta_UV + 1 - L)/M_E^2
   J_soft = (-Delta_UV + Delta_IR)/M_E^2
@@ -42,9 +47,9 @@ Dimensional finite term:
   final finite constant = 11/16
 
 Local execution:
-  9/9 regression tests passed using SymPy.
+  11/11 regression tests passed using SymPy.
   Test source: calculations/test_RC001_dim6_WW_crossbox_exact_routing.py
-  The test suite checks explicit vector-numerator reductions, integrated J/K coefficients, SU(2)-weighted sum, hard/soft/full master split, UV/IR pole bookkeeping, the O(eps) finite term, and the Hermitian-conjugate operator identity modulo a total derivative.
+  The test suite checks explicit vector-numerator reductions, integrated J/K coefficients, SU(2)-weighted sum, hard/soft/full master split, UV/IR pole bookkeeping, the O(eps) finite term, the Hermitian-conjugate operator identity modulo a total derivative, and an independent gamma-function evaluation of the combined full master.
 
 Evidence boundary:
   This is one fixed ordered tree contraction with unit multiplicity.
