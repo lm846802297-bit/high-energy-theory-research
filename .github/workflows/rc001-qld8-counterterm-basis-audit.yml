@@ -12,6 +12,9 @@ on:
       - "calculations/RC-001-QLD8-QCD-color-factor-audit.py"
       - "research/RC-001-QLD8-QCD-color-factor-block.md"
       - "validation/RC-001-QLD8-QCD-color-factor-audit.txt"
+      - "calculations/RC-001-QLD8-QCD-momentum-routing-audit.py"
+      - "research/RC-001-QLD8-QCD-one-loop-momentum-routing.md"
+      - "validation/RC-001-QLD8-QCD-momentum-routing-audit.txt"
 
 permissions:
   contents: read
@@ -32,3 +35,5 @@ jobs:
         run: python calculations/RC-001-QLD8-counterterm-basis-audit.py
       - name: Run exact QLD8 QCD color-factor audit
         run: python calculations/RC-001-QLD8-QCD-color-factor-audit.py
+      - name: Run exact QLD8 QCD momentum-routing audit
+        run: python calculations/RC-001-QLD8-QCD-momentum-routing-audit.py
