@@ -114,7 +114,9 @@ If the operator is rewritten in the crossed color-octet current basis, adjoint-c
 
 ## 5. UV extraction still required
 
-The source factor \((q_A\pm\ell)^2\) contains \(\ell^2\) and \(q_A\cdot\ell\) terms. Combined with the two fermion numerators, the unexpanded integrand has superficial degree \(+2\). The dimension-eight logarithmic counterterm must be isolated by an IR-safe off-shell UV expansion through external-momentum degree two. Do not discard the loop-momentum terms before UV/IR separation; power-like pieces and logarithmic dimension-eight terms must be distinguished.
+The four cross-source exchanges \((\bar Q,Q)\), \((\bar Q,\bar d)\), \((Q,d)\), and \((\bar d,d)\) carry \((q_A\pm\ell)^2\), which contains \(\ell^2\) and \(q_A\cdot\ell\) terms. Combined with the two fermion numerators, these four unexpanded integrands have superficial degree \(+2\). By contrast, the two within-source exchanges \((\bar Q,d)\) and \((Q,\bar d)\) carry the external factor \(q_A^2\) and are logarithmically divergent by power counting.
+
+For the four cross-source graphs, the dimension-eight logarithmic counterterm must be isolated from the power-like pieces by an IR-safe off-shell UV expansion through external-momentum degree two (or a consistent \(R^*\) implementation). Do not discard the loop-momentum terms before UV/IR separation; the degree-two logarithmic local polynomial and any power-like lower-dimensional pieces must be distinguished.
 
 Next steps:
 1. Fix the complete relative Feynman-rule signs and fermion-flow conventions for all six graphs.
