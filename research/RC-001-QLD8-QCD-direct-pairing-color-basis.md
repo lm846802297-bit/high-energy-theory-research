@@ -8,10 +8,13 @@
 
 The source operator is naturally written as
 \[
-\mathcal O_{d^\dagger d}
-=(D_\mu\bar Q_i P_R d_i)^\dagger_{\rm source}
-(D^\mu\bar d_jP_LQ_j)
-\sim(\bar Q_iP_Rd_i)(\bar d_jP_LQ_j),
+\mathcal O_{d^\dagger d}^{(8)}
+=(D_\mu J_d^\dagger)(D^\mu J_d),\qquad
+J_d=\bar d_RY_d^\dagger Q_L,
+\]
+whose fermion factors are
+\[
+(\bar Q_iP_Rd_i)(\bar d_jP_LQ_j),
 \]
 with direct spinor pairings \((\bar Q,d)\) and \((\bar d,Q)\). The QCD one-loop open-line numerators can be kept in this pairing; there is no need to Fierz the spinors into \((\bar Q,Q)(\bar d,d)\) before renormalization.
 
