@@ -93,6 +93,7 @@ def audit():
 
 if __name__=="__main__":
     result=audit()
+    print("RC-001 chiral Fierz exact-matrix audit")
     for name,count in result["identities"].items():
         print(f"PASS {name}: {count}/256 components")
     print(f"PASS total: {result['total_exact_components_checked']}/1024 exact components")
