@@ -306,6 +306,28 @@ At \(\mu_R=M_E\), its finite hard subset is
 \left.C_3^{WW,\rm box}\right|_{\rm finite}
 =\frac{11}{16}\frac{g_2^2}{16\pi^2}C_{LD}.
 \]
+The weak tensor is exactly the Pauli-triplet product
+\[
+(T_3)_{ij,kl}=\sum_I\sigma^I_{ij}\sigma^I_{kl}.
+\]
+A convenient gauge-covariant operator representative for this local derivative structure is
+\[
+Q_{LD}^{(3)}
+=(\bar L\sigma^I H)i\gamma^\mu
+(D_\mu^{\rm adj})^{IJ}(H^\dagger\sigma^J L),
+\qquad
+(D_\mu^{\rm adj}Y)^I
+=\partial_\mu Y^I+g_2\epsilon^{IJK}W_\mu^JY^K.
+\]
+Thus the corresponding EFT one-\(W\) contact associated with this sub-block is
+\[
+\mathcal L_{\rm contact}
+=i g_2 C_3^{WW,\rm box}\epsilon^{IJK}
+(\bar L\sigma^I H)\gamma^\mu W_\mu^J
+(H^\dagger\sigma^K L).
+\]
+The Pauli normalization and adjoint-commutator identity are independently checked in calculations/RC-001-dim6-WW-triplet-current-contact.py and validation/RC-001-dim6-WW-triplet-current-contact.txt. This is the local EFT contact dictated by the triplet derivative representative; it is not the UV one-loop five-point form factor.
+
 This is **not** yet a complete \(C_{HL}^{(1,3)}\) matching coefficient. EOM/current projection must be applied only after all routings and the full common-basis amplitude are summed.
 
 The previous common-numerator candidate \(+3/(4M_E^2)\) is superseded. The current exact-routing result \(11/(16M_E^2)\) differs because the four pairs have distinct shifted denominators/numerators and the \(O(\epsilon)\) angular term is retained.
