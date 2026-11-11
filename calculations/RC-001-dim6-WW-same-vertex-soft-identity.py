@@ -84,6 +84,10 @@ def same_vertex_data():
 
     # The EFT derivative momentum is q_D=p3+p4=-P.
     qD = Q
+    momentum_conservation = {
+        p4[i]: -p1[i]-p2[i]-p3[i] for i in range(4)
+    }
+    qD_conserved = [sp.expand(component.subs(momentum_conservation)) for component in qD]
     return {
         "P": P,
         "Q": Q,
@@ -95,6 +99,7 @@ def same_vertex_data():
         "heavy_projected": heavy_projected,
         "expected_heavy": expected_heavy,
         "qD": qD,
+        "qD_conserved": qD_conserved,
     }
 
 
@@ -104,8 +109,8 @@ def main():
     assert sp.simplify(data["N04_hard"]-data["expected_numerator"]) == sp.zeros(4)
     assert sp.simplify(data["heavy_projected"]-data["expected_heavy"]) == sp.zeros(4)
     assert sp.simplify(
-        sp.Matrix(data["qD"])+sp.Matrix(data["P"])
-    ) == sp.zeros(4)
+        sp.Matrix(data["qD_conserved"])+sp.Matrix(data["P"])
+    ) == sp.zeros(4,1)
 
     print("RC-001 same-vertex Q_LD pure-WW soft identity")
     print("LD-W-03 denominators: k^2, (k+p1)^2, (k-p2)^2")
