@@ -1,7 +1,7 @@
 # RC-001 — Common-\(k\) ordinary-matter longitudinal assembly ledger
 
 **Workstream:** RC-001-WW-UV-FF-02, Stage B2c-IVn-d  
-**Status:** the pairwise ingredients are indexed: cross-vertex and same-vertex fermion WTIs, six scalar-line/seagull endpoint kernels, six graph-specific \(R_{\rm FG}\) current projections, orientation-dependent three-W phases, the local Yukawa-singlet endpoint cancellation with common heavy-channel routing, the 1PI/1PR LSZ boundary, and the exact longitudinal inverse-kernel completion target for (R_{\rm FG}). This is not yet a summed Slavnov–Taylor identity. The scalar symmetric and commutator tensors remain distinct; reducible external-leg/LSZ terms and the gauge-fixing/ghost sector remain separate.
+**Status:** the pairwise ingredients are indexed: cross-vertex and same-vertex fermion WTIs, six scalar-line/seagull endpoint kernels, six graph-specific \(R_{\rm FG}\) current projections, orientation-dependent three-W phases, the local Yukawa-singlet endpoint cancellation with common heavy-channel routing, the 1PI/1PR LSZ boundary, and the exact longitudinal inverse-kernel completion target for \(R_{\rm FG}\). This is not yet a summed Slavnov–Taylor identity. The scalar symmetric and commutator tensors remain distinct; reducible external-leg/LSZ terms and the gauge-fixing/ghost sector remain separate.
 
 ## 1. Frozen common-\(k\) definitions
 
@@ -87,7 +87,7 @@ The scalar-line/seagull sub-block is now also explicit. Its weak tensors remain
 \quad\text{and}\quad
 \mathcal G_{AB}^a\ \text{or}\ \mathcal G_{FS}^a
 \]
-as separate structures. The local Yukawa-singlet endpoint variation is now checked separately: \\( (R_{\\bar L}^a+R_H^a)T_0=0 \\) and \\( (R_{H^\\dagger}^a+R_L^a)T_0=0 \\), and the common-​\\(k\\) shifts show that the two fields at each Yukawa vertex multiply the same heavy-channel spectator. This closes the local charge-sum sub-block. It does not yet provide the complete reducible external-leg/LSZ contribution or the full gauge variation of the amputated Green function. Do not infer a complete scalar-endpoint cancellation merely from the universal arbitrary-current kernel identity.
+as separate structures. The local Yukawa-singlet endpoint variation is now checked separately: \( (R_{\\bar L}^a+R_H^a)T_0=0 \) and \( (R_{H^\\dagger}^a+R_L^a)T_0=0 \), and the common-​\(k\) shifts show that the two fields at each Yukawa vertex multiply the same heavy-channel spectator. This closes the local charge-sum sub-block. It does not yet provide the complete reducible external-leg/LSZ contribution or the full gauge variation of the amputated Green function. Do not infer a complete scalar-endpoint cancellation merely from the universal arbitrary-current kernel identity.
 
 ## 5. Direct-attachment census
 
