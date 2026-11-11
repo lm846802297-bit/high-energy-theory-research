@@ -17,6 +17,9 @@ class TestTripletOperatorMap(unittest.TestCase):
     def test_derivative_current_decomposition(self):
         self.assertEqual(MOD.derivative_current_identity(), 0)
 
+    def test_eom_ibp_yukawa_source_reduction(self):
+        self.assertEqual(MOD.eom_ibp_reduction_identity(), 0)
+
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)
