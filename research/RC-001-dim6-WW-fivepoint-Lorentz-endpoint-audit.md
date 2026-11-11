@@ -228,13 +228,11 @@ It checks:
 - six-pair topology census: 12+6+6=24.
 
 This does **not** establish:
-1. the raw weak-index matrix ordering of every five-point graph;
-2. the phase-weighted sum of the matter-line commutator pieces with the three-W graph;
-3. cancellation of \(D(k)-D(k+q)\) against the shifted matter endpoint terms after a common loop-momentum routing;
-4. the complete scalar-line/seagull/three-W sum for each pair;
-5. the raw weak-index order for same-vertex LD-W-03/04;
-6. the gauge-fixing/ghost Slavnov–Taylor completion;
-7. external-leg/LSZ and counterterm completion;
-8. any integrated five-point hard coefficient or transverse form factor.
+1. the Lorentz-weighted sum of the matter-line commutator pieces with the three-W graph;
+2. cancellation of \(D(k)-D(k+q)\) against the shifted matter endpoint terms after a common loop-momentum routing;
+3. the complete scalar-line/seagull/three-W sum for each pair;
+4. the gauge-fixing/ghost Slavnov–Taylor completion;
+5. external-leg/LSZ and counterterm completion;
+6. any integrated five-point hard coefficient or transverse form factor.
 
-The next step is not a new hard integral. First derive the raw weak-index order and the exact shifted heavy/light momenta for each graph, then place the Lorentz endpoint expressions above over a common loop variable and perform the pairwise matter-line plus three-W sum. Only after that algebra closes should the UV and EFT five-point hard/soft integrals be evaluated.
+The raw weak-index ordering and relative phase factors for all 24 direct attachments are now recorded in the cross-vertex and same-vertex bridge notes. The B1 source has already checked all 24 momentum routes, including the same-vertex \(P_E=P_{FS}+q\) shift. The next step is therefore to insert those fixed inputs into the Lorentz numerators, contract each graph with \(q_\alpha\), and perform the common-loop-momentum shift algebra. Keep the scalar seagull tensors distinct and retain \(R_{\rm FG}\). Only after that integrand-level sum closes should the UV and EFT five-point hard/soft integrals be evaluated.
