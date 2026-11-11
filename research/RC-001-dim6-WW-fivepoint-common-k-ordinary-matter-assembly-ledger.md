@@ -106,11 +106,11 @@ for LD-W-01…06. No new topology is introduced in IVl/IVm/IVn-a.
 
 ## 6. Remaining assembly gates
 
-1. Add the two Yukawa-singlet endpoint variations with their shifted four-point amplitudes, retaining the actual raw weak-index order and the \(P_L/P_R\) endpoint terms.
-2. Add external-field emissions/LSZ terms and identify which are reducible contributions to the five-point Green function.
-3. Sum the scalar \(\mathcal S_X\) terms with the Yukawa/external endpoint terms; keep \(\mathcal G_{AB}\) and \(\mathcal G_{FS}\) separate until their orientation-specific phases are applied.
+1. Write the reducible external-field W emissions explicitly and separate them from the 1PI five-point vertex used for Wilson matching; keep the common heavy-channel factors and external propagators visible.
+2. Combine the fermion WTI endpoint terms with the local Yukawa-singlet charge cancellation, retaining the \(P_L/P_R\) endpoint pieces and raw weak-index order.
+3. Sum the scalar \(\mathcal S_X\) terms with the corresponding endpoint/LSZ terms; keep \(\mathcal G_{AB}\) and \(\mathcal G_{FS}\) separate until their orientation-specific phases are applied.
 4. Combine the ordinary-matter integrand with the explicit RFG kernels and the three-W terms.
-5. Only then add the gauge-fixing/ghost Slavnov–Taylor sector and counterterms.
+5. Only then add the gauge-fixing/ghost Slavnov–Taylor sector and the \(W\)-field, gauge-coupling, matter-field, Yukawa, heavy-mass, and operator counterterms.
 6. After the complete off-shell identity closes, perform the common-regulator UV–EFT subtraction and compare the local longitudinal contact to the existing EFT one-\(W\) vertex.
 
 No loop integration, complete STI closure, transverse form factor, UV–EFT matching coefficient, or Wilson coefficient is claimed at this stage.
