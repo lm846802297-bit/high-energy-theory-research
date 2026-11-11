@@ -17,7 +17,7 @@ General routing:
 Direct EFT insertion comparison:
   The Q_LD derivative momentum is q_D=p3+p4+k.
   Momentum conservation gives q_D=k-p1-p2, equal to the soft limit of the UV heavy momentum.
-  The independently constructed EFT numerator equals the UV numerator after the soft heavy expansion for all four pairs (zero symbolic residuals).
+  Substituting q_D for q_E makes the EFT numerator equal the UV numerator after the soft heavy expansion for all four pairs (zero symbolic residuals). This is an algebraic routing identity, not an independent diagram-generation check.
 
 Exact four-dimensional Euclidean Clifford/SymPy residue:
   LD-W-01: (-1, 0, -1) in (slash p1, slash p2, slash p3)
@@ -51,9 +51,9 @@ Tensor-basis finding:
   Retain gamma^[mu nu rho] in d dimensions until after UV-EFT subtraction.
 
 Reproduction:
-  The exact Clifford algebra, four pair residues, weighted T3 residue, exceptional
-  limit, and epsilon-parameter polynomial were independently reproduced with SymPy
-  in the current calculation session.
+  The exact four-dimensional Clifford algebra, four pair residues, weighted T3 residue,
+  exceptional limit, and epsilon-parameter polynomial were reproduced with SymPy in
+  the current calculation session.
   The scalar triangle and epsilon moment were independently evaluated with mpmath.
   Repository regression file: calculations/test_RC001_dim6_WW_nonexceptional_soft_pole.py
   Nine regression cases are supplied, including the direct UV-soft/EFT numerator identity; this record does not claim a GitHub Actions pass.
