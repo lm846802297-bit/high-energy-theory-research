@@ -12,6 +12,7 @@
 
 ### 从这里开始
 
+0. 每次开始任务前，先阅读根目录的强制规范 [AGENTS.md](AGENTS.md)。
 1. 阅读[详细中文用户手册](docs/USER_GUIDE.zh-CN.md)，了解项目设置、工作流、研究变更、证据、验证和审查。
 2. 阅读[Scientific Diff 工作流规范](docs/scientific-diff-workflow.md)。
 3. 每项实质性研究变更都应从[研究变更模板](templates/research-change.md)开始。

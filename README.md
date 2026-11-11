@@ -12,6 +12,7 @@ The workflow is designed for theoretical particle physics, UV–EFT matching, pe
 
 ### Start here
 
+0. Before every task, read the mandatory repository instructions in [AGENTS.md](AGENTS.md).
 1. Read the [detailed User Guide](docs/USER_GUIDE.md) for project setup, workstreams, research changes, evidence, validation, and review.
 2. Read [the workflow specification](docs/scientific-diff-workflow.md).
 3. Copy [the research-change template](templates/research-change.md) for each substantive research change.
