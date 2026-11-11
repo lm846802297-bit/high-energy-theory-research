@@ -1,7 +1,7 @@
 # RC-001 — UV five-point Ward endpoint decomposition
 
 **Workstream:** RC-001-WW-UV-FF-02, Stage B2c-IVb  
-**Status:** the oriented A/B fermion and scalar endpoint identities, the physical Yukawa-singlet charge sums, and the three-W/Feynman-gauge kernel identities are now collected in one endpoint ledger. This establishes the exact algebraic pieces that must telescope. It does not yet claim that the complete Lorentz-weighted 24-graph sum has been evaluated.
+**Status:** the oriented A/B fermion and scalar endpoint identities, physical Yukawa-singlet charge sums, and three-W/Feynman-gauge kernel identities are collected here. The raw weak-index ordering and relative phases for all 24 direct attachments are now closed in the cross-vertex and same-vertex bridge records, and the scalar endpoint weak/Lorentz decomposition is recorded separately. This establishes the algebraic inputs to the Ward sum, but the complete Lorentz-weighted 24-graph integrand has not yet been evaluated.
 
 ## 1. Physical weak generators and Yukawa endpoints
 
@@ -148,4 +148,4 @@ It does **not** establish:
 5. external-leg/LSZ and counterterm completion;
 6. a five-point hard integral, transverse form factor, or Wilson coefficient.
 
-The next step is to build the explicit Lorentz-weighted sum pair by pair, using the physical weak tensors and phase ratios already fixed. The sum must be checked before integration.
+The next step is now specifically the common-loop-momentum Lorentz-weighted sum. Use the B1 routes without re-deriving them, insert the cross-vertex and same-vertex raw weak tensors with their different three-W orientation signs, and keep the scalar-line and seagull tensors separate. The sum must be checked before integration.
