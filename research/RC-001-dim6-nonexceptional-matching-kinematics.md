@@ -250,7 +250,7 @@ C_{\rm hard}^{\rm fin}=
 \]
 At \(\mu_R=M_E\), its coefficients are \((1/2,11/16,1/4)\). The \(p_2\) coefficient reduces to the previously obtained \(11/16\) in the exceptional projection. The \(O(\epsilon)\) terms in \(R_J\) are essential: in particular, \(-\epsilon/16\) multiplying the pole gives the familiar \(-1/16\) finite shift.
 
-The analytic kernels and expansion are in calculations/RC-001-dim6-WW-nonexceptional-hard-expansion.py; eight regression tests are in calculations/test_RC001_dim6_WW_nonexceptional_hard_expansion.py; captured coefficients are in validation/RC-001-dim6-WW-nonexceptional-hard-expansion.txt. These are analytic numerator/tensor reductions for a fixed sub-block, not a generated complete diagram set or a full basis-matched Wilson coefficient.
+The analytic kernels and expansion are in calculations/RC-001-dim6-WW-nonexceptional-hard-expansion.py; eight regression tests are in calculations/test_RC001_dim6_WW_nonexceptional_hard_expansion.py; captured coefficients are in validation/RC-001-dim6-WW-nonexceptional-hard-expansion.txt. A separate explicit 4D Dirac-matrix implementation reproduces all four d=4 pair kernels; its source/output are calculations/RC-001-dim6-WW-hard-explicit-4d-crosscheck.py and validation/RC-001-dim6-WW-hard-explicit-4d-crosscheck.txt. These are analytic numerator/tensor reductions for a fixed sub-block, not a generated complete diagram set or a full basis-matched Wilson coefficient.
 
 ## 4. UV–EFT and \(R^*\) bookkeeping
 
