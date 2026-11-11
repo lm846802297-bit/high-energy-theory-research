@@ -1,7 +1,7 @@
 # RC-001 — UV five-point Lorentz endpoint audit: fermion lines, scalar seagulls, and the three-W chain
 
 **Workstream:** RC-001-WW-UV-FF-02, Stage B2c-IVc  
-**Status:** the Lorentz contractions of both oriented fermion-line insertions, both scalar-line insertions together with their seagulls, the bare three-W vertex, and the Feynman-gauge propagator chain have been checked exactly. The six-pair topology census is mapped to these endpoint classes. This is an exact **Lorentz endpoint audit**, not yet the full weak-index/phase-weighted 24-graph sum. In particular, no cancellation of the matter-line terms against the three-W graph is claimed.
+**Status:** the Lorentz contractions of both oriented fermion-line insertions and both scalar-line insertions, the scalar seagull metric contraction, the bare three-W vertex, and the Feynman-gauge propagator chain have been checked exactly. The scalar-line and seagull Lorentz factors are kept separate: their weak tensors differ, as shown by the subsequent raw-index bridge. This is an exact **Lorentz endpoint audit**, not the full weak-index/phase-weighted 24-graph sum. No cancellation of the matter-line terms against the three-W graph is claimed.
 
 ## 1. Fixed routing variables and scope
 
@@ -62,7 +62,7 @@ Both identities are exact off shell. The numerator/denominator identities are ch
 
 When restoring the chiral projectors, use the oriented propagator WTIs from Stage B2c-I/II. Equations (2.1)–(2.2) display the reduced numerator functions after the common chiral chain has been factored out.
 
-## 3. Scalar-line and seagull longitudinal contractions
+## 3. Scalar-line WTI and the separate seagull Lorentz factor
 
 For the scalar-line numerators used in the fixed routing,
 \[
@@ -76,56 +76,34 @@ q\cdot(r_B^W+r_B^Y)
 Therefore the ordinary scalar-line insertions reduce to
 \[
 \boxed{
-\mathcal W_{A,S}
-=\Delta(r_A^Y)-\Delta(r_A^W),
+q_\alpha N_{A,S}^{\alpha}
+\longrightarrow
+\Delta(r_A^Y)-\Delta(r_A^W),
 }
 \tag{3.1}
 \]
 \[
 \boxed{
-\mathcal W_{B,S}
-=\Delta(r_B^W)-\Delta(r_B^Y).
+q_\alpha N_{B,S}^{\alpha}
+\longrightarrow
+\Delta(r_B^W)-\Delta(r_B^Y).
 }
 \tag{3.2}
 \]
+These are stripped propagator-difference identities. The phase-weighted scalar-line graphs still carry their own ordered weak tensors, \(\mathcal W_A^a\) or \(\mathcal W_B^a\).
 
-These are not the complete scalar endpoint contributions. The scalar seagull has
+The two-gauge scalar seagull has Lorentz vertex proportional to \(g^{\alpha\mu}\), where \(\alpha\) is the external-W index and \(\mu\) is the internal-W index. Its longitudinal contraction is
 \[
-V_{\rm sg}^{ab,\alpha\mu}
-=ig_2^2\{t^a,t^b\}g^{\alpha\mu},
+q_\alpha g^{\alpha\mu}=q^\mu.
+\]
+It therefore supplies a separate \(q^\mu\Delta(r_{\rm sg})\) numerator, with the scalar propagator and spectator factors fixed by the B1 routing. The seagull weak tensor is an anticommutator, not the same ordered tensor as the ordinary scalar-line graph. The exact raw-index result is recorded in
+research/RC-001-dim6-WW-cross-vertex-raw-weak-index-bridge.md:
+\[
+\mathcal S_A^a=\mathcal W_A^a+\widetilde{\mathcal W}_A^a,
 \qquad
-q_\alpha V_{\rm sg}^{ab,\alpha\mu}
-=ig_2^2\{t^a,t^b\}q^\mu.
+\mathcal S_B^a=\mathcal W_B^a+\widetilde{\mathcal W}_B^a.
 \]
-Using the relative phases of the Stage-B2c Feynman-rule ledger (ordinary line insertion \(-g_2\), seagull replacement \(+g_2\)), and retaining the internal scalar-current vectors
-\[
-V_A^\mu=2p_A^\mu-k^\mu,\qquad
-V_B^\nu=-2p_B^\nu-k^\nu,
-\]
-the phase-weighted Lorentz combinations are
-\[
-\boxed{
-\mathcal S_A^\mu
-=g_2\left[
-\Delta(r_A^W)V_A^\mu
--\Delta(r_A^Y)(V_A^\mu-q^\mu)
-\right],
-}
-\tag{3.3}
-\]
-\[
-\boxed{
-\mathcal S_B^\nu
-=g_2\left[
-\Delta(r_B^Y)(V_B^\nu+q^\nu)
--\Delta(r_B^W)V_B^\nu
-\right].
-}
-\tag{3.4}
-\]
-The equations are stated after factoring the common four-point skeleton and the corresponding weak tensor. They are vector identities, not just scalar propagator identities. In particular, the \(q^\mu\) pieces are retained.
-
-The A and B forms differ because the scalar propagator momenta have opposite orientations. Replacing both by one common sign convention would lose the endpoint information needed for the three-W comparison.
+Consequently the scalar-line and seagull pieces must not be combined into one stripped Lorentz vector with a common weak tensor. The full weak-index-weighted combination remains part of the B2c-IV integrand sum.
 
 ## 4. Three-W contraction and the Feynman-gauge remainder
 
@@ -215,17 +193,22 @@ This is a topology count, not a FeynArts/QGRAF-generated diagram count.
 
 For a cross-vertex pair, the Lorentz endpoint factors (2.1)–(3.4) multiply the appropriate heavy-line numerator and the opposite endpoint current. The three-W term multiplies the two internal-W propagators and the shifted matter current at the second W endpoint. For LD-W-03/04, the heavy propagator is a spectator external-channel propagator in the four-point seed; its momentum in each five-point attachment must be fixed by the actual all-incoming momentum conservation at the corresponding Yukawa vertex.
 
-## 6. Routing gate for the same-vertex pairs LD-W-03/04
+## 6. Same-vertex momentum routing is already checked in B1
 
-The four-point same-vertex routing is
+For LD-W-03/04, the four-point seed has
 \[
-r_F=k+p_1,\qquad r_S=p_2-k,\qquad r_F+r_S=P=p_1+p_2
+r_F=k+p_F,\qquad r_S=p_S-k,\qquad
+P_{FS}=p_F+p_S.
 \]
-for LD-W-03, with the conjugate right-vertex routing for LD-W-04.
+The original B1 routing audit explicitly assigns the external-W insertions on the fermion line, scalar line, internal-W line, and scalar seagull. In each case the momentum entering the Yukawa vertex is shifted so that
+\[
+\boxed{P_E=P_{FS}+q.}
+\]
+The vertex momentum-conservation equations for these four attachment types are included in
+calculations/RC-001-dim6-WW-UV-fivepoint-routing-Ward-numerators.py
+and were checked together with the cross-vertex routes (24/24).
 
-An external W inserted on one of the matter propagators changes the momentum entering the Yukawa vertex and therefore changes the heavy-channel momentum. In a three-W insertion, the two internal-W legs carry momenta differing by \(q\); consequently one of \(r_F,r_S\) is shifted while the other is not. The heavy momentum must be reconstructed from their sum for that specific orientation.
-
-Accordingly, the earlier schematic statement that every attachment in LD-W-03/04 carries the same \((P_{FS}+q)^2-M_E^2\) denominator is **not used as an input to this audit**. It requires a graph-by-graph momentum-conservation derivation, especially for the three-W insertion. The present script checks only the Lorentz endpoint identities and does not validate that heavy denominator assignment.
+Thus the same-vertex heavy-channel shift is **not an unresolved momentum-routing gate**. The present Lorentz endpoint script does not independently rederive those equations, but the B1 route record already validates them. The remaining same-vertex issue is the raw weak-index matrix order for the \(S\to F\) internal-W orientation, not the heavy denominator assignment.
 
 ## 7. Reproduction and evidence boundary
 
@@ -237,8 +220,8 @@ validation/RC-001-dim6-WW-fivepoint-Lorentz-endpoint-audit.txt.
 It checks:
 - A/B fermion numerator differences: 16/16 Dirac components each;
 - A/B scalar propagator differences: 2/2;
-- A scalar-line plus seagull vector identity: 4/4 Lorentz components;
-- B scalar-line plus seagull vector identity: 4/4 Lorentz components;
+- A/B scalar-line propagator-difference identities: 2/2;
+- scalar seagull metric contraction (q_alpha g^{\alpha\mu}=q^\mu): 4/4 Lorentz components;
 - three-W contraction: 16/16 Lorentz components;
 - Feynman-gauge propagator chain including \(R_{\rm FG}\): 16/16 components;
 - non-vanishing of \(R_{\rm FG}\) at a generic rational diagnostic point;
@@ -249,7 +232,7 @@ This does **not** establish:
 2. the phase-weighted sum of the matter-line commutator pieces with the three-W graph;
 3. cancellation of \(D(k)-D(k+q)\) against the shifted matter endpoint terms after a common loop-momentum routing;
 4. the complete scalar-line/seagull/three-W sum for each pair;
-5. the same-vertex LD-W-03/04 heavy-channel routing for every attachment;
+5. the raw weak-index order for same-vertex LD-W-03/04;
 6. the gauge-fixing/ghost Slavnov–Taylor completion;
 7. external-leg/LSZ and counterterm completion;
 8. any integrated five-point hard coefficient or transverse form factor.
