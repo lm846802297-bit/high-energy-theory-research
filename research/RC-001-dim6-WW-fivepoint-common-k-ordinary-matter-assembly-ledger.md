@@ -1,7 +1,7 @@
 # RC-001 — Common-\(k\) ordinary-matter longitudinal assembly ledger
 
 **Workstream:** RC-001-WW-UV-FF-02, Stage B2c-IVn-e  
-**Status:** the pairwise ingredients are indexed: cross-vertex and same-vertex fermion WTIs, six scalar-line/seagull endpoint kernels, six graph-specific \(R_{\rm FG}\) current projections, orientation-dependent three-W phases, the local Yukawa-singlet endpoint cancellation with common heavy-channel routing, the 1PI/1PR LSZ boundary, the exact longitudinal inverse-kernel completion target for \(R_{\rm FG}\), and the IVn-e audit of momentum-dependent scalar-current routing. The latter finds that IVh's arbitrary-current identity has not yet been matched to the actual IVl/IVm scalar currents. This is not yet a summed Slavnov–Taylor identity. The scalar symmetric and commutator tensors remain distinct; reducible external-leg/LSZ terms and the gauge-fixing/ghost sector remain separate.
+**Status:** the pairwise ingredients are indexed: cross-vertex and same-vertex fermion WTIs, six scalar-line/seagull endpoint kernels, six graph-specific \(R_{\rm FG}\) current projections, orientation-dependent three-W phases, the local Yukawa-singlet endpoint cancellation with common heavy-channel routing, the 1PI/1PR LSZ boundary, the exact longitudinal inverse-kernel completion target for \(R_{\rm FG}\), the IVn-e audit of momentum-dependent scalar-current routing, and the exact three-W internal-leg exchange identity at the vertex/group-factor level. The latter finds that IVh's arbitrary-current identity has not yet been matched to the actual IVl/IVm scalar currents. This is not yet a summed Slavnov–Taylor identity. The scalar symmetric and commutator tensors remain distinct; reducible external-leg/LSZ terms and the gauge-fixing/ghost sector remain separate.
 
 ## 1. Frozen common-\(k\) definitions
 
@@ -107,7 +107,7 @@ for LD-W-01…06. No new topology is introduced in IVl/IVm/IVn-a…IVn-e.
 ## 6. Remaining assembly gates
 
 1. Derive a graph-specific common-routing bridge for the six scalar endpoints. Match the IVm \(V_A(\kappa),V_B(k),V_S(\kappa)\) currents to the IVl three-W currents, including the full scalar, light-fermion, heavy and W denominators; do not substitute currents by inspection.
-2. For each scalar-containing pair, write the three-W graph in both allowed internal-leg routings and derive the loop-variable transformation, including the Lorentz-index exchange, weak tensor, phase, and ordered Dirac chain. Keep the LD-W-06 A and B seagulls separate.
+2. Use the already checked vertex/group identity \(\epsilon^{acb}\Gamma_{\alpha\nu\mu}(q,-\kappa,k)=\epsilon^{abc}\Gamma_{\alpha\mu\nu}(q,k,-\kappa)\), then derive the full endpoint-level loop-variable transformation for each scalar-containing pair, including scalar propagators, heavy momentum, Lorentz-index exchange, phase, and ordered Dirac chain. Keep the LD-W-06 A and B seagulls separate.
 3. Revisit LD-W-01 as the fermion-only control, and then assemble the six pair-specific matter-line/three-W commutator terms in the common routing.
 4. Combine the fermion WTI endpoint terms with the local Yukawa-singlet charge cancellation, retaining the \(P_L/P_R\) endpoint pieces and raw weak-index order.
 5. Sum the scalar \(\mathcal S_X\) terms with the corresponding seagull and endpoint/LSZ terms; keep \(\mathcal G_{AB}\) and \(\mathcal G_{FS}\) separate until their orientation-specific phases are applied.
