@@ -150,6 +150,36 @@ This identity is off shell: the last term must **not** be discarded before the l
 \]
 the last term maps into the corresponding Higgs-dressed Yukawa/source operator. The total derivative term can be integrated by parts only together with the divergence of the lepton current; that divergence is also controlled by the Yukawa EOM. Therefore the triplet box projection feeds a correlated set of \(O_{H\ell}^{(1)}\)-type current, \(Q_{LD}\), and Yukawa-source representatives before basis reduction. It is not a stand-alone \(O_{H\ell}^{(3)}\) coefficient.
 
+For completeness, with the SM lepton equations of motion in the convention above,
+\[
+i\slashed D L=Y_e H e_R,\qquad
+i(D_\mu\bar L)\gamma^\mu=-\bar e_RY_e^\dagger H^\dagger,
+\]
+the current divergence is
+\[
+\partial_\mu(\bar L\gamma^\mu L)
+=i\big(\bar e_RY_e^\dagger H^\dagger L
+-\bar L Y_e H e_R\big).
+\]
+After integration by parts and use of these EOM, the preceding off-shell identity becomes
+\[
+\boxed{
+Q_{LD}^{(3)}+Q_{LD}
+\doteq
+-\,O_{H\ell}^{(1)}
++(H^\dagger H)
+\big(\bar e_RY_e^\dagger H^\dagger L
++\bar L Y_e H e_R\big),
+}
+\]
+where
+\[
+O_{H\ell}^{(1)}
+=(H^\dagger i\overleftrightarrow D_\mu H)
+(\bar L\gamma^\mu L),
+\]
+and \(\doteq\) denotes equality modulo a total derivative and the light-field EOM. The Yukawa-source term is the Hermitian pair required by the EOM reduction; it is not optional. This gives the operator-level destination of the \(T_3\) derivative tensor in the stated convention. It does not by itself determine its Wilson coefficient, because the full UV/EFT one-\(W\) amplitude and all other matching sub-blocks must still be summed.
+
 The identity follows directly by expanding
 \[
 (\bar L_i\sigma^I_{ij}H_j)i\gamma^\mu
