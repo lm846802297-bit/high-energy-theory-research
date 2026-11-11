@@ -39,6 +39,13 @@ class TestRC001MomentumDependentScalarCurrentAudit(unittest.TestCase):
         self.assertGreater(MOD.nonzero_entries(results["LD-W-06:A-current"]), 0)
         self.assertGreater(MOD.nonzero_entries(results["LD-W-06:B-current"]), 0)
 
+
+    def test_three_w_internal_leg_exchange_preserves_full_vertex(self):
+        self.assertEqual(
+            MOD.verify_three_w_internal_leg_exchange(),
+            (64, 27, 1728),
+        )
+
     def test_main_reports_no_physical_non_cancellation_claim(self):
         import contextlib
         import io
@@ -47,6 +54,9 @@ class TestRC001MomentumDependentScalarCurrentAudit(unittest.TestCase):
             MOD.main()
         captured = output.getvalue()
         self.assertIn("12/12 vector components", captured)
+        self.assertIn("64/64", captured)
+        self.assertIn("27/27", captured)
+        self.assertIn("1728/1728", captured)
         self.assertIn("LD-W-06:A-current", captured)
         self.assertIn("LD-W-06:B-current", captured)
         self.assertIn("no physical non-cancellation is claimed", captured)
