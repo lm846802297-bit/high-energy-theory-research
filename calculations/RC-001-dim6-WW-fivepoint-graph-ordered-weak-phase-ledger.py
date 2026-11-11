@@ -1,5 +1,10 @@
 #!/usr/bin/env python3
-"""RC-001: graph-ordered weak tensors tied to B2c Feynman-rule phases."""
+"""Exact signed-action SU(2) algebra check for RC-001 B2c.
+
+The script verifies candidate ordered products in the signed WTI-action basis.
+It does NOT establish their mapping to the raw weak-index products of every
+Feynman graph; that is the separate B2c-IV raw-index bridge.
+"""
 from itertools import product
 import sympy as sp
 
@@ -73,10 +78,8 @@ def G_tensor(slot_a, slot_b, external_a):
     ))
 
 
-def verify_graph_orderings():
-    pair_checks = 0
-    a_checks = 0
-    b_checks = 0
+def verify_candidate_signed_action_orderings():
+    pair_checks = a_checks = b_checks = 0
     for pair_id, slot_a, slot_b, c0, c3 in PAIRS:
         T_ab = pair_tensor(slot_a, slot_b)
         for ix in INDICES:
@@ -86,9 +89,6 @@ def verify_graph_orderings():
 
         for external_a in range(3):
             G = G_tensor(slot_a, slot_b, external_a)
-
-            # Actual A-line graph ordering: internal-W generator first,
-            # external-W generator second. Yukawa-endpoint ordering is reversed.
             graph_A = lambda *ix: sp.simplify(sum(
                 act(
                     apply(apply(T0, slot_a, external_a), slot_b, b),
@@ -101,8 +101,6 @@ def verify_graph_orderings():
                 assert sp.simplify(graph_A(*ix)-yukawa_A(*ix)+I*G(*ix)) == 0
                 a_checks += 1
 
-            # Actual B-line graph ordering: external-W generator first,
-            # internal-W generator second. Yukawa-endpoint ordering is reversed.
             graph_B = apply(T_ab, slot_b, external_a)
             yukawa_B = lambda *ix: sp.simplify(sum(
                 act(
@@ -117,7 +115,7 @@ def verify_graph_orderings():
     return pair_checks, a_checks, b_checks
 
 
-def verify_seagulls():
+def verify_candidate_seagulls():
     checks = 0
     for _, slot_a, slot_b, _, _ in PAIRS:
         for scalar_slot, other_slot in ((slot_a, slot_b), (slot_b, slot_a)):
@@ -147,27 +145,20 @@ def verify_seagulls():
 
 
 def main():
-    pair, a, b = verify_graph_orderings()
-    seagull = verify_seagulls()
+    pair, a, b = verify_candidate_signed_action_orderings()
+    seagull = verify_candidate_seagulls()
     assert (pair, a, b, seagull) == (96, 288, 288, 288)
 
-    print("RC-001 graph-ordered SU(2) weak tensor / phase ledger")
-    print(f"PASS: six pair tensors reproduce their T0/T3 projections ({pair}/96).")
-    print(f"PASS: A-line graph ordering minus Yukawa-end ordering = -i G_AB ({a}/288).")
-    print(f"PASS: B-line graph ordering minus Yukawa-end ordering = -i G_AB ({b}/288).")
-    print(f"PASS: scalar seagull weak tensor = one-half opposite-endpoint generator ({seagull}/288).")
-    print("ORDERED GRAPH TENSORS:")
-    print("  A matter insertion: T_A^b T_A^a T_B^b")
-    print("  B matter insertion: T_A^b T_B^a T_B^b")
-    print("  A seagull: {T_A^a,T_A^b} T_B^b")
-    print("  B seagull: T_A^b {T_B^a,T_B^b}")
-    print("  three-W: epsilon^{abc} T_A^b T_B^c")
-    print("PHASES RELATIVE TO THE FOUR-POINT SKELETON:")
-    print("  ordinary matter line: -g2")
-    print("  scalar seagull: +g2")
-    print("  three-W: -i g2")
-    print("BOUNDARY: group/phase ledger only; no Lorentz-weighted 24-graph sum or full STI closure.")
-    
+    print("RC-001 signed-action SU(2) algebra check (B2c-III)")
+    print(f"PASS: six seed pair tensors reproduce T0/T3 projections ({pair}/96).")
+    print(f"PASS: candidate A-order commutator identity ({a}/288).")
+    print(f"PASS: candidate B-order commutator identity ({b}/288).")
+    print(f"PASS: candidate scalar-seagull signed-action identity ({seagull}/288).")
+    print("BOUNDARY: signed-action algebra only.")
+    print("The raw weak-index ordering of each Feynman graph is not established here.")
+    print("Map the explicit t^a index contractions and fermion/scalar arrows before")
+    print("combining these candidate tensors with the Feynman-rule phase ratios.")
+
 
 if __name__ == "__main__":
     main()
