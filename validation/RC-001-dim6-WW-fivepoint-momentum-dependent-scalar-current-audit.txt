@@ -25,6 +25,7 @@ BOUNDARY: no physical non-cancellation is claimed; no graph is omitted, no R_FG 
 Three-W exchange identity:
   Gamma_{alpha nu mu}(q,-k-q,k) = -Gamma_{alpha mu nu}(q,k,-k-q)
   epsilon^{a c b} = -epsilon^{a b c}; their product is invariant.
+This is a vertex-slot relabeling only; it does not exchange the attached matter endpoints or their momenta.
 
 Execution: local exact SymPy symbolic/rational arithmetic.
 Diagnostic point: k=(4,1,2,1), q=(1,2,0,1),
