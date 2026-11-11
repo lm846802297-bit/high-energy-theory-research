@@ -113,7 +113,7 @@ The source and output files are listed in the two companion notes. These are loc
 
 **Closed:**
 - the raw weak-index matrix ordering, the endpoint orientation of the three-W group tensor, the relative phase factors, and the scalar seagull anticommutators for all 24 direct attachments;
-- the universal common-\(k\) transverse-kernel cancellation between matter-line commutator terms and the three-W graph for all six pair classes, with the \(A\to B\) and \(S\to F\) signs kept distinct;
+- the abstract fixed-current common-\(k\) transverse-kernel identity between matter-line commutator kernels and the three-W inverse-kernel difference, with the \(A\to B\) and \(S\to F\) signs kept distinct. Its graph-specific use for momentum-dependent scalar currents remains subject to the IVn-e routing bridge;
 - exact common-\(k\) maps for all 12 Yukawa-endpoint terms and all six scalar-seagull routings, including the shifted heavy-channel momenta.
 
 The ordinary-Feynman-gauge remainder \(R_{\rm FG}\) is nonzero and is retained. The new kernel identity does not close its ghost/gauge-fixing Slavnov–Taylor completion.
@@ -130,3 +130,11 @@ The universal-kernel and route-map records are:
 - \`research/RC-001-dim6-WW-fivepoint-common-k-shift-maps.md\`
 
 These results do not yet constitute an integrated UV five-point form factor or a Wilson coefficient.
+
+## 6. 2026-11-11 qualification: abstract kernel versus actual scalar-current routing
+
+The weak-index and relative-phase census in this file remains closed. The separate IVh Lorentz-kernel calculation also remains a valid tensor identity for fixed arbitrary endpoint-current values. However, IVn-e finds that the actual scalar derivative currents used by IVl and IVm differ by \(q\) after their respective common-\(k\) routings. Therefore the abstract \(D(k)-D(k+q)\) cancellation must not yet be described as a completed graph-specific Lorentz-weighted cancellation for LD-W-02/03/04/05/06.
+
+The exact audit and the six nonzero rational-point substitution checks are recorded in
+\`research/RC-001-dim6-WW-fivepoint-momentum-dependent-scalar-current-audit.md\`.
+The remaining task is to derive a common routing or an explicit change-of-variable identity with the complete scalar, light-fermion, heavy and W denominators, including the exchanged three-W Lorentz indices, weak tensor, phase and Dirac ordering. No physical non-cancellation is claimed; no graph is removed and \(R_{\rm FG}\) remains explicit.
