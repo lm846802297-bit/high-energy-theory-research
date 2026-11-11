@@ -31,10 +31,10 @@ GAMMA5 = GAMMA[0]*GAMMA[1]*GAMMA[2]*GAMMA[3]
 P_L = (sp.eye(4)-GAMMA5)/2
 P_R = (sp.eye(4)+GAMMA5)/2
 k = sp.symbols("k0:4")
-p1 = sp.symbols("p10:4")
-p2 = sp.symbols("p20:4")
-p3 = sp.symbols("p30:4")
-p4 = sp.symbols("p40:4")
+p1 = sp.symbols("p1_0:4")
+p2 = sp.symbols("p2_0:4")
+p3 = sp.symbols("p3_0:4")
+p4 = sp.symbols("p4_0:4")
 M = sp.symbols("M", positive=True)
 
 
