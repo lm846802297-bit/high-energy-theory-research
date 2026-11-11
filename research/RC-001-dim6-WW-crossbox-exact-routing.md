@@ -1,6 +1,6 @@
 # RC-001 — \(Q_{LD}\) pure-\(WW\) cross-box exact routing and hard/soft split
 
-**Status:** exact Lorentz reductions and the scalar-master UV–EFT split are checked for the four cross-vertex \(WW\) attachment classes in one fixed ordered external amplitude. The result is a **unit-multiplicity, fixed-routing sub-block**, not the complete \(WW\) Wilson coefficient. The full charge-conjugate/crossed-routing census, diagram-generator validation, common Ward sum, and common-basis matching remain open.
+**Status:** exact Lorentz reductions, scalar-master UV–EFT split, manual (2/(2!)=1) Wick multiplicity, and the operator-level Hermitian-conjugate relation are checked for the four cross-vertex (WW) attachment classes in one fixed ordered external amplitude. The result is a **unit-multiplicity, fixed-routing sub-block**, not the complete (WW) Wilson coefficient. Exact graph-generator reconciliation/sign validation, the UV one-(W) five-point form factor, the common Ward sum, nonexceptional subtraction, and common-basis matching remain open.
 
 ## 1. Frozen amplitude and conventions
 
