@@ -14,6 +14,7 @@ import sympy as sp
 d, eps, L = sp.symbols("d eps L", real=True)
 p1, p2, p3, p4 = sp.symbols("p1 p2 p3 p4")
 J, K = sp.symbols("J K")
+cbar = sp.symbols("cbar")
 WEIGHTS = {
     "01": -sp.Rational(1, 4),
     "02": sp.Rational(1, 4),
@@ -84,7 +85,6 @@ def expand_masters():
     """Use the already checked scalar masters in the common MS-bar convention."""
     # J_hard = (Delta_UV + 1 - L)/M_E^2; K_hard = -1/M_E^2.
     # Keep Delta_UV symbolic as 1/eps + cbar to retain O(eps)*pole terms.
-    cbar = sp.symbols("cbar")
     delta = 1/eps + cbar
     j_master = delta + 1 - L
     k_master = -1
