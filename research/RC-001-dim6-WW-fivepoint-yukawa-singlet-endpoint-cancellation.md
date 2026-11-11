@@ -73,6 +73,36 @@ For the left vertex the pair is \((\bar L,H)\); for the right vertex it is \((H^
 
 This cancellation removes the **local Yukawa-vertex gauge variation** from the ordinary-matter endpoint ledger. It does not remove the external-leg emissions themselves from the amputated Green-function Ward identity: their reducible/LSZ organization must still be kept explicit.
 
+## 3.1 LD-W-06 secondary shifts
+
+The two secondary loop shifts required by the \(-\Delta_W\) pieces are
+\[
+k_A'=k+q,\qquad k_B'=k-q.
+\]
+They change the heavy channel, but they do not split the two light-field variations at either Yukawa singlet:
+\[
+h_{\bar L}(k_A')=h_H(k_A')=h(k_A')-q,
+\]
+\[
+h_{H^\dagger}(k_B')=h_L(k_B')=h(k_B')+q.
+\]
+Consequently the local physical-representation identities remain
+\[
+(R_{\bar L}^a+R_H^a)T_0\,S_E(h-q)X_A=0,
+\]
+\[
+(R_{H^\dagger}^a+R_L^a)T_0\,S_E(h+q)X_B=0.
+\]
+The three heavy denominators \(h^2-M_E^2\), \((h-q)^2-M_E^2\), and \((h+q)^2-M_E^2\) are generically distinct; the cancellation works because the two field variations at a given vertex share the same shifted heavy factor, not because the shifted propagators equal the unshifted one.
+
+The exact calculation is recorded in:
+- \`calculations/RC-001-dim6-WW-fivepoint-LD-W-06-shifted-Yukawa-singlet-charge-closure.py\`
+- \`calculations/test_RC001_dim6_WW_fivepoint_LD_W_06_shifted_Yukawa_singlet_charge_closure.py\`
+- \`research/RC-001-dim6-WW-fivepoint-LD-W-06-shifted-Yukawa-singlet-charge-closure.md\`
+- \`validation/RC-001-dim6-WW-fivepoint-LD-W-06-shifted-Yukawa-singlet-charge-closure.txt\`
+
+The shifted heavy-channel maps pass 8/8 vector components on each side, and the shifted left/right singlet charge sums pass 96/96 weak components. This remains a local endpoint-factor cancellation only.
+
 ## 4. Exact reproduction
 
 - Source: \`calculations/RC-001-dim6-WW-fivepoint-yukawa-singlet-endpoint-cancellation.py\`
