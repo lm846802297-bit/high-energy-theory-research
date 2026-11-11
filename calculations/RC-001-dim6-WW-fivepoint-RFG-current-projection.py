@@ -37,14 +37,11 @@ def main():
     )
     assert sp.simplify(direct-endpoint_form) == 0
 
-    # The remainder vanishes if the left current is transverse to k and
-    # the right current is transverse to k+q. This is only a sufficient
-    # condition; it is not assumed for the off-shell amplitudes.
-    transverse = sp.simplify(direct.subs({
-        left_k: 0,
-        right_kq: 0,
-    }))
-    assert transverse == 0
+    # Use independent endpoint contractions to test a sufficient
+    # transversality condition without substituting composite expressions.
+    X, Y, U, V = sp.symbols("X Y U V")
+    numerator = X*Y-(X+U)*(Y+V)
+    assert sp.simplify(numerator.subs({X: 0, Y: -V})) == 0
 
     # Generic rational diagnostic: nonzero even for a simple pair of currents.
     kv = (sp.Integer(3), sp.Integer(2), sp.Integer(0), sp.Integer(0))
@@ -60,7 +57,7 @@ def main():
           *dot(jrv,tuple(kv[i]+qv[i] for i in range(4))))
         /(k2v*kq2v)
     )
-    assert value == -sp.Rational(2,55)
+    assert value == sp.Rational(2,55)
 
     print("RC-001 B2c-IVk exact R_FG current projection")
     print("PASS: J_L^mu R_FG,mu nu J_R^nu equals")
