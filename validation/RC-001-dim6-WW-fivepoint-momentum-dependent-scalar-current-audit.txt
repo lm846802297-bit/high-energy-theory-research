@@ -2,7 +2,7 @@ RC-001 B2c-IVn-e momentum-dependent scalar-current audit
 
 PASS: exact A/B/S scalar-current shifts are q (12/12 vector components).
 PASS: three-W internal-leg exchange Lorentz sign (64/64), group sign (27/27), combined vertex invariance (1728/1728).
-PASS: cross/same-vertex line, seagull and three-W denominator factor maps (7/7 exact identities).
+PASS: actual cross/same-vertex line, seagull and three-W denominator factor maps (7/7 exact identities).
 ACTUAL IVm versus IVl CURRENT ROUTES:
   LD-W-02 B scalar: V_B(k) versus V_B(k+q)
   LD-W-03/04 S scalar: V_S(k+q) versus V_S(k)
