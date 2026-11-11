@@ -43,7 +43,6 @@ class TestLDW0304SameVertexEndpointBridge(unittest.TestCase):
             MOD.main()
         captured = output.getvalue()
         self.assertIn("symmetric q contact is (Delta_Y+Delta_W)/2", captured)
-        self.assertIn("R_FG are retained", captured) if False else None
         self.assertIn("no physical non-cancellation", captured)
 
 
