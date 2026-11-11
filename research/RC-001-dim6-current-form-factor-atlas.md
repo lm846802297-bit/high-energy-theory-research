@@ -273,7 +273,7 @@ The Ward-Takahashi/Slavnov-Taylor check is applied to the summed amplitude inclu
 | ID | UV graph/form-factor data | EFT subtraction | Counterterms and consistency tests | Status |
 |---|---|---|---|---|
 | LD-B-FF | External \(B\) on \(E,L,H\) lines plus all compatible one-loop gauge families | \(Q_{LD}\) insertion, \(B\)-contact, external-line and mixed-propagator graphs if retained | \(B\) field/input renormalization, Ward identity, local/reducible separation | NOT EVALUATED |
-| LD-W-FF | External \(W^I\) on doublet fermion/scalar lines plus required gauge-sector graphs | \(Q_{LD}\) insertion and external-line \(W\) graphs; no direct \(W\) derivative contact | Weak tensor, Slavnov-Taylor identity, gauge/ghost and external-field terms | NOT EVALUATED |
+| LD-W-FF | External \(W^I\) on doublet fermion/scalar lines plus required gauge-sector graphs | Tree \(Q_{LD}\) insertion and external-line \(W\) graphs; include the triplet redundant-basis contacts in §3.4 | Weak tensor, UV five-point amplitude, Slavnov-Taylor identity, gauge/ghost and external-field terms | PARTIAL: EFT local contact/covariance checked; UV five-point NOT EVALUATED |
 | LD-X-FF | External \(A'\) on \(E,L\) lines; include kinetic-mixing effects where applicable | \(Q_{LD}\) insertion and \(A'\)-contact graphs | Signed flavor charges, mixing boundary, current/EOM bookkeeping | NOT EVALUATED |
 | RD-B-FF | External \(B\) on \(E,\ell_R\) lines | \(Q_{RD}\) insertion and \(B\)-contact graphs | Hypercharge/input counterterms, Ward identity | NOT EVALUATED |
 | RD-X-FF | External \(A'\) on \(E,\ell_R,S\) lines | \(Q_{RD}\) insertion and \(A'\)-contact graphs | Signed flavor/scalar charges, mixing boundary, Ward identity | NOT EVALUATED |
