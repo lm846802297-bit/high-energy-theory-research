@@ -11,9 +11,9 @@ RATIONAL POINT:
   HB=(h+q)^2-M_E^2=-365.
 
 A -Delta_W denominator before/after shift:
-  (44,78,48,-377) -> (34,61,35,-389).
+  (44,75,49,-377) -> (34,61,35,-389).
 B -Delta_W denominator before/after shift:
-  (34,35,61,-377) -> (44,48,78,-365).
+  (34,35,61,-377) -> (44,49,75,-365).
 
 RESULT:
   The A and B secondary shifts align the scalar/W/current factors,
