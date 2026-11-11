@@ -102,7 +102,11 @@ Expanding the heavy denominator in the soft region gives
 \[
 \frac{1}{(k-p_1-p_2)^2-M_E^2}
 =-\frac1{M_E^2}+O(M_E^{-4}).
+\] The EFT insertion \(Q_{LD}=(\bar L H)i\slashed D(H^\dagger L)\) differentiates the composite \(H^\dagger L\), whose momentum in these loop routings is
+\[
+q_D=p_3+p_4+k=k-p_1-p_2=q_E.
 \]
+The \(SU(2)_L\)-singlet composite has no direct one-\(W\) derivative contact. Constructing the four EFT numerators from this derivative momentum and the ordinary fermion/scalar \(W\) vertices reproduces the soft-expanded UV numerator **pair by pair**, with zero symbolic residual for LD-W-01/02/05/06. This is an integrand-level UV-soft/EFT identity for this cross-box subset, not yet the full amplitude or Ward sum.
 The four numerator chains were reconstructed with the general shifts above. Feynman parametrization and the \(d\to4\) UV tensor residue give the following stripped coefficients of \(1/(16\pi^2\epsilon_{\rm UV})\), before the common heavy factor \(-1/M_E^2\), in the ordered basis \((\slashed p_1,\slashed p_2,\slashed p_3)P_L\):
 \[
 \begin{array}{c|rrr}
