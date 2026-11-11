@@ -278,7 +278,7 @@ def rational_diagnostic():
     three = contract_scalar_kernel(kernel, chain, v_b_kap)
     rfg_matrix = contract_scalar_kernel(rfg, chain, v_b_kap)
     assert matrix_zero(line+three-rfg_matrix)
-    assert matrix_zero(rfg_matrix-n02/(dot(k,k)*dot(kap,k a p)))
+    assert matrix_zero(rfg_matrix-n02/(dot(k,k)*dot(kap,kap)))
 
     # The re-based commutator q-contact is a nonzero matrix at this point.
     q_contact = (I*sp.Rational(1,2)*delta
