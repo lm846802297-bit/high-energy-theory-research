@@ -1,7 +1,7 @@
 # RC-001 — Common-\(k\) ordinary-matter longitudinal assembly ledger
 
-**Workstream:** RC-001-WW-UV-FF-02, Stage B2c-IVn-b  
-**Status:** the pairwise ingredients are indexed: cross-vertex and same-vertex fermion WTIs, six scalar-line/seagull endpoint kernels, six graph-specific \(R_{\rm FG}\) current projections, orientation-dependent three-W phases, and the local Yukawa-singlet endpoint cancellation with common heavy-channel routing. This is not yet a summed Slavnov–Taylor identity. The scalar symmetric and commutator tensors remain distinct; reducible external-leg/LSZ terms and the gauge-fixing/ghost sector remain separate.
+**Workstream:** RC-001-WW-UV-FF-02, Stage B2c-IVn-d  
+**Status:** the pairwise ingredients are indexed: cross-vertex and same-vertex fermion WTIs, six scalar-line/seagull endpoint kernels, six graph-specific \(R_{\rm FG}\) current projections, orientation-dependent three-W phases, the local Yukawa-singlet endpoint cancellation with common heavy-channel routing, the 1PI/1PR LSZ boundary, and the exact longitudinal inverse-kernel completion target for (R_{\rm FG}). This is not yet a summed Slavnov–Taylor identity. The scalar symmetric and commutator tensors remain distinct; reducible external-leg/LSZ terms and the gauge-fixing/ghost sector remain separate.
 
 ## 1. Frozen common-\(k\) definitions
 
@@ -102,7 +102,7 @@ By pair:
 \[
 (3,4,4,4,4,5)
 \]
-for LD-W-01…06. No new topology is introduced in IVl/IVm/IVn-a/IVn-b.
+for LD-W-01…06. No new topology is introduced in IVl/IVm/IVn-a…IVn-d.
 
 ## 6. Remaining assembly gates
 
