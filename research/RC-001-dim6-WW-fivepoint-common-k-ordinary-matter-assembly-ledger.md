@@ -1,6 +1,6 @@
 # RC-001 — Common-\(k\) ordinary-matter longitudinal assembly ledger
 
-**Workstream:** RC-001-WW-UV-FF-02, Stage B2c-IVn-g/01  
+**Workstream:** RC-001-WW-UV-FF-02, Stage B2c-IVn-g/02  
 **Status:** the pairwise ingredients are indexed: cross-vertex and same-vertex fermion WTIs, six scalar-line/seagull endpoint kernels, six graph-specific \(R_{\rm FG}\) current projections, orientation-dependent three-W phases, the local Yukawa-singlet endpoint cancellation with common heavy-channel routing, the 1PI/1PR LSZ boundary, the exact longitudinal inverse-kernel completion target for \(R_{\rm FG}\), the IVn-e audit of momentum-dependent scalar-current routing, the exact three-W internal-leg exchange identity at the vertex/group-factor level, and seven exact scalar/fermion-line versus three-W denominator-factor relations. The IVh arbitrary-current identity was not sufficient by itself to establish graph-specific scalar-current cancellation. IVn-f/01–05 now insert the actual currents, ordered Dirac chains, shifted denominators, and scalar-line/seagull endpoint structures for all six pair classes; the full ordinary-matter longitudinal sum remains open. IVn-f/01 now closes the actual LD-W-01 F-F commutator/three-W sub-block with its explicit Dirac chain, physical weak tensor, relative phase, and complete spectator denominators; it leaves the explicit nonzero R_FG projection. IVn-f/02 now separates LD-W-02 into its A-side fermion/three-W sub-block and B-side scalar-line/seagull kernel, and derives the exact (V_B(k)=V_B(\kappa)+q) rebase with both symmetric and commutator (q^\mu) contacts retained. IVn-f/03 now adds the LD-W-05 A-side scalar split, with the symmetric and commutator q^mu contacts retained. IVn-f/04 completes the pair-specific LD-W-03/04 same-vertex endpoint bridge: V_S^line=V_S^3W-q, the symmetric and commutator q^mu contacts remain separate, and both Dirac-Hermitian R_FG chains and heavy spectators are checked. IVn-f/05 completes the pair-specific LD-W-06 S-S endpoint bridge: A and B currents are rebased separately, with (V_A^{\rm line}=V_A^{3W}-q) and (V_B^{\rm line}=V_B^{3W}+q); their two seagulls and weak tensors remain distinct. IVn-g/01 now audits the secondary shifts of the two LD-W-06 scalar-line \(-\Delta_W\) terms: the scalar/W/current factors align, but the heavy channel shifts to (h-q) on A and (h+q) on B. These terms cannot be identified pointwise with the unshifted (h)-channel three-W integrand. This is not yet a summed Slavnov–Taylor identity. The scalar symmetric and commutator tensors remain distinct; reducible external-leg/LSZ terms and the gauge-fixing/ghost sector remain separate.
 
 ## 1. Frozen common-\(k\) definitions
@@ -322,7 +322,29 @@ The exact source and six local tests are recorded in:
 - \`research/RC-001-dim6-WW-fivepoint-LD-W-06-secondary-shift-heavy-channel-audit.md\`
 - \`validation/RC-001-dim6-WW-fivepoint-LD-W-06-secondary-shift-heavy-channel-audit.txt\`
 
-This is a precise routing/denominator result, not a completed Ward identity.
+IVn-g/02 extends the local Yukawa-singlet charge check to these shifted channels: the two left-vertex variations share (h-q), and the two right-vertex variations share (h+q), so both local charge sums still vanish. This is a precise routing/denominator result, not a completed Ward identity.
+
+### 4.7 Shifted LD-W-06 Yukawa-singlet charge factors (IVn-g/02)
+
+The secondary shifts change the heavy channel but do not split the two field variations at either Yukawa singlet:
+\[
+k_A'=k+q:\quad h_{\bar L}=h_H=h(k_A')-q,
+\]
+\[
+k_B'=k-q:\quad h_{H^\dagger}=h_L=h(k_B')+q.
+\]
+The physical charge sums therefore remain
+\[
+(R_{\bar L}^a+R_H^a)T_0\,S_E(h-q)X_A=0,\qquad
+(R_{H^\dagger}^a+R_L^a)T_0\,S_E(h+q)X_B=0.
+\]
+The exact check passes 8/8 vector components for each heavy-channel map and 96/96 weak-index components for the shifted singlet charge sums. This is a local endpoint-factor cancellation; it does not sum the scalar-line/three-W Lorentz kernels or the reducible LSZ terms.
+
+The exact source and five local tests are recorded in:
+- \`calculations/RC-001-dim6-WW-fivepoint-LD-W-06-shifted-Yukawa-singlet-charge-closure.py\`
+- \`calculations/test_RC001_dim6_WW_fivepoint_LD_W_06_shifted_Yukawa_singlet_charge_closure.py\`
+- \`research/RC-001-dim6-WW-fivepoint-LD-W-06-shifted-Yukawa-singlet-charge-closure.md\`
+- \`validation/RC-001-dim6-WW-fivepoint-LD-W-06-shifted-Yukawa-singlet-charge-closure.txt\`
 
 ## 5. Direct-attachment census
 
@@ -342,10 +364,11 @@ for LD-W-01…06. No new topology is introduced in IVl/IVm/IVn-a…IVn-e.
 ## 6. Remaining assembly gates
 
 1. **Assemble the ordinary-matter longitudinal integrand for all six pairs.** Insert the four fermion-line WTI endpoint pieces, all six scalar-line/seagull kernels, and all six three-W kernels using the actual common-\(k\) routes. Keep all \(P_L/P_R\) endpoint pieces, the \(S\to F\) and \(A\to B\) weak-index orders, and the distinct \(\mathcal S_A,\mathcal S_B,\mathcal S_S\) tensors.
-2. **Perform every secondary loop-variable shift on the complete numerator and denominator.** Keep the two terms in each \(\delta_X=\Delta_Y-\Delta_W\) separate. For LD-W-06, the A and B negative-propagator terms shift \(h\) to \(h-q\) and \(h+q\); do not replace either by \(h\).
-3. **Extend the local Yukawa-singlet charge check to the shifted heavy channels.** Verify that the two light-field endpoint variations at each Yukawa vertex carry the same \(h\), \(h-q\), or \(h+q\) after the corresponding complete shift. Keep the four reducible external-leg/LSZ emissions in a separate ledger.
+2. **Perform every secondary loop-variable shift on the complete numerator and denominator.** Keep the two terms in each \(\delta_X=\Delta_Y-\Delta_W\) separate. For LD-W-06, the A and B negative-propagator terms shift \(h\) to \(h-q\) and \(h+q\), respectively.
+3. **Extend the shifted-channel audit to the other five pair classes.** For every local Yukawa endpoint pair, verify that the two field variations share the same shifted heavy-channel factor after the full momentum/current map. LD-W-06 passes this local charge-factor test.
 4. **Combine the ordinary-matter 1PI terms with the local endpoint variations.** Only after the weak-index, Dirac-order, momentum-shift, and heavy-denominator identities close should the full longitudinal integrand be declared telescoped.
-5. **Derive the BRST/ghost Slavnov–Taylor completion** and test the longitudinal inverse-kernel target \(D(\kappa)[L(\kappa)-L(k)]D(k)=-R_{\rm FG}\) in the assembled matter-current chains.
-6. **Add counterterms:** \(W\)-field, gauge-coupling, matter-field, Yukawa, heavy-mass, and operator counterterms. Only after the complete off-shell identity closes should the common-regulator UV–EFT subtraction and comparison with the EFT one-\(W\) vertex be performed.
+5. **Write the four reducible external-leg/LSZ factors and their lower-point amplitudes explicitly.** Keep them outside the 1PI five-point vertex until the full Ward identity is assembled.
+6. **Derive the BRST/ghost Slavnov–Taylor completion** and test the longitudinal inverse-kernel target \(D(\kappa)[L(\kappa)-L(k)]D(k)=-R_{\rm FG}\) in the assembled matter-current chains.
+7. **Add counterterms:** \(W\)-field, gauge-coupling, matter-field, Yukawa, heavy-mass, and operator counterterms. Only after the complete off-shell identity closes should the common-regulator UV–EFT subtraction and comparison with the EFT one-\(W\) vertex be performed.
 
 No loop integration, complete STI closure, transverse form factor, UV–EFT matching coefficient, or Wilson coefficient is claimed at this stage.
