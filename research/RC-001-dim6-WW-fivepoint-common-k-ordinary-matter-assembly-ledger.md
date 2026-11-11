@@ -87,7 +87,7 @@ The scalar-line/seagull sub-block is now also explicit. Its weak tensors remain
 \quad\text{and}\quad
 \mathcal G_{AB}^a\ \text{or}\ \mathcal G_{FS}^a
 \]
-as separate structures. The scalar-line/seagull decomposition alone is not the full gauge variation of the Yukawa-connected endpoint: the remaining Yukawa-singlet and external-field terms must be included before deciding how its commutator part combines with the three-W term. In particular, do not infer a complete scalar-endpoint cancellation merely from the universal arbitrary-current kernel identity.
+as separate structures. The local Yukawa-singlet endpoint variation is now checked separately: \\( (R_{\\bar L}^a+R_H^a)T_0=0 \\) and \\( (R_{H^\\dagger}^a+R_L^a)T_0=0 \\), and the common-​\\(k\\) shifts show that the two fields at each Yukawa vertex multiply the same heavy-channel spectator. This closes the local charge-sum sub-block. It does not yet provide the complete reducible external-leg/LSZ contribution or the full gauge variation of the amputated Green function. Do not infer a complete scalar-endpoint cancellation merely from the universal arbitrary-current kernel identity.
 
 ## 5. Direct-attachment census
 
