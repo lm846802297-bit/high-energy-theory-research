@@ -58,12 +58,19 @@ Both composites are weak singlets, so
 D_\mu^{SU(2)}\Psi_L=\partial_\mu\Psi_L,\qquad
 D_\mu^{SU(2)}\bar\Psi_L=\partial_\mu\bar\Psi_L.
 \]
-The tree-level EFT insertion \(Q_{LD}=\bar\Psi_L i\slashed D\Psi_L\) therefore has no direct \(W_\mu^I\) contact vertex. The longitudinal external-\(W\) Ward contraction of the emissions from the two composite pairs is proportional to
+With \(D_\mu H=\partial_\mu H-i g_2T^IW_\mu^I H\) and \(D_\mu L=\partial_\mu L-i g_2T^IW_\mu^I L\),
+\[
+(D_\mu H)^\dagger L+H^\dagger D_\mu L
+=\partial_\mu(H^\dagger L)
++i g_2H^\dagger T^IW_\mu^IL-i g_2H^\dagger T^IW_\mu^IL
+=\partial_\mu(H^\dagger L).
+\]
+The cancellation holds generator by generator for \(I=1,2,3\), not only after summing over weak indices. Thus the tree-level EFT insertion \(Q_{LD}=\bar\Psi_L i\slashed D\Psi_L\) has no direct \(W_\mu^I\) contact vertex. This explicit expansion is independently checked in calculations/RC-001-dim6-WW-wick-multiplicity.py (five local regression tests; captured output in validation/RC-001-dim6-WW-wick-multiplicity.txt). The longitudinal external-\(W\) Ward contraction of the emissions from the two composite pairs is proportional to
 \[
 (t_{\bar L}^I+t_H^I)T_0,\qquad
 (t_{H^\dagger}^I+t_L^I)T_0,
 \]
-and both vanish by the singlet identities in research/RC-001-dim6-SU2-attachment-projection.md. Thus the tree-level operator insertion satisfies the \(W\)-current Ward identity without a derivative-contact term.
+and both vanish by the singlet identities in research/RC-001-dim6-SU2-attachment-projection.md. The same explicit Wick audit shows that the two endpoint assignments for each unordered pair cancel the \(1/2!\) in the second-order interaction, giving unit multiplicity; this is a manual combinatoric check, not a generated graph/sign census. Thus the tree-level operator insertion satisfies the \(W\)-current Ward identity without a derivative-contact term.
 
 A separate partial one-loop check is now available for the internal-\(W\) four-point cross-box sub-block. Contracting the four cross-box numerators with the longitudinal propagator projector gives the kernels
 \[
