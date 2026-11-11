@@ -1,6 +1,6 @@
 # RC-001 — Nonexceptional kinematics and local-projector prescription for dimension-six gauge matching
 
-**Status:** prescribed common kinematic point and tensor-projector setup; no new loop coefficient is claimed.
+**Status:** the fixed-routing, unit-multiplicity pure-WW cross-box triplet sub-block now has a nonexceptional EFT-soft UV residue, a d-dimensional hard-region expansion, and a finite local hard polynomial. This is not the complete gauge-corrected Wilson coefficient.
 
 ## 1. Why the existing zero-momentum routing is not the final subtraction prescription
 
@@ -165,7 +165,92 @@ F_\perp^{\rm soft,stripped}
 \]
 The leading heavy factor \(-1/M_E^2\) reverses this sign. The \(1/\mu_{\rm IR}^2\) dependence makes this a nonlocal soft form factor, not a local Wilson coefficient. It must be retained in the off-shell UV/EFT tensor comparison; whether it cancels after the other routing and the remaining Ward-completing graphs are added is still open.
 
-The exact residue and parameter-polynomial checks are in calculations/RC-001-dim6-WW-nonexceptional-soft-pole.py; the eight regression cases are in calculations/test_RC001_dim6_WW_nonexceptional_soft_pole.py. The scalar triangle and epsilon-moment numerical values are recorded in validation/RC-001-dim6-WW-nonexceptional-soft-pole.txt. The exact UV-pole algebra was independently reproduced locally in this iteration; the checked-in unittest file is an additional regression artifact and is not represented as a GitHub Actions pass.
+The exact residue and parameter-polynomial checks are in calculations/RC-001-dim6-WW-nonexceptional-soft-pole.py; the nine regression cases are in calculations/test_RC001_dim6_WW_nonexceptional_soft_pole.py. The scalar triangle and epsilon-moment numerical values are recorded in validation/RC-001-dim6-WW-nonexceptional-soft-pole.txt. The UV-soft/EFT numerator equality is an algebraic routing identity using the derivative momentum, not an independent diagram-generator validation. The checked-in unittest file is a regression artifact and is not represented as a GitHub Actions pass.
+
+### 3.4 Nonexceptional hard-region expansion and local matching polynomial
+
+The hard region keeps the full heavy propagator and expands the two shifted light propagators and the heavy momentum to first order in the external momenta. With
+\[
+J=\int\frac{d^dk}{(2\pi)^d}\frac{1}{(k^2)^2(k^2-M_E^2)},\qquad
+K=\int\frac{d^dk}{(2\pi)^d}\frac{1}{k^2(k^2-M_E^2)^2},
+\]
+the d-dimensional numerator and tensor reduction give:
+
+| Pair | coefficient of \(J\) | coefficient of \(K\) |
+|---|---|---|
+| LD-W-01 | \(\frac{(d-2)^2}{d}(p_2+p_4)\) | \(\frac{2(d-2)}d(p_1+p_2)\) |
+| LD-W-02 | \(-p_2+2(1-\frac1d)p_3\) | \(\frac2d(p_1+p_2)\) |
+| LD-W-05 | \(2(1-\frac1d)p_2+(1-\frac2d)p_3\) | \(-\frac2d(p_1+p_2)\) |
+| LD-W-06 | \(-(p_1+p_2)\) | \(\frac2d(p_1+p_2)\) |
+
+The LD-W-01 chain uses
+\[
+\gamma_\mu\slashed a\slashed b\slashed c\gamma^\mu
+=-2\slashed c\slashed b\slashed a+(4-d)\slashed a\slashed b\slashed c,
+\]
+and the loop tensors use
+\[
+\langle k_\mu k_\nu\rangle=\frac{k^2}{d}g_{\mu\nu},\qquad
+\langle k_\mu k_\nu k_\rho k_\sigma\rangle
+=\frac{k^4}{d(d+2)}
+(g_{\mu\nu}g_{\rho\sigma}+g_{\mu\rho}g_{\nu\sigma}+g_{\mu\sigma}g_{\nu\rho}).
+\]
+No four-dimensional epsilon duality is needed for this local hard polynomial.
+
+Applying the same triplet weights \((-1,+1,+1,-1)/4\) and then imposing momentum conservation gives
+\[
+R_J(d)=
+\frac{d^2-3d+4}{4d}p_1+
+\frac{d-1}{2d}p_2+
+\frac{d-1}{4}p_3,
+\qquad
+R_K(d)=-\frac{d-1}{2d}(p_1+p_2).
+\]
+The exceptional limit \(p_1=p_3=0,\ p_2=P,\ p_4=-P\) reproduces the previous four pair kernels exactly and yields
+\[
+R_J= \frac{d-1}{2d}P,\qquad
+R_K=-\frac{d-1}{2d}P,
+\]
+i.e. \((d-1)(J-K)/(2d)\).
+
+Using the checked hard masters
+\[
+J_{\rm hard}=\frac{\Delta_{\rm UV}+1-L}{M_E^2},\qquad
+K_{\rm hard}=-\frac1{M_E^2},\qquad
+L=\ln\frac{M_E^2}{\mu_R^2},
+\]
+and expanding \(d=4-2\epsilon\), one finds
+\[
+R_J=
+\left(\frac12-\frac{3\epsilon}{8}\right)p_1+
+\left(\frac38-\frac{\epsilon}{16}\right)p_2+
+\left(\frac34-\frac{\epsilon}{2}\right)p_3,
+\]
+\[
+R_K=\left(-\frac38+\frac{\epsilon}{16}\right)(p_1+p_2).
+\]
+The hard-region pole is
+\[
+\left.\mathcal M_{T_3}^{\rm hard}\right|_{\rm pole}
+=\frac{g_2^2|y_\ell|^2}{16\pi^2M_E^2\epsilon_{\rm UV}}\,
+\bar u(p_1)\left(
+\frac12\slashed p_1+\frac38\slashed p_2+\frac34\slashed p_3
+\right)P_Lu(p_4),
+\]
+which cancels the EFT-soft UV pole in §3.2 with the opposite sign. This is an explicit nonexceptional pole closure for the four cross-vertex classes at fixed routing and unit multiplicity.
+
+After \(\overline{\rm MS}\) subtraction, the finite local hard polynomial is
+\[
+\boxed{
+C_{\rm hard}^{\rm fin}=
+\left(\frac12-\frac L2\right)\slashed p_1+
+\left(\frac{11}{16}-\frac{3L}{8}\right)\slashed p_2+
+\left(\frac14-\frac{3L}{4}\right)\slashed p_3.
+}
+\]
+At \(\mu_R=M_E\), its coefficients are \((1/2,11/16,1/4)\). The \(p_2\) coefficient reduces to the previously obtained \(11/16\) in the exceptional projection. The \(O(\epsilon)\) terms in \(R_J\) are essential: in particular, \(-\epsilon/16\) multiplying the pole gives the familiar \(-1/16\) finite shift.
+
+The analytic kernels and expansion are in calculations/RC-001-dim6-WW-nonexceptional-hard-expansion.py; eight regression tests are in calculations/test_RC001_dim6_WW_nonexceptional_hard_expansion.py; captured coefficients are in validation/RC-001-dim6-WW-nonexceptional-hard-expansion.txt. These are analytic numerator/tensor reductions for a fixed sub-block, not a generated complete diagram set or a full basis-matched Wilson coefficient.
 
 ## 4. UV–EFT and \(R^*\) bookkeeping
 
