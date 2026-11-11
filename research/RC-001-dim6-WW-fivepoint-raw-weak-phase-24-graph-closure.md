@@ -111,14 +111,22 @@ The source and output files are listed in the two companion notes. These are loc
 
 ## 5. What is now closed and what remains open
 
-**Closed:** the raw weak-index matrix ordering, the endpoint orientation of the three-W group tensor, the relative phase factors, and the scalar seagull anticommutators for all 24 direct attachments.
+**Closed:**
+- the raw weak-index matrix ordering, the endpoint orientation of the three-W group tensor, the relative phase factors, and the scalar seagull anticommutators for all 24 direct attachments;
+- the universal common-\(k\) transverse-kernel cancellation between matter-line commutator terms and the three-W graph for all six pair classes, with the \(A\to B\) and \(S\to F\) signs kept distinct;
+- exact common-\(k\) maps for all 12 Yukawa-endpoint terms and all six scalar-seagull routings, including the shifted heavy-channel momenta.
+
+The ordinary-Feynman-gauge remainder \(R_{\rm FG}\) is nonzero and is retained. The new kernel identity does not close its ghost/gauge-fixing Slavnov–Taylor completion.
 
 **Still open:**
-1. the common-\(k\) Lorentz-weighted longitudinal sum for the cross-vertex subset;
-2. the common-\(k\) Lorentz-weighted longitudinal sum for the same-vertex subset, retaining \(P_E=P_{FS}+q\);
-3. the scalar-line/seagull sum with distinct weak tensors;
-4. cancellation or completion of the Feynman-gauge \(R_{\rm FG}\) term by the full gauge-fixing/ghost Slavnov–Taylor identity;
-5. external-leg/LSZ, parameter and operator counterterms;
-6. the UV–EFT hard/soft subtraction and any transverse form-factor comparison.
+1. insert the explicit pair-dependent fermion/scalar currents and heavy propagator numerators into the common-\(k\) identities;
+2. combine the scalar-line and seagull Lorentz factors with their distinct weak tensors and the Yukawa/external endpoint terms;
+3. complete external-leg/LSZ, parameter/operator counterterms and the gauge-fixing/ghost Slavnov–Taylor sector;
+4. perform the common UV–EFT soft subtraction for the five-point amplitude;
+5. compare the remaining local longitudinal contact with the already fixed EFT one-\(W\) contact.
 
-The next work should therefore be a Lorentz-integrand calculation using the already-validated B1 routes. Do not spend another pass recounting weak indices, and do not infer a cancellation from the group-phase table alone.
+The universal-kernel and route-map records are:
+- \`research/RC-001-dim6-WW-fivepoint-common-k-lorentz-kernel.md\`
+- \`research/RC-001-dim6-WW-fivepoint-common-k-shift-maps.md\`
+
+These results do not yet constitute an integrated UV five-point form factor or a Wilson coefficient.
