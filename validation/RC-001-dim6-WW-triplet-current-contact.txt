@@ -22,7 +22,7 @@ This follows from the exact matrix identity
     = g_2 epsilon^{IJK} W_mu^J Y^K sigma^I.
 
 Therefore the EFT one-W contact implied by this triplet derivative operator is
-  L_contact = i g_2 C_3 epsilon^{IJK}
+  L_contact = i g_2 C_Q3 epsilon^{IJK}
               (barL sigma^I H) gamma^mu W_mu^J
               (Hdag sigma^K L).
 
@@ -35,6 +35,9 @@ Tests:
 
 Interpretation boundary:
   This identifies the local EFT contact required by a T3 derivative operator.
+  With phi(x)=int_p exp(-i p.x) phi(p), the derivative on Y=Hdag sigma L
+  has p3+p4=-P. The WW note's raw amplitude coefficient multiplies +slash(P),
+  so C_Q3=-C3_amp in that convention. The contact sign follows C_Q3.
   It is not the UV one-loop five-point form factor and does not establish
   the final C_Hl^(3) coefficient. The full UV current amplitude, its EFT
   subtraction, other operator tensors, and EOM/IBP reduction remain open.
