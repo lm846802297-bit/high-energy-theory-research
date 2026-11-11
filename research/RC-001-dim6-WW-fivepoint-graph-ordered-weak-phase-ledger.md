@@ -118,13 +118,11 @@ The raw physical matrix ordering is no longer an open census problem. It is reco
 
 The cross-vertex three-W tensor is \(+\mathcal G_{AB}^a\) in the A-to-B convention. The same-vertex three-W tensor is \(-\mathcal G_{FS}^a\) because the gauge line is oriented S-to-F. This sign must be retained when the relative phase \(P_{3W}/P_4=-ig_2\) is combined with the matter-line commutators.
 
-The remaining task is now the Lorentz-weighted common-routing sum:
-1. insert the raw weak tensors into the B1 momentum routes;
-2. contract the 16 cross-vertex and eight same-vertex attachments with \(q_\alpha\);
-3. shift the common loop momentum only after the exact heavy/light denominators are written;
-4. retain the scalar-line and seagull weak tensors separately;
-5. compare the transverse inverse-kernel difference with the A/B endpoint terms and keep \(R_{\rm FG}\) explicit;
-6. only then add external-leg/LSZ, ghost/gauge-fixing and counterterm completion.
+The common-\(k\) transverse-kernel comparison and graph-specific shift maps are now recorded in:
+- \`research/RC-001-dim6-WW-fivepoint-common-k-lorentz-kernel.md\`;
+- \`research/RC-001-dim6-WW-fivepoint-common-k-shift-maps.md\`.
+
+The remaining task is to insert the explicit pair-dependent current numerators and heavy propagators into these fixed maps, retain the distinct scalar-line/seagull weak tensors, and combine the Yukawa endpoints with external-field gauge variations. The nonzero \(R_{\rm FG}\) must remain explicit until the ghost/gauge-fixing Slavnov–Taylor completion is assembled.
 
 ## 6. Reproduction and evidence boundary
 
