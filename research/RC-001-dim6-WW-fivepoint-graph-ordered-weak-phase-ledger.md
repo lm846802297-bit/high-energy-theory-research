@@ -1,7 +1,7 @@
 # RC-001 — Signed-action weak algebra and provisional graph-order map
 
 **Workstream:** RC-001-WW-UV-FF-02, Stage B2c-III  
-**Status:** the SU(2) signed-action commutator and scalar-seagull identities are checked exactly, and the relative Feynman-rule phases are fixed in Stage B2c-I/II. However, the mapping of these signed actions to the raw weak-index matrix products of every oriented five-point Feynman graph is **not yet independently closed**. The ordering labels below are therefore a provisional WTI-basis ledger, not a claim that the complete graph weak tensors have already been derived.
+**Status:** this file records the signed-WTI-action algebra and remains a provisional algebra-basis ledger. The raw physical weak-index ordering is now independently derived in two companion records: the cross-vertex bridge for LD-W-01/02/05/06 and the S-to-F same-vertex bridge for LD-W-03/04. The same-vertex three-W tensor has the opposite orientation sign from the cross-vertex subset. None of these weak-index results closes the Lorentz-weighted 24-graph Ward sum.
 
 ## 1. Pair endpoints and seed tensors
 
@@ -109,18 +109,22 @@ the phase ratios relative to the four-point skeleton are
 \]
 These phase ratios are fixed by the explicit Feynman-rule products. They are not sufficient to establish the cancellation until each graph's raw weak-index tensor is translated into the signed-action basis with the correct ordering.
 
-## 5. Required B2c-IV: raw weak-index bridge
+## 5. Raw-index bridge status and remaining task
 
-The next calculation must not assume the candidate orderings in §2. For each of the 24 graphs:
+The raw physical matrix ordering is no longer an open census problem. It is recorded separately so that the two internal-W orientations are not conflated:
 
-1. Write the weak indices at the two Yukawa vertices explicitly, starting from \(T_0=\delta_{ij}\delta_{kl}\).
-2. Insert the raw matrices \(t^a_{ij}\) at the actual fermion/scalar gauge vertex.
-3. Track whether the line is \(L\), \(\bar L\), \(H\), or \(H^\dagger\), including the reversed index order on conjugate fields.
-4. Derive the matrix product in the same order as the spinor/scalar propagator chain.
-5. Translate that raw tensor into the \(\mathscr T_r^a\) signed-action basis.
-6. Only then multiply by the phase ratios in §4 and compare the matter-line commutator with the three-W tensor.
+- Cross-vertex LD-W-01/02/05/06: research/RC-001-dim6-WW-cross-vertex-raw-weak-index-bridge.md
+- Same-vertex LD-W-03/04 with internal W oriented S -> F: research/RC-001-dim6-WW-same-vertex-raw-weak-index-bridge.md
 
-The same raw-index derivation is required for both scalar seagulls. The anticommutator identity is not enough to settle their graph signs.
+The cross-vertex three-W tensor is \(+\mathcal G_{AB}^a\) in the A-to-B convention. The same-vertex three-W tensor is \(-\mathcal G_{FS}^a\) because the gauge line is oriented S-to-F. This sign must be retained when the relative phase \(P_{3W}/P_4=-ig_2\) is combined with the matter-line commutators.
+
+The remaining task is now the Lorentz-weighted common-routing sum:
+1. insert the raw weak tensors into the B1 momentum routes;
+2. contract the 16 cross-vertex and eight same-vertex attachments with \(q_\alpha\);
+3. shift the common loop momentum only after the exact heavy/light denominators are written;
+4. retain the scalar-line and seagull weak tensors separately;
+5. compare the transverse inverse-kernel difference with the A/B endpoint terms and keep \(R_{\rm FG}\) explicit;
+6. only then add external-leg/LSZ, ghost/gauge-fixing and counterterm completion.
 
 ## 6. Reproduction and evidence boundary
 
@@ -136,11 +140,9 @@ It establishes the signed-action algebra:
 - candidate scalar-seagull identities: 288/288.
 
 It does **not** establish:
-1. the raw weak-index tensor of each five-point Feynman graph;
-2. the mapping of each raw tensor to the candidate signed-action order;
-3. the Lorentz-weighted matter-line/three-W cancellation;
-4. the scalar-line/seagull Lorentz and group sum;
-5. the ghost/gauge-fixing Slavnov–Taylor completion;
-6. external-leg/counterterm completion or any integrated Wilson coefficient.
+1. the Lorentz-weighted matter-line/three-W cancellation;
+2. the scalar-line/seagull Lorentz and group sum;
+3. the ghost/gauge-fixing Slavnov–Taylor completion;
+4. external-leg/counterterm completion or any integrated Wilson coefficient. The raw graph weak tensors are covered by the two companion bridge records cited in §5.
 
 The PR must remain Open/Draft until the raw weak-index bridge and the Lorentz-weighted longitudinal sum are completed.
