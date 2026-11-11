@@ -33,6 +33,13 @@ class TestNonexceptionalWWSoftPole(unittest.TestCase):
         for pair in MOD.PAIRS:
             self.assertEqual(self.data["triangle_invariants"][pair], expected)
 
+    def test_uv_soft_expansion_equals_eft_insertion_numerator(self):
+        momenta = MOD.symmetric_momenta()
+        for pair in MOD.PAIRS:
+            uv_numerator, _, _ = MOD.routing(pair, momenta)
+            eft_numerator = MOD.eft_soft_numerator(pair, momenta)
+            self.assertEqual(sp.simplify(uv_numerator - eft_numerator), sp.zeros(4), pair)
+
     def test_pairwise_soft_uv_residues(self):
         self.assertEqual(
             self.data["pair_coefficients"],
