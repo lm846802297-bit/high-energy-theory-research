@@ -109,7 +109,33 @@ The nonzero entries show that replacing the IVm current by the IVl current chang
 
 The two current sets may be related by a loop-momentum change of variables, by exchanging the two internal-W legs of the three-W graph with the associated Lorentz/group orientation change, or by combining the scalar seagull \(q^\mu\) contact with the endpoint terms. Each option must be derived explicitly with the heavy and light propagator denominators retained. One cannot replace \(V_A(\kappa)\) by \(V_A(k)\), or \(V_B(k)\) by \(V_B(\kappa)\), by inspection.
 
-## 5. Correct next calculation
+## 5. Exact three-W internal-leg exchange identity
+
+The three-W graph admits an exact internal-leg exchange at the vertex level. For \(\kappa=k+q\),
+\[
+\boxed{
+\Gamma_{\alpha\nu\mu}(q,-\kappa,k)
+=-\Gamma_{\alpha\mu\nu}(q,k,-\kappa).
+}
+\tag{5.1}
+\]
+At the same time,
+\[
+\epsilon^{acb}=-\epsilon^{abc}.
+\]
+The Lorentz vertex and the antisymmetric weak tensor each change sign, so their product is invariant:
+\[
+\boxed{
+\epsilon^{acb}\Gamma_{\alpha\nu\mu}(q,-\kappa,k)
+=\epsilon^{abc}\Gamma_{\alpha\mu\nu}(q,k,-\kappa).
+}
+\tag{5.2}
+\]
+The updated exact source checks 64/64 Lorentz components, 27/27 weak-index permutations, and 1728/1728 combined Lorentz/group components.
+
+This establishes that exchanging the two internal-W legs is an allowed representation of the same three-W vertex before attaching the endpoint subgraphs. It does **not** yet establish the required scalar endpoint routing: after the exchange, the endpoint scalar momenta, scalar propagators, heavy-channel momentum, Dirac ordering, and the sign convention for the physical W momentum must all be transformed together. Equation (5.2) is the starting point for that derivation, not the completed common-routing bridge.
+
+## 6. Correct next calculation
 
 The next task is a **graph-specific common-routing bridge**, not another arbitrary-current tensor proof:
 
@@ -122,7 +148,7 @@ The next task is a **graph-specific common-routing bridge**, not another arbitra
 
 The ordinary-matter longitudinal integrand is not yet assembled. Keep \(R_{\rm FG}\) explicit. Do not infer a ghost cancellation from the inverse-kernel algebra identity, and do not begin UV–EFT integration or Wilson-coefficient extraction until this graph-specific routing bridge closes.
 
-## 8. Reproduction
+## 7. Reproduction
 
 - Source: \`calculations/RC-001-dim6-WW-fivepoint-momentum-dependent-scalar-current-audit.py\`
 - Tests: \`calculations/test_RC001_dim6_WW_fivepoint_momentum_dependent_scalar_current_audit.py\`
