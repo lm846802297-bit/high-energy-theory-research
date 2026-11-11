@@ -282,7 +282,7 @@ def compute_audit():
         sp.trace(GAMMA[3] * P_R * weighted_n0 * P_L) / 2
     )
     epsilon_symmetrized = sp.factor(
-        (epsilon_polynomial + epsilon_polynomial.subs({Y: Z, Z: Y})) / 2
+        (epsilon_polynomial + epsilon_polynomial.subs({Y: Z, Z: Y}, simultaneous=True)) / 2
     )
 
     # Every denominator triangle has a^2=b^2=1 and (a-b)^2=4/3.
