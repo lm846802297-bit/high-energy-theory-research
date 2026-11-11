@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
-"""RC-001 B2c-IVc: exact Lorentz endpoint and scalar-seagull audit.
+"""RC-001 B2c-IVc: exact Lorentz endpoint audit.
 
-This script checks the Lorentz algebra of the external-W insertions before
-loop integration. It does not perform the full weak-index/phase-weighted
-24-graph sum and does not claim a complete Slavnov-Taylor identity.
+This script checks stripped Lorentz identities before loop integration.
+It does not identify the scalar-line weak tensor with the seagull tensor;
+those are audited separately in the explicit raw-index bridge. It does not
+perform the full weak-index/phase-weighted 24-graph sum or claim a complete
+Slavnov-Taylor identity.
 
 Index convention in the three-W chain:
   D^{mu nu}(k) = g^{mu nu}/k^2,
@@ -108,40 +110,21 @@ def verify_scalar_endpoints():
     return 2
 
 
-def verify_phase_weighted_scalar_seagulls():
+def verify_seagull_metric_contraction():
+    # The scalar seagull carries g^{alpha mu}; contracting the external
+    # momentum q_alpha gives q^mu. Its weak tensor is audited separately
+    # in the explicit raw-index bridge, not factored as the scalar-line tensor.
     q = list(sp.symbols("qSG0:4", real=True))
-    r = list(sp.symbols("rSG0:4", real=True))
-    p_a = list(sp.symbols("pA0:4", real=True))
-    p_b = list(sp.symbols("pB0:4", real=True))
-    k = list(sp.symbols("kSG0:4", real=True))
-
-    r_w = r
-    r_y_a = [r[i] - q[i] for i in range(4)]
-    r_y_b = [r[i] + q[i] for i in range(4)]
-    d_aw = 1/dot(r_w, r_w)
-    d_ay = 1/dot(r_y_a, r_y_a)
-    d_bw = 1/dot(r_w, r_w)
-    d_by = 1/dot(r_y_b, r_y_b)
-
-    v_a = sp.Matrix([2*p_a[i] - k[i] for i in range(4)])
-    v_b = sp.Matrix([-2*p_b[i] - k[i] for i in range(4)])
-    qv = sp.Matrix(q)
-
-    # Relative phases after factoring the common four-point skeleton:
-    # ordinary scalar-line insertion -g2; seagull +g2.
-    # The stripped scalar-line WTI numerators are (rW+rY) on both sides.
-    a_line = -(d_ay - d_aw) * v_a
-    a_seagull = d_ay * qv
-    a_sum = sp.simplify(a_line + a_seagull)
-    a_target = sp.simplify(d_aw*v_a - d_ay*(v_a-qv))
-    assert all(sp.simplify(a_sum[i]-a_target[i]) == 0 for i in range(4))
-
-    b_line = -(d_bw - d_by) * v_b
-    b_seagull = d_by * qv
-    b_sum = sp.simplify(b_line + b_seagull)
-    b_target = sp.simplify(d_by*(v_b+qv) - d_bw*v_b)
-    assert all(sp.simplify(b_sum[i]-b_target[i]) == 0 for i in range(4))
-    return 4, 4
+    q_lower = [ETA[i] * q[i] for i in range(4)]
+    checks = 0
+    for mu in range(4):
+        contracted = sp.expand(sum(
+            q_lower[alpha] * metric(alpha, mu)
+            for alpha in range(4)
+        ))
+        assert sp.simplify(contracted - q[mu]) == 0
+        checks += 1
+    return checks
 
 
 def verify_three_w_and_feynman_gauge_chain():
@@ -211,7 +194,7 @@ def pair_census():
 def main():
     a_f, b_f = verify_fermion_endpoints()
     scalar = verify_scalar_endpoints()
-    a_sg, b_sg = verify_phase_weighted_scalar_seagulls()
+    seagull_lorentz = verify_seagull_metric_contraction()
     three_w, fg = verify_three_w_and_feynman_gauge_chain()
     remainder = verify_nonzero_remainder_diagnostic()
     pairs, matter, seagulls, n3w = pair_census()
@@ -220,8 +203,8 @@ def main():
     print(f"PASS: A-side fermion numerator difference ({a_f}/16 Dirac components).")
     print(f"PASS: B-side fermion numerator difference ({b_f}/16 Dirac components).")
     print(f"PASS: A/B scalar propagator differences ({scalar}/2).")
-    print(f"PASS: A scalar-line + seagull vector identity ({a_sg}/4 Lorentz components).")
-    print(f"PASS: B scalar-line + seagull vector identity ({b_sg}/4 Lorentz components).")
+    print(f"PASS: scalar seagull metric contraction q_alpha g^(alpha mu)=q^mu ({seagull_lorentz}/4 Lorentz components).")
+    print("NOTE: scalar-line and seagull weak tensors are distinct; see the raw-index bridge.")
     print(f"PASS: three-W contraction ({three_w}/16 Lorentz components).")
     print(f"PASS: Feynman-gauge W-chain decomposition including R_FG ({fg}/16 components).")
     print("PASS: R_FG is generically nonzero (explicit rational diagnostic point).")
