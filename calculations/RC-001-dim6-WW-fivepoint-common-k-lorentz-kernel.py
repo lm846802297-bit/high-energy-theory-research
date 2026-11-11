@@ -275,13 +275,13 @@ def main():
     seagull_checks = verify_scalar_seagull_decompositions()
     k2, kq2, R0 = verify_rfg_nonzero()
 
-    assert wti_checks == 12*16 + 6  # 12 fermion matrix WTIs plus 6 scalar WTIs.
+    assert wti_checks == 6*16 + 6  # Six fermion matrix WTIs plus six scalar WTIs.
     assert three_w_checks == 16
     assert pair_checks == 96
     assert seagull_checks == 3
 
     print("RC-001 B2c-IVh common-k longitudinal Lorentz-kernel audit")
-    print(f"PASS: oriented matter-line WTI inputs ({wti_checks} checks).")
+    print(f"PASS: oriented matter-line WTI inputs ({wti_checks}=6*16 Dirac + 6 scalar checks).")
     print(f"PASS: three-W contraction to K(k+q)-K(k) ({three_w_checks}/16).")
     print("PASS: both W-propagator orientations give D(k)-D(k+q)+R_FG (32/32).")
     print(f"PASS: six pairwise arbitrary-current contractions ({pair_checks}/96 components).")
