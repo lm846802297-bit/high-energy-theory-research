@@ -334,8 +334,8 @@ The previous common-numerator candidate \(+3/(4M_E^2)\) is superseded. The curre
 
 ## 7. Remaining acceptance gates
 
-1. The operator-level charge-conjugate orientation is mapped by Hermitian conjugation and IBP to the same action operator; no extra factor of two is allowed. Reconcile the diagram generator's labeled orientations against this operator-level identity and verify that no topologically distinct contraction is omitted.
-2. Validate the diagram multiplicities, orientations, and Feynman-rule signs with FeynArts/QGRAF or an independent explicit Wick-contraction derivation. The existing attachment atlas is not an exact diagram count.
+1. The operator-level charge-conjugate orientation is mapped by Hermitian conjugation and IBP to the same action operator; the explicit manual Wick audit also gives unit multiplicity (2/(2!)=1) for each unordered pair. No extra factor of two is allowed. Reconcile the diagram generator's labeled orientations against this operator-level identity and verify that no topologically distinct contraction is omitted.
+2. The second-order Wick multiplicity is now checked manually and archived. Remaining diagram-level acceptance requires an independent graph/sign census (FeynArts/QGRAF or a fully explicit manual derivation), including fermion-flow signs, scalar seagulls, and any distinct topologies. The attachment atlas alone is not an exact diagram count.
 3. Include LD-W-03/04 and the external \(L,H\) LSZ terms in the complete gauge Ward bookkeeping, even though their common light-only matching pieces cancel at \(O(M_E^{-2})\).
 4. Combine the hard UV pole with the EFT operator counterterm and the \(C_{LD}\), \(g_2\), and field-renormalization conventions exactly once.
 5. Check the one-\(W\) form factor/longitudinal Ward identity and only then apply the EOM/current projection.
