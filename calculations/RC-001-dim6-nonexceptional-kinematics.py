@@ -23,7 +23,7 @@ def checks():
         "p4_pairwise_dot": [sp.simplify(v+mu2/3) for v in p4_dots],
         "determinant": sp.simplify(G3.det()-sp.Rational(16,27)*mu2**3),
         "eigenvalues": eigenvalues,
-        "two_particle_channel": sp.simplify(2*mu2-2*(-mu2/3)),
+        "two_particle_channel": sp.simplify(2*mu2+2*(-mu2/3)),
     }
 
 
@@ -32,7 +32,7 @@ def main():
     assert r["p4_on_shell_offshell_norm"] == 0
     assert all(v == 0 for v in r["p4_pairwise_dot"])
     assert r["determinant"] == 0
-    assert r["two_particle_channel"] == sp.Rational(8,3)*mu2/2
+    assert r["two_particle_channel"] == sp.Rational(4,3)*mu2
     print("PASS: p1+p2+p3+p4=0 is consistent with all four p_i^2=mu_IR^2.")
     print("PASS: all six pairwise dot products equal -mu_IR^2/3.")
     print("PASS: det G_(p1,p2,p3)=16 mu_IR^6/27.")
