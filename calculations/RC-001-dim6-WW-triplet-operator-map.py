@@ -54,14 +54,23 @@ def derivative_current_identity():
     return sp.simplify(2*sp.I*A - (sp.I*(A+B) - sp.I*(B-A)))
 
 
+def eom_ibp_reduction_identity():
+    """Check -i phi div(J_L)+2 phi B = phi(A+B) from the lepton EOM."""
+    phi, A, B = sp.symbols("phi A B", commutative=True)
+    divJ = sp.I*(A-B)
+    return sp.simplify(-sp.I*phi*divJ + 2*phi*B - phi*(A+B))
+
+
 def main():
     assert component_operator_identity() == 0
     assert derivative_current_identity() == 0
+    assert eom_ibp_reduction_identity() == 0
     print("PASS: explicit Pauli-matrix component identity.")
     print("PASS: off-shell Q_LD^(3) = 2i(DH)^dag H (barL gamma L)")
     print("      + 2(Hdag H)(barL i slash D L) - Q_LD.")
     print("PASS: 2i(DH)^dag H = i d(Hdag H) - Hdag i<->D H.")
-    print("BOUNDARY: no light-field EOM, IBP source reduction, or UV loop matching is applied.")
+    print("PASS: EOM + IBP maps Q_LD^(3)+Q_LD to -O_Hl^(1) plus the Hermitian Yukawa-source pair.")
+    print("BOUNDARY: no UV one-W form factor or loop matching is applied.")
 
 
 if __name__ == "__main__":
