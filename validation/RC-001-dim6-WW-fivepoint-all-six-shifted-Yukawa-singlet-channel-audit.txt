@@ -2,7 +2,7 @@ RC-001 B2c-IVn-g/03: all-six shifted Yukawa-singlet channel audit
 
 PASS: cross A endpoints share h-q after k'=k+q (8/8 vector components).
 PASS: cross B endpoints share h+q after k'=k-q (4/4 vector components).
-PASS: same-vertex LD-W-03/04 heavy spectators remain k-independent (12/12 vector components).
+PASS: same-vertex LD-W-03/04 heavy spectators survive k->k±q (8/8 vector components, 16/16 derivative checks).
 PASS: left/right singlet charge sums with h-q, h+q, and h_E (192/192 weak components).
 RATIONAL LD-W-06 HEAVY DENOMINATORS: H0, HA, HB=(-377, -389, -365).
 
