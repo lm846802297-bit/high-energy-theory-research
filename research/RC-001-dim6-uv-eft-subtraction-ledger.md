@@ -1,6 +1,6 @@
 # RC-001 — Dimension-six gauge matching: UV–EFT subtraction and common-basis ledger
 
-**Status:** matching protocol and per-amplitude evidence ledger established. The newly identified \(O(g^2/M_E^2)\) gauge-correction amplitudes have not yet been integrated. No finite gauge-correction Wilson coefficient is claimed in this document. Existing bosonic coefficients from master §254 and previously checked scalar/soft kernels are not duplicated.
+**Status:** matching protocol and per-amplitude evidence ledger established. Selected \(Q_{LD}\) pure-\(WW\) sub-blocks now have nonexceptional hard/soft results: cross-vertex classes 01/02/05/06 have a finite local hard polynomial and pole closure, while same-vertex classes 03/04 are pure-soft and give zero hard-minus-EFT contribution at \(O(M_E^{-2})\). The complete gauge-corrected amplitudes, counterterm sum, external-\(W\) form factor, and common-basis Wilson vector remain open; no complete finite gauge-correction Wilson coefficient is claimed. Existing bosonic coefficients from master §254 and previously checked scalar/soft kernels are not duplicated.
 
 ## 1. Common conventions
 
