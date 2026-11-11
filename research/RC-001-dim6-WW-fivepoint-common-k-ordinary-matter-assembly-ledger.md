@@ -1,7 +1,7 @@
 # RC-001 — Common-\(k\) ordinary-matter longitudinal assembly ledger
 
 **Workstream:** RC-001-WW-UV-FF-02, Stage B2c-IVn-f/03  
-**Status:** the pairwise ingredients are indexed: cross-vertex and same-vertex fermion WTIs, six scalar-line/seagull endpoint kernels, six graph-specific \(R_{\rm FG}\) current projections, orientation-dependent three-W phases, the local Yukawa-singlet endpoint cancellation with common heavy-channel routing, the 1PI/1PR LSZ boundary, the exact longitudinal inverse-kernel completion target for \(R_{\rm FG}\), the IVn-e audit of momentum-dependent scalar-current routing, the exact three-W internal-leg exchange identity at the vertex/group-factor level, and seven exact scalar/fermion-line versus three-W denominator-factor relations. The current-routing audit shows that IVh's arbitrary-current identity has not yet been matched to the actual IVl/IVm scalar currents for the scalar-containing pairs. IVn-f/01 now closes the actual LD-W-01 F-F commutator/three-W sub-block with its explicit Dirac chain, physical weak tensor, relative phase, and complete spectator denominators; it leaves the explicit nonzero R_FG projection. IVn-f/02 now separates LD-W-02 into its A-side fermion/three-W sub-block and B-side scalar-line/seagull kernel, and derives the exact (V_B(k)=V_B(\kappa)+q) rebase with both symmetric and commutator (q^\mu) contacts retained. This is not yet a summed Slavnov–Taylor identity. The scalar symmetric and commutator tensors remain distinct; reducible external-leg/LSZ terms and the gauge-fixing/ghost sector remain separate.
+**Status:** the pairwise ingredients are indexed: cross-vertex and same-vertex fermion WTIs, six scalar-line/seagull endpoint kernels, six graph-specific \(R_{\rm FG}\) current projections, orientation-dependent three-W phases, the local Yukawa-singlet endpoint cancellation with common heavy-channel routing, the 1PI/1PR LSZ boundary, the exact longitudinal inverse-kernel completion target for \(R_{\rm FG}\), the IVn-e audit of momentum-dependent scalar-current routing, the exact three-W internal-leg exchange identity at the vertex/group-factor level, and seven exact scalar/fermion-line versus three-W denominator-factor relations. The current-routing audit shows that IVh's arbitrary-current identity has not yet been matched to the actual IVl/IVm scalar currents for the scalar-containing pairs. IVn-f/01 now closes the actual LD-W-01 F-F commutator/three-W sub-block with its explicit Dirac chain, physical weak tensor, relative phase, and complete spectator denominators; it leaves the explicit nonzero R_FG projection. IVn-f/02 now separates LD-W-02 into its A-side fermion/three-W sub-block and B-side scalar-line/seagull kernel, and derives the exact (V_B(k)=V_B(\kappa)+q) rebase with both symmetric and commutator (q^\mu) contacts retained. IVn-f/03 now adds the LD-W-05 A-side scalar split, with the symmetric and commutator q^mu contacts retained. IVn-f/04 completes the pair-specific LD-W-03/04 same-vertex endpoint bridge: V_S^line=V_S^3W-q, the symmetric and commutator q^mu contacts remain separate, and both Dirac-Hermitian R_FG chains and heavy spectators are checked. This is not yet a summed Slavnov–Taylor identity. The scalar symmetric and commutator tensors remain distinct; reducible external-leg/LSZ terms and the gauge-fixing/ghost sector remain separate.
 
 ## 1. Frozen common-\(k\) definitions
 
@@ -156,6 +156,69 @@ The scalar-line/seagull sub-block is now also explicit. Its weak tensors remain
 \]
 as separate structures. The local Yukawa-singlet endpoint variation is now checked separately: \( (R_{\bar L}^a+R_H^a)T_0=0 \) and \( (R_{H^\dagger}^a+R_L^a)T_0=0 \), and the common-​\(k\) shifts show that the two fields at each Yukawa vertex multiply the same heavy-channel spectator. This closes the local charge-sum sub-block. It does not yet provide the complete reducible external-leg/LSZ contribution or the full gauge variation of the amputated Green function. Do not infer a complete scalar-endpoint cancellation merely from the universal arbitrary-current kernel identity.
 
+### 4.4 LD-W-03/04 same-vertex S-to-F endpoint bridge (IVn-f/04)
+
+The same-vertex scalar endpoint has a different current rebase from both cross-vertex scalar cases. With
+\[
+r_S^Y=p_S-k,\quad r_S^W=p_S-\kappa,\quad
+\Delta_{Y,W}=1/(r_S^{Y,W})^2,\quad \delta_S=\Delta_Y-\Delta_W,
+\]
+the S-to-F scalar WTI gives
+\[
+q\cdot(r_S^W+r_S^Y)\Delta_W\Delta_Y
+=\Delta_W-\Delta_Y=-\delta_S.
+\]
+The scalar-line current is \(V_S^{\rm line}=2p_S-\kappa\), while the three-W current is \(V_S^{3W}=2p_S-k\), so \(V_S^{\rm line}=V_S^{3W}-q\). The exact rebased scalar-line/seagull current is
+\[
+\begin{aligned}
+\mathcal C_S^\mu=g_2\Big[
+&\tfrac12\delta_S V_S^{3W,\mu}\mathcal S_S^a
++\tfrac12(\Delta_Y+\Delta_W)q^\mu\mathcal S_S^a\\
+&+\tfrac i2\delta_S V_S^{3W,\mu}\mathcal G_{FS}^a
+-\tfrac i2\delta_Sq^\mu\mathcal G_{FS}^a
+\Big].
+\end{aligned}
+\]
+Thus the symmetric and commutator contacts have coefficients \((\Delta_Y+\Delta_W)/2\) and \(-i\delta_S/2\), respectively. This is not the LD-W-02 B-side or LD-W-05 A-side formula with a relabelled endpoint.
+
+The common shift \(k_{\rm old}=k+q\) maps the original scalar-line momenta to
+\[
+r_S^S\to r_S^W,\quad r_S^Y\to r_S^Y,\quad
+r_F^W\to r_F^Y,\quad k_S\to\kappa,\quad
+V_S\to V_S^{\rm line}.
+\]
+Moreover,
+\[
+\Delta_W(k)=\Delta_Y(k+q),\quad
+r_F^Y(k)=r_F^W(k+q),\quad
+V_S^{\rm line}(k)=V_S^{3W}(k+q).
+\]
+Therefore the \(-\Delta_W\) part of the scalar WTI maps, after \(k\to k+q\), to the corresponding F-side endpoint routing. The seagull denominator is exactly \(D_{3W}/k^2\); the scalar-line graph retains both scalar propagators and must not be assigned the seagull denominator.
+
+The actual ordered kernels are
+\[
+\mathcal K_{03,S}=\slashed{\mathcal C}_S\slashed r_F^Y/\kappa^2,\qquad
+\mathcal K_{04,S}=\slashed r_F^Y\slashed{\mathcal C}_S/\kappa^2,
+\]
+and the corresponding three-W remainders retain
+\[
+\begin{aligned}
+\mathcal N_{03}&=(V_S^{3W}\cdot k)\slashed k\slashed r_F^Y
+-(V_S^{3W}\cdot\kappa)\slashed\kappa\slashed r_F^Y,\\
+\mathcal N_{04}&=(V_S^{3W}\cdot k)\slashed r_F^Y\slashed k
+-(V_S^{3W}\cdot\kappa)\slashed r_F^Y\slashed\kappa.
+\end{aligned}
+\]
+The chiral heavy propagator \(P_R(\slashed h_E+M_E)P_L/(h_E^2-M_E^2)\) remains a \(k\)-independent spectator in the original seed order.
+
+The exact source and seven regression tests are recorded in:
+- \`calculations/RC-001-dim6-WW-fivepoint-LD-W-03-04-common-k-same-vertex-endpoint-split.py\`
+- \`calculations/test_RC001_dim6_WW_fivepoint_LD_W_03_04_common_k_same_vertex_endpoint_split.py\`
+- \`research/RC-001-dim6-WW-fivepoint-LD-W-03-04-common-k-same-vertex-endpoint-split.md\`
+- \`validation/RC-001-dim6-WW-fivepoint-LD-W-03-04-common-k-same-vertex-endpoint-split.txt\`
+
+The exact rational checks use two nonsingular points for both pair orientations. They confirm 64/64 direct-versus-factorized \(R_{\rm FG}\) matrix components and 64/64 raw-versus-rebased scalar-kernel components. The two q-contact matrices remain nonzero. The weak-index checks reproduce the S-to-F group-phase identity, but do not claim the Lorentz-weighted four-attachment cancellation.
+
 ## 5. Direct-attachment census
 
 The ordinary internal attachments remain
@@ -173,11 +236,10 @@ for LD-W-01…06. No new topology is introduced in IVl/IVm/IVn-a…IVn-e.
 
 ## 6. Remaining assembly gates
 
-1. **LD-W-03/04 (same-vertex):** assemble each ordered Dirac-Hermitian chain separately, preserving the \(S\to F\) phase and the heavy spectator \(S_E(h_E)\). Treat the scalar-line/seagull kernel and the fermion-line/three-W sub-block separately until the actual common current basis is fixed.
-2. **LD-W-06 (S–S):** keep the A and B scalar-line terms and their two seagulls separate until both full Lorentz-weighted weak tensors have been inserted. Rebase each endpoint current independently; do not collapse the two \(q^\mu\) contacts.
-3. After the six pair-specific sub-blocks are explicit, assemble the complete ordinary-matter longitudinal integrand. Retain all \(P_L/P_R\) endpoint pieces and the raw weak-index order.
-4. Combine the Yukawa-endpoint terms with the local Yukawa-singlet charge cancellation; do not absorb the four external-leg emissions into the 1PI five-point vertex.
-5. Write the four external-leg/LSZ factors and their lower-point amplitudes explicitly, then derive the BRST/ghost Slavnov–Taylor completion and test the longitudinal inverse-kernel target \(D(\kappa)[L(\kappa)-L(k)]D(k)=-R_{\rm FG}\) in the assembled matter-current chains.
-6. Add the \(W\)-field, gauge-coupling, matter-field, Yukawa, heavy-mass, and operator counterterms. Only after the complete off-shell identity closes should the common-regulator UV–EFT subtraction and comparison with the EFT one-\(W\) vertex be performed.
+1. **LD-W-06 (S–S):** keep the A and B scalar-line terms and their two seagulls separate until both full Lorentz-weighted weak tensors have been inserted. Rebase each endpoint current independently; do not collapse the two \(q^\mu\) contacts.
+2. After the six pair-specific sub-blocks are explicit, assemble the complete ordinary-matter longitudinal integrand. Retain all \(P_L/P_R\) endpoint pieces and the raw weak-index order.
+3. Combine the Yukawa-endpoint terms with the local Yukawa-singlet charge cancellation; do not absorb the four external-leg emissions into the 1PI five-point vertex.
+4. Write the four external-leg/LSZ factors and their lower-point amplitudes explicitly, then derive the BRST/ghost Slavnov–Taylor completion and test the longitudinal inverse-kernel target \(D(\kappa)[L(\kappa)-L(k)]D(k)=-R_{\rm FG}\) in the assembled matter-current chains.
+5. Add the \(W\)-field, gauge-coupling, matter-field, Yukawa, heavy-mass, and operator counterterms. Only after the complete off-shell identity closes should the common-regulator UV–EFT subtraction and comparison with the EFT one-\(W\) vertex be performed.
 
 No loop integration, complete STI closure, transverse form factor, UV–EFT matching coefficient, or Wilson coefficient is claimed at this stage.
