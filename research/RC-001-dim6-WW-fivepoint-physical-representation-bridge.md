@@ -122,9 +122,9 @@ Hence
 =\frac12R_A^aT_0.
 }
 \]
-The physical-representation seagull identities are checked for all scalar endpoints, three external-W generators and 16 weak-index components (288/288).
+The physical-representation seagull identities are checked algebraically for all scalar slots, three external-W generators and 16 weak-index components (288/288). For the cross-vertex scalar endpoints, the explicit raw-index bridge confirms that the seagull tensor is the sum of the two ordered matter-line tensors. For LD-W-03/04, the anticommutator identity alone does not determine which ordered product belongs to the graph because the internal W is oriented from S to F.
 
-The Lorentz coefficient \(q^\mu\) from the seagull vertex is not included in this group-only identity. It must still be combined with the scalar-line WTI.
+The Lorentz coefficient \(q^\mu\) from the seagull vertex is not included in this group-only identity. It must be combined with the scalar-line WTI while retaining the distinct weak tensors.
 
 ## 5. Relative phase and what remains undetermined
 
@@ -134,7 +134,7 @@ P_{\rm line}/P_4=-g_2,\qquad
 P_{\rm seagull}/P_4=+g_2,\qquad
 P_{3W}/P_4=-ig_2.
 \]
-The physical matter-line commutator tensor \(+i\mathcal G_{AB}^a\) therefore carries the phase-weighted group factor \(-ig_2\mathcal G_{AB}^a\). The three-W graph also carries \(-ig_2\mathcal G_{AB}^a\), multiplying its own contracted Lorentz kernel.
+For the four cross-vertex pairs, the physical matter-line commutator tensor \(+i\mathcal G_{AB}^a\) carries the phase-weighted group factor \(-ig_2\mathcal G_{AB}^a\). The three-W graph has the same group-phase factor, multiplying its own contracted Lorentz kernel. Do not extend this graph-order statement to LD-W-03/04 before deriving their raw S-to-F chains.
 
 This equality of phase-weighted group factors is **not** a cancellation proof. The A/B line WTI endpoint signs, the two terms in the three-W inverse-kernel difference, the scalar seagull Lorentz terms, and the Feynman-gauge remainder must be assembled in one common numerator expression. In particular, do not infer the sign of the final sum from the group tensor alone.
 
@@ -148,8 +148,8 @@ validation/RC-001-dim6-WW-fivepoint-physical-representation-bridge.txt.
 It checks:
 - the physical generator algebra \([R^a,R^b]=+i\epsilon^{abc}R^c\) for all four field slots;
 - all six pair projections (96/96);
-- A-line physical ordered commutator relation (288/288);
-- B-line physical ordered commutator relation (288/288);
+- candidate A-line ordered commutator relation in the physical-representation algebra (288/288);
+- candidate B-line ordered commutator relation in the physical-representation algebra (288/288);
 - physical scalar-seagull tensors (288/288).
 
 This does not establish:
@@ -157,7 +157,7 @@ This does not establish:
 2. the raw weak-index ordering of same-vertex LD-W-03/04;
 3. the scalar-line/seagull endpoint sum with distinct weak tensors;
 4. the ghost/gauge-fixing Slavnov–Taylor completion;
-4. external-leg/LSZ and counterterm terms;
-5. any integrated five-point hard coefficient or transverse form factor.
+5. external-leg/LSZ and counterterm terms;
+6. any integrated five-point hard coefficient or transverse form factor.
 
-The next task is B2c-IVb: combine these physical weak tensors with the explicit graph-specific Lorentz numerators and relative phases, then perform the \(q_\alpha\) contraction and the full A/B/three-W sum before integration.
+The next task is to combine the cross-vertex raw-index tensors with the B1 momentum routes and the graph-specific Lorentz numerators, then perform the \(q_\alpha\) contraction and common-loop-momentum shift algebra before integration. The same-vertex LD-W-03/04 raw chains must be derived separately rather than imported from the cross-vertex A/B template.
