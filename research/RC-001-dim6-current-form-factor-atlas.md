@@ -114,6 +114,51 @@ The Pauli completeness and adjoint-commutator identities are checked in calculat
 
 This is the **EFT contact implied by the local triplet derivative operator**, not the UV one-loop five-point form factor. It does not close LD-W-FF or determine the final \(C_{H\ell}^{(3)}\) coefficient. The UV current amplitude, its common off-shell EFT subtraction, the other derivative tensors, and the EOM/IBP projection remain required.
 
+### 3.3 Exact Pauli-Fierz map before applying equations of motion
+
+The four-point \(T_3\) derivative structure must not be identified directly with the Warsaw-basis \(O_{H\ell}^{(3)}\). Applying the Pauli completeness relation to the *entire covariant derivative*, including its adjoint connection, gives the exact off-shell identity
+\[
+\begin{aligned}
+Q_{LD}^{(3)}
+={}&2i\big[(D_\mu H)^\dagger H\big]
+       (\bar L\gamma^\mu L)
++2(H^\dagger H)(\bar L i\slashed D L)\\
+&-Q_{LD}.
+\end{aligned}
+\]
+Here \(Q_{LD}=(\bar L H)i\slashed D(H^\dagger L)\) uses the same field ordering and covariant-derivative convention as above. Equivalently, since
+\[
+2i(D_\mu H)^\dagger H
+=i\partial_\mu(H^\dagger H)
+-H^\dagger i\overleftrightarrow D_\mu H,
+\]
+one has
+\[
+\boxed{
+Q_{LD}^{(3)}+Q_{LD}
+=
+\big[i\partial_\mu(H^\dagger H)
+-H^\dagger i\overleftrightarrow D_\mu H\big]
+(\bar L\gamma^\mu L)
++2(H^\dagger H)(\bar L i\slashed D L).
+}
+\]
+This identity is off shell: the last term must **not** be discarded before the light-lepton equation of motion is applied. With the SM Yukawa convention
+\[
+\mathcal L_Y=-\bar L Y_e H e_R+\mathrm{h.c.},
+\qquad i\slashed D L=Y_e H e_R,
+\]
+the last term maps into the corresponding Higgs-dressed Yukawa/source operator. The total derivative term can be integrated by parts only together with the divergence of the lepton current; that divergence is also controlled by the Yukawa EOM. Therefore the triplet box projection feeds a correlated set of \(O_{H\ell}^{(1)}\)-type current, \(Q_{LD}\), and Yukawa-source representatives before basis reduction. It is not a stand-alone \(O_{H\ell}^{(3)}\) coefficient.
+
+The identity follows directly by expanding
+\[
+(\bar L_i\sigma^I_{ij}H_j)i\gamma^\mu
+\big[(D_\mu H^\dagger)_k\sigma^I_{kl}L_l
++H^\dagger_k\sigma^I_{kl}D_\mu L_l\big]
+\]
+and using \(\sigma^I_{ij}\sigma^I_{kl}
+=2\delta_{il}\delta_{jk}-\delta_{ij}\delta_{kl}\). No on-shell condition, gauge choice, or loop integral is used. The operator-basis projection must preserve the same convention for \(Q_{LD}\), the SM Yukawa sign, and the total-derivative/EOM source terms.
+
 ## 4. Form-factor decomposition and matching record
 
 Use common nonexceptional off-shell external momenta (or one common infrared regulator) and the same gauge-fixing, \(\overline{\mathrm{MS}}\), and external-field conventions on both sides. For each amplitude, record separately:
