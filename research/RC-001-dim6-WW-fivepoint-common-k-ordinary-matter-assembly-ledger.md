@@ -102,7 +102,7 @@ By pair:
 \[
 (3,4,4,4,4,5)
 \]
-for LD-W-01…06. No new topology is introduced in IVl/IVm/IVn-a.
+for LD-W-01…06. No new topology is introduced in IVl/IVm/IVn-a/IVn-b.
 
 ## 6. Remaining assembly gates
 
