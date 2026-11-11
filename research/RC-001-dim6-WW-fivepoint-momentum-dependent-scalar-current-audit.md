@@ -133,7 +133,7 @@ The Lorentz vertex and the antisymmetric weak tensor each change sign, so their 
 \]
 The updated exact source checks 64/64 Lorentz components, 27/27 weak-index permutations, and 1728/1728 combined Lorentz/group components.
 
-This establishes that exchanging the two internal-W legs is an allowed representation of the same three-W vertex before attaching the endpoint subgraphs. It does **not** yet establish the required scalar endpoint routing: after the exchange, the endpoint scalar momenta, scalar propagators, heavy-channel momentum, Dirac ordering, and the sign convention for the physical W momentum must all be transformed together. Equation (5.2) is the starting point for that derivation, not the completed common-routing bridge.
+This establishes the antisymmetry/relabeling identity of the three-W vertex and its weak tensor. It is **not** a physical exchange of the A/B matter endpoints: once the two W legs are attached to distinct matter subgraphs, each endpoint current remains tied to its own momentum-conservation equation. In particular, (5.2) does not by itself turn (V_A(k)) into (V_A(\kappa)), or (V_B(\kappa)) into (V_B(k)). The scalar endpoint momenta, scalar propagators, heavy-channel momentum, Dirac ordering, and physical W-flow signs must all be transformed together before claiming a common routing. Equation (5.2) is only the vertex-level starting identity, not the completed common-routing bridge.
 
 ## 6. Correct next calculation
 
