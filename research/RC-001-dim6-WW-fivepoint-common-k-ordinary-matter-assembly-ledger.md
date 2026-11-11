@@ -1,7 +1,7 @@
 # RC-001 — Common-\(k\) ordinary-matter longitudinal assembly ledger
 
-**Workstream:** RC-001-WW-UV-FF-02, Stage B2c-IVn-d  
-**Status:** the pairwise ingredients are indexed: cross-vertex and same-vertex fermion WTIs, six scalar-line/seagull endpoint kernels, six graph-specific \(R_{\rm FG}\) current projections, orientation-dependent three-W phases, the local Yukawa-singlet endpoint cancellation with common heavy-channel routing, the 1PI/1PR LSZ boundary, and the exact longitudinal inverse-kernel completion target for \(R_{\rm FG}\). This is not yet a summed Slavnov–Taylor identity. The scalar symmetric and commutator tensors remain distinct; reducible external-leg/LSZ terms and the gauge-fixing/ghost sector remain separate.
+**Workstream:** RC-001-WW-UV-FF-02, Stage B2c-IVn-e  
+**Status:** the pairwise ingredients are indexed: cross-vertex and same-vertex fermion WTIs, six scalar-line/seagull endpoint kernels, six graph-specific \(R_{\rm FG}\) current projections, orientation-dependent three-W phases, the local Yukawa-singlet endpoint cancellation with common heavy-channel routing, the 1PI/1PR LSZ boundary, and the exact longitudinal inverse-kernel completion target for \(R_{\rm FG}\), and the IVn-e audit of momentum-dependent scalar-current routing. The latter finds that IVh's arbitrary-current identity has not yet been matched to the actual IVl/IVm scalar currents. This is not yet a summed Slavnov–Taylor identity. The scalar symmetric and commutator tensors remain distinct; reducible external-leg/LSZ terms and the gauge-fixing/ghost sector remain separate.
 
 ## 1. Frozen common-\(k\) definitions
 
@@ -79,7 +79,7 @@ For the cross-vertex group phase \(-ig_2\mathcal G_{AB}\), and the same-vertex p
 R_{\rm FG}^{\mu\nu}
 =\frac{k^\mu k^\nu-\kappa^\mu\kappa^\nu}{k^2\kappa^2}.
 \]
-The present IVl calculation inserts the actual endpoint numerators into this residual tensor for all six pairs. It does **not** set \(R_{\rm FG}\) to zero. IVn-d further identifies it exactly as the negative of the propagator-sandwiched longitudinal inverse-kernel difference: with \(L_{\mu\nu}(p)=p_\mu p_\nu\), \(D(\kappa)[L(\kappa)-L(k)]D(k)=-R_{\rm FG}\). Thus \(K+L=p^2g\) closes the inverse-kernel algebra. This is the tensor target for the BRST/ghost STI, not proof that a ghost graph by itself cancels the matter-chain remainder.
+The IVl source inserts the six graph-specific currents into the residual tensor. However, IVn-e finds that the scalar derivative currents used in IVl and IVm are evaluated at different shifted momenta: (V_A(k)-V_A(\kappa)=q), (V_B(k)-V_B(\kappa)=q), and (V_S(k)-V_S(\kappa)=q). The IVh arbitrary-current test uses independent momentum-independent symbols for its endpoint currents, so it proves the tensor identity but does not yet prove the graph-specific cancellation after these scalar-current shifts. The exact six-endpoint diagnostic is recorded in `research/RC-001-dim6-WW-fivepoint-momentum-dependent-scalar-current-audit.md`. No physical non-cancellation is claimed; the loop-variable/routing bridge remains to be derived. IVn-d separately identifies (R_{\rm FG}) as the negative of the propagator-sandwiched longitudinal inverse-kernel difference: with (L_{\mu\nu}(p)=p_\mu p_\nu), (D(\kappa)[L(\kappa)-L(k)]D(k)=-R_{\rm FG}). Thus (K+L=p^2g) closes the inverse-kernel algebra. This is the tensor target for the BRST/ghost STI, not proof that a ghost graph by itself cancels the matter-chain remainder.
 
 The scalar-line/seagull sub-block is now also explicit. Its weak tensors remain
 \[
@@ -102,15 +102,17 @@ By pair:
 \[
 (3,4,4,4,4,5)
 \]
-for LD-W-01…06. No new topology is introduced in IVl/IVm/IVn-a…IVn-d.
+for LD-W-01…06. No new topology is introduced in IVl/IVm/IVn-a…IVn-e.
 
 ## 6. Remaining assembly gates
 
-1. Keep the reducible external-field W emissions separate from the 1PI five-point vertex used for Wilson matching; if the connected Green function is assembled, write the four external-leg factors and their lower-point amplitudes explicitly.
-2. Combine the fermion WTI endpoint terms with the local Yukawa-singlet charge cancellation, retaining the \(P_L/P_R\) endpoint pieces and raw weak-index order.
-3. Sum the scalar \(\mathcal S_X\) terms with the corresponding endpoint/LSZ terms; keep \(\mathcal G_{AB}\) and \(\mathcal G_{FS}\) separate until their orientation-specific phases are applied.
-4. Combine the ordinary-matter integrand with the explicit RFG kernels and the three-W terms, without setting \(R_{\rm FG}\) to zero.
-5. Derive the BRST/ghost Slavnov–Taylor completion and demonstrate that it supplies the longitudinal inverse-kernel target \(D(\kappa)[L(\kappa)-L(k)]D(k)=-R_{\rm FG}\) in the actual matter-current chains, together with the required inverse-propagator terms.
-6. Add the \(W\)-field, gauge-coupling, matter-field, Yukawa, heavy-mass, and operator counterterms. After the complete off-shell identity closes, perform the common-regulator UV–EFT subtraction and compare the local longitudinal contact to the existing EFT one-\(W\) vertex.
+1. Derive a graph-specific common-routing bridge for the six scalar endpoints. Match the IVm \(V_A(\kappa),V_B(k),V_S(\kappa)\) currents to the IVl three-W currents, including the full scalar, light-fermion, heavy and W denominators; do not substitute currents by inspection.
+2. For each scalar-containing pair, write the three-W graph in both allowed internal-leg routings and derive the loop-variable transformation, including the Lorentz-index exchange, weak tensor, phase, and ordered Dirac chain. Keep the LD-W-06 A and B seagulls separate.
+3. Revisit LD-W-01 as the fermion-only control, and then assemble the six pair-specific matter-line/three-W commutator terms in the common routing.
+4. Combine the fermion WTI endpoint terms with the local Yukawa-singlet charge cancellation, retaining the \(P_L/P_R\) endpoint pieces and raw weak-index order.
+5. Sum the scalar \(\mathcal S_X\) terms with the corresponding seagull and endpoint/LSZ terms; keep \(\mathcal G_{AB}\) and \(\mathcal G_{FS}\) separate until their orientation-specific phases are applied.
+6. Keep the reducible external-field W emissions separate from the 1PI five-point vertex used for Wilson matching; if the connected Green function is assembled, write the four external-leg factors and their lower-point amplitudes explicitly.
+7. Only after the ordinary-matter integrand is routed consistently, derive the BRST/ghost Slavnov–Taylor completion and test the longitudinal inverse-kernel target \(D(\kappa)[L(\kappa)-L(k)]D(k)=-R_{\rm FG}\) in the actual matter-current chains.
+8. Add the \(W\)-field, gauge-coupling, matter-field, Yukawa, heavy-mass, and operator counterterms. After the complete off-shell identity closes, perform the common-regulator UV–EFT subtraction and compare the local longitudinal contact to the existing EFT one-\(W\) vertex.
 
 No loop integration, complete STI closure, transverse form factor, UV–EFT matching coefficient, or Wilson coefficient is claimed at this stage.
