@@ -16,6 +16,7 @@ Use this Skill for general high-energy theory and phenomenology research. Review
 5. **Do not overstate validation.** A schema test does not establish physics correctness; a benchmark point does not represent a full parameter space; a successful run does not prove reproducibility unless its inputs and environment are identified.
 6. **Preserve uncertainty.** Record unresolved ambiguities, failed checks, assumptions, and software/tool limitations. Never silently convert a failed or missing check into a pass.
 7. **Do not promote candidate rules.** Candidate schemas and recommendations remain candidates until the decision register records explicit approval.
+8. **Archive completed calculations.** For every substantial run, commit the essential native/uncompressed outputs, exact source revision, inputs, run manifest, and checksums under the canonical research record. Do not create a ZIP/TAR archive as a substitute for extracted result files. For large files, use durable versioned storage with a committed manifest, then verify the remote files after pushing. Follow [the mandatory archival policy](../../docs/CALCULATION_RESULT_ARCHIVAL_POLICY.md).
 
 ## Workflow
 
@@ -25,7 +26,7 @@ Use this Skill for general high-energy theory and phenomenology research. Review
 4. **Derive and compute:** show intermediate steps for nontrivial derivations; use symbolic or numerical tools when they add independent evidence; record code, inputs, outputs, and environment.
 5. **Verify:** test dimensions, signs, limiting cases, gauge/symmetry constraints, numerical stability, and independent formulations as applicable.
 6. **Synthesize:** map conclusions to supporting evidence and distinguish established, conditional, excluded, allowed, not-assessed, and unresolved statements.
-7. **Archive:** retain the run manifest, artifact identities, validation reports, and unresolved issues. Invalidate downstream results when relevant inputs or code change.
+7. **Archive:** retain the run manifest, artifact identities, validation reports, and unresolved issues. Commit essential native/uncompressed result files and verify their remote hashes under the [calculation-result archival policy](../../docs/CALCULATION_RESULT_ARCHIVAL_POLICY.md). Invalidate downstream results when relevant inputs or code change.
 
 ## Formula and loop-calculation checklist
 

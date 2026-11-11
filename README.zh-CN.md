@@ -22,6 +22,7 @@
 8. 可复用的研究 Skill 从 [SKILL.md](skills/high-energy-theory-research/SKILL.md) 开始，再阅读其参考指南。
 9. 修改候选 Schema 前，先检查[仓库状态](docs/REPOSITORY_STATUS.md)、[未解决问题](docs/OPEN_ISSUES.md)和[规范决策登记表](docs/governance/DECISION_REGISTER.md)。
 10. 阅读 [v1.6.5 设计基线](docs/design/high-energy-theory-research-Skill-v1.6.5.md)、[v1.6.7 设计与实现整合报告](docs/design/high-energy-theory-research-Skill-v1.6.7.md)，以及 [v1.6.6 Artifact 身份候选澄清](schema/v1.4.3.7/audit/高能理论物理研究-Skill-详细设计文档-v1.6.6-Artifact身份语义候选修订.md)。
+11. 提交数值结果、运行清单和验证证据时，必须遵守[计算结果归档规范](docs/CALCULATION_RESULT_ARCHIVAL_POLICY.zh-CN.md)。
 
 ### 核心链条
 
@@ -34,6 +35,7 @@
 - **`docs/scientific-diff-workflow.md`** — 工作流、术语定义、状态模型和物理研究专项指引。
 - **`projects/`** — 顶层项目注册表及项目/工作流层级；目前只承担导航元数据功能。
 - **`docs/USER_GUIDE.md`** — 项目设置、研究变更、计算证据、验证和迁移纪律的详细操作手册；另有[中文版本](docs/USER_GUIDE.zh-CN.md)。
+- **`docs/CALCULATION_RESULT_ARCHIVAL_POLICY.zh-CN.md`** — 数值结果原生文件归档、运行来源、校验和、大文件存储及远端核对的强制规范；另有[英文版](docs/CALCULATION_RESULT_ARCHIVAL_POLICY.md)。
 - **`docs/PROJECT_REGISTRY_AUDIT.md`** — 第一阶段注册表/路径预审的范围与证据，明确记录尚未执行的测试和未来文件迁移的限制。
 - **`docs/review-checklist.md`** — 科学变更及其与论文同步时的审查项目。
 - **`docs/design/`** — 保留的设计基线与整合实现报告；目录说明见[中文版本](docs/design/README.zh-CN.md)。

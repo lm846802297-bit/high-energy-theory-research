@@ -119,7 +119,7 @@ For each result that matters, record as applicable:
 - output paths and hashes for large or binary artifacts;
 - warnings, failures, discarded runs, and post-processing steps.
 
-Do not record a run as reproducible if the input configuration or necessary environment is missing.
+Do not record a run as reproducible if the input configuration or necessary environment is missing. Archive substantial runs under the canonical research record with directly accessible native outputs, provenance, and checksums; follow the mandatory [calculation-result archival policy](CALCULATION_RESULT_ARCHIVAL_POLICY.md). Do not use a newly created ZIP/TAR archive as a substitute for extracted result files.
 
 ### Stage 6 — Verify using checks appropriate to the physics
 
@@ -216,7 +216,7 @@ This pattern also applies to UV–EFT matching, finite loop terms, neutrino mass
 - Use branches and reviewable commits for proposed changes; preserve a stable baseline.
 - Keep research-change IDs in commit or pull-request descriptions where useful.
 - Use text diffs for LaTeX, Markdown, source code, configuration files, and symbolic expressions stored as text.
-- For notebooks, PDFs, generated plots, large data, and binary files, record relevant metadata, content hashes, input provenance, and a human-readable summary of the scientific difference.
+- For notebooks, PDFs, generated plots, large data, and binary files, record relevant metadata, content hashes, input provenance, and a human-readable summary of the scientific difference. Commit essential native/uncompressed outputs directly when practical; for files too large for ordinary Git, use Git LFS or durable versioned storage with an immutable manifest rather than an expiring CI artifact.
 - Avoid committing credentials, private tokens, or data that the project is not permitted to redistribute.
 - Separate “the source changed” from “the result was regenerated” and “the result was verified.”
 
