@@ -148,4 +148,4 @@ It does **not** establish:
 5. external-leg/LSZ and counterterm completion;
 6. a five-point hard integral, transverse form factor, or Wilson coefficient.
 
-The next step is now specifically the common-loop-momentum Lorentz-weighted sum. Use the B1 routes without re-deriving them, insert the cross-vertex and same-vertex raw weak tensors with their different three-W orientation signs, and keep the scalar-line and seagull tensors separate. The sum must be checked before integration.
+The universal common-\(k\) transverse-kernel cancellation and all Yukawa/seagull shift maps are now checked in the B2c-IVh/IVj records. The next step is to insert the explicit pair-dependent fermion/scalar currents and heavy propagator numerators into those fixed maps, then combine the scalar seagull tensors with the Yukawa/external endpoint terms. Keep \(R_{\rm FG}\) explicit and do not integrate until the full UV–EFT longitudinal identity, including external-leg/LSZ and ghost/gauge-fixing terms, is assembled.
