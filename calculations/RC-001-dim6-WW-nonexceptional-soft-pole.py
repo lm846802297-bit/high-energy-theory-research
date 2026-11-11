@@ -405,7 +405,7 @@ def main():
     assert abs(eps_moment - expected_eps_moment) < mp.mpf("1e-35")
 
     print("RC-001 nonexceptional pure-WW EFT-soft audit")
-    print("PASS: UV soft expansion equals the independently routed EFT Q_LD insertion numerator for all four pairs.")
+    print("PASS: replacing the heavy-line momentum by the EFT derivative momentum gives the same numerator for all four pairs (algebraic routing identity).")
     print("PASS: all four generalized routings reduce to the old exceptional denominators.")
     print("PASS: all four symmetric-point triangles have invariants (1,1,4/3) mu_IR^2.")
     print("Per-pair UV residues, in the (slash p1, slash p2, slash p3) basis:")
