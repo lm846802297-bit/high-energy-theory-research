@@ -319,10 +319,17 @@ Q_{LD}^{(3)}
 (D_\mu^{\rm adj}Y)^I
 =\partial_\mu Y^I+g_2\epsilon^{IJK}W_\mu^JY^K.
 \]
-Thus the corresponding EFT one-\(W\) contact associated with this sub-block is
+The Pauli normalization is one: \(Q_{LD}^{(3)}\) has exactly the \(T_3\) tensor, not \(T_3/4\). There is, however, a Fourier-sign distinction to retain. With \(\phi(x)=\int_p e^{-ipx}\phi(p)\) and the all-incoming momenta of §1, the derivative on \(Y^I=H^\dagger\sigma^I L\) carries \(p_3+p_4=-P\). Hence the four-point matrix element of \(Q_{LD}^{(3)}\) is proportional to \(-\slashed P\,T_3\), whereas \(C_3^{WW,\rm box}\) in §6 is defined as the raw coefficient of \(+\slashed P\,T_3\). In this convention,
+\[
+C_{Q_{LD}^{(3)}}^{WW,\rm box}=-C_3^{WW,\rm box}.
+\]
+The corresponding EFT one-\(W\) contact is therefore
 \[
 \mathcal L_{\rm contact}
-=i g_2 C_3^{WW,\rm box}\epsilon^{IJK}
+=i g_2 C_{Q_{LD}^{(3)}}^{WW,\rm box}\epsilon^{IJK}
+(\bar L\sigma^I H)\gamma^\mu W_\mu^J
+(H^\dagger\sigma^K L)
+=-i g_2 C_3^{WW,\rm box}\epsilon^{IJK}
 (\bar L\sigma^I H)\gamma^\mu W_\mu^J
 (H^\dagger\sigma^K L).
 \]
