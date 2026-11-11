@@ -129,6 +129,35 @@ C_{Q_{LD}^{(3)}}^{WW,\rm cross}
 \]
 for this fixed cross-box sub-block. At \(\mu_R=M_E\), this is \(-g_2^2|y_\ell|^2/(32\pi^2M_E^2)\). The corresponding EFT contact is obtained by inserting this coefficient into the boxed adjoint-derivative contact above. The \(v_-\) and \(v_+\) directions are retained as off-shell form factors and are not yet assigned to Warsaw-basis operators. The decomposition is checked in calculations/RC-001-dim6-WW-offshell-formfactor-decomposition.py and the contact coefficient in calculations/RC-001-dim6-WW-triplet-contact-from-hard-polynomial.py, with validation outputs under validation/.
 
+For the purpose of constructing the **EFT local one-\(W\) contact** before EOM/IBP reduction, the two remaining directions can be represented by the gauge-covariant redundant off-shell operators
+\[
+\mathcal O_-^{(3)}
+=T_{ij,kl}(\bar L_i\gamma^\mu L_l)\,
+i\!\left[H_k^\dagger D_\mu H_j-(D_\mu H_k^\dagger)H_j\right],
+\]
+\[
+\mathcal O_+^{(3)}
+=T_{ij,kl}(\bar L_i\gamma^\mu L_l)\,
+i\!\left[H_k^\dagger D_\mu H_j+(D_\mu H_k^\dagger)H_j\right],
+\qquad T_{ij,kl}=\sum_A\sigma^A_{ij}\sigma^A_{kl}.
+\]
+Their four-point form factors are \(v_-=p_2-p_3\) and \(v_+=p_2+p_3\). Expanding the doublet covariant derivatives gives
+\[
+\mathcal L_{\mathcal O_-}^{W}
+=2g_2 b\,T_{ij,kl}(\bar L_i\gamma^\mu L_l)
+H_k^\dagger\frac{\sigma^J_{jm}}2H_m\,W_\mu^J,
+\qquad
+\mathcal L_{\mathcal O_+}^{W}=0.
+\]
+The latter cancellation follows because the gauge connections in \(H^\dagger D_\mu H+(D_\mu H^\dagger)H\) cancel. The Pauli contraction in the first contact is checked componentwise:
+\[
+T_{ij,kl}\frac{\sigma^J_{jm}}2
+=\delta_{il}\sigma^J_{km}-\frac12\sigma^J_{im}\delta_{kl}.
+\]
+Thus, in this redundant off-shell basis, the full local contact implied by the hard polynomial is the sum of the \(Q_{LD}^{(3)}\) adjoint contact with coefficient \(a(L)\) and the \(\mathcal O_-^{(3)}\) contact with coefficient \(b(L)\); the \(v_+\) term has no direct \(W\) contact. The common factor \(g_2^2|y_\ell|^2/(16\pi^2M_E^2)\) multiplies \(a,b,c\). At \(\mu_R=M_E\), \(a=-1/2\) and \(b=-1/32\). The exact momentum/Pauli checks are in calculations/RC-001-dim6-WW-covariant-contact-completion.py and validation/RC-001-dim6-WW-covariant-contact-completion.txt.
+
+This constructs the **EFT local contact in a redundant gauge-covariant basis**. It is still not the UV one-loop five-point form factor, and it is not yet a Warsaw-basis coefficient: the Hermitian completion, EOM/IBP reduction, and external-leg emissions remain to be included.
+
 This is the **EFT contact implied by the local triplet derivative operator**, not the UV one-loop five-point form factor. It does not close LD-W-FF or determine the final \(C_{H\ell}^{(3)}\) coefficient. The UV current amplitude, its common off-shell EFT subtraction, the other derivative tensors, and the EOM/IBP projection remain required.
 
 ### 3.3 Exact Pauli-Fierz map before applying equations of motion
