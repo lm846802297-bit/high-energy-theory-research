@@ -227,11 +227,54 @@ def audit_actual_scalar_endpoint_rfg_differences():
     return results, denominators
 
 
+def metric(mu, nu):
+    return sp.Integer(ETA[mu]) if mu == nu else sp.Integer(0)
+
+
+def gamma3(alpha, mu, nu, q, k):
+    """Gamma_{alpha mu nu}(q,k,-k-q), all momenta incoming."""
+    return (
+        metric(alpha, mu) * ETA[nu] * (q[nu] - k[nu])
+        + metric(mu, nu) * ETA[alpha] * (2*k[alpha] + q[alpha])
+        + metric(nu, alpha) * ETA[mu] * (-k[mu] - 2*q[mu])
+    )
+
+
+def verify_three_w_internal_leg_exchange():
+    q = list(sp.symbols("q3W0:4", real=True))
+    k = list(sp.symbols("k3W0:4", real=True))
+    kap = add(k, q)
+    lorentz_checks = 0
+    for alpha, mu, nu in product(range(4), repeat=3):
+        original = gamma3(alpha, mu, nu, q, k)
+        exchanged = gamma3(alpha, nu, mu, q, scale(-1, kap))
+        assert sp.simplify(exchanged + original) == 0
+        lorentz_checks += 1
+
+    group_checks = 0
+    combined_checks = 0
+    for a, b, c in product(range(3), repeat=3):
+        eps_original = sp.LeviCivita(a, b, c)
+        eps_exchanged = sp.LeviCivita(a, c, b)
+        assert sp.simplify(eps_exchanged + eps_original) == 0
+        group_checks += 1
+        for alpha, mu, nu in product(range(4), repeat=3):
+            original = eps_original * gamma3(alpha, mu, nu, q, k)
+            exchanged = eps_exchanged * gamma3(
+                alpha, nu, mu, q, scale(-1, kap)
+            )
+            assert sp.simplify(exchanged - original) == 0
+            combined_checks += 1
+    return lorentz_checks, group_checks, combined_checks
+
+
 def main():
     shift_checks = verify_exact_scalar_current_shifts()
     results, denominators = audit_actual_scalar_endpoint_rfg_differences()
+    leg_exchange = verify_three_w_internal_leg_exchange()
     print("RC-001 B2c-IVn-e momentum-dependent scalar-current audit")
     print(f"PASS: exact A/B/S scalar-current shifts are q ({shift_checks}/12 vector components).")
+    print(f"PASS: three-W internal-leg exchange Lorentz sign ({leg_exchange[0]}/64), group sign ({leg_exchange[1]}/27), combined vertex invariance ({leg_exchange[2]}/1728).")
     print("ACTUAL IVm versus IVl CURRENT ROUTES:")
     print("  LD-W-02 B scalar: V_B(k) versus V_B(k+q)")
     print("  LD-W-03/04 S scalar: V_S(k+q) versus V_S(k)")
