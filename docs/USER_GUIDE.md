@@ -148,6 +148,8 @@ Keep the following evidence categories distinct:
 
 One category does not imply another. A symbolic check is not diagram-level validation. A CI pass is not proof of a Wilson coefficient. A literature citation is not a reproduction. If a tool or environment is unavailable, record the missing evidence and its consequence.
 
+For every substantial numerical run, follow the mandatory [calculation-result archival policy](CALCULATION_RESULT_ARCHIVAL_POLICY.md): retain the essential native-format outputs as directly accessible files, do not create a ZIP/TAR archive as a substitute for extracted results, record run provenance and checksums, and verify the committed files from GitHub after pushing. Use Git LFS or durable versioned storage with a manifest when outputs are too large for ordinary Git.
+
 For loop matching, record external momenta and flow, Feynman rules and signs, UV/IR regulators, renormalization convention, EFT subtraction prescription, counterterms, operator basis, EOM/Fierz conventions, and the order at which terms are retained.
 
 ## 8. Claim–Evidence Matrix
@@ -199,6 +201,7 @@ For both commands, inspect the full report, not only the exit code. Fix errors b
 - Do not merge a research change merely because its documentation is tidy. Check its scientific acceptance criteria separately.
 - After integration, inspect the resulting default-branch state and update the research record with the exact integrated revision.
 - Do not rewrite history or move large sets of files solely for cosmetic consistency.
+- After pushing a result, retrieve the committed files from GitHub and verify their paths, sizes, and hashes; a successful push alone is not archival verification. See the [calculation-result archival policy](CALCULATION_RESULT_ARCHIVAL_POLICY.md).
 
 ## 11. File organization and migration
 

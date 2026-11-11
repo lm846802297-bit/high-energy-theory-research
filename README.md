@@ -12,6 +12,7 @@ The workflow is designed for theoretical particle physics, UV–EFT matching, pe
 
 ### Start here
 
+0. Before every task, read the mandatory repository instructions in [AGENTS.md](AGENTS.md).
 1. Read the [detailed User Guide](docs/USER_GUIDE.md) for project setup, workstreams, research changes, evidence, validation, and review.
 2. Read [the workflow specification](docs/scientific-diff-workflow.md).
 3. Copy [the research-change template](templates/research-change.md) for each substantive research change.
@@ -22,6 +23,7 @@ The workflow is designed for theoretical particle physics, UV–EFT matching, pe
 8. For the reusable research Skill, start at [SKILL.md](skills/high-energy-theory-research/SKILL.md), then read its reference guides.
 9. Review [repository status](docs/REPOSITORY_STATUS.md), [open issues](docs/OPEN_ISSUES.md), and the [normative decision register](docs/governance/DECISION_REGISTER.md) before changing candidate schemas.
 10. Read the [v1.6.5 design baseline](docs/design/high-energy-theory-research-Skill-v1.6.5.md), the [v1.6.7 consolidated design/implementation report](docs/design/high-energy-theory-research-Skill-v1.6.7.md), and the [v1.6.6 Artifact-identity candidate clarification](schema/v1.4.3.7/audit/高能理论物理研究-Skill-详细设计文档-v1.6.6-Artifact身份语义候选修订.md).
+11. Follow the mandatory [calculation-result archival policy](docs/CALCULATION_RESULT_ARCHIVAL_POLICY.md) when committing numerical outputs, run manifests, and validation evidence.
 
 ### Core chain
 
@@ -34,6 +36,7 @@ Every arrow should be traceable. A change to an upstream assumption or formula m
 - **docs/scientific-diff-workflow.md** — workflow, definitions, status model, and physics-specific guidance.
 - **projects/** — top-level project registry and project/workstream hierarchy; navigation metadata only at this stage.
 - **docs/USER_GUIDE.md** — detailed operating manual for project setup, research changes, calculation evidence, validation, and migration discipline.
+- **docs/CALCULATION_RESULT_ARCHIVAL_POLICY.md** — mandatory rules for native/uncompressed outputs, run provenance, checksums, large-file storage, and remote verification; see the [Chinese version](docs/CALCULATION_RESULT_ARCHIVAL_POLICY.zh-CN.md).
 - **docs/PROJECT_REGISTRY_AUDIT.md** — scope and evidence of the Phase A registry/path pre-audit, including explicit limits on unrun tests and future file migration.
 - **docs/review-checklist.md** — checks for scientific changes and manuscript synchronization.
 - **docs/design/** — retained design baseline and consolidated implementation report.
