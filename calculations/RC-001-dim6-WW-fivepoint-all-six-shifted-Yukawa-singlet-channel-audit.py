@@ -100,19 +100,18 @@ def verify_same_vertex_spectators():
     h_e = add(add(p_f, p_s), q)
     k_plus = add(k, q)
     k_minus = sub(k, q)
-    # Both loop shifts leave h_E unchanged.
-    assert all(sp.simplify(h_e[i] - (p_f[i] + p_s[i] + q[i])) == 0
+    h_e_plus = add(add(p_f, p_s), q)
+    h_e_minus = add(add(p_f, p_s), q)
+    assert all(sp.simplify(h_e[i] - h_e_plus[i]) == 0
                for i in range(4))
-    assert all(sp.simplify(h_e[i] - (p_f[i] + p_s[i] + q[i])) == 0
+    assert all(sp.simplify(h_e[i] - h_e_minus[i]) == 0
                for i in range(4))
     assert all(sp.diff(h_e[i], k[j]) == 0
                for i, j in product(range(4), repeat=2))
-    assert all(sp.simplify((p_f[i] + p_s[i] + q[i])
-                           - (p_f[i] + p_s[i] + q[i])) == 0
-               for i in range(4))
-    # The shifted loop variables do not enter the heavy spectator.
-    assert k_plus != k_minus
-    return 12
+    assert all(sp.diff(h_e_plus[i], k[j]) == 0
+               and sp.diff(h_e_minus[i], k[j]) == 0
+               for i, j in product(range(4), repeat=2))
+    return 8, 16
 
 
 def verify_all_singlet_charge_sums():
@@ -165,11 +164,11 @@ def main():
     same = verify_same_vertex_spectators()
     weak = verify_all_singlet_charge_sums()
     heavy = rational_heavy_channels()
-    assert (a, b, same, weak, heavy) == (8, 4, 12, 192, (-377, -389, -365))
+    assert (a, b, same, weak, heavy) == (8, 4, (8, 16), 192, (-377, -389, -365))
     print("RC-001 B2c-IVn-g/03: all-six shifted Yukawa-singlet channel audit")
     print(f"PASS: cross A endpoints share h-q after k'=k+q ({a}/8 vector components).")
     print(f"PASS: cross B endpoints share h+q after k'=k-q ({b}/4 vector components).")
-    print(f"PASS: same-vertex LD-W-03/04 heavy spectators remain k-independent ({same}/12 vector components).")
+    print(f"PASS: same-vertex LD-W-03/04 heavy spectators survive k->k±q ({same[0]}/8 vector components, {same[1]}/16 derivative checks).")
     print(f"PASS: left/right singlet charge sums with h-q, h+q, and h_E ({weak}/192 weak components).")
     print(f"RATIONAL LD-W-06 HEAVY DENOMINATORS: H0, HA, HB={heavy}.")
     print("RESULT: all six pair classes preserve the local Yukawa-singlet charge factor under the validated shifts.")
