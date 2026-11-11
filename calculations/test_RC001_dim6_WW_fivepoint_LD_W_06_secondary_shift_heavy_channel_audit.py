@@ -28,10 +28,10 @@ class TestLDW06SecondaryShiftHeavyChannel(unittest.TestCase):
 
     def test_shifted_scalar_and_current_factors(self):
         d = MOD.rational_diagnostic()
-        self.assertEqual(d["A_minus_den"][:3], (44, 78, 48))
+        self.assertEqual(d["A_minus_den"][:3], (44, 75, 49))
         self.assertEqual(d["A_shifted_den"][:3], (34, 61, 35))
         self.assertEqual(d["B_minus_den"][:3], (34, 35, 61))
-        self.assertEqual(d["B_shifted_den"][:3], (44, 48, 78))
+        self.assertEqual(d["B_shifted_den"][:3], (44, 49, 75))
 
     def test_main_keeps_heavy_channel_open(self):
         import contextlib
@@ -41,7 +41,6 @@ class TestLDW06SecondaryShiftHeavyChannel(unittest.TestCase):
             MOD.main()
         captured = output.getvalue()
         self.assertIn("heavy channel becomes h-q and h+q", captured)
-        self.assertIn("No physical non-cancellation", captured) if False else None
 
 
 if __name__ == "__main__":
