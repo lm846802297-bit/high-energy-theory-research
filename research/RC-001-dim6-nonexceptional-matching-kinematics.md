@@ -271,6 +271,28 @@ Only the cross-vertex classes contribute to this hard polynomial; the same-verte
 
 This closes the hard/soft analysis of the six internal-\(W\) line-pair classes for one fixed ordered tree exchange and unit multiplicity. It does **not** close the full renormalized \(WW\) four-point amplitude: external-field and parameter/operator counterterms, the external-\(W\) five-point form factor, the complete Slavnov–Taylor sum, and the common EOM/IBP operator-basis projection remain open. No complete \(Q_{LD}\) Wilson coefficient is claimed.
 
+### 3.6 Off-shell momentum-basis decomposition of the hard polynomial
+
+The finite hard polynomial can be decomposed into three independent momentum vectors without yet assigning all of them to named operators. Define
+\[
+v_D=p_3+p_4=-(p_1+p_2),\qquad
+v_-=p_2-p_3,\qquad
+v_+=p_2+p_3.
+\]
+Then
+\[
+C_{\rm hard}^{\rm fin}=a\,v_D+b\,v_-+c\,v_+,
+\]
+with
+\[
+\boxed{
+a=-\frac12+\frac L2,\qquad
+b=-\frac1{32}+\frac{7L}{16},\qquad
+c=\frac7{32}-\frac{5L}{16}.
+}
+\]
+At \(\mu_R=M_E\), \((a,b,c)=(-1/2,-1/32,7/32)\). The \(v_D\) direction is the derivative momentum of the triplet \(Q_{LD}^{(3)}\) representative. The other two are retained as independent off-shell form-factor directions; they are not assigned to Warsaw-basis operators before the weak-index, total-derivative, EOM/source, and full-amplitude reductions are performed. The exact linear-algebra check is in calculations/RC-001-dim6-WW-offshell-formfactor-decomposition.py with output validation/RC-001-dim6-WW-offshell-formfactor-decomposition.txt.
+
 ## 4. UV–EFT and \(R^*\) bookkeeping
 
 For each attachment class, record before simplification:
