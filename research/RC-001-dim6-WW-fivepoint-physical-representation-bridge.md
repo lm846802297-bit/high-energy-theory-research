@@ -1,7 +1,7 @@
 # RC-001 — Physical SU(2) representation bridge for the five-point weak tensors
 
 **Workstream:** RC-001-WW-UV-FF-02, Stage B2c-IVa  
-**Status:** the signed WTI actions used in the pair-projection audit are now explicitly related to the physical field-representation generators. The two-generator seed tensors are unchanged, while three-generator products acquire the expected overall sign. The physical-representation commutator and seagull identities are checked algebraically for all six pair labels. However, the raw open-chain mapping is now explicitly established only for the four cross-vertex pairs LD-W-01/02/05/06 (see the separate B2c-IVd raw-index bridge). The same-vertex pairs LD-W-03/04 have a distinct S-to-F internal-W orientation and remain outside that graph-order claim. This is not the complete Lorentz-weighted 24-graph sum.
+**Status:** the signed WTI actions used in the pair-projection audit are now explicitly related to the physical field-representation generators. The two-generator seed tensors are unchanged, while three-generator products acquire the expected overall sign. The physical-representation commutator and seagull identities are checked algebraically for all six pair labels. However, the raw open-chain mapping is established in two separate records: B2c-IVd for the four cross-vertex pairs LD-W-01/02/05/06, and B2c-IVe for same-vertex LD-W-03/04 with their distinct S-to-F internal-W orientation. This file remains the common field-representation algebra bridge, not the complete Lorentz-weighted 24-graph sum.
 
 ## 1. Physical field generators versus signed WTI actions
 
@@ -122,7 +122,7 @@ Hence
 =\frac12R_A^aT_0.
 }
 \]
-The physical-representation seagull identities are checked algebraically for all scalar slots, three external-W generators and 16 weak-index components (288/288). For the cross-vertex scalar endpoints, the explicit raw-index bridge confirms that the seagull tensor is the sum of the two ordered matter-line tensors. For LD-W-03/04, the anticommutator identity alone does not determine which ordered product belongs to the graph because the internal W is oriented from S to F.
+The physical-representation seagull identities are checked algebraically for all scalar slots, three external-W generators and 16 weak-index components (288/288). For the cross-vertex scalar endpoints, the explicit raw-index bridge confirms that the seagull tensor is the sum of the two ordered matter-line tensors. For LD-W-03/04, the anticommutator identity alone does not determine which ordered product belongs to the graph because the internal W is oriented from S to F; the separate B2c-IVe raw-index bridge now derives that ordering.
 
 The Lorentz coefficient \(q^\mu\) from the seagull vertex is not included in this group-only identity. It must be combined with the scalar-line WTI while retaining the distinct weak tensors.
 
@@ -154,7 +154,7 @@ It checks:
 
 This does not establish:
 1. the complete Lorentz-weighted cross-vertex A/B matter-line plus three-W cancellation;
-2. the raw weak-index ordering of same-vertex LD-W-03/04;
+2. the Lorentz-weighted same-vertex LD-W-03/04 line/three-W sum;
 3. the scalar-line/seagull endpoint sum with distinct weak tensors;
 4. the ghost/gauge-fixing Slavnov–Taylor completion;
 5. external-leg/LSZ and counterterm terms;
