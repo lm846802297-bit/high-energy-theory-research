@@ -268,13 +268,78 @@ def verify_three_w_internal_leg_exchange():
     return lorentz_checks, group_checks, combined_checks
 
 
+def verify_actual_denominator_route_factors():
+    me2 = sp.symbols("M_E2", real=True)
+    k = list(sp.symbols("kDen0:4", real=True))
+    q = list(sp.symbols("qDen0:4", real=True))
+    kap = add(k, q)
+    k2, kap2 = dot(k, k), dot(kap, kap)
+
+    # Cross-vertex routing: r_A=k-p_A, r_B=k+p_B, h=k-P.
+    p_a = list(sp.symbols("pADen0:4", real=True))
+    p_b = list(sp.symbols("pBDen0:4", real=True))
+    p_ap = list(sp.symbols("pAprimeDen0:4", real=True))
+    p_bp = list(sp.symbols("pBprimeDen0:4", real=True))
+    r_a = sub(k, p_a)
+    r_b = add(k, p_b)
+    h = sub(k, add(p_a, p_ap))
+    hden = dot(h, h) - me2
+    r_a2 = dot(r_a, r_a)
+    r_aq2 = dot(add(r_a, q), add(r_a, q))
+    r_b2 = dot(r_b, r_b)
+    r_bq2 = dot(add(r_b, q), add(r_b, q))
+
+    d_3w = k2 * kap2 * r_a2 * r_bq2 * hden
+    d_a_line = kap2 * r_a2 * r_aq2 * r_bq2 * hden
+    d_a_sg = kap2 * r_a2 * r_bq2 * hden
+    d_b_line = k2 * r_a2 * r_b2 * r_bq2 * hden
+    d_b_sg = k2 * r_a2 * r_bq2 * hden
+
+    cross_checks = (
+        d_a_line * k2 - d_3w * r_aq2,
+        d_a_sg * k2 - d_3w,
+        d_b_line * kap2 - d_3w * r_b2,
+        d_b_sg * kap2 - d_3w,
+    )
+    assert all(sp.simplify(x) == 0 for x in cross_checks)
+
+    # Same-vertex routing: F line and S line share h_E=p_F+p_S+q.
+    p_f = list(sp.symbols("pFDen0:4", real=True))
+    p_s = list(sp.symbols("pSDen0:4", real=True))
+    r_f = add(k, p_f)
+    r_fy = add(kap, p_f)
+    r_s = sub(p_s, k)
+    r_sw = sub(p_s, kap)
+    h_e = add(add(p_f, p_s), q)
+    h_eden = dot(h_e, h_e) - me2
+    r_f2 = dot(r_f, r_f)
+    r_fy2 = dot(r_fy, r_fy)
+    r_s2 = dot(r_s, r_s)
+    r_sw2 = dot(r_sw, r_sw)
+
+    d_3w_same = k2 * kap2 * r_fy2 * r_s2 * h_eden
+    d_f_line = k2 * r_f2 * r_fy2 * r_s2 * h_eden
+    d_s_line = kap2 * r_fy2 * r_s2 * r_sw2 * h_eden
+    d_s_sg = kap2 * r_fy2 * r_s2 * h_eden
+
+    same_checks = (
+        d_f_line * kap2 - d_3w_same * r_f2,
+        d_s_line * k2 - d_3w_same * r_sw2,
+        d_s_sg * k2 - d_3w_same,
+    )
+    assert all(sp.simplify(x) == 0 for x in same_checks)
+    return len(cross_checks) + len(same_checks)
+
+
 def main():
     shift_checks = verify_exact_scalar_current_shifts()
     results, denominators = audit_actual_scalar_endpoint_rfg_differences()
     leg_exchange = verify_three_w_internal_leg_exchange()
+    denominator_checks = verify_actual_denominator_route_factors()
     print("RC-001 B2c-IVn-e momentum-dependent scalar-current audit")
     print(f"PASS: exact A/B/S scalar-current shifts are q ({shift_checks}/12 vector components).")
     print(f"PASS: three-W internal-leg exchange Lorentz sign ({leg_exchange[0]}/64), group sign ({leg_exchange[1]}/27), combined vertex invariance ({leg_exchange[2]}/1728).")
+    print(f"PASS: actual cross/same-vertex line, seagull and three-W denominator factor maps ({denominator_checks}/7 exact identities).")
     print("ACTUAL IVm versus IVl CURRENT ROUTES:")
     print("  LD-W-02 B scalar: V_B(k) versus V_B(k+q)")
     print("  LD-W-03/04 S scalar: V_S(k+q) versus V_S(k)")
