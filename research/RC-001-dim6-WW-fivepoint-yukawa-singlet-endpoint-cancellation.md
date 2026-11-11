@@ -103,6 +103,23 @@ The exact calculation is recorded in:
 
 The shifted heavy-channel maps pass 8/8 vector components on each side, and the shifted left/right singlet charge sums pass 96/96 weak components. This remains a local endpoint-factor cancellation only.
 
+## 3.2 All-six pair-class extension
+
+The same channel statement is not specific to LD-W-06:
+- For every cross-vertex A endpoint (LD-W-01/02/05/06), the secondary shift \(k'=k+q\) gives the common left-singlet channel \(h-q\) for \(\bar L\) and \(H\).
+- For every cross-vertex B endpoint (LD-W-01/02/05/06), the secondary shift \(k'=k-q\) gives the common right-singlet channel \(h+q\) for \(H^\dagger\) and \(L\).
+- For same-vertex LD-W-03/04, \(h_E=p_F+p_S+q\) is independent of \(k\), so both loop shifts leave the common heavy spectator unchanged.
+
+The exact physical charge sums, multiplied by independent \(S_E(h-q)\), \(S_E(h+q)\), and \(S_E(h_E)\) factors, pass 192/192 weak-index components. The routing maps pass 8/8 components for cross A, 4/4 for cross B, and 8/8 shift-vector plus 16/16 derivative checks for same-vertex spectators.
+
+Reproduction:
+- \`calculations/RC-001-dim6-WW-fivepoint-all-six-shifted-Yukawa-singlet-channel-audit.py\`
+- \`calculations/test_RC001_dim6_WW_fivepoint_all_six_shifted_Yukawa_singlet_channel_audit.py\`
+- \`research/RC-001-dim6-WW-fivepoint-all-six-shifted-Yukawa-singlet-channel-audit.md\`
+- \`validation/RC-001-dim6-WW-fivepoint-all-six-shifted-Yukawa-singlet-channel-audit.txt\`
+
+This closes the local Yukawa-singlet charge factor under the validated shifts for all six pair classes. It does not close the full 1PI longitudinal integrand or the reducible LSZ sector.
+
 ## 4. Exact reproduction
 
 - Source: \`calculations/RC-001-dim6-WW-fivepoint-yukawa-singlet-endpoint-cancellation.py\`
