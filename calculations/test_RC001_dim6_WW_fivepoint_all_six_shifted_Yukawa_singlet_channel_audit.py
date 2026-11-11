@@ -18,7 +18,7 @@ class TestAllSixShiftedYukawaChannels(unittest.TestCase):
         self.assertEqual(MOD.verify_cross_B_secondary_channel(), 4)
 
     def test_same_vertex_spectators(self):
-        self.assertEqual(MOD.verify_same_vertex_spectators(), 12)
+        self.assertEqual(MOD.verify_same_vertex_spectators(), (8, 16))
 
     def test_all_singlet_charge_sums(self):
         self.assertEqual(MOD.verify_all_singlet_charge_sums(), 192)
