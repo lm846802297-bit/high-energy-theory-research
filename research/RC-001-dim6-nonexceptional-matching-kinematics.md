@@ -252,6 +252,25 @@ At \(\mu_R=M_E\), its coefficients are \((1/2,11/16,1/4)\). The \(p_2\) coeffici
 
 The analytic kernels and expansion are in calculations/RC-001-dim6-WW-nonexceptional-hard-expansion.py; eight regression tests are in calculations/test_RC001_dim6_WW_nonexceptional_hard_expansion.py; captured coefficients are in validation/RC-001-dim6-WW-nonexceptional-hard-expansion.txt. A separate explicit 4D Dirac-matrix implementation reproduces all four d=4 pair kernels; its source/output are calculations/RC-001-dim6-WW-hard-explicit-4d-crosscheck.py and validation/RC-001-dim6-WW-hard-explicit-4d-crosscheck.txt. These are analytic numerator/tensor reductions for a fixed sub-block, not a generated complete diagram set or a full basis-matched Wilson coefficient.
 
+### 3.5 Six-pair internal-\(W\) hard-matching summary
+
+The two same-Yukawa-vertex classes LD-W-03/04 are pure-soft at \(O(M_E^{-2})\), as shown in research/RC-001-dim6-WW-same-vertex-soft-matching.md. Their W-loop denominators contain only light propagators, the heavy propagator carries only the external channel momentum \(P=p_1+p_2\), and the chiral heavy numerator reduces to \(-\slashed P/M_E^2\). The EFT derivative momentum is \(q_D=p_3+p_4=-P\), so the light-loop form factor is reproduced exactly. Their hard-region loop integrals are scaleless and the hard-minus-EFT contribution is zero.
+
+Combining these two singlet-tensor pure-soft classes with the four cross-vertex triplet classes gives the following fixed-ordering internal-\(W\) result:
+\[
+\boxed{
+C_{\rm hard}^{WW,\rm internal}=
+\left(\frac12-\frac L2\right)\slashed p_1+
+\left(\frac{11}{16}-\frac{3L}{8}\right)\slashed p_2+
+\left(\frac14-\frac{3L}{4}\right)\slashed p_3,
+\qquad
+L=\ln\frac{M_E^2}{\mu_R^2}.
+}
+\]
+Only the cross-vertex classes contribute to this hard polynomial; the same-vertex singlet contribution is zero. At \(\mu_R=M_E\), the coefficient vector is \((1/2,11/16,1/4)\). The assembly script and output are calculations/RC-001-dim6-WW-six-pair-hard-summary.py and validation/RC-001-dim6-WW-six-pair-hard-summary.txt.
+
+This closes the hard/soft analysis of the six internal-\(W\) line-pair classes for one fixed ordered tree exchange and unit multiplicity. It does **not** close the full renormalized \(WW\) four-point amplitude: external-field and parameter/operator counterterms, the external-\(W\) five-point form factor, the complete Slavnov–Taylor sum, and the common EOM/IBP operator-basis projection remain open. No complete \(Q_{LD}\) Wilson coefficient is claimed.
+
 ## 4. UV–EFT and \(R^*\) bookkeeping
 
 For each attachment class, record before simplification:
