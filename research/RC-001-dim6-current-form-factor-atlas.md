@@ -235,6 +235,22 @@ The identity follows directly by expanding
 and using \(\sigma^I_{ij}\sigma^I_{kl}
 =2\delta_{il}\delta_{jk}-\delta_{ij}\delta_{kl}\). No on-shell condition, gauge choice, or loop integral is used. The operator-basis projection must preserve the same convention for \(Q_{LD}\), the SM Yukawa sign, and the total-derivative/EOM source terms.
 
+### 3.4 Exact EFT one-\(W\) contact and local gauge-covariance check
+
+The local contact vertices implied by the fixed internal-\(W\) hard polynomial are now recorded in research/RC-001-dim6-WW-fivepoint-EFT-ward.md. In the redundant off-shell basis \(F(aQ_D^{(3)}+bO_-^{(3)}+cO_+^{(3)})\), with \(F=g_2^2|y_\ell|^2/(16\pi^2M_E^2)\), the direct one-\(W\) contacts are
+\[
+F g_2 W_\mu^J\left[
+ia\,\epsilon^{IJK}(\bar L\sigma^I H)\gamma^\mu(H^\dagger\sigma^K L)
++2b\,T_{3(ij,kl)}(\bar L_i\gamma^\mu L_l)
+H_k^\dagger\left(\frac{\sigma^J}{2}\right)_{jm}H_m
+\right],
+\]
+while \(O_+^{(3)}\) has zero direct contact. At \(\mu_R=M_E\), \(a=-1/2\), \(b=-1/32\), giving coefficients \(-ig_2F/2\) and \(-g_2F/16\).
+
+The accompanying exact SymPy audit verifies the adjoint commutator and local-gauge cancellation in \(D_\mu^{\rm adj}Y\), invariance of the \(T_3\) tensor under all four doublet transformations, and the Pauli-generator contact contraction for all three \(W^I\). Five local regression tests pass. The explicit-log slopes are \(\mathrm d(a,b,c)/\mathrm d\ln\mu_R=(-1,-7/8,5/8)\); these are not the complete anomalous dimensions.
+
+This closes only the **EFT local-contact/covariance** part for the stated hard sub-block. The UV one-loop external-\(W\) five-point form factor, its transverse part, the full external-leg/gauge-sector/counterterm set, and the complete Slavnov–Taylor sum remain unevaluated. Sources: calculations/RC-001-dim6-WW-fivepoint-EFT-ward.py, calculations/test_RC001_dim6_WW_fivepoint_EFT_ward.py, validation/RC-001-dim6-WW-fivepoint-EFT-ward.txt.
+
 ## 4. Form-factor decomposition and matching record
 
 Use common nonexceptional off-shell external momenta (or one common infrared regulator) and the same gauge-fixing, \(\overline{\mathrm{MS}}\), and external-field conventions on both sides. For each amplitude, record separately:
