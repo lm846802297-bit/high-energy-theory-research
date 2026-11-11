@@ -110,7 +110,7 @@ Consequently, if a local coefficient \(C_3\) multiplies \(Q_{LD}^{(3)}\), its EF
 (H^\dagger\sigma^K L).
 }
 \]
-The Pauli completeness and adjoint-commutator identities are checked in calculations/RC-001-dim6-WW-triplet-current-contact.py (four local tests; captured output in validation/RC-001-dim6-WW-triplet-current-contact.txt).
+The Pauli completeness and adjoint-commutator identities are checked in calculations/RC-001-dim6-WW-triplet-current-contact.py (four local tests; captured output in validation/RC-001-dim6-WW-triplet-current-contact.txt). In the fixed all-incoming Fourier convention \(e^{-ipx}\) of the WW cross-box note, the raw amplitude coefficient \(C_3^{WW,\rm box}\) multiplies \(+\slashed P T_3\), while the matrix element of the displayed \(Q_{LD}^{(3)}\) carries \(p_3+p_4=-P\). Thus \(C_{Q_{LD}^{(3)}}^{WW,\rm box}=-C_3^{WW,\rm box}\); the contact sign must follow the operator coefficient, not the raw \(+\slashed P\) amplitude label.
 
 This is the **EFT contact implied by the local triplet derivative operator**, not the UV one-loop five-point form factor. It does not close LD-W-FF or determine the final \(C_{H\ell}^{(3)}\) coefficient. The UV current amplitude, its common off-shell EFT subtraction, the other derivative tensors, and the EOM/IBP projection remain required.
 
