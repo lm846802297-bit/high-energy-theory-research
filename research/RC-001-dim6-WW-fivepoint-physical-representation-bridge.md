@@ -1,7 +1,7 @@
 # RC-001 — Physical SU(2) representation bridge for the five-point weak tensors
 
 **Workstream:** RC-001-WW-UV-FF-02, Stage B2c-IVa  
-**Status:** the signed WTI actions used in the pair-projection audit are now explicitly related to the physical field-representation generators. The two-generator seed tensors are unchanged, while the three-generator products acquire the expected overall sign. The A/B graph-order commutators and scalar-seagull tensors have been rechecked in the physical representation. This is a field-representation algebra bridge, not yet the complete Lorentz-weighted 24-graph sum.
+**Status:** the signed WTI actions used in the pair-projection audit are now explicitly related to the physical field-representation generators. The two-generator seed tensors are unchanged, while three-generator products acquire the expected overall sign. The physical-representation commutator and seagull identities are checked algebraically for all six pair labels. However, the raw open-chain mapping is now explicitly established only for the four cross-vertex pairs LD-W-01/02/05/06 (see the separate B2c-IVd raw-index bridge). The same-vertex pairs LD-W-03/04 have a distinct S-to-F internal-W orientation and remain outside that graph-order claim. This is not the complete Lorentz-weighted 24-graph sum.
 
 ## 1. Physical field generators versus signed WTI actions
 
@@ -54,9 +54,9 @@ The six exact projections remain
 \]
 with \(T_3=\sigma^I_{ij}\sigma^I_{kl}\). All 96 weak-index components reproduce the existing SU(2) attachment-projection note.
 
-## 3. Ordered physical-representation tensors
+## 3. Candidate ordered physical-representation tensors
 
-The graph order is read from the explicit propagator/vertex chain:
+For the four cross-vertex pairs LD-W-01/02/05/06, the B1 propagator/vertex routes give the following open-chain order:
 
 - A-side line: the internal-W endpoint precedes the external-W insertion in the open line chain;
 - B-side line: the external-W insertion precedes the internal-W endpoint.
@@ -98,7 +98,7 @@ where
 \]
 The A- and B-side physical commutator signs are therefore both \(+i\mathcal G_{AB}^a\). This differs from the signed-action commutator labels in B2c-III exactly by the three-generator sign conversion.
 
-These are the group-theory factors for the ordered products shown. The relative Lorentz signs from the two oriented line WTIs still have to be included before combining the A/B terms with the three-W graph.
+These are the group-theory factors for the ordered products shown for the cross-vertex subset. The separate explicit-index bridge checks their mapping to the raw cross-vertex matrix chains. Do not apply this A/B graph-order assignment automatically to LD-W-03/04: their internal W is oriented from the scalar endpoint S to the fermion endpoint F, and their raw matrix order must be derived from that routing. The relative Lorentz signs from the two oriented line WTIs still have to be included before combining the cross-vertex A/B terms with the three-W graph.
 
 ## 4. Physical scalar-seagull tensors
 
@@ -153,9 +153,10 @@ It checks:
 - physical scalar-seagull tensors (288/288).
 
 This does not establish:
-1. the complete Lorentz-weighted A/B matter-line plus three-W cancellation;
-2. the scalar-line/seagull endpoint sum;
-3. the ghost/gauge-fixing Slavnov–Taylor completion;
+1. the complete Lorentz-weighted cross-vertex A/B matter-line plus three-W cancellation;
+2. the raw weak-index ordering of same-vertex LD-W-03/04;
+3. the scalar-line/seagull endpoint sum with distinct weak tensors;
+4. the ghost/gauge-fixing Slavnov–Taylor completion;
 4. external-leg/LSZ and counterterm terms;
 5. any integrated five-point hard coefficient or transverse form factor.
 
