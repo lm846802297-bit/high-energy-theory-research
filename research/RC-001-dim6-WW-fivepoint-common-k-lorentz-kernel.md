@@ -234,3 +234,25 @@ Thus \(R_{\rm FG}\) is not an algebraic zero. It is retained in (3.1) and (3.2).
 5. only then assess the complete longitudinal identity and any local matching coefficient.
 
 No integrated UV five-point form factor, independent transverse form factor, or Wilson coefficient is claimed here.
+
+
+## 8. 2026-11-11 scope refinement from IVn-e: momentum-dependent scalar currents
+
+The arbitrary-current test in the source represents \(J_A\) and \(J_B\) by independent symbolic four-vectors. It therefore verifies the propagator tensor identity for fixed current values. It does not, by itself, verify that the actual scalar derivative currents in the line-insertion and three-W graphs have the same momentum arguments after the common-\(k\) shifts.
+
+The graph-specific IVl and IVm sources use
+\[
+V_A^{(3W)}=2p_A-k,\qquad V_A^{(\rm line)}=2p_A-(k+q),
+\]
+\[
+V_B^{(3W)}=-2p_B-(k+q),\qquad V_B^{(\rm line)}=-2p_B-k,
+\]
+\[
+V_S^{(3W)}=2p_S-k,\qquad V_S^{(\rm line)}=2p_S-(k+q).
+\]
+Each pair differs by \(q\). The exact six-endpoint rational-point audit is recorded in
+\`research/RC-001-dim6-WW-fivepoint-momentum-dependent-scalar-current-audit.md\`.
+
+Accordingly, the statement in §§3–4 that the transverse \(D(k)-D(k+q)\) pieces cancel for all six pair classes is established at the **abstract fixed-current kernel level**. Its use as a graph-specific cancellation for LD-W-02/03/04/05/06 still requires an explicit loop-variable/routing bridge that carries the scalar currents, all light/heavy denominators, weak tensors, phases, and ordered Dirac chains together. This is not evidence of a physical failure of the Ward identity; it is an unclosed step in applying the abstract identity to the actual scalar-containing graphs.
+
+LD-W-01, whose two endpoint currents are fermionic and momentum independent, is not affected by this particular scalar-current shift issue. \(R_{\rm FG}\) remains explicit throughout. No graph is removed and no ghost/ST cancellation is inferred.
