@@ -112,6 +112,23 @@ Consequently, if a local coefficient \(C_3\) multiplies \(Q_{LD}^{(3)}\), its EF
 \]
 The Pauli completeness and adjoint-commutator identities are checked in calculations/RC-001-dim6-WW-triplet-current-contact.py (four local tests; captured output in validation/RC-001-dim6-WW-triplet-current-contact.txt). In the fixed all-incoming Fourier convention \(e^{-ipx}\) of the WW cross-box note, the raw amplitude coefficient \(C_3^{WW,\rm box}\) multiplies \(+\slashed P T_3\), while the matrix element of the displayed \(Q_{LD}^{(3)}\) carries \(p_3+p_4=-P\). Thus \(C_{Q_{LD}^{(3)}}^{WW,\rm box}=-C_3^{WW,\rm box}\); the contact sign must follow the operator coefficient, not the raw \(+\slashed P\) amplitude label.
 
+The nonexceptional cross-box hard polynomial has now been decomposed into the independent off-shell momentum vectors
+\[
+v_D=p_3+p_4=-(p_1+p_2),\qquad
+v_-=p_2-p_3,\qquad v_+=p_2+p_3.
+\]
+Its \(v_D\) coefficient is
+\[
+a(L)=-\frac12+\frac L2,\qquad L=\ln\frac{M_E^2}{\mu_R^2},
+\]
+while the other coefficients are \(b(L)=-1/32+7L/16\) and \(c(L)=7/32-5L/16\). Since the raw \(+\slashed P\) amplitude coefficient is \(-a\), the \(Q_{LD}^{(3)}\) operator coefficient is \(a\) in the stated Fourier convention. Restoring the common loop factor,
+\[
+C_{Q_{LD}^{(3)}}^{WW,\rm cross}
+=\frac{g_2^2|y_\ell|^2}{16\pi^2M_E^2}
+\left(-\frac12+\frac L2\right)
+\]
+for this fixed cross-box sub-block. At \(\mu_R=M_E\), this is \(-g_2^2|y_\ell|^2/(32\pi^2M_E^2)\). The corresponding EFT contact is obtained by inserting this coefficient into the boxed adjoint-derivative contact above. The \(v_-\) and \(v_+\) directions are retained as off-shell form factors and are not yet assigned to Warsaw-basis operators. The decomposition is checked in calculations/RC-001-dim6-WW-offshell-formfactor-decomposition.py and the contact coefficient in calculations/RC-001-dim6-WW-triplet-contact-from-hard-polynomial.py, with validation outputs under validation/.
+
 This is the **EFT contact implied by the local triplet derivative operator**, not the UV one-loop five-point form factor. It does not close LD-W-FF or determine the final \(C_{H\ell}^{(3)}\) coefficient. The UV current amplitude, its common off-shell EFT subtraction, the other derivative tensors, and the EOM/IBP projection remain required.
 
 ### 3.3 Exact Pauli-Fierz map before applying equations of motion
