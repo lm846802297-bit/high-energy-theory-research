@@ -144,6 +144,43 @@ def routing(pair, momenta):
     return numerator.applyfunc(sp.expand), a, b
 
 
+def eft_soft_numerator(pair, momenta):
+    """Build the EFT Q_LD insertion numerator from its differentiated composite.
+
+    The derivative momentum is q_D=p3+p4+k. Momentum conservation makes it
+    identical to k-p1-p2, the soft limit of the UV heavy momentum. Gauge
+    endpoints are attached to the two external lines named by the pair.
+    """
+    p1, p2, p3, p4 = momenta
+    ell = list(L)
+    k = ell  # EFT loop momentum before Feynman-parameter shifting
+    q_derivative = vadd(p3, p4, k)
+    q_bar_l = vsub(p1, k)
+    q_l = vadd(k, p4)
+    scalar_hdag = vadd(vscale(2, p3), k)
+    scalar_h = vsub(vscale(2, p2), k)
+
+    if pair == "01":
+        numerator = sp.zeros(4)
+        for mu in range(4):
+            numerator += (
+                GAMMA[mu]
+                * slash(q_bar_l)
+                * slash(q_derivative)
+                * slash(q_l)
+                * GAMMA[mu]
+            )
+    elif pair == "02":
+        numerator = -slash(scalar_hdag) * slash(q_bar_l) * slash(q_derivative)
+    elif pair == "05":
+        numerator = slash(scalar_h) * slash(q_derivative) * slash(q_l)
+    elif pair == "06":
+        numerator = -vdot(scalar_hdag, scalar_h) * slash(q_derivative)
+    else:
+        raise ValueError(pair)
+    return numerator.applyfunc(sp.expand)
+
+
 def simplex_integral_polynomial(expression):
     return sp.simplify(
         sp.integrate(
@@ -230,6 +267,12 @@ def compute_audit():
         pair: soft_uv_residue(pair, symmetric)
         for pair in PAIRS
     }
+    eft_numerator_residuals = {}
+    for pair in PAIRS:
+        uv_numerator, _, _ = routing(pair, symmetric)
+        eft_numerator = eft_soft_numerator(pair, symmetric)
+        eft_numerator_residuals[pair] = sp.simplify(uv_numerator - eft_numerator)
+
     expected_pairs = {
         "01": [-1, 0, -1],
         "02": [0, -1, sp.Rational(3, 2)],
@@ -297,6 +340,7 @@ def compute_audit():
 
     return {
         "residues": residues,
+        "eft_numerator_residuals": eft_numerator_residuals,
         "pair_coefficients": pair_coefficients,
         "expected_pairs": expected_pairs,
         "weighted_coefficients": weighted_coefficients,
@@ -318,6 +362,10 @@ def main():
             target = 2 * (1 if i == j else 0) * sp.eye(4)
             assert sp.simplify(GAMMA[i] * GAMMA[j] + GAMMA[j] * GAMMA[i] - target) == sp.zeros(4)
 
+    assert all(
+        residual == sp.zeros(4)
+        for residual in data["eft_numerator_residuals"].values()
+    )
     assert data["pair_coefficients"] == data["expected_pairs"]
     assert data["weighted_coefficients"] == [
         sp.Rational(1, 2),
@@ -347,6 +395,7 @@ def main():
     assert abs(eps_moment - expected_eps_moment) < mp.mpf("1e-35")
 
     print("RC-001 nonexceptional pure-WW EFT-soft audit")
+    print("PASS: UV soft expansion equals the independently routed EFT Q_LD insertion numerator for all four pairs.")
     print("PASS: all four generalized routings reduce to the old exceptional denominators.")
     print("PASS: all four symmetric-point triangles have invariants (1,1,4/3) mu_IR^2.")
     print("Per-pair UV residues, in the (slash p1, slash p2, slash p3) basis:")
