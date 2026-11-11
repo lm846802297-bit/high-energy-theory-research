@@ -13,22 +13,25 @@ SPEC.loader.exec_module(MOD)
 
 
 class TestRC001ExplicitRFGSixPairCurrents(unittest.TestCase):
-    def test_all_six_pairs_at_two_exact_rational_points(self):
-        results = MOD.audit_points()
-        self.assertEqual(len(results), 2)
-        for point in results:
-            self.assertEqual(tuple(point.keys()), ("01", "02", "03", "04", "05", "06"))
+    @classmethod
+    def setUpClass(cls):
+        # audit_point performs the direct tensor-vs-factorized matrix assertion
+        # for every pair before returning the compact numerators.
+        cls.results = MOD.audit_points()
 
-    def test_direct_tensor_and_compact_current_forms_agree(self):
-        for point in MOD.audit_points():
+    def test_all_six_pairs_at_two_exact_rational_points(self):
+        self.assertEqual(len(self.results), 2)
+        expected = ("01", "02", "03", "04", "05", "06")
+        for point in self.results:
+            self.assertEqual(tuple(point.keys()), expected)
+
+    def test_all_propagator_factors_are_nonsingular_and_rfg_nonzero(self):
+        for point in self.results:
             for pair_id, result in point.items():
-                self.assertTrue(MOD.matrix_zero(
-                    result["numerator"] - result["numerator"]
-                ))
-                self.assertTrue(all(x != 0 for x in result["denominators"]))
+                self.assertTrue(all(x != 0 for x in result["denominators"]), pair_id)
                 self.assertTrue(any(
                     MOD.sp.simplify(x) != 0 for x in result["numerator"]
-                ))
+                ), pair_id)
 
     def test_main_reports_all_six_pair_classes(self):
         output = io.StringIO()
