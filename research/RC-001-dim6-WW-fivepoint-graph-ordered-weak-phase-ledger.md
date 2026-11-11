@@ -1,17 +1,17 @@
-# RC-001 — Graph-ordered weak tensors and phase ledger for the external-W attachments
+# RC-001 — Signed-action weak algebra and provisional graph-order map
 
 **Workstream:** RC-001-WW-UV-FF-02, Stage B2c-III  
-**Status:** the weak-generator orderings are now attached to the actual A/B line positions in the five-point numerator templates, and their commutator differences are checked with the relative Feynman-rule phases fixed in Stage B2c-I/II. The scalar-seagull weak tensors are also mapped to the opposite-endpoint generator. This is still a group/phase ledger: the Lorentz-weighted 24-graph sum and full Slavnov–Taylor identity are not claimed.
+**Status:** the SU(2) signed-action commutator and scalar-seagull identities are checked exactly, and the relative Feynman-rule phases are fixed in Stage B2c-I/II. However, the mapping of these signed actions to the raw weak-index matrix products of every oriented five-point Feynman graph is **not yet independently closed**. The ordering labels below are therefore a provisional WTI-basis ledger, not a claim that the complete graph weak tensors have already been derived.
 
-## 1. Pair endpoints
+## 1. Pair endpoints and seed tensors
 
-Use the signed external-index actions \(\mathscr T_r^a\) for the all-incoming ordering
+For the all-incoming ordering \((\bar L_i,H_j,H^\dagger_k,L_l)\), use the signed external-index actions \(\mathscr T_r^a\) defined in the Stage-B2b weak-ordering audit. The seed pair tensor is
 \[
-(\bar L_i,H_j,H^\dagger_k,L_l),
-\]
-as defined in the Stage-B2b weak-ordering audit. For an internal-W pair \(A,B\), the seed weak tensor is
-\[
-\mathcal T_{AB}=\sum_b\mathscr T_A^b\mathscr T_B^bT_0.
+\mathcal T_{AB}=\sum_b\mathscr T_A^b\mathscr T_B^bT_0,
+\qquad
+T_0=\delta_{ij}\delta_{kl},
+\qquad
+T_3=\sigma^I_{ij}\sigma^I_{kl}.
 \]
 
 | Pair | A endpoint | B endpoint | \(\mathcal T_{AB}\) |
@@ -23,116 +23,124 @@ as defined in the Stage-B2b weak-ordering audit. For an internal-W pair \(A,B\),
 | LD-W-05 | \(H\) | \(L\) | \(+T_3/4\) |
 | LD-W-06 | \(H\) | \(H^\dagger\) | \(-T_3/4\) |
 
-Here \(T_0=\delta_{ij}\delta_{kl}\) and \(T_3=\sigma^I_{ij}\sigma^I_{kl}\).
+The six seed projections are reproduced component by component (96/96).
 
-## 2. Actual generator order in each five-point graph
+## 2. Candidate ordered tensors in the signed-WTI action basis
 
-The external W is inserted on the propagator between the Yukawa vertex and the internal-W endpoint. The graph order is therefore fixed by the position of the external vertex relative to the internal-W vertex:
-
-- A-line insertion: the internal-W generator is encountered first, then the external-W generator:
-  \[
-  \mathcal W_A^a
-  =\sum_b\mathscr T_A^b\mathscr T_A^a\mathscr T_B^bT_0.
-  \]
-- B-line insertion: the external-W generator is encountered first, then the internal-W generator:
-  \[
-  \mathcal W_B^a
-  =\sum_b\mathscr T_A^b\mathscr T_B^a\mathscr T_B^bT_0.
-  \]
-- A scalar seagull:
-  \[
-  \mathcal S_A^a
-  =\sum_b\{\mathscr T_A^a,\mathscr T_A^b\}\mathscr T_B^bT_0.
-  \]
-- B scalar seagull:
-  \[
-  \mathcal S_B^a
-  =\sum_b\mathscr T_A^b\{\mathscr T_B^a,\mathscr T_B^b\}T_0.
-  \]
-- Internal-W three-gauge insertion:
-  \[
-  \mathcal G_{AB}^a
-  =\epsilon^{abc}\mathscr T_A^b\mathscr T_B^cT_0.
-  \]
-
-These are the ordered weak tensors that multiply the graph-specific Lorentz numerators. They must not be replaced by the unordered seed tensor \(\mathcal T_{AB}\) before the external-W generator ordering has been retained.
-
-## 3. Commutator relation with the Yukawa-endpoint ordering
-
-The line WTI has two endpoint terms. The term at the internal-W endpoint has the graph ordering in §2; the term at the Yukawa endpoint has the reversed ordering on the same representation slot. With the signed-action algebra
+The location of the external-W insertion suggests the following ordered products in the signed-action basis:
+\[
+\mathcal W_{A,\mathrm{cand}}^a
+=\sum_b\mathscr T_A^b\mathscr T_A^a\mathscr T_B^bT_0,
+\]
+\[
+\mathcal W_{B,\mathrm{cand}}^a
+=\sum_b\mathscr T_A^b\mathscr T_B^a\mathscr T_B^bT_0.
+\]
+The corresponding reversed products are
+\[
+\widetilde{\mathcal W}_{A,\mathrm{cand}}^a
+=\sum_b\mathscr T_A^a\mathscr T_A^b\mathscr T_B^bT_0,
+\]
+\[
+\widetilde{\mathcal W}_{B,\mathrm{cand}}^a
+=\sum_b\mathscr T_A^b\mathscr T_B^b\mathscr T_B^aT_0.
+\]
+For the signed-action algebra
 \[
 [\mathscr T_r^a,\mathscr T_r^b]
 =-i\epsilon^{abc}\mathscr T_r^c,
 \]
-the graph-order minus Yukawa-endpoint-order differences are
+the exact relations are
 \[
-\boxed{
-\mathcal W_A^a-\widetilde{\mathcal W}_A^a
+\mathcal W_{A,\mathrm{cand}}^a
+-\widetilde{\mathcal W}_{A,\mathrm{cand}}^a
 =-i\mathcal G_{AB}^a,
-}
 \]
 \[
-\boxed{
-\mathcal W_B^a-\widetilde{\mathcal W}_B^a
+\mathcal W_{B,\mathrm{cand}}^a
+-\widetilde{\mathcal W}_{B,\mathrm{cand}}^a
 =-i\mathcal G_{AB}^a,
-}
 \]
 where
 \[
-\widetilde{\mathcal W}_A^a
-=\sum_b\mathscr T_A^a\mathscr T_A^b\mathscr T_B^bT_0,
-\qquad
-\widetilde{\mathcal W}_B^a
-=\sum_b\mathscr T_A^b\mathscr T_B^b\mathscr T_B^aT_0.
+\mathcal G_{AB}^a
+=\epsilon^{abc}\mathscr T_A^b\mathscr T_B^cT_0.
 \]
-The equality is checked for all six pairs, all three external-W generators, and all 16 external weak-index components.
+Each identity is checked for all six pairs, three external-W generators and 16 weak-index components (288/288 for each endpoint).
 
-This fixes the group-theory sign for the actual graph ordering. It does not yet establish the cancellation with the three-W graph: the A/B Lorentz endpoint signs from the oriented fermion/scalar WTI, the propagator factors, and the \(R_{\rm FG}\) term must still be included in the same expression.
+**Important qualification.** The \(\mathscr T_r^a\) are signed WTI actions, not simply the raw fundamental matrices \(t^a\) at every field slot. For transposed/conjugate slots, composition order can reverse when translated back to a raw matrix chain. Also, a three-generator product changes sign under \(\mathscr T_r=-T_{r,\mathrm{field}}\), whereas the two-generator seed tensor does not. Therefore the pair-projection check alone does not prove that the candidate ordered products above are the exact weak factors of every graph.
 
-## 4. Seagull weak tensors
+The actual mapping must be derived from explicit weak-index contractions at each Feynman vertex, including the fermion-arrow orientation and the \(H\) versus \(H^\dagger\) scalar orientation. Until that is done, the \(-i\mathcal G_{AB}^a\) relations are algebraic identities in the signed-action basis only.
 
-For a scalar endpoint,
+## 3. Scalar-seagull algebra
+
+For \(t^a=\sigma^a/2\),
 \[
 \{t^a,t^b\}=\frac12\delta^{ab}\mathbf1.
 \]
-Consequently,
+The signed-action algebra consequently gives the candidate endpoint identities
 \[
-\mathcal S_A^a=\frac12\mathscr T_B^aT_0,
-\qquad
-\mathcal S_B^a=\frac12\mathscr T_A^aT_0.
+\mathcal S_{A,\mathrm{cand}}^a
+=\sum_b\{\mathscr T_A^a,\mathscr T_A^b\}\mathscr T_B^bT_0
+=\frac12\mathscr T_B^aT_0,
 \]
-These identities hold for every scalar endpoint in LD-W-02…06 and for all external-W generators. They fix the group tensor but not the Lorentz coefficient \(q^\mu\) from the seagull contraction; that coefficient must be combined with the scalar-line WTI before the scalar endpoint is declared to telescope.
+\[
+\mathcal S_{B,\mathrm{cand}}^a
+=\sum_b\mathscr T_A^b\{\mathscr T_B^a,\mathscr T_B^b\}T_0
+=\frac12\mathscr T_A^aT_0.
+\]
+The algebraic identities are checked for all scalar endpoints, all external-W generators and all weak-index components (288/288).
 
-## 5. Combining the group identities with the B2c phases
+This still does not fix the complete graph weak tensor until the seagull's raw \(H^\dagger t^at^bH\) index contraction is mapped to the chosen signed-action convention.
 
-The phase ratios relative to the four-point skeleton are now fixed by the action convention in Stage B2c-I/II:
+## 4. Feynman-rule phases: fixed, but not yet multiplied by a fully mapped graph tensor
+
+For
+\[
+D_\mu=\partial_\mu-ig_2t^aW_\mu^a,\qquad
+W_{\mu\nu}^a=\partial_\mu W_\nu^a-\partial_\nu W_\mu^a
++g_2\epsilon^{abc}W_\mu^bW_\nu^c,
+\]
+the phase ratios relative to the four-point skeleton are
 \[
 \frac{P_{\rm matter\ insertion}}{P_4}=-g_2,\qquad
 \frac{P_{\rm seagull}}{P_4}=+g_2,\qquad
 \frac{P_{3W}}{P_4}=-ig_2.
 \]
-Thus the pure group commutator factor \(-i\mathcal G_{AB}^a\) from either matter-line ordering is multiplied by the matter-line phase \(-g_2\), giving \(+ig_2\mathcal G_{AB}^a\) before the orientation-dependent Lorentz endpoint sign is applied. The three-W graph carries \(-ig_2\mathcal G_{AB}^a\) times its contracted Lorentz kernel. The relative phase is therefore now unambiguous; whether and how these terms cancel is a Lorentz-weighted graph-sum question, not a group-algebra question.
+These phase ratios are fixed by the explicit Feynman-rule products. They are not sufficient to establish the cancellation until each graph's raw weak-index tensor is translated into the signed-action basis with the correct ordering.
 
-For the scalar endpoint, the seagull carries \(+g_2\) times the anticommutator tensor and \(q^\mu\), while the ordinary scalar-line insertion carries \(-g_2\) times its oriented propagator difference. Their sum must be evaluated before simplifying the scalar endpoint. The anticommutator identity alone is not the scalar Compton Ward identity.
+## 5. Required B2c-IV: raw weak-index bridge
+
+The next calculation must not assume the candidate orderings in §2. For each of the 24 graphs:
+
+1. Write the weak indices at the two Yukawa vertices explicitly, starting from \(T_0=\delta_{ij}\delta_{kl}\).
+2. Insert the raw matrices \(t^a_{ij}\) at the actual fermion/scalar gauge vertex.
+3. Track whether the line is \(L\), \(\bar L\), \(H\), or \(H^\dagger\), including the reversed index order on conjugate fields.
+4. Derive the matrix product in the same order as the spinor/scalar propagator chain.
+5. Translate that raw tensor into the \(\mathscr T_r^a\) signed-action basis.
+6. Only then multiply by the phase ratios in §4 and compare the matter-line commutator with the three-W tensor.
+
+The same raw-index derivation is required for both scalar seagulls. The anticommutator identity is not enough to settle their graph signs.
 
 ## 6. Reproduction and evidence boundary
 
-The exact SymPy audit is in
+The exact SymPy audit remains in
 calculations/RC-001-dim6-WW-fivepoint-graph-ordered-weak-phase-ledger.py
-with captured output in
+with output in
 validation/RC-001-dim6-WW-fivepoint-graph-ordered-weak-phase-ledger.txt.
 
-It checks:
-- six seed pair tensors: 96/96 components;
-- A-line graph ordering minus Yukawa-endpoint ordering: 288/288;
-- B-line graph ordering minus Yukawa-endpoint ordering: 288/288;
-- scalar-seagull weak tensors: 288/288.
+It establishes the signed-action algebra:
+- six pair tensors: 96/96;
+- candidate A-order commutator identity: 288/288;
+- candidate B-order commutator identity: 288/288;
+- candidate scalar-seagull identities: 288/288.
 
-This does not establish:
-1. the Lorentz-weighted cancellation of the matter-line and three-W graphs;
-2. the scalar-line/seagull Lorentz sum;
-3. the ordinary-Feynman-gauge ghost/gauge-fixing Slavnov–Taylor completion;
-4. external-leg/LSZ and counterterm terms;
-5. a five-point hard integral, transverse form factor, or Wilson coefficient.
+It does **not** establish:
+1. the raw weak-index tensor of each five-point Feynman graph;
+2. the mapping of each raw tensor to the candidate signed-action order;
+3. the Lorentz-weighted matter-line/three-W cancellation;
+4. the scalar-line/seagull Lorentz and group sum;
+5. the ghost/gauge-fixing Slavnov–Taylor completion;
+6. external-leg/counterterm completion or any integrated Wilson coefficient.
 
-The next step is to assemble each of the 24 graph-specific Lorentz numerators with these ordered weak tensors and phase ratios, contract \(q_\alpha\), and sum the A/B endpoint pieces pair by pair. The four-point shifted-momentum Ward variation is the target; the EFT contact comparison follows after that UV identity is established.
+The PR must remain Open/Draft until the raw weak-index bridge and the Lorentz-weighted longitudinal sum are completed.
