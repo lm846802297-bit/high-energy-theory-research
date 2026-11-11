@@ -152,8 +152,18 @@ def eft_soft_numerator(pair, momenta):
     endpoints are attached to the two external lines named by the pair.
     """
     p1, p2, p3, p4 = momenta
+    if pair == "01":
+        a, b = vscale(-1, p1), p4
+    elif pair == "02":
+        a, b = vscale(-1, p1), p3
+    elif pair == "05":
+        a, b = vscale(-1, p2), p4
+    elif pair == "06":
+        a, b = vscale(-1, p2), p3
+    else:
+        raise ValueError(pair)
     ell = list(L)
-    k = ell  # EFT loop momentum before Feynman-parameter shifting
+    k = vsub(ell, vadd(vscale(Y, a), vscale(Z, b)))
     q_derivative = vadd(p3, p4, k)
     q_bar_l = vsub(p1, k)
     q_l = vadd(k, p4)
