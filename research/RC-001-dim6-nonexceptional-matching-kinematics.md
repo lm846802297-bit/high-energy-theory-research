@@ -293,6 +293,20 @@ c=\frac7{32}-\frac{5L}{16}.
 \]
 At \(\mu_R=M_E\), \((a,b,c)=(-1/2,-1/32,7/32)\). The \(v_D\) direction is the derivative momentum of the triplet \(Q_{LD}^{(3)}\) representative. The other two are retained as independent off-shell form-factor directions; they are not assigned to Warsaw-basis operators before the weak-index, total-derivative, EOM/source, and full-amplitude reductions are performed. The exact linear-algebra check is in calculations/RC-001-dim6-WW-offshell-formfactor-decomposition.py with output validation/RC-001-dim6-WW-offshell-formfactor-decomposition.txt.
 
+### 3.7 Matching-scale logarithm and pole consistency
+
+For the hard polynomial in §3.4, the coefficient of \(L=\ln(M_E^2/\mu_R^2)\) is
+\[
+-\left(\frac12p_1+\frac38p_2+\frac34p_3\right)=-R_{\rm pole}.
+\]
+Since \(dL/d\ln\mu_R=-2\),
+\[
+\frac{d C_{\rm hard}^{\rm fin}}{d\ln\mu_R}
+=2R_{\rm pole}
+=p_1+\frac34p_2+\frac32p_3.
+\]
+Thus the matching logarithm is fixed by the same nonexceptional pole residue that cancels the EFT-soft UV pole. The exceptional projection again gives \(11/16-3L/8\). The exact symbolic check is in calculations/RC-001-dim6-WW-hard-scale-dependence.py with output validation/RC-001-dim6-WW-hard-scale-dependence.txt. This is a sub-block pole/log consistency relation, not the full EFT RG cancellation; the latter requires the complete operator-mixing and counterterm matrix.
+
 ## 4. UV–EFT and \(R^*\) bookkeeping
 
 For each attachment class, record before simplification:
