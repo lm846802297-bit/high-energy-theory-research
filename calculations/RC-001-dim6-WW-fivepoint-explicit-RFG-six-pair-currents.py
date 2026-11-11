@@ -184,7 +184,7 @@ def audit_point(k, q, p1, p2, p3, m_e2):
             )
             den = (
                 wk2, wkq2, dot(data["r_A"], data["r_A"]),
-                dot(data["r_BY"], dot(data["r_BY"], data["r_BY"])),
+                dot(data["r_BY"], data["r_BY"]),
                 dot(data["h"], data["h"]) - m_e2,
             )
         else:
