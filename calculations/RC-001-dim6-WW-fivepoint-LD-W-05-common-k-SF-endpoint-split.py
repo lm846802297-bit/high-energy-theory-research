@@ -263,14 +263,14 @@ def rational_diagnostic():
     rfg = (
         sp.Matrix(k)*sp.Matrix(k).T
         - sp.Matrix(kap)*sp.Matrix(kap).T
-    )/(dot(k,k)*dot(kap,k ap))
+    )/(dot(k,k)*dot(kap,kap))
     d0, dq = D_up(k), D_up(kap)
     kernel = sp.simplify(dq*(K_down(kap)-K_down(k))*d0)
     line = contract_scalar_left_kernel(dq-d0, v_a_3w, chain)
     three = contract_scalar_left_kernel(kernel, v_a_3w, chain)
     rfg_matrix = contract_scalar_left_kernel(rfg, v_a_3w, chain)
     assert matrix_zero(line+three-rfg_matrix)
-    assert matrix_zero(rfg_matrix-n05/(dot(k,k)*dot(kap,k ap)))
+    assert matrix_zero(rfg_matrix-n05/(dot(k,k)*dot(kap,kap)))
 
     # A-side scalar commutator q-contact, contracted into the B fermion chain.
     q_contact = (
