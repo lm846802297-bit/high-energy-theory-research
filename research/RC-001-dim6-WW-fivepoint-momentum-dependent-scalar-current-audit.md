@@ -122,7 +122,7 @@ The next task is a **graph-specific common-routing bridge**, not another arbitra
 
 The ordinary-matter longitudinal integrand is not yet assembled. Keep \(R_{\rm FG}\) explicit. Do not infer a ghost cancellation from the inverse-kernel algebra identity, and do not begin UV–EFT integration or Wilson-coefficient extraction until this graph-specific routing bridge closes.
 
-## 6. Reproduction
+## 8. Reproduction
 
 - Source: \`calculations/RC-001-dim6-WW-fivepoint-momentum-dependent-scalar-current-audit.py\`
 - Tests: \`calculations/test_RC001_dim6_WW_fivepoint_momentum_dependent_scalar_current_audit.py\`
