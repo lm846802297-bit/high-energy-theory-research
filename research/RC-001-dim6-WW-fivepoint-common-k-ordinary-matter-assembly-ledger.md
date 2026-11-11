@@ -1,7 +1,7 @@
 # RC-001 — Common-\(k\) ordinary-matter longitudinal assembly ledger
 
 **Workstream:** RC-001-WW-UV-FF-02, Stage B2c-IVn-b  
-**Status:** the previously separate ingredients are now indexed pair by pair: cross-vertex fermion WTIs, the newly derived same-vertex fermion WTIs, the six scalar-line/seagull endpoint kernels, the six graph-specific \(R_{\rm FG}\) current projections, and the orientation-dependent three-W group phases. This is an assembly ledger, not yet a summed Slavnov–Taylor identity. In particular, the scalar endpoint's symmetric and commutator tensors are still distinct, and the Yukawa/external-field endpoint terms have not yet been added to the same common-\(k\) integrand.
+**Status:** the pairwise ingredients are indexed: cross-vertex and same-vertex fermion WTIs, six scalar-line/seagull endpoint kernels, six graph-specific \(R_{\rm FG}\) current projections, orientation-dependent three-W phases, and the local Yukawa-singlet endpoint cancellation with common heavy-channel routing. This is not yet a summed Slavnov–Taylor identity. The scalar symmetric and commutator tensors remain distinct; reducible external-leg/LSZ terms and the gauge-fixing/ghost sector remain separate.
 
 ## 1. Frozen common-\(k\) definitions
 
