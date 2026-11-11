@@ -163,7 +163,7 @@ With \(p_\perp^2=\det G=16\mu_{\rm IR}^6/27\), the stripped coefficient of \(\sl
 F_\perp^{\rm soft,stripped}
 =-\frac{I_\epsilon(4/3)}{32\pi^2\mu_{\rm IR}^2}.
 \]
-The leading heavy factor \(-1/M_E^2\) reverses this sign. The \(1/\mu_{\rm IR}^2\) dependence makes this a nonlocal soft form factor, not a local Wilson coefficient. It must be retained in the off-shell UV/EFT tensor comparison; whether it cancels after the other routing and the remaining Ward-completing graphs are added is still open.
+The leading heavy factor \(-1/M_E^2\) reverses this sign. The \(1/\mu_{\rm IR}^2\) dependence makes this a nonlocal soft form factor, not a local Wilson coefficient. For this fixed cross-box subset, the soft-expanded UV integrand and the EFT \(Q_{LD}\) insertion have the same three light denominators and the same numerator after using \(p_1+p_2+p_3+p_4=0\). Consequently this rank-three nonlocal term, together with the other soft form factors, cancels in the UV-minus-EFT difference for this subset. This is the expected expansion-by-regions identity, not a cancellation between unrelated diagrams; the other routing and Ward-completing graphs remain open.
 
 The exact residue and parameter-polynomial checks are in calculations/RC-001-dim6-WW-nonexceptional-soft-pole.py; the nine regression cases are in calculations/test_RC001_dim6_WW_nonexceptional_soft_pole.py. The scalar triangle and epsilon-moment numerical values are recorded in validation/RC-001-dim6-WW-nonexceptional-soft-pole.txt. The UV-soft/EFT numerator equality is an algebraic routing identity using the derivative momentum, not an independent diagram-generator validation. The checked-in unittest file is a regression artifact and is not represented as a GitHub Actions pass.
 
