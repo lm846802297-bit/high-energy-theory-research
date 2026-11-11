@@ -41,9 +41,8 @@ class TestNonexceptionalHardExpansion(unittest.TestCase):
 
     def test_soft_pole_cancels_hard_pole(self):
         pole, _, _ = MOD.hard_amplitude_expansion()
-        self.assertEqual(sp.simplify(pole-MOD.soft_uv_residue()), 0)
-        # EFT soft pole carries the opposite sign to the hard-region pole.
-        self.assertEqual(sp.simplify(pole-MOD.soft_uv_residue()), 0)
+        eft_soft_pole = -MOD.soft_uv_residue()
+        self.assertEqual(sp.simplify(pole+eft_soft_pole), 0)
 
     def test_msbar_finite_local_polynomial(self):
         _, finite, _ = MOD.hard_amplitude_expansion()
