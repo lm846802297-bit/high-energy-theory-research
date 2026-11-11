@@ -161,3 +161,23 @@ The present result supplies the EFT-side prediction and the operator-dimension c
 This calculation fixes the EFT local contact vertex required by the already matched four-point hard polynomial. It does **not** evaluate the UV one-loop five-point graphs with the external \(W\) attached to the UV heavy/light lines. It also does not include the second external-field routing, all external-leg and gauge-sector terms, counterterms, or the complete Slavnov–Taylor sum. In particular, the transverse part of the UV five-point amplitude has not been computed.
 
 The next independent calculation remains the UV one-loop five-point amplitude in the same nonexceptional off-shell kinematics and Feynman-gauge convention. Its longitudinal contraction must be compared with the gauge variation implied by the four-point sub-block, and its nonlocal transverse soft terms must be compared with the EFT. An independent local transverse contact is not part of the dimension-six M_E^{-2} basis; field-strength contacts belong to dimension seven. Only after the UV and EFT five-point amplitudes and their counterterms are combined can the complete \(WW\) matching row be closed.
+
+
+## 7. 2026-11-11 — UV longitudinal Ward-contraction stage A
+
+The separate RC-001-WW-UV-FF-02 Stage-A derivation is now recorded in
+research/RC-001-dim6-WW-UV-longitudinal-Ward-contraction.md, with an exact
+symbolic audit in calculations/RC-001-dim6-WW-UV-longitudinal-Ward-contraction.py
+and its captured local output in validation/RC-001-dim6-WW-UV-longitudinal-Ward-contraction.txt.
+
+The audit establishes the massless fermion and scalar line Ward identities,
+the propagator-chain telescoping relation, both Yukawa-singlet endpoint
+cancellations, all six internal-W weak-tensor projections, and the contraction
+of the non-Abelian three-W vertex. It also makes explicit that the ordinary
+Feynman-gauge three-W contraction contains a nonzero longitudinal
+gauge-fixing remainder relative to the Feynman-gauge inverse propagator.
+The ghost/gauge-fixing Slavnov-Taylor completion is not yet assembled.
+
+This is a line-level longitudinal identity and an EFT-contact consistency
+check. It is not an integrated UV five-point form factor, does not determine
+the transverse form factor, and does not close the full WW Wilson coefficient.
