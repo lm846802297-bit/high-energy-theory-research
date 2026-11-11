@@ -52,9 +52,20 @@ Q_{LD}^\dagger
 \]
 Thus \(Q_{LD}\) is Hermitian modulo a total derivative in the action.
 
-For the internal \(W\) exchange itself, the second-order expansion of \(g_2W_\mu^I J^{I\mu}\) carries \(1/2!\). For a fixed unordered pair of distinct matter lines, the two assignments of the current insertions to \(x\) and \(y\) are related by \(x\leftrightarrow y\); their sum cancels this \(1/2!\). Reversing the momentum assigned to the real \(W\) propagator is a dummy change \(k\to-k\), not another graph. Thus each unordered cross-line pair has unit multiplicity in this manual Wick-contraction count. This fixes the multiplicity of the four displayed cross-box pair classes; it does not replace a generator's enumeration of the full self-energy/vertex/contact atlas.
+The multiplicity can be fixed directly from the second-order interaction expansion. For
+\[
+S_{\rm int}^{(2)}=\frac1{2!}\int d^dx\,d^dy\,
+J_\mu^I(x)D^{\mu\nu}(x-y)J_\nu^I(y),
+\]
+choose one unordered pair of distinct matter lines \(a,b\). There are two Wick assignments, \((a@x,b@y)\) and \((b@x,a@y)\), and the factor \(1/2!\) therefore gives
+\[
+N_{\{a,b\}}=\frac{2}{2!}=1.
+\]
+The four cross-vertex classes LD-W-01/02/05/06 each have this unit multiplicity. The two same-Yukawa-vertex classes LD-W-03/04 obey the same endpoint combinatorics, although their loop kernels are a separate light-only/EFT-cancellation problem. Reversing the momentum on the real \(W\) propagator, \(k\mapsto-k\), is a dummy-variable relabeling with unit Jacobian, not another Wick contraction.
 
-These identities settle the operator-level relation between the two charge-conjugate tree orientations. The conjugate orientation matches \(Q_{LD}^\dagger\), which is the same integrated action operator as \(Q_{LD}\) modulo the displayed total derivative. Since the coefficient is proportional to \(|y_\ell|^2\) and the pure-\(WW\) hard sub-block is real, the conjugate orientation fixes the same Wilson coefficient; it is **not** an additional factor of two. The \(1/2!\) in the second-order expansion is already canceled by the two dummy vertex-label orderings. This resolves the operator-level multiplicity, but not the exact graph-label census or every Feynman-rule sign; those remain subject to diagram-level validation.
+This manual count is now reproduced by calculations/RC-001-dim6-WW-wick-multiplicity.py; its five local regression tests pass, with the captured output in validation/RC-001-dim6-WW-wick-multiplicity.txt. It is an explicit second-order Wick-contraction audit, **not** a FeynArts/QGRAF graph-generation result and does not independently fix every Feynman-rule sign or seagull.
+
+These identities settle the operator-level relation between the two charge-conjugate tree orientations. The conjugate orientation matches \(Q_{LD}^\dagger\), which is the same integrated action operator as \(Q_{LD}\) modulo the displayed total derivative. Since the coefficient is proportional to \(|y_\ell|^2\) and the pure-\(WW\) hard sub-block is real, the conjugate orientation fixes the same Wilson coefficient; it is **not** an additional factor of two. The \(1/2!\) in the second-order expansion is already canceled by the two dummy vertex-label orderings. Together with the explicit (2/2!) Wick count above, this rules out an extra factor of two from the conjugate orientation or from reversing the real-(W) loop momentum. The exact graph-label census, all Feynman-rule signs, and seagull/ghost completion remain subject to diagram-level validation.
 
 ## 3. \(SU(2)_L\) attachment classes
 
