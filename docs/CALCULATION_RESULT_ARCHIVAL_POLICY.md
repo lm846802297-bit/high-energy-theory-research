@@ -16,7 +16,10 @@ Follow the existing project/workstream layout and record conventions. Do not cre
 ## 2. Commit usable native result files, not a newly packed archive
 
 - Commit the essential result files directly in their native, machine-readable formats where practical: CSV, JSON/JSONL, TXT, ROOT, HDF5, Parquet, notebooks, source code, plots, and other formats actually produced or consumed by the calculation.
-- **Do not create a new ZIP/TAR archive as a substitute for committing the extracted result files.** A reviewer should be able to inspect and use the actual data files without first unpacking an opaque bundle.
+- **Extract-before-upload is mandatory.** If a calculation or result delivery arrives as ZIP/TAR—including a ChatGPT handoff bundle, local-runner output package, GitHub Actions artifact, or collaborator delivery—extract it before committing/publishing and commit the required extracted native files individually, preserving their useful filenames and directory structure.
+- A newly generated delivery ZIP/TAR is a transfer container only. **Do not commit it as the sole or substitute archive of the extracted outputs.** Reviewers must be able to inspect and use the actual source, inputs, CSV/JSON/ROOT/HDF5/Parquet/TXT outputs, reports, metadata, and manifests directly from the repository.
+- An original upstream archive may be retained when the exact container is necessary for provenance/reproducibility or when extracted source files cannot legally be redistributed. Record its source/version, byte size, SHA-256, extraction command, and checksums of extracted files; still commit all extracted files that may be redistributed.
+- Tool-native compressed formats that are themselves the original data product may be retained when necessary and documented; this exception does not permit wrapping ordinary outputs in a newly generated ZIP/TAR.
 - If an upstream source is supplied as an archive, extract the files required for the calculation and commit those extracted files when redistribution is permitted. Record the original archive filename, source/version, byte size, SHA-256, extraction command, and checksums of the extracted files in the provenance record. Do not silently alter precision, units, columns, line endings, or raw data.
 - Keep raw inputs, transformed inputs, and derived outputs distinguishable. If a conversion or post-processing step changes the data, preserve the raw source where permitted and record the transformation and the output checksum.
 - Tool-native compressed formats that are themselves the original data product may be retained when necessary; document the format and command. This exception does not justify wrapping ordinary outputs in a newly created ZIP/TAR.
@@ -51,3 +54,16 @@ Retain the logs and checkpoints needed to audit or resume a long calculation. Om
 4. Report repository archival separately from scientific validation. A successful commit, matching checksum, green CI, or completed run does not by itself establish a correct physical result or a confirmed claim.
 
 These requirements apply to future projects and workstreams throughout this repository.
+
+## 6. CI is optional and is not a research or merge gate
+
+CI is optional supporting infrastructure, not a prerequisite for calculation, scientific validation, result submission, pull-request review, or merge.
+
+- Calculations may be run directly on a local machine or an approved compute runner. Do not wait for a CI job before starting, continuing, or completing research.
+- Numerical and scientific acceptance checks remain necessary where appropriate, but they may be run locally or on an approved runner. Record the exact commands, source revision, inputs, settings, outputs, and checks actually performed. CI is neither a substitute for scientific validation nor a mandatory way to perform it.
+- GitHub Actions may still be used as an optional compute or artifact-handoff service. A workflow that performs the calculation is an execution run; record its provenance and outputs. Its existence does not make a separate PR CI check mandatory.
+- A queued, unavailable, disabled, billing-blocked, cancelled, or infrastructure-failed CI job must not by itself block research progress, archival, PR creation, review, or merge. Record its status truthfully and distinguish infrastructure problems from scientific failures.
+- If CI is run, report the exact commit SHA and the checks that actually ran. Never claim an unrun check passed. A green CI result validates only the properties tested by that workflow.
+- Review and merge according to the actual diff, reproducibility, scientific evidence, scope, and relevant checks. Do not require CI status checks as branch-protection gates under this policy. Do not change repository protection settings without explicit authorization.
+- CI is mandatory for a specific task only if the author explicitly requests it.
+
