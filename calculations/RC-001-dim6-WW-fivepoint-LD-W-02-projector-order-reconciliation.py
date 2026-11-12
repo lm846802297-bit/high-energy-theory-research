@@ -87,33 +87,35 @@ def verify_RFG_is_separate():
  p1=[1,1,0,1]; p2=[0,2,1,0]; p3=[2,0,1,1]
  p4=[-p1[i]-p2[i]-p3[i]-q[i] for i in range(4)]
  r_aw=[k[i]-p1[i] for i in range(4)]
+ r_ay=[r_aw[i]-q[i] for i in range(4)]
  r_by=[k[i]+p4[i]+q[i] for i in range(4)]
  h=[k[i]-p1[i]-p2[i] for i in range(4)]
+ h_a=[h[i]-q[i] for i in range(4)]
  v_b=[-2*p3[i]-kap[i] for i in range(4)]
  # Actual two-W R_FG numerator for the F-S graph.
  rfg=(dot(v_b,k)*slash(r_aw)*slash(h)*slash(k)
       -dot(v_b,kap)*slash(r_aw)*slash(h)*slash(kap))
  # Single-W endpoint structures have V_B slash(r_A) slash(h), not this order.
- single_w=slash(v_b)*slash(r_aw)*slash(h)
- single_y=slash(v_b)*slash(r_aw)*slash(h)
- assert rfg!=sp.zeros(4) and single_w!=sp.zeros(4)
- assert rfg!=single_w
+ single_w=slash(v_b)*slash(r_aw)*slash(h_a)
+ single_y=slash(v_b)*slash(r_ay)*slash(h_a)
+ assert rfg!=sp.zeros(4) and single_w!=sp.zeros(4) and single_y!=sp.zeros(4)
+ assert single_w!=single_y and rfg!=single_w and rfg!=single_y
  nz=lambda m:sum(sp.simplify(m[i,j])!=0 for i,j in product(range(4),repeat=2))
- return nz(rfg),nz(single_w)
+ return nz(rfg),nz(single_w),nz(single_y)
 
 
 def main():
  c=verify_chiral_intertwining()
  checks,den,vk,vkap,ew,ey=rational_endpoint_projector_order()
- rfg,single=verify_RFG_is_separate()
- assert (c,checks,rfg,single)==(10,128,16,16)
+ rfg,single_w,single_y=verify_RFG_is_separate()
+ assert (c,checks,rfg,single_w,single_y)==(10,128,16,16,16)
  assert vk==-33 and vkap==-18
  print("RC-001 B2c-IVn-h/06: LD-W-02 projector/order reconciliation")
  print(f"PASS: gamma/projector intertwining ({c}/10 identities).")
  print(f"PASS: actual A-WTI endpoint reductions ({checks}/128 matrix entries).")
  print("PASS: the two endpoints share rightmost P_L and ordered gamma_mu slash(r_A) slash(h_A),")
  print("      while retaining distinct r_A^W and r_A^Y momenta.")
- print(f"PASS: R_FG and single-W endpoint numerators remain distinct ({rfg}/16 and {single}/16 nonzero entries).")
+ print(f"PASS: R_FG and both distinct single-W endpoint numerators remain separate ({rfg}/16, {single_w}/16, {single_y}/16 nonzero entries).")
  print(f"RATIONAL V_B DOTS: V_B(kappa).k={vk}, V_B(kappa).kappa={vkap}.")
  print(f"RATIONAL DENOMINATORS: {den}.")
  print("BOUNDARY: projector placement is reconciled; no equality of single-W endpoints")
