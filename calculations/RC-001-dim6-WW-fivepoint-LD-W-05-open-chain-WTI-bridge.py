@@ -84,23 +84,19 @@ def verify_common_k_B_yukawa_endpoint_route():
     p2 = list(sp.symbols("p2Route0:4", real=True))
     p3 = list(sp.symbols("p3Route0:4", real=True))
     p4 = [-p1[i] - p2[i] - p3[i] - q[i] for i in range(4)]
-    kappa = add(k, q)
 
-    mapped = (
-        sub(k, p2),                  # r_A^Y(k)
-        add(add(k, p4), q),          # r_B^Y(k)
-        sub(k, add(p1, p2)),         # h(k)
-        sub([2 * p2[i] for i in range(4)], k),  # V_A(k)
-        k,                           # internal W momentum
-    )
-    targets = mapped
-    assert all(
-        sp.simplify(mapped[n][mu] - targets[n][mu]) == 0
-        for n in range(5) for mu in range(4)
-    )
-    assert all(sp.simplify(kappa[i] - (k[i] + q[i])) == 0
+    # The B-side fermion endpoint is unshifted. Its B-line momentum and
+    # the same heavy channel can be expressed from either adjacent vertex.
+    r_b_w = add(k, p4)
+    r_b_y_from_w = add(r_b_w, q)
+    r_b_y_common = add(add(k, p4), q)
+    h_from_right = add(add(k, p3), add(p4, q))
+    h_from_left = sub(k, add(p1, p2))
+    assert all(sp.simplify(r_b_y_from_w[i] - r_b_y_common[i]) == 0
                for i in range(4))
-    return 20
+    assert all(sp.simplify(h_from_right[i] - h_from_left[i]) == 0
+               for i in range(4))
+    return 8
 
 
 def rational_open_chain_diagnostic():
@@ -176,7 +172,7 @@ def main():
     wti = verify_oriented_B_fermion_wti()
     route = verify_common_k_B_yukawa_endpoint_route()
     diag = rational_open_chain_diagnostic()
-    assert wti == 16 and route == 20
+    assert wti == 16 and route == 8
     assert diag["open_index_checks"] == 64
     assert diag["contracted_entries"] == 16
 
@@ -185,7 +181,7 @@ def main():
     print(f"PASS: actual open Lorentz-index chain ({diag['open_index_checks']}/64 matrix components).")
     print("PASS: Feynman-gauge contraction with D(k) and V_A(k) (16/16 matrix components).")
     print("PASS: explicit two-endpoint RHS split (exact matrix equality).")
-    print(f"PASS: B-side common-k Yukawa endpoint route ({route}/20 vector components).")
+    print(f"PASS: B-side unshifted endpoint/heavy-channel momentum identities ({route}/8 vector components).")
     print(f"RATIONAL DENOMINATORS: {diag['denominators']}.")
     print(f"NONZERO CONTRACTED OPEN-CHAIN ENTRIES: {diag['contracted_entries']}/16.")
     print("RESULT: the B-side fermion WTI holds after insertion into the actual S-F open chain.")
