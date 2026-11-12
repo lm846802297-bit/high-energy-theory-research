@@ -60,7 +60,7 @@ def contract_scalar_left(kernel, current, chain):
     for mu, nu in product(range(4), repeat=2):
         out += (
             (ETA[mu] * current[mu]) * chain
-            * GAMMA_DOWN[nu] * kernel[mu, nu]
+            * GAMMA_DOWN[nu] * PL * kernel[mu, nu]
         )
     return sp.simplify(out)
 
