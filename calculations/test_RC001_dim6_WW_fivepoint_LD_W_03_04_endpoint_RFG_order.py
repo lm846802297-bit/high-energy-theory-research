@@ -12,6 +12,9 @@ class LDW0304EndpointOrderTests(unittest.TestCase):
     def test_symbolic_endpoint_orders_and_conjugation(self):
         self.assertEqual(MOD.verify_symbolic_endpoint_orders(), 6)
 
+    def test_he_spectator_is_k_independent(self):
+        self.assertEqual(MOD.verify_he_spectator_independence(), 32)
+
     def test_rational_point_endpoints_and_rfg_are_distinct(self):
         k = [4, 1, 2, 1]
         q = [1, 2, 0, 1]
