@@ -23,6 +23,9 @@ class TestLDW01CommonKNumeratorDenominator(unittest.TestCase):
     def test_physical_weak_commutator_phase_alignment(self):
         self.assertEqual(MOD.verify_weak_phase(), (48, 48))
 
+    def test_final_projector_is_after_right_W_current(self):
+        self.assertEqual(MOD.verify_final_projector_order(), 16)
+
     def test_nonsingular_nonzero_rfg_diagnostic(self):
         den, nonzero, chain_checks = MOD.rational_diagnostic()
         self.assertEqual(den, (10, 8, 6, -3, -393))
