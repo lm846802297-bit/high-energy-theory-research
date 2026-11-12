@@ -50,6 +50,10 @@ produces \(\frac12T_x-\frac14T_0=\frac14T_3\); pairs related by one conjugate-re
 
 The two same-Yukawa-vertex pairs LD-W-03 and LD-W-04 are pure singlet-tensor contributions, \(-3T_0/4\). The four cross-vertex pairs reduce to pure triplet-tensor contributions, with the signs displayed above. Do not project all six \(WW\) classes onto a single singlet coefficient before summing their loop integrals: each topology has a different momentum numerator and may have a different multiplicity.
 
+The two same-vertex loop routings have now been checked separately. For LD-W-03 (\(\bar L-H\)), the light denominators are \(k^2,(k+p_1)^2,(k-p_2)^2\); for LD-W-04 (\(L-H^\dagger\)), they are \(k^2,(k+p_4)^2,(k-p_3)^2\). The heavy propagator carries only the external channel momentum \(P=p_1+p_2=-(p_3+p_4)\), independent of the W-loop momentum. Its chiral numerator reduces to \(-\slashed P/M_E^2\), exactly the tree \(Q_{LD}\) derivative insertion because \(q_D=p_3+p_4=-P\). Thus these two same-vertex W graphs are pure-soft at \(O(M_E^{-2})\): the EFT reproduces their full light-loop form factors, while the hard-region loop integrals are scaleless. They generate no hard matching coefficient in this order, but remain part of the EFT soft/operator-renormalization/Ward sum. The numerator and chiral-projector checks are in calculations/RC-001-dim6-WW-same-vertex-soft-identity.py and validation/RC-001-dim6-WW-same-vertex-soft-identity.txt.
+
+The four cross-vertex classes have separately reached nonexceptional hard/soft pole closure and a finite local hard polynomial; see research/RC-001-dim6-nonexceptional-matching-kinematics.md §§3.1–3.4. This still does not close the complete six-pair \(WW\) amplitude: the full counterterm, external-field, external-W form-factor, and Slavnov–Taylor sums remain open.
+
 For \(Q_{RD}\), every field in the tree exchange is an \(SU(2)_L\) singlet, so there is no \(WW\) attachment class.
 
 ## 4. Evidence boundary

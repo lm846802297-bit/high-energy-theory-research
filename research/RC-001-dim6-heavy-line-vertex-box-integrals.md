@@ -11,9 +11,9 @@ L_\ell=\ln\frac{M_{E_\ell}^2}{\mu_R^2}.
 \]
 Normalize scalar loop integrals by
 \[
-\int_k \equiv \mu_R^{2\epsilon}\int\frac{d^dk}{i\pi^{d/2}},
+\int_k \equiv (4\pi)^\epsilon\mu_R^{2\epsilon}\int\frac{d^dk}{i\pi^{d/2}},
 \]
-with the usual \(+i0\) prescriptions understood. The displayed \(\Delta_{\rm UV}\) and \(\Delta_{\rm IR}\) symbols are kept distinct; a scaleless integral is never treated as evidence that its UV and IR poles separately vanish.
+with the usual \(+i0\) prescriptions understood. The explicit \((4\pi)^\epsilon\) factor is part of the stated loop normalization and makes the pole convention \(\Delta_\epsilon=1/\epsilon-\gamma_E+\ln4\pi\) consistent with the displayed scalar master integrals. The displayed \(\Delta_{\rm UV}\) and \(\Delta_{\rm IR}\) symbols are kept distinct; a scaleless integral is never treated as evidence that its UV and IR poles separately vanish.
 
 ## 2. Heavy-\(E_\ell\) self-energy at low momentum
 
