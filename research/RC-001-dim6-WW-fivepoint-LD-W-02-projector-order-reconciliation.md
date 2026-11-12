@@ -54,6 +54,6 @@ All W, fermion, scalar, and heavy denominators used in the local check are nonze
 - Tests: \`calculations/test_RC001_dim6_WW_fivepoint_LD_W_02_projector_order_reconciliation.py\`
 - Output: \`validation/RC-001-dim6-WW-fivepoint-LD-W-02-projector-order-reconciliation.txt\`
 
-The exact SymPy assertions cover ten chiral intertwining identities and 128 endpoint matrix-entry reductions. No GitHub Actions result is claimed. The standalone unittest is included for reproduction.
+The exact SymPy assertions cover ten chiral intertwining identities and 128 endpoint matrix-entry reductions. Local execution against source commit `ddf9d41d408b4ee94ccb0c313befcb97423f4b81` used Python 3.13.5 and SymPy 1.14.0; the combined LD-W-02/LD-W-05 regression suite passed 9/9 tests (5/5 for LD-W-02 and 4/4 for LD-W-05). GitHub Actions are not claimed as passed; the latest candidate-schema, QLD8 counterterm-basis, and QLD chiral-Fierz runs concluded failure, with causes not established from the available job metadata.
 
 No complete LD-W-02 scalar-line/seagull cancellation, 24-graph Ward identity, LSZ/ST closure, loop integration, UV–EFT subtraction, or Wilson coefficient is claimed.
