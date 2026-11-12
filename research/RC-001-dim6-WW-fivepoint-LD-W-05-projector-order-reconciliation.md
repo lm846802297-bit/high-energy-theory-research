@@ -41,12 +41,13 @@ The rightmost \(P_L\) and the Dirac order are common; the two fermion momenta re
 The graph-specific cross-vertex LD-W-05 two-W projection has the order
 \[
 \mathcal N_{05}^{\rm FG}
-=(V_A\cdot k)\slashed h\slashed r_B^Y\slashed k
--(V_A\cdot\kappa)\slashed h\slashed r_B^Y\slashed\kappa.
+=\left[(V_A\cdot k)\slashed h\slashed r_B^Y\slashed k
+-(V_A\cdot\kappa)\slashed h\slashed r_B^Y\slashed\kappa\right]P_L.
 \]
-This is not the single-W endpoint numerator
+After contracting the single-W propagator with the scalar current, the two WTI endpoint numerators are instead
 \[
-\slashed h\slashed r_B^{W,Y}\slashed V_A.
+\mathcal E_W=\slashed h\slashed r_B^W\slashed V_A P_L,\qquad
+\mathcal E_Y=-\slashed h\slashed r_B^Y\slashed V_A P_L.
 \]
 The former contains the two-W inverse-kernel difference; the latter is the WTI endpoint after the single Feynman-gauge propagator is contracted with the scalar current. Their distinct matrix order and propagator structure must be preserved until the full longitudinal sum is assembled. The audit explicitly verifies that both structures are nonzero at the rational point and does not assert they are equal.
 
