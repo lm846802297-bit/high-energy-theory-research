@@ -530,10 +530,15 @@ Thus the rightmost chiral orientation agrees, but the two fermion momenta remain
 The two-W remainder has the separate order
 \[
 \mathcal N_{05}^{\rm FG}
-=(V_A\cdot k)\slashed h\slashed r_B^Y\slashed k
--(V_A\cdot\kappa)\slashed h\slashed r_B^Y\slashed\kappa.
+=\left[(V_A\cdot k)\slashed h\slashed r_B^Y\slashed k
+-(V_A\cdot\kappa)\slashed h\slashed r_B^Y\slashed\kappa\right]P_L.
 \]
-It is not identified with either single-W endpoint numerator \(\slashed h\slashed r_B^{W,Y}\slashed V_A\). At the rational point, both WTI endpoint numerators and the \(R_{\rm FG}\) numerator are nonzero, and the two endpoint numerators are distinct. The complete longitudinal sum must determine how these pieces combine.
+After the single-W propagator is contracted with the scalar current, the signed WTI endpoint numerators are
+\[
+\mathcal E_W=\slashed h\slashed r_B^W\slashed V_A P_L,\qquad
+\mathcal E_Y=-\slashed h\slashed r_B^Y\slashed V_A P_L.
+\]
+The exact rational-point check finds all three matrices nonzero (16/16 entries each) and distinct. The complete longitudinal sum must determine how these pieces combine. The local combined regression suite passes 9/9 tests (LD-W-05: 4/4; LD-W-02: 5/5), using Python 3.13.5 and SymPy 1.14.0 at source commit \`ddf9d41d408b4ee94ccb0c313befcb97423f4b81\`. The latest PR-head GitHub Actions runs for candidate-schema validation, QLD8 counterterm-basis, and QLD chiral-Fierz checks are failures, not passes.
 
 The exact source and four regression tests are recorded in:
 - \`calculations/RC-001-dim6-WW-fivepoint-LD-W-05-projector-order-reconciliation.py\`
@@ -558,18 +563,23 @@ With the heavy spectator \(\slashed h_AP_L\) to its right, the two terms reduce 
 \]
 The common rightmost \(P_L\) and Dirac order are established, while the distinct fermion momenta are retained. The open Lorentz comparison passes 128/128 matrix entries.
 
-The two-W \(R_{\rm FG}\) projection has a separate order,
+The two-W \(R_{\rm FG}\) projection follows the explicit cross-pair current ordering,
 \[
 \mathcal N_{02}^{\rm FG}
-=(V_B(\kappa)\cdot k)\slashed r_A^W\slashed h\slashed k
--(V_B(\kappa)\cdot\kappa)\slashed r_A^W\slashed h\slashed\kappa,
+=\left[(V_B(\kappa)\cdot k)\slashed k(-\slashed r_A^W)\slashed h
+-(V_B(\kappa)\cdot\kappa)\slashed\kappa(-\slashed r_A^W)\slashed h\right]P_L.
 \]
-and is not identified with the single-W endpoint structure \(\slashed V_B(\kappa)\slashed r_A^{W,Y}\slashed h_AP_L\). At the rational point,
+The contracted single-W WTI endpoints have the distinct signed order
+\[
+\mathcal E_W=-\slashed V_B(\kappa)\slashed r_A^W\slashed h_A P_L,\qquad
+\mathcal E_Y=+\slashed V_B(\kappa)\slashed r_A^Y\slashed h_A P_L,
+\]
+with the corresponding \((r_A^W)^2\) and \((r_A^Y)^2\) propagator denominators. The exact rational-point check finds all three matrices nonzero (16/16 entries each) and distinct. At the rational point,
 \[
 V_B(\kappa)\cdot k=-33,\qquad
 V_B(\kappa)\cdot\kappa=-18,
 \]
-with all local denominator factors nonzero. The exact source and tests are:
+and all seven local denominator factors are nonzero. The local combined regression suite passes 9/9 tests (LD-W-05: 4/4; LD-W-02: 5/5), using Python 3.13.5 and SymPy 1.14.0 at source commit \`ddf9d41d408b4ee94ccb0c313befcb97423f4b81\`. The exact source and tests are:
 - \`calculations/RC-001-dim6-WW-fivepoint-LD-W-02-projector-order-reconciliation.py\`
 - \`calculations/test_RC001_dim6_WW_fivepoint_LD_W_02_projector_order_reconciliation.py\`
 - \`research/RC-001-dim6-WW-fivepoint-LD-W-02-projector-order-reconciliation.md\`
@@ -592,12 +602,14 @@ for LD-W-01…06. No new topology is introduced in IVl/IVm/IVn-a…IVn-e.
 
 ## 6. Remaining assembly gates
 
-1. **Reconcile graph-specific \(P_L/P_R\) and Dirac-order conventions for the remaining cross-vertex pairs.** LD-W-02 and LD-W-05 now have explicit projector-order reductions. LD-W-01 and LD-W-06 still require their graph-specific endpoint-versus-\(R_{\rm FG}\) order comparison.
-2. **Assemble the ordinary-matter longitudinal integrand for all six pairs.** Insert all six fermion-line WTI insertions (four algebraic orientations), all six scalar-line kernels, all six seagulls, and all six three-W kernels using exact weak tensors and phases. LD-W-06 has only scalar-line/seagull attachments.
-3. **Perform every secondary loop-variable shift on the complete numerator and denominator.** Keep the two terms in each \(\delta_X=\Delta_Y-\Delta_W\) separate. For LD-W-06, the A and B negative-propagator terms shift \(h\) to \(h-q\) and \(h+q\), respectively.
-4. **Combine the local Yukawa-singlet factors with the actual ordered 1PI terms.** Local charge sums pass for all six pairs, but this alone does not establish cancellation of the Lorentz- and weak-index-weighted integrand.
-5. **Write the four reducible external-leg/LSZ factors and their lower-point amplitudes explicitly.** Keep them outside the 1PI five-point vertex until the full Ward identity is assembled.
-6. **Derive the BRST/ghost Slavnov–Taylor completion** and test the longitudinal inverse-kernel target \(D(\kappa)[L(\kappa)-L(k)]D(k)=-R_{\rm FG}\) in the assembled matter-current chains.
-7. **Add counterterms:** \(W\)-field, gauge-coupling, matter-field, Yukawa, heavy-mass, and operator counterterms. Only after the complete off-shell identity closes should the common-regulator UV–EFT subtraction and comparison with the EFT one-\(W\) vertex be performed.
+1. **LD-W-01 projector/order reconciliation.** Reduce both oriented F-F WTI endpoints in the actual ordered chains and compare their chiral placement with the pair-specific two-W \(R_{\rm FG}\) numerator.
+2. **LD-W-03/04 same-vertex order reconciliation.** Preserve their distinct Dirac-Hermitian orientations and \(h_E\) spectators; compare the contracted WTI endpoints with each graph's own \(R_{\rm FG}\) chain.
+3. **LD-W-06 scalar endpoint completion.** No fermion-line WTI exists for S-S. Assemble its two scalar-line kernels and two seagulls with the exact shifted heavy denominators and compare to the two-W remainder.
+4. **Assemble the ordinary-matter longitudinal integrand for all six pairs.** Insert the fermion-line WTIs, scalar-line kernels, seagulls, and three-W kernels using exact weak tensors and phases.
+5. **Perform every secondary loop-variable shift on the complete numerator and denominator.** Keep the two terms in each \(\delta_X=\Delta_Y-\Delta_W\) separate. For LD-W-06, the A and B negative-propagator terms shift \(h\) to \(h-q\) and \(h+q\), respectively.
+6. **Combine the local Yukawa-singlet factors with the actual ordered 1PI terms.** Local charge sums pass for all six pairs, but this alone does not establish cancellation of the Lorentz- and weak-index-weighted integrand.
+7. **Write the four reducible external-leg/LSZ factors and their lower-point amplitudes explicitly.** Keep them outside the 1PI five-point vertex until the full Ward identity is assembled.
+8. **Derive the BRST/ghost Slavnov–Taylor completion** and test the longitudinal inverse-kernel target \(D(\kappa)[L(\kappa)-L(k)]D(k)=-R_{\rm FG}\) in the assembled matter-current chains.
+9. **Add counterterms:** \(W\)-field, gauge-coupling, matter-field, Yukawa, heavy-mass, and operator counterterms. Only after the complete off-shell identity closes should the common-regulator UV–EFT subtraction and comparison with the EFT one-\(W\) vertex be performed.
 
 No loop integration, complete STI closure, transverse form factor, UV–EFT matching coefficient, or Wilson coefficient is claimed at this stage.
