@@ -99,13 +99,13 @@
   "outputs": [
     {
       "path": "research/RC-001-dim6-WW-fivepoint-LD-W-01-projector-order-reconciliation.md",
-      "bytes": 5678,
-      "sha256": "da46899653d1fe328b34a9006559326d9a1ede379e57d268c63b48b076f2dc0e"
+      "bytes": 5670,
+      "sha256": "379f3defd229d4ae26923bb89fea7048e3ee6d23d5283a223ef26cbb9ac3ee06"
     },
     {
       "path": "validation/RC-001-dim6-WW-fivepoint-LD-W-01-projector-order-reconciliation.txt",
-      "bytes": 1667,
-      "sha256": "3fe850964c9a994f880de59a4e7984d8febd0b27d289701788692612cf3f5fbd"
+      "bytes": 1686,
+      "sha256": "85e805dcf974ea744943ef2ace37a45ff67e1bd2939d5c6877cca8c708768a5f"
     }
   ],
   "warnings": [
