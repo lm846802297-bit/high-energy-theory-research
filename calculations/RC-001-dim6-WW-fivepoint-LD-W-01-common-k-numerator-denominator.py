@@ -243,6 +243,44 @@ def verify_weak_phase():
     return checks_a, checks_b
 
 
+def verify_final_projector_order():
+    k = [sp.Integer(4), sp.Integer(1), sp.Integer(2), sp.Integer(1)]
+    q = [sp.Integer(1), sp.Integer(2), sp.Integer(0), sp.Integer(1)]
+    p1 = [sp.Integer(1), sp.Integer(0), sp.Integer(1), sp.Integer(0)]
+    p2 = [sp.Integer(0), sp.Integer(1), sp.Integer(0), sp.Integer(2)]
+    p3 = [sp.Integer(2), sp.Integer(0), sp.Integer(1), sp.Integer(1)]
+    p4 = [-p1[i] - p2[i] - p3[i] - q[i] for i in range(4)]
+    kap = add(k, q)
+    r_a = sub(k, p1)
+    r_by = add(add(k, p4), q)
+    h = sub(k, add(p1, p2))
+
+    # Stripped matter chain; final P_L acts after the right W current.
+    chain = -slash(r_a) * slash(h) * slash(r_by)
+    direct = sp.zeros(4)
+    for mu, nu in product(range(4), repeat=2):
+        coefficient = ETA[mu] * ETA[nu] * (
+            k[mu] * k[nu] - kap[mu] * kap[nu]
+        )
+        direct += GAMMA[mu] * chain * GAMMA[nu] * PL * coefficient
+
+    corrected = (
+        slash(k) * chain * slash(k) * PL
+        - slash(kap) * chain * slash(kap) * PL
+    )
+    old_order = (
+        slash(k) * (chain * PL) * slash(k)
+        - slash(kap) * (chain * PL) * slash(kap)
+    )
+    assert matrix_zero(direct - corrected)
+    old_difference = sum(
+        sp.simplify(direct[i, j] - old_order[i, j]) != 0
+        for i, j in product(range(4), repeat=2)
+    )
+    assert old_difference == 16
+    return old_difference
+
+
 def rational_diagnostic():
     k = [sp.Integer(4), sp.Integer(1), sp.Integer(2), sp.Integer(1)]
     q = [sp.Integer(1), sp.Integer(2), sp.Integer(0), sp.Integer(1)]
@@ -292,6 +330,7 @@ def main():
     vertex_checks, kernel_checks = verify_three_w_vertex_and_kernel()
     weak_a, weak_b = verify_weak_phase()
     den, nonzero, chain_checks = rational_diagnostic()
+    projector_diff = verify_final_projector_order()
 
     print("RC-001 B2c-IVn-f/01: LD-W-01 exact common-k F-F bridge")
     print(f"PASS: oriented A/B fermion WTIs ({wti}/32 Dirac components).")
@@ -301,6 +340,7 @@ def main():
     print(f"PASS: Feynman-gauge propagator-chain decomposition ({kernel_checks}/16 tensor components).")
     print(f"PASS: actual LD-W-01 Dirac-chain cancellation to R_FG at an exact rational point ({chain_checks}/32 matrix components).")
     print(f"PASS: physical A/B weak commutator and phase alignment ({weak_a}/48 and {weak_b}/48 weak components).")
+    print(f"PASS: final P_L after right W current; old pre-slash(k) placement rejected ({projector_diff}/16 matrix entries).")
     print(f"RATIONAL DIAGNOSTIC: denominator factors={den}; nonzero N_01 entries={nonzero}/16.")
     print("RESULT: the LD-W-01 F-F commutator/three-W sub-block is exactly reduced to the explicit R_FG projection.")
     print("BOUNDARY: this does not include the Yukawa-endpoint gauge variations, external-leg/LSZ,")
