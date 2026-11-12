@@ -585,6 +585,27 @@ and all seven local denominator factors are nonzero. The local combined regressi
 - \`research/RC-001-dim6-WW-fivepoint-LD-W-02-projector-order-reconciliation.md\`
 - \`validation/RC-001-dim6-WW-fivepoint-LD-W-02-projector-order-reconciliation.txt\`
 
+### 4.15 LD-W-01 F-F projector/order reconciliation (IVn-h/07)
+
+Both oriented F-F fermion WTIs are now reduced in the actual ordered open chains. The four endpoint reductions retain the graph-specific \(h-q\), \(h\), \(r_B^W\), and \(r_B^Y\) routing, with the common rightmost \(P_L\). Exact comparison passes \(1024/1024\) Dirac-matrix entries.
+
+After the A-side shift \(k_{\rm old}=k+q\), its second endpoint and the unshifted B-side second endpoint reduce to the same common-\(k\) chain
+\[
+-\gamma_\mu S_A^W\slashed hS_B^Y\gamma_\nu P_L,
+\]
+passing \(256/256\) matrix entries. The A-side shift map passes \(16/16\) vector components; the two single-W denominator alignments to the three-W reference pass \(2/2\) identities. The W propagator momenta remain distinct (\(\kappa\) on the shifted A endpoint and \(k\) on the B endpoint).
+
+The pair-specific \(R_{\rm FG}\) direct Lorentz contraction agrees with its factorized five-slash numerator in \(16/16\) entries. The final \(P_L\) must act after the right W current; the earlier pre-\(\slashed k\) placement is rejected in \(16/16\) entries. The \(R_{\rm FG}\) matrix remains nonzero and distinct from the one-W endpoint contractions. The local unittest suite passes \(6/6\) tests.
+
+Sources and run evidence:
+- calculations/RC-001-dim6-WW-fivepoint-LD-W-01-projector-order-reconciliation.py
+- calculations/test_RC001_dim6_WW_fivepoint_LD_W_01_projector_order_reconciliation.py
+- research/RC-001-dim6-WW-fivepoint-LD-W-01-projector-order-reconciliation.md
+- validation/RC-001-dim6-WW-fivepoint-LD-W-01-projector-order-reconciliation.txt
+- validation/RC-001-dim6-WW-fivepoint-LD-W-01-projector-order-reconciliation-run-manifest.json
+
+This closes the LD-W-01 projector/order sub-block only. It does not close the six-pair longitudinal sum, the complete STI, loop integration, UV-EFT subtraction, or a Wilson coefficient.
+
 ## 5. Direct-attachment census
 
 The ordinary internal attachments remain
@@ -602,7 +623,7 @@ for LD-W-01…06. No new topology is introduced in IVl/IVm/IVn-a…IVn-e.
 
 ## 6. Remaining assembly gates
 
-1. **LD-W-01 projector/order reconciliation.** Reduce both oriented F-F WTI endpoints in the actual ordered chains and compare their chiral placement with the pair-specific two-W \(R_{\rm FG}\) numerator.
+1. **LD-W-01 projector/order reconciliation — completed as a local algebraic sub-block (IVn-h/07).** Both oriented endpoint chains, the A-shift/B-common second-endpoint equality, and the pair-specific two-W \(R_{\rm FG}\) projector order are checked. The complete six-pair sum remains open.
 2. **LD-W-03/04 same-vertex order reconciliation.** Preserve their distinct Dirac-Hermitian orientations and \(h_E\) spectators; compare the contracted WTI endpoints with each graph's own \(R_{\rm FG}\) chain.
 3. **LD-W-06 scalar endpoint completion.** No fermion-line WTI exists for S-S. Assemble its two scalar-line kernels and two seagulls with the exact shifted heavy denominators and compare to the two-W remainder.
 4. **Assemble the ordinary-matter longitudinal integrand for all six pairs.** Insert the fermion-line WTIs, scalar-line kernels, seagulls, and three-W kernels using exact weak tensors and phases.
