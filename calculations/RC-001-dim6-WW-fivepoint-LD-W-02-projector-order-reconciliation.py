@@ -74,10 +74,9 @@ def rational_endpoint_projector_order():
  end_w=slash(v_b)*(-slash(r_aw))*slash(h_a)*PL
  end_y=slash(v_b)*slash(r_ay)*slash(h_a)*PL
  assert end_w!=end_y and end_w!=sp.zeros(4) and end_y!=sp.zeros(4)
+ r_by=[kap[i]+p3[i] for i in range(4)]
  den=(dot(k,k),dot(kap,kap),dot(r_aw,r_aw),dot(r_ay,r_ay),
-      dot(kap,p3)**2 if False else dot([kap[i]+p3[i] for i in range(4)],
-                                      [kap[i]+p3[i] for i in range(4)]),
-      dot(h,h)-400,dot(h_a,h_a)-400)
+      dot(r_by,r_by),dot(h,h)-400,dot(h_a,h_a)-400)
  assert all(x!=0 for x in den)
  return checks,den,dot(v_b,k),dot(v_b,kap),end_w,end_y
 
@@ -93,11 +92,12 @@ def verify_RFG_is_separate():
  h_a=[h[i]-q[i] for i in range(4)]
  v_b=[-2*p3[i]-kap[i] for i in range(4)]
  # Actual two-W R_FG numerator for the F-S graph.
- rfg=(dot(v_b,k)*slash(r_aw)*slash(h)*slash(k)
-      -dot(v_b,kap)*slash(r_aw)*slash(h)*slash(kap))
- # Single-W endpoint structures have V_B slash(r_A) slash(h), not this order.
- single_w=slash(v_b)*slash(r_aw)*slash(h_a)
- single_y=slash(v_b)*slash(r_ay)*slash(h_a)
+ rfg=(dot(v_b,k)*slash(k)*(-slash(r_aw))*slash(h)
+      -dot(v_b,kap)*slash(kap)*(-slash(r_aw))*slash(h))*PL
+ # The contracted single-W endpoints have the scalar current at the left;
+ # the oriented A-WTI fixes the relative signs and r_A^W/r_A^Y momenta.
+ single_w=slash(v_b)*(-slash(r_aw))*slash(h_a)*PL
+ single_y=slash(v_b)*slash(r_ay)*slash(h_a)*PL
  assert rfg!=sp.zeros(4) and single_w!=sp.zeros(4) and single_y!=sp.zeros(4)
  assert single_w!=single_y and rfg!=single_w and rfg!=single_y
  nz=lambda m:sum(sp.simplify(m[i,j])!=0 for i,j in product(range(4),repeat=2))
