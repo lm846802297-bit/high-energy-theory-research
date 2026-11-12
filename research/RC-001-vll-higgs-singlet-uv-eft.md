@@ -698,6 +698,62 @@ The additive \(B-A'\) vacuum-polarization pole and heavy threshold are separatel
 
 The runtime availability check is recorded in `validation/RC-001-dim6-diagram-tool-availability.txt`. SymPy is available, but no Mathematica/Wolfram executable, FeynCalc, FeynArts, pyfeyn, or QGRAF installation is available in this execution environment. Thus no independent diagram-level amplitude calculation is claimed. The GitHub Actions was attempted and retried on HEAD 29d73dac582dfd2883cdd7dea5b36b5da98d4bc9; both attempts returned runner_id=0 and no recorded steps. This is a runner/infrastructure failure, not evidence of a script assertion failure. By explicit project decision, CI is skipped and is not a closure gate for this iteration. No repository-CI pass is claimed; the scientific closure gates remain the uncomputed UV–EFT amplitudes and independent diagram-level validation.
 
+## 10.14 Benchmark A/B EFT5/O8 reconciliation with PR #69 (2026-11-09)
+
+The \(O_8=(H^\dagger H)^2(S^\dagger S)^2\) operator and its leading \(C_5^4\) soft-potential UV pole are **prior RC-001 results**, already recorded in §§262.5, 264.4, and 10.9. The independent Higgs--radial-scalar calculation in [axial-vector-review-response PR #69](https://github.com/lm846802297-bit/axial-vector-review-response/pull/69) reconstructs this subset at the original paper's Benchmark A/B points and adds a benchmark-level Plan-C scale-closure check. It is not a first discovery of \(O_8\).
+
+### 10.14.1 Convention lock
+
+The cross-repository comparison uses the active RC-001 convention
+\[
+\mathcal L_{\mathrm{EFT5}}\supset-C_{5,\ell}\mathcal O_{5,\ell}+\mathrm{h.c.},
+\qquad
+\mathcal O_{5,\ell}=(\bar L_\ell H)S_\ell\ell_R,
+\qquad
+C_{5,\ell}=-\frac{y_\ell\lambda_\ell}{M_{E_\ell}}.
+\]
+This sign follows from the Schur complement of the UV charged-lepton/VLL mass matrix. The corresponding signed mass parameter is \(m_\ell^{\mathrm{EFT5}}=C_{5,\ell}v_hv_s/2\); the positive physical mass entering the determinant is \(|m_\ell^{\mathrm{EFT5}}|\). A positive \(C_5\) is an equivalent alternative only if the operator term is written \(+C_5\mathcal O_5\). The \(O_8\) pole, running, and scalar-potential coefficients depend on \(|C_5|^4\), so the sign convention does not alter those numbers.
+
+### 10.14.2 Bubble/contact bookkeeping
+
+The exact-SVD light-light subtraction discussed in the matrix audit is a bubble-only intermediate quantity. The separate archived Plan-C-lite finite soft function is **not** bubble-only: the 2026-10-27 higgs_portal_planC_lite.py implementation (function pi_soft_planb) evaluates a bubble and a dimension-five contact tadpole and returns their sum. Its source blob SHA is df139e099853246501d2fbf9957dbba890014d14. The PR #69 scale-check implementation independently retains bubble + contact + hard.
+
+Consequently, the contact tadpole must not be added a second time to the Plan-C finite soft self-energy. The new PR #69 result completes the local UV-pole identification and the \(O_8\) running; it does not discover an absent finite contact term in the archived Plan-C code. The two statements—bubble-only exact-SVD subtraction and contact-complete Plan-C soft function—refer to different objects.
+
+### 10.14.3 Benchmark-level pole and scale check
+
+PR #69 independently reconstructs
+\[
+\delta c_8=-\frac{1}{16\pi^2}\sum_{\ell=\mu,\tau}|C_{5,\ell}|^4
+\]
+as the potential counterterm coefficient multiplying \(\Delta_{\mathrm{UV}}\), and reproduces the full leading-EFT5 mixed local Hessian \(F_{hs}=16F/(v_hv_s)\), split into \(12F/(v_hv_s)\) from the bubble and \(4F/(v_hv_s)\) from the contact.
+
+At \(s=m_h^2\), in the Plan-B sign convention \(\Pi_B=-\Pi_{\mathrm{RC}}\), the retained soft-plus-hard scale derivative obeys
+\[
+\frac{d\Pi_{hs,B}^{\mathrm{soft+hard}}}{d\ln\mu}
+=2\Pi_{hs,\mathrm{EFT5},B}^{\mathrm{loop,UV}},
+\qquad
+\beta_{c_8}^{\mathrm{loop}}
+=-\frac{2}{16\pi^2}\sum_\ell|C_{5,\ell}|^4.
+\]
+Here \(\Pi_{hs,\mathrm{EFT5},B}^{\mathrm{loop,UV}}\) denotes the Plan-B loop-pole coefficient, not its counterterm. The \(O_8\) running contributes the opposite scale derivative. The symmetric finite-difference derivative agrees with the analytic result to relative \(5.35\times10^{-8}\) (A) and \(3.37\times10^{-8}\) (B); the residual after including \(O_8\) running is \(1.73\times10^{-13}\) (A) and \(1.50\times10^{-13}\) (B).
+
+### 10.14.4 Finite heavy-VLL scalar-potential contribution
+
+The same PR independently expands the exact heavy singular value in the VLL Coleman--Weinberg determinant. In the specified background-field/\(\overline{\mathrm{MS}}\) scalar-potential basis at \(\mu=M_E\), it obtains
+\[
+c_8^{\mathrm{VLL,CW}}(M_E)
+=-\frac{7}{2(16\pi^2)}
+\sum_{\ell=\mu,\tau}|C_{5,\ell}|^4,
+\]
+with \(c_8^A=-3.80925598\times10^{-17}\,\mathrm{GeV}^{-4}\) and \(c_8^B=-9.76902113\times10^{-20}\,\mathrm{GeV}^{-4}\). The exact heavy-eigenvalue expression and the dimension-eight-truncated background expansion agree to relative \(2.96\times10^{-11}\) at both benchmarks.
+
+This establishes the finite heavy-VLL contribution in the **restricted scalar-potential subsector**. It does not complete the full dimension-eight hard/soft Wilson vector or the remaining higher-dimensional EFT soft/source sectors.
+
+The PR #69 validation workflow [run 42582889232](https://github.com/lm846802297-bit/axial-vector-review-response/actions/runs/42582889232) passes 18 tests, including the independent EFT5 contact/O8 and Plan-C scale checks. The exact calculation report and regenerated benchmark JSON are linked from the PR description.
+
+**Status update:** the prior RC-001 statement that the finite dimension-eight hard matching was wholly outstanding is refined for this one scalar-potential subsector: the heavy-VLL Coleman--Weinberg \(O_8\) contribution is now available as an independently validated subcalculation. The complete dimension-eight hard/soft matching, derivative-operator/EOM/source completion, remaining gauge/scalar sectors, independent diagram-level validation, and model-level Wilson-vector closure remain open.
+
 ## 11. Change history
 
 | Date | Revision | Change | Reason |
@@ -719,3 +775,4 @@ The runtime availability check is recorded in `validation/RC-001-dim6-diagram-to
 | 2026-10-23 | Conditional mixed input-parameter poles | Derived the first-order B-A' parameter-only pole sub-block using the signed off-diagonal propagator coefficient rho_BX=-chi+O(chi^2); added CL-014 and an exact charge-algebra check | Keep mixed kinetic renormalization separate from diagonal results and from the still-open mixed vertex/box matching |
 | 2026-10-23 | Heavy-line Yukawa-vertex hard sub-blocks | Evaluated the FF and FS vertex kernels with oriented signs for both conjugate (y) and (lambda) vertices; retained the (O(epsilon)	imes 1/epsilon) term in (dB_0); added CL-015 and exact symbolic checks | Preserve vertex-only poles and finite constants as a sub-block; do not claim complete Wilson coefficients before crossed boxes, EFT contacts, and counterterms are combined |
 | 2026-10-23 | Artifact bundle provenance | Added the immutable v66 (2026-10-19) working-tree snapshot with a 138-file inventory and normalized relocation metadata; preserved the v153 baseline and claim statuses | Give the earlier generation's supporting sources and outputs a repository-addressable location without implying that archive integrity establishes physical validation |
+| 2026-11-13 | PR #69 Benchmark A/B cross-reconciliation | Added the bounded §10.14 benchmark cross-check, Plan-C contact bookkeeping, and heavy-VLL CW scalar-potential result; updated CL-007 and the counterterm ledger | Preserve the independent cross-check while keeping the complete Wilson vector and model-level matching open |
