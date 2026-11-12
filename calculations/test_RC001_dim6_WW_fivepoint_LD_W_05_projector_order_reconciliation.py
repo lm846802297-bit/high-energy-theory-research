@@ -19,9 +19,10 @@ class TestLDW05ProjectorOrder(unittest.TestCase):
         self.assertEqual(checks, 128)
 
     def test_RFG_is_separate_from_single_W_endpoint(self):
-        rfg, endpoint, _, _ = MOD.verify_RFG_order_is_separate()
+        rfg, endpoint_w, endpoint_y, _, _ = MOD.verify_RFG_order_is_separate()
         self.assertEqual(rfg, 16)
-        self.assertEqual(endpoint, 16)
+        self.assertEqual(endpoint_w, 16)
+        self.assertEqual(endpoint_y, 16)
 
     def test_main_preserves_boundary(self):
         import contextlib
