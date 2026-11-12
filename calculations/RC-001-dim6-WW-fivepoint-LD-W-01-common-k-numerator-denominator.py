@@ -183,7 +183,7 @@ def verify_common_routing_and_denominators():
 def contract_kernel(kernel, chain):
     out = sp.zeros(4)
     for mu, nu in product(range(4), repeat=2):
-        out += GAMMA_DOWN[mu] * chain * GAMMA_DOWN[nu] * kernel[mu, nu]
+        out += GAMMA_DOWN[mu] * chain * GAMMA_DOWN[nu] * PL * kernel[mu, nu]
     return out
 
 
@@ -254,8 +254,13 @@ def rational_diagnostic():
     r_a = sub(k, p1)
     r_by = add(add(k, p4), q)
     h = sub(k, add(p1, p2))
-    chain = -slash(r_a) * slash(h) * slash(r_by) * PL
-    n01 = slash(k) * chain * slash(k) - slash(kap) * chain * slash(kap)
+    # The final chiral projector belongs after the right W current, not
+    # between X_B^Y and the last W-momentum slash.
+    chain = -slash(r_a) * slash(h) * slash(r_by)
+    n01 = (
+        slash(k) * chain * slash(k) * PL
+        - slash(kap) * chain * slash(kap) * PL
+    )
     me2 = sp.Integer(400)
     den = (
         dot(k, k), dot(kap, kap), dot(r_a, r_a),
