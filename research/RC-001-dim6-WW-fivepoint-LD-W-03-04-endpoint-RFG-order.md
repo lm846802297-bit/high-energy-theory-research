@@ -78,6 +78,6 @@ The numbers of nonzero entries in the \(4\times4\) endpoint matrices \((\mathcal
 - Test: \`calculations/test_RC001_dim6_WW_fivepoint_LD_W_03_04_endpoint_RFG_order.py\`
 - Output: \`validation/RC-001-dim6-WW-fivepoint-LD-W-03-04-endpoint-RFG-order.txt\`
 
-Local execution: Python 3.13.5, SymPy 1.14.0. The source entry point and the two standalone unit tests pass. This is a local symbolic/rational-point result; no GitHub Actions or independent diagram-package pass is claimed.
+Execution provenance: Python 3.13.5 and SymPy 1.14.0 were used in the current analysis runtime to independently transcribe and evaluate the six symbolic endpoint/conjugation identities, the rational-point matrices, denominator values, and spectator derivatives. The committed calculation entry point and standalone unittest file have not yet been executed from their repository paths. No GitHub Actions or independent diagram-package pass is claimed.
 
 This does not combine the WTI endpoints with scalar-line/seagull kernels, the three-W phase-weighted term, reducible LSZ factors, gauge-fixing/ghost contributions, or counterterms. No loop integration, UV–EFT subtraction, transverse form factor, or Wilson coefficient is claimed.
