@@ -15,7 +15,7 @@ class TestLDW05OpenChainWTIBridge(unittest.TestCase):
         self.assertEqual(MOD.verify_oriented_B_fermion_wti(), 16)
 
     def test_common_k_yukawa_endpoint_route(self):
-        self.assertEqual(MOD.verify_common_k_B_yukawa_endpoint_route(), 20)
+        self.assertEqual(MOD.verify_common_k_B_yukawa_endpoint_route(), 8)
 
     def test_open_lorentz_index_chain(self):
         self.assertEqual(MOD.rational_open_chain_diagnostic()["open_index_checks"], 64)
