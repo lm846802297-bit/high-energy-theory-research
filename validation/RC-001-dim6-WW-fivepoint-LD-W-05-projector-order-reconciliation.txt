@@ -1,0 +1,20 @@
+RC-001 B2c-IVn-h/05: LD-W-05 projector/order reconciliation
+
+PASS: gamma/projector intertwining identities (10/10).
+PASS: actual B-WTI endpoint projector reductions (128/128 matrix components).
+PASS: both endpoints reduce to the same right-chiral Dirac orientation,
+      with distinct r_B^W and r_B^Y momenta retained.
+PASS: graph-specific R_FG numerator is nonzero (16/16 entries).
+PASS: single-W endpoint numerator remains a distinct object (16/16 entries).
+RATIONAL CURRENT DOTS: V_A.k=-28, V_A.kappa=-31.
+
+RESULT: the P_L/P_R placement in the B-oriented WTI is reconciled exactly.
+
+BOUNDARY:
+  This is not an equality of the single-W WTI endpoints and R_FG.
+  Their cancellation must be established only in the complete longitudinal
+  matter + scalar + three-W + LSZ/ST sum.
+  No loop integration, UV-EFT subtraction, or Wilson coefficient is claimed.
+
+Local regression suite: 4/4 tests passed.
+Execution was local exact SymPy arithmetic; no GitHub Actions result is claimed.
