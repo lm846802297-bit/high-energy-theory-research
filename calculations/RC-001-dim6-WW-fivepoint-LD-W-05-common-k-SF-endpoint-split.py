@@ -224,7 +224,7 @@ def verify_weak_ordering():
 def contract_scalar_left_kernel(kernel, scalar_current, chain):
     out = sp.zeros(4)
     for mu, nu in product(range(4), repeat=2):
-        out += (ETA[mu]*scalar_current[mu]) * chain * GAMMA_DOWN[nu] * kernel[mu, nu]
+        out += (ETA[mu]*scalar_current[mu]) * chain * GAMMA_DOWN[nu] * PL * kernel[mu, nu]
     return out
 
 
@@ -255,10 +255,12 @@ def rational_diagnostic():
     assert all(v_a_3w[i]-v_a_line[i] == q[i] for i in range(4))
 
     # Actual three-W R_FG numerator with A scalar current V_A(k).
-    chain = slash(h)*slash(r_by)*PL
+    # Keep the stripped X_A slash(h) X_B^Y chain separate. The final P_L
+    # acts after the right W current, hence after slash(k) or slash(kappa).
+    chain = slash(h)*slash(r_by)
     n05 = (
-        dot(v_a_3w, k)*chain*slash(k)
-        - dot(v_a_3w, kap)*chain*slash(kap)
+        dot(v_a_3w, k)*chain*slash(k)*PL
+        - dot(v_a_3w, kap)*chain*slash(kap)*PL
     )
     rfg = (
         sp.Matrix(k)*sp.Matrix(k).T
@@ -275,7 +277,7 @@ def rational_diagnostic():
     # A-side scalar commutator q-contact, contracted into the B fermion chain.
     q_contact = (
         I*sp.Rational(1,2)*delta
-        * slash(h)*slash(r_by)*slash(q)/dot(kap,kap)
+        * slash(h)*slash(r_by)*slash(q)*PL/dot(kap,kap)
     )
     q_nonzero = sum(sp.simplify(q_contact[i,j]) != 0
                     for i,j in product(range(4),repeat=2))
