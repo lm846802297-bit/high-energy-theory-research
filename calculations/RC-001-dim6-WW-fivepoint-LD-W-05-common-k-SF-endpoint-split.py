@@ -228,6 +228,44 @@ def contract_scalar_left_kernel(kernel, scalar_current, chain):
     return out
 
 
+def verify_final_projector_order():
+    k = [sp.Integer(5), sp.Integer(1), sp.Integer(2), sp.Integer(0)]
+    q = [sp.Integer(0), sp.Integer(1), sp.Integer(1), sp.Integer(2)]
+    p1 = [sp.Integer(1), sp.Integer(1), sp.Integer(0), sp.Integer(1)]
+    p2 = [sp.Integer(0), sp.Integer(2), sp.Integer(1), sp.Integer(0)]
+    p3 = [sp.Integer(2), sp.Integer(0), sp.Integer(1), sp.Integer(1)]
+    p4 = [-p1[i] - p2[i] - p3[i] - q[i] for i in range(4)]
+    kap = add(k, q)
+    r_by = add(add(k, p4), q)
+    h = sub(k, add(p1, p2))
+    v_a = sub(scale(2, p2), k)
+
+    # Stripped matter chain; final P_L acts after the right W current.
+    chain = slash(h) * slash(r_by)
+    direct = sp.zeros(4)
+    for mu, nu in product(range(4), repeat=2):
+        coefficient = ETA[mu] * ETA[nu] * (
+            k[mu] * k[nu] - kap[mu] * kap[nu]
+        )
+        direct += v_a[mu] * chain * GAMMA[nu] * PL * coefficient
+
+    corrected = (
+        dot(v_a, k) * chain * slash(k) * PL
+        - dot(v_a, kap) * chain * slash(kap) * PL
+    )
+    old_order = (
+        dot(v_a, k) * (chain * PL) * slash(k)
+        - dot(v_a, kap) * (chain * PL) * slash(kap)
+    )
+    assert matrix_zero(direct - corrected)
+    old_difference = sum(
+        sp.simplify(direct[i, j] - old_order[i, j]) != 0
+        for i, j in product(range(4), repeat=2)
+    )
+    assert old_difference == 16
+    return old_difference
+
+
 def rational_diagnostic():
     k = [sp.Integer(5), sp.Integer(1), sp.Integer(2), sp.Integer(0)]
     q = [sp.Integer(0), sp.Integer(1), sp.Integer(1), sp.Integer(2)]
@@ -293,6 +331,7 @@ def main():
     route, den_checks = verify_B_side_fermion_route_to_three_w()
     weak_comm, weak_sg = verify_weak_ordering()
     den, delta, n_nonzero, q_nonzero = rational_diagnostic()
+    projector_diff = verify_final_projector_order()
 
     print("RC-001 B2c-IVn-f/03: LD-W-05 exact S-F endpoint split")
     print(f"PASS: B-side oriented fermion WTI ({wti}/16 Dirac components).")
@@ -303,6 +342,7 @@ def main():
     print(f"PASS: A-side scalar seagull anticommutator ({weak_sg}/48 weak components).")
     print(f"PASS: actual LD-W-05 R_FG current contraction at rational point ({n_nonzero}/16 nonzero entries).")
     print(f"PASS: re-based A-scalar commutator q-contact is explicit and nonzero ({q_nonzero}/16 matrix entries); delta={delta}.")
+    print(f"PASS: final P_L after right W current; old pre-slash(k) placement rejected ({projector_diff}/16 matrix entries).")
     print(f"RATIONAL DIAGNOSTIC: denominator factors={den}.")
     print("RESULT: the B-side fermion/three-W sub-block uses V_A(k); the A-side scalar-line/seagull")
     print("        kernel uses V_A(k+q)=V_A(k)-q and splits into V_A(k) plus explicit q contacts.")
