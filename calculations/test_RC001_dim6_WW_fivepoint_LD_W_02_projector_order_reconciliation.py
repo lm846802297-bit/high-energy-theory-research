@@ -14,7 +14,7 @@ class TestLDW02ProjectorOrder(unittest.TestCase):
   checks,*_=MOD.rational_endpoint_projector_order()
   self.assertEqual(checks,128)
  def test_RFG_is_separate(self):
-  self.assertEqual(MOD.verify_RFG_is_separate(),(16,16))
+  self.assertEqual(MOD.verify_RFG_is_separate(),(16,16,16))
  def test_rational_denominators_and_currents(self):
   _,den,vk,vkap,*_=MOD.rational_endpoint_projector_order()
   self.assertTrue(all(x!=0 for x in den))
