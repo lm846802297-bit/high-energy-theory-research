@@ -475,7 +475,7 @@ The source, six regression tests, and validation output are recorded in:
 - \`research/RC-001-dim6-WW-fivepoint-LD-W-05-open-chain-WTI-bridge.md\`
 - \`validation/RC-001-dim6-WW-fivepoint-LD-W-05-open-chain-WTI-bridge.txt\`
 
-The separate \(R_{\rm FG}\) projector/order comparison is deliberately left open; this closes the local B-side WTI sub-block only.
+IVn-h/05 now reconciles the LD-W-05 B-oriented WTI projector placement: both endpoints reduce to the same right-chiral open-chain order, while retaining distinct (r_B^W) and (r_B^Y) momenta. The single-W WTI endpoint numerators are explicitly kept distinct from the two-W (R_{\rm FG}) projection; this closes the projector-order audit, not their full cancellation.
 
 ### 4.12 LD-W-03/04 actual same-vertex open-chain WTIs (IVn-h/04)
 
@@ -509,6 +509,38 @@ The exact source, six regression tests, and validation output are recorded in:
 
 This closes the two same-vertex fermion-line WTI sub-blocks, not their four-attachment sum.
 
+### 4.13 LD-W-05 projector/order reconciliation (IVn-h/05)
+
+The B-oriented WTI gives
+\[
+S_B^Y\slashed qP_LS_B^W=P_LS_B^W-S_B^YP_R.
+\]
+After insertion into the actual ordered S-F chain, the two endpoint terms contain
+\[
+\slashed hP_L\slashed r_B^W\gamma_\nu P_L,\qquad
+-\slashed h\slashed r_B^YP_R\gamma_\nu P_L.
+\]
+Using \(P_L\slashed r=\slashed rP_R\) and \(P_R\gamma_\nu=\gamma_\nu P_L\), these become
+\[
+\slashed h\slashed r_B^W\gamma_\nu P_L,\qquad
+-\slashed h\slashed r_B^Y\gamma_\nu P_L.
+\]
+Thus the rightmost chiral orientation agrees, but the two fermion momenta remain distinct. The four open Lorentz components pass 128/128 matrix-entry comparisons.
+
+The two-W remainder has the separate order
+\[
+\mathcal N_{05}^{\rm FG}
+=(V_A\cdot k)\slashed h\slashed r_B^Y\slashed k
+-(V_A\cdot\kappa)\slashed h\slashed r_B^Y\slashed\kappa.
+\]
+It is not identified with either single-W endpoint numerator \(\slashed h\slashed r_B^{W,Y}\slashed V_A\). At the rational point, both WTI endpoint numerators and the \(R_{\rm FG}\) numerator are nonzero, and the two endpoint numerators are distinct. The complete longitudinal sum must determine how these pieces combine.
+
+The exact source and four regression tests are recorded in:
+- \`calculations/RC-001-dim6-WW-fivepoint-LD-W-05-projector-order-reconciliation.py\`
+- \`calculations/test_RC001_dim6_WW_fivepoint_LD_W_05_projector_order_reconciliation.py\`
+- \`research/RC-001-dim6-WW-fivepoint-LD-W-05-projector-order-reconciliation.md\`
+- \`validation/RC-001-dim6-WW-fivepoint-LD-W-05-projector-order-reconciliation.txt\`
+
 ## 5. Direct-attachment census
 
 The ordinary internal attachments remain
@@ -526,10 +558,10 @@ for LD-W-01…06. No new topology is introduced in IVl/IVm/IVn-a…IVn-e.
 
 ## 6. Remaining assembly gates
 
-1. **Reconcile the graph-specific \(P_L/P_R\) and Dirac-order conventions between the WTI endpoint chains and the \(R_{\rm FG}\) numerator for each cross-vertex pair.** Keep this separate from the algebraic WTI checks; do not infer projector equality from a momentum-routing identity.
-2. **Assemble the ordinary-matter longitudinal integrand for all six pairs.** The fermion-line WTIs for LD-W-01/02/03/04/05 now pass in their actual open-chain orientations. Add the six scalar-line kernels, all six seagulls, and all six three-W kernels with the exact weak tensors and phases. LD-W-06 has only the scalar-line/seagull attachments.
+1. **Reconcile graph-specific \(P_L/P_R\) and Dirac-order conventions for the remaining cross-vertex pairs.** LD-W-05 now has a projector-order audit; LD-W-01/02 and LD-W-06 still require the same explicit endpoint-versus-\(R_{\rm FG}\) comparison.
+2. **Assemble the ordinary-matter longitudinal integrand for all six pairs.** Insert all six fermion-line WTI insertions (four algebraic orientations), all six scalar-line kernels, all six seagulls, and all six three-W kernels using exact weak tensors and phases. LD-W-06 has only scalar-line/seagull attachments.
 3. **Perform every secondary loop-variable shift on the complete numerator and denominator.** Keep the two terms in each \(\delta_X=\Delta_Y-\Delta_W\) separate. For LD-W-06, the A and B negative-propagator terms shift \(h\) to \(h-q\) and \(h+q\), respectively.
-4. **Combine the now-closed local Yukawa-singlet factors with the actual ordered 1PI terms.** The local charge sums pass for all six pairs, but this alone does not establish cancellation of the Lorentz- and weak-index-weighted integrand.
+4. **Combine the local Yukawa-singlet factors with the actual ordered 1PI terms.** Local charge sums pass for all six pairs, but this alone does not establish cancellation of the Lorentz- and weak-index-weighted integrand.
 5. **Write the four reducible external-leg/LSZ factors and their lower-point amplitudes explicitly.** Keep them outside the 1PI five-point vertex until the full Ward identity is assembled.
 6. **Derive the BRST/ghost Slavnov–Taylor completion** and test the longitudinal inverse-kernel target \(D(\kappa)[L(\kappa)-L(k)]D(k)=-R_{\rm FG}\) in the assembled matter-current chains.
 7. **Add counterterms:** \(W\)-field, gauge-coupling, matter-field, Yukawa, heavy-mass, and operator counterterms. Only after the complete off-shell identity closes should the common-regulator UV–EFT subtraction and comparison with the EFT one-\(W\) vertex be performed.
