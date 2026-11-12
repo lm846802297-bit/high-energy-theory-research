@@ -5,16 +5,16 @@ PASS: actual B-WTI endpoint projector reductions (128/128 matrix components).
 PASS: both endpoints reduce to the same right-chiral Dirac orientation,
       with distinct r_B^W and r_B^Y momenta retained.
 PASS: graph-specific R_FG numerator is nonzero (16/16 entries).
-PASS: single-W endpoint numerator remains a distinct object (16/16 entries).
+PASS: signed single-W endpoint numerators are distinct from R_FG
+      (16/16 for the W endpoint; 16/16 for the Yukawa endpoint).
 RATIONAL CURRENT DOTS: V_A.k=-28, V_A.kappa=-31.
 
-RESULT: the P_L/P_R placement in the B-oriented WTI is reconciled exactly.
+Local exact SymPy execution of the calculation source: PASS.
+Standalone unittest module: pending execution at the time of this record.
+GitHub Actions: no pass claimed.
 
 BOUNDARY:
   This is not an equality of the single-W WTI endpoints and R_FG.
   Their cancellation must be established only in the complete longitudinal
   matter + scalar + three-W + LSZ/ST sum.
   No loop integration, UV-EFT subtraction, or Wilson coefficient is claimed.
-
-Independent local SymPy verification: all four assertion groups passed (10 chiral identities, 128 endpoint matrix entries, distinct endpoint numerators, and the rational current contractions).
-The standalone unittest module is included but was not run as a separate process; no GitHub Actions result is claimed.
