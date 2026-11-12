@@ -63,7 +63,7 @@ r_B^Y=k+p_4+q,\quad
 h=k-p_1-p_2,\quad
 V_A=2p_2-k,
 \]
-with internal W momentum \(k\). The five vector maps are checked component by component (20/20).
+with internal W momentum \(k\). The the unshifted B-line relation and the equality of the two expressions for the heavy channel pass 8/8 vector components.
 
 ## 4. Exact rational diagnostic
 
