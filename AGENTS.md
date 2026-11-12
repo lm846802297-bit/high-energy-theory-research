@@ -75,7 +75,7 @@ Do not call a calculation independent if it reuses the same trace, integral redu
 
 Follow the mandatory [calculation-result archival policy](docs/CALCULATION_RESULT_ARCHIVAL_POLICY.md):
 
-- Commit essential, directly usable native result files; do not create a new ZIP/TAR archive as a substitute for extracted outputs.
+- **Extract-before-upload is mandatory:** when results arrive as ZIP/TAR (including ChatGPT handoff bundles, local-runner packages, GitHub Actions artifacts, or collaborator deliveries), extract first and commit the required native files individually. A delivery archive is transport only, not a substitute for its extracted contents. Follow [§2 of the calculation-result archival policy](docs/CALCULATION_RESULT_ARCHIVAL_POLICY.md).
 - Record exact source commit, input provenance and hashes, commands, software versions, physical/numerical settings, outputs, and SHA-256 checksums.
 - Use Git LFS or durable versioned storage with a committed manifest for files too large for ordinary Git.
 - Retrieve committed files from GitHub after pushing and verify paths, sizes, counts, and hashes before claiming archival completion.
@@ -88,3 +88,16 @@ Use a focused branch and PR for a coherent change. Inspect the actual diff and r
 At the end of a task, report the research question and exact scope; baseline and resulting commit/PR; files and outputs created/changed; derivations and numerical checks actually performed; independent validation and convergence evidence; incomplete or conditional items; and exact archive status (local only, committed to PR branch, or merged and verified on main).
 
 Never describe a task as scientifically complete solely because its code, documentation, CI, or archival step is complete.
+
+## CI is optional; research work must not wait for CI
+
+Continuous integration (CI) is optional supporting infrastructure. It is not a prerequisite, acceptance gate, or merge condition for research work.
+
+- Do not require a CI run to start, continue, or complete a calculation; perform numerical or scientific validation; prepare or archive results; commit or push research files; open or update a pull request; mark a pull request ready for review; or merge a pull request.
+- If the calculation can be run directly on an available local machine or an approved compute runner, proceed. Do not pause research solely because GitHub Actions is queued, unavailable, disabled, blocked by account/billing limits, or failing for infrastructure reasons.
+- GitHub Actions may still be used when useful as an optional compute, dispatch, or artifact-handoff mechanism. A workflow that actually executes a research calculation is an execution run: record its exact source commit, inputs, settings, environment, logs, and outputs. Its use does not make a separate CI status check mandatory.
+- This policy does not waive scientific or numerical validation. Perform the checks appropriate to the claim—such as analytic identities, dimensional and unit checks, limiting cases, independent implementations, convergence, uncertainty estimates, provenance, and output-integrity checks—locally or on an approved runner, and record exactly what was performed. CI neither substitutes for these checks nor adds a mandatory gate.
+- If CI is run, report its exact commit SHA and actual result. If it is not run, queued, blocked, cancelled, or failed, record that status truthfully and distinguish infrastructure failure from a scientific or numerical failure. Never describe an unrun check as passed.
+- Base review and merge decisions on the actual diff, reproducibility, scientific evidence, scope, and the checks that are genuinely relevant to the change—not on whether a CI badge is green. Do not configure CI status checks as required branch-protection gates under this repository policy. Do not change repository protection settings without explicit authorization.
+- CI becomes mandatory for a particular task only when the author explicitly requests it for that task.
+
