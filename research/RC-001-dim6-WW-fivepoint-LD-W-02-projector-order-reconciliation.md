@@ -27,16 +27,18 @@ The scalar spectator and the common-\(k\) current \(V_B(\kappa)\) are not absorb
 
 ## 2. Keep the two-W remainder distinct
 
-The graph-specific two-W projection has the order
+The graph-specific two-W projection follows the explicit cross-pair current ordering:
 \[
 \mathcal N_{02}^{\rm FG}
-=(V_B(\kappa)\cdot k)\slashed r_A^W\slashed h\slashed k
--(V_B(\kappa)\cdot\kappa)\slashed r_A^W\slashed h\slashed\kappa.
+=\left[(V_B(\kappa)\cdot k)\slashed k(-\slashed r_A^W)\slashed h
+-(V_B(\kappa)\cdot\kappa)\slashed\kappa(-\slashed r_A^W)\slashed h\right]P_L.
 \]
-The single-W WTI endpoints instead contain
+The contracted single-W WTI endpoints have a different ordered structure and opposite endpoint signs:
 \[
-\slashed V_B(\kappa)\slashed r_A^{W,Y}\slashed h_A P_L.
+\mathcal E_W=-\slashed V_B(\kappa)\slashed r_A^W\slashed h_A P_L,\qquad
+\mathcal E_Y=+\slashed V_B(\kappa)\slashed r_A^Y\slashed h_A P_L,
 \]
+with their respective fermion propagator denominators \((r_A^W)^2\) and \((r_A^Y)^2\).
 These objects have different W-kernel and Dirac structures. The audit verifies that both are nonzero at the rational point, but does not identify them or infer a cancellation before the full longitudinal assembly.
 
 At the common rational point,
