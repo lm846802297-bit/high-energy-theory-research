@@ -23,6 +23,9 @@ class TestLDW05CommonKEndpointSplit(unittest.TestCase):
     def test_physical_A_weak_commutator_and_seagull(self):
         self.assertEqual(MOD.verify_weak_ordering(), (48, 48))
 
+    def test_final_projector_is_after_right_W_current(self):
+        self.assertEqual(MOD.verify_final_projector_order(), 16)
+
     def test_rational_RFG_and_scalar_q_contact(self):
         den, delta, n_nonzero, q_nonzero = MOD.rational_diagnostic()
         self.assertEqual(den, (20, 8, 23, 17, -4, -390))
