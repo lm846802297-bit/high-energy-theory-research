@@ -51,7 +51,7 @@ def matrix_zero(m):
 
 def contract_FG(m):
     return sum((
-        ETA[mu] * GAMMA[mu] * m * GAMMA[mu]
+        ETA[mu] * GAMMA[mu] * m * GAMMA[mu] * PL
         for mu in range(4)
     ), sp.zeros(4))
 
@@ -178,18 +178,20 @@ def verify_actual_RFG_remainder():
     r_a = sub(k, p1)
     r_b_y = add(add(k, p4), q)
     h = sub(k, add(p1, p2))
-    chain = -slash(r_a) * slash(h) * slash(r_b_y) * PL
+    # The stripped loop chain excludes the final P_L. It is restored after
+    # the right internal-W current, hence after the last slash(k).
+    chain = -slash(r_a) * slash(h) * slash(r_b_y)
 
     n_01 = (
-        slash(k) * chain * slash(k)
-        - slash(kap) * chain * slash(kap)
+        slash(k) * chain * slash(k) * PL
+        - slash(kap) * chain * slash(kap) * PL
     )
     direct = sp.zeros(4)
     for mu, nu in product(range(4), repeat=2):
         coefficient = ETA[mu] * ETA[nu] * (
             k[mu] * k[nu] - kap[mu] * kap[nu]
         )
-        direct += GAMMA[mu] * chain * GAMMA[nu] * coefficient
+        direct += GAMMA[mu] * chain * GAMMA[nu] * PL * coefficient
     assert matrix_zero(direct - n_01)
     nonzero = sum(
         sp.simplify(n_01[i, j]) != 0
