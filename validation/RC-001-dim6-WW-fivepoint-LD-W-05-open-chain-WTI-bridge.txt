@@ -4,7 +4,7 @@ PASS: oriented B-side fermion WTI (16/16 Dirac components).
 PASS: actual open Lorentz-index chain (64/64 matrix components).
 PASS: Feynman-gauge contraction with D(k) and V_A(k) (16/16 matrix components).
 PASS: explicit two-endpoint RHS split (exact matrix equality).
-PASS: B-side common-k Yukawa endpoint route (20/20 vector components).
+PASS: B-side unshifted endpoint/heavy-channel momentum identities (8/8 vector components).
 
 RATIONAL DENOMINATORS:
   (k^2,kappa^2,r_AY^2,r_AW^2,r_BW^2,r_BY^2,h^2-M_E^2)
