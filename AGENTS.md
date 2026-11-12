@@ -75,7 +75,7 @@ Do not call a calculation independent if it reuses the same trace, integral redu
 
 Follow the mandatory [calculation-result archival policy](docs/CALCULATION_RESULT_ARCHIVAL_POLICY.md):
 
-- Commit essential, directly usable native result files; do not create a new ZIP/TAR archive as a substitute for extracted outputs.
+- **Extract-before-upload is mandatory:** when results arrive as ZIP/TAR (including ChatGPT handoff bundles, local-runner packages, GitHub Actions artifacts, or collaborator deliveries), extract first and commit the required native files individually. A delivery archive is transport only, not a substitute for its extracted contents. Follow [§2 of the calculation-result archival policy](docs/CALCULATION_RESULT_ARCHIVAL_POLICY.md).
 - Record exact source commit, input provenance and hashes, commands, software versions, physical/numerical settings, outputs, and SHA-256 checksums.
 - Use Git LFS or durable versioned storage with a committed manifest for files too large for ordinary Git.
 - Retrieve committed files from GitHub after pushing and verify paths, sizes, counts, and hashes before claiming archival completion.
