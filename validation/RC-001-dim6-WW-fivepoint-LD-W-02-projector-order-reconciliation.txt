@@ -1,0 +1,17 @@
+RC-001 B2c-IVn-h/06: LD-W-02 projector/order reconciliation
+
+PASS: gamma/projector intertwining (10/10 identities).
+PASS: actual A-WTI endpoint reductions (128/128 matrix entries).
+PASS: the two endpoints share rightmost P_L and ordered gamma_mu slash(r_A) slash(h_A),
+      while retaining distinct r_A^W and r_A^Y momenta.
+PASS: R_FG and single-W endpoint numerators remain distinct (16/16 and 16/16 nonzero entries).
+RATIONAL V_B DOTS: V_B(kappa).k=-33, V_B(kappa).kappa=-18.
+RATIONAL DENOMINATORS: (20,8,11,5,38,20,-390,-402).
+
+BOUNDARY:
+  Projector placement is reconciled; no equality of single-W endpoints
+  and the two-W R_FG projection is asserted.
+  No complete matter/scalar/three-W/LSZ/ST sum or Wilson coefficient is claimed.
+
+Independent local SymPy verification: the chiral, endpoint, and rational-point assertion groups were checked directly.
+The standalone unittest module is included but was not run as a separate process; no GitHub Actions result is claimed.
