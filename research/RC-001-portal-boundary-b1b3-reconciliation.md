@@ -4,7 +4,7 @@
 >
 > **Audit date:** 2026-10-27
 >
-> **Status:** The portal matching relation and a working scalar-suppressed reference boundary are explicit. The tree-level C5 coefficient has a separate derivation and exact symbolic check. All 576 real-scalar candidate-kernel integrals are evaluated conditionally, and their algebraic B1/B3 Wick signs are resolved under the declared trace convention. A separate complex-external projection now selects one oriented cycle per flavor in the unbroken zero-mixing limit: muon s channel and tau u channel. The source-aligned one-cycle hard-region audit reproduces the §248 polynomial and diagrammatic sign product. The full allowed-path sum beyond this limit, complete EFT soft/counterterm subtraction, and model-level Wilson-vector closure remain **unresolved**.
+> **Status:** The portal matching relation and a working scalar-suppressed reference boundary are explicit. The tree-level C5 coefficient has a separate derivation and exact symbolic check. All 576 real-scalar candidate-kernel integrals are evaluated conditionally, and their algebraic B1/B3 Wick signs are resolved under the declared trace convention. A separate complex-external projection now selects one oriented cycle per flavor in the unbroken zero-mixing limit: muon s channel and tau u channel. The source-aligned one-cycle hard-region audit reproduces the §248 polynomial and diagrammatic sign product. The fixed-complex 16-path mass-basis sum is now proven equal to one interaction-basis propagator trace at integrand level, and its unbroken limit reduces to the source-aligned path 0101. VEV-suppressed finite-mixing hard/soft corrections, complete EFT soft/counterterm closure beyond the fixed sector, and model-level Wilson-vector closure remain **unresolved**.
 
 ## 1. Provenance and version relationship
 
@@ -929,3 +929,54 @@ The result is:
 - All 30 other flavor/path rows have total effective mixing degree at least two after enforcing \(M_{11}=0\); the minimum non-leading degree is two.
 
 **Interpretation:** this supports the leading unbroken dimension-six matching being controlled by the source-aligned \((0,1,0,1)\) path, whose \(d=4-2\epsilon\) hard-region and EFT-soft subtraction are already recorded in §§9.4–9.6. The remaining paths are numerator-suppressed by \(s_L^2\), \(s_R^2\), or higher powers and belong to the VEV/mixing-suppressed correction problem. This is not by itself a complete regions proof: the hard-region expansion must verify that no omitted power-enhanced infrared contribution changes the counting, and the finite-mass \(d=4\) simplex sum must not be substituted for that expansion.
+
+
+### 9.14 Exact finite-mixing propagator covariance and reduction to the source box
+
+The new [full-propagator covariance script](../calculations/RC-001-full-propagator-basis-covariance.py) passes **14 exact symbolic checks**; its byte-aligned execution record is in [validation/RC-001-full-propagator-basis-covariance.txt](../validation/RC-001-full-propagator-basis-covariance.txt).
+
+For the fixed complex orientation, the chiral trace has the flavor structure
+\[
+\operatorname{tr}_{f}\!\left[
+Y_h P_1Y_sD_2Y_s^T P_3Y_h^T D_4
+\right],
+\]
+where
+\[
+D_i=\operatorname{diag}\!\left(
+\frac1{k_i^2-m_1^2},\frac1{k_i^2-m_2^2}
+\right),\qquad
+P_i=\operatorname{diag}\!\left(
+\frac{m_1}{k_i^2-m_1^2},\frac{m_2}{k_i^2-m_2^2}
+\right).
+\]
+The 16 explicit internal mass-eigenstate paths are exactly the component expansion of this one matrix trace. With
+\[
+Y_h=U_L^T Y_h^{(I)}U_R D,\qquad
+Y_s=U_L^T Y_s^{(I)}U_R D,\qquad D=\operatorname{diag}(-1,1),
+\]
+and the corresponding chiral propagator blocks transformed with \(U_L,U_R D\), the rotation matrices telescope around the closed trace. The script verifies the exact identity
+\[
+\boxed{\mathcal A_{\rm mass\ basis}^{\rm integrand}
+=\mathcal A_{\rm interaction\ basis}^{\rm integrand}}
+\]
+for generic finite mixing, before performing the loop integral.
+
+This gives a stronger statement than trace covariance alone: the denominators and mass numerators are included, so the 16 finite-mixing paths are **not 16 independent diagrams or 16 independent Wilson coefficients**. They are the mass-eigenstate decomposition of one ordered loop.
+
+In the unbroken limit \(s_L=s_R=m_1=0\), only path
+\[
+(0,1,0,1)=(\text{light},\text{heavy},\text{light},\text{heavy})
+\]
+survives. Its flavor factor is
+\[
+\frac{y^2\lambda^2M_E^2}
+{(k_1^2-M_E^2)\,k_2^2\,(k_3^2-M_E^2)\,k_4^2},
+\]
+and the fixed chiral Dirac trace supplies \(2k_2\cdot k_4\). This reproduces the source-aligned two-heavy/two-light box integrand used in §9.4. The \(\tau\) orientation has the same matrix structure with the external \(S\leftrightarrow S^\dagger\) routing, hence the \(u\)-channel rather than the \(\mu\) \(s\)-channel.
+
+The normalization is also checked: four real-field vertices each carry \(1/\sqrt2\), so the real-loop coupling product has a factor \(1/4\). This is exactly the \(1/4\) weight of one charge-neutral complex external assignment. Summing the four allowed assignments gives unit projection weight; **no additional factor \(1/4\) is to be applied**.
+
+**What this closes:** the exact finite-mixing mass-basis path sum is basis-covariant at integrand level, and the leading unbroken term reduces to the source-aligned box with the already checked global sign and hard/soft subtraction.
+
+**What remains open:** this does not calculate the VEV-suppressed hard/soft corrections from the other paths. Their finite-mass \(d=4\) simplex integrals cannot be promoted to Wilson coefficients by taking \(m_1\to0\); each region-sensitive contribution must be separated from the corresponding EFT soft matrix element. It also does not close other operator sectors, the full counterterm vector, or the complete common-basis/EOM projection. PR #9 remains Draft/Open.
