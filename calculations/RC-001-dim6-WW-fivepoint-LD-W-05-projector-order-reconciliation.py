@@ -101,21 +101,20 @@ def verify_RFG_order_is_separate():
         dot(v_a, k) * slash(h) * slash(r_by) * slash(k)
         - dot(v_a, kap) * slash(h) * slash(r_by) * slash(kap)
     )
-    # The WTI endpoints instead have a single-W current contraction
-    # slash(h) slash(r_B^{W,Y}) slash(V_A), with their own scalar
-    # denominators. These are intentionally not equated to R_FG.
-    endpoint_w = slash(h) * slash(r_bw) * slash(v_a)
-    endpoint_y = slash(h) * slash(r_by) * slash(v_a)
+    # Contracting the single W propagator with V_A places slash(V_A)
+    # at the right end of each ordered B-fermion endpoint.
+    endpoint_w = slash(h) * slash(r_bw) * slash(v_a) * PL
+    endpoint_y = -slash(h) * slash(r_by) * slash(v_a) * PL
+    rfg = rfg * PL  # retain the common rightmost chiral projector
     assert rfg != sp.zeros(4)
     assert endpoint_w != sp.zeros(4)
     assert endpoint_y != sp.zeros(4)
     assert endpoint_w != endpoint_y
     assert rfg != endpoint_w and rfg != endpoint_y
-    return (
-        sum(sp.simplify(rfg[i,j]) != 0 for i,j in product(range(4),repeat=2)),
-        sum(sp.simplify(endpoint_w[i,j]) != 0 for i,j in product(range(4),repeat=2)),
-        dot(v_a,k), dot(v_a,kap),
+    nz = lambda m: sum(
+        sp.simplify(m[i,j]) != 0 for i,j in product(range(4), repeat=2)
     )
+    return nz(rfg), nz(endpoint_w), nz(endpoint_y), dot(v_a,k), dot(v_a,kap)
 
 
 def main():
