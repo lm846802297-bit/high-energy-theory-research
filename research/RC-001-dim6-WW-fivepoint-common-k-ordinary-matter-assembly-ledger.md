@@ -585,6 +585,31 @@ and all seven local denominator factors are nonzero. The local combined regressi
 - \`research/RC-001-dim6-WW-fivepoint-LD-W-02-projector-order-reconciliation.md\`
 - \`validation/RC-001-dim6-WW-fivepoint-LD-W-02-projector-order-reconciliation.txt\`
 
+
+### 4.15 LD-W-03/04 same-vertex endpoint/\(R_{\rm FG}\) order (IVn-h/08)
+
+The two same-vertex fermion-line WTI endpoint pairs have now been reduced after the actual internal-W Lorentz contraction with the scalar current \(V_S=2p_S-\kappa\). For LD-W-03,
+\[
+\mathcal E_{03,W}=\slashed V_S\slashed r_F^W P_R,\qquad
+\mathcal E_{03,Y}=-\slashed V_S\slashed r_F^Y P_R.
+\]
+For the Dirac-Hermitian-conjugate LD-W-04 orientation,
+\[
+\mathcal E_{04,W}=\slashed r_F^W\slashed V_S P_L,\qquad
+\mathcal E_{04,Y}=-\slashed r_F^Y\slashed V_S P_L.
+\]
+The two pairs obey the expected Dirac-bar relations. The projector placement and reversed gamma order are retained; the two orientations are not collapsed into one chain. The pair-specific two-W remainders remain
+\[
+\mathcal N_{03}^{\rm FG}=(V_S\!\cdot k)\slashed k\slashed r_F^Y
+-(V_S\!\cdot\kappa)\slashed\kappa\slashed r_F^Y,
+\]
+\[
+\mathcal N_{04}^{\rm FG}=(V_S\!\cdot k)\slashed r_F^Y\slashed k
+-(V_S\!\cdot\kappa)\slashed r_F^Y\slashed\kappa.
+\]
+At the recorded nonsingular rational point, all endpoint matrices and \(R_{\rm FG}\) numerators are nonzero and pairwise distinct; the \(h_E\) spectator is \(k\)-independent. This is an endpoint-order reconciliation, not a cancellation.
+
+Execution boundary: the six identities, rational-point entries, denominator values, and spectator derivatives were independently reconstructed and evaluated in the current Python 3.13.5/SymPy 1.14.0 analysis runtime. The committed source entry point and unittest have not yet been executed from repository paths; no CI or independent diagram-package pass is claimed. See the LD-W-03/04 endpoint-order research note and companion source/validation files.
 ## 5. Direct-attachment census
 
 The ordinary internal attachments remain
@@ -603,7 +628,7 @@ for LD-W-01…06. No new topology is introduced in IVl/IVm/IVn-a…IVn-e.
 ## 6. Remaining assembly gates
 
 1. **LD-W-01 projector/order reconciliation.** Reduce both oriented F-F WTI endpoints in the actual ordered chains and compare their chiral placement with the pair-specific two-W \(R_{\rm FG}\) numerator.
-2. **LD-W-03/04 same-vertex order reconciliation.** Preserve their distinct Dirac-Hermitian orientations and \(h_E\) spectators; compare the contracted WTI endpoints with each graph's own \(R_{\rm FG}\) chain.
+2. **LD-W-03/04 same-vertex order reconciliation — completed as an endpoint-order sub-block (IVn-h/08).** Both oriented WTI endpoint pairs are reduced with their actual scalar-current contraction and compared with their own (R_{\rm FG}) chains; the Dirac-bar relations and (h_E) spectator are checked. No cancellation is inferred.
 3. **LD-W-06 scalar endpoint completion.** No fermion-line WTI exists for S-S. Assemble its two scalar-line kernels and two seagulls with the exact shifted heavy denominators and compare to the two-W remainder.
 4. **Assemble the ordinary-matter longitudinal integrand for all six pairs.** Insert the fermion-line WTIs, scalar-line kernels, seagulls, and three-W kernels using exact weak tensors and phases.
 5. **Perform every secondary loop-variable shift on the complete numerator and denominator.** Keep the two terms in each \(\delta_X=\Delta_Y-\Delta_W\) separate. For LD-W-06, the A and B negative-propagator terms shift \(h\) to \(h-q\) and \(h+q\), respectively.
