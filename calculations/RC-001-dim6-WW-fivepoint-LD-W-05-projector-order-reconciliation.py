@@ -89,7 +89,8 @@ def verify_RFG_order_is_separate():
     p2 = [sp.Integer(0), sp.Integer(2), sp.Integer(1), sp.Integer(0)]
     p3 = [sp.Integer(2), sp.Integer(0), sp.Integer(1), sp.Integer(1)]
     p4 = [-p1[i] - p2[i] - p3[i] - q[i] for i in range(4)]
-    r_by = [k[i] + p4[i] + q[i] for i in range(4)]
+    r_bw = [k[i] + p4[i] for i in range(4)]
+    r_by = [r_bw[i] + q[i] for i in range(4)]
     h = [k[i] - p1[i] - p2[i] for i in range(4)]
     v_a = [2*p2[i] - k[i] for i in range(4)]
 
@@ -103,12 +104,13 @@ def verify_RFG_order_is_separate():
     # The WTI endpoints instead have a single-W current contraction
     # slash(h) slash(r_B^{W,Y}) slash(V_A), with their own scalar
     # denominators. These are intentionally not equated to R_FG.
-    endpoint_w = slash(h) * slash(r_by) * slash(v_a)
+    endpoint_w = slash(h) * slash(r_bw) * slash(v_a)
     endpoint_y = slash(h) * slash(r_by) * slash(v_a)
     assert rfg != sp.zeros(4)
     assert endpoint_w != sp.zeros(4)
     assert endpoint_y != sp.zeros(4)
-    assert rfg != endpoint_w
+    assert endpoint_w != endpoint_y
+    assert rfg != endpoint_w and rfg != endpoint_y
     return (
         sum(sp.simplify(rfg[i,j]) != 0 for i,j in product(range(4),repeat=2)),
         sum(sp.simplify(endpoint_w[i,j]) != 0 for i,j in product(range(4),repeat=2)),
