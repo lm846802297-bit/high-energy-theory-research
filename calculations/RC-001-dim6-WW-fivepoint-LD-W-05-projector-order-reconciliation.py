@@ -124,15 +124,15 @@ def main():
     rfg = verify_RFG_order_is_separate()
     assert chiral == 10
     assert endpoint[0] == 128
-    assert rfg[0] == rfg[1] == 16
+    assert rfg[0] == rfg[1] == rfg[2] == 16
     print("RC-001 B2c-IVn-h/05: LD-W-05 projector/order reconciliation")
     print(f"PASS: gamma/projector intertwining identities ({chiral}/10).")
     print(f"PASS: actual B-WTI endpoint projector reductions ({endpoint[0]}/128 matrix components).")
     print("PASS: both endpoints reduce to the same right-chiral Dirac orientation,")
     print("      with distinct r_B^W and r_B^Y momenta retained.")
     print(f"PASS: graph-specific R_FG numerator is nonzero ({rfg[0]}/16 entries).")
-    print(f"PASS: single-W endpoint numerator remains a distinct object ({rfg[1]}/16 entries).")
-    print(f"RATIONAL CURRENT DOTS: V_A.k={rfg[2]}, V_A.kappa={rfg[3]}.")
+    print(f"PASS: both signed single-W endpoint numerators are distinct from R_FG ({rfg[1]}/16, {rfg[2]}/16 entries).")
+    print(f"RATIONAL CURRENT DOTS: V_A.k={rfg[3]}, V_A.kappa={rfg[4]}.")
     print("RESULT: the P_L/P_R placement in the B-oriented WTI is reconciled exactly.")
     print("BOUNDARY: this is not an equality of the single-W WTI endpoints and R_FG.")
     print("          Their cancellation must be established only in the complete longitudinal")
