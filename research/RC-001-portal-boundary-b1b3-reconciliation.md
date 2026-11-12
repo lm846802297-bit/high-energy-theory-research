@@ -980,3 +980,46 @@ The normalization is also checked: four real-field vertices each carry \(1/\sqrt
 **What this closes:** the exact finite-mixing mass-basis path sum is basis-covariant at integrand level, and the leading unbroken term reduces to the source-aligned box with the already checked global sign and hard/soft subtraction.
 
 **What remains open:** this does not calculate the VEV-suppressed hard/soft corrections from the other paths. Their finite-mass \(d=4\) simplex integrals cannot be promoted to Wilson coefficients by taking \(m_1\to0\); each region-sensitive contribution must be separated from the corresponding EFT soft matrix element. It also does not close other operator sectors, the full counterterm vector, or the complete common-basis/EOM projection. PR #9 remains Draft/Open.
+
+
+### 9.15 EFT interpretation of the power-soft finite-mixing paths — 2026-11-12
+
+The boundary analysis in `RC-001-fixed-complex-soft-region-boundary-audit.py` identifies three power-soft paths, (0000,0001,0100), in addition to the leading logarithmic (0101) path. The new [power-soft EFT topology map](../calculations/RC-001-fixed-complex-power-soft-EFT-topology-map.py) and [validation record](../validation/RC-001-fixed-complex-power-soft-EFT-topology-map.txt) pass **10 exact symbolic coupling/factorization identities** by local SymPy expression replay. The checked-in script was not run as a standalone process; the validation record states this explicitly.
+
+The exact triangular relation and the positive-light-mass Eq. (13) vertices give
+[
+m_1=M_Erac{s_Ls_R}{c_Lc_R},qquad
+y_h^{m light}=yc_Ls_R,qquad
+lambda_s^{m light}=lambda s_Lc_R,
+]
+and
+[
+C_{5,m eff}=rac{ylambda c_L^2c_R^2}{M_E},
+qquad
+oxed{y_h^{m light}lambda_s^{m light}=C_{5,m eff}m_1.}
+]
+This identity explains how mixing-suppressed light Yukawa vertices can coexist with nonvanishing soft-region contributions: the simplex boundary supplies inverse powers of (m_1).
+
+The three power-soft coefficients from the boundary audit factorize as
+[
+mathcal S_{0000}
+=-rac{|C_{5,m eff}|^2}{120}(17s+7t+u),
+]
+[
+mathcal S_{0001}
+=+rac{5|C_{5,m eff}|^2}{12}s,qquad
+mathcal S_{0100}
+=+rac{|C_{5,m eff}|^2}{12}(6s+t+u),
+]
+so
+[
+oxed{mathcal S_{m power}
+=rac{|C_{5,m eff}|^2}{40}(31s+t+3u).}
+]
+
+Their EFT topology interpretation is:
+- (0000): an all-light box with four induced light-light Yukawa vertices;
+- (0001) and (0100): one-heavy/three-light soft triangles, represented in the EFT by one (C_5) insertion and two induced light-light Yukawa vertices;
+- (0101): the two-heavy/two-light logarithmic region, matched to the (C_5C_5^ast) soft bubble already treated in the source-aligned hard/soft calculation.
+
+**Crucial distinction:** the power-soft polynomial is part of the broken-phase finite-mixing amplitude. It is not an additional unbroken dimension-six Wilson coefficient. It must be reproduced by the corresponding EFT all-light box and one-heavy triangle graphs, with their (d=4-2epsilon) integrals and counterterms, before the UV soft contribution is subtracted. No empirical subtraction of (mathcal S_{m power}) is allowed. This is the next open calculation; no cancellation is claimed yet.
