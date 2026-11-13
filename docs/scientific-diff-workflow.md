@@ -222,6 +222,10 @@ This pattern also applies to UV–EFT matching, finite loop terms, neutrino mass
 
 A pull request can organize review, but code review and CI are only part of scientific validation. A green CI status must never automatically mark a physical claim as confirmed.
 
+### Pull-request merge strategy
+
+For substantive research and repository changes, use GitHub **Create a merge commit** by default. Preserve meaningful topic-branch commits and the explicit PR integration boundary so that changes to assumptions, derivations, implementations, numerical corrections, tests, and evidence can be traced independently. Use Squash and merge only for trivial, indivisible maintenance/documentation changes whose intermediate commits carry no useful research provenance. Use Rebase and merge only when a linear history is explicitly required and the commits are already meaningful and reviewable; note that rebase rewrites commit identities. Inspect the full commit list and actual diff before choosing. Do not rewrite reviewed/shared history for cosmetic reasons. After merge, verify the integrated main revision and update the research record. See the normative [Git merge policy](governance/GIT_MERGE_POLICY.md).
+
 ## 9. Completion criteria
 
 Before declaring a research change complete, confirm that:
