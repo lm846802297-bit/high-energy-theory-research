@@ -241,3 +241,18 @@ Use **docs/review-checklist.md** for the operational review.
 ## 10. Method boundary
 
 Scientific Diff is a research-process discipline, not an automated proof system. It improves traceability, reproducibility, and change impact analysis. Scientific correctness still depends on sound theory, appropriate calculations, valid data and constraints, independent scrutiny, and expert judgment.
+
+## 11. Research reporting and communication standard
+
+Use direct, evidence-led reporting. A research update records what has been established, the evidence supporting it, and the next consequential work; it is not a general disclaimer.
+
+Use the following structure for progress reports, research-change summaries, reviews, and handoffs:
+
+1. **Conclusion:** answer the research question and state the current decision.
+2. **Evidence:** provide the governing equations, derivation, implementation path, source data, or validation.
+3. **Results:** report numerical values with units and precision, benchmark parameters, comparisons, and physical interpretation.
+4. **Remaining work:** list only pending tasks that affect the next stage.
+
+Report completed calculations with actual values and checks performed. Present established derivations directly. State each approximation and its validity domain once. Mark unfinished work as pending, in progress, or blocked, with the specific missing step; do not let it obscure independent completed results. When an error is found, state the incorrect equation or implementation, give the correction, and identify affected outputs. Compare alternatives quantitatively under matched assumptions and record the recommended scheme.
+
+This standard supplements the Scientific Diff evidence hierarchy and the project/workstream/RC/run/claim records. Preserve claim statuses and evidence links exactly: communication style must never promote a claim beyond its assessed evidence. Avoid repetitive defensive wording, generic warnings, and re-litigation of settled decisions. Do not omit genuine assumptions, physical applicability conditions, or unresolved evidence that changes the meaning of a claim.
