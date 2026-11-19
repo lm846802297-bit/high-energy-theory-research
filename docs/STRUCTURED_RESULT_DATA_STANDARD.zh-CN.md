@@ -133,7 +133,14 @@ results/<run_label>/
 
 ## 6. Schema 校验和归档验收
 
-本仓库配套的 `docs/schemas/research-result-record-v1.0.0.schema.json` 使用 JSON Schema Draft 2020-12，支持 `run_manifest`、`result_summary` 和 `validation_report` 三类记录。使用支持 Draft 2020-12 的校验器，并启用 `date-time` / `uri` 格式检查。
+本仓库配套的 `docs/schemas/research-result-record-v1.0.0.schema.json` 使用 JSON Schema Draft 2020-12，支持 `run_manifest`、`result_summary` 和 `validation_report` 三类记录。安装依赖并执行本仓库校验器：
+
+```bash
+python -m pip install -r docs/schemas/requirements-result-validation.txt
+python docs/schemas/validate_result_records.py --repo-root . results/<run_label>/run_manifest.json results/<run_label>/result_summary.json results/<run_label>/validation_report.json
+```
+
+校验器检查 Schema、严格 JSON 数值、引用文件路径/字节数/SHA-256，以及 CSV 的行数、列名、逐列单位和非有限数值。只传入本次实际存在的 JSON 文件。
 
 归档前逐项检查：
 
