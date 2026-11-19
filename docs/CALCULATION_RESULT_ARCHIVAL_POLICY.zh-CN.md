@@ -50,4 +50,8 @@
 3. 推送后检查实际 PR diff，并从 GitHub 重新读取已提交文件。将远端路径、文件数量、大小和 SHA-256 与本地提交逐项核对。
 4. 分开报告仓库归档状态和科学验证状态。成功 commit、校验和一致、CI 通过或计算程序正常结束，都不能单独证明物理结果正确或研究主张已经成立。
 
+## 6. 结构化 JSON/CSV 结果记录
+
+新产生的重要数值计算应遵循[结构化科研结果数据规范 v1.0.0](STRUCTURED_RESULT_DATA_STANDARD.zh-CN.md)，并使用 `schemas/research-result-record-v1.0.0.schema.json` 校验 `run_manifest`、`result_summary` 和 `validation_report`。运行来源、科学结果和验证报告分开记录；逐点数组保存为带明确单位的原生表格。该归档数据规范独立于尚未发布的研究记录 Schema v1.4.3.7 候选包。
+
 本规范适用于本仓库今后的所有项目和工作流。
