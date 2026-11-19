@@ -148,6 +148,8 @@ Skill 目前由指令、参考文档和脚本构成，尚不是能够自动完�
 
 某一类别通过不代表其他类别也通过。符号检查不是图级验证；CI 通过不是 Wilson 系数正确的证明；引用文献不等于复现。如果工具或环境不可用，应记录缺失的证据及其影响。
 
+每次重要数值计算都必须遵守[计算结果归档规范](CALCULATION_RESULT_ARCHIVAL_POLICY.zh-CN.md)：将必要的原生结果文件直接归档，不得新建 ZIP/TAR 来代替解压后的结果；记录运行来源和校验和，并在推送后从 GitHub 重新读取核对。超出普通 Git 存储能力的结果应使用 Git LFS 或带清单的持久版本化存储。
+
 对于圈图匹配，应记录外部动量及其流向、费曼规则和符号、UV/IR 调节方式、重整化约定、EFT 减法处方、反项、算符基底、EOM/Fierz 约定，以及保留项的阶数。
 
 ## 8. Claim–Evidence Matrix（主张—证据矩阵）
@@ -199,6 +201,7 @@ python skills/high-energy-theory-research/scripts/validate_project_records.py pa
 - 不要因为文档整洁就合并研究变更；应单独检查其科学验收标准。
 - 集成后检查默认分支的实际状态，并在研究记录中写入确切的集成版本。
 - 不要仅为格式美观而重写历史或大规模移动文件。
+- 结果推送后，必须从 GitHub 重新读取已提交文件，核对路径、大小和哈希；仅仅推送成功不等于归档验证完成。详见[计算结果归档规范](CALCULATION_RESULT_ARCHIVAL_POLICY.zh-CN.md)。
 
 ## 11. 文件组织与迁移
 

@@ -92,6 +92,52 @@ The four-check audit at `calculations/RC-001-dimension8-constant-pole-candidate.
 
 This does **not** complete the dimension-eight hard matching or all \(O(M_E^{-4})\) predictions. Higher-dimensional tree-level EFT vertices and their soft insertions remain outstanding. At a strict \(O(M_E^{-2})\) truncation, this entire constant-pole sector must be dropped consistently.
 
+## 6. PR #69 Benchmark A/B cross-check and Plan-C contact bookkeeping (2026-11-09)
+
+The leading \(O_8=(H^\dagger H)^2(S^\dagger S)^2\) soft-potential pole in Sec. 5 is prior RC-001 work, not a new discovery in [PR #69](https://github.com/lm846802297-bit/axial-vector-review-response/pull/69). PR #69 independently reconstructs it at Benchmarks A/B, explicitly separates the \(hs\) bubble and dimension-five contact pieces, and checks the Plan-C scale derivative against the corresponding running.
+
+The coefficient convention is the one used throughout this ledger:
+\[
+\mathcal L_{\mathrm{EFT5}}\supset-C_{5,\ell}\mathcal O_{5,\ell}+\mathrm{h.c.},
+\qquad
+C_{5,\ell}=-\frac{y_\ell\lambda_\ell}{M_{E_\ell}}.
+\]
+The signed EFT mass parameter follows the Schur complement; the positive mass used in the light-fermion determinant is its magnitude. The \(O_8\) pole and running depend on \(|C_5|^4\), so the benchmark coefficients are insensitive to the sign once the operator convention is used consistently.
+
+For \(F=\sum_\ell |m_\ell|^4\), the mixed Hessian is
+\[
+F_{hs}=\frac{16F}{v_hv_s}
+=\underbrace{\frac{12F}{v_hv_s}}_{\mathrm{bubble}}
++\underbrace{\frac{4F}{v_hv_s}}_{\mathrm{dimension\!-\!five\ contact}}.
+\]
+Thus the RC-convention EFT loop pole is
+\[
+\Pi_{hs,\mathrm{EFT5},\mathrm{loop}}^{\mathrm{UV}}
+=-\frac{16F}{16\pi^2v_hv_s}\Delta_{\mathrm{UV}},
+\]
+with the opposite Plan-B sign used in the archived Plan-C self-energy. This is the same \(12+4=16\) structure already represented by the bubble-plus-contact counterterm in Sec. 5.
+
+**No double counting:** the statement that the archived exact-SVD light-light subtraction is bubble-only applies only to that subtraction. The separate Plan-C-lite finite soft function already includes its contact tadpole: the archived higgs_portal_planC_lite.py function pi_soft_planb returns the sum of explicit bubble and contact terms (source blob SHA df139e099853246501d2fbf9957dbba890014d14). The PR #69 scale-check routine independently retains bubble + contact + hard. The contact must not be appended again to the Plan-C finite soft self-energy.
+
+At \(s=m_h^2\), PR #69 finds in Plan-B convention
+\[
+\frac{d\Pi_{hs,B}^{\mathrm{soft+hard}}}{d\ln\mu}
+=2\Pi_{hs,\mathrm{EFT5},B}^{\mathrm{loop,UV}},
+\qquad
+\beta_{c_8}^{\mathrm{loop}}
+=-\frac{2}{16\pi^2}\sum_\ell|C_{5,\ell}|^4.
+\]
+The \(O_8\) running cancels the retained scale variation. The residual after running is \(1.73\times10^{-13}\) relative (A) and \(1.50\times10^{-13}\) (B); the symmetric finite-difference derivative agrees with the analytic result to better than \(5.4\times10^{-8}\).
+
+PR #69 also evaluates the finite heavy-eigenstate Coleman--Weinberg contribution in the restricted VLL scalar-potential/\(\overline{\mathrm{MS}}\) basis:
+\[
+c_8^{\mathrm{VLL,CW}}(M_E)
+=-\frac{7}{2(16\pi^2)}\sum_\ell|C_{5,\ell}|^4,
+\]
+giving \(-3.80925598\times10^{-17}\,\mathrm{GeV}^{-4}\) (A) and \(-9.76902113\times10^{-20}\,\mathrm{GeV}^{-4}\) (B). This is the finite heavy-VLL scalar-potential contribution, not the complete dimension-eight hard/soft Wilson vector. The independent high-precision heavy-eigenvalue expansion check agrees at relative \(2.96\times10^{-11}\); the associated PR #69 GitHub Actions run [42582889232](https://github.com/lm846802297-bit/axial-vector-review-response/actions/runs/42582889232) passes 18 tests.
+
+The new cross-check refines the status of the \(O_8\) scalar-potential subsector only. Higher-dimensional EFT soft/source insertions, derivative-operator/EOM completion, remaining gauge/scalar sectors, diagram-level validation, and full model-level Wilson-vector closure remain open.
+
 ## Reproducibility boundary
 
 The SymPy script at calculations/RC-001-uv-eft-two-point-difference.py checks the stated algebraic identities and the counterterm pole cancellation. Its output is in validation/RC-001-uv-eft-two-point-difference.txt. No numerical loop integration, FeynArts/FeynCalc run, complete higher-dimensional EFT soft-insertion sum, or final finite dimension-six Wilson coefficient is claimed.

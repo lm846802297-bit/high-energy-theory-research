@@ -121,7 +121,7 @@ For each result that matters, record as applicable:
 - output paths and hashes for large or binary artifacts;
 - warnings, failures, discarded runs, and post-processing steps.
 
-Do not record a run as reproducible if the input configuration or necessary environment is missing.
+Do not record a run as reproducible if the input configuration or necessary environment is missing. Archive substantial runs under the canonical research record with directly accessible native outputs, provenance, and checksums; follow the mandatory [calculation-result archival policy](CALCULATION_RESULT_ARCHIVAL_POLICY.md). Do not use a newly created ZIP/TAR archive as a substitute for extracted result files.
 
 ### Stage 6 — Verify using checks appropriate to the physics
 
@@ -218,11 +218,15 @@ This pattern also applies to UV–EFT matching, finite loop terms, neutrino mass
 - Use branches and reviewable commits for proposed changes; preserve a stable baseline.
 - Keep research-change IDs in commit or pull-request descriptions where useful.
 - Use text diffs for LaTeX, Markdown, source code, configuration files, and symbolic expressions stored as text.
-- For notebooks, PDFs, generated plots, large data, and binary files, record relevant metadata, content hashes, input provenance, and a human-readable summary of the scientific difference.
+- For notebooks, PDFs, generated plots, large data, and binary files, record relevant metadata, content hashes, input provenance, and a human-readable summary of the scientific difference. Commit essential native/uncompressed outputs directly when practical; for files too large for ordinary Git, use Git LFS or durable versioned storage with an immutable manifest rather than an expiring CI artifact.
 - Avoid committing credentials, private tokens, or data that the project is not permitted to redistribute.
 - Separate “the source changed” from “the result was regenerated” and “the result was verified.”
 
 A pull request can organize review, but code review and CI are only part of scientific validation. A green CI status must never automatically mark a physical claim as confirmed.
+
+### Pull-request merge strategy
+
+For substantive research and repository changes, use GitHub **Create a merge commit** by default. Preserve meaningful topic-branch commits and the explicit PR integration boundary so that changes to assumptions, derivations, implementations, numerical corrections, tests, and evidence can be traced independently. Use Squash and merge only for trivial, indivisible maintenance/documentation changes whose intermediate commits carry no useful research provenance. Use Rebase and merge only when a linear history is explicitly required and the commits are already meaningful and reviewable; note that rebase rewrites commit identities. Inspect the full commit list and actual diff before choosing. Do not rewrite reviewed/shared history for cosmetic reasons. After merge, verify the integrated main revision and update the research record. See the normative [Git merge policy](governance/GIT_MERGE_POLICY.md).
 
 ## 9. Completion criteria
 
@@ -243,3 +247,19 @@ Use **docs/review-checklist.md** for the operational review.
 ## 10. Method boundary
 
 Scientific Diff is a research-process discipline, not an automated proof system. It improves traceability, reproducibility, and change impact analysis. Scientific correctness still depends on sound theory, appropriate calculations, valid data and constraints, independent scrutiny, and expert judgment.
+
+
+## 11. Research reporting and communication standard
+
+Use direct, evidence-led reporting. A research update records what has been established, the evidence supporting it, and the next consequential work; it is not a general disclaimer.
+
+Use the following structure for progress reports, research-change summaries, reviews, and handoffs:
+
+1. **Conclusion:** answer the research question and state the current decision.
+2. **Evidence:** provide the governing equations, derivation, implementation path, source data, or validation.
+3. **Results:** report numerical values with units and precision, benchmark parameters, comparisons, and physical interpretation.
+4. **Remaining work:** list only pending tasks that affect the next stage.
+
+Report completed calculations with actual values and checks performed. Present established derivations directly. State each approximation and its validity domain once. Mark unfinished work as pending, in progress, or blocked, with the specific missing step; do not let it obscure independent completed results. When an error is found, state the incorrect equation or implementation, give the correction, and identify affected outputs. Compare alternatives quantitatively under matched assumptions and record the recommended scheme.
+
+This standard supplements the Scientific Diff evidence hierarchy and the project/workstream/RC/run/claim records. Preserve claim statuses and evidence links exactly: communication style must never promote a claim beyond its assessed evidence. Avoid repetitive defensive wording, generic warnings, and re-litigation of settled decisions. Do not omit genuine assumptions, physical applicability conditions, or unresolved evidence that changes the meaning of a claim.
