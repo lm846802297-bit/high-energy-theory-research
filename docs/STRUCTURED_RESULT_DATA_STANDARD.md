@@ -52,7 +52,7 @@ For purely analytic derivations with no numerical arrays, do not create empty CS
 
 ## 6. Schema and archive validation
 
-Validate JSON records against the local Draft 2020-12 schema with format checking enabled. Check CSV headers, units, row counts, finite numeric values, and grid coverage. Verify every referenced output's path, byte size, and SHA-256. After pushing, retrieve the remote files and compare paths, sizes, counts, and hashes. Report archive status separately from scientific validation.
+Validate JSON records against the local Draft 2020-12 schema at `docs/schemas/research-result-record-v1.0.0.schema.json` with format checking enabled. Check CSV headers, units, row counts, finite numeric values, and grid coverage. Verify every referenced output's path, byte size, and SHA-256. After pushing, retrieve the remote files and compare paths, sizes, counts, and hashes. Report archive status separately from scientific validation.
 
 ## 7. Historical records
 
