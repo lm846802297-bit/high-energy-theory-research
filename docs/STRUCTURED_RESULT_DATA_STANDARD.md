@@ -1,6 +1,6 @@
 # Structured Research Result Data Standard v1.0.0
 
-**Status:** Adopted for new substantial numerical, simulation, scan, and computational-validation runs in this repository.  
+**Status:** Proposed for adoption; applies to new substantial numerical, simulation, scan, and computational-validation runs after merge.  
 **Schema:** JSON Schema Draft 2020-12.  
 **Purpose:** Standardize data structure, run provenance, and archival. This standard does not certify scientific correctness.
 
