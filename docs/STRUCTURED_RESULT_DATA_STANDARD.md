@@ -59,7 +59,7 @@ python -m pip install -r docs/schemas/requirements-result-validation.txt
 python docs/schemas/validate_result_records.py --repo-root . results/<run_label>/run_manifest.json results/<run_label>/result_summary.json results/<run_label>/validation_report.json
 ```
 
-The script checks schema validity, strict JSON numbers, referenced file paths/byte counts/SHA-256, and CSV row counts, headers, per-column units, and non-finite values. Pass only record files that exist for the run. Check CSV headers, units, row counts, finite numeric values, and grid coverage. Verify every referenced output's path, byte size, and SHA-256. After pushing, retrieve the remote files and compare paths, sizes, counts, and hashes. Report archive status separately from scientific validation.
+The script checks schema validity, strict JSON numbers, referenced file paths/byte counts/SHA-256, and CSV row counts, headers, per-column units, and non-finite values. Pass only record files that exist for the run. A validation status of `passed` requires at least one check and every check to be `passed`; otherwise use `partial`, `failed`, or `inconclusive`. Check CSV headers, units, row counts, finite numeric values, and grid coverage. Verify every referenced output's path, byte size, and SHA-256. After pushing, retrieve the remote files and compare paths, sizes, counts, and hashes. Report archive status separately from scientific validation.
 
 ## 7. Historical records
 
