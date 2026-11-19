@@ -73,7 +73,7 @@ Do not call a calculation independent if it reuses the same trace, integral redu
 
 ## 7. Numerical-result archival and Git workflow
 
-Follow the mandatory [calculation-result archival policy](docs/CALCULATION_RESULT_ARCHIVAL_POLICY.md):
+Follow the mandatory [calculation-result archival policy](docs/CALCULATION_RESULT_ARCHIVAL_POLICY.md) and the [Structured Research Result Data Standard v1.0.0](docs/STRUCTURED_RESULT_DATA_STANDARD.md). For machine-readable run/result records, validate against `docs/schemas/research-result-record-v1.0.0.schema.json`; keep this archive-data profile separate from the unreleased research-record Schema v1.4.3.7 candidate.
 
 - **Extract-before-upload is mandatory:** when results arrive as ZIP/TAR (including ChatGPT handoff bundles, local-runner packages, GitHub Actions artifacts, or collaborator deliveries), extract first and commit the required native files individually. A delivery archive is transport only, not a substitute for its extracted contents. Follow [§2 of the calculation-result archival policy](docs/CALCULATION_RESULT_ARCHIVAL_POLICY.md).
 - Record exact source commit, input provenance and hashes, commands, software versions, physical/numerical settings, outputs, and SHA-256 checksums.
