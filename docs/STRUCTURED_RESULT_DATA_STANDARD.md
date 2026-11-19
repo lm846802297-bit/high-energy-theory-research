@@ -21,7 +21,7 @@ Do not force every task to create every file. A substantial execution needs a ma
 
 The local `research-result-record-v1.0.0.schema.json` validates three record types:
 
-- **run_manifest:** records what actually ran, including the commit SHA used at execution time, script path/fingerprint, input provenance, physical/numerical configuration, software/hardware environment, exact command, output inventory, validation status, and archival status.
+- **run_manifest:** records what actually ran, including the commit SHA used at execution time, script path/fingerprint, input provenance (SHA-256, or immutable URI plus version when bytes are unavailable), physical/numerical configuration, software/hardware environment, exact command, output inventory, validation status, and archival status.
 - **result_summary:** records what was calculated, the benchmark, scope, observables as numeric values plus separate unit fields, scientific status, interpretation, and data-file references.
 - **validation_report:** records each check by ID, category, status, method, observed value, threshold, unit, and evidence path.
 
