@@ -159,6 +159,7 @@ for flavor in ("mu", "tau"):
 
 geometry = {flavor: path_geometry(cycle) for flavor,cycle in cycles.items()}
 rows = []
+integrated_totals = {flavor: [sp.Integer(0) for _ in Q] for flavor in ("mu", "tau")}
 for flavor in ("mu", "tau"):
     cycle = cycles[flavor]
     fcoeff, dcoeff = geometry[flavor]
@@ -179,6 +180,7 @@ for flavor in ("mu", "tau"):
             integrated = sp.factor(
                 6*C13*(If/sp.Integer(3)-sp.Rational(2,3)*Id)
             )
+            integrated_totals[flavor][alpha] += integrated
             rows.append({
                 "flavor": flavor,
                 "cycle": "-".join(cycle),
@@ -194,6 +196,36 @@ for flavor in ("mu", "tau"):
 
 if len(rows) != 192:
     raise AssertionError(f"expected 192 rows (2 flavors x 16 paths x 6 invariants), got {len(rows)}")
+# A physical rational point satisfying the triangular M11=0 constraint.
+benchmark = {
+    cL: sp.Rational(12,13), sL: sp.Rational(5,13),
+    cR: sp.Rational(12,13), sR: sp.Rational(5,13),
+    m1: sp.Integer(1), m2: sp.Rational(144,25),
+    y: sp.Rational(2,7), lam: sp.Rational(3,11),
+}
+m11_constraint = sp.simplify(
+    -benchmark[cL]*benchmark[cR]*benchmark[m1]
+    + benchmark[m2]*benchmark[sL]*benchmark[sR]
+)
+check("rational finite-mixing benchmark satisfies M11=0", m11_constraint, 0)
+numeric_totals = {
+    flavor: [sp.N(expr.subs(benchmark), 35) for expr in integrated_totals[flavor]]
+    for flavor in ("mu", "tau")
+}
+# Exchanging S <-> Sdag swaps Q2<->Q3 and Q4<->Q5, while Q1 and Q6 stay fixed.
+swap_pairs = ((0,0),(1,2),(2,1),(3,4),(4,3),(5,5))
+max_flavor_swap_difference = 0.0
+for mu_alpha, tau_alpha in swap_pairs:
+    difference = sp.N(numeric_totals["mu"][mu_alpha] - numeric_totals["tau"][tau_alpha], 30)
+    magnitude = abs(float(difference))
+    max_flavor_swap_difference = max(max_flavor_swap_difference, magnitude)
+    if magnitude > 1e-20:
+        raise AssertionError(
+            f"finite-mixing mu/tau orientation swap failed at Q{mu_alpha+1}/Q{tau_alpha+1}: {difference}"
+        )
+print("PASS: finite-mixing mu/tau integrated sums obey the S<->Sdag invariant permutation at the exact rational benchmark.")
+print(f"MAX_FLAVOR_SWAP_ABS_DIFFERENCE: {max_flavor_swap_difference:.3e}")
+
 print("PASS: generated all 192 fixed-complex-orientation path/invariant rows.")
 print("SCOPE: d=4 finite-mass simplex integrals of the B2-type kernel; no B1/B3 terms in the fixed chiral sequence.")
 
