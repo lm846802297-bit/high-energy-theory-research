@@ -24,7 +24,8 @@ The workflow is designed for theoretical particle physics, UV–EFT matching, pe
 9. Review [repository status](docs/REPOSITORY_STATUS.md), [open issues](docs/OPEN_ISSUES.md), and the [normative decision register](docs/governance/DECISION_REGISTER.md) before changing candidate schemas.
 10. Read the [v1.6.5 design baseline](docs/design/high-energy-theory-research-Skill-v1.6.5.md), the [v1.6.7 consolidated design/implementation report](docs/design/high-energy-theory-research-Skill-v1.6.7.md), and the [v1.6.6 Artifact-identity candidate clarification](schema/v1.4.3.7/audit/高能理论物理研究-Skill-详细设计文档-v1.6.6-Artifact身份语义候选修订.md).
 11. Follow the mandatory [calculation-result archival policy](docs/CALCULATION_RESULT_ARCHIVAL_POLICY.md) when committing numerical outputs, run manifests, and validation evidence.
-12. Follow the normative [Git merge strategy and commit-history policy](docs/governance/GIT_MERGE_POLICY.md): substantive research PRs default to merge commits.
+12. Follow the project-wide [Research Compute Policy](RESEARCH_COMPUTE_POLICY.md): ChatGPT Linux is the primary compute environment, GitHub is the canonical archive, and Actions is for independent verification.
+13. Follow the normative [Git merge strategy and commit-history policy](docs/governance/GIT_MERGE_POLICY.md): substantive research PRs default to merge commits.
 
 ### Core chain
 
@@ -37,6 +38,7 @@ Every arrow should be traceable. A change to an upstream assumption or formula m
 - **docs/scientific-diff-workflow.md** — workflow, definitions, status model, and physics-specific guidance.
 - **projects/** — top-level project registry and project/workstream hierarchy; navigation metadata only at this stage.
 - **docs/USER_GUIDE.md** — detailed operating manual for project setup, research changes, calculation evidence, validation, and migration discipline.
+- **RESEARCH_COMPUTE_POLICY.md** — normative separation of primary computation, GitHub archival, and independent Actions verification.
 - **docs/CALCULATION_RESULT_ARCHIVAL_POLICY.md** — mandatory rules for native/uncompressed outputs, run provenance, checksums, large-file storage, and remote verification; see the [Chinese version](docs/CALCULATION_RESULT_ARCHIVAL_POLICY.zh-CN.md).
 - **docs/PROJECT_REGISTRY_AUDIT.md** — scope and evidence of the Phase A registry/path pre-audit, including explicit limits on unrun tests and future file migration.
 - **docs/review-checklist.md** — checks for scientific changes and manuscript synchronization.
