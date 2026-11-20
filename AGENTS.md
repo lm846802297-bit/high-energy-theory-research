@@ -1,6 +1,6 @@
 # Repository instructions — High-Energy Theory Research
 
-> **Mandatory compute architecture:** Follow [RESEARCH_COMPUTE_POLICY.md](RESEARCH_COMPUTE_POLICY.md) for all numerical and computational work. The active ChatGPT Linux environment is the default primary compute environment; GitHub is the canonical source/result archive; GitHub Actions is reserved for independent verification and CI, not the primary calculation engine.
+> **Mandatory compute architecture:** Follow [RESEARCH_COMPUTE_POLICY.md](RESEARCH_COMPUTE_POLICY.md) for all numerical and computational work. Select the primary environment by mode: ordinary GPT chat uses ChatGPT Linux; Codex and ChatGPT Work use the user's Windows local environment. GitHub is the canonical source/result archive; GitHub Actions is reserved for independent verification and CI, not the primary calculation engine.
 
 These instructions are mandatory for all agents and contributors. They complement the User Guide, Scientific Diff workflow, project-specific records, and calculation-result archival policy.
 
