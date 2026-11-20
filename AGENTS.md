@@ -1,5 +1,7 @@
 # Repository instructions — High-Energy Theory Research
 
+> **Mandatory compute architecture:** Follow [RESEARCH_COMPUTE_POLICY.md](RESEARCH_COMPUTE_POLICY.md) for all numerical and computational work. The active ChatGPT Linux environment is the default primary compute environment; GitHub is the canonical source/result archive; GitHub Actions is reserved for independent verification and CI, not the primary calculation engine.
+
 These instructions are mandatory for all agents and contributors. They complement the User Guide, Scientific Diff workflow, project-specific records, and calculation-result archival policy.
 
 ## 1. Minimal preflight
@@ -9,7 +11,7 @@ Before substantive work:
 1. Read this file and the root [README](README.md) or [Chinese README](README.zh-CN.md).
 2. Read [docs/USER_GUIDE.md](docs/USER_GUIDE.md) and [docs/scientific-diff-workflow.md](docs/scientific-diff-workflow.md).
 3. Inspect [projects/registry.yaml](projects/registry.yaml) and [research/README.md](research/README.md) to identify the canonical project, workstream, active research-change record, and claim–evidence matrix.
-4. Read only the source files, calculations, and validation records relevant to the task. Do not load or rewrite the entire repository by default.
+4. For numerical/computational tasks, follow [RESEARCH_COMPUTE_POLICY.md](RESEARCH_COMPUTE_POLICY.md) and identify the primary execution environment before running. Read only the source files, calculations, and validation records relevant to the task. Do not load or rewrite the entire repository by default.
 5. Before changing candidate schemas, migrations, or governance behavior, read [docs/REPOSITORY_STATUS.md](docs/REPOSITORY_STATUS.md), [docs/OPEN_ISSUES.md](docs/OPEN_ISSUES.md), and [docs/governance/DECISION_REGISTER.md](docs/governance/DECISION_REGISTER.md).
 
 Never invent a completed calculation, run record, validation result, source revision, or scientific decision.
@@ -95,7 +97,7 @@ Continuous integration (CI) is optional supporting infrastructure. It is not a p
 
 - Do not require a CI run to start, continue, or complete a calculation; perform numerical or scientific validation; prepare or archive results; commit or push research files; open or update a pull request; mark a pull request ready for review; or merge a pull request.
 - If the calculation can be run directly on an available local machine or an approved compute runner, proceed. Do not pause research solely because GitHub Actions is queued, unavailable, disabled, blocked by account/billing limits, or failing for infrastructure reasons.
-- GitHub Actions may still be used when useful as an optional compute, dispatch, or artifact-handoff mechanism. A workflow that actually executes a research calculation is an execution run: record its exact source commit, inputs, settings, environment, logs, and outputs. Its use does not make a separate CI status check mandatory.
+- Under this project's compute policy, GitHub Actions is for independent verification, regression testing, and CI; it is not the primary calculation engine. If an explicitly approved independent Actions run executes a calculation, record its exact source commit, inputs, settings, environment, logs, and outputs.
 - This policy does not waive scientific or numerical validation. Perform the checks appropriate to the claim—such as analytic identities, dimensional and unit checks, limiting cases, independent implementations, convergence, uncertainty estimates, provenance, and output-integrity checks—locally or on an approved runner, and record exactly what was performed. CI neither substitutes for these checks nor adds a mandatory gate.
 - If CI is run, report its exact commit SHA and actual result. If it is not run, queued, blocked, cancelled, or failed, record that status truthfully and distinguish infrastructure failure from a scientific or numerical failure. Never describe an unrun check as passed.
 - Base review and merge decisions on the actual diff, reproducibility, scientific evidence, scope, and the checks that are genuinely relevant to the change—not on whether a CI badge is green. Do not configure CI status checks as required branch-protection gates under this repository policy. Do not change repository protection settings without explicit authorization.
