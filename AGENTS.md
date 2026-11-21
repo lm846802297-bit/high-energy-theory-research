@@ -2,7 +2,6 @@
 
 > **Mandatory compute architecture:** Follow [RESEARCH_COMPUTE_POLICY.md](RESEARCH_COMPUTE_POLICY.md) for all numerical and computational work. Select the primary environment by actual execution target: ordinary GPT chat uses ChatGPT Linux; Codex/Work local execution uses the user's Windows environment; Codex/Work cloud-computer execution uses the GPT-managed cloud environment. GitHub is the canonical source/result archive; GitHub Actions is reserved for independent verification and CI, not the primary calculation engine.
 
-
 > **Research communication standard:** Follow the canonical [project-wide decision policy](https://github.com/lm846802297-bit/high-energy-theory-research/blob/main/AGENTS.md#research-communication-and-decision-policy) and [Scientific Diff reporting workflow](https://github.com/lm846802297-bit/high-energy-theory-research/blob/main/docs/scientific-diff-workflow.md#11-research-reporting-and-communication-standard). Preserve RC/run/claim identifiers, evidence links, and assessed claim status.
 
 These instructions are mandatory for all agents and contributors. They complement the User Guide, Scientific Diff workflow, project-specific records, and calculation-result archival policy.
@@ -14,7 +13,7 @@ Before substantive work:
 1. Read this file and the root [README](README.md) or [Chinese README](README.zh-CN.md).
 2. Read [docs/USER_GUIDE.md](docs/USER_GUIDE.md) and [docs/scientific-diff-workflow.md](docs/scientific-diff-workflow.md).
 3. Inspect [projects/registry.yaml](projects/registry.yaml) and [research/README.md](research/README.md) to identify the canonical project, workstream, active research-change record, and claim–evidence matrix.
-4. Read only the source files, calculations, and validation records relevant to the task. Do not load or rewrite the entire repository by default.
+4. For numerical/computational tasks, follow [RESEARCH_COMPUTE_POLICY.md](RESEARCH_COMPUTE_POLICY.md) and identify the primary execution environment before running. Read only the source files, calculations, and validation records relevant to the task. Do not load or rewrite the entire repository by default.
 5. Before changing candidate schemas, migrations, or governance behavior, read [docs/REPOSITORY_STATUS.md](docs/REPOSITORY_STATUS.md), [docs/OPEN_ISSUES.md](docs/OPEN_ISSUES.md), and [docs/governance/DECISION_REGISTER.md](docs/governance/DECISION_REGISTER.md).
 
 Never invent a completed calculation, run record, validation result, source revision, or scientific decision.
@@ -100,11 +99,12 @@ Continuous integration (CI) is optional supporting infrastructure. It is not a p
 
 - Do not require a CI run to start, continue, or complete a calculation; perform numerical or scientific validation; prepare or archive results; commit or push research files; open or update a pull request; mark a pull request ready for review; or merge a pull request.
 - If the calculation can be run directly on an available local machine or an approved compute runner, proceed. Do not pause research solely because GitHub Actions is queued, unavailable, disabled, blocked by account/billing limits, or failing for infrastructure reasons.
-- GitHub Actions may still be used when useful as an optional compute, dispatch, or artifact-handoff mechanism. A workflow that actually executes a research calculation is an execution run: record its exact source commit, inputs, settings, environment, logs, and outputs. Its use does not make a separate CI status check mandatory.
+- Under this project's compute policy, GitHub Actions is for independent verification, regression testing, and CI; it is not the primary calculation engine. If an explicitly approved independent Actions run executes a calculation, record its exact source commit, inputs, settings, environment, logs, and outputs.
 - This policy does not waive scientific or numerical validation. Perform the checks appropriate to the claim—such as analytic identities, dimensional and unit checks, limiting cases, independent implementations, convergence, uncertainty estimates, provenance, and output-integrity checks—locally or on an approved runner, and record exactly what was performed. CI neither substitutes for these checks nor adds a mandatory gate.
 - If CI is run, report its exact commit SHA and actual result. If it is not run, queued, blocked, cancelled, or failed, record that status truthfully and distinguish infrastructure failure from a scientific or numerical failure. Never describe an unrun check as passed.
 - Base review and merge decisions on the actual diff, reproducibility, scientific evidence, scope, and the checks that are genuinely relevant to the change—not on whether a CI badge is green. Do not configure CI status checks as required branch-protection gates under this repository policy. Do not change repository protection settings without explicit authorization.
 - CI becomes mandatory for a particular task only when the author explicitly requests it for that task.
+
 ## Pull-request merge strategy and commit-history preservation
 
 Before preparing or merging a PR, read [the normative Git merge policy](docs/governance/GIT_MERGE_POLICY.md). For substantive research, analytical/numerical work, validation, schema/governance changes, and research records, **Create a merge commit is the default**. Preserve meaningful topic-branch commits and the explicit PR boundary so scientific assumptions, derivations, implementations, corrections, tests, and evidence remain traceable. Squash is reserved for trivial, indivisible maintenance with no useful per-commit provenance. Rebase is allowed only for an intentional linear history when commits are already meaningful and reviewable. Do not rewrite reviewed/shared history for cosmetic reasons. After integration, verify main and update the exact integrated revision in the relevant research record; archival and scientific validation remain separate.
