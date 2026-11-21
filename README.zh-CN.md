@@ -24,7 +24,8 @@
 9. 修改候选 Schema 前，先检查[仓库状态](docs/REPOSITORY_STATUS.md)、[未解决问题](docs/OPEN_ISSUES.md)和[规范决策登记表](docs/governance/DECISION_REGISTER.md)。
 10. 阅读 [v1.6.5 设计基线](docs/design/high-energy-theory-research-Skill-v1.6.5.md)、[v1.6.7 设计与实现整合报告](docs/design/high-energy-theory-research-Skill-v1.6.7.md)，以及 [v1.6.6 Artifact 身份候选澄清](schema/v1.4.3.7/audit/高能理论物理研究-Skill-详细设计文档-v1.6.6-Artifact身份语义候选修订.md)。
 11. 提交数值结果、运行清单和验证证据时，必须遵守[计算结果归档规范](docs/CALCULATION_RESULT_ARCHIVAL_POLICY.zh-CN.md)。
-12. 实质性科研 PR 默认使用 [Merge Commit 合并策略](docs/governance/GIT_MERGE_POLICY.md)，保留有科研追溯价值的独立提交。
+12. 必须遵守[科研计算执行规范](RESEARCH_COMPUTE_POLICY.md)：普通 GPT 聊天模式使用 ChatGPT Linux；Codex/Work 可使用 Windows 本地环境或 GPT 管理的云端计算机；GitHub 负责长期归档，Actions 只负责独立验证。
+13. 实质性科研 PR 默认使用 [Merge Commit 合并策略](docs/governance/GIT_MERGE_POLICY.md)，保留有科研追溯价值的独立提交。
 13. 已完成且验收通过的科研成果必须及时合并到 `main`，并在专题 README、项目注册表或研究索引中建立稳定入口；PR 负责审查与集成，不作为长期归档位置。未完成工作保留在专题分支或 Draft PR。详见 [科研成果归档与 PR 生命周期规范](docs/governance/GIT_MERGE_POLICY.md#6-main-is-the-canonical-research-archive)。
 
 ### 核心链条
@@ -38,6 +39,7 @@
 - **`docs/scientific-diff-workflow.md`** — 工作流、术语定义、状态模型和物理研究专项指引。
 - **`projects/`** — 顶层项目注册表及项目/工作流层级；目前只承担导航元数据功能。
 - **`docs/USER_GUIDE.md`** — 项目设置、研究变更、计算证据、验证和迁移纪律的详细操作手册；另有[中文版本](docs/USER_GUIDE.zh-CN.md)。
+- **`RESEARCH_COMPUTE_POLICY.md`** — 主计算、GitHub 归档和 Actions 独立验证三者职责分离的强制规范。
 - **`docs/CALCULATION_RESULT_ARCHIVAL_POLICY.zh-CN.md`** — 数值结果原生文件归档、运行来源、校验和、大文件存储及远端核对的强制规范；另有[英文版](docs/CALCULATION_RESULT_ARCHIVAL_POLICY.md)。
 - **`docs/PROJECT_REGISTRY_AUDIT.md`** — 第一阶段注册表/路径预审的范围与证据，明确记录尚未执行的测试和未来文件迁移的限制。
 - **`docs/review-checklist.md`** — 科学变更及其与论文同步时的审查项目。
