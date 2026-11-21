@@ -7,7 +7,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from jsonschema import Draft202012Validator
+from jsonschema import Draft202012Validator, FormatChecker
 
 SCHEMA_DIR = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(SCHEMA_DIR))
@@ -69,7 +69,7 @@ class InputProvenanceSchemaTests(unittest.TestCase):
         with SCHEMA_PATH.open("r", encoding="utf-8") as stream:
             cls.schema = json.load(stream)
         Draft202012Validator.check_schema(cls.schema)
-        cls.validator = Draft202012Validator(cls.schema)
+        cls.validator = Draft202012Validator(cls.schema, format_checker=FormatChecker())
 
     def valid(self, input_record: dict) -> bool:
         return self.validator.is_valid(minimal_manifest(input_record))
@@ -123,6 +123,15 @@ class InputProvenanceSchemaTests(unittest.TestCase):
             "source": "external dataset",
             "format": "csv",
             "uri": "https://example.org/data.csv",
+        }))
+
+    def test_invalid_uri_is_rejected(self):
+        self.assertFalse(self.valid({
+            "name": "invalid-uri",
+            "source": "external dataset",
+            "format": "csv",
+            "uri": "not-a-uri",
+            "version": "v1",
         }))
 
 
