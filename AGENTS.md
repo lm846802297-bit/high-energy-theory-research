@@ -1,5 +1,8 @@
 # Repository instructions — High-Energy Theory Research
 
+> **Mandatory compute architecture:** Follow [RESEARCH_COMPUTE_POLICY.md](RESEARCH_COMPUTE_POLICY.md) for all numerical and computational work. Select the primary environment by actual execution target: ordinary GPT chat uses ChatGPT Linux; Codex/Work local execution uses the user's Windows environment; Codex/Work cloud-computer execution uses the GPT-managed cloud environment. GitHub is the canonical source/result archive; GitHub Actions is reserved for independent verification and CI, not the primary calculation engine.
+
+
 > **Research communication standard:** Follow the canonical [project-wide decision policy](https://github.com/lm846802297-bit/high-energy-theory-research/blob/main/AGENTS.md#research-communication-and-decision-policy) and [Scientific Diff reporting workflow](https://github.com/lm846802297-bit/high-energy-theory-research/blob/main/docs/scientific-diff-workflow.md#11-research-reporting-and-communication-standard). Preserve RC/run/claim identifiers, evidence links, and assessed claim status.
 
 These instructions are mandatory for all agents and contributors. They complement the User Guide, Scientific Diff workflow, project-specific records, and calculation-result archival policy.
