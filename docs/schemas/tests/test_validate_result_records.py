@@ -23,10 +23,10 @@ def minimal_manifest(input_record: dict) -> dict:
         "run_id": "TEST-RUN-001",
         "created_at": "2026-11-21T00:00:00Z",
         "project": {"repository": "example/research", "project_id": "validator-test"},
-        "source": {"commit_sha": "a" * 40, "script_path": "run.py"},
+        "source": {"commit_sha": "a" * 40, "script_path": "run.py", "script_sha256": "c" * 64},
         "inputs": [input_record],
         "configuration": {"physics": {}, "numerics": {}, "conventions": {}},
-        "environment": {"platform": "Linux", "runtime": {"python": "3.x"}},
+        "environment": {"platform": "Linux", "runtime": {"python": "3.x"}, "dependencies": {}, "hardware": {"cpu": "test"}},
         "execution": {
             "status": "succeeded",
             "command": "python run.py",
@@ -133,6 +133,39 @@ class InputProvenanceSchemaTests(unittest.TestCase):
             "uri": "not-a-uri",
             "version": "v1",
         }))
+
+    def test_script_fingerprint_is_required(self):
+        record = minimal_manifest({
+            "name": "local-table",
+            "source": "repository input",
+            "format": "csv",
+            "path": "data/input.csv",
+            "sha256": "b" * 64,
+        })
+        record["source"].pop("script_sha256")
+        self.assertFalse(self.validator.is_valid(record))
+
+    def test_dependencies_are_required(self):
+        record = minimal_manifest({
+            "name": "local-table",
+            "source": "repository input",
+            "format": "csv",
+            "path": "data/input.csv",
+            "sha256": "b" * 64,
+        })
+        record["environment"].pop("dependencies")
+        self.assertFalse(self.validator.is_valid(record))
+
+    def test_hardware_is_required(self):
+        record = minimal_manifest({
+            "name": "local-table",
+            "source": "repository input",
+            "format": "csv",
+            "path": "data/input.csv",
+            "sha256": "b" * 64,
+        })
+        record["environment"].pop("hardware")
+        self.assertFalse(self.validator.is_valid(record))
 
 
 if __name__ == "__main__":
