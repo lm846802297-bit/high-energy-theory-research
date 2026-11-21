@@ -14,7 +14,7 @@ from pathlib import Path
 try:
     from jsonschema import Draft202012Validator, FormatChecker
 except ImportError:
-    print("ERROR: install jsonschema>=4.18,<5 first.", file=sys.stderr)
+    print("ERROR: install the pinned dependency with python -m pip install -r docs/schemas/requirements-result-validation.txt.", file=sys.stderr)
     raise SystemExit(2)
 
 
