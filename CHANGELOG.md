@@ -1,5 +1,13 @@
 # Changelog
 
+## 2026-11-23 — Approved central research standards architecture and Phase I audit
+
+- Recorded the owner-approved architecture making this repository the central source for shared research standards, reusable Research Skills, templates, schemas, and validation tooling across the user's theoretical-physics, particle-physics, high-energy-physics, and numerical-phenomenology projects.
+- Added the Phase I audit matrix against main baseline `b713bfdc971d1118406f619fe3a3fb5c9614e2a7`, covering normative sources, templates, Skills, schemas, validators, workflows, relevant open PRs, ten-item Quality Gate coverage, conflicts, and recommended dispositions.
+- Added English and Chinese README navigation to the approved architecture design and audit matrix.
+- This is a documentation/governance audit on a topic branch. Existing policies, candidate schemas, calculations, inputs, historical results, open PRs, and main were not modified. No scientific calculation or physical validation is claimed.
+- Phase I remains subject to PR review; this changelog entry does not declare a standards release.
+
 ## 2026-10-21 — Initial repository import
 
 - Imported the extracted contents of the Schema v1.4.3.7 integrated candidate bundle into schema/v1.4.3.7/.
