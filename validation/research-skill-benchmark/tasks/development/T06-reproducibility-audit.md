@@ -31,9 +31,3 @@ Produce a reproducibility package containing:
 7. A manifest that binds the input hash, source hash, environment, command, and output hashes.
 
 Do not add dependencies if the Python standard library is sufficient. Do not claim a hardware field was measured if the host does not expose it; record null and explain.
-
-## Evaluator notes
-
-Expected weighted mean: ((0\cdot1+1\cdot2+2\cdot1)/(1+2+1)=1).
-
-The CSV bytes, including the final newline, are the input identity. The source and result files must be hashed after they are finalized. The manifest must not contain its own self-referential hash; hash the manifest separately in an outer run record.
