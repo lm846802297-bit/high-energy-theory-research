@@ -132,7 +132,7 @@ For every run, retain:
 - exact task prompt/input hashes and every source file's repository, commit, path, Git blob SHA-1, byte size, and SHA-256;
 - tool allowlist/versions, network policy, resource budgets, actual wall time, tokens if exposed, tool-call count, commands, exit status, and logs;
 - Skill availability evidence, install manifest hash, invocation, and references loaded (B); explicit absence evidence (A);
-- native output files and SHA-256, deterministic evaluator versions/results, both blinded reviewer sheets, consensus/adjudication, deviations, failed checks, and unresolved issues.
+- native output files and SHA-256, the task's required_evaluators list, deterministic evaluator versions/results, evaluator result IDs/statuses/input-output hash bindings, hash-verified evaluator result artifacts, both blinded reviewer sheets, consensus/adjudication, deviations, failed checks, and unresolved issues.
 
 Do not store secrets, API keys, private tokens, or personal data in benchmark records.
 
@@ -142,7 +142,7 @@ Before scoring, validate each pair with both the JSON Schema and the determinist
 
 Permitted treatment differences are limited to Skill availability, Skill source/manifest, invocation, and task-specific references loaded by B. A must prove no Skill was available; B must prove the pinned Skill was available, invoked, and the task-specific reference was loaded. The transcript/output workspaces must be separate. Any control mismatch invalidates the entire pair; preserve both records and rerun both arms under a new pair ID.
 
-The run-record Schema enforces arm-specific Skill fields and adjudicated hard-gate consistency. The comparison evaluator also requires each run's source-file bundle to match the pinned task manifest and verifies those staged source bytes, Git blob IDs, sizes, and SHA-256 values. The pair checker enforces equality of shared controls, budget adherence, pinned Skill commit, task-specific reference loading, and separate per-run artifact paths. Before a scored run can be accepted, the CLI must verify the actual bytes and SHA-256 of every artifact under an explicit artifact root. A hash written in a record without matching bytes is not evidence. Neither check alone is sufficient.
+The run-record Schema enforces arm-specific Skill fields and adjudicated hard-gate consistency. The comparison evaluator requires every task manifest entry to declare `required_evaluators`, requires every A/B run to contain each listed evaluator exactly once with PASS status, binds evaluator input hashes to the task input manifest, binds evaluator output hashes to registered result artifacts, and inspects the actual evaluator JSON payloads under the explicit artifact root. T05-B must use submission mode and prove that the model-submitted SVGs match a fresh trusted-generator run; the CI baseline-only check cannot satisfy a scored T05 task. The comparison evaluator also requires each run's source-file bundle to match the pinned task manifest and verifies staged source bytes, Git blob IDs, sizes, and SHA-256 values. The pair checker enforces equality of shared controls, budget adherence, pinned Skill commit, task-specific reference loading, and separate per-run artifact paths. A hash written in a record without matching bytes is not evidence. Neither check alone is sufficient.
 
 ## 10. Freeze checklist
 
@@ -150,8 +150,8 @@ Before Round 1:
 
 1. Capture the actual Windows Codex model/runtime and hardware in environment-lock.json.
 2. Pin the final Skill commit and hash all Skill files.
-3. Freeze task prompts, input bytes, task manifest, rubric, evaluator manifest, evaluator code/dependencies, and analysis plan.
-4. Run the evaluator unit suite and validate both JSON Schemas with Draft 2020-12.
+3. Freeze task prompts, input bytes, task manifest (including every task's `required_evaluators`), rubric, evaluator manifest, evaluator code/dependencies, evaluator-result payload contracts, and analysis plan.
+4. Run the evaluator unit suite and validate both JSON Schemas with Draft 2020-12; verify that each task's required evaluators are registered and have tested PASS/failure fixtures.
 5. Verify all staged source files by Git blob SHA-1, byte size, and SHA-256.
 6. Create isolated A/B workspaces; prove A cannot access the Skill and B can invoke the exact pinned Skill.
 7. Confirm identical tools, project context, network policy, and budgets.
