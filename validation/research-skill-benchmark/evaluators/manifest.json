@@ -110,8 +110,8 @@
     {
       "path": "protocol/experimental-design.md",
       "role": "preregistered_experimental_design_and_pair_integrity_rules",
-      "git_blob_sha1": "c1a2b4d2b72ecae54203358dea9bd3ac72eced21",
-      "size_bytes": 14932
+      "git_blob_sha1": "d7a64d4ed3e218b57e44d142b4af3761be6ce8d0",
+      "size_bytes": 15295
     },
     {
       "path": "protocol/scoring-rubric.yaml",
@@ -499,7 +499,7 @@
   "test_suite": {
     "command": "python -m unittest discover -s evaluators -v",
     "tests_defined": 41,
-    "development_run": "Run 1169 passed the 39-test exact-protocol-hash suite. Two additional tests now verify canonical input_manifest_sha256 and exact task-prompt bytes; the updated 41-test suite is pending CI.",
+    "development_run": "Run 1169 passed the 39-test exact-protocol-hash suite. The current 41-test implementation adds canonical input_manifest_sha256 and exact task-prompt byte verification; Linux CI is pending.",
     "exact_committed_tree_rerun_required": true,
     "ci_workflow": ".github/workflows/schema-validation.yml",
     "ci_step": "Validate and test Particle Physics Research Skill Benchmark",
@@ -511,7 +511,7 @@
     "ci_python_version": "3.12.16",
     "schema_validation_status": "PASS",
     "failure_summary": "Run 1149 passed schema validation, project integration tests, Skill scaffold tests, and 31 of 32 Benchmark tests. The sole failure was an old test that still treated a semantic text difference as a byte-serialization mismatch; the test and evaluator were corrected.",
-    "pending_changes": "Canonical input manifest and exact prompt-file binding added; one Round 2 test fixture was aligned to recompute the canonical hash after task ID mutation."
+    "pending_changes": "41-test canonical input/prompt verification suite pending current-head CI."
   },
   "limitations": [
     "This evaluator registry is a development artifact and not a security boundary; keep it out of model workspaces.",
