@@ -44,7 +44,7 @@ From the benchmark root, install the pinned evaluator dependencies and run:
 
 For Round 1, use the development task manifest. For Round 2, pass the sealed evaluator's combined holdout task manifest explicitly:
 
-    python evaluators/evaluate.py compare --records-dir path/to/run-artifacts/records --task-manifest path/to/evaluator-only/holdout-manifest.json --round round_2_full --seed 12345 --protocol-commit COMMIT_SHA --analysis-plan-sha256 ANALYSIS_PLAN_SHA256 --environment-lock-sha256 ENVIRONMENT_LOCK_SHA256 --artifact-root path/to/run-artifacts --output reports/comparison.json
+    python evaluators/evaluate.py compare --records-dir path/to/run-artifacts/records --task-manifest path/to/evaluator-only/holdout-manifest.json --round round_2_full --seed 12345 --protocol-commit COMMIT_SHA --analysis-plan-sha256 ANALYSIS_PLAN_SHA256 --environment-lock-sha256 ENVIRONMENT_LOCK_SHA256 --artifact-root path/to/run-artifacts --input-root path/to/staged-inputs --output reports/comparison.json
 
 The compare command consumes immutable A/B run records and a task manifest, verifies every artifact's actual bytes, recomputes scores, validates pairs, calculates task-family summaries, and writes a comparison report. Round 1 is never classified as confirmatory. The evaluator never executes model-generated source code.
 
