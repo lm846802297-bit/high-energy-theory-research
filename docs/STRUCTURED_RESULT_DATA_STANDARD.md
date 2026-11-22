@@ -63,6 +63,23 @@ The script checks schema validity, strict JSON numbers, referenced file paths/by
 
 Run the validator's regression suite with `python -m unittest discover -s docs/schemas/tests -v`. It covers non-standard JSON constants, float overflow/underflow, and input provenance locator requirements. A validation status of `passed` requires at least one check and every check to be `passed`; otherwise use `partial`, `failed`, or `inconclusive`. Check CSV headers, units, row counts, finite numeric values, and grid coverage. Verify every referenced output's path, byte size, and SHA-256. After pushing, retrieve the remote files and compare paths, sizes, counts, and hashes. Report archive status separately from scientific validation.
 
-## 7. Historical records
+## 7. Pull-request execution provenance (Schema v1.0.1)
+
+Schema v1.0.1 is a backward-compatible record-profile update. It preserves the v1.0.0 record roles and adds the optional `execution.source_control` object. For a GitHub `pull_request` execution, the object requires three distinct 40-character commit identifiers:
+
+- `pr_head_sha`: the exact source-branch commit under review;
+- `base_sha`: the exact target-branch commit used for the test merge;
+- `tested_merge_sha`: the synthetic merge commit checked out and actually executed by the workflow.
+
+These values are not interchangeable. In particular, GitHub's `GITHUB_SHA` for a `pull_request` event normally identifies the tested merge commit, not the PR head. Keep `source.commit_sha` as the actual checkout/source tree commit; use `execution.source_control` to make the PR relationship explicit. The optional object may also record `pr_number`, `pr_url`, `workflow_run_id`, and `workflow_run_attempt`.
+
+For local, push, and manually dispatched runs, set `event` accordingly; the PR-specific SHA triplet is required only when `event="pull_request"`. Do not fabricate PR fields for a non-PR run. Existing v1.0.0 records remain valid under the v1.0.0 schema and are not rewritten. To validate a v1.0.1 record, select its versioned schema explicitly:
+
+```bash
+python docs/schemas/validate_result_records.py --schema docs/schemas/research-result-record-v1.0.1.schema.json --repo-root . results/<run_label>/run_manifest.json
+python -m unittest discover -s docs/schemas/tests -v
+```
+
+## 8. Historical records
 
 Apply this standard to new runs from adoption onward. Preserve existing JSON, CSV, logs, plots, and historical manifests byte-for-byte. Do not fabricate missing metadata or rewrite raw values to satisfy the new profile. A new index or manifest may reference a legacy file, clearly labelling it as legacy and only adding fields supported by source evidence.
