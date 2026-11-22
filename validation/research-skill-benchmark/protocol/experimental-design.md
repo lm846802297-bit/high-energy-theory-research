@@ -72,7 +72,7 @@ The six development tasks are indexed in `tasks/development/manifest.json`.
 
 Round 1 runs T01–T03 (18 paired-arm runs). Round 2 runs all six development dimensions and adds a separately prepared sealed holdout set. The development tasks and their evaluator key may be used to refine the Skill; they cannot establish generalization on their own.
 
-T03 uses the complete pinned axial-vector manuscript PDF, not the earlier single-figure PDF. Its Git commit, blob SHA-1, file size, and companion TeX source are recorded in the task prompt and task manifest. The evaluator must calculate and record the PDF SHA-256 from the exact staged bytes before the task is scored. The PDF page number and rendered equation number must be read from the PDF, not inferred from TeX line numbers.
+T03 uses the complete pinned axial-vector manuscript PDF, not the earlier single-figure PDF. Its Git commit, blob SHA-1, file size, and companion TeX source are recorded in the task prompt and task manifest. The evaluator must stage the PDF once from the pinned commit into a read-only common input snapshot, verify the Git blob SHA-1, calculate and record the PDF SHA-256, and distribute byte-identical copies to A and B. Do not let each arm independently fetch the source over the network. The PDF page number and rendered equation number must be read from the PDF, not inferred from TeX line numbers.
 
 ## 5. Development and holdout separation
 
