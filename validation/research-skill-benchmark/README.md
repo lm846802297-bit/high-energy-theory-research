@@ -26,8 +26,8 @@ Only Skill availability/invocation is intentionally changed.
 
 ## Three-round evaluation
 
-1. **Round 1 — pilot A/B:** theory derivation, numerical integration, and source-grounded paper reading; three independent runs per arm per task (18 runs total).
-2. **Round 2 — six dimensions:** add symbolic calculation, figure audit, and reproducibility; use the holdout set and blinded scoring.
+1. **Round 1 — pilot A/B:** T01 theory/Jacobian derivation, T02 threshold numerical integration, and T03 source-grounded reading of the pinned axial-vector manuscript; three independent runs per arm per task (18 runs total).
+2. **Round 2 — six dimensions:** add T04 symbolic Dirac trace, T05 PDF figure audit, and T06 reproducibility package. Use a separately prepared holdout set and blinded scoring.
 3. **Round 3 — real projects:** evaluate in LZ, axial-vector, and ColliderAgent using read-only tasks first.
 
 ## Current status
