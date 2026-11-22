@@ -78,8 +78,8 @@
     {
       "path": "protocol/experimental-design.md",
       "role": "preregistered_experimental_design_and_pair_integrity_rules",
-      "git_blob_sha1": "0c76c05bf08ae514a4176b30c282cefde63a2388",
-      "size_bytes": 13500
+      "git_blob_sha1": "c510fee0ed165404b120b3f931b0a61ff5e857cb",
+      "size_bytes": 13804
     },
     {
       "path": "protocol/scoring-rubric.yaml",
@@ -97,13 +97,13 @@
       "path": "tasks/development/T06-reproducibility-audit.md",
       "role": "T06_model_visible_task_specification",
       "git_blob_sha1": "590e6d01dd448a7437bd18444a5348e9c8f2069c",
-      "size_bytes": 1594
+      "size_bytes": 1596
     },
     {
       "path": "tasks/development/T02-numerical-integral.md",
       "role": "model_visible_development_task_with_evaluator_reference_separated",
       "git_blob_sha1": "4e51745b18a63d62ff21249eeba2c01b6bdc5a9b",
-      "size_bytes": 1614
+      "size_bytes": 1617
     }
   ],
   "deterministic_evaluators": [
