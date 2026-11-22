@@ -1,0 +1,252 @@
+{
+  "schema_version": "1.0",
+  "evaluator_version": "1.0.0",
+  "status": "draft_not_frozen",
+  "model_workspace_visible": false,
+  "blinding": {
+    "evaluator_manifest_visible_to_models": false,
+    "development_key_visible_to_models": false,
+    "golden_outputs_visible_to_models": false,
+    "holdout_keys_visible_to_models": false,
+    "recommended_network_policy": "offline_after_staging"
+  },
+  "runtime": {
+    "python_minimum": "3.12",
+    "dependencies_file": "evaluators/requirements.txt",
+    "dependencies_are_exactly_pinned": true,
+    "dependencies": [
+      "jsonschema==4.26.0",
+      "PyYAML==6.0.3",
+      "mpmath==1.3.0",
+      "sympy==1.14.0",
+      "numpy==2.3.5",
+      "scipy==1.17.0",
+      "PyMuPDF==1.26.7"
+    ]
+  },
+  "evaluator_code": [
+    {
+      "path": "evaluators/evaluate.py",
+      "role": "run_schema_validation_pair_integrity_source_hashing_score_recomputation_and_comparison",
+      "git_blob_sha1": "ee922bb3bc6f4c350c0a2283728c5549cc1f3cd9",
+      "size_bytes": 32547
+    },
+    {
+      "path": "evaluators/test_evaluate.py",
+      "role": "unit_and_semantic_regression_tests",
+      "git_blob_sha1": "b16801c760d68a57db47ffdc2d1f881dadc544cc",
+      "size_bytes": 16244
+    },
+    {
+      "path": "evaluators/verify_dirac_trace.py",
+      "role": "independent_4x4_dirac_representation_and_clifford_algebra_check_for_T04",
+      "git_blob_sha1": "366a669a6e0053abe2bafab62778d766da21ea67",
+      "size_bytes": 4896
+    },
+    {
+      "path": "evaluators/verify_repro_package.py",
+      "role": "T06_hash_manifest_validation_and_independent_weighted_mean_recalculation_without_executing_model_code",
+      "git_blob_sha1": "ecbf5c416f24ded27cdd09c8025df0fa8b00fa98",
+      "size_bytes": 4112
+    },
+    {
+      "path": "evaluators/requirements.txt",
+      "role": "exactly_pinned_evaluator_dependencies",
+      "git_blob_sha1": "51e1219724b4460f1c2513fb8fe32b8598ed4686",
+      "size_bytes": 104
+    }
+  ],
+  "protocol_artifacts": [
+    {
+      "path": "protocol/run-record.schema.json",
+      "role": "strict_run_record_schema_with_A_B_conditional_Skill_constraints",
+      "git_blob_sha1": "eda496758f89ae018089b0d9e24ab5b5fab47a51",
+      "size_bytes": 11926
+    },
+    {
+      "path": "protocol/comparison-report.schema.json",
+      "role": "strict_machine_readable_comparison_report_schema",
+      "git_blob_sha1": "f6b0b34923e96d47f360bd0d7aa05a5edb194616",
+      "size_bytes": 4343
+    },
+    {
+      "path": "protocol/experimental-design.md",
+      "role": "preregistered_experimental_design_and_pair_integrity_rules",
+      "git_blob_sha1": "0c76c05bf08ae514a4176b30c282cefde63a2388",
+      "size_bytes": 13500
+    },
+    {
+      "path": "protocol/scoring-rubric.yaml",
+      "role": "weighted_score_and_preregistered_decision_thresholds",
+      "git_blob_sha1": "497a9346ff3c43c734d037bcb79ad0430bf9bbfa",
+      "size_bytes": 7557
+    },
+    {
+      "path": "tasks/development/manifest.json",
+      "role": "development_task_family_and_input_manifest",
+      "git_blob_sha1": "142c15d11afd8991f502b3a89ba8e5361bc4b63c",
+      "size_bytes": 4676
+    },
+    {
+      "path": "tasks/development/T06-reproducibility-audit.md",
+      "role": "T06_model_visible_task_specification",
+      "git_blob_sha1": "99c164b291c304e09860f8168049f4379b94a5c7",
+      "size_bytes": 1629
+    }
+  ],
+  "deterministic_evaluators": [
+    {
+      "id": "E-T01-T02-KALLEN-JACOBIAN",
+      "task_ids": [
+        "T01",
+        "T02"
+      ],
+      "role": "primary_exact_symbolic_and_high_precision_reference",
+      "repository": "lm846802297-bit/high-energy-theory-research",
+      "source_commit": "fb4bb38ded984f760375c93ec79d5c1ea6994530",
+      "path": "validation/skill-module-evaluation-2026-11-22/symbolic/derive_phase_space_jacobian.py",
+      "git_blob_sha1": "2d6ced1542d6af95838ef394dd56bb65359b6e10",
+      "scope": "Kallen factorization, complete ds/du Jacobian, and 50-digit original-s versus transformed-u integral comparison.",
+      "T02_reference": {
+        "value_GeV2": "0.141975883465984392640489856748572220501161185",
+        "visibility": "evaluator_only",
+        "acceptance": "Compare the model absolute integral with a preregistered absolute/relative tolerance; normalized-shape agreement alone is insufficient."
+      }
+    },
+    {
+      "id": "E-T02-LZ-CONVERGENCE-SUPPORT",
+      "task_ids": [
+        "T02"
+      ],
+      "role": "supporting_cross_check_not_primary_oracle",
+      "repository": "lm846802297-bit/high-energy-theory-research",
+      "source_commit": "fb4bb38ded984f760375c93ec79d5c1ea6994530",
+      "path": "validation/skill-module-evaluation-2026-11-22/numerical/convergence_phase_space.py",
+      "git_blob_sha1": "ca15ea3cecb2ec2d21302a409bc50cef7aa5011f",
+      "scope": "Separate LZ reduced three-body phase-space case with Gauss-Legendre orders 4 through 1024 and independent original-s SciPy quadrature. Not the numerical oracle for the T02 (1.0, 0.2, 0.5) GeV benchmark."
+    },
+    {
+      "id": "E-T03-SOURCE-READING",
+      "task_ids": [
+        "T03"
+      ],
+      "role": "manual_blinded_source_review",
+      "source_bundle": [
+        {
+          "repository": "lm846802297-bit/axial-vector-review-response",
+          "commit": "a7ac6456dafb27492183912fe4abbaa73a9455f7",
+          "path": "archive/manuscript-baselines/axial_vector_model_building-v6.pdf",
+          "git_blob_sha1": "be8f472a8cc3c35975dcb5970c9be996fde2d985",
+          "size_bytes": 2759986
+        },
+        {
+          "repository": "lm846802297-bit/axial-vector-review-response",
+          "commit": "a7ac6456dafb27492183912fe4abbaa73a9455f7",
+          "path": "overleaf-source/axial-vector-model-building-v6/main-v6.tex",
+          "git_blob_sha1": "b99f9e26a0b57acd0a4938ea6e03fc691a82becb",
+          "size_bytes": 71477
+        }
+      ],
+      "scope": "Verify original equation/Figure numbering, PDF page numbers, panel interpretation, benchmark assumptions, and distinctions between official limits and phenomenological recasts. PDF page numbers must be read from the rendered PDF."
+    },
+    {
+      "id": "E-T04-DIRAC-TRACE",
+      "task_ids": [
+        "T04"
+      ],
+      "role": "independent_explicit_matrix_representation_check",
+      "path": "evaluators/verify_dirac_trace.py",
+      "git_blob_sha1": "366a669a6e0053abe2bafab62778d766da21ea67",
+      "scope": "Checks Clifford algebra and the stated trace against an explicit 4x4 Dirac representation with metric (+---). Python standard library only."
+    },
+    {
+      "id": "E-T05A-PDF-TEXT-SCREEN",
+      "task_ids": [
+        "T05"
+      ],
+      "role": "deterministic_pdf_text_screen_plus_visual_review",
+      "repository": "lm846802297-bit/high-energy-theory-research",
+      "source_commit": "fb4bb38ded984f760375c93ec79d5c1ea6994530",
+      "path": "validation/skill-module-evaluation-2026-11-22/pdf/audit_pdf_text_reconstructed.py",
+      "git_blob_sha1": "f4315e35e5007a5201f3f7f09a6b5f554cc5306e",
+      "scope": "Effective text size and character/word spacing for supported PDF content streams. Screening only; does not replace visual inspection, cover all transforms, or establish journal compliance."
+    },
+    {
+      "id": "E-T05B-DATA-TO-FIGURE",
+      "task_ids": [
+        "T05"
+      ],
+      "role": "pinned_csv_to_svg_regeneration_with_sealed_golden_outputs",
+      "repository": "lm846802297-bit/LZ-3-body-for-hdm",
+      "source_commit": "8902abdb8bc44cad690059f9985204b4c0737657",
+      "generator": {
+        "path": "research/three_body_calculation_and_validation/plot_user_dsigma_curve.py",
+        "git_blob_sha1": "1a1fd7ccca9961d10d4eea83df66ecaaf8377baa",
+        "size_bytes": 8378
+      },
+      "model_visible_inputs": [
+        {
+          "path": "research/three_body_calculation_and_validation/results/fixed_speed_xe131_dsigma_450kev.csv",
+          "git_blob_sha1": "a3b590d1705d1478a293eb9e37f6587f2040d57c",
+          "size_bytes": 9348
+        },
+        {
+          "path": "research/three_body_calculation_and_validation/results/local_minima_refinement_1keV.csv",
+          "git_blob_sha1": "423bce6526ae931f6d0b95262e3a405872e44d48",
+          "size_bytes": 3949
+        }
+      ],
+      "evaluator_only_reference_outputs": [
+        {
+          "path": "research/three_body_calculation_and_validation/results/plots/fixed_speed_xe131_dsigma_450kev.svg",
+          "git_blob_sha1": "067903cbae2303de551d1f0b074b9603964b2244",
+          "size_bytes": 10223
+        },
+        {
+          "path": "research/three_body_calculation_and_validation/results/plots/xe131_gcn_jj55_response_ratio_450kev.svg",
+          "git_blob_sha1": "620f85205c465bdd6364a1f2b6fad103069e9915",
+          "size_bytes": 8961
+        }
+      ],
+      "command": "python plot_user_dsigma_curve.py --csv results/fixed_speed_xe131_dsigma_450kev.csv --minima results/local_minima_refinement_1keV.csv --out-dir results/plots",
+      "acceptance": "Verify staged input Git blob IDs, sizes and SHA-256; run the unmodified pinned generator; hash outputs; compare byte identity with golden SVGs; independently spot-check plotted coordinates and inspect rendered outputs."
+    },
+    {
+      "id": "E-T06-REPRO-PACKAGE",
+      "task_ids": [
+        "T06"
+      ],
+      "role": "hash_manifest_validation_and_independent_result_recalculation",
+      "path": "evaluators/verify_repro_package.py",
+      "git_blob_sha1": "ecbf5c416f24ded27cdd09c8025df0fa8b00fa98",
+      "scope": "Verifies exact T06 CSV bytes, source/input/output SHA-256 values, manifest bindings, environment fields, and weighted mean. Does not execute model-generated code."
+    }
+  ],
+  "blinded_review": {
+    "reviewers": 2,
+    "arm_labels_hidden": true,
+    "one_point_difference": "documented_consensus_note",
+    "third_adjudicator_for": [
+      "two_or_more_point_difference",
+      "hard_gate_disagreement",
+      "fabricated_evidence_disagreement"
+    ],
+    "statistics": [
+      "exact_agreement",
+      "quadratic_weighted_cohen_kappa"
+    ]
+  },
+  "test_suite": {
+    "command": "python -m unittest discover -s evaluators -v",
+    "tests_defined": 17,
+    "development_run": "17 passed, 0 failed on ChatGPT Linux draft",
+    "exact_committed_tree_rerun_required": true
+  },
+  "limitations": [
+    "This evaluator registry is a development artifact and not a security boundary; keep it out of model workspaces.",
+    "T03 requires human source interpretation and direct PDF-page verification.",
+    "T05-A PDF visual inspection remains a human check in addition to the deterministic text screen.",
+    "T06 verifies the recorded package and independently recomputes the result; it does not prove submitted source execution unless trusted runner evidence is available.",
+    "The local test run preceded the final GitHub commit; rerun the suite against the exact committed tree before claiming evaluator acceptance."
+  ]
+}
