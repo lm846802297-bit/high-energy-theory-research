@@ -304,14 +304,14 @@
   "test_suite": {
     "command": "python -m unittest discover -s evaluators -v",
     "tests_defined": 33,
-    "development_run": "All 33 Benchmark evaluator tests passed in GitHub Actions Run 1152 on PR head fcb85d9aad3689d2fb7cdf1105a9b99e27ca594d. The same run passed schema validation, T01/T02 symbolic and numerical checks, T05 PDF screening and semantic SVG baseline validation, Python compilation, and the UV-EFT provenance bundle.",
+    "development_run": "All 33 Benchmark evaluator tests passed in GitHub Actions Run 1154 on PR head 7db1ded743f173a489331124c0b36140ab8cd382. The same run passed schema validation, T01/T02 symbolic and numerical checks, T05 PDF screening and semantic SVG baseline validation, Python compilation, and the UV-EFT provenance bundle.",
     "exact_committed_tree_rerun_required": true,
     "ci_workflow": ".github/workflows/schema-validation.yml",
     "ci_step": "Validate and test Particle Physics Research Skill Benchmark",
-    "last_verified_head_sha": "fcb85d9aad3689d2fb7cdf1105a9b99e27ca594d",
-    "last_verified_run_id": 45053311394,
-    "last_verified_run_number": 1152,
-    "last_verified_run_url": "https://github.com/lm846802297-bit/high-energy-theory-research/actions/runs/45053311394",
+    "last_verified_head_sha": "7db1ded743f173a489331124c0b36140ab8cd382",
+    "last_verified_run_id": 45053544748,
+    "last_verified_run_number": 1154,
+    "last_verified_run_url": "https://github.com/lm846802297-bit/high-energy-theory-research/actions/runs/45053544748",
     "last_verified_conclusion": "success",
     "ci_python_version": "3.12.16",
     "schema_validation_status": "PASS",
@@ -327,7 +327,7 @@
     "The historical T05 Golden SVGs are not byte-identical to the current pinned plotter serialization. Run 1145 showed exact identity of all three plotted path-data strings; only SVG serialization and coordinate formatting differ. The verifier now checks semantic geometry/labels and separately requires submitted model outputs to match fresh trusted-generator bytes.",
     "T05-A still requires visual inspection; the semantic SVG comparison is a deterministic data/structure check, not a substitute for reviewing the rendered plots.",
     "Run 1152 passed all 33 evaluator tests and the complete CI job. T05 historical Golden SVG byte identity remains false by design; semantic curve/structure checks pass. This run did not evaluate model-submitted A/B SVG outputs, which require the submission-mode evaluator during scored task execution.",
-    "The latest commit after Run 1152 updates only this evaluator-manifest CI evidence; it does not change evaluator code, tests, tasks, schemas, rubric, or workflow. CI will run again on the manifest evidence commit."
+    "Run 1154 passed all 33 evaluator tests and the full CI job on HEAD 7db1ded743f173a489331124c0b36140ab8cd382. The following commit updates only this evaluator-manifest CI evidence; evaluator code, tests, task prompts, schemas, rubric, and workflow are unchanged."
   ],
   "ci_integration": {
     "workflow": ".github/workflows/schema-validation.yml",
@@ -341,9 +341,9 @@
     ],
     "current_head_run_status": "success_on_pre_manifest_evidence_commit",
     "last_unit_suite_run": {
-      "head_sha": "fcb85d9aad3689d2fb7cdf1105a9b99e27ca594d",
-      "run_id": 45053311394,
-      "run_number": 1152,
+      "head_sha": "7db1ded743f173a489331124c0b36140ab8cd382",
+      "run_id": 45053544748,
+      "run_number": 1154,
       "conclusion": "success",
       "tests_passed": 33
     },
@@ -351,9 +351,9 @@
     "workflow_size_bytes": 7820
   },
   "latest_deterministic_ci_evidence": {
-    "run_id": 45053311394,
-    "run_number": 1152,
-    "head_sha": "fcb85d9aad3689d2fb7cdf1105a9b99e27ca594d",
+    "run_id": 45053544748,
+    "run_number": 1154,
+    "head_sha": "7db1ded743f173a489331124c0b36140ab8cd382",
     "conclusion": "success",
     "environment": {
       "python": "3.12.16",
@@ -394,14 +394,19 @@
     },
     "UV_EFT_provenance_bundle": {
       "status": "PASS",
-      "artifact_id": 14766845008,
-      "size_bytes": 152765,
-      "sha256": "26032c821ee41d100f4563ed7d915a47b06a4a2754b9cc9576b384191b917ba4"
+      "artifact_id": 14765599427,
+      "size_bytes": 152758,
+      "sha256": "1fbda930ad9279d7b32f6713ccfbe7be93b3686eda7758dbc9027b610a37e3c8"
     },
     "evaluator_artifacts": {
-      "artifact_id": 14766069568,
-      "size_bytes": 9544,
-      "sha256": "6426a37d663a11d7d7d1bb00b9c4c76436ab76a423851212501a578d617b6534"
+      "artifact_id": 14766491479,
+      "size_bytes": 9541,
+      "sha256": "2759e358e72e58dfe20a7e25dbb40e8a0154eca4220a70f83da04d66a47fdaaa"
+    },
+    "candidate_schema_validation_report": {
+      "artifact_id": 14766666125,
+      "size_bytes": 3808,
+      "sha256": "1b991a6de29ec08bf83a32cd39d7d57c67a842d21551cf433275763881b75182"
     }
   }
 }
