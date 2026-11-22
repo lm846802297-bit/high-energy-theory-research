@@ -50,6 +50,17 @@ The local content-stream audit found 37 text runs, a minimum effective size of 6
 
 The local audit implementation was reconstructed from the method of the pinned Nature Skills script, but its byte identity with the upstream Git blob was not established. The reconstructed script is included alongside the audit result.
 
+## Latest installer hardening status
+
+At the later installer review, two additional safeguards were added:
+
+- Rollback cleanup preserves the previous installation backup unless the new installation is confirmed present or no backup remains.
+- Existing installation manifests are now checked for the expected source repository, a 40-character lowercase commit SHA, all required Skill files, valid 64-character SHA-256 entries, and an exact match with the installed file inventory.
+
+The Windows PowerShell regression script now contains six rollback-cleanup cases and seven manifest-integrity cases (13 total). The Python Skill contract suite now contains seven tests, including a check that the installer helper and Windows regression script are included.
+
+**These latest 13 PowerShell cases and the seventh Python contract test have not yet been executed.** The earlier six-test Python result and 45-test central Windows result apply to earlier revisions, not the latest installer-hardening HEAD. Re-run them before treating the latest HEAD as validated.
+
 ## Windows Codex discovery
 
 The Windows follow-up used PR head `92e57041218bae574b2acfbd2c8eda5a61a89648`, Windows build 26300, Codex Desktop 26.1117.4957.0, and bundled codex-cli 0.171.0-alpha.13.
