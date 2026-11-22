@@ -105,3 +105,16 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\skills\high-energy-theory-
 ```
 
 The script checks the repository source, project-scoped and user-scoped discovery paths, required reference files, and whether the Codex CLI is on PATH. It does not install or copy files and cannot prove that an already-running Codex session has indexed the Skill. After the filesystem check, start a fresh Codex session, inspect `/skills`, and explicitly invoke `high-energy-theory-research` once to confirm runtime discovery. See the [OpenAI Skill evaluation guidance](https://developers.openai.com/blog/eval-skills) for explicit invocation and forward-testing practices.
+
+## Windows Codex Desktop caveat
+
+The documented project path is `.agents/skills/<skill-name>/`, but filesystem presence is not proof of Windows Desktop runtime discovery. As of 2026-11-22, [openai/codex issue #40458](https://github.com/openai/codex/issues/40458) remains open and reports that the Windows Codex Desktop App may omit repository-local skills while still loading user, system, and plugin skills.
+
+Test the exact host being used:
+
+- **Codex CLI:** open a new session from the target repository, inspect `/skills`, and explicitly invoke the Skill.
+- **Codex Desktop for Windows:** open a new session for the trusted repository and inspect the app's native Available skills list; then explicitly invoke the Skill and confirm its references load.
+
+Record the Codex host (CLI or Desktop), app/CLI version, Windows build, repository root, trust state, discovered Skill name, and explicit-invocation result. The issue is a known report, not proof that every Windows Desktop build fails.
+
+If project-scope discovery fails, a copy under `%USERPROFILE%\.agents\skills\` can be used as a diagnostic comparison. That path is global across projects; do not treat it as a project-isolated fix or copy it there without an explicit installation decision.
