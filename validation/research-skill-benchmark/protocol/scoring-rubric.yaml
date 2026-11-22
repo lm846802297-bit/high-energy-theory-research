@@ -75,3 +75,51 @@ reporting:
     - "Time, tokens if available, tool calls, and compute cost if available"
     - "Deviations and missing data"
   pilot_inference: "Three repetitions per task/arm are exploratory. Do not claim statistical significance."
+
+scoring_formula:
+  expression: "Q = 25 * sum((weight_percent / 100) * dimension_score)"
+  scale: [0, 100]
+  recompute_from_dimension_scores: true
+  model_reported_composite_is_authoritative: false
+  paired_effect: "delta_Q = Q_with_skill - Q_no_skill"
+  aggregation:
+    within_task: "Mean paired delta_Q across repetitions for each task."
+    across_tasks: "Equal-weight macro-average across independent task IDs."
+    correlated_task_families: "T01 and T02 share threshold_kinematics and are not independent task families for generalization claims."
+practical_effect_threshold:
+  minimum_macro_mean_delta_q_points: 5
+  rationale: "Five points on the 0-100 scale corresponds to an average 0.2-point gain on the 0-4 rubric scale if distributed evenly."
+statistical_analysis:
+  round_1: "Exploratory only; no confirmatory significance claim."
+  round_2_primary_endpoint: "Equal-weight macro-average of per-task mean paired delta_Q on sealed holdout."
+  confidence_interval: "95% cluster bootstrap over independent task IDs; preserve repetitions within sampled tasks; 10000 resamples."
+  minimum_holdout_tasks_per_dimension: 2
+  minimum_paired_repetitions_per_holdout_task: 3
+  minimum_holdout_runs: 72
+  power_analysis: "May increase sample size before unsealing, never reduce these minima."
+reviewer_process:
+  independent_reviewers: 2
+  blind_arm_labels: true
+  preserve_original_score_sheets: true
+  report:
+    - exact_agreement
+    - quadratic_weighted_cohen_kappa
+  third_adjudicator_required_if:
+    - "Any dimension differs by at least 2 points."
+    - "Hard-gate disagreement."
+    - "Disagreement over fabricated source or validation evidence."
+  preserve_adjudication: true
+decision_rules:
+  positive:
+    - "Holdout macro_mean_delta_Q >= 5."
+    - "95% cluster-bootstrap interval lower bound > 0."
+    - "Mean autonomy delta >= -0.5."
+    - "No B-only critical hard-gate failures."
+    - "No unresolved pair-integrity or protocol deviation."
+  negative:
+    - "95% interval upper bound < 0, or repeated B-only critical failures establish material regression."
+  mixed:
+    - "Aggregate improvement with material task-family/dimension regression, or a B-only hard-gate failure."
+  inconclusive:
+    - "Interval includes zero, practical threshold is not met, study is underpowered, or evidence is missing."
+  pilot_decision: "Round 1 cannot establish Positive or Negative; descriptive diagnostics only."
