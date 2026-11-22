@@ -1,0 +1,128 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/research-skill-benchmark/run-record.schema.json",
+  "title": "Particle Physics Research Skill Benchmark Run Record",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "run_id",
+    "pair_id",
+    "task_id",
+    "arm",
+    "repeat",
+    "started_at_utc",
+    "model",
+    "runtime",
+    "task_input",
+    "tools",
+    "budget",
+    "skill",
+    "artifacts",
+    "evaluation",
+    "deviations"
+  ],
+  "properties": {
+    "run_id": {"type": "string", "minLength": 1},
+    "pair_id": {"type": "string", "minLength": 1},
+    "task_id": {"type": "string", "minLength": 1},
+    "arm": {"enum": ["no-skill", "with-skill"]},
+    "repeat": {"type": "integer", "minimum": 1},
+    "started_at_utc": {"type": "string", "format": "date-time"},
+    "ended_at_utc": {"type": ["string", "null"], "format": "date-time"},
+    "model": {
+      "type": "object",
+      "required": ["label", "immutable_id", "reasoning_effort"],
+      "properties": {
+        "label": {"type": "string"},
+        "immutable_id": {"type": ["string", "null"]},
+        "reasoning_effort": {"type": ["string", "null"]},
+        "sampling": {"type": ["object", "null"]}
+      }
+    },
+    "runtime": {
+      "type": "object",
+      "required": ["os", "codex_product", "codex_version", "python_version"],
+      "properties": {
+        "os": {"type": "string"},
+        "codex_product": {"type": "string"},
+        "codex_version": {"type": "string"},
+        "python_version": {"type": ["string", "null"]},
+        "hardware": {"type": ["object", "null"]}
+      }
+    },
+    "task_input": {
+      "type": "object",
+      "required": ["prompt_sha256", "input_manifest_sha256", "source_commit"],
+      "properties": {
+        "prompt_sha256": {"$ref": "#/$defs/sha256"},
+        "input_manifest_sha256": {"$ref": "#/$defs/sha256"},
+        "source_commit": {"type": ["string", "null"]}
+      }
+    },
+    "tools": {
+      "type": "object",
+      "required": ["allowlist", "network_policy"],
+      "properties": {
+        "allowlist": {"type": "array", "items": {"type": "string"}},
+        "network_policy": {"type": "string"}
+      }
+    },
+    "budget": {
+      "type": "object",
+      "required": ["wall_time_seconds", "tool_call_limit"],
+      "properties": {
+        "wall_time_seconds": {"type": "number", "minimum": 0},
+        "token_limit": {"type": ["integer", "null"], "minimum": 1},
+        "tool_call_limit": {"type": "integer", "minimum": 1}
+      }
+    },
+    "skill": {
+      "type": "object",
+      "required": ["available", "source_commit", "manifest_sha256"],
+      "properties": {
+        "available": {"type": "boolean"},
+        "source_commit": {"type": ["string", "null"]},
+        "manifest_sha256": {"anyOf": [{"$ref": "#/$defs/sha256"}, {"type": "null"}]},
+        "invocation": {"type": ["string", "null"]},
+        "references_loaded": {"type": "array", "items": {"type": "string"}}
+      }
+    },
+    "artifacts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["path", "sha256", "role"],
+        "properties": {
+          "path": {"type": "string"},
+          "sha256": {"$ref": "#/$defs/sha256"},
+          "role": {"type": "string"}
+        }
+      }
+    },
+    "evaluation": {
+      "type": "object",
+      "required": ["hard_gates", "dimension_scores", "autonomy_score"],
+      "properties": {
+        "hard_gates": {"type": "object"},
+        "dimension_scores": {
+          "type": "object",
+          "required": ["scientific_correctness", "independent_validation", "reproducibility", "evidence_quality", "efficiency"],
+          "properties": {
+            "scientific_correctness": {"$ref": "#/$defs/score"},
+            "independent_validation": {"$ref": "#/$defs/score"},
+            "reproducibility": {"$ref": "#/$defs/score"},
+            "evidence_quality": {"$ref": "#/$defs/score"},
+            "efficiency": {"$ref": "#/$defs/score"}
+          }
+        },
+        "autonomy_score": {"$ref": "#/$defs/score"},
+        "weighted_score": {"type": ["number", "null"], "minimum": 0, "maximum": 100}
+      }
+    },
+    "deviations": {"type": "array", "items": {"type": "string"}}
+  },
+  "$defs": {
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "score": {"type": ["integer", "null"], "minimum": 0, "maximum": 4}
+  }
+}
