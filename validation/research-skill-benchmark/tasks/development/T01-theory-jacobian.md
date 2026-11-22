@@ -19,10 +19,3 @@ Let (m_1,m_2>0), and define (s=W^2-(m_1+m_2)^2). Consider the Källén function
 ## Required output
 
 A derivation with explicit assumptions, the transformed measure, a dimensional check, and one independent algebraic or numerical check. Do not assume that normalized-shape agreement validates an absolute rate.
-
-## Evaluator notes (not shown to the model)
-
-- (\lambda=s(s+4m_1m_2)).
-- (ds/du=2\Delta u).
-- (s) and (Delta) have mass dimension 2; (u) is dimensionless.
-- A missing factor 2 changes an absolute integral by a factor 1/2 but cancels from unit-area normalization if it is a global constant.
