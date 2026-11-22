@@ -1,10 +1,13 @@
 [CmdletBinding()]
 param(
-    [string]$RepositoryRoot = (Join-Path $PSScriptRoot '..'),
+    [string]$RepositoryRoot,
     [string]$SkillsRoot = (Join-Path $env:USERPROFILE '.agents\skills')
 )
 
 $ErrorActionPreference = 'Stop'
+if (-not $RepositoryRoot) {
+    $RepositoryRoot = Join-Path $PSScriptRoot '..'
+}
 $sourceRepository = 'https://github.com/lm846802297-bit/high-energy-theory-research.git'
 $skillName = 'high-energy-theory-research'
 $skillPath = "skills/$skillName"
