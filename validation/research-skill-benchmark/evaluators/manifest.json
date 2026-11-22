@@ -28,14 +28,14 @@
     {
       "path": "evaluators/evaluate.py",
       "role": "run_schema_validation_pair_integrity_source_hashing_score_recomputation_and_comparison",
-      "git_blob_sha1": "ee922bb3bc6f4c350c0a2283728c5549cc1f3cd9",
-      "size_bytes": 32547
+      "git_blob_sha1": "a629a926d11155dea75c14b4cce33e357e935ab7",
+      "size_bytes": 34703
     },
     {
       "path": "evaluators/test_evaluate.py",
       "role": "unit_and_semantic_regression_tests",
-      "git_blob_sha1": "b16801c760d68a57db47ffdc2d1f881dadc544cc",
-      "size_bytes": 16244
+      "git_blob_sha1": "5bf6d3187ec8798a3b448e5490d2f88b5a156223",
+      "size_bytes": 22694
     },
     {
       "path": "evaluators/verify_dirac_trace.py",
@@ -58,16 +58,16 @@
     {
       "path": "evaluators/verify_figure_regeneration.py",
       "role": "T05B_pinned_plot_script_execution_and_byte_for_byte_golden_SVG_comparison",
-      "git_blob_sha1": "fd03086d6f6006abd389ed773ae32256cd449f3e",
-      "size_bytes": 6233
+      "git_blob_sha1": "6c4555b323e3908c0a02952764e5611f1c5e9229",
+      "size_bytes": 6261
     }
   ],
   "protocol_artifacts": [
     {
       "path": "protocol/run-record.schema.json",
       "role": "strict_run_record_schema_with_A_B_conditional_Skill_constraints",
-      "git_blob_sha1": "eda496758f89ae018089b0d9e24ab5b5fab47a51",
-      "size_bytes": 11926
+      "git_blob_sha1": "157f32121e26eeaf2276027a122b20ef2179e5cc",
+      "size_bytes": 17618
     },
     {
       "path": "protocol/comparison-report.schema.json",
@@ -96,8 +96,14 @@
     {
       "path": "tasks/development/T06-reproducibility-audit.md",
       "role": "T06_model_visible_task_specification",
-      "git_blob_sha1": "99c164b291c304e09860f8168049f4379b94a5c7",
-      "size_bytes": 1629
+      "git_blob_sha1": "590e6d01dd448a7437bd18444a5348e9c8f2069c",
+      "size_bytes": 1594
+    },
+    {
+      "path": "tasks/development/T02-numerical-integral.md",
+      "role": "model_visible_development_task_with_evaluator_reference_separated",
+      "git_blob_sha1": "4e51745b18a63d62ff21249eeba2c01b6bdc5a9b",
+      "size_bytes": 1614
     }
   ],
   "deterministic_evaluators": [
@@ -249,8 +255,8 @@
   },
   "test_suite": {
     "command": "python -m unittest discover -s evaluators -v",
-    "tests_defined": 19,
-    "development_run": "19 passed, 0 failed on ChatGPT Linux draft",
+    "tests_defined": 24,
+    "development_run": "Not run against the current committed tree. The earlier 17-test draft run predates the two T05 tests and the current artifact/hard-gate checks; final execution is pending.",
     "exact_committed_tree_rerun_required": true
   },
   "limitations": [
@@ -258,6 +264,6 @@
     "T03 requires human source interpretation and direct PDF-page verification.",
     "T05-A PDF visual inspection remains a human check in addition to the deterministic text screen.",
     "T06 verifies the recorded package and independently recomputes the result; it does not prove submitted source execution unless trusted runner evidence is available.",
-    "The local test run preceded the final GitHub commit; rerun the suite against the exact committed tree before claiming evaluator acceptance."
+    "The current exact-commit 24-test suite has not been executed; do not claim evaluator acceptance until it runs on the committed tree."
   ]
 }

@@ -87,7 +87,8 @@ def verify_figure_regeneration(manifest_path: Path, model_input_root: Path, gold
             "--minima", str(minima_copy),
             "--out-dir", str(output_dir),
         ]
-        env = {"PATH": os.environ.get("PATH", ""), "PYTHONIOENCODING": "utf-8", "HOME": str(work)}
+        env = os.environ.copy()
+        env.update({"PYTHONIOENCODING": "utf-8", "HOME": str(work), "USERPROFILE": str(work)})
         completed = subprocess.run(command, cwd=work, env=env, capture_output=True, text=True, timeout=timeout_seconds, check=False)
         if completed.returncode != 0:
             raise ValueError(f"Pinned plotting script failed ({completed.returncode}): {completed.stderr[-2000:]}")

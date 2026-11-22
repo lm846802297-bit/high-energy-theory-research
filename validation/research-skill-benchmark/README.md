@@ -35,8 +35,8 @@ T01 and T02 share the threshold_kinematics family and count as one independent t
 From the benchmark root, install the pinned evaluator dependencies and run:
 
     python -m unittest discover -s evaluators -v
-    python evaluators/evaluate.py validate-run path/to/run-record.json
-    python evaluators/evaluate.py validate-pair path/to/A.json path/to/B.json
+    python evaluators/evaluate.py validate-run path/to/run-record.json --artifact-root path/to/run-artifacts
+    python evaluators/evaluate.py validate-pair path/to/A.json path/to/B.json --artifact-root path/to/run-artifacts
     python evaluators/evaluate.py verify-sources --input-root path/to/staged-inputs
     python evaluators/verify_dirac_trace.py --json-out path/to/dirac-check.json
     python evaluators/verify_repro_package.py --source path/to/solution.py --input path/to/input.csv --output path/to/result.json --manifest path/to/manifest.json

@@ -33,4 +33,3 @@ Do not add dependencies if the Python standard library is sufficient. Do not cla
 
 The independent evaluator verifies exact input bytes, source/input/output SHA-256 values, the manifest binding, and the numerical result by recomputing the weighted mean directly from the CSV. It does not execute model-generated source code. Execution evidence must come from the recorded task runner, command, exit status, stdout/stderr, and transcript/log artifacts.
 
-Expected weighted mean: exactly 1.

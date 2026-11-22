@@ -27,7 +27,3 @@ This is a reduced three-body phase-space integral in a specified constant-amplit
 ## Acceptance scope
 
 The integral has dimension GeV². A unit-area normalized shape can hide a missing global Jacobian factor; validate the absolute integral as well. Do not infer a cross section, event rate, or detector prediction from this kernel alone.
-
-Evaluator reference for these inputs:
-`0.141975883465984392640489856748572220501161185 GeV^2`.
-The high-precision reference is evaluator-only and must not be mounted into the model workspace.

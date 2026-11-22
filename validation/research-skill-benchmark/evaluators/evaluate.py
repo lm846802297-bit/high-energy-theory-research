@@ -116,6 +116,7 @@ def validate_run(
     schema_path: Path = DEFAULT_RUN_SCHEMA,
     rubric_path: Path = DEFAULT_RUBRIC,
     require_scored: bool = True,
+    artifact_root: Path | None = None,
 ) -> float | None:
     validate_schema(record, schema_path)
     rubric = read_rubric(rubric_path)
@@ -155,6 +156,11 @@ def validate_run(
     autonomy_right = reviewers[1].get("autonomy_score")
     autonomy_disagreement = autonomy_left != autonomy_right
     hard_disagreement = reviewers[0].get("hard_gates") != reviewers[1].get("hard_gates")
+    if adjudication is not None:
+        if adjudication.get("final_hard_gates") != evaluation["hard_gates"]:
+            raise EvaluationError(f"Run {record['run_id']} final hard gates disagree with adjudication")
+    elif not hard_disagreement and evaluation["hard_gates"] != reviewers[0]["hard_gates"]:
+        raise EvaluationError(f"Run {record['run_id']} final hard gates differ from unanimous reviewer gates")
     needs_adjudication = hard_disagreement or any(abs(float(a) - float(b)) >= 2 for _, a, b in disagreements)
     if autonomy_disagreement and autonomy_left is not None and autonomy_right is not None:
         needs_adjudication = needs_adjudication or abs(float(autonomy_left) - float(autonomy_right)) >= 2
@@ -181,6 +187,8 @@ def validate_run(
     missing_artifacts = sorted(required_artifacts - artifact_paths)
     if missing_artifacts:
         raise EvaluationError(f"Run {record['run_id']} is missing required artifact records: {missing_artifacts}")
+    if artifact_root is not None:
+        verify_run_artifacts(record, artifact_root)
     skill = record["skill"]
     expected_skill_commit = record["protocol"].get("skill_source_commit")
     if record["arm"] == "with-skill" and skill.get("source_commit") != expected_skill_commit:
@@ -219,9 +227,10 @@ def validate_pair(
     second: dict[str, Any],
     schema_path: Path = DEFAULT_RUN_SCHEMA,
     rubric_path: Path = DEFAULT_RUBRIC,
+    artifact_root: Path | None = None,
 ) -> tuple[dict[str, Any], dict[str, Any]]:
-    validate_run(first, schema_path, rubric_path)
-    validate_run(second, schema_path, rubric_path)
+    validate_run(first, schema_path, rubric_path, artifact_root=artifact_root)
+    validate_run(second, schema_path, rubric_path, artifact_root=artifact_root)
     if {first["arm"], second["arm"]} != {"no-skill", "with-skill"}:
         raise EvaluationError("A valid pair must contain exactly one no-skill and one with-skill record")
     a = first if first["arm"] == "no-skill" else second
@@ -233,6 +242,9 @@ def validate_pair(
         raise EvaluationError("A/B runs must have distinct run_id values")
     if a["execution"]["transcript_artifact"] == b["execution"]["transcript_artifact"]:
         raise EvaluationError("A/B runs must have separate transcript artifacts")
+    shared_artifacts = {item["path"] for item in a["artifacts"]} & {item["path"] for item in b["artifacts"]}
+    if shared_artifacts:
+        raise EvaluationError(f"A/B runs must have separate artifact paths: {sorted(shared_artifacts)}")
     control_a = _control_projection(a)
     control_b = _control_projection(b)
     if control_a != control_b:
@@ -277,7 +289,26 @@ def verify_source_record(record: dict[str, Any], local_path: Path) -> dict[str, 
     return actual
 
 
-def _quantile(sorted_values: list[float], probability: float) -> float:
+def verify_run_artifacts(record: dict[str, Any], artifact_root: Path) -> list[dict[str, Any]]:
+    root = artifact_root.resolve()
+    verified: list[dict[str, Any]] = []
+    for artifact in record["artifacts"]:
+        relative = Path(artifact["path"])
+        if relative.is_absolute():
+            raise EvaluationError(f"Artifact path must be relative: {artifact['path']}")
+        path = (root / relative).resolve()
+        if not path.is_relative_to(root):
+            raise EvaluationError(f"Artifact path escapes artifact root: {artifact['path']}")
+        if not path.is_file():
+            raise EvaluationError(f"Missing run artifact: {artifact['path']}")
+        actual_sha = sha256(path.read_bytes())
+        if actual_sha != artifact["sha256"]:
+            raise EvaluationError(f"Artifact SHA-256 mismatch: {artifact['path']}")
+        verified.append({"path": artifact["path"], "sha256": actual_sha, "status": "PASS"})
+    return verified
+
+
+def _quantile(sorted_values: list[float], probability: float):
     if not sorted_values:
         raise EvaluationError("Cannot calculate quantile of empty values")
     position = (len(sorted_values) - 1) * probability
@@ -370,6 +401,7 @@ def compare_records(
     seed: int,
     schema_path: Path = DEFAULT_RUN_SCHEMA,
     rubric_path: Path = DEFAULT_RUBRIC,
+    artifact_root: Path | None = None,
 ) -> dict[str, Any]:
     task_info = {item["id"]: item for item in task_manifest.get("tasks", [])}
     if not task_info:
@@ -396,7 +428,7 @@ def compare_records(
     for pair_id, members in sorted(by_pair.items()):
         if len(members) != 2:
             raise EvaluationError(f"Pair {pair_id} has {len(members)} records; expected exactly 2")
-        a, b = validate_pair(members[0], members[1], schema_path, rubric_path)
+        a, b = validate_pair(members[0], members[1], schema_path, rubric_path, artifact_root)
         task = task_info[a["task_id"]]
         family = task.get("task_family", a["task_id"])
         qa = float(a["evaluation"]["weighted_score"])
@@ -559,13 +591,13 @@ def compare_records(
 
 def command_validate_run(args: argparse.Namespace) -> dict[str, Any]:
     record = read_json(args.run_record)
-    score = validate_run(record, args.schema, args.rubric, require_scored=not args.allow_unscored)
+    score = validate_run(record, args.schema, args.rubric, require_scored=not args.allow_unscored, artifact_root=args.artifact_root)
     return {"status": "PASS", "run_id": record["run_id"], "arm": record["arm"], "recomputed_weighted_score": score}
 
 
 def command_validate_pair(args: argparse.Namespace) -> dict[str, Any]:
     first, second = read_json(args.first), read_json(args.second)
-    a, b = validate_pair(first, second, args.schema, args.rubric)
+    a, b = validate_pair(first, second, args.schema, args.rubric, args.artifact_root)
     return {"status": "PASS", "pair_id": a["pair_id"], "task_id": a["task_id"], "no_skill_run_id": a["run_id"], "with_skill_run_id": b["run_id"]}
 
 
@@ -590,7 +622,7 @@ def command_verify_sources(args: argparse.Namespace) -> dict[str, Any]:
 def command_compare(args: argparse.Namespace) -> dict[str, Any]:
     records = _load_run_files(args.records_dir)
     manifest = read_json(args.task_manifest)
-    report = compare_records(records, manifest, args.round, args.seed, args.schema, args.rubric)
+    report = compare_records(records, manifest, args.round, args.seed, args.schema, args.rubric, args.artifact_root)
     report["protocol_commit"] = args.protocol_commit
     report["analysis_plan_sha256"] = args.analysis_plan_sha256
     report["environment_lock_sha256"] = args.environment_lock_sha256
@@ -609,6 +641,7 @@ def build_parser() -> argparse.ArgumentParser:
     run.add_argument("run_record", type=Path)
     run.add_argument("--schema", type=Path, default=DEFAULT_RUN_SCHEMA)
     run.add_argument("--rubric", type=Path, default=DEFAULT_RUBRIC)
+    run.add_argument("--artifact-root", type=Path, required=True)
     run.add_argument("--allow-unscored", action="store_true")
     run.set_defaults(func=command_validate_run)
 
@@ -617,6 +650,7 @@ def build_parser() -> argparse.ArgumentParser:
     pair.add_argument("second", type=Path)
     pair.add_argument("--schema", type=Path, default=DEFAULT_RUN_SCHEMA)
     pair.add_argument("--rubric", type=Path, default=DEFAULT_RUBRIC)
+    pair.add_argument("--artifact-root", type=Path, required=True)
     pair.set_defaults(func=command_validate_pair)
 
     source = sub.add_parser("verify-sources", help="verify staged task inputs against Git identities")
@@ -634,6 +668,7 @@ def build_parser() -> argparse.ArgumentParser:
     compare.add_argument("--environment-lock-sha256", required=True)
     compare.add_argument("--schema", type=Path, default=DEFAULT_RUN_SCHEMA)
     compare.add_argument("--rubric", type=Path, default=DEFAULT_RUBRIC)
+    compare.add_argument("--artifact-root", type=Path, required=True)
     compare.add_argument("--report-schema", type=Path, default=DEFAULT_REPORT_SCHEMA)
     compare.add_argument("--output", type=Path)
     compare.set_defaults(func=command_compare)

@@ -45,7 +45,7 @@ def make_record(arm: str, run_id: str, score=3):
         "task_input": {"prompt_sha256": "3" * 64, "input_manifest_sha256": "4" * 64, "source_commit": "f" * 40, "source_files": []},
         "tools": {"allowlist": ["python"], "network_policy": "offline", "versions": {"python": "3.13"}},
         "budget": {"wall_time_seconds": 600, "token_limit": 10000, "tool_call_limit": 30},
-        "execution": {"randomization_seed": "seed-1", "pair_order": "A_then_B", "actual_wall_time_seconds": 60, "actual_tool_calls": 5, "token_count": 1000, "commands": ["python task.py"], "tool_log_artifact": "logs/tool.json", "transcript_artifact": f"transcripts/{run_id}.json", "exit_status": 0},
+        "execution": {"randomization_seed": "seed-1", "pair_order": "A_then_B", "actual_wall_time_seconds": 60, "actual_tool_calls": 5, "token_count": 1000, "commands": ["python task.py"], "tool_log_artifact": f"logs/{run_id}.json", "transcript_artifact": f"transcripts/{run_id}.json", "exit_status": 0},
         "skill": {
             "available": available,
             "source_commit": "9" * 40 if available else None,
@@ -55,7 +55,7 @@ def make_record(arm: str, run_id: str, score=3):
             "availability_evidence_artifact": f"evidence/{run_id}-skill.json",
         },
         "artifacts": [
-            {"path": "logs/tool.json", "sha256": "5" * 64, "role": "tool_log"},
+            {"path": f"logs/{run_id}.json", "sha256": "5" * 64, "role": "tool_log"},
             {"path": f"transcripts/{run_id}.json", "sha256": "6" * 64, "role": "transcript"},
             {"path": f"evidence/{run_id}-skill.json", "sha256": "7" * 64, "role": "skill_availability_evidence"},
         ],
@@ -237,6 +237,8 @@ class EvaluatorTests(unittest.TestCase):
                         record["artifacts"][2]["path"] = record["skill"]["availability_evidence_artifact"]
                     if pair_counter == 1:
                         b["evaluation"]["hard_gates"]["critical_physics_error"] = "fail"
+                        for reviewer in b["evaluation"]["reviewer_assessments"]:
+                            reviewer["hard_gates"]["critical_physics_error"] = "fail"
                     records.extend([a, b])
         report = evaluate.compare_records(records, {"tasks": tasks}, "round_2_full", seed=17, schema_path=SCHEMA, rubric_path=RUBRIC)
         self.assertEqual(report["decision"], "mixed")
@@ -353,6 +355,50 @@ class EvaluatorTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "Size mismatch"):
                 verify_figure_regeneration.verify_identity(source, "0" * 40, 1)
 
+
+    def test_hard_gate_disagreement_requires_adjudication(self):
+        record = make_record("no-skill", "run-a")
+        record["evaluation"]["reviewer_assessments"][1]["hard_gates"]["critical_physics_error"] = "fail"
+        with self.assertRaisesRegex(evaluate.EvaluationError, "third-party adjudication"):
+            evaluate.validate_run(record, SCHEMA, RUBRIC)
+
+    def test_final_hard_gates_must_match_unanimous_reviewers(self):
+        record = make_record("no-skill", "run-a")
+        record["evaluation"]["hard_gates"]["critical_physics_error"] = "fail"
+        with self.assertRaisesRegex(evaluate.EvaluationError, "final hard gates differ"):
+            evaluate.validate_run(record, SCHEMA, RUBRIC)
+
+    def test_artifact_hash_verification_passes(self):
+        record = make_record("no-skill", "run-a")
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            for artifact in record["artifacts"]:
+                path = root / artifact["path"]
+                path.parent.mkdir(parents=True, exist_ok=True)
+                data = ("artifact:" + artifact["path"]).encode("utf-8")
+                path.write_bytes(data)
+                artifact["sha256"] = hashlib.sha256(data).hexdigest()
+            verified = evaluate.verify_run_artifacts(record, root)
+            self.assertEqual(len(verified), len(record["artifacts"]))
+            self.assertTrue(all(item["status"] == "PASS" for item in verified))
+
+    def test_artifact_hash_mismatch_rejected(self):
+        record = make_record("no-skill", "run-a")
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            artifact = record["artifacts"][0]
+            path = root / artifact["path"]
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_bytes(b"tampered")
+            with self.assertRaisesRegex(evaluate.EvaluationError, "Artifact SHA-256 mismatch"):
+                evaluate.verify_run_artifacts(record, root)
+
+    def test_artifact_path_escape_rejected(self):
+        record = make_record("no-skill", "run-a")
+        record["artifacts"][0]["path"] = "../outside.txt"
+        with tempfile.TemporaryDirectory() as tmp:
+            with self.assertRaisesRegex(evaluate.EvaluationError, "escapes artifact root"):
+                evaluate.verify_run_artifacts(record, Path(tmp))
 
 if __name__ == "__main__":
     unittest.main()

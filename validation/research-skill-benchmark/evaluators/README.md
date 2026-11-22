@@ -6,8 +6,8 @@ The evaluator workspace is separate from model-visible task inputs. The pinned r
 
 Dependencies are pinned in evaluators/requirements.txt. The package uses Python 3.12+ and JSON Schema Draft 2020-12.
 
-- evaluate.py validate-run: validates a run record, verifies A/B-specific Skill fields, checks budget limits and reviewer consensus/adjudication, and recomputes Q from the five dimension scores.
-- evaluate.py validate-pair: verifies exactly one A and one B record, identical common controls, distinct transcripts, the locked Skill commit, and the task-specific Skill reference.
+- evaluate.py validate-run: validates a run record, verifies A/B-specific Skill fields, checks budget limits and reviewer consensus/adjudication, verifies every artifact's actual SHA-256 under a required artifact root, and recomputes Q from the five dimension scores.
+- evaluate.py validate-pair: verifies exactly one A and one B record, identical common controls, distinct transcript and artifact paths, the locked Skill commit, and the task-specific Skill reference.
 - evaluate.py verify-sources: verifies staged input byte size, Git blob SHA-1, and SHA-256 against the development task manifest. The staged input tree preserves the repository slug followed by the original repository path.
 - evaluate.py compare: pairs immutable records, rejects missing/duplicate pairs, computes task and task-family effects, performs the preregistered cluster bootstrap for a sufficiently complete Round 2 holdout, and emits the comparison report.
 - verify_dirac_trace.py: independent 4x4 Dirac-representation trace and Clifford-algebra check for T04; Python standard library only.
