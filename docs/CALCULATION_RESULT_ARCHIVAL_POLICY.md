@@ -67,3 +67,6 @@ CI is optional supporting infrastructure, not a prerequisite for calculation, sc
 - Review and merge according to the actual diff, reproducibility, scientific evidence, scope, and relevant checks. Do not require CI status checks as branch-protection gates under this policy. Do not change repository protection settings without explicit authorization.
 - CI is mandatory for a specific task only if the author explicitly requests it.
 
+## 6. Structured JSON/CSV result records
+
+New substantial numerical runs must also follow the [Structured Research Result Data Standard v1.0.0](STRUCTURED_RESULT_DATA_STANDARD.md) and validate `run_manifest`, `result_summary`, and `validation_report` records against `schemas/research-result-record-v1.0.0.schema.json`. Keep execution provenance, scientific results, and validation evidence as distinct records; store pointwise arrays in native tables with explicit units. This archive-data profile is independent of the unreleased research-record Schema v1.4.3.7 candidate.
