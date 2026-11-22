@@ -1,7 +1,7 @@
-# Structured Research Result Data Standard v1.0.0
+# Structured Research Result Data Standard v1.0.1
 
 **Status:** Proposed for adoption; applies to new substantial numerical, simulation, scan, and computational-validation runs after merge.  
-**Schema:** JSON Schema Draft 2020-12.  
+**Schema:** JSON Schema Draft 2020-12 (`research-result-record-v1.0.1.schema.json`). Backward-compatible validation of v1.0.0 records is retained.  
 **Purpose:** Standardize data structure, run provenance, and archival. This standard does not certify scientific correctness.
 
 ## 1. Standard result bundle
@@ -19,13 +19,26 @@ Do not force every task to create every file. A substantial execution needs a ma
 
 ## 2. JSON record roles
 
-The local `research-result-record-v1.0.0.schema.json` validates three record types:
+The local `research-result-record-v1.0.1.schema.json` validates three record types and remains backward-compatible with v1.0.0 records:
 
 - **run_manifest:** records what actually ran, including the commit SHA used at execution time, script path/fingerprint, input provenance (for repository-local inputs, both a repository-relative path and SHA-256; when input bytes are unavailable, an immutable URI plus version), physical/numerical configuration, software/hardware environment, exact command, output inventory, validation status, and archival status. The schema requires the entry-script SHA-256 and explicit runtime, dependency, and hardware records.
 - **result_summary:** records what was calculated, the benchmark, scope, observables as numeric values plus separate unit fields, scientific status, interpretation, and data-file references.
 - **validation_report:** records each check by ID, category, status, method, observed value, threshold, unit, and evidence path.
 
 Use numeric JSON values rather than unit-bearing strings. Use `null` plus an explicit `not_computed` status for quantities not evaluated; never substitute zero. Do not encode NaN or Infinity.
+
+### Source revision semantics (v1.0.1)
+
+For a new v1.0.1 `run_manifest`, `source.revision_context` is required. It separates the PR source revision from the commit that the runner actually checked out:
+
+- `source.commit_sha` remains the compatibility field for the exact checked-out Git commit and must equal `source.revision_context.checked_out_sha`.
+- `pr_head_sha` identifies the commit at the tip of the pull-request source branch.
+- `base_sha` identifies the target branch commit used for the pull request.
+- `tested_merge_sha` identifies GitHub's synthetic pull-request merge commit only when that merge commit was actually checked out and tested. It is `null` when the workflow tested the PR head directly or no synthetic merge ref was used.
+- `head_ref` and `base_ref` identify the actual source and target branch names. For a `pull_request` event, `source.branch` must be `head_ref`; do not use `GITHUB_REF_NAME` as the source branch because GitHub exposes a synthetic `<number>/merge` ref for merge-based pull-request runs.
+- `checkout_mode` records whether the runner tested `pull_request_merge`, `pull_request_head`, a normal branch commit, a detached commit, or an unknown checkout mode.
+
+For non-PR runs, the PR-specific fields (`pr_number`, `pr_head_sha`, `base_sha`, and `tested_merge_sha`) are explicitly `null`. This prevents a synthetic merge SHA from being mistaken for the contributor's source commit. The v1.0.1 schema continues to accept existing v1.0.0 records unchanged; only new v1.0.1 run manifests require this revision context.
 
 ## 3. CSV and numeric arrays
 

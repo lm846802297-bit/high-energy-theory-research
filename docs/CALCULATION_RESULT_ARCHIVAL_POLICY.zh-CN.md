@@ -33,7 +33,7 @@
 
 每次重要计算都必须提供 `run_manifest.json`、YAML 或内容等价的完整运行记录。按适用情况至少记录：
 
-- 精确的源码 commit，以及计算脚本/notebook 路径；
+- 精确的 checkout 源码 commit，以及计算脚本/notebook 路径；对于 PR 运行，必须分别记录 `pr_head_sha`、`base_sha` 和 `tested_merge_sha`，并记录 checkout 模式及真实 head/base 分支。`commit_sha` 表示实际 checkout 的代码树，不应自动解释为 PR 源分支 HEAD；
 - 输入文件名、来源/版本、参数或配置文件及 SHA-256；
 - 运行时、操作系统、编译器和相关软件包版本；
 - 精确命令或执行流程；
@@ -52,6 +52,6 @@
 
 ## 6. 结构化 JSON/CSV 结果记录
 
-新产生的重要数值计算应遵循[结构化科研结果数据规范 v1.0.0](STRUCTURED_RESULT_DATA_STANDARD.zh-CN.md)，并使用 `schemas/research-result-record-v1.0.0.schema.json` 校验 `run_manifest`、`result_summary` 和 `validation_report`。运行来源、科学结果和验证报告分开记录；逐点数组保存为带明确单位的原生表格。该归档数据规范独立于尚未发布的研究记录 Schema v1.4.3.7 候选包。
+新产生的重要数值计算应遵循[结构化科研结果数据规范 v1.0.1](STRUCTURED_RESULT_DATA_STANDARD.zh-CN.md)，并使用 `schemas/research-result-record-v1.0.1.schema.json` 校验 `run_manifest`、`result_summary` 和 `validation_report`。运行来源、科学结果和验证报告分开记录；逐点数组保存为带明确单位的原生表格。该归档数据规范独立于尚未发布的研究记录 Schema v1.4.3.7 候选包。
 
 本规范适用于本仓库今后的所有项目和工作流。
