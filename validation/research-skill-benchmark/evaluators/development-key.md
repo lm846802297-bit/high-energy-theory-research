@@ -55,3 +55,26 @@ Evaluator facts from the companion TeX:
 - The manuscript explicitly describes the NA62 curve as an indicative acceptance-dependent recast, the NA64-mu curve as a rate-level phenomenological recast, and the four-muon reinterpretations as rate-level estimates pending detector-level simulations near threshold. The contours are conditional on the stated benchmark and should not be described as model-independent.
 - The PDF page number and rendered equation number must be read from the pinned PDF itself and recorded by the evaluator; do not infer them from TeX line numbers.
 - Before scoring, verify the PDF Git blob SHA-1 and calculate its SHA-256. The SHA-256 is intentionally not prefilled here.
+
+## T04 — symbolic Dirac trace
+
+With (g^{\mu\nu}=\mathrm{diag}(+1,-1,-1,-1)) and the stated spin sums:
+[
+T^{\mu\nu}=4\left[p^\mu k^\nu+p^\nu k^\mu-(p\cdot k+m^2)g^{\mu\nu}\right].
+]
+The mass cross terms vanish because traces of an odd number of gamma matrices vanish. The two mass terms yield (-m^2\mathrm{Tr}(\gamma^\mu\gamma^\nu)=-4m^2g^{\mu\nu}). The four-gamma trace yields the momentum terms. Verify signs using the explicit metric and index positions.
+
+## T05 — PDF figure audit
+
+- Verify both the pinned Git blob SHA-1 and the recorded SHA-256.
+- 5 pt is a generic screening threshold only, not a journal-specific requirement.
+- Require final-size visual inspection in addition to content-stream/geometry checks.
+- Score correct identification of clipping, collisions, labels/units, scale, and any transformation that could alter data interpretation. A clean automated report is not proof of physics correctness.
+
+## T06 — reproducibility package
+
+- Input CSV bytes, including final newline:
+  `x,weight\n0,1\n1,2\n2,1\n`.
+- Weighted mean: (1).
+- The source and input hashes must be computed from the finalized exact files. Hash outputs after the run. Do not put a manifest's own hash inside itself; record it in the outer run record.
+- Standard library is sufficient; unnecessary dependencies reduce the efficiency score.
