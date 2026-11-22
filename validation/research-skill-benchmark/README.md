@@ -37,7 +37,7 @@ From the benchmark root, install the lightweight pinned test dependencies and ru
     python -m pip install -r evaluators/requirements-test.txt
     python -m unittest discover -s evaluators -v
 
-The CI workflow also validates both JSON Schemas with Draft 2020-12, parses the JSON manifests and scoring YAML, and runs the same evaluator unit suite.
+The CI workflow also validates both JSON Schemas with Draft 2020-12, parses the JSON manifests and scoring YAML, runs the same evaluator unit suite, executes the pinned T01/T02 symbolic and numerical references, screens the pinned T05 PDF, and regenerates the two T05 SVGs against evaluator-only golden outputs.
     python evaluators/evaluate.py validate-run path/to/run-record.json --artifact-root path/to/run-artifacts
     python evaluators/evaluate.py validate-pair path/to/A.json path/to/B.json --artifact-root path/to/run-artifacts
     python evaluators/evaluate.py verify-sources --input-root path/to/staged-inputs
