@@ -54,6 +54,7 @@ class SkillContractTests(unittest.TestCase):
         skill_text = SKILL.read_text(encoding="utf-8")
         self.assertIn("validate_project_records.py", skill_text)
         self.assertIn("references/optional-tooling.md", skill_text)
+        self.assertIn("Central-repository-only tooling", skill_text)
 
 
 if __name__ == "__main__":
