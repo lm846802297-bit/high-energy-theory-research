@@ -85,3 +85,11 @@
 - Recorded openai/codex issue #40458, which reports repository-local Skill discovery failures in Windows Codex Desktop.
 - Updated the diagnostic output and contract tests to preserve read-only behavior and require host-specific runtime confirmation.
 - A user-scope copy remains a global diagnostic comparison, not a project-isolated workaround.
+
+## 2026-11-22 — Installer rollback and cross-repository scope review
+
+- Fixed scratch cleanup so a previous Skill backup is preserved whenever installation/rollback has not safely completed; destination existence alone no longer authorizes deleting a remaining backup.
+- Extracted the cleanup decision into a small helper and added six Windows PowerShell regression cases, including a rollback failure with a concurrently occupied destination. Windows execution of this new regression file is pending.
+- Clarified that candidate-schema and project-registry validators require a pinned central source checkout; the standalone user-level Skill export does not include the central schema bundle/helper module.
+- Added a Skill contract assertion for the central-only validator boundary.
+- The central PR remains Draft pending Windows PowerShell 5.1 execution of the new rollback regression test and final review.
