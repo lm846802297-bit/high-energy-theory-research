@@ -21,4 +21,34 @@ foreach ($case in $cases) {
     Write-Output ("PASS: {0}" -f $case.Name)
 }
 
-Write-Output ("PASS: {0} rollback-cleanup cases" -f $cases.Count)
+
+$source = 'https://github.com/lm846802297-bit/high-energy-theory-research.git'
+$commit = 'a' * 40
+$hashA = 'b' * 64
+$hashB = 'c' * 64
+$requiredFiles = @('SKILL.md', 'references/task-router.md')
+$validFiles = @(
+    [PSCustomObject]@{ path = 'SKILL.md'; sha256 = $hashA },
+    [PSCustomObject]@{ path = 'references/task-router.md'; sha256 = $hashB }
+)
+$actualFiles = @($validFiles)
+$validManifest = [PSCustomObject]@{ source_repository = $source; source_commit = $commit; files = $validFiles }
+$manifestCases = @(
+    @{ Name = 'valid manifest and exact file inventory'; Manifest = $validManifest; Actual = $actualFiles; Required = $requiredFiles; Expected = $true },
+    @{ Name = 'wrong source repository'; Manifest = [PSCustomObject]@{ source_repository = 'https://example.invalid/repo.git'; source_commit = $commit; files = $validFiles }; Actual = $actualFiles; Required = $requiredFiles; Expected = $false },
+    @{ Name = 'malformed source commit'; Manifest = [PSCustomObject]@{ source_repository = $source; source_commit = 'not-a-commit'; files = $validFiles }; Actual = $actualFiles; Required = $requiredFiles; Expected = $false },
+    @{ Name = 'missing required Skill file'; Manifest = [PSCustomObject]@{ source_repository = $source; source_commit = $commit; files = @($validFiles[0]) }; Actual = @($validFiles[0]); Required = $requiredFiles; Expected = $false },
+    @{ Name = 'modified installed file hash'; Manifest = $validManifest; Actual = @([PSCustomObject]@{ path = 'SKILL.md'; sha256 = $hashB }, $validFiles[1]); Required = $requiredFiles; Expected = $false },
+    @{ Name = 'empty manifest file list'; Manifest = [PSCustomObject]@{ source_repository = $source; source_commit = $commit; files = @() }; Actual = @(); Required = $requiredFiles; Expected = $false },
+    @{ Name = 'unrecorded extra installed file'; Manifest = $validManifest; Actual = @($validFiles + [PSCustomObject]@{ path = 'extra.txt'; sha256 = $hashA }); Required = $requiredFiles; Expected = $false }
+)
+
+foreach ($case in $manifestCases) {
+    $actual = Test-ResearchSkillManifestIntegrity -Manifest $case.Manifest -SourceRepository $source -ActualFiles $case.Actual -RequiredFiles $case.Required
+    if ($actual -ne $case.Expected) {
+        throw ("{0}: expected integrity={1}, actual={2}" -f $case.Name, $case.Expected, $actual)
+    }
+    Write-Output ("PASS: {0}" -f $case.Name)
+}
+
+Write-Output ("PASS: {0} rollback-cleanup and {1} manifest-integrity cases" -f $cases.Count, $manifestCases.Count)
