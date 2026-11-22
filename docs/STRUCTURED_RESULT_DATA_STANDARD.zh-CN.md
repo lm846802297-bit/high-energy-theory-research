@@ -155,7 +155,24 @@ python docs/schemas/validate_result_records.py --repo-root . results/<run_label>
 - 验证状态只反映实际执行的检查；
 - 推送后重新从 GitHub 读取文件，核对路径、大小、数量和 SHA-256。
 
-## 7. 历史结果迁移
+## 7. Pull Request 执行来源（Schema v1.0.1）
+
+Schema v1.0.1 是向后兼容的记录格式更新，保留 v1.0.0 的记录职责，并增加可选的 `execution.source_control` 对象。对于 GitHub `pull_request` 事件，该对象必须分别记录三个不同的 40 位 commit SHA：
+
+- `pr_head_sha`：接受审查的 PR 源分支精确提交；
+- `base_sha`：测试合并时使用的目标分支精确提交；
+- `tested_merge_sha`：工作流实际 checkout 并执行的合成 merge commit。
+
+这三个 SHA 不能互相替代。特别是 GitHub 的 `pull_request` 事件中，`GITHUB_SHA` 通常指向测试用的合成 merge commit，而不是 PR head。保留 `source.commit_sha` 作为实际 checkout/source tree 的提交；使用 `execution.source_control` 明确记录 PR 关系。该对象还可以记录 `pr_number`、`pr_url`、`workflow_run_id` 和 `workflow_run_attempt`。
+
+本地运行、push 事件和手动触发的运行应填写对应的 `event`；只有 `event="pull_request"` 时才强制要求 PR 三个 SHA。非 PR 运行不得伪造 PR 字段。已有 v1.0.0 记录继续使用 v1.0.0 Schema 验证，不进行追溯改写。验证 v1.0.1 记录时，显式指定对应版本的 Schema：
+
+```bash
+python docs/schemas/validate_result_records.py --schema docs/schemas/research-result-record-v1.0.1.schema.json --repo-root . results/<run_label>/run_manifest.json
+python -m unittest discover -s docs/schemas/tests -v
+```
+
+## 8. 历史结果迁移
 
 本规范从采用后的新运行开始执行。既有 JSON、CSV、日志、图像和历史运行记录保持原样，不为满足新格式而重写原始数据、改变精度或伪造缺失字段。旧文件可由新的索引/运行清单引用，并明确标记为 legacy；只有在能从原始记录中核实的字段才允许补充。
 
