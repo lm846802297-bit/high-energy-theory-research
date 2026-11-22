@@ -26,6 +26,7 @@ The workflow is designed for theoretical particle physics, UV–EFT matching, pe
 11. Follow the mandatory [calculation-result archival policy](docs/CALCULATION_RESULT_ARCHIVAL_POLICY.md) when committing numerical outputs, run manifests, and validation evidence.
 12. Follow the project-wide [Research Compute Policy](RESEARCH_COMPUTE_POLICY.md): ordinary GPT chat uses ChatGPT Linux; Codex/Work may use the user's Windows local environment or a GPT-managed cloud computer; GitHub is the canonical archive and Actions is for independent verification.
 13. Follow the normative [Git merge strategy and commit-history policy](docs/governance/GIT_MERGE_POLICY.md): substantive research PRs default to merge commits.
+14. For the approved cross-project research standards architecture and Phase I source audit, see the [central standards design](docs/superpowers/specs/2026-11-23-central-research-standards-design.md) and [audit matrix](docs/governance/CENTRAL_STANDARDS_AUDIT_MATRIX.md).
 
 ### Core chain
 
