@@ -82,7 +82,7 @@ T03 uses the complete pinned axial-vector manuscript PDF, not the earlier single
 
 A Git repository is not a security boundary. For a genuinely blind holdout, run the model in a workspace that does not contain `tasks/holdout`, evaluator keys, or the benchmark repository history. For stronger blinding, keep holdout keys in a separate private evaluator repository.
 
-## 5. Scoring and non-compensatory gates
+## 6. Scoring and non-compensatory gates
 
 Use [scoring-rubric.yaml](scoring-rubric.yaml). Two independent reviewers should score outputs without seeing the arm label. Deterministic evaluators should run before human review.
 
@@ -95,7 +95,7 @@ Hard gates:
 
 Report the five weighted dimensions separately and the autonomy guardrail separately. Do not hide a regression in one dimension behind the composite score.
 
-## 6. Outcomes and adoption decisions
+## 7. Outcomes and adoption decisions
 
 A Skill module is retained only if the evidence shows at least one meaningful benefit:
 - improved physical/mathematical correctness;
@@ -109,7 +109,7 @@ If the confidence interval is wide or results are mixed, classify the result as 
 
 No minimum score or adoption threshold may be changed after inspecting holdout outcomes. Any threshold revision requires a new protocol version and a fresh holdout set.
 
-## 7. Required run artifacts
+## 8. Required run artifacts
 
 For every run, retain:
 - run ID, pair ID, task ID, arm, repetition, timestamp;
@@ -125,7 +125,7 @@ For every run, retain:
 
 Do not store secrets, API keys, private tokens, or personal data in benchmark records.
 
-## 8. Freeze checklist
+## 9. Freeze checklist
 
 Before Round 1:
 1. Complete [environment-lock.json](environment-lock.json) using the actual Windows Codex environment.
