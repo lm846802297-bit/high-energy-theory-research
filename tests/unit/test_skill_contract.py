@@ -33,6 +33,13 @@ class SkillContractTests(unittest.TestCase):
         self.assertIn("not", readme)
         self.assertIn("formal schema release", readme)
 
+    def test_codex_discovery_paths_are_documented(self):
+        tooling = (SKILL.parent / "references" / "optional-tooling.md").read_text(encoding="utf-8")
+        diagnostic = SKILL.parent / "scripts" / "check_codex_skill_discovery.ps1"
+        self.assertIn(".agents/skills/", tooling)
+        self.assertIn("~/.agents/skills/", tooling)
+        self.assertTrue(diagnostic.is_file())
+
     def test_project_record_validator_is_referenced_and_present(self):
         script = SKILL.parent / "scripts" / "validate_project_records.py"
         self.assertTrue(script.is_file())
