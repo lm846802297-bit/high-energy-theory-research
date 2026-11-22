@@ -304,15 +304,15 @@
   "test_suite": {
     "command": "python -m unittest discover -s evaluators -v",
     "tests_defined": 33,
-    "development_run": "Seven new T05 semantic-comparison tests pass locally on ChatGPT Linux. Run 1149 executed 32 tests and found one obsolete legacy assertion; that assertion is now updated to require semantic mismatch detection. The full 33-test suite requires a new CI run.",
+    "development_run": "All 33 Benchmark evaluator tests passed in GitHub Actions Run 1152 on PR head fcb85d9aad3689d2fb7cdf1105a9b99e27ca594d. The same run passed schema validation, T01/T02 symbolic and numerical checks, T05 PDF screening and semantic SVG baseline validation, Python compilation, and the UV-EFT provenance bundle.",
     "exact_committed_tree_rerun_required": true,
     "ci_workflow": ".github/workflows/schema-validation.yml",
     "ci_step": "Validate and test Particle Physics Research Skill Benchmark",
-    "last_verified_head_sha": "3e0e80f9d5087d9099c110e99d748a695389544c",
-    "last_verified_run_id": 45053050178,
-    "last_verified_run_number": 1149,
-    "last_verified_run_url": "https://github.com/lm846802297-bit/high-energy-theory-research/actions/runs/45053050178",
-    "last_verified_conclusion": "failure",
+    "last_verified_head_sha": "fcb85d9aad3689d2fb7cdf1105a9b99e27ca594d",
+    "last_verified_run_id": 45053311394,
+    "last_verified_run_number": 1152,
+    "last_verified_run_url": "https://github.com/lm846802297-bit/high-energy-theory-research/actions/runs/45053311394",
+    "last_verified_conclusion": "success",
     "ci_python_version": "3.12.16",
     "schema_validation_status": "PASS",
     "failure_summary": "Run 1149 passed schema validation, project integration tests, Skill scaffold tests, and 31 of 32 Benchmark tests. The sole failure was an old test that still treated a semantic text difference as a byte-serialization mismatch; the test and evaluator were corrected."
@@ -326,7 +326,8 @@
     "The workflow now includes end-to-end T01/T02 symbolic and numerical checks plus T05 PDF screening and CSV-to-SVG regeneration. These new deterministic evaluator steps are awaiting a workflow run on the current branch head.",
     "The historical T05 Golden SVGs are not byte-identical to the current pinned plotter serialization. Run 1145 showed exact identity of all three plotted path-data strings; only SVG serialization and coordinate formatting differ. The verifier now checks semantic geometry/labels and separately requires submitted model outputs to match fresh trusted-generator bytes.",
     "T05-A still requires visual inspection; the semantic SVG comparison is a deterministic data/structure check, not a substitute for reviewing the rendered plots.",
-    "Run 1149 executed 32 Benchmark tests; one legacy test expectation conflicted with the new semantic comparison and has been updated. Rerun the complete 33-test suite on the next HEAD."
+    "Run 1152 passed all 33 evaluator tests and the complete CI job. T05 historical Golden SVG byte identity remains false by design; semantic curve/structure checks pass. This run did not evaluate model-submitted A/B SVG outputs, which require the submission-mode evaluator during scored task execution.",
+    "The latest commit after Run 1152 updates only this evaluator-manifest CI evidence; it does not change evaluator code, tests, tasks, schemas, rubric, or workflow. CI will run again on the manifest evidence commit."
   ],
   "ci_integration": {
     "workflow": ".github/workflows/schema-validation.yml",
@@ -338,15 +339,69 @@
       "Run pinned T05 PDF and data-to-figure evaluators",
       "Upload deterministic Benchmark evaluator outputs"
     ],
-    "current_head_run_status": "pending_after_legacy_T05_test_correction",
+    "current_head_run_status": "success_on_pre_manifest_evidence_commit",
     "last_unit_suite_run": {
-      "head_sha": "ad8cdb968875cd07249aa52558282bc556803e4f",
-      "run_id": 45050044303,
-      "run_number": 1137,
+      "head_sha": "fcb85d9aad3689d2fb7cdf1105a9b99e27ca594d",
+      "run_id": 45053311394,
+      "run_number": 1152,
       "conclusion": "success",
-      "tests_passed": 25
+      "tests_passed": 33
     },
     "workflow_git_blob_sha1": "38605cfeaec4133ce5b096a57b6ebd1ca2295e73",
     "workflow_size_bytes": 7820
+  },
+  "latest_deterministic_ci_evidence": {
+    "run_id": 45053311394,
+    "run_number": 1152,
+    "head_sha": "fcb85d9aad3689d2fb7cdf1105a9b99e27ca594d",
+    "conclusion": "success",
+    "environment": {
+      "python": "3.12.16",
+      "platform": "Linux-7.0.0-1020-azure-x86_64-with-glibc2.43",
+      "architecture": "x86_64"
+    },
+    "T01_T02": {
+      "status": "PASS",
+      "precision_digits": 50,
+      "original_s_integral_GeV2": "0.141975883465984392640489856748572220501161185",
+      "transformed_u_integral_GeV2": "0.141975883465984392640489856748572220501161185",
+      "relative_residual": "0",
+      "archived_shape_kernel_over_correct": "0.5",
+      "absolute_integral_requires_factor": 2
+    },
+    "T05_PDF": {
+      "auditable": true,
+      "minimum_required_pt": 5,
+      "minimum_found_pt": 6.48,
+      "text_run_count": 37,
+      "below_minimum_count": 0,
+      "spacing_issue_count": 0,
+      "warnings": []
+    },
+    "T05_SVG": {
+      "status": "PASS",
+      "semantic_golden_match": true,
+      "historical_byte_identity": false,
+      "path_data_exact": true,
+      "path_count": 3,
+      "maximum_coordinate_delta_px": 0.0046153846153629274,
+      "coordinate_tolerance_px": 0.01,
+      "submitted_model_outputs_evaluated": false
+    },
+    "evaluator_tests": {
+      "passed": 33,
+      "failed": 0
+    },
+    "UV_EFT_provenance_bundle": {
+      "status": "PASS",
+      "artifact_id": 14766845008,
+      "size_bytes": 152765,
+      "sha256": "26032c821ee41d100f4563ed7d915a47b06a4a2754b9cc9576b384191b917ba4"
+    },
+    "evaluator_artifacts": {
+      "artifact_id": 14766069568,
+      "size_bytes": 9544,
+      "sha256": "6426a37d663a11d7d7d1bb00b9c4c76436ab76a423851212501a578d617b6534"
+    }
   }
 }
