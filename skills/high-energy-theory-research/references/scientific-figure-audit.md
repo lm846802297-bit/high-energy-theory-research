@@ -45,3 +45,10 @@ Optional local audits include:
 Run audits on the final exported artifact, not only on an intermediate preview. Inspect the figure at its final physical size. Automated geometry checks cannot establish that a physical contour, axis transformation, error band, or claim is scientifically correct.
 
 Use third-party figure Skills only as optional guidance. Do not copy protected assets or code unless the applicable license permits it. Never upload unpublished figures or data to an external image service without explicit authorization.
+
+
+## Journal-specific PDF thresholds
+
+The default threshold of a third-party PDF text-size auditor is a screening value, not a universal publication requirement. Set the threshold from the current official guidance for the exact journal, article type, figure class, and submission stage. Report the threshold used and the minimum effective size found. If the journal requirement is not yet verified, report the measurement without assigning a journal-compliance verdict.
+
+Run the text-size audit on the final exported PDF. Its content-stream parser may not account for every PDF construct (for example, all Form XObject transformations); combine the report with final-size visual inspection and other geometry checks where appropriate.
