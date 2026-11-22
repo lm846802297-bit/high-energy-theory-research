@@ -29,6 +29,15 @@
           "path": "archive/manuscript-baselines/axial_vector_model_building-v6.pdf",
           "git_blob_sha1": "be8f472a8cc3c35975dcb5970c9be996fde2d985",
           "size_bytes": 2759986
+        },
+        {
+          "repository": "lm846802297-bit/axial-vector-review-response",
+          "commit": "a7ac6456dafb27492183912fe4abbaa73a9455f7",
+          "path": "overleaf-source/axial-vector-model-building-v6/main-v6.tex",
+          "git_blob_sha1": "b99f9e26a0b57acd0a4938ea6e03fc691a82becb",
+          "size_bytes": 71477,
+          "role": "companion_tex_source",
+          "visibility": "model_input"
         }
       ]
     },
@@ -79,6 +88,7 @@
     "Prompt SHA-256 values are computed from the exact frozen prompt bytes immediately before the run and recorded in run records.",
     "T03 PDF SHA-256 must be computed by the evaluator from the exact pinned PDF before scoring; the Git blob SHA-1 and file size are pinned here.",
     "T05 PDF SHA-256 is already recorded in its task specification.",
-    "Do not expose evaluators/development-key.md to model workspaces."
+    "Do not expose evaluators/development-key.md to model workspaces.",
+    "T03 PDF and companion TeX are both model-visible immutable inputs; calculate and record SHA-256 for both during staging. PDF page numbers must be verified from the PDF."
   ]
 }
