@@ -3,19 +3,19 @@
   "status": "incomplete_pending_windows_host_capture",
   "captured_at_utc": null,
   "host": {
-    "os_name": null,
-    "os_build": null,
+    "os_name": "Windows",
+    "os_build": "26300",
     "architecture": null,
     "cpu_model": null,
     "gpu_model": null,
     "memory_gb": null
   },
   "codex": {
-    "product": null,
-    "desktop_version": null,
-    "cli_version": null,
-    "runtime_mode": null,
-    "skill_discovery_scope": null
+    "product": "Codex Desktop",
+    "desktop_version": "26.1117.4957.0",
+    "cli_version": "0.171.0-alpha.13",
+    "runtime_mode": "Desktop project-scoped Skill discovery previously verified; user-level installation and benchmark workspace isolation pending",
+    "skill_discovery_scope": "project-scoped on prior acceptance; benchmark treatment must use the exact pinned user-level installation after central release"
   },
   "model": {
     "model_label": null,
@@ -51,6 +51,7 @@
   "notes": [
     "Do not invent values that the host does not expose; use null and record the limitation.",
     "The exact model label/build and Codex runtime must be captured from the actual Windows host before protocol freeze.",
-    "The Skill source commit must be pinned; do not benchmark against a moving main branch."
+    "The Skill source commit must be pinned; do not benchmark against a moving main branch.",
+    "Windows build 26300, Codex Desktop 26.1117.4957.0, and bundled codex-cli 0.171.0-alpha.13 were recorded in the prior Windows discovery acceptance at an earlier PR head. Reconfirm these values on the actual benchmark run host."
   ]
 }
