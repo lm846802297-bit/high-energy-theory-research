@@ -329,7 +329,8 @@
                 },
                 "then": {
                   "required": [
-                    "sha256"
+                    "sha256",
+                    "bytes"
                   ]
                 }
               },
