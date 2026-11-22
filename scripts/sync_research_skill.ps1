@@ -36,6 +36,8 @@ function Get-Inventory {
         }
 }
 
+. (Join-Path $PSScriptRoot 'research-skill-installer.helpers.ps1')
+
 # Fetch the publication branch directly. Local branches and working-tree files
 # are never used as installation inputs.
 $publication = Invoke-Git @('ls-remote', '--exit-code', $sourceRepository, 'refs/heads/main')
@@ -68,6 +70,7 @@ $destination = Join-Path $root $skillName
 $scratch = Join-Path $root ('.install-' + [guid]::NewGuid().ToString('N'))
 $backup = Join-Path $scratch 'previous'
 $lock = [IO.File]::Open((Join-Path $root ".$skillName.lock"), 'OpenOrCreate', 'ReadWrite', 'None')
+$installSucceeded = $false
 try {
     if (Test-Path -LiteralPath $destination) {
         $existing = Get-Item -LiteralPath $destination -Force
@@ -107,6 +110,7 @@ try {
     }
     try {
         [IO.Directory]::Move($staged, $destination)
+        $installSucceeded = $true
     } catch {
         if (Test-Path -LiteralPath $backup) {
             [IO.Directory]::Move($backup, $destination)
@@ -116,10 +120,13 @@ try {
     $manifest | ConvertTo-Json -Depth 5
 } finally {
     $lock.Dispose()
-    # Retain the backup if restoration failed. Scratch is a direct child created
-    # by this invocation and contains only the exported Skill and any backup.
-    if ((Test-Path -LiteralPath $scratch) -and
-        ((Test-Path -LiteralPath $destination) -or -not (Test-Path -LiteralPath $backup))) {
+    # Keep the previous installation whenever installation/rollback did not
+    # finish safely. Destination existence alone does not prove rollback success:
+    # another process may have created it while the previous backup still exists.
+    $destinationExists = Test-Path -LiteralPath $destination
+    $backupExists = Test-Path -LiteralPath $backup
+    $cleanupAllowed = Test-ResearchSkillScratchCleanupAllowed -InstallSucceeded $installSucceeded -DestinationExists $destinationExists -BackupExists $backupExists
+    if ((Test-Path -LiteralPath $scratch) -and $cleanupAllowed) {
         $resolvedScratch = (Resolve-Path -LiteralPath $scratch).ProviderPath
         if ([IO.Path]::GetDirectoryName($resolvedScratch) -eq $root.TrimEnd('\', '/')) {
             Remove-Item -LiteralPath $resolvedScratch -Recurse -Force
