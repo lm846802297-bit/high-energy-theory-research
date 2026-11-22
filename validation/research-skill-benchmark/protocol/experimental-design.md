@@ -142,7 +142,7 @@ Before scoring, validate each pair with both the JSON Schema and the determinist
 
 Permitted treatment differences are limited to Skill availability, Skill source/manifest, invocation, and task-specific references loaded by B. A must prove no Skill was available; B must prove the pinned Skill was available, invoked, and the task-specific reference was loaded. The transcript/output workspaces must be separate. Any control mismatch invalidates the entire pair; preserve both records and rerun both arms under a new pair ID.
 
-The run-record Schema enforces arm-specific Skill fields and adjudicated hard-gate consistency. The pair checker enforces equality of shared controls, budget adherence, pinned Skill commit, task-specific reference loading, and separate per-run artifact paths. Before a scored run can be accepted, the CLI must verify the actual bytes and SHA-256 of every artifact under an explicit artifact root. A hash written in a record without matching bytes is not evidence. Neither check alone is sufficient.
+The run-record Schema enforces arm-specific Skill fields and adjudicated hard-gate consistency. The comparison evaluator also requires each run's source-file bundle to match the pinned task manifest and verifies those staged source bytes, Git blob IDs, sizes, and SHA-256 values. The pair checker enforces equality of shared controls, budget adherence, pinned Skill commit, task-specific reference loading, and separate per-run artifact paths. Before a scored run can be accepted, the CLI must verify the actual bytes and SHA-256 of every artifact under an explicit artifact root. A hash written in a record without matching bytes is not evidence. Neither check alone is sufficient.
 
 ## 10. Freeze checklist
 
