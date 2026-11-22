@@ -28,6 +28,14 @@
     "test_dependencies": [
       "jsonschema==4.26.0",
       "PyYAML==6.0.3"
+    ],
+    "physics_dependencies_file": "evaluators/requirements-physics.txt",
+    "physics_dependencies_are_exactly_pinned": true,
+    "physics_dependencies": [
+      "sympy==1.14.0",
+      "mpmath==1.3.0",
+      "numpy==2.3.5",
+      "scipy==1.17.0"
     ]
   },
   "evaluator_code": [
@@ -72,6 +80,12 @@
       "role": "minimal_exactly_pinned_dependencies_for_schema_and_evaluator_unit_tests",
       "git_blob_sha1": "083ac9bf8d74939d8286549caaebf0626e7d51ec",
       "size_bytes": 33
+    },
+    {
+      "path": "evaluators/requirements-physics.txt",
+      "role": "pinned_dependencies_for_T01_T02_deterministic_symbolic_and_numerical_evaluators",
+      "git_blob_sha1": "235e267836e8e6a42c6dec571d6ff617dc0b0b56",
+      "size_bytes": 55
     }
   ],
   "protocol_artifacts": [
@@ -301,6 +315,26 @@
     "T03 requires human source interpretation and direct PDF-page verification.",
     "T05-A PDF visual inspection remains a human check in addition to the deterministic text screen.",
     "T06 verifies the recorded package and independently recomputes the result; it does not prove submitted source execution unless trusted runner evidence is available.",
-    "Run 1137 validated the evaluator code, test suite, and protocol artifacts at PR head ad8cdb968875cd07249aa52558282bc556803e4f. The subsequent evaluator-manifest-only status update must be rerun after any evaluator or protocol code change."
-  ]
+    "Run 1137 validated the evaluator code, test suite, and protocol artifacts at PR head ad8cdb968875cd07249aa52558282bc556803e4f. The subsequent evaluator-manifest-only status update must be rerun after any evaluator or protocol code change.",
+    "The workflow now includes end-to-end T01/T02 symbolic and numerical checks plus T05 PDF screening and CSV-to-SVG regeneration. These new deterministic evaluator steps are awaiting a workflow run on the current branch head."
+  ],
+  "ci_integration": {
+    "workflow": ".github/workflows/schema-validation.yml",
+    "git_blob_sha1": "dd6149c15c4759c200d1b10a3ce01a7c23d58b48",
+    "size_bytes": 7716,
+    "new_steps": [
+      "Validate and test Particle Physics Research Skill Benchmark",
+      "Run pinned T01/T02 symbolic and numerical evaluators",
+      "Run pinned T05 PDF and data-to-figure evaluators",
+      "Upload deterministic Benchmark evaluator outputs"
+    ],
+    "current_head_run_status": "pending_workflow_dispatch",
+    "last_unit_suite_run": {
+      "head_sha": "ad8cdb968875cd07249aa52558282bc556803e4f",
+      "run_id": 45050044303,
+      "run_number": 1137,
+      "conclusion": "success",
+      "tests_passed": 25
+    }
+  }
 }
