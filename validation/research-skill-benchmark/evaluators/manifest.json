@@ -111,7 +111,7 @@
       "path": "protocol/experimental-design.md",
       "role": "preregistered_experimental_design_and_pair_integrity_rules",
       "git_blob_sha1": "d7a64d4ed3e218b57e44d142b4af3761be6ce8d0",
-      "size_bytes": 15295
+      "size_bytes": 15324
     },
     {
       "path": "protocol/scoring-rubric.yaml",
@@ -499,19 +499,19 @@
   "test_suite": {
     "command": "python -m unittest discover -s evaluators -v",
     "tests_defined": 41,
-    "development_run": "Run 1169 passed the 39-test exact-protocol-hash suite. The current 41-test implementation adds canonical input_manifest_sha256 and exact task-prompt byte verification; Linux CI is pending.",
+    "development_run": "GitHub Actions Run 1173 passed all 41 Benchmark evaluator tests on exact HEAD 1ba87dbc09288ad31eac7b816e062b0a4ddb269b. Exact protocol-file hashes, canonical input_manifest_sha256, and task.path prompt-byte verification are all exercised by the suite.",
     "exact_committed_tree_rerun_required": true,
     "ci_workflow": ".github/workflows/schema-validation.yml",
     "ci_step": "Validate and test Particle Physics Research Skill Benchmark",
-    "last_verified_head_sha": "edeccfac3c9478e278395bbbb34d8ec2690f4b12",
-    "last_verified_run_id": 45058000344,
-    "last_verified_run_number": 1169,
-    "last_verified_run_url": "https://github.com/lm846802297-bit/high-energy-theory-research/actions/runs/45058000344",
+    "last_verified_head_sha": "1ba87dbc09288ad31eac7b816e062b0a4ddb269b",
+    "last_verified_run_id": 45059384540,
+    "last_verified_run_number": 1173,
+    "last_verified_run_url": "https://github.com/lm846802297-bit/high-energy-theory-research/actions/runs/45059384540",
     "last_verified_conclusion": "success",
     "ci_python_version": "3.12.16",
     "schema_validation_status": "PASS",
-    "failure_summary": "Run 1149 passed schema validation, project integration tests, Skill scaffold tests, and 31 of 32 Benchmark tests. The sole failure was an old test that still treated a semantic text difference as a byte-serialization mismatch; the test and evaluator were corrected.",
-    "pending_changes": "41-test canonical input/prompt verification suite pending current-head CI."
+    "failure_summary": "Run 1149 passed schema validation, project integration tests, Skill scaffold tests, and 31 of 32 Benchmark tests. The sole failure was an old test that still treated a semantic text difference as a byte-serialization mismatch; the test and evaluator were corrected. Run 1171 initially failed one Round 2 synthetic fixture because the fixture changed task_id without recomputing the canonical input_manifest_sha256. The fixture was corrected; Run 1173 passed all 41 tests.",
+    "pending_changes": "Evidence-only manifest update, exact workflow SHA/byte-size correction, and native artifact digest record; awaiting final exact-head CI rerun."
   },
   "limitations": [
     "This evaluator registry is a development artifact and not a security boundary; keep it out of model workspaces.",
@@ -531,38 +531,62 @@
     "Run 1166 passed the complete 38-test suite and all central CI stages on exact HEAD 00d61983b5e9690eaf54e79b5d1c159559f92d26. The next commit updates only this evaluator-manifest evidence and requires a final evidence-only rerun.",
     "Run 1167 passed the full 38-test suite and all central CI stages on exact HEAD 3e8b9eefa285a51c1973f2ccc29aebd378744613. The next commit updates only this evaluator-manifest evidence and requires a final evidence-only rerun.",
     "The comparison engine now verifies exact hashes for protocol commit, environment lock, scoring rubric, task manifest, evaluator manifest, and analysis plan. The new run-record schema requires analysis_plan_sha256. The updated 39-test suite is pending CI.",
-    "The input_manifest_sha256 is now defined as a canonical JSON hash of task ID, exact prompt SHA-256, source commit, and sorted source-file identities. compare verifies prompt_sha256 against the exact prompt file and source bytes against the task manifest."
+    "The input_manifest_sha256 is now defined as a canonical JSON hash of task ID, exact prompt SHA-256, source commit, and sorted source-file identities. compare verifies prompt_sha256 against the exact prompt file and source bytes against the task manifest.",
+    "Run 1173's T05 SVG output is a trusted baseline regeneration only; no model-submitted SVG has been scored. The T05 submission schema requires two submitted outputs and the actual submission comparison.",
+    "The UV-EFT hard-derivative pilot has eight numerical cases and independent Feynman-parameter quadrature checks, but the source record explicitly leaves full UV numerator/diagram completeness, complete-basis Wilson matching, and human scientific review pending.",
+    "The UV-EFT provenance bundle's candidate record validator reports 22 records, zero errors, and zero warnings; its own report explicitly does not implement full directory-manifest digest recomputation, complete state-machine transition coverage, or independent scientific correctness validation."
   ],
   "ci_integration": {
     "workflow": ".github/workflows/schema-validation.yml",
-    "git_blob_sha1": "dd6149c15c4759c200d1b10a3ce01a7c23d58b48",
-    "size_bytes": 7716,
+    "git_blob_sha1": "940e64ba27e50ca26875bb0b1a0655515fd21ab8",
+    "size_bytes": 7836,
     "new_steps": [
       "Validate and test Particle Physics Research Skill Benchmark",
       "Run pinned T01/T02 symbolic and numerical evaluators",
       "Run pinned T05 PDF and data-to-figure evaluators",
       "Upload deterministic Benchmark evaluator outputs"
     ],
-    "current_head_run_status": "success_on_exact_pre_manifest_evidence_head",
+    "current_head_run_status": "success_on_exact_head_1ba87dbc09288ad31eac7b816e062b0a4ddb269b",
     "last_unit_suite_run": {
-      "head_sha": "3e8b9eefa285a51c1973f2ccc29aebd378744613",
-      "run_id": 45057361278,
-      "run_number": 1167,
+      "head_sha": "1ba87dbc09288ad31eac7b816e062b0a4ddb269b",
+      "run_id": 45059384540,
+      "run_number": 1173,
       "conclusion": "success",
-      "tests_passed": 38
+      "tests_passed": 41,
+      "tests_failed": 0
     },
-    "workflow_git_blob_sha1": "38605cfeaec4133ce5b096a57b6ebd1ca2295e73",
-    "workflow_size_bytes": 7820
+    "workflow_git_blob_sha1": "940e64ba27e50ca26875bb0b1a0655515fd21ab8",
+    "workflow_size_bytes": 7836,
+    "last_windows_installer_run": {
+      "head_sha": "1ba87dbc09288ad31eac7b816e062b0a4ddb269b",
+      "run_id": 45059384535,
+      "run_number": 12,
+      "conclusion": "success",
+      "powershell": "5.1.26100.33822",
+      "windows": "Microsoft Windows NT 10.0.26100.0",
+      "rollback_cleanup_cases": 6,
+      "rollback_cleanup_passed": 6,
+      "manifest_integrity_cases": 7,
+      "manifest_integrity_passed": 7
+    }
   },
   "latest_deterministic_ci_evidence": {
-    "run_id": 45057361278,
-    "run_number": 1167,
-    "head_sha": "3e8b9eefa285a51c1973f2ccc29aebd378744613",
+    "run_id": 45059384540,
+    "run_number": 1173,
+    "head_sha": "1ba87dbc09288ad31eac7b816e062b0a4ddb269b",
     "conclusion": "success",
+    "run_url": "https://github.com/lm846802297-bit/high-energy-theory-research/actions/runs/45059384540",
     "environment": {
       "python": "3.12.16",
       "platform": "Linux-7.0.0-1020-azure-x86_64-with-glibc2.43",
-      "architecture": "x86_64"
+      "architecture": "x86_64",
+      "machine": "x86_64",
+      "processor": ""
+    },
+    "evaluator_tests": {
+      "defined": 41,
+      "passed": 41,
+      "failed": 0
     },
     "T01_T02": {
       "status": "PASS",
@@ -576,50 +600,6 @@
         "sympy": "1.14.0",
         "mpmath": "1.3.0"
       }
-    },
-    "T05_PDF": {
-      "auditable": true,
-      "minimum_required_pt": 5,
-      "minimum_found_pt": 6.48,
-      "text_run_count": 37,
-      "below_minimum_count": 0,
-      "spacing_issue_count": 0,
-      "warnings": []
-    },
-    "T05_SVG": {
-      "status": "PASS",
-      "semantic_golden_match": true,
-      "historical_byte_identity": false,
-      "path_data_exact": true,
-      "path_count": 3,
-      "maximum_coordinate_delta_px": 0.0046153846153629274,
-      "coordinate_tolerance_px": 0.01,
-      "evaluation_mode": "trusted_baseline_only",
-      "submitted_model_outputs_evaluated": false,
-      "generated_svg_sha256": {
-        "fixed_speed_xe131_dsigma_450kev": "aeb29b7b256573a28503b24da429db680e6ed6f8debba72a59fd6a4b96829452",
-        "xe131_gcn_jj55_response_ratio_450kev": "57d7a23c1e00b91f4505e1f73d29451b489ccd4bb5df3536a020de6ca6525ce1"
-      }
-    },
-    "evaluator_tests": {
-      "passed": 38,
-      "failed": 0
-    },
-    "UV_EFT_provenance_bundle": {
-      "status": "PASS",
-      "artifact_id": 14767214297,
-      "size_bytes": 152755,
-      "sha256": "2fdc4d3fa651085c2d241ecc4b25441065e91c22899bf59b3c684b5c4a777538"
-    },
-    "evaluator_artifacts": {
-      "artifact_id": 14768041141,
-      "size_bytes": 9537,
-      "sha256": "464e27682aac3853b817082b7460a40ecaa4048b399bfef87110fb0cbd9d0c7d"
-    },
-    "candidate_schema_validation_report": {
-      "artifact_id": 14767758256,
-      "size_bytes": 3808,
-      "sha256": "797ebd8aa9f254669643a9af1cf10912148548752eb8b6800be7295b565597f1"
     },
     "T02_LZ_convergence": {
       "status": "PASS",
@@ -642,11 +622,148 @@
       ],
       "P23_peak_ER_keV": 328.01521028884076,
       "P23_peak_height_per_keV": 0.0030254675659530075,
-      "shape_normalized": true
+      "shape_normalized": true,
+      "environment": {
+        "python": "3.12.16",
+        "numpy": "2.3.5",
+        "scipy": "1.17.0"
+      }
+    },
+    "T05_PDF": {
+      "auditable": true,
+      "minimum_required_pt": 5,
+      "minimum_found_pt": 6.48,
+      "text_run_count": 37,
+      "below_minimum_count": 0,
+      "spacing_issue_count": 0,
+      "warnings": []
+    },
+    "T05_SVG": {
+      "status": "PASS",
+      "semantic_golden_match": true,
+      "historical_byte_identity": false,
+      "path_data_exact": true,
+      "path_count": 3,
+      "maximum_coordinate_delta_px": 0.0046153846153629274,
+      "coordinate_tolerance_px": 0.01,
+      "evaluation_mode": "trusted_baseline_only",
+      "submission_evaluated": false,
+      "submission_pass": null,
+      "generated_svg_sha256": {
+        "fixed_speed_xe131_dsigma_450kev": "aeb29b7b256573a28503b24da429db680e6ed6f8debba72a59fd6a4b96829452",
+        "xe131_gcn_jj55_response_ratio_450kev": "57d7a23c1e00b91f4505e1f73d29451b489ccd4bb5df3536a020de6ca6525ce1"
+      }
+    },
+    "evaluator_output_files": [
+      {
+        "path": "benchmark-evaluator-environment.json",
+        "sha256": "2f2b9c558a16993fb9662062a6cbb22317ca7e98e1a4756e76adfcc7d61aff66"
+      },
+      {
+        "path": "t01-t02-jacobian.json",
+        "sha256": "a54e4de94229bde8df438573dd1bc3b1ce3a05d99db853e32b84ae0a6bcae653"
+      },
+      {
+        "path": "t02-lz-convergence.json",
+        "sha256": "6c6ecb5f4fd2177db83bdce77f497f74568f94a47a0265ea3801319ededcd567"
+      },
+      {
+        "path": "t05-pdf-text-audit.json",
+        "sha256": "fa7795514204bd99bc8eff8ee31e991bea8ede733ea9f5399178cc2ac1080e36"
+      },
+      {
+        "path": "t05-data-to-figure.json",
+        "sha256": "3a4fc90525fa7b852cba6ca4c0fe1dd9b85998709f8d3241575e2dcc0d33a500"
+      },
+      {
+        "path": "t05-generated/fixed_speed_xe131_dsigma_450kev.svg",
+        "sha256": "aeb29b7b256573a28503b24da429db680e6ed6f8debba72a59fd6a4b96829452"
+      },
+      {
+        "path": "t05-generated/xe131_gcn_jj55_response_ratio_450kev.svg",
+        "sha256": "57d7a23c1e00b91f4505e1f73d29451b489ccd4bb5df3536a020de6ca6525ce1"
+      }
+    ],
+    "evaluator_artifacts": {
+      "artifact_id": 14768603807,
+      "size_bytes": 9541,
+      "sha256": "b2d0fa09ed214f5a4d1a151f54d25531a6da403bfe3c3ee39cc142eccc3cfc5a",
+      "archive_name": "particle-physics-research-skill-benchmark-evaluator-results",
+      "retention_expires_at": "2027-02-20T19:11:56Z"
+    },
+    "candidate_schema_validation_report": {
+      "artifact_id": 14768917102,
+      "size_bytes": 3808,
+      "sha256": "965aa55e5f78916f2cc2ec6b9d442a731185b710132086818965eb6270a4a1e3",
+      "retention_expires_at": "2026-12-22T19:14:28Z"
+    },
+    "UV_EFT_provenance_bundle": {
+      "status": "PASS",
+      "artifact_id": 14768464447,
+      "size_bytes": 152767,
+      "sha256": "f5ed82daef13240046a2ba06af27a4dcdc679adfbdcfd9253b20a7aa7743976",
+      "archive_name": "uv-eFT-hard-derivative-provenance-bundle",
+      "retention_expires_at": "2026-12-22T19:14:58Z"
+    },
+    "UV_EFT_pilot_results": {
+      "status": "all_checks_passed_within_declared_scope",
+      "task_id": "UV-EFT-HARD-DERIVATIVE-001",
+      "cases": 8,
+      "r_values": [
+        0.01,
+        0.001,
+        0.0001,
+        0.00001
+      ],
+      "L_values": [
+        0,
+        0.7
+      ],
+      "max_Fprime_absolute_error": 4.5297099404706387e-13,
+      "max_PV_component_absolute_error": 5.639932965095795e-14,
+      "exact_projection_factor": "1/6",
+      "Pi_prime_at_matching_scale_over_K": -0.008443431970194815,
+      "max_scaled_asymptotic_residual": 2.6105098694477245,
+      "max_scaled_second_order_residual": 63.857764835158655,
+      "environment": {
+        "platform": "linux",
+        "python": "3.12.16",
+        "lockfile_sha256": "34f0ca601edef17dbdfcc8d8d9fffbf08ea267ab46501d33ba7d1503fb7913b2",
+        "container_digest": null
+      },
+      "source_commit": "135dcf5da9ae2a01741b3b4dda1257f42722f9eb",
+      "code_tree_sha256": "1f08eeba4a4bebeed6b8d30dc4137a0a2de9fccad36c00f9cd3e3723c75cf67e",
+      "record_validation": {
+        "records": 22,
+        "errors": 0,
+        "warnings": 0
+      },
+      "record_validation_report_sha256": "25e23a23384387348fb5ca8f5a96ea817d42497ba02864ec08b26b7944243276",
+      "record_chain_sha256": "997883399522ccad7ba093c0b8fb981ce4200fe6c848cf87a0ede150a3f449a4",
+      "record_chain_summary_sha256": "da634c751a8f436946fb129b17e5bb30a9cfeb3b465283d79a6871c41b7ea11c",
+      "results_sha256": "a477697ca87f2f2d91fa71a4663048d2ef56fdd1b87743e5a902bad42ab5e237",
+      "run_log_sha256": "a8154322285dbe688c7588bbd322796f3ed83b3c9c12defe88d781c2e3b0e12f",
+      "config_sha256": "bca9af3b2a6a3cc8b53671c28fdaa8e65909d4aa8a4a2528d4f0394bec729805",
+      "problem_sha256": "91ef514b430955370168e92e18ec2401e473eafd6b3c2f6f65fbca1dc82ff1c0",
+      "source_excerpt_sha256": "eabba70bffe8a428a43d4f275f72332ede0cd6fe6e708f1121f9bb1afe002a9d",
+      "human_review_status": "pending",
+      "physics_scope": "Closed-form PV functions and derivative combination cross-checked against independent Feynman-parameter quadrature; no fresh full UV numerator derivation or complete-basis Wilson matching."
+    },
+    "windows_installer_regression": {
+      "run_id": 45059384535,
+      "run_number": 12,
+      "head_sha": "1ba87dbc09288ad31eac7b816e062b0a4ddb269b",
+      "conclusion": "success",
+      "run_url": "https://github.com/lm846802297-bit/high-energy-theory-research/actions/runs/45059384535",
+      "powershell": "5.1.26100.33822",
+      "windows": "Microsoft Windows NT 10.0.26100.0",
+      "parser_checks": "PASS",
+      "rollback_cleanup": "6/6 PASS",
+      "manifest_integrity": "7/7 PASS"
     }
   },
   "required_evaluator_enforcement": {
-    "status": "implemented_registry_bound_and_full_ci_passed",
+    "status": "implemented_registry_protocol_and_input_bound_full_ci_passed",
     "task_manifest_field": "required_evaluators",
     "comparison_requirements": [
       "Every task must explicitly declare required_evaluators, including an empty list for tasks relying only on blinded human review.",
@@ -662,11 +779,12 @@
       "T05 baseline-only result cannot satisfy a scored run"
     ],
     "ci_run": {
-      "id": 45057361278,
-      "number": 1167,
-      "head_sha": "3e8b9eefa285a51c1973f2ccc29aebd378744613",
+      "id": 45059384540,
+      "number": 1173,
+      "head_sha": "1ba87dbc09288ad31eac7b816e062b0a4ddb269b",
       "conclusion": "success",
-      "benchmark_tests_passed": 38
+      "benchmark_tests_passed": 41,
+      "benchmark_tests_failed": 0
     },
     "registry_binding": {
       "evaluator_id_registry": "deterministic_evaluators",
@@ -675,6 +793,21 @@
       "exact_registry_sha256_bound_to_run_protocol": true,
       "private_holdout_registry_supported": true,
       "cli_argument": "--evaluator-manifest"
+    },
+    "protocol_file_binding": {
+      "protocol_commit_equals_cli_protocol_commit": true,
+      "exact_task_manifest_sha256": true,
+      "exact_scoring_rubric_sha256": true,
+      "exact_environment_lock_sha256": true,
+      "exact_analysis_plan_sha256": true,
+      "exact_evaluator_manifest_sha256": true,
+      "run_record_requires_analysis_plan_sha256": true
+    },
+    "input_binding": {
+      "canonical_input_manifest_sha256": true,
+      "exact_task_prompt_file_sha256": true,
+      "prompt_path_relative_to_task_manifest_directory": true,
+      "staged_source_git_blob_sha1_size_and_sha256": true
     }
   },
   "input_manifest_contract": {
@@ -699,6 +832,6 @@
       "size_bytes",
       "sha256"
     ],
-    "prompt_binding": "task_input.prompt_sha256 is checked against the exact task prompt file at task_manifest_parent / task.path"
+    "prompt_binding": "compare hashes the exact task prompt file named by task.path, resolved relative to the task-manifest directory, and checks it against each A/B prompt_sha256. validate_run recomputes input_manifest_sha256 from the canonical JSON contract."
   }
 }
