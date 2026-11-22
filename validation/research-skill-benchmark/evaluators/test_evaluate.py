@@ -234,6 +234,7 @@ class EvaluatorTests(unittest.TestCase):
                     for record in (a, b):
                         record["pair_id"] = pair_id
                         record["task_id"] = task_id
+                        record["task_input"]["input_manifest_sha256"] = evaluate.compute_task_input_manifest_sha256(record)
                         record["repeat"] = repeat
                         record["execution"]["transcript_artifact"] = f"transcripts/{record['run_id']}.json"
                         record["artifacts"][1]["path"] = record["execution"]["transcript_artifact"]
