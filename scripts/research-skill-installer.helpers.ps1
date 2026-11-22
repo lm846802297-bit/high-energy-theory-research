@@ -16,7 +16,7 @@ function Test-ResearchSkillManifestIntegrity {
     param(
         [Parameter(Mandatory = $true)][AllowNull()][object]$Manifest,
         [Parameter(Mandatory = $true)][string]$SourceRepository,
-        [Parameter(Mandatory = $true)][object[]]$ActualFiles,
+        [Parameter(Mandatory = $true)][AllowEmptyCollection()][object[]]$ActualFiles,
         [Parameter(Mandatory = $true)][string[]]$RequiredFiles
     )
 
@@ -32,17 +32,22 @@ function Test-ResearchSkillManifestIntegrity {
         return $false
     }
     $recordedPaths = @($recordedFiles | ForEach-Object { [string]$_.path })
-    if (@($RequiredFiles | Where-Object { $_ -cnotin $recordedPaths }).Count -gt 0) {
+    $missingRequired = @($RequiredFiles | Where-Object { $_ -cnotin $recordedPaths })
+    if ($missingRequired.Count -gt 0) {
         return $false
     }
-    if (@($recordedFiles | Where-Object {
+    $invalidRecords = @($recordedFiles | Where-Object {
         [string]::IsNullOrWhiteSpace([string]$_.path) -or
-        [string]$_.sha256 -cnotmatch '^[0-9a-f]{64}$'
-    }).Count -gt 0) {
+        [string]$_.sha256 -cnotmatch '^[0-9a-f]{64}
+}
+
+    })
+    if ($invalidRecords.Count -gt 0) {
         return $false
     }
 
     $recorded = @($recordedFiles | ForEach-Object { "$($_.path) $($_.sha256)" } | Sort-Object)
     $actual = @($ActualFiles | ForEach-Object { "$($_.path) $($_.sha256)" } | Sort-Object)
-    return (@(Compare-Object -ReferenceObject $recorded -DifferenceObject $actual -CaseSensitive).Count -eq 0)
+    $difference = @(Compare-Object -ReferenceObject $recorded -DifferenceObject $actual -CaseSensitive)
+    return ($difference.Count -eq 0)
 }
