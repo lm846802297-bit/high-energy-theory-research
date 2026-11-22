@@ -110,3 +110,12 @@
 - Separated development evaluator keys from model-visible task prompts.
 - Reserved a holdout area but did not create or expose holdout prompts/keys; a genuinely blind holdout must be prepared after protocol and Skill versions are frozen.
 - No A/B model runs have been executed. The benchmark protocol remains draft pending exact model/build capture and Windows workspace-isolation checks.
+
+## 2026-11-22 — Benchmark protocol refinement
+
+- Added six task specifications and a development-task manifest; separated model-visible prompts from evaluator-only keys.
+- Replaced the initial figure-only reading exercise with a full pinned axial-vector manuscript reading task. The evaluator must verify the PDF identity, calculate its SHA-256, and extract equation/Figure numbers and PDF pages from the actual PDF.
+- Specified byte-identical read-only source staging for both A/B arms.
+- Defined a common project-instruction snapshot that removes the shared-Skill routing paragraph from both arms, preserving all other project instructions, so the treatment variable remains Skill availability/invocation.
+- Added a 0.5-point maximum allowed mean autonomy regression margin and explicit autonomy failure conditions.
+- Protocol remains draft; environment/model lock and sealed holdout preparation are pending. No A/B runs have been executed.
