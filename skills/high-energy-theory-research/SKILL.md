@@ -58,7 +58,9 @@ Do not pass the navigation registry to validate_project_records.py. Use the stru
 
 ## Project record validation
 
-When a project stores structured research records as JSON or YAML, run the bundled validator against the project record directory:
+**Central-repository-only tooling:** `validate_project_records.py` and `validate_project_registry.py` are maintained for the central `high-energy-theory-research` source checkout. The user-level Skill export contains these script files but does not contain the central candidate schema bundle or its `cross_record_validate.py` helper. Therefore, do not invoke these validators from the standalone user-level installation or assume they are available in another repository. For a downstream project that explicitly adopts the central candidate schema/registry contract, use a pinned, compatible central source checkout and pass the downstream project's record/registry paths and project root explicitly. Otherwise, follow that project's own validation tooling and schemas.
+
+When a project stores structured research records as JSON or YAML **and explicitly adopts the central candidate schema bundle**, run the validator from the central source checkout against the project record directory:
 
 ~~~bash
 python skills/high-energy-theory-research/scripts/validate_project_records.py path/to/project/records --project-root path/to/project
