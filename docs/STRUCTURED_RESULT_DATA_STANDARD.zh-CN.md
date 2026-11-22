@@ -1,7 +1,7 @@
-# 结构化科研结果数据规范 v1.0.0
+# 结构化科研结果数据规范 v1.0.1
 
 **状态：** 本规范拟用于本仓库的新数值计算、模拟、参数扫描和计算验证；合并后对新运行生效。历史结果不追溯改写。  
-**规范版本：** `1.0.0`；JSON Schema：Draft 2020-12。  
+**规范版本：** `1.0.1`；JSON Schema：Draft 2020-12。v1.0.1 Schema 同时兼容校验既有 v1.0.0 记录。  
 **适用边界：** 本规范统一数据结构、运行来源和归档方式；它不把软件测试通过等同于物理结论成立。
 
 ## 1. 标准结果包
@@ -41,6 +41,19 @@ results/<run_label>/
 - 验证状态、各项检查的实际结果，以及 Git 归档状态。
 
 运行清单记录**实际执行的版本**，不能写当前分支最新 SHA 来替代计算发生时的源码 SHA。
+
+#### 2.1.1 源码修订版本语义（v1.0.1）
+
+新生成的 v1.0.1 `run_manifest` 必须提供 `source.revision_context`，明确区分 PR 源分支、目标分支和实际测试的 Git commit：
+
+- `source.commit_sha` 保留为兼容字段，表示实际 checkout 的 Git commit，必须与 `source.revision_context.checked_out_sha` 相同。
+- `pr_head_sha`：PR 源分支在本次运行时的 HEAD commit。
+- `base_sha`：本次 PR 所使用的目标分支 commit。
+- `tested_merge_sha`：只有实际 checkout 并测试了 GitHub 合成 PR merge commit 时才填写；直接测试 PR head 或未使用合成 merge ref 时填写 `null`。
+- `head_ref`、`base_ref`：分别记录真实源分支和目标分支名称。对于 `pull_request` 事件，`source.branch` 必须等于 `head_ref`。不能把 GitHub 的 `GITHUB_REF_NAME` 直接当成源分支，因为基于合成 merge ref 的 PR workflow 中它可能是 `<PR 编号>/merge`。
+- `checkout_mode`：记录实际测试的是 `pull_request_merge`、`pull_request_head`、普通分支 commit、detached commit 或未知模式。
+
+非 PR 运行必须将 `pr_number`、`pr_head_sha`、`base_sha` 和 `tested_merge_sha` 显式设为 `null`。这样可以避免把 GitHub 合成 merge SHA 误认为贡献者源分支的 commit。v1.0.1 Schema 继续接受既有 v1.0.0 记录；只有新生成的 v1.0.1 运行清单必须包含 revision context。
 
 ### 2.2 `result_summary.json`：计算得到了什么
 
@@ -133,7 +146,7 @@ results/<run_label>/
 
 ## 6. Schema 校验和归档验收
 
-本仓库配套的 `docs/schemas/research-result-record-v1.0.0.schema.json` 使用 JSON Schema Draft 2020-12，支持 `run_manifest`、`result_summary` 和 `validation_report` 三类记录。安装依赖并执行本仓库校验器：
+本仓库配套的 `docs/schemas/research-result-record-v1.0.1.schema.json` 使用 JSON Schema Draft 2020-12，支持 `run_manifest`、`result_summary` 和 `validation_report` 三类记录。安装依赖并执行本仓库校验器：
 
 ```bash
 python -m pip install -r docs/schemas/requirements-result-validation.txt
