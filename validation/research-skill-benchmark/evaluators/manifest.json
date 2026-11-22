@@ -42,14 +42,14 @@
     {
       "path": "evaluators/evaluate.py",
       "role": "run_schema_validation_pair_integrity_source_hashing_score_recomputation_and_comparison",
-      "git_blob_sha1": "e03201cb0289e374f1402fd0687b17c7fdc0be05",
-      "size_bytes": 44903
+      "git_blob_sha1": "7bc1de925dc5efc511c339eb98aa30986ea11964",
+      "size_bytes": 46190
     },
     {
       "path": "evaluators/test_evaluate.py",
       "role": "unit_and_semantic_regression_tests",
-      "git_blob_sha1": "f04434352899242d36553c738921ee9a2983b62a",
-      "size_bytes": 35901
+      "git_blob_sha1": "8a48e2fb1e70c39f9d1591555b079c35e5a937d2",
+      "size_bytes": 38011
     },
     {
       "path": "evaluators/verify_dirac_trace.py",
@@ -98,8 +98,8 @@
     {
       "path": "protocol/run-record.schema.json",
       "role": "strict_run_record_schema_with_A_B_conditional_Skill_constraints",
-      "git_blob_sha1": "157f32121e26eeaf2276027a122b20ef2179e5cc",
-      "size_bytes": 17618
+      "git_blob_sha1": "b8ec2d1b241827841178c48b452af5a2c99ace03",
+      "size_bytes": 17730
     },
     {
       "path": "protocol/comparison-report.schema.json",
@@ -110,8 +110,8 @@
     {
       "path": "protocol/experimental-design.md",
       "role": "preregistered_experimental_design_and_pair_integrity_rules",
-      "git_blob_sha1": "8e02127ae1e8ad3a79c989939ca6f8c33b167615",
-      "size_bytes": 14685
+      "git_blob_sha1": "c1a2b4d2b72ecae54203358dea9bd3ac72eced21",
+      "size_bytes": 14932
     },
     {
       "path": "protocol/scoring-rubric.yaml",
@@ -476,8 +476,8 @@
       ],
       "role": "run_record_source_bundle_matches_task_manifest_and_staged_bytes",
       "path": "evaluators/evaluate.py",
-      "git_blob_sha1": "e03201cb0289e374f1402fd0687b17c7fdc0be05",
-      "size_bytes": 44903,
+      "git_blob_sha1": "7bc1de925dc5efc511c339eb98aa30986ea11964",
+      "size_bytes": 46190,
       "scope": "Compare every run's repository, source commit, path, Git blob SHA-1 and byte size with the pinned task manifest; verify staged bytes and SHA-256 under the required input root. T05 includes the PDF, plotting script and both CSV inputs; T03 includes the PDF and companion TeX.",
       "evaluator_type": "internal"
     }
@@ -498,20 +498,20 @@
   },
   "test_suite": {
     "command": "python -m unittest discover -s evaluators -v",
-    "tests_defined": 38,
-    "development_run": "All 38 Benchmark evaluator tests passed in GitHub Actions Run 1167 on PR head 3e8b9eefa285a51c1973f2ccc29aebd378744613. The full workflow passed schema validation, project integration tests, Skill scaffold tests, T01/T02 symbolic and numerical checks, T05 PDF and SVG semantic baseline checks, Python compilation, and the UV-EFT provenance bundle.",
+    "tests_defined": 39,
+    "development_run": "Run 1168 passed the prior 38-test suite. One new regression test now verifies that protocol commit, environment lock, rubric, evaluator registry, task manifest, and analysis-plan hashes are bound to exact files; the updated 39-test suite requires CI validation.",
     "exact_committed_tree_rerun_required": true,
     "ci_workflow": ".github/workflows/schema-validation.yml",
     "ci_step": "Validate and test Particle Physics Research Skill Benchmark",
-    "last_verified_head_sha": "3e8b9eefa285a51c1973f2ccc29aebd378744613",
-    "last_verified_run_id": 45057361278,
-    "last_verified_run_number": 1167,
-    "last_verified_run_url": "https://github.com/lm846802297-bit/high-energy-theory-research/actions/runs/45057361278",
+    "last_verified_head_sha": "035b02848b06bdd3aca64f2d543158c741b2fecf",
+    "last_verified_run_id": 45057485995,
+    "last_verified_run_number": 1168,
+    "last_verified_run_url": "https://github.com/lm846802297-bit/high-energy-theory-research/actions/runs/45057485995",
     "last_verified_conclusion": "success",
     "ci_python_version": "3.12.16",
     "schema_validation_status": "PASS",
     "failure_summary": "Run 1149 passed schema validation, project integration tests, Skill scaffold tests, and 31 of 32 Benchmark tests. The sole failure was an old test that still treated a semantic text difference as a byte-serialization mismatch; the test and evaluator were corrected.",
-    "pending_changes": null
+    "pending_changes": "Exact protocol artifact hash binding added to compare; awaiting new CI run."
   },
   "limitations": [
     "This evaluator registry is a development artifact and not a security boundary; keep it out of model workspaces.",
@@ -529,7 +529,8 @@
     "The evaluator registry is now the authoritative source for required evaluator IDs, task associations, and result-payload JSON Schemas. The scoring CLI accepts a separate evaluator manifest for the private Holdout package and verifies its exact bytes against protocol.evaluator_manifest_sha256.",
     "Run 1165 passed all 38 Benchmark evaluator tests and the full central CI workflow. The same HEAD passed Windows PowerShell 5.1 installer regression Run 4; the next commit updates only this CI evidence record and must be revalidated.",
     "Run 1166 passed the complete 38-test suite and all central CI stages on exact HEAD 00d61983b5e9690eaf54e79b5d1c159559f92d26. The next commit updates only this evaluator-manifest evidence and requires a final evidence-only rerun.",
-    "Run 1167 passed the full 38-test suite and all central CI stages on exact HEAD 3e8b9eefa285a51c1973f2ccc29aebd378744613. The next commit updates only this evaluator-manifest evidence and requires a final evidence-only rerun."
+    "Run 1167 passed the full 38-test suite and all central CI stages on exact HEAD 3e8b9eefa285a51c1973f2ccc29aebd378744613. The next commit updates only this evaluator-manifest evidence and requires a final evidence-only rerun.",
+    "The comparison engine now verifies exact hashes for protocol commit, environment lock, scoring rubric, task manifest, evaluator manifest, and analysis plan. The new run-record schema requires analysis_plan_sha256. The updated 39-test suite is pending CI."
   ],
   "ci_integration": {
     "workflow": ".github/workflows/schema-validation.yml",

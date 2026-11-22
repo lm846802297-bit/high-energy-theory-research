@@ -38,6 +38,7 @@ def make_record(arm: str, run_id: str, score=3):
             "scoring_rubric_sha256": "c" * 64,
             "evaluator_manifest_sha256": "d" * 64,
             "task_manifest_sha256": "e" * 64,
+            "analysis_plan_sha256": "f" * 64,
         },
         "model": {"label": "test-model", "immutable_id": None, "reasoning_effort": "high", "sampling": None},
         "runtime": {"os": "Linux", "codex_product": "Codex", "codex_version": "1.0", "python_version": "3.13", "architecture": "x86_64", "hardware": {"cpu": "test"}},
@@ -647,7 +648,7 @@ class EvaluatorTests(unittest.TestCase):
             "required_evaluators": [],
         }]}
         registry = {"deterministic_evaluators": []}
-        with self.assertRaisesRegex(evaluate.EvaluationError, "evaluator_manifest_sha256"):
+        with self.assertRaisesRegex(evaluate.EvaluationError, "protocol binding mismatch for evaluator_manifest_sha256"):
             evaluate.compare_records(
                 [a, b],
                 manifest,
@@ -656,8 +657,48 @@ class EvaluatorTests(unittest.TestCase):
                 schema_path=SCHEMA,
                 rubric_path=RUBRIC,
                 evaluator_manifest=registry,
-                evaluator_manifest_sha256="1" * 64,
+                protocol_bindings={"evaluator_manifest_sha256": "1" * 64},
             )
+
+    def test_compare_binds_all_protocol_artifact_hashes_to_exact_files(self):
+        manifest = {"tasks": [{
+            "id": "T01",
+            "dimension": "theoretical_derivation",
+            "task_family": "threshold_kinematics",
+            "skill_reference": "references/symbolic-calculation.md",
+            "required_evaluators": [],
+        }]}
+        registry = {"deterministic_evaluators": []}
+        a = make_record("no-skill", "run-a")
+        b = make_record("with-skill", "run-b")
+        bindings = {
+            "commit": a["protocol"]["commit"],
+            "environment_lock_sha256": a["protocol"]["environment_lock_sha256"],
+            "scoring_rubric_sha256": a["protocol"]["scoring_rubric_sha256"],
+            "evaluator_manifest_sha256": a["protocol"]["evaluator_manifest_sha256"],
+            "task_manifest_sha256": a["protocol"]["task_manifest_sha256"],
+            "analysis_plan_sha256": a["protocol"]["analysis_plan_sha256"],
+        }
+        report = evaluate.compare_records(
+            [a, b], manifest, "round_1_pilot", seed=5,
+            schema_path=SCHEMA, rubric_path=RUBRIC,
+            evaluator_manifest=registry, protocol_bindings=bindings,
+        )
+        self.assertEqual(report["decision"], "inconclusive")
+
+        for field, expected in bindings.items():
+            left = make_record("no-skill", "run-a-" + field)
+            right = make_record("with-skill", "run-b-" + field)
+            wrong = "0" * len(expected)
+            left["protocol"][field] = wrong
+            right["protocol"][field] = wrong
+            with self.subTest(field=field):
+                with self.assertRaisesRegex(evaluate.EvaluationError, f"protocol binding mismatch for {field}"):
+                    evaluate.compare_records(
+                        [left, right], manifest, "round_1_pilot", seed=5,
+                        schema_path=SCHEMA, rubric_path=RUBRIC,
+                        evaluator_manifest=registry, protocol_bindings=bindings,
+                    )
 
 
 if __name__ == "__main__":

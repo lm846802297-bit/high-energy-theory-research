@@ -27,6 +27,8 @@ DEFAULT_REPORT_SCHEMA = ROOT / "protocol" / "comparison-report.schema.json"
 DEFAULT_RUBRIC = ROOT / "protocol" / "scoring-rubric.yaml"
 DEFAULT_TASK_MANIFEST = ROOT / "tasks" / "development" / "manifest.json"
 DEFAULT_EVALUATOR_MANIFEST = ROOT / "evaluators" / "manifest.json"
+DEFAULT_ENVIRONMENT_LOCK = ROOT / "protocol" / "environment-lock.json"
+DEFAULT_ANALYSIS_PLAN = ROOT / "protocol" / "experimental-design.md"
 DIMENSIONS = (
     "scientific_correctness",
     "independent_validation",
@@ -583,17 +585,19 @@ def compare_records(
     artifact_root: Path | None = None,
     input_root: Path | None = None,
     evaluator_manifest: dict[str, Any] | None = None,
-    evaluator_manifest_sha256: str | None = None,
+    protocol_bindings: dict[str, str] | None = None,
 ) -> dict[str, Any]:
     if evaluator_manifest is None:
         evaluator_manifest = read_json(DEFAULT_EVALUATOR_MANIFEST)
     _index_evaluator_registry(evaluator_manifest)
-    if evaluator_manifest_sha256 is not None:
+    if protocol_bindings is not None:
         for record in records:
-            if record["protocol"].get("evaluator_manifest_sha256") != evaluator_manifest_sha256:
-                raise EvaluationError(
-                    f"Run {record['run_id']} evaluator_manifest_sha256 differs from the exact evaluator registry bytes"
-                )
+            for field, expected_hash in protocol_bindings.items():
+                if record["protocol"].get(field) != expected_hash:
+                    raise EvaluationError(
+                        f"Run {record['run_id']} protocol binding mismatch for {field}: "
+                        f"recorded={record['protocol'].get(field)}, expected={expected_hash}"
+                    )
     task_info = {item["id"]: item for item in task_manifest.get("tasks", [])}
     if not task_info:
         raise EvaluationError("Task manifest contains no tasks")
@@ -818,7 +822,20 @@ def command_compare(args: argparse.Namespace) -> dict[str, Any]:
     records = _load_run_files(args.records_dir)
     manifest = read_json(args.task_manifest)
     evaluator_manifest = read_json(args.evaluator_manifest)
-    evaluator_manifest_sha256 = sha256(args.evaluator_manifest.read_bytes())
+    analysis_plan_sha256 = sha256(args.analysis_plan.read_bytes())
+    environment_lock_sha256 = sha256(args.environment_lock.read_bytes())
+    if args.analysis_plan_sha256 is not None and args.analysis_plan_sha256 != analysis_plan_sha256:
+        raise EvaluationError("Provided analysis_plan_sha256 does not match the exact analysis-plan file bytes")
+    if args.environment_lock_sha256 is not None and args.environment_lock_sha256 != environment_lock_sha256:
+        raise EvaluationError("Provided environment_lock_sha256 does not match the exact environment-lock file bytes")
+    protocol_bindings = {
+        "commit": args.protocol_commit,
+        "task_manifest_sha256": sha256(args.task_manifest.read_bytes()),
+        "scoring_rubric_sha256": sha256(args.rubric.read_bytes()),
+        "environment_lock_sha256": environment_lock_sha256,
+        "evaluator_manifest_sha256": sha256(args.evaluator_manifest.read_bytes()),
+        "analysis_plan_sha256": analysis_plan_sha256,
+    }
     report = compare_records(
         records,
         manifest,
@@ -829,11 +846,11 @@ def command_compare(args: argparse.Namespace) -> dict[str, Any]:
         args.artifact_root,
         args.input_root,
         evaluator_manifest,
-        evaluator_manifest_sha256,
+        protocol_bindings,
     )
     report["protocol_commit"] = args.protocol_commit
-    report["analysis_plan_sha256"] = args.analysis_plan_sha256
-    report["environment_lock_sha256"] = args.environment_lock_sha256
+    report["analysis_plan_sha256"] = analysis_plan_sha256
+    report["environment_lock_sha256"] = environment_lock_sha256
     validate_schema(report, args.report_schema)
     if args.output:
         args.output.parent.mkdir(parents=True, exist_ok=True)
@@ -870,11 +887,13 @@ def build_parser() -> argparse.ArgumentParser:
     compare.add_argument("--records-dir", type=Path, required=True)
     compare.add_argument("--task-manifest", type=Path, default=DEFAULT_TASK_MANIFEST)
     compare.add_argument("--evaluator-manifest", type=Path, default=DEFAULT_EVALUATOR_MANIFEST)
+    compare.add_argument("--analysis-plan", type=Path, default=DEFAULT_ANALYSIS_PLAN)
+    compare.add_argument("--environment-lock", type=Path, default=DEFAULT_ENVIRONMENT_LOCK)
     compare.add_argument("--round", choices=["round_1_pilot", "round_2_full", "round_3_real_projects"], required=True)
     compare.add_argument("--seed", type=int, required=True)
     compare.add_argument("--protocol-commit", required=True)
-    compare.add_argument("--analysis-plan-sha256", required=True)
-    compare.add_argument("--environment-lock-sha256", required=True)
+    compare.add_argument("--analysis-plan-sha256")
+    compare.add_argument("--environment-lock-sha256")
     compare.add_argument("--schema", type=Path, default=DEFAULT_RUN_SCHEMA)
     compare.add_argument("--rubric", type=Path, default=DEFAULT_RUBRIC)
     compare.add_argument("--artifact-root", type=Path, required=True)

@@ -66,7 +66,8 @@
         "environment_lock_sha256",
         "scoring_rubric_sha256",
         "evaluator_manifest_sha256",
-        "task_manifest_sha256"
+        "task_manifest_sha256",
+        "analysis_plan_sha256"
       ],
       "properties": {
         "version": {
@@ -88,6 +89,9 @@
           "$ref": "#/$defs/sha256"
         },
         "task_manifest_sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "analysis_plan_sha256": {
           "$ref": "#/$defs/sha256"
         }
       }
