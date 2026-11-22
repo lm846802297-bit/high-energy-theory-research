@@ -80,6 +80,16 @@ class InputProvenanceSchemaTests(unittest.TestCase):
             "source": "repository input",
             "format": "csv",
             "path": "data/input.csv",
+            "bytes": 12,
+            "sha256": "b" * 64,
+        }))
+
+    def test_local_input_requires_byte_count(self):
+        self.assertFalse(self.valid({
+            "name": "local-table",
+            "source": "repository input",
+            "format": "csv",
+            "path": "data/input.csv",
             "sha256": "b" * 64,
         }))
 
