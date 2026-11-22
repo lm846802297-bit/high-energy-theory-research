@@ -100,3 +100,13 @@
 - Added seven Windows PowerShell manifest-integrity cases covering valid inventory, wrong repository, malformed source commit, missing required file, modified hash, empty inventory, and unrecorded extra file.
 - Extended the Python Skill contract test to assert the installer helper and Windows regression test are included in the repository.
 - Windows PowerShell 5.1 execution of the expanded 13-case installer regression remains pending.
+
+## 2026-11-22 — Research Skill A/B benchmark scaffold
+
+- Added a preregistered A/B protocol comparing the same GPT/Codex runtime with and without the shared Research Skill.
+- Added a weighted scoring rubric with non-compensatory physics/evidence gates and a separate reasoning-autonomy guardrail.
+- Added an environment lock, run-record schema, comparison-report schema, and separate run directories for both arms.
+- Added six development tasks covering theoretical derivation, numerical integration, source-grounded manuscript reading, symbolic Dirac traces, PDF figure audit, and reproducibility.
+- Separated development evaluator keys from model-visible task prompts.
+- Reserved a holdout area but did not create or expose holdout prompts/keys; a genuinely blind holdout must be prepared after protocol and Skill versions are frozen.
+- No A/B model runs have been executed. The benchmark protocol remains draft pending exact model/build capture and Windows workspace-isolation checks.
