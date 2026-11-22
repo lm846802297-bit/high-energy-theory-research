@@ -80,10 +80,9 @@ try {
             throw "Existing Skill is not managed by this installer: $destination"
         }
         $old = Get-Content -LiteralPath $oldManifest -Raw -Encoding UTF8 | ConvertFrom-Json
-        $recorded = @($old.files | ForEach-Object { "$($_.path) $($_.sha256)" } | Sort-Object)
-        $actual = @(Get-Inventory $destination | ForEach-Object { "$($_.path) $($_.sha256)" } | Sort-Object)
-        if ($old.source_repository -cne $sourceRepository -or (($recorded -join "`n") -cne ($actual -join "`n"))) {
-            throw "The existing Skill differs from its installation manifest: $destination"
+        $actual = @(Get-Inventory $destination)
+        if (-not (Test-ResearchSkillManifestIntegrity -Manifest $old -SourceRepository $sourceRepository -ActualFiles $actual -RequiredFiles $required)) {
+            throw "The existing Skill differs from or has an invalid installation manifest: $destination"
         }
     }
 
