@@ -22,6 +22,12 @@
       "numpy==2.3.5",
       "scipy==1.17.0",
       "PyMuPDF==1.26.7"
+    ],
+    "test_dependencies_file": "evaluators/requirements-test.txt",
+    "test_dependencies_are_exactly_pinned": true,
+    "test_dependencies": [
+      "jsonschema==4.26.0",
+      "PyYAML==6.0.3"
     ]
   },
   "evaluator_code": [
@@ -60,6 +66,12 @@
       "role": "T05B_pinned_plot_script_execution_and_byte_for_byte_golden_SVG_comparison",
       "git_blob_sha1": "6c4555b323e3908c0a02952764e5611f1c5e9229",
       "size_bytes": 6261
+    },
+    {
+      "path": "evaluators/requirements-test.txt",
+      "role": "minimal_exactly_pinned_dependencies_for_schema_and_evaluator_unit_tests",
+      "git_blob_sha1": "083ac9bf8d74939d8286549caaebf0626e7d51ec",
+      "size_bytes": 33
     }
   ],
   "protocol_artifacts": [
@@ -272,8 +284,10 @@
   "test_suite": {
     "command": "python -m unittest discover -s evaluators -v",
     "tests_defined": 25,
-    "development_run": "Not run against the current committed tree. The earlier 17-test draft run predates the T05 tests, artifact checks, hard-gate reconciliation, and task-source matching; final execution is pending.",
-    "exact_committed_tree_rerun_required": true
+    "development_run": "Pending CI execution against the current committed tree.",
+    "exact_committed_tree_rerun_required": true,
+    "ci_workflow": ".github/workflows/schema-validation.yml",
+    "ci_step": "Validate and test Particle Physics Research Skill Benchmark"
   },
   "limitations": [
     "This evaluator registry is a development artifact and not a security boundary; keep it out of model workspaces.",
