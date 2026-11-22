@@ -18,6 +18,11 @@ class SkillContractTests(unittest.TestCase):
             "task-router.md",
             "evidence-and-claim-gates.md",
             "source-and-version-audit.md",
+            "symbolic-calculation.md",
+            "numerical-scans-and-uncertainty.md",
+            "scientific-figure-audit.md",
+            "paper-reading.md",
+            "optional-tooling.md",
         ):
             with self.subTest(name=name):
                 self.assertTrue((refs / name).is_file())
@@ -31,7 +36,9 @@ class SkillContractTests(unittest.TestCase):
     def test_project_record_validator_is_referenced_and_present(self):
         script = SKILL.parent / "scripts" / "validate_project_records.py"
         self.assertTrue(script.is_file())
-        self.assertIn("validate_project_records.py", SKILL.read_text(encoding="utf-8"))
+        skill_text = SKILL.read_text(encoding="utf-8")
+        self.assertIn("validate_project_records.py", skill_text)
+        self.assertIn("references/optional-tooling.md", skill_text)
 
 
 if __name__ == "__main__":
