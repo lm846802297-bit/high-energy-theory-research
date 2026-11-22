@@ -1,0 +1,60 @@
+{
+  "status": "PASS: multi-level convergence and independent original-variable quadrature",
+  "inputs": {
+    "mchi1_keV": 1000000000.0,
+    "target_mass_keV": 122000000.0,
+    "scalar_mass_keV": 300.0,
+    "iDM_threshold_keV": 300.0,
+    "incident_speed_km_s": 780.0,
+    "source_record": "LZ-3-body-for-hdm PR #77, merged commit 8902abdb8bc44cad690059f9985204b4c0737657",
+    "source_script_blob_sha": "9d16dee9297f992aff41c80c67275b8b5eb8c99e",
+    "source_data_blob_sha": "3fed4e5e4517cd59c83f3415ce441eabd90b396d",
+    "source_summary_blob_sha": "bddd5274f1ade39b8e2b26e53171686516951daf",
+    "source_pdf_sha256_recorded_upstream": "b4fc7bd73265df2bc2ce1640cbf8847b63323ec1dda220f9e7903f4620b871bb"
+  },
+  "exact_kinematics": {
+    "recoil_endpoints_keV": [106.5912099531907, 670.7107218077737],
+    "P22_plateau_per_keV": 0.0017726740149661354,
+    "P23_peak_ER_keV": 328.01521028884076,
+    "P23_peak_height_per_keV": 0.0030254675659530075
+  },
+  "convergence_sequence": [
+    {"order":4,"raw_spectrum_area_keV3":12519373.919637496,"normalized_area":1.0},
+    {"order":8,"raw_spectrum_area_keV3":12519373.93931776,"normalized_area":1.0000000000000002,"previous_order":4,"max_abs_shape_difference_per_keV":1.6721394234531228e-12,"max_rel_shape_difference_active_region":1.5719836987276425e-09},
+    {"order":16,"raw_spectrum_area_keV3":12519373.939317752,"normalized_area":1.0,"previous_order":8,"max_abs_shape_difference_per_keV":1.3010426069826053e-18,"max_rel_shape_difference_active_region":4.524811945875386e-16},
+    {"order":32,"raw_spectrum_area_keV3":12519373.93931776,"normalized_area":1.0,"previous_order":16,"max_abs_shape_difference_per_keV":1.3010426069826053e-18,"max_rel_shape_difference_active_region":4.354650451079135e-16},
+    {"order":64,"raw_spectrum_area_keV3":12519373.939317748,"normalized_area":0.9999999999999999,"previous_order":32,"max_abs_shape_difference_per_keV":1.734723475976807e-18,"max_rel_shape_difference_active_region":6.068241097507056e-16},
+    {"order":128,"raw_spectrum_area_keV3":12519373.939317796,"normalized_area":1.0000000000000002,"previous_order":64,"max_abs_shape_difference_per_keV":2.6020852139652106e-18,"max_rel_shape_difference_active_region":8.614268648947499e-16},
+    {"order":256,"raw_spectrum_area_keV3":12519373.93931776,"normalized_area":0.9999999999999999,"previous_order":128,"max_abs_shape_difference_per_keV":2.168404344971009e-18,"max_rel_shape_difference_active_region":7.178557207456249e-16},
+    {"order":512,"raw_spectrum_area_keV3":12519373.939317781,"normalized_area":0.9999999999999999,"previous_order":256,"max_abs_shape_difference_per_keV":2.6020852139652106e-18,"max_rel_shape_difference_active_region":8.938697127524234e-16},
+    {"order":1024,"raw_spectrum_area_keV3":12519373.939317834,"normalized_area":0.9999999999999999,"previous_order":512,"max_abs_shape_difference_per_keV":2.6020852139652106e-18,"max_rel_shape_difference_active_region":8.974163090018906e-16}
+  ],
+  "independent_scipy_quad_checks": [
+    {"ER_keV":150.0,"gauss_legendre_512":10594.393318338874,"scipy_quad_original_s":10594.393318338853,"relative_difference":2.060323058307295e-15},
+    {"ER_keV":250.0,"gauss_legendre_512":32939.40674786638,"scipy_quad_original_s":32939.40674786629,"relative_difference":2.650669820453183e-15},
+    {"ER_keV":350.0,"gauss_legendre_512":37536.39794374412,"scipy_quad_original_s":37536.397943744014,"relative_difference":2.9075609326264896e-15},
+    {"ER_keV":450.0,"gauss_legendre_512":29081.179967416545,"scipy_quad_original_s":29081.179967416476,"relative_difference":2.376849818755246e-15},
+    {"ER_keV":550.0,"gauss_legendre_512":14377.333101811688,"scipy_quad_original_s":14377.333101811662,"relative_difference":1.7712500273387339e-15},
+    {"ER_keV":650.0,"gauss_legendre_512":1177.506872594983,"scipy_quad_original_s":1177.5068725949807,"relative_difference":1.9309753576397196e-15}
+  ],
+  "heavy_particle_limit": {
+    "endpoints_keV": [106.59251700367113, 670.7027362614213],
+    "max_exact_vs_NR_endpoint_difference_keV": 0.00798554635241544
+  },
+  "normalization": {
+    "P22_area_analytic": 1.0,
+    "P22_trapezoid_grid_area_not_used_for_step_function": 1.0007804092279333,
+    "P23_area": 0.9999999999999999,
+    "shape_is_normalized": true
+  },
+  "environment": {
+    "python": "3.13.5",
+    "platform": "Linux-6.18.57-x86_64-with-glibc2.41",
+    "numpy": "2.3.5",
+    "scipy": "1.17.0"
+  },
+  "output": {
+    "csv": "convergence_spectrum.csv",
+    "csv_sha256": "72be740eb37adf1e61344c51e0e6812addeec6018142984292770911e2bc50ad"
+  }
+}
