@@ -4,7 +4,7 @@ The evaluator workspace is separate from model-visible task inputs. The pinned r
 
 ## Deterministic evaluator package
 
-Runtime dependencies are pinned in evaluators/requirements.txt. The lightweight CI/unit-test dependencies are pinned separately in evaluators/requirements-test.txt. The package uses Python 3.12+ and JSON Schema Draft 2020-12. The central schema-validation workflow runs both JSON Schema meta-validation and the 32-test evaluator suite, then executes the pinned T01/T02 symbolic/numerical references and the T05 PDF/data-to-figure checks. T03 remains a blinded human source-review task.
+Runtime dependencies are pinned in evaluators/requirements.txt. The lightweight CI/unit-test dependencies are pinned separately in evaluators/requirements-test.txt. The package uses Python 3.12+ and JSON Schema Draft 2020-12. The central schema-validation workflow runs both JSON Schema meta-validation and the 33-test evaluator suite, then executes the pinned T01/T02 symbolic/numerical references and the T05 PDF/data-to-figure checks. T03 remains a blinded human source-review task.
 
 - evaluate.py validate-run: validates a run record, verifies A/B-specific Skill fields, checks budget limits and reviewer consensus/adjudication, verifies every artifact's actual SHA-256 under a required artifact root, and recomputes Q from the five dimension scores.
 - evaluate.py validate-pair: verifies exactly one A and one B record, identical common controls, distinct transcript and artifact paths, the locked Skill commit, and the task-specific Skill reference.

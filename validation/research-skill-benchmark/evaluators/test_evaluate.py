@@ -485,10 +485,13 @@ class EvaluatorTests(unittest.TestCase):
                 manifest_path, model_root, golden_root, generated_output_root=generated_root
             )
             self.assertEqual(result["status"], "FAIL")
-            self.assertFalse(result["byte_identity_matches"])
+            self.assertFalse(result["semantic_golden_match"])
+            self.assertIn("SVG text mismatch", result["semantic_checks"][0]["error"])
             self.assertTrue((generated_root / "fixed_speed_xe131_dsigma_450kev.svg").is_file())
-            self.assertEqual(result["mismatches"][0]["path"], "fixed_speed_xe131_dsigma_450kev.svg")
-            self.assertIsInstance(result["mismatches"][0]["first_differing_byte"], int)
+            self.assertEqual(
+                result["historical_serialization_differences"][0],
+                "fixed_speed_xe131_dsigma_450kev.svg",
+            )
 
 
 if __name__ == "__main__":
