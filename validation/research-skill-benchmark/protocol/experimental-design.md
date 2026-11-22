@@ -36,6 +36,8 @@ This benchmark does not claim that a Skill improves the underlying model. It mea
 - Same task prompt, inputs, source snapshots, workspace files, project-level instructions, tool allowlist, network policy, time/token budget, and stopping rule.
 - Same OS, hardware/runtime, Python/compiler/package versions, and available external software.
 - Same evaluation scripts and reference answers, which are never exposed to the model.
+- For project-level `AGENTS.md` snapshots that contain the shared-Skill integration paragraph, remove that same paragraph from the common benchmark snapshot used by **both** arms. Preserve every other project instruction byte-for-byte and record the transformed snapshot hash. B receives the Skill only through the treatment installation/invocation; A must not be told that a Skill exists.
+- Other project-specific Skills and tools remain identical and available in both arms. Do not remove them to create an artificially weak baseline.
 
 The common harness must not mention or imply the existence of the Skill in A. It must not contain a project instruction telling A to invoke the Skill. In B, Skill invocation is the only intended treatment difference.
 
