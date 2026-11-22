@@ -1,94 +1,30 @@
 {
-  "schema_version": "1.0",
-  "split": "development",
-  "status": "draft_not_frozen",
-  "tasks": [
-    {
-      "id": "T01",
-      "path": "T01-theory-jacobian.md",
-      "dimension": "theoretical_derivation",
-      "skill_reference": "references/symbolic-calculation.md",
-      "input_sources": []
-    },
-    {
-      "id": "T02",
-      "path": "T02-numerical-integral.md",
-      "dimension": "numerical_integration",
-      "skill_reference": "references/numerical-scans-and-uncertainty.md",
-      "input_sources": []
-    },
-    {
-      "id": "T03",
-      "path": "T03-paper-reading.md",
-      "dimension": "paper_reading",
-      "skill_reference": "references/paper-reading.md",
-      "input_sources": [
-        {
-          "repository": "lm846802297-bit/axial-vector-review-response",
-          "commit": "a7ac6456dafb27492183912fe4abbaa73a9455f7",
-          "path": "archive/manuscript-baselines/axial_vector_model_building-v6.pdf",
-          "git_blob_sha1": "be8f472a8cc3c35975dcb5970c9be996fde2d985",
-          "size_bytes": 2759986
-        },
-        {
-          "repository": "lm846802297-bit/axial-vector-review-response",
-          "commit": "a7ac6456dafb27492183912fe4abbaa73a9455f7",
-          "path": "overleaf-source/axial-vector-model-building-v6/main-v6.tex",
-          "git_blob_sha1": "b99f9e26a0b57acd0a4938ea6e03fc691a82becb",
-          "size_bytes": 71477,
-          "role": "companion_tex_source",
-          "visibility": "model_input"
-        }
-      ]
-    },
-    {
-      "id": "T04",
-      "path": "T04-symbolic-dirac-trace.md",
-      "dimension": "symbolic_calculation",
-      "skill_reference": "references/symbolic-calculation.md",
-      "input_sources": []
-    },
-    {
-      "id": "T05",
-      "path": "T05-figure-audit.md",
-      "dimension": "figure_audit",
-      "skill_reference": "references/scientific-figure-audit.md",
-      "input_sources": [
-        {
-          "repository": "lm846802297-bit/LZ-3-body-for-hdm",
-          "commit": "8902abdb8bc44cad690059f9985204b4c0737657",
-          "path": "paper-source/figures/fixed_speed_recoil_spectra_v2.pdf",
-          "git_blob_sha1": "5f2d7a7192c0b3d78fa057ea8a004305f0ae13e8",
-          "sha256": "9eb61ea4dc77c6a23af29aa1d2887b692488daa9e997d59f0c7aea28c8be9df1"
-        }
-      ]
-    },
-    {
-      "id": "T06",
-      "path": "T06-reproducibility-audit.md",
-      "dimension": "reproducibility",
-      "skill_reference": "references/source-and-version-audit.md",
-      "input_sources": []
-    }
+  "schema_version":"1.0",
+  "split":"development",
+  "status":"draft_not_frozen",
+  "tasks":[
+    {"id":"T01","path":"T01-theory-jacobian.md","dimension":"theoretical_derivation","task_family":"threshold_kinematics","skill_reference":"references/symbolic-calculation.md","input_sources":[]},
+    {"id":"T02","path":"T02-numerical-integral.md","dimension":"numerical_integration","task_family":"threshold_kinematics","skill_reference":"references/numerical-scans-and-uncertainty.md","input_sources":[]},
+    {"id":"T03","path":"T03-paper-reading.md","dimension":"paper_reading","task_family":"source_grounded_reading","skill_reference":"references/paper-reading.md","input_sources":[
+      {"repository":"lm846802297-bit/axial-vector-review-response","commit":"a7ac6456dafb27492183912fe4abbaa73a9455f7","path":"archive/manuscript-baselines/axial_vector_model_building-v6.pdf","staged_path":"axial-vector-review-response/archive/manuscript-baselines/axial_vector_model_building-v6.pdf","git_blob_sha1":"be8f472a8cc3c35975dcb5970c9be996fde2d985","size_bytes":2759986,"role":"primary_pdf","visibility":"model_input"},
+      {"repository":"lm846802297-bit/axial-vector-review-response","commit":"a7ac6456dafb27492183912fe4abbaa73a9455f7","path":"overleaf-source/axial-vector-model-building-v6/main-v6.tex","staged_path":"axial-vector-review-response/overleaf-source/axial-vector-model-building-v6/main-v6.tex","git_blob_sha1":"b99f9e26a0b57acd0a4938ea6e03fc691a82becb","size_bytes":71477,"role":"companion_tex_source","visibility":"model_input"}
+    ]},
+    {"id":"T04","path":"T04-symbolic-dirac-trace.md","dimension":"symbolic_calculation","task_family":"symbolic_trace","skill_reference":"references/symbolic-calculation.md","input_sources":[]},
+    {"id":"T05","path":"T05-figure-audit.md","dimension":"figure_audit","task_family":"figure_integrity","skill_reference":"references/scientific-figure-audit.md","input_sources":[
+      {"repository":"lm846802297-bit/LZ-3-body-for-hdm","commit":"8902abdb8bc44cad690059f9985204b4c0737657","path":"paper-source/figures/fixed_speed_recoil_spectra_v2.pdf","staged_path":"LZ-3-body-for-hdm/paper-source/figures/fixed_speed_recoil_spectra_v2.pdf","git_blob_sha1":"5f2d7a7192c0b3d78fa057ea8a004305f0ae13e8","size_bytes":30288,"sha256":"9eb61ea4dc77c6a23af29aa1d2887b692488daa9e997d59f0c7aea28c8be9df1","role":"pdf_audit_input","visibility":"model_input"},
+      {"repository":"lm846802297-bit/LZ-3-body-for-hdm","commit":"8902abdb8bc44cad690059f9985204b4c0737657","path":"research/three_body_calculation_and_validation/plot_user_dsigma_curve.py","staged_path":"LZ-3-body-for-hdm/research/three_body_calculation_and_validation/plot_user_dsigma_curve.py","git_blob_sha1":"1a1fd7ccca9961d10d4eea83df66ecaaf8377baa","size_bytes":8378,"role":"figure_generator","visibility":"model_input"},
+      {"repository":"lm846802297-bit/LZ-3-body-for-hdm","commit":"8902abdb8bc44cad690059f9985204b4c0737657","path":"research/three_body_calculation_and_validation/results/fixed_speed_xe131_dsigma_450kev.csv","staged_path":"LZ-3-body-for-hdm/research/three_body_calculation_and_validation/results/fixed_speed_xe131_dsigma_450kev.csv","git_blob_sha1":"a3b590d1705d1478a293eb9e37f6587f2040d57c","size_bytes":9348,"role":"figure_input_data","visibility":"model_input"},
+      {"repository":"lm846802297-bit/LZ-3-body-for-hdm","commit":"8902abdb8bc44cad690059f9985204b4c0737657","path":"research/three_body_calculation_and_validation/results/local_minima_refinement_1keV.csv","staged_path":"LZ-3-body-for-hdm/research/three_body_calculation_and_validation/results/local_minima_refinement_1keV.csv","git_blob_sha1":"423bce6526ae931f6d0b95262e3a405872e44d48","size_bytes":3949,"role":"figure_input_data","visibility":"model_input"}
+    ]},
+    {"id":"T06","path":"T06-reproducibility-audit.md","dimension":"reproducibility","task_family":"reproducibility","skill_reference":"references/source-and-version-audit.md","input_sources":[]}
   ],
-  "pilot_round_1": [
-    "T01",
-    "T02",
-    "T03"
-  ],
-  "full_round_2": [
-    "T01",
-    "T02",
-    "T03",
-    "T04",
-    "T05",
-    "T06"
-  ],
-  "notes": [
-    "Prompt SHA-256 values are computed from the exact frozen prompt bytes immediately before the run and recorded in run records.",
-    "T03 PDF SHA-256 must be computed by the evaluator from the exact pinned PDF before scoring; the Git blob SHA-1 and file size are pinned here.",
-    "T05 PDF SHA-256 is already recorded in its task specification.",
-    "Do not expose evaluators/development-key.md to model workspaces.",
-    "T03 PDF and companion TeX are both model-visible immutable inputs; calculate and record SHA-256 for both during staging. PDF page numbers must be verified from the PDF."
+  "pilot_round_1":["T01","T02","T03"],
+  "full_round_2":["T01","T02","T03","T04","T05","T06"],
+  "notes":[
+    "Prompt SHA-256 values are computed from exact frozen prompt bytes immediately before the run and recorded in run records.",
+    "T03 PDF and companion TeX are model-visible immutable inputs; calculate SHA-256 for both at staging and verify Git blob SHA-1 plus byte size.",
+    "T05 PDF audit and CSV-to-SVG reproduction are distinct pipelines. Golden SVG references are evaluator-only.",
+    "T01 and T02 share threshold_kinematics and count as one independent task-family cluster.",
+    "Do not expose evaluators/manifest.json, evaluators/development-key.md, or golden outputs to model workspaces."
   ]
 }
