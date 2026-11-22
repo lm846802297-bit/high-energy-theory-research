@@ -9,6 +9,7 @@ from pathlib import Path
 import evaluate
 import verify_dirac_trace
 import verify_repro_package
+import verify_figure_regeneration
 
 ROOT = Path(__file__).resolve().parents[1]
 SCHEMA = ROOT / "protocol" / "run-record.schema.json"
@@ -287,6 +288,70 @@ class EvaluatorTests(unittest.TestCase):
             manifest_path.write_text(json.dumps(manifest), encoding="utf-8")
             with self.assertRaisesRegex(ValueError, "source_sha256 mismatch"):
                 verify_repro_package.verify(source, input_csv, output_json, manifest_path)
+
+
+    def test_pinned_figure_generator_matches_golden_outputs(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            model_root = root / "model-inputs"
+            golden_root = root / "golden"
+            repo_slug = "LZ-3-body-for-hdm"
+            generator_rel = "research/three_body_calculation_and_validation/plot_user_dsigma_curve.py"
+            csv_rel = "research/three_body_calculation_and_validation/results/fixed_speed_xe131_dsigma_450kev.csv"
+            minima_rel = "research/three_body_calculation_and_validation/results/local_minima_refinement_1keV.csv"
+            output_rel = "research/three_body_calculation_and_validation/results/plots"
+            generator = model_root / repo_slug / generator_rel
+            csv_path = model_root / repo_slug / csv_rel
+            minima_path = model_root / repo_slug / minima_rel
+            generator.parent.mkdir(parents=True)
+            csv_path.parent.mkdir(parents=True)
+            minima_path.parent.mkdir(parents=True, exist_ok=True)
+            generator.write_text(
+                "import argparse\nfrom pathlib import Path\np=argparse.ArgumentParser()\np.add_argument('--csv')\np.add_argument('--minima')\np.add_argument('--out-dir')\na=p.parse_args()\no=Path(a.out_dir)\no.mkdir(parents=True,exist_ok=True)\n(o/'fixed_speed_xe131_dsigma_450kev.svg').write_bytes(b'<svg>cross</svg>')\n(o/'xe131_gcn_jj55_response_ratio_450kev.svg').write_bytes(b'<svg>ratio</svg>')\n",
+                encoding="utf-8",
+            )
+            csv_path.write_text("ER_keV,value\n1,2\n", encoding="utf-8")
+            minima_path.write_text("ER_keV,value\n1,2\n", encoding="utf-8")
+            golden_dir = golden_root / repo_slug / output_rel
+            golden_dir.mkdir(parents=True)
+            golden_cross = golden_dir / "fixed_speed_xe131_dsigma_450kev.svg"
+            golden_ratio = golden_dir / "xe131_gcn_jj55_response_ratio_450kev.svg"
+            golden_cross.write_bytes(b"<svg>cross</svg>")
+            golden_ratio.write_bytes(b"<svg>ratio</svg>")
+
+            def identity(path):
+                data = path.read_bytes()
+                return {"git_blob_sha1": evaluate.git_blob_sha1(data), "size_bytes": len(data)}
+
+            evaluator_manifest = {
+                "deterministic_evaluators": [{
+                    "id": "E-T05B-DATA-TO-FIGURE",
+                    "repository": "owner/" + repo_slug,
+                    "generator": {"path": generator_rel, **identity(generator)},
+                    "model_visible_inputs": [
+                        {"path": csv_rel, **identity(csv_path)},
+                        {"path": minima_rel, **identity(minima_path)},
+                    ],
+                    "evaluator_only_reference_outputs": [
+                        {"path": output_rel + "/" + golden_cross.name, **identity(golden_cross)},
+                        {"path": output_rel + "/" + golden_ratio.name, **identity(golden_ratio)},
+                    ],
+                }]
+            }
+            manifest_path = root / "evaluator-manifest.json"
+            manifest_path.write_text(json.dumps(evaluator_manifest), encoding="utf-8")
+            result = verify_figure_regeneration.verify_figure_regeneration(manifest_path, model_root, golden_root)
+            self.assertEqual(result["status"], "PASS")
+            self.assertTrue(result["trusted_pinned_source_executed"])
+            self.assertFalse(result["model_generated_code_executed"])
+
+    def test_pinned_figure_generator_rejects_input_hash_mismatch(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            source = root / "source.py"
+            source.write_text("print('x')\n", encoding="utf-8")
+            with self.assertRaisesRegex(ValueError, "Size mismatch"):
+                verify_figure_regeneration.verify_identity(source, "0" * 40, 1)
 
 
 if __name__ == "__main__":
