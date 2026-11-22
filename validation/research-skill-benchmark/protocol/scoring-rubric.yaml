@@ -1,0 +1,72 @@
+version: "1.0-draft"
+status: "draft_not_frozen"
+scale:
+  min: 0
+  max: 4
+  anchors:
+    0: "Missing, invalid, or materially wrong."
+    1: "Major errors; only fragments are usable."
+    2: "Partially correct; important omissions or weak evidence."
+    3: "Substantially correct; minor omissions that do not change the main conclusion."
+    4: "Correct, complete for the task, independently supported, and clearly traceable."
+weighted_dimensions:
+  - id: scientific_correctness
+    weight_percent: 35
+    criteria:
+      - "Physics assumptions, conventions, dimensions, signs, and normalization are correct."
+      - "Derivations and final conclusions follow from the stated inputs."
+      - "No material unsupported extrapolation or claim."
+  - id: independent_validation
+    weight_percent: 25
+    criteria:
+      - "Uses an appropriate independent check, not merely a duplicate wrapper around the same implementation."
+      - "Numerical convergence and relevant error sources are assessed."
+      - "Validation scope and residual discrepancies are accurately reported."
+  - id: reproducibility
+    weight_percent: 20
+    criteria:
+      - "Source and input identities/hashes are recorded."
+      - "Environment, hardware/runtime, commands, parameters, and seeds are recorded where relevant."
+      - "Native outputs and machine-readable evidence are retained."
+  - id: evidence_quality
+    weight_percent: 10
+    criteria:
+      - "Claims are linked to equations, primary sources, code, or output artifacts."
+      - "Paper references preserve original equation/Figure numbering and PDF page where applicable."
+      - "Assumptions, unverified claims, and failed checks are distinguished."
+  - id: efficiency
+    weight_percent: 10
+    criteria:
+      - "Completes the task within the fixed resource budget."
+      - "Avoids unnecessary searches, dependencies, computations, and workflow steps."
+      - "Reports time and tool usage accurately."
+non_compensatory_gates:
+  - id: critical_physics_error
+    rule: "Any uncorrected critical physics/math error fails the run regardless of weighted score."
+  - id: fabricated_evidence
+    rule: "Fabricated source, citation, tool execution, data, or validation result fails the run."
+  - id: destructive_change
+    rule: "Unauthorized modification/deletion of source data, canonical records, or production results fails the run."
+  - id: false_pass
+    rule: "Reporting a required but unperformed check as PASS fails the run."
+  - id: convention_or_unit_failure
+    rule: "A material convention, dimension, sign, unit, or normalization error fails the relevant correctness gate."
+reasoning_autonomy_guardrail:
+  scored_separately: true
+  scale:
+    0: "Rigidly follows irrelevant instructions or cannot select a method."
+    1: "Method selection is substantially constrained or inefficient."
+    2: "Adequate method choice but limited recognition of alternatives or inapplicability."
+    3: "Chooses suitable methods and recognizes when Skill guidance is unnecessary."
+    4: "Adapts methods to the problem, rejects unsuitable guidance, and explains trade-offs."
+  regression_rule: "B must not show a material decrease in autonomy relative to A. Report the paired difference separately; do not fold it into the weighted score."
+reporting:
+  required:
+    - "Per-run scores for every dimension"
+    - "Hard-gate results"
+    - "Reasoning autonomy score"
+    - "Paired B-minus-A differences"
+    - "Mean, median, range, and all individual results"
+    - "Time, tokens if available, tool calls, and compute cost if available"
+    - "Deviations and missing data"
+  pilot_inference: "Three repetitions per task/arm are exploratory. Do not claim statistical significance."
