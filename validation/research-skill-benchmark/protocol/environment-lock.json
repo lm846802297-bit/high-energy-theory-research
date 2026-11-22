@@ -1,0 +1,56 @@
+{
+  "schema_version": "1.0",
+  "status": "incomplete_pending_windows_host_capture",
+  "captured_at_utc": null,
+  "host": {
+    "os_name": null,
+    "os_build": null,
+    "architecture": null,
+    "cpu_model": null,
+    "gpu_model": null,
+    "memory_gb": null
+  },
+  "codex": {
+    "product": null,
+    "desktop_version": null,
+    "cli_version": null,
+    "runtime_mode": null,
+    "skill_discovery_scope": null
+  },
+  "model": {
+    "model_label": null,
+    "immutable_model_id_if_exposed": null,
+    "reasoning_effort": null,
+    "sampling_parameters_if_exposed": null,
+    "system_configuration_fingerprint_if_available": null
+  },
+  "tools": {
+    "python_version": null,
+    "python_executable": null,
+    "packages_lock_sha256": null,
+    "mathematica_version": null,
+    "feyncalc_version": null,
+    "form_version": null,
+    "git_version": null,
+    "available_tools_allowlist": [],
+    "network_policy": null
+  },
+  "skill_treatment": {
+    "source_repository": "https://github.com/lm846802297-bit/high-energy-theory-research",
+    "source_commit": null,
+    "skill_directory_manifest_sha256": null,
+    "installation_manifest_sha256": null,
+    "task_reference_files": []
+  },
+  "run_budget": {
+    "max_wall_time_seconds_per_run": null,
+    "max_tokens_per_run_if_exposed": null,
+    "max_tool_calls_per_run": null,
+    "same_budget_for_both_arms": true
+  },
+  "notes": [
+    "Do not invent values that the host does not expose; use null and record the limitation.",
+    "The exact model label/build and Codex runtime must be captured from the actual Windows host before protocol freeze.",
+    "The Skill source commit must be pinned; do not benchmark against a moving main branch."
+  ]
+}
