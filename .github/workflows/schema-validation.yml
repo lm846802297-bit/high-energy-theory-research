@@ -73,6 +73,72 @@ jobs:
           PY
           python -m unittest discover -s validation/research-skill-benchmark/evaluators -v
 
+      - name: Run pinned T01/T02 symbolic and numerical evaluators
+        run: |
+          python -m pip install -r validation/research-skill-benchmark/evaluators/requirements-physics.txt
+          tmpdir="$(mktemp -d)"
+          cp validation/skill-module-evaluation-2026-11-22/symbolic/derive_phase_space_jacobian.py "$tmpdir/"
+          python "$tmpdir/derive_phase_space_jacobian.py" > "$RUNNER_TEMP/t01-t02-jacobian.json"
+          cp validation/skill-module-evaluation-2026-11-22/numerical/convergence_phase_space.py "$tmpdir/"
+          python "$tmpdir/convergence_phase_space.py" > "$RUNNER_TEMP/t02-lz-convergence.json"
+          python - <<'PY' > "$RUNNER_TEMP/benchmark-evaluator-environment.json"
+          import json
+          import platform
+          import sys
+          print(json.dumps({
+              "python": sys.version,
+              "platform": platform.platform(),
+              "machine": platform.machine(),
+              "processor": platform.processor(),
+          }, indent=2))
+          PY
+
+      - name: Run pinned T05 PDF and data-to-figure evaluators
+        run: |
+          set -euo pipefail
+          lz_commit="8902abdb8bc44cad690059f9985204b4c0737657"
+          lz_root="$RUNNER_TEMP/lz-source"
+          model_root="$RUNNER_TEMP/t05-model-input"
+          golden_root="$RUNNER_TEMP/t05-evaluator-golden"
+          git clone --filter=blob:none --no-checkout https://github.com/lm846802297-bit/LZ-3-body-for-hdm.git "$lz_root"
+          git -C "$lz_root" fetch --depth 1 origin "$lz_commit"
+          git -C "$lz_root" checkout --detach "$lz_commit"
+          mkdir -p "$model_root/LZ-3-body-for-hdm/paper-source/figures"
+          mkdir -p "$model_root/LZ-3-body-for-hdm/research/three_body_calculation_and_validation/results"
+          mkdir -p "$golden_root/LZ-3-body-for-hdm/research/three_body_calculation_and_validation/results/plots"
+          cp "$lz_root/paper-source/figures/fixed_speed_recoil_spectra_v2.pdf" "$model_root/LZ-3-body-for-hdm/paper-source/figures/"
+          cp "$lz_root/research/three_body_calculation_and_validation/plot_user_dsigma_curve.py" "$model_root/LZ-3-body-for-hdm/research/three_body_calculation_and_validation/"
+          cp "$lz_root/research/three_body_calculation_and_validation/results/fixed_speed_xe131_dsigma_450kev.csv" "$model_root/LZ-3-body-for-hdm/research/three_body_calculation_and_validation/results/"
+          cp "$lz_root/research/three_body_calculation_and_validation/results/local_minima_refinement_1keV.csv" "$model_root/LZ-3-body-for-hdm/research/three_body_calculation_and_validation/results/"
+          cp "$lz_root/research/three_body_calculation_and_validation/results/plots/fixed_speed_xe131_dsigma_450kev.svg" "$golden_root/LZ-3-body-for-hdm/research/three_body_calculation_and_validation/results/plots/"
+          cp "$lz_root/research/three_body_calculation_and_validation/results/plots/xe131_gcn_jj55_response_ratio_450kev.svg" "$golden_root/LZ-3-body-for-hdm/research/three_body_calculation_and_validation/results/plots/"
+          set +e
+          python validation/skill-module-evaluation-2026-11-22/pdf/audit_pdf_text_reconstructed.py "$model_root/LZ-3-body-for-hdm/paper-source/figures/fixed_speed_recoil_spectra_v2.pdf" --min-pt 5.0 --json > "$RUNNER_TEMP/t05-pdf-text-audit.json"
+          pdf_status=$?
+          set -e
+          if [ "$pdf_status" -eq 2 ]; then
+            echo "T05 PDF text audit was not auditable"
+            exit 1
+          elif [ "$pdf_status" -eq 1 ]; then
+            echo "::warning::T05 PDF text-size screening found below-threshold glyph runs; retain the report for blinded visual review"
+          elif [ "$pdf_status" -ne 0 ]; then
+            exit "$pdf_status"
+          fi
+          python validation/research-skill-benchmark/evaluators/verify_figure_regeneration.py --manifest validation/research-skill-benchmark/evaluators/manifest.json --model-input-root "$model_root" --golden-root "$golden_root" > "$RUNNER_TEMP/t05-data-to-figure.json"
+
+      - name: Upload deterministic Benchmark evaluator outputs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: particle-physics-research-skill-benchmark-evaluator-results
+          path: |
+            ${{ runner.temp }}/t01-t02-jacobian.json
+            ${{ runner.temp }}/t02-lz-convergence.json
+            ${{ runner.temp }}/t05-pdf-text-audit.json
+            ${{ runner.temp }}/t05-data-to-figure.json
+            ${{ runner.temp }}/benchmark-evaluator-environment.json
+          if-no-files-found: warn
+
       - name: Compile candidate Python tools and physics pilot
         run: python -m compileall -q schema/v1.4.3.7/tools skills/high-energy-theory-research/scripts tests/eval-cases/uv-eFT-hard-derivative-pilot
 
