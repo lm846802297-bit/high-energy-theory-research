@@ -1,7 +1,9 @@
 """Regression tests for the structured research-result validator."""
 from __future__ import annotations
 
+import hashlib
 import json
+import subprocess
 import sys
 import tempfile
 import unittest
@@ -176,6 +178,42 @@ class InputProvenanceSchemaTests(unittest.TestCase):
         })
         record["environment"].pop("hardware")
         self.assertFalse(self.validator.is_valid(record))
+
+
+
+class SourceScriptIntegrityTests(unittest.TestCase):
+    def validate_source(self, script_content: str | None, script_path: str, digest: str | None = None):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            if script_content is not None:
+                (root / script_path).write_text(script_content, encoding="utf-8")
+            record = minimal_manifest({})
+            record["inputs"] = []
+            record["source"]["script_path"] = script_path
+            if digest is None and script_content is not None:
+                digest = hashlib.sha256((root / script_path).read_bytes()).hexdigest()
+            record["source"]["script_sha256"] = digest or ("b" * 64)
+            record_path = root / "run_manifest.json"
+            record_path.write_text(json.dumps(record), encoding="utf-8")
+            return subprocess.run(
+                [sys.executable, str(SCHEMA_DIR / "validate_result_records.py"),
+                 "--repo-root", str(root), str(record_path)],
+                capture_output=True, text=True, check=False,
+            )
+
+    def test_validator_checks_recorded_source_script_sha256(self):
+        result = self.validate_source("print('exact source')\\n", "run.py")
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+
+    def test_validator_rejects_changed_source_script_bytes(self):
+        result = self.validate_source("print('changed source')\\n", "run.py", "0" * 64)
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("source script SHA-256 mismatch", result.stdout)
+
+    def test_validator_rejects_missing_source_script(self):
+        result = self.validate_source(None, "missing.py", "b" * 64)
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("source script does not exist", result.stdout)
 
 
 if __name__ == "__main__":
