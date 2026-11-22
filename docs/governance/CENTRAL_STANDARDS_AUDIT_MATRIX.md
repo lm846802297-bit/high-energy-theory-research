@@ -164,6 +164,7 @@ The labels below describe whether the current central sources cover the subject.
 | AUD-12 | RCRPS validator dependency error text names a stale path | docs/schemas/validate_result_records.py refers to research/schemas while requirements live in docs/schemas | Installation failure guidance can send users to a nonexistent path | Focused maintenance fix |
 | AUD-13 | Candidate Schema v1.4.3.7 has unresolved release blockers | DECISION_REGISTER.md and OPEN_ISSUES.md | The candidate must not be presented as the central released research-record schema | Keep candidate status until its own gates close |
 | AUD-14 | PR #6 and PR #27 have diverged from current main | GitHub compare: each is 41 commits behind main | Integration requires careful synchronization and conflict review, not blind merge | Resolve within each PR's own review process |
+| AUD-15 | Chinese README's pre-existing navigation list repeated item number 13; Phase I navigation addition exposed the duplicate | README.zh-CN.md at the audited baseline | The navigation sequence was ambiguous even though links were intact | Correct the existing archive-lifecycle item to 14 and number the new central-standards entry 15 in this branch; no content or destination changed |
 
 ## 9. Recommended central disposition
 
