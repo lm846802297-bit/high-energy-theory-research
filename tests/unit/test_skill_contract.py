@@ -48,6 +48,17 @@ class SkillContractTests(unittest.TestCase):
             with self.subTest(command=command):
                 self.assertNotIn(command, diagnostic)
 
+    def test_windows_installer_regression_assets_exist(self):
+        installer = ROOT / "scripts" / "sync_research_skill.ps1"
+        helper = ROOT / "scripts" / "research-skill-installer.helpers.ps1"
+        regression = ROOT / "tests" / "windows" / "test_sync_research_skill_cleanup.ps1"
+        self.assertTrue(installer.is_file())
+        self.assertTrue(helper.is_file())
+        self.assertTrue(regression.is_file())
+        helper_text = helper.read_text(encoding="utf-8")
+        self.assertIn("Test-ResearchSkillScratchCleanupAllowed", helper_text)
+        self.assertIn("Test-ResearchSkillManifestIntegrity", helper_text)
+
     def test_project_record_validator_is_referenced_and_present(self):
         script = SKILL.parent / "scripts" / "validate_project_records.py"
         self.assertTrue(script.is_file())
