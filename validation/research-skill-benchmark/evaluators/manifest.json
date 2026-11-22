@@ -48,8 +48,8 @@
     {
       "path": "evaluators/test_evaluate.py",
       "role": "unit_and_semantic_regression_tests",
-      "git_blob_sha1": "fc0015309437f78bff1ee2d6998ba499a8503b9c",
-      "size_bytes": 24111
+      "git_blob_sha1": "5fed1e7ab3724f86e01c1d729d55d62fae7d358e",
+      "size_bytes": 27975
     },
     {
       "path": "evaluators/verify_dirac_trace.py",
@@ -72,8 +72,8 @@
     {
       "path": "evaluators/verify_figure_regeneration.py",
       "role": "T05B_pinned_plot_script_execution_and_byte_for_byte_golden_SVG_comparison",
-      "git_blob_sha1": "6c4555b323e3908c0a02952764e5611f1c5e9229",
-      "size_bytes": 6261
+      "git_blob_sha1": "43c6f53cb7c0c65eea4c93cc17c2c4a38878e199",
+      "size_bytes": 7589
     },
     {
       "path": "evaluators/requirements-test.txt",
@@ -250,8 +250,8 @@
       "acceptance": "Verify staged input Git blob IDs, sizes and SHA-256; run the unmodified pinned generator in a temporary offline workspace; hash outputs; compare byte identity with golden SVGs; independently spot-check plotted coordinates and inspect rendered outputs.",
       "verifier_script": {
         "path": "evaluators/verify_figure_regeneration.py",
-        "git_blob_sha1": "fd03086d6f6006abd389ed773ae32256cd449f3e",
-        "size_bytes": 6233
+        "git_blob_sha1": "43c6f53cb7c0c65eea4c93cc17c2c4a38878e199",
+        "size_bytes": 7589
       }
     },
     {
@@ -297,8 +297,8 @@
   },
   "test_suite": {
     "command": "python -m unittest discover -s evaluators -v",
-    "tests_defined": 25,
-    "development_run": "25 passed, 0 failed on PR head ad8cdb968875cd07249aa52558282bc556803e4f in GitHub Actions Run 1137 (45050044303). The run also passed Draft 2020-12 schema meta-validation, JSON manifest parsing, and scoring YAML parsing.",
+    "tests_defined": 26,
+    "development_run": "25 tests passed in GitHub Actions Run 1137 on PR head ad8cdb968875cd07249aa52558282bc556803e4f. The T05 mismatch-diagnostic test and updated verifier are pending a new CI run.",
     "exact_committed_tree_rerun_required": true,
     "ci_workflow": ".github/workflows/schema-validation.yml",
     "ci_step": "Validate and test Particle Physics Research Skill Benchmark",
@@ -316,7 +316,8 @@
     "T05-A PDF visual inspection remains a human check in addition to the deterministic text screen.",
     "T06 verifies the recorded package and independently recomputes the result; it does not prove submitted source execution unless trusted runner evidence is available.",
     "Run 1137 validated the evaluator code, test suite, and protocol artifacts at PR head ad8cdb968875cd07249aa52558282bc556803e4f. The subsequent evaluator-manifest-only status update must be rerun after any evaluator or protocol code change.",
-    "The workflow now includes end-to-end T01/T02 symbolic and numerical checks plus T05 PDF screening and CSV-to-SVG regeneration. These new deterministic evaluator steps are awaiting a workflow run on the current branch head."
+    "The workflow now includes end-to-end T01/T02 symbolic and numerical checks plus T05 PDF screening and CSV-to-SVG regeneration. These new deterministic evaluator steps are awaiting a workflow run on the current branch head.",
+    "Run 1142 found that the pinned T05 plotter output is not byte-identical to the archived SVG reference. The updated verifier preserves generated SVGs and reports first-difference metadata. Do not update the golden outputs or modify the LZ source until the discrepancy is inspected."
   ],
   "ci_integration": {
     "workflow": ".github/workflows/schema-validation.yml",
@@ -328,13 +329,15 @@
       "Run pinned T05 PDF and data-to-figure evaluators",
       "Upload deterministic Benchmark evaluator outputs"
     ],
-    "current_head_run_status": "pending_workflow_dispatch",
+    "current_head_run_status": "pending_after_T05_diagnostic_update",
     "last_unit_suite_run": {
       "head_sha": "ad8cdb968875cd07249aa52558282bc556803e4f",
       "run_id": 45050044303,
       "run_number": 1137,
       "conclusion": "success",
       "tests_passed": 25
-    }
+    },
+    "workflow_git_blob_sha1": "38605cfeaec4133ce5b096a57b6ebd1ca2295e73",
+    "workflow_size_bytes": 7820
   }
 }
