@@ -7,6 +7,10 @@ description: Conduct rigorous, reproducible high-energy theoretical physics and 
 
 Use this Skill for general high-energy theory and phenomenology research. Reviewer-response work is one supported workflow, not the primary purpose.
 
+## Using the Skill across repositories
+
+Follow the active repository's research instructions, conventions, and specialized Skills. Read task references relative to this Skill's installed directory. Apply the active project's archival and validation policies. The source repository's governance, registry, schema, and migration examples below apply to projects that explicitly adopt them. Run those commands from a compatible source checkout with the expected repository files available. The standalone user-level installation contains the Skill, references, and scripts. Its `skill-install-manifest.json` identifies the published source commit.
+
 ## Mandatory research discipline
 
 1. **State conventions first.** Record the model/Lagrangian, fields and charges, metric and gamma-matrix conventions, normalization, renormalization scheme/scale, approximations, and units whenever they affect the result.
@@ -16,7 +20,7 @@ Use this Skill for general high-energy theory and phenomenology research. Review
 5. **Do not overstate validation.** A schema test does not establish physics correctness; a benchmark point does not represent a full parameter space; a successful run does not prove reproducibility unless its inputs and environment are identified.
 6. **Preserve uncertainty.** Record unresolved ambiguities, failed checks, assumptions, and software/tool limitations. Never silently convert a failed or missing check into a pass.
 7. **Do not promote candidate rules.** Candidate schemas and recommendations remain candidates until the decision register records explicit approval.
-8. **Archive completed calculations.** For every substantial run, commit the essential native/uncompressed outputs, exact source revision, inputs, run manifest, and checksums under the canonical research record. Do not create a ZIP/TAR archive as a substitute for extracted result files. For large files, use durable versioned storage with a committed manifest, then verify the remote files after pushing. Follow [the mandatory archival policy](../../docs/CALCULATION_RESULT_ARCHIVAL_POLICY.md).
+8. **Archive completed calculations.** For every substantial run, commit the essential native/uncompressed outputs, exact source revision, inputs, run manifest, and checksums under the canonical research record. Do not create a ZIP/TAR archive as a substitute for extracted result files. For large files, use durable versioned storage with a committed manifest, then verify the remote files after pushing. Follow the active repository's archival policy.
 
 ## Workflow
 
@@ -26,7 +30,7 @@ Use this Skill for general high-energy theory and phenomenology research. Review
 4. **Derive and compute:** show intermediate steps for nontrivial derivations; use symbolic or numerical tools when they add independent evidence; record code, inputs, outputs, and environment.
 5. **Verify:** test dimensions, signs, limiting cases, gauge/symmetry constraints, numerical stability, and independent formulations as applicable.
 6. **Synthesize:** map conclusions to supporting evidence and distinguish established, conditional, excluded, allowed, not-assessed, and unresolved statements.
-7. **Archive:** retain the run manifest, artifact identities, validation reports, and unresolved issues. Commit essential native/uncompressed result files and verify their remote hashes under the [calculation-result archival policy](../../docs/CALCULATION_RESULT_ARCHIVAL_POLICY.md). Invalidate downstream results when relevant inputs or code change.
+7. **Archive:** retain the run manifest, artifact identities, validation reports, and unresolved issues. Commit essential native/uncompressed result files and verify their remote hashes under the active repository's archival policy. Invalidate downstream results when relevant inputs or code change.
 
 ## Formula and loop-calculation checklist
 
@@ -42,7 +46,7 @@ Report the parameter mapping, scan ranges, priors/sampling method, perturbativit
 
 ## Project and workstream selection
 
-Before creating a research record, consult projects/README.md and projects/registry.yaml. Identify the parent project and workstream rather than treating every calculation family as a top-level project. The current UV–EFT matching workstream belongs to axial-vector-model-building; do not register it as a separate top-level project.
+In the central source repository, consult `projects/README.md` and `projects/registry.yaml` before creating a research record. Identify the parent project and workstream rather than treating every calculation family as a top-level project. The current UV–EFT matching workstream belongs to axial-vector-model-building; do not register it as a separate top-level project.
 
 The registry is navigation metadata, not a record in candidate Schema v1.4.3.7. To validate project/workstream IDs and declared local canonical paths, run:
 
@@ -82,6 +86,6 @@ Load only the module required by the current task:
 - Scientific figure design and QA: [references/scientific-figure-audit.md](references/scientific-figure-audit.md)
 - Source-grounded paper reading: [references/paper-reading.md](references/paper-reading.md)
 - Optional third-party tools, reviewed commit pins, license and dependency notes: [references/optional-tooling.md](references/optional-tooling.md)
-- Full design and schema governance: [docs/design/README.md](../../docs/design/README.md) and [docs/governance/DECISION_REGISTER.md](../../docs/governance/DECISION_REGISTER.md)
+- Central source checkout design and schema governance: `docs/design/README.md` and `docs/governance/DECISION_REGISTER.md`
 
 The optional-tooling map does not install dependencies or make a tool mandatory. Choose methods from the problem's mathematical and physical structure, then use tools only when they add useful evidence.

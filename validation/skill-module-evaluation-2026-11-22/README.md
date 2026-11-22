@@ -1,6 +1,6 @@
 # High-Energy Theory Research Skill evaluation — 2026-11-22
 
-This is a bounded evaluation record for PR #27 in `lm846802297-bit/high-energy-theory-research`. It evaluates the new Skill modules using a symbolic phase-space derivation, an independent numerical integration, and a PDF figure audit. It does not modify the original LZ research repository or claim Windows Codex runtime discovery.
+This is a bounded evaluation record for PR #27 in `lm846802297-bit/high-energy-theory-research`. It evaluates the new Skill modules using a symbolic phase-space derivation, an independent numerical integration, and a PDF figure audit. The Windows follow-up records Skill discovery and reference loading at the tested PR head. The LZ source repository was used as a read-only reference.
 
 ## Contract test
 
@@ -44,15 +44,24 @@ These are findings about the existing LZ reproduction record, not changes made b
 
 ## PDF figure audit
 
-The audited input is `paper-source/figures/fixed_speed_recoil_spectra_v2.pdf` from the LZ repository at the same source commit. Its SHA-256 is recorded in `pdf/figure_audit.json`.
+The audited input is `paper-source/figures/fixed_speed_recoil_spectra_v2.pdf` from the LZ repository at the same source commit. Its SHA-256 is recorded in [`pdf/audit_result.json`](pdf/audit_result.json).
 
 The local content-stream audit found 37 text runs, a minimum effective size of 6.48 pt, zero runs below the 5 pt screening threshold, zero character/word-spacing issues, and no parser warnings. The one-page figure was rendered at 180 dpi and visually inspected. The 5 pt value is a screening threshold only; no journal-specific compliance claim is made.
 
-The local audit implementation was reconstructed from the method of the pinned Nature Skills script, but its byte identity with the upstream Git blob was not established. The local script hash and upstream reference blob hash are both recorded in `pdf/figure_audit.json`.
+The local audit implementation was reconstructed from the method of the pinned Nature Skills script, but its byte identity with the upstream Git blob was not established. The reconstructed script is included alongside the audit result.
 
 ## Windows Codex discovery
 
-The read-only PowerShell diagnostic checks the repository source, project scope, user scope, required references, and CLI availability. It does not install or copy the Skill and cannot establish runtime discovery. The current Codex documentation lists `.agents/skills/` and `~/.agents/skills/`; openai/codex issue #40458 reports a Windows Desktop project-local discovery problem. The exact Windows host must still be tested in a fresh session. This remains the blocker before converting PR #27 from Draft to Ready for review.
+The Windows follow-up used PR head `92e57041218bae574b2acfbd2c8eda5a61a89648`, Windows build 26300, Codex Desktop 26.1117.4957.0, and bundled codex-cli 0.171.0-alpha.13.
+
+| Check | Result |
+| --- | --- |
+| PowerShell diagnostic | Exit 0 after copying the complete Skill to the isolated worktree's `.agents/skills/high-energy-theory-research/`. All eight references were present. |
+| Desktop discovery and invocation | The native picker showed the Skill as project-scoped. A fresh turn selected it and read `SKILL.md` and `references/symbolic-calculation.md` with PowerShell. |
+| CLI discovery | The app-server `skills/list` returned the Skill enabled with `scope: repo`. |
+| CLI reference loading | Two fresh read-only invocations reached Skill selection but failed to start the PowerShell subprocess because the Windows runtime provisioning service was unavailable. Reference loading in that CLI mode remains unverified. |
+
+The local Windows Python 3.12.14 checks passed 60 schema checks, 83 candidate fixture expectations, 16 semantic expectations, 29 integration tests, and 45 unit tests, including the six Skill contract tests. The schema validator used `PYTHONUTF8=1` on the GBK-default host. This follow-up uses local acceptance evidence.
 
 ## Reproduction commands
 
@@ -64,4 +73,4 @@ python numerical/convergence_phase_space.py
 python pdf/audit_pdf_text_reconstructed.py /path/to/fixed_speed_recoil_spectra_v2.pdf --min-pt 5.0 --json
 ```
 
-The PDF is not duplicated in this evaluation folder; its repository path, source commit, Git blob SHA-1, and SHA-256 are recorded in `pdf/figure_audit.json`.
+The PDF is not duplicated in this evaluation folder; its repository path, source commit, and SHA-256 are recorded in [`pdf/audit_result.json`](pdf/audit_result.json).

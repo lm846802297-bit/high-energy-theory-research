@@ -106,6 +106,18 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\skills\high-energy-theory-
 
 The script checks the repository source, project-scoped and user-scoped discovery paths, required reference files, and whether the Codex CLI is on PATH. It does not install or copy files and cannot prove that an already-running Codex session has indexed the Skill. After the filesystem check, start a fresh Codex session, inspect `/skills`, and explicitly invoke `high-energy-theory-research` once to confirm runtime discovery. See the [OpenAI Skill evaluation guidance](https://developers.openai.com/blog/eval-skills) for explicit invocation and forward-testing practices.
 
+## Shared Windows user installation
+
+After the release reaches central `main`, run the synchronizer from the central repository:
+
+```powershell
+powershell -NoProfile -File .\scripts\sync_research_skill.ps1
+```
+
+The synchronizer resolves central `main` to an exact Git commit, exports only the tracked Skill files, and records each relative path and SHA-256 in `skill-install-manifest.json`. The default destination is `%USERPROFILE%\.agents\skills\high-energy-theory-research`. Repeat the command to update a managed installation. If an existing installation lacks the manifest or its files differ from the manifest, inspect and preserve those files before replacing them. Local acceptance can use an isolated `-SkillsRoot`.
+
+After syncing, start a fresh local Codex session in the target project and explicitly select the Skill. Verify the user-level source, read the relevant reference, and record the source commit from the installation manifest. An enabled same-name project copy can change which version is selected. Check the resolved path. Deploy separately on other machines or execution hosts.
+
 ## Windows Codex Desktop caveat
 
 The documented project path is `.agents/skills/<skill-name>/`, but filesystem presence is not proof of Windows Desktop runtime discovery. As of 2026-11-22, [openai/codex issue #40458](https://github.com/openai/codex/issues/40458) reports that the Windows Codex Desktop App may omit repository-local skills while still loading user, system, and plugin skills.
