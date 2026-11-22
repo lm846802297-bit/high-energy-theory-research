@@ -31,3 +31,6 @@ Every task must declare `required_evaluators`, even when it relies entirely on b
 The holdout must contain at least two independently authored task-family clusters per each of the six dimensions, with at least three paired repetitions per task: at least 12 independent task-family clusters, 36 paired task runs, and 72 model runs. A documented power analysis may increase, but not reduce, these minima.
 
 No holdout tasks have been prepared or run yet. This is intentional; the benchmark protocol, Skill version, evaluator code, and analysis plan must be frozen first.
+
+
+The sealed scoring invocation must pass the private rubric, analysis plan, environment lock, task manifest, and evaluator registry explicitly with `--rubric`, `--analysis-plan`, `--environment-lock`, `--task-manifest`, and `--evaluator-manifest`. The comparison engine computes SHA-256 from the exact bytes of each file and checks them against every run record's protocol fields, including `analysis_plan_sha256` and `protocol.commit`. Do not reuse the development rubric or development environment lock for Round 2.
