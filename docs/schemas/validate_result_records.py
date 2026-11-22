@@ -163,8 +163,8 @@ def verify_artifacts(record: dict, repo_root: Path):
 
 
 def verify_source(record: dict, repo_root: Path):
-    if record.get("record_type") != "run_manifest":
-        return []
+    if record.get("record_type") != "run_manifest" or record.get("schema_version") != "1.0.1":
+        return []  # Preserve v1.0.0 validation behavior; source-byte checks are a v1.0.1 gate.
     errors = []
     source = record.get("source", {})
     target = resolve_repo_path(repo_root.resolve(), source.get("script_path", ""), errors)
