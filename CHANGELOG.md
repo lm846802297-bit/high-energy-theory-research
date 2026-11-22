@@ -68,3 +68,12 @@
 - Preserved the existing high-energy-theory-research Skill name and entry point; no existing research records, source calculations, schemas, or open PRs were changed.
 - Added Skill-contract regression coverage for the new reference files and optional-tooling route.
 - Validation and Windows Codex discovery remain pending until run in the target Windows Codex environment.
+
+## 2026-11-22 — Skill module evaluation and Codex discovery diagnostics
+
+- Added a read-only PowerShell diagnostic for the current project/user Codex Skill paths; no local installation or runtime discovery is claimed.
+- Updated the optional-tooling map to distinguish current `.agents/skills` paths from older `.codex/skills` examples.
+- Strengthened numerical guidance on full Jacobians, normalized shapes versus absolute rates, and output/manifest consistency.
+- Strengthened figure guidance so PDF text-size thresholds come from the target journal rather than a universal default.
+- Added a bounded evaluation case using an existing 2→3 phase-space integration and an existing paper figure PDF. The evaluation scripts, environment, inputs, outputs, and audit reports are recorded separately from the original LZ project.
+- Linux contract tests and numerical/PDF checks are recorded; Windows Codex runtime discovery remains pending.
