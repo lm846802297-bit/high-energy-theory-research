@@ -36,7 +36,7 @@ Follow the existing project/workstream layout and record conventions. Do not cre
 
 For every substantial run, include a `run_manifest.json`/YAML or an equivalent complete record. It must identify, as applicable:
 
-- the exact source commit and calculation script/notebook paths;
+- the exact checked-out source commit and calculation script/notebook paths; for pull-request runs, record `pr_head_sha`, `base_sha`, and `tested_merge_sha` separately, with the checkout mode and actual head/base refs. `commit_sha` identifies the checked-out tree, not automatically the PR source head;
 - input filenames, source/version, parameter/configuration files, and SHA-256 checksums;
 - runtime, operating system, compiler, and relevant package versions;
 - the exact command or execution procedure;
@@ -69,4 +69,4 @@ CI is optional supporting infrastructure, not a prerequisite for calculation, sc
 
 ## 6. Structured JSON/CSV result records
 
-New substantial numerical runs must also follow the [Structured Research Result Data Standard v1.0.0](STRUCTURED_RESULT_DATA_STANDARD.md) and validate `run_manifest`, `result_summary`, and `validation_report` records against `schemas/research-result-record-v1.0.0.schema.json`. Keep execution provenance, scientific results, and validation evidence as distinct records; store pointwise arrays in native tables with explicit units. This archive-data profile is independent of the unreleased research-record Schema v1.4.3.7 candidate.
+New substantial numerical runs must also follow the [Structured Research Result Data Standard v1.0.1](STRUCTURED_RESULT_DATA_STANDARD.md) and validate `run_manifest`, `result_summary`, and `validation_report` records against `schemas/research-result-record-v1.0.1.schema.json`. Keep execution provenance, scientific results, and validation evidence as distinct records; store pointwise arrays in native tables with explicit units. This archive-data profile is independent of the unreleased research-record Schema v1.4.3.7 candidate.
