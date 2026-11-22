@@ -73,7 +73,7 @@ results/<run_label>/
 
 ```json
 {
-  "schema_version": "1.0.0",
+  "schema_version": "1.0.1",
   "record_type": "result_summary",
   "run_id": "EXAMPLE-RUN-001",
   "created_at": "2026-11-20T00:00:00Z",
