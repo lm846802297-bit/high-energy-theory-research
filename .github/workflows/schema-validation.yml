@@ -124,7 +124,7 @@ jobs:
           elif [ "$pdf_status" -ne 0 ]; then
             exit "$pdf_status"
           fi
-          python validation/research-skill-benchmark/evaluators/verify_figure_regeneration.py --manifest validation/research-skill-benchmark/evaluators/manifest.json --model-input-root "$model_root" --golden-root "$golden_root" > "$RUNNER_TEMP/t05-data-to-figure.json"
+          python validation/research-skill-benchmark/evaluators/verify_figure_regeneration.py --manifest validation/research-skill-benchmark/evaluators/manifest.json --model-input-root "$model_root" --golden-root "$golden_root" --generated-output-root "$RUNNER_TEMP/t05-generated" > "$RUNNER_TEMP/t05-data-to-figure.json"
 
       - name: Upload deterministic Benchmark evaluator outputs
         if: always()
@@ -136,6 +136,7 @@ jobs:
             ${{ runner.temp }}/t02-lz-convergence.json
             ${{ runner.temp }}/t05-pdf-text-audit.json
             ${{ runner.temp }}/t05-data-to-figure.json
+            ${{ runner.temp }}/t05-generated/*.svg
             ${{ runner.temp }}/benchmark-evaluator-environment.json
           if-no-files-found: warn
 
