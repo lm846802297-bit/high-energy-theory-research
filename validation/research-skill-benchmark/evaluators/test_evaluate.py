@@ -378,9 +378,8 @@ class EvaluatorTests(unittest.TestCase):
                 data = ("artifact:" + artifact["path"]).encode("utf-8")
                 path.write_bytes(data)
                 artifact["sha256"] = hashlib.sha256(data).hexdigest()
-            verified = evaluate.verify_run_artifacts(record, root)
-            self.assertEqual(len(verified), len(record["artifacts"]))
-            self.assertTrue(all(item["status"] == "PASS" for item in verified))
+            score = evaluate.validate_run(record, SCHEMA, RUBRIC, artifact_root=root)
+            self.assertEqual(score, 75.0)
 
     def test_artifact_hash_mismatch_rejected(self):
         record = make_record("no-skill", "run-a")
@@ -391,7 +390,7 @@ class EvaluatorTests(unittest.TestCase):
             path.parent.mkdir(parents=True, exist_ok=True)
             path.write_bytes(b"tampered")
             with self.assertRaisesRegex(evaluate.EvaluationError, "Artifact SHA-256 mismatch"):
-                evaluate.verify_run_artifacts(record, root)
+                evaluate.validate_run(record, SCHEMA, RUBRIC, artifact_root=root)
 
     def test_artifact_path_escape_rejected(self):
         record = make_record("no-skill", "run-a")
