@@ -158,7 +158,7 @@ class EvaluatorTests(unittest.TestCase):
     def test_round_one_is_never_confirmatory(self):
         a = make_record("no-skill", "run-a")
         b = make_record("with-skill", "run-b", score=4)
-        manifest = {"tasks": [{"id": "T01", "dimension": "theoretical_derivation", "task_family": "threshold_kinematics", "skill_reference": "references/symbolic-calculation.md"}]}
+        manifest = {"tasks": [{"id": "T01", "dimension": "theoretical_derivation", "task_family": "threshold_kinematics", "skill_reference": "references/symbolic-calculation.md", "required_evaluators": []}]}
         report = evaluate.compare_records([a, b], manifest, "round_1_pilot", seed=123, schema_path=SCHEMA, rubric_path=RUBRIC)
         self.assertEqual(report["decision"], "inconclusive")
         self.assertIsNone(report["summary"]["confidence_interval_95"])
@@ -169,7 +169,7 @@ class EvaluatorTests(unittest.TestCase):
     def test_duplicate_run_id_rejected(self):
         a = make_record("no-skill", "run-a")
         b = make_record("with-skill", "run-a")
-        manifest = {"tasks": [{"id": "T01", "dimension": "theoretical_derivation", "task_family": "threshold_kinematics", "skill_reference": "references/symbolic-calculation.md"}]}
+        manifest = {"tasks": [{"id": "T01", "dimension": "theoretical_derivation", "task_family": "threshold_kinematics", "skill_reference": "references/symbolic-calculation.md", "required_evaluators": []}]}
         with self.assertRaisesRegex(evaluate.EvaluationError, "Duplicate run_id"):
             evaluate.compare_records([a, b], manifest, "round_1_pilot", seed=1, schema_path=SCHEMA, rubric_path=RUBRIC)
 
@@ -181,7 +181,7 @@ class EvaluatorTests(unittest.TestCase):
             for family_index in range(2):
                 task_id = f"H{dim_index + 1}{family_index + 1}"
                 family = f"family-{task_id}"
-                tasks.append({"id": task_id, "dimension": dimension, "task_family": family, "skill_reference": "references/symbolic-calculation.md"})
+                tasks.append({"id": task_id, "dimension": dimension, "task_family": family, "skill_reference": "references/symbolic-calculation.md", "required_evaluators": []})
                 for repeat in range(1, 4):
                     pair_id = f"pair-{task_id}-r{repeat}"
                     a = make_record("no-skill", f"{pair_id}-A", score=2)
@@ -221,7 +221,7 @@ class EvaluatorTests(unittest.TestCase):
             for family_index in range(2):
                 task_id = f"H{dim_index + 1}{family_index + 1}"
                 family = f"family-{task_id}"
-                tasks.append({"id": task_id, "dimension": dimension, "task_family": family, "skill_reference": "references/symbolic-calculation.md"})
+                tasks.append({"id": task_id, "dimension": dimension, "task_family": family, "skill_reference": "references/symbolic-calculation.md", "required_evaluators": []})
                 for repeat in range(1, 4):
                     pair_counter += 1
                     pair_id = f"pair-{task_id}-r{repeat}"
@@ -492,6 +492,77 @@ class EvaluatorTests(unittest.TestCase):
                 result["historical_serialization_differences"][0],
                 "fixed_speed_xe131_dsigma_450kev.svg",
             )
+
+
+    def test_compare_rejects_missing_required_task_evaluator(self):
+        a = make_record("no-skill", "run-a")
+        b = make_record("with-skill", "run-b")
+        manifest = {"tasks": [{
+            "id": "T01",
+            "dimension": "theoretical_derivation",
+            "task_family": "threshold_kinematics",
+            "skill_reference": "references/symbolic-calculation.md",
+            "required_evaluators": ["E-T01-T02-KALLEN-JACOBIAN"],
+        }]}
+        with self.assertRaisesRegex(evaluate.EvaluationError, "missing required evaluator results"):
+            evaluate.compare_records([a, b], manifest, "round_1_pilot", seed=3, schema_path=SCHEMA, rubric_path=RUBRIC)
+
+    def test_t05_baseline_only_result_cannot_satisfy_scored_run(self):
+        record = make_record("with-skill", "run-t05")
+        record["task_id"] = "T05"
+        task = {
+            "id": "T05",
+            "required_evaluators": [
+                "E-T05A-PDF-TEXT-SCREEN",
+                "E-T05B-DATA-TO-FIGURE",
+            ],
+        }
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            pdf_result = {"auditable": True, "below_minimum_count": 0, "spacing_issue_count": 0}
+            svg_result = {
+                "status": "PASS",
+                "evaluation_mode": "trusted_baseline_only",
+                "submission_evaluated": False,
+                "submission_pass": None,
+            }
+            result_specs = [
+                ("results/t05-pdf.json", "E-T05A-PDF-TEXT-SCREEN", pdf_result),
+                ("results/t05-svg.json", "E-T05B-DATA-TO-FIGURE", svg_result),
+            ]
+            for relative, evaluator_id, payload in result_specs:
+                path = root / relative
+                path.parent.mkdir(parents=True, exist_ok=True)
+                path.write_text(json.dumps(payload), encoding="utf-8")
+                digest = hashlib.sha256(path.read_bytes()).hexdigest()
+                record["artifacts"].append({"path": relative, "sha256": digest, "role": "deterministic_evaluator_result"})
+                record["evaluation"]["deterministic_checks"].append({
+                    "id": evaluator_id,
+                    "version": "1.0.0",
+                    "status": "pass",
+                    "input_sha256": record["task_input"]["input_manifest_sha256"],
+                    "output_sha256": digest,
+                    "result_artifact": relative,
+                })
+            with self.assertRaisesRegex(evaluate.EvaluationError, "baseline-only mode"):
+                evaluate.validate_required_evaluators(record, task, root)
+
+            svg_path = root / "results/t05-svg.json"
+            svg_result.update({
+                "evaluation_mode": "submission",
+                "submission_evaluated": True,
+                "submission_pass": True,
+            })
+            svg_path.write_text(json.dumps(svg_result), encoding="utf-8")
+            svg_digest = hashlib.sha256(svg_path.read_bytes()).hexdigest()
+            for artifact in record["artifacts"]:
+                if artifact["path"] == "results/t05-svg.json":
+                    artifact["sha256"] = svg_digest
+            for check in record["evaluation"]["deterministic_checks"]:
+                if check["id"] == "E-T05B-DATA-TO-FIGURE":
+                    check["output_sha256"] = svg_digest
+            validated = evaluate.validate_required_evaluators(record, task, root)
+            self.assertEqual(set(validated), set(task["required_evaluators"]))
 
 
 if __name__ == "__main__":

@@ -42,14 +42,14 @@
     {
       "path": "evaluators/evaluate.py",
       "role": "run_schema_validation_pair_integrity_source_hashing_score_recomputation_and_comparison",
-      "git_blob_sha1": "d3dc80dd42660b71159ee9caf9c1604e48b5afb6",
-      "size_bytes": 37114
+      "git_blob_sha1": "a8e0d7048db9679bea3121889563e0b325649aae",
+      "size_bytes": 42057
     },
     {
       "path": "evaluators/test_evaluate.py",
       "role": "unit_and_semantic_regression_tests",
-      "git_blob_sha1": "3a2515673ae1f0d7215ab7a852915765f2662cb7",
-      "size_bytes": 28038
+      "git_blob_sha1": "444b9014293fbb032a2fe2b1c82beebc77dd1299",
+      "size_bytes": 31660
     },
     {
       "path": "evaluators/verify_dirac_trace.py",
@@ -122,8 +122,8 @@
     {
       "path": "tasks/development/manifest.json",
       "role": "development_task_family_and_input_manifest",
-      "git_blob_sha1": "9a9d43eb65b8fbfa8030db15f37c4a9cfc4ca00d",
-      "size_bytes": 5710
+      "git_blob_sha1": "7663963632276b137d8d6712edd3a8ab3272b6e5",
+      "size_bytes": 6555
     },
     {
       "path": "tasks/development/T06-reproducibility-audit.md",
@@ -303,19 +303,20 @@
   },
   "test_suite": {
     "command": "python -m unittest discover -s evaluators -v",
-    "tests_defined": 33,
-    "development_run": "All 33 Benchmark evaluator tests passed in GitHub Actions Run 1154 on PR head 7db1ded743f173a489331124c0b36140ab8cd382. The same run passed schema validation, T01/T02 symbolic and numerical checks, T05 PDF screening and semantic SVG baseline validation, Python compilation, and the UV-EFT provenance bundle.",
+    "tests_defined": 35,
+    "development_run": "Run 1154 passed the prior 33-test suite. Two additional tests now enforce task-specific evaluator presence and reject T05 baseline-only results in scored runs; the updated 35-test suite requires CI validation.",
     "exact_committed_tree_rerun_required": true,
     "ci_workflow": ".github/workflows/schema-validation.yml",
     "ci_step": "Validate and test Particle Physics Research Skill Benchmark",
-    "last_verified_head_sha": "7db1ded743f173a489331124c0b36140ab8cd382",
+    "last_verified_head_sha": "ed5d1f3b5cbb09ce7fa1938d89532484ddacff67",
     "last_verified_run_id": 45053544748,
     "last_verified_run_number": 1154,
     "last_verified_run_url": "https://github.com/lm846802297-bit/high-energy-theory-research/actions/runs/45053544748",
     "last_verified_conclusion": "success",
     "ci_python_version": "3.12.16",
     "schema_validation_status": "PASS",
-    "failure_summary": "Run 1149 passed schema validation, project integration tests, Skill scaffold tests, and 31 of 32 Benchmark tests. The sole failure was an old test that still treated a semantic text difference as a byte-serialization mismatch; the test and evaluator were corrected."
+    "failure_summary": "Run 1149 passed schema validation, project integration tests, Skill scaffold tests, and 31 of 32 Benchmark tests. The sole failure was an old test that still treated a semantic text difference as a byte-serialization mismatch; the test and evaluator were corrected.",
+    "pending_changes": "Required-evaluator enforcement added to evaluate.py compare; awaiting new CI run."
   },
   "limitations": [
     "This evaluator registry is a development artifact and not a security boundary; keep it out of model workspaces.",
@@ -327,7 +328,8 @@
     "The historical T05 Golden SVGs are not byte-identical to the current pinned plotter serialization. Run 1145 showed exact identity of all three plotted path-data strings; only SVG serialization and coordinate formatting differ. The verifier now checks semantic geometry/labels and separately requires submitted model outputs to match fresh trusted-generator bytes.",
     "T05-A still requires visual inspection; the semantic SVG comparison is a deterministic data/structure check, not a substitute for reviewing the rendered plots.",
     "Run 1152 passed all 33 evaluator tests and the complete CI job. T05 historical Golden SVG byte identity remains false by design; semantic curve/structure checks pass. This run did not evaluate model-submitted A/B SVG outputs, which require the submission-mode evaluator during scored task execution.",
-    "Run 1154 passed all 33 evaluator tests and the full CI job on HEAD 7db1ded743f173a489331124c0b36140ab8cd382. The following commit updates only this evaluator-manifest CI evidence; evaluator code, tests, task prompts, schemas, rubric, and workflow are unchanged."
+    "Run 1154 passed all 33 evaluator tests and the full CI job on HEAD 7db1ded743f173a489331124c0b36140ab8cd382. The following commit updates only this evaluator-manifest CI evidence; evaluator code, tests, task prompts, schemas, rubric, and workflow are unchanged.",
+    "Before required-evaluator enforcement, evaluate.py compare validated artifact hashes but did not require task-specific deterministic evaluator IDs/statuses. The new task-manifest required_evaluators contract closes this gap; T05 scored runs must include a submission-mode result, not a baseline-only result."
   ],
   "ci_integration": {
     "workflow": ".github/workflows/schema-validation.yml",

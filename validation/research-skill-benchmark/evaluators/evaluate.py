@@ -357,6 +357,94 @@ def validate_task_source_bundle(
     return verified
 
 
+
+def _validate_evaluator_payload(evaluator_id: str, payload: dict[str, Any], run_id: str) -> None:
+    if not isinstance(payload, dict):
+        raise EvaluationError(f"Evaluator result for {evaluator_id} in run {run_id} is not a JSON object")
+
+    if evaluator_id == "E-T01-T02-KALLEN-JACOBIAN":
+        status = payload.get("status")
+        if not isinstance(status, str) or not status.startswith("PASS"):
+            raise EvaluationError(f"Run {run_id} has a non-PASS T01/T02 Jacobian evaluator result")
+    elif evaluator_id == "E-T04-DIRAC-TRACE":
+        if payload.get("status") != "PASS":
+            raise EvaluationError(f"Run {run_id} has a non-PASS T04 Dirac-trace evaluator result")
+    elif evaluator_id == "E-T05A-PDF-TEXT-SCREEN":
+        if payload.get("auditable") is not True:
+            raise EvaluationError(f"Run {run_id} T05 PDF evaluator did not produce an auditable result")
+    elif evaluator_id == "E-T05B-DATA-TO-FIGURE":
+        if payload.get("status") != "PASS":
+            raise EvaluationError(f"Run {run_id} T05 SVG evaluator did not PASS")
+        if payload.get("evaluation_mode") != "submission" or payload.get("submission_evaluated") is not True or payload.get("submission_pass") is not True:
+            raise EvaluationError(
+                f"Run {run_id} T05 SVG evaluator used baseline-only mode or did not verify the submitted model outputs"
+            )
+    elif evaluator_id == "E-T06-REPRO-PACKAGE":
+        if payload.get("status") != "PASS":
+            raise EvaluationError(f"Run {run_id} has a non-PASS T06 reproducibility evaluator result")
+    elif evaluator_id == "E-T02-LZ-CONVERGENCE-SUPPORT":
+        status = payload.get("status")
+        if isinstance(status, str) and not status.startswith("PASS"):
+            raise EvaluationError(f"Run {run_id} has a non-PASS optional T02 convergence cross-check")
+    else:
+        raise EvaluationError(f"Task manifest requires unknown evaluator ID {evaluator_id}")
+
+
+def validate_required_evaluators(
+    record: dict[str, Any],
+    task: dict[str, Any],
+    artifact_root: Path | None = None,
+) -> list[str]:
+    if "required_evaluators" not in task or not isinstance(task["required_evaluators"], list):
+        raise EvaluationError(f"Task {task.get('id', '<unknown>')} must declare required_evaluators")
+    required = task["required_evaluators"]
+    if len(required) != len(set(required)):
+        raise EvaluationError(f"Task {task['id']} contains duplicate required_evaluators")
+
+    checks = record["evaluation"].get("deterministic_checks", [])
+    by_id: dict[str, dict[str, Any]] = {}
+    for check in checks:
+        evaluator_id = check["id"]
+        if evaluator_id in by_id:
+            raise EvaluationError(f"Run {record['run_id']} contains duplicate evaluator result {evaluator_id}")
+        by_id[evaluator_id] = check
+
+    missing = sorted(set(required) - set(by_id))
+    if missing:
+        raise EvaluationError(f"Run {record['run_id']} is missing required evaluator results: {missing}")
+
+    artifact_by_path = {item["path"]: item for item in record["artifacts"]}
+    validated: list[str] = []
+    for evaluator_id in required:
+        check = by_id[evaluator_id]
+        if check["status"] != "pass":
+            raise EvaluationError(
+                f"Run {record['run_id']} required evaluator {evaluator_id} has status {check['status']!r}, not 'pass'"
+            )
+        if check["input_sha256"] != record["task_input"]["input_manifest_sha256"]:
+            raise EvaluationError(f"Run {record['run_id']} evaluator {evaluator_id} input hash is not bound to the task input manifest")
+        result_path = check["result_artifact"]
+        artifact = artifact_by_path.get(result_path)
+        if artifact is None:
+            raise EvaluationError(f"Run {record['run_id']} evaluator {evaluator_id} result is not registered as a run artifact")
+        if check["output_sha256"] != artifact["sha256"]:
+            raise EvaluationError(f"Run {record['run_id']} evaluator {evaluator_id} output hash differs from its artifact record")
+
+        if artifact_root is not None:
+            root = artifact_root.resolve()
+            relative = Path(result_path)
+            if relative.is_absolute():
+                raise EvaluationError(f"Evaluator result path must be relative: {result_path}")
+            path = (root / relative).resolve()
+            if not path.is_relative_to(root):
+                raise EvaluationError(f"Evaluator result path escapes artifact root: {result_path}")
+            if not path.is_file():
+                raise EvaluationError(f"Missing evaluator result artifact: {result_path}")
+            payload = read_json(path)
+            _validate_evaluator_payload(evaluator_id, payload, record["run_id"])
+        validated.append(evaluator_id)
+    return validated
+
 def _quantile(sorted_values: list[float], probability: float):
     if not sorted_values:
         raise EvaluationError("Cannot calculate quantile of empty values")
@@ -482,6 +570,8 @@ def compare_records(
         task = task_info[a["task_id"]]
         validate_task_source_bundle(a, task, input_root)
         validate_task_source_bundle(b, task, input_root)
+        validate_required_evaluators(a, task, artifact_root)
+        validate_required_evaluators(b, task, artifact_root)
         family = task.get("task_family", a["task_id"])
         qa = float(a["evaluation"]["weighted_score"])
         qb = float(b["evaluation"]["weighted_score"])
