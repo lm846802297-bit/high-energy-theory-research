@@ -1,41 +1,55 @@
 # Particle Physics Research Skill Benchmark
 
-Status: **protocol draft — not yet frozen; no formal A/B runs have been executed.**
+Status: **protocol draft — not frozen; no formal A/B runs have been executed.**
 
-This benchmark tests whether the shared `high-energy-theory-research` Skill improves scientific work relative to the same GPT model working without that Skill.
+This benchmark tests whether the shared high-energy-theory-research Skill improves scientific work relative to the same GPT model without that Skill.
 
 ## Research question
 
-Does access to the shared Skill improve scientific quality, reproducibility, and evidence quality without materially reducing the model's ability to choose appropriate methods?
+Does the Skill improve scientific quality, independent validation, reproducibility, and evidence quality without materially reducing method-selection autonomy?
 
-The primary comparison is:
-
-- **A — No Skill:** the fixed model, tools, project instructions, and inputs; the shared Skill is unavailable.
-- **B — With Skill:** the same model, tools, project instructions, and inputs; the pinned shared Skill is available and explicitly invoked for the task.
+- **A — No Skill:** fixed model, tools, project instructions, inputs, and budget; shared Skill is unavailable.
+- **B — With Skill:** identical controls; the pinned shared Skill is available and explicitly invoked.
 
 Only Skill availability/invocation is intentionally changed.
 
-## Benchmark structure
+## Structure
 
-- `protocol/`: pre-registered design, rubric, and environment record.
-- `tasks/development/`: tasks that may be used while improving the Skill.
-- `tasks/holdout/`: tasks reserved for final evaluation; do not use them to edit Skill instructions.
-- `runs/no-skill/` and `runs/with-skill/`: immutable run records and native outputs.
-- `evaluators/`: independent, deterministic checks and blinded-review guidance.
-- `reports/`: generated comparisons. No report is a PASS until its required run records and checks exist.
+- protocol/: pre-registered design, scoring rubric, environment lock, and JSON Schemas.
+- tasks/development/: tasks that may be used to improve Skill instructions.
+- tasks/holdout/: sealed final-evaluation area; do not use during development.
+- runs/no-skill/ and runs/with-skill/: immutable run records and native outputs.
+- evaluators/: deterministic validators, pinned evaluator registry, and blinded-review guidance.
+- reports/: generated comparisons; no report is PASS until all run records and checks exist.
 
-## Three-round evaluation
+## Evaluation rounds
 
-1. **Round 1 — pilot A/B:** T01 theory/Jacobian derivation, T02 threshold numerical integration, and T03 source-grounded reading of the pinned axial-vector manuscript; three independent runs per arm per task (18 runs total).
-2. **Round 2 — six dimensions:** add T04 symbolic Dirac trace, T05 PDF figure audit, and T06 reproducibility package. Use a separately prepared holdout set and blinded scoring.
-3. **Round 3 — real projects:** evaluate in LZ, axial-vector, and ColliderAgent using read-only tasks first.
+1. **Round 1 — Pilot:** T01, T02, T03; three repetitions per arm per task; 18 model runs. Descriptive only.
+2. **Round 2 — Full:** all six dimensions plus sealed Holdout. Minimum 12 independent task-family clusters, 36 paired task runs, 72 model runs. Apply frozen statistical decision rules.
+3. **Round 3 — Real projects:** read-only tasks in LZ, axial-vector, and ColliderAgent under a separate project-stratified plan.
+
+T01 and T02 share the threshold_kinematics family and count as one independent task-family cluster. T05 contains a PDF audit and a separate CSV-to-SVG regeneration pipeline; the generator is not claimed to have produced the PDF.
+
+## Evaluator commands
+
+From the benchmark root, install the pinned evaluator dependencies and run:
+
+    python -m unittest discover -s evaluators -v
+    python evaluators/evaluate.py validate-run path/to/run-record.json
+    python evaluators/evaluate.py validate-pair path/to/A.json path/to/B.json
+    python evaluators/evaluate.py verify-sources --input-root path/to/staged-inputs
+    python evaluators/verify_dirac_trace.py --json-out path/to/dirac-check.json
+    python evaluators/verify_repro_package.py --source path/to/solution.py --input path/to/input.csv --output path/to/result.json --manifest path/to/manifest.json
+
+The evaluate.py compare command consumes immutable A/B run records and a task manifest, recomputes scores, validates pairs, calculates task-family summaries, and writes a comparison report. Round 1 is never classified as confirmatory. The evaluator never executes model-generated source code.
 
 ## Current status
 
-- Benchmark directory and protocol are being added to central PR #27.
-- No model A/B result exists yet.
-- Model/build/runtime lock must be completed on the Windows Codex host before the protocol is frozen.
-- Holdout prompts and scoring keys must remain unavailable to the model during scored runs.
-- No Skill module is accepted or rejected by this benchmark yet.
+- Benchmark and development tasks are in central PR #27.
+- Protocol remains draft pending Windows host capture and independent review.
+- No model A/B result exists; no Skill module has been accepted or rejected.
+- The evaluator manifest, reference outputs, and development key are evaluator-only and must not be mounted into model workspaces.
+- Holdout prompts/keys have intentionally not been created; an independent evaluator prepares them only after protocol and Skill freeze.
+- No formal A/B runs have been executed.
 
-See [experimental design](protocol/experimental-design.md), [scoring rubric](protocol/scoring-rubric.yaml), and [environment lock](protocol/environment-lock.json).
+See the experimental design, scoring rubric, environment lock, and evaluator guide in this directory.

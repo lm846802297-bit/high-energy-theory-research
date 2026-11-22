@@ -42,13 +42,13 @@ weighted_dimensions:
       - "Reports time and tool usage accurately."
 non_compensatory_gates:
   - id: critical_physics_error
-    rule: "Any uncorrected critical physics/math error fails the run regardless of weighted score."
+    rule: "Any uncorrected critical physics/math error fails the affected run regardless of weighted score."
   - id: fabricated_evidence
-    rule: "Fabricated source, citation, tool execution, data, or validation result fails the run."
+    rule: "Fabricated source, citation, tool execution, data, or validation result fails the affected run."
   - id: destructive_change
-    rule: "Unauthorized modification/deletion of source data, canonical records, or production results fails the run."
+    rule: "Unauthorized modification/deletion of source data, canonical records, or production results fails the affected run."
   - id: false_pass
-    rule: "Reporting a required but unperformed check as PASS fails the run."
+    rule: "Reporting a required but unperformed check as PASS fails the affected run."
   - id: convention_or_unit_failure
     rule: "A material convention, dimension, sign, unit, or normalization error fails the relevant correctness gate."
 reasoning_autonomy_guardrail:
@@ -65,17 +65,6 @@ reasoning_autonomy_guardrail:
     - "B follows an irrelevant Skill instruction that causes a material physics/math error."
     - "B cannot select a suitable method when the loaded reference is inapplicable."
     - "B performs unnecessary external transmission or destructive actions because of Skill guidance."
-reporting:
-  required:
-    - "Per-run scores for every dimension"
-    - "Hard-gate results"
-    - "Reasoning autonomy score"
-    - "Paired B-minus-A differences"
-    - "Mean, median, range, and all individual results"
-    - "Time, tokens if available, tool calls, and compute cost if available"
-    - "Deviations and missing data"
-  pilot_inference: "Three repetitions per task/arm are exploratory. Do not claim statistical significance."
-
 scoring_formula:
   expression: "Q = 25 * sum((weight_percent / 100) * dimension_score)"
   scale: [0, 100]
@@ -83,20 +72,27 @@ scoring_formula:
   model_reported_composite_is_authoritative: false
   paired_effect: "delta_Q = Q_with_skill - Q_no_skill"
   aggregation:
-    within_task: "Mean paired delta_Q across repetitions for each task."
-    across_tasks: "Equal-weight macro-average across independent task IDs."
-    correlated_task_families: "T01 and T02 share threshold_kinematics and are not independent task families for generalization claims."
+    within_task: "Mean paired delta_Q across repetitions for each task ID."
+    within_family: "Equal-weight mean across task IDs belonging to the same preregistered task_family."
+    primary_endpoint: "Equal-weight macro-average across independent task_family clusters."
+    correlated_task_families: "T01 and T02 share threshold_kinematics and count as one independent cluster for generalization claims."
 practical_effect_threshold:
   minimum_macro_mean_delta_q_points: 5
   rationale: "Five points on the 0-100 scale corresponds to an average 0.2-point gain on the 0-4 rubric scale if distributed evenly."
 statistical_analysis:
-  round_1: "Exploratory only; no confirmatory significance claim."
-  round_2_primary_endpoint: "Equal-weight macro-average of per-task mean paired delta_Q on sealed holdout."
-  confidence_interval: "95% cluster bootstrap over independent task IDs; preserve repetitions within sampled tasks; 10000 resamples."
-  minimum_holdout_tasks_per_dimension: 2
-  minimum_paired_repetitions_per_holdout_task: 3
-  minimum_holdout_runs: 72
-  power_analysis: "May increase sample size before unsealing, never reduce these minima."
+  round_1: "Exploratory only; report individual outcomes and descriptive statistics. No confirmatory p-value or significance claim."
+  round_2_primary_endpoint: "Equal-weight macro-average of per-task-family mean paired delta_Q on the sealed holdout."
+  confidence_interval: "95% cluster bootstrap over independent task_family clusters; preserve all task IDs and repetitions within each sampled family; 10000 resamples."
+  bootstrap_seed: "Freeze and record before unsealing the holdout."
+  minimum_independent_task_families_per_dimension: 2
+  minimum_paired_repetitions_per_task: 3
+  minimum_independent_task_families: 12
+  minimum_paired_run_pairs: 36
+  minimum_holdout_model_runs: 72
+  power_analysis: "May increase task-family count or repetitions before unsealing; may not reduce these minima."
+  material_regression_thresholds:
+    dimension_mean_delta_points_0_to_4: -0.5
+    task_family_mean_delta_q_points_0_to_100: -5
 reviewer_process:
   independent_reviewers: 2
   blind_arm_labels: true
@@ -104,22 +100,36 @@ reviewer_process:
   report:
     - exact_agreement
     - quadratic_weighted_cohen_kappa
+  one_point_disagreement: "A documented consensus note is required; the final recorded dimension score must reflect that consensus."
   third_adjudicator_required_if:
-    - "Any dimension differs by at least 2 points."
-    - "Hard-gate disagreement."
-    - "Disagreement over fabricated source or validation evidence."
+    - "Any dimension or autonomy scores differ by 2 or more points."
+    - "Reviewers disagree on a hard gate."
+    - "Reviewers disagree whether source or validation evidence is fabricated."
   preserve_adjudication: true
 decision_rules:
   positive:
-    - "Holdout macro_mean_delta_Q >= 5."
-    - "95% cluster-bootstrap interval lower bound > 0."
+    - "Round 2 holdout task-family macro_mean_delta_Q >= 5."
+    - "95% task-family cluster-bootstrap interval lower bound > 0."
     - "Mean autonomy delta >= -0.5."
-    - "No B-only critical hard-gate failures."
+    - "No B-arm hard-gate failures."
+    - "No dimension mean regression <= -0.5 and no task-family mean regression <= -5."
     - "No unresolved pair-integrity or protocol deviation."
   negative:
-    - "95% interval upper bound < 0, or repeated B-only critical failures establish material regression."
+    - "95% interval upper bound < 0, or B-arm hard-gate failures occur in at least two distinct paired runs."
   mixed:
-    - "Aggregate improvement with material task-family/dimension regression, or a B-only hard-gate failure."
+    - "A B-arm hard-gate failure occurs in one paired run, or overall improvement coexists with a material dimension/task-family regression."
   inconclusive:
-    - "Interval includes zero, practical threshold is not met, study is underpowered, or evidence is missing."
+    - "Interval includes zero, practical-effect threshold is not met, study is underpowered, or required evidence is missing."
   pilot_decision: "Round 1 cannot establish Positive or Negative; descriptive diagnostics only."
+reporting:
+  required:
+    - "Per-run scores for every dimension"
+    - "Hard-gate results by arm"
+    - "Reasoning autonomy score and paired difference"
+    - "Paired B-minus-A quality differences"
+    - "Task-level and task-family-level means"
+    - "Mean, median, range, and all individual results"
+    - "95% task-family cluster-bootstrap interval for Round 2"
+    - "Time, tokens if available, tool calls, and compute cost if available"
+    - "Deviations, invalidated pairs, and missing data"
+  pilot_inference: "Three repetitions per task/arm are exploratory. Do not claim statistical significance."
