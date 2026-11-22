@@ -19,7 +19,7 @@ Do not force every task to create every file. A substantial execution needs a ma
 
 ## 2. JSON record roles
 
-The local `research-result-record-v1.0.0.schema.json` validates three record types:
+The local `research-result-record-v1.0.1.schema.json` validates three record types and remains backward-compatible with v1.0.0 records:
 
 - **run_manifest:** records what actually ran, including the commit SHA used at execution time, script path/fingerprint, input provenance (for repository-local inputs, both a repository-relative path and SHA-256; when input bytes are unavailable, an immutable URI plus version), physical/numerical configuration, software/hardware environment, exact command, output inventory, validation status, and archival status. The schema requires the entry-script SHA-256 and explicit runtime, dependency, and hardware records.
 - **result_summary:** records what was calculated, the benchmark, scope, observables as numeric values plus separate unit fields, scientific status, interpretation, and data-file references.
