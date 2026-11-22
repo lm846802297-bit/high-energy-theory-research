@@ -40,6 +40,7 @@ From the benchmark root, install the pinned evaluator dependencies and run:
     python evaluators/evaluate.py verify-sources --input-root path/to/staged-inputs
     python evaluators/verify_dirac_trace.py --json-out path/to/dirac-check.json
     python evaluators/verify_repro_package.py --source path/to/solution.py --input path/to/input.csv --output path/to/result.json --manifest path/to/manifest.json
+    python evaluators/verify_figure_regeneration.py --manifest evaluators/manifest.json --model-input-root path/to/staged-inputs --golden-root path/to/evaluator-goldens
 
 The evaluate.py compare command consumes immutable A/B run records and a task manifest, recomputes scores, validates pairs, calculates task-family summaries, and writes a comparison report. Round 1 is never classified as confirmatory. The evaluator never executes model-generated source code.
 

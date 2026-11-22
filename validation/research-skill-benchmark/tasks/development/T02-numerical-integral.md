@@ -5,7 +5,7 @@ Status: development only; may be used to improve the Skill.
 ## Definition and scope
 
 Let
-`W^2=(m_1+m_2)^2+s,quad s\geq0`.
+`W^2=(m_1+m_2)^2+s, with s >= 0`.
 Then
 `\lambda(W^2,m_1^2,m_2^2)=s(s+4m_1m_2)`.
 

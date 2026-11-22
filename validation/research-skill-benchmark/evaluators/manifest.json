@@ -54,6 +54,12 @@
       "role": "exactly_pinned_evaluator_dependencies",
       "git_blob_sha1": "51e1219724b4460f1c2513fb8fe32b8598ed4686",
       "size_bytes": 104
+    },
+    {
+      "path": "evaluators/verify_figure_regeneration.py",
+      "role": "T05B_pinned_plot_script_execution_and_byte_for_byte_golden_SVG_comparison",
+      "git_blob_sha1": "fd03086d6f6006abd389ed773ae32256cd449f3e",
+      "size_bytes": 6233
     }
   ],
   "protocol_artifacts": [
@@ -209,7 +215,12 @@
         }
       ],
       "command": "python plot_user_dsigma_curve.py --csv results/fixed_speed_xe131_dsigma_450kev.csv --minima results/local_minima_refinement_1keV.csv --out-dir results/plots",
-      "acceptance": "Verify staged input Git blob IDs, sizes and SHA-256; run the unmodified pinned generator; hash outputs; compare byte identity with golden SVGs; independently spot-check plotted coordinates and inspect rendered outputs."
+      "acceptance": "Verify staged input Git blob IDs, sizes and SHA-256; run the unmodified pinned generator in a temporary offline workspace; hash outputs; compare byte identity with golden SVGs; independently spot-check plotted coordinates and inspect rendered outputs.",
+      "verifier_script": {
+        "path": "evaluators/verify_figure_regeneration.py",
+        "git_blob_sha1": "fd03086d6f6006abd389ed773ae32256cd449f3e",
+        "size_bytes": 6233
+      }
     },
     {
       "id": "E-T06-REPRO-PACKAGE",
@@ -238,8 +249,8 @@
   },
   "test_suite": {
     "command": "python -m unittest discover -s evaluators -v",
-    "tests_defined": 17,
-    "development_run": "17 passed, 0 failed on ChatGPT Linux draft",
+    "tests_defined": 19,
+    "development_run": "19 passed, 0 failed on ChatGPT Linux draft",
     "exact_committed_tree_rerun_required": true
   },
   "limitations": [

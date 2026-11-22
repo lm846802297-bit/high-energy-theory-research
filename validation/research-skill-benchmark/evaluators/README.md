@@ -12,6 +12,7 @@ Dependencies are pinned in evaluators/requirements.txt. The package uses Python 
 - evaluate.py compare: pairs immutable records, rejects missing/duplicate pairs, computes task and task-family effects, performs the preregistered cluster bootstrap for a sufficiently complete Round 2 holdout, and emits the comparison report.
 - verify_dirac_trace.py: independent 4x4 Dirac-representation trace and Clifford-algebra check for T04; Python standard library only.
 - verify_repro_package.py: independently verifies T06 source/input/output hashes and recomputes the weighted mean from the exact CSV bytes. It deliberately does not execute model-generated source code.
+- verify_figure_regeneration.py: verifies the pinned T05-B generator, model-visible CSVs, evaluator-only golden SVGs, runs only the trusted pinned plotting script in a temporary workspace, and compares both generated SVGs byte-for-byte.
 
 The T01/T02 symbolic reference and the T02 LZ-specific convergence program are pinned in the registry. The latter is a supporting cross-check, not the numerical oracle for the T02 GeV benchmark. T05-A's PDF text-size scanner is a screening tool; it does not replace visual inspection or establish journal compliance. T05-B compares two regenerated SVGs against evaluator-only reference outputs.
 
