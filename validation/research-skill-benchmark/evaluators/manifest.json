@@ -72,8 +72,8 @@
     {
       "path": "evaluators/verify_figure_regeneration.py",
       "role": "T05B_pinned_plot_script_execution_and_byte_for_byte_golden_SVG_comparison",
-      "git_blob_sha1": "43c6f53cb7c0c65eea4c93cc17c2c4a38878e199",
-      "size_bytes": 7589
+      "git_blob_sha1": "6e73572b99610a1b988d34cd8a46f354bd2f9c15",
+      "size_bytes": 13846
     },
     {
       "path": "evaluators/requirements-test.txt",
@@ -86,6 +86,12 @@
       "role": "pinned_dependencies_for_T01_T02_deterministic_symbolic_and_numerical_evaluators",
       "git_blob_sha1": "235e267836e8e6a42c6dec571d6ff617dc0b0b56",
       "size_bytes": 55
+    },
+    {
+      "path": "evaluators/test_figure_regeneration_semantics.py",
+      "role": "T05_semantic_golden_comparison_and_submitted_output_regression_tests",
+      "git_blob_sha1": "ebf6a9e1f6ec0ee1140224bddd4372ef3c7db267",
+      "size_bytes": 7272
     }
   ],
   "protocol_artifacts": [
@@ -247,11 +253,11 @@
         }
       ],
       "command": "python plot_user_dsigma_curve.py --csv results/fixed_speed_xe131_dsigma_450kev.csv --minima results/local_minima_refinement_1keV.csv --out-dir results/plots",
-      "acceptance": "Verify staged input Git blob IDs, sizes and SHA-256; run the unmodified pinned generator in a temporary offline workspace; hash outputs; compare byte identity with golden SVGs; independently spot-check plotted coordinates and inspect rendered outputs.",
+      "acceptance": "Verify staged input Git blob IDs, sizes and SHA-256; run the unmodified pinned generator in a temporary offline workspace; compare historical Golden SVGs semantically (exact path data, SVG structure/labels, exact dimensions, and coordinate agreement within 0.01 px); record serialization differences without failing when semantic content matches. For an actual scored run, compare both model-submitted SVGs byte-for-byte with the fresh trusted-generator outputs. Independently spot-check plotted coordinates and visually inspect rendered outputs.",
       "verifier_script": {
         "path": "evaluators/verify_figure_regeneration.py",
-        "git_blob_sha1": "43c6f53cb7c0c65eea4c93cc17c2c4a38878e199",
-        "size_bytes": 7589
+        "git_blob_sha1": "6e73572b99610a1b988d34cd8a46f354bd2f9c15",
+        "size_bytes": 13846
       }
     },
     {
@@ -297,18 +303,19 @@
   },
   "test_suite": {
     "command": "python -m unittest discover -s evaluators -v",
-    "tests_defined": 26,
-    "development_run": "25 tests passed in GitHub Actions Run 1137 on PR head ad8cdb968875cd07249aa52558282bc556803e4f. The T05 mismatch-diagnostic test and updated verifier are pending a new CI run.",
+    "tests_defined": 32,
+    "development_run": "Six new T05 semantic-comparison tests pass locally on ChatGPT Linux. The full 32-test suite and updated verifier require a new CI run against the exact committed tree.",
     "exact_committed_tree_rerun_required": true,
     "ci_workflow": ".github/workflows/schema-validation.yml",
     "ci_step": "Validate and test Particle Physics Research Skill Benchmark",
-    "last_verified_head_sha": "ad8cdb968875cd07249aa52558282bc556803e4f",
-    "last_verified_run_id": 45050044303,
-    "last_verified_run_number": 1137,
-    "last_verified_run_url": "https://github.com/lm846802297-bit/high-energy-theory-research/actions/runs/45050044303",
-    "last_verified_conclusion": "success",
+    "last_verified_head_sha": "23944da630436fb4bf87d2ce2fe429111e1d84a0",
+    "last_verified_run_id": 45051175252,
+    "last_verified_run_number": 1145,
+    "last_verified_run_url": "https://github.com/lm846802297-bit/high-energy-theory-research/actions/runs/45051175252",
+    "last_verified_conclusion": "failure",
     "ci_python_version": "3.12.16",
-    "schema_validation_status": "PASS"
+    "schema_validation_status": "PASS",
+    "failure_summary": "Run 1145 passed schema, evaluator unit tests, T01/T02, and T05 PDF screening. T05 failed because historical Golden SVG serialization differed; the three plotted path-data strings were independently confirmed identical to generated outputs."
   },
   "limitations": [
     "This evaluator registry is a development artifact and not a security boundary; keep it out of model workspaces.",
@@ -317,7 +324,8 @@
     "T06 verifies the recorded package and independently recomputes the result; it does not prove submitted source execution unless trusted runner evidence is available.",
     "Run 1137 validated the evaluator code, test suite, and protocol artifacts at PR head ad8cdb968875cd07249aa52558282bc556803e4f. The subsequent evaluator-manifest-only status update must be rerun after any evaluator or protocol code change.",
     "The workflow now includes end-to-end T01/T02 symbolic and numerical checks plus T05 PDF screening and CSV-to-SVG regeneration. These new deterministic evaluator steps are awaiting a workflow run on the current branch head.",
-    "Run 1142 found that the pinned T05 plotter output is not byte-identical to the archived SVG reference. The updated verifier preserves generated SVGs and reports first-difference metadata. Do not update the golden outputs or modify the LZ source until the discrepancy is inspected."
+    "The historical T05 Golden SVGs are not byte-identical to the current pinned plotter serialization. Run 1145 showed exact identity of all three plotted path-data strings; only SVG serialization and coordinate formatting differ. The verifier now checks semantic geometry/labels and separately requires submitted model outputs to match fresh trusted-generator bytes.",
+    "T05-A still requires visual inspection; the semantic SVG comparison is a deterministic data/structure check, not a substitute for reviewing the rendered plots."
   ],
   "ci_integration": {
     "workflow": ".github/workflows/schema-validation.yml",

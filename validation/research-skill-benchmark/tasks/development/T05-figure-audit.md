@@ -51,15 +51,15 @@ Golden SVG outputs are evaluator-only and must not be placed in either model wor
 python plot_user_dsigma_curve.py --csv results/fixed_speed_xe131_dsigma_450kev.csv --minima results/local_minima_refinement_1keV.csv --out-dir results/plots
 ```
 
-4. Confirm both SVGs are generated; record their SHA-256 values and inspect the rendered figures.
+4. Confirm both SVGs are generated under `results/plots/` in the run's native output package; record their SHA-256 values and inspect the rendered figures.
 5. Independently spot-check plotted coordinates against the raw CSV and verify the response ratio uses the stated GCN/JJ55 columns.
 6. Do not modify source or raw CSVs to force a match.
 
 ## Required output
 
 - Part A audit report, native rendered page, and machine-readable JSON.
-- Part B input hash manifest, exact command, environment, stdout/stderr, both SVGs, and output hashes.
+- Part B input hash manifest, exact command, environment, stdout/stderr, both SVGs, and output hashes. Include both SVGs as run artifacts.
 - Visual inspection notes and explicit PASS/FAIL/NOT AUDITABLE per check.
 - Explicit statement that Part A and Part B are separate source pipelines.
 
-The evaluator compares Part B outputs with sealed reference SVGs; their paths and hashes are not model-visible.
+The historical Golden SVGs are evaluator-only and are used for a semantic cross-check: exact plotted path data, SVG structure and labels, exact dimensions, and numeric coordinate agreement within 0.01 px. They are not byte-identical to the current generator's serialization. The model's submitted SVGs must match a fresh execution of the trusted pinned generator byte-for-byte. Do not modify the source project or historical Golden files.

@@ -124,7 +124,7 @@ jobs:
           elif [ "$pdf_status" -ne 0 ]; then
             exit "$pdf_status"
           fi
-          python validation/research-skill-benchmark/evaluators/verify_figure_regeneration.py --manifest validation/research-skill-benchmark/evaluators/manifest.json --model-input-root "$model_root" --golden-root "$golden_root" --generated-output-root "$RUNNER_TEMP/t05-generated" > "$RUNNER_TEMP/t05-data-to-figure.json"
+          python validation/research-skill-benchmark/evaluators/verify_figure_regeneration.py --manifest validation/research-skill-benchmark/evaluators/manifest.json --model-input-root "$model_root" --golden-root "$golden_root" --generated-output-root "$RUNNER_TEMP/t05-generated" --baseline-only > "$RUNNER_TEMP/t05-data-to-figure.json"
 
       - name: Upload deterministic Benchmark evaluator outputs
         if: always()

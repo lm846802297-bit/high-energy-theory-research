@@ -37,13 +37,17 @@ From the benchmark root, install the lightweight pinned test dependencies and ru
     python -m pip install -r evaluators/requirements-test.txt
     python -m unittest discover -s evaluators -v
 
-The CI workflow also validates both JSON Schemas with Draft 2020-12, parses the JSON manifests and scoring YAML, runs the same evaluator unit suite, executes the pinned T01/T02 symbolic and numerical references, screens the pinned T05 PDF, and regenerates the two T05 SVGs against evaluator-only golden outputs.
+The CI workflow also validates both JSON Schemas with Draft 2020-12, parses the JSON manifests and scoring YAML, runs the evaluator unit suite, executes the pinned T01/T02 symbolic and numerical references, screens the pinned T05 PDF, and performs a semantic T05 SVG baseline check.
     python evaluators/evaluate.py validate-run path/to/run-record.json --artifact-root path/to/run-artifacts
     python evaluators/evaluate.py validate-pair path/to/A.json path/to/B.json --artifact-root path/to/run-artifacts
     python evaluators/evaluate.py verify-sources --input-root path/to/staged-inputs
     python evaluators/verify_dirac_trace.py --json-out path/to/dirac-check.json
     python evaluators/verify_repro_package.py --source path/to/solution.py --input path/to/input.csv --output path/to/result.json --manifest path/to/manifest.json
-    python evaluators/verify_figure_regeneration.py --manifest evaluators/manifest.json --model-input-root path/to/staged-inputs --golden-root path/to/evaluator-goldens
+    python evaluators/verify_figure_regeneration.py --manifest evaluators/manifest.json --model-input-root path/to/staged-inputs --golden-root path/to/evaluator-goldens --generated-output-root path/to/trusted-generated --baseline-only
+
+For a scored T05 run, pass the model's submitted SVG directory instead of `--baseline-only`:
+
+    python evaluators/verify_figure_regeneration.py --manifest evaluators/manifest.json --model-input-root path/to/staged-inputs --golden-root path/to/evaluator-goldens --submitted-output-root path/to/run-artifacts/results/plots
 
 For Round 1, use the development task manifest. For Round 2, pass the sealed evaluator's combined holdout task manifest explicitly:
 
