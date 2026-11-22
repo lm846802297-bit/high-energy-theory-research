@@ -304,19 +304,19 @@
   "test_suite": {
     "command": "python -m unittest discover -s evaluators -v",
     "tests_defined": 35,
-    "development_run": "Run 1154 passed the prior 33-test suite. Two additional tests now enforce task-specific evaluator presence and reject T05 baseline-only results in scored runs; the updated 35-test suite requires CI validation.",
+    "development_run": "All 35 Benchmark evaluator tests passed in GitHub Actions Run 1158 on PR head 4ff75b6941bba5732fae47aa88b116bbb5142a62. The full workflow passed schema validation, project integration tests, Skill scaffold tests, T01/T02 symbolic and numerical checks, T05 PDF and SVG baseline checks, Python compilation, and the UV-EFT provenance bundle.",
     "exact_committed_tree_rerun_required": true,
     "ci_workflow": ".github/workflows/schema-validation.yml",
     "ci_step": "Validate and test Particle Physics Research Skill Benchmark",
-    "last_verified_head_sha": "ed5d1f3b5cbb09ce7fa1938d89532484ddacff67",
-    "last_verified_run_id": 45053544748,
-    "last_verified_run_number": 1154,
-    "last_verified_run_url": "https://github.com/lm846802297-bit/high-energy-theory-research/actions/runs/45053544748",
+    "last_verified_head_sha": "4ff75b6941bba5732fae47aa88b116bbb5142a62",
+    "last_verified_run_id": 45054494838,
+    "last_verified_run_number": 1158,
+    "last_verified_run_url": "https://github.com/lm846802297-bit/high-energy-theory-research/actions/runs/45054494838",
     "last_verified_conclusion": "success",
     "ci_python_version": "3.12.16",
     "schema_validation_status": "PASS",
     "failure_summary": "Run 1149 passed schema validation, project integration tests, Skill scaffold tests, and 31 of 32 Benchmark tests. The sole failure was an old test that still treated a semantic text difference as a byte-serialization mismatch; the test and evaluator were corrected.",
-    "pending_changes": "Required-evaluator enforcement added to evaluate.py compare; awaiting new CI run."
+    "pending_changes": null
   },
   "limitations": [
     "This evaluator registry is a development artifact and not a security boundary; keep it out of model workspaces.",
@@ -329,7 +329,7 @@
     "T05-A still requires visual inspection; the semantic SVG comparison is a deterministic data/structure check, not a substitute for reviewing the rendered plots.",
     "Run 1152 passed all 33 evaluator tests and the complete CI job. T05 historical Golden SVG byte identity remains false by design; semantic curve/structure checks pass. This run did not evaluate model-submitted A/B SVG outputs, which require the submission-mode evaluator during scored task execution.",
     "Run 1154 passed all 33 evaluator tests and the full CI job on HEAD 7db1ded743f173a489331124c0b36140ab8cd382. The following commit updates only this evaluator-manifest CI evidence; evaluator code, tests, task prompts, schemas, rubric, and workflow are unchanged.",
-    "Before required-evaluator enforcement, evaluate.py compare validated artifact hashes but did not require task-specific deterministic evaluator IDs/statuses. The new task-manifest required_evaluators contract closes this gap; T05 scored runs must include a submission-mode result, not a baseline-only result."
+    "Run 1158 passed the 35-test suite and the full CI workflow with required-evaluator enforcement enabled. The next commit updates only this manifest evidence; evaluator source, tests, task requirements, schemas, rubric, and workflow are unchanged."
   ],
   "ci_integration": {
     "workflow": ".github/workflows/schema-validation.yml",
@@ -343,19 +343,19 @@
     ],
     "current_head_run_status": "success_on_pre_manifest_evidence_commit",
     "last_unit_suite_run": {
-      "head_sha": "7db1ded743f173a489331124c0b36140ab8cd382",
-      "run_id": 45053544748,
-      "run_number": 1154,
+      "head_sha": "4ff75b6941bba5732fae47aa88b116bbb5142a62",
+      "run_id": 45054494838,
+      "run_number": 1158,
       "conclusion": "success",
-      "tests_passed": 33
+      "tests_passed": 35
     },
     "workflow_git_blob_sha1": "38605cfeaec4133ce5b096a57b6ebd1ca2295e73",
     "workflow_size_bytes": 7820
   },
   "latest_deterministic_ci_evidence": {
-    "run_id": 45053544748,
-    "run_number": 1154,
-    "head_sha": "7db1ded743f173a489331124c0b36140ab8cd382",
+    "run_id": 45054494838,
+    "run_number": 1158,
+    "head_sha": "4ff75b6941bba5732fae47aa88b116bbb5142a62",
     "conclusion": "success",
     "environment": {
       "python": "3.12.16",
@@ -391,24 +391,48 @@
       "submitted_model_outputs_evaluated": false
     },
     "evaluator_tests": {
-      "passed": 33,
+      "passed": 35,
       "failed": 0
     },
     "UV_EFT_provenance_bundle": {
       "status": "PASS",
-      "artifact_id": 14765599427,
-      "size_bytes": 152758,
-      "sha256": "1fbda930ad9279d7b32f6713ccfbe7be93b3686eda7758dbc9027b610a37e3c8"
+      "artifact_id": 14766622805,
+      "size_bytes": 152776,
+      "sha256": "3cc4b35ca37a7b23e3754b412f6cec82ec95f5d1fcf900ef34137a137977f63f"
     },
     "evaluator_artifacts": {
-      "artifact_id": 14766491479,
+      "artifact_id": 14766822136,
       "size_bytes": 9541,
-      "sha256": "2759e358e72e58dfe20a7e25dbb40e8a0154eca4220a70f83da04d66a47fdaaa"
+      "sha256": "2ad1e20f49602a19c1bf7001bd92e4b3e0b93ec0d21ff5a9a826bc6d2baef999"
     },
     "candidate_schema_validation_report": {
-      "artifact_id": 14766666125,
+      "artifact_id": 14766856975,
       "size_bytes": 3808,
-      "sha256": "1b991a6de29ec08bf83a32cd39d7d57c67a842d21551cf433275763881b75182"
+      "sha256": "ea796656de2248d20fafc694cd40edd90205c4664e380299072f3bb7ded5e456"
+    }
+  },
+  "required_evaluator_enforcement": {
+    "status": "implemented_and_ci_passed",
+    "task_manifest_field": "required_evaluators",
+    "comparison_requirements": [
+      "Every task must explicitly declare required_evaluators, including an empty list for tasks relying only on blinded human review.",
+      "Each A and B run must contain every required evaluator ID exactly once with status pass.",
+      "Each evaluator input_sha256 must equal the run's task_input.input_manifest_sha256.",
+      "Each evaluator output_sha256 must equal the SHA-256 recorded for its registered result artifact.",
+      "The result artifact must exist under the evaluator artifact root and pass actual SHA-256 verification.",
+      "Evaluator result JSON must satisfy the evaluator-specific payload contract."
+    ],
+    "T05_submission_gate": "E-T05B-DATA-TO-FIGURE must report evaluation_mode=submission, submission_evaluated=true, and submission_pass=true. A CI baseline-only result cannot satisfy a scored T05 run.",
+    "tests_added": [
+      "compare rejects a missing required evaluator",
+      "T05 baseline-only result cannot satisfy a scored run"
+    ],
+    "ci_run": {
+      "id": 45054494838,
+      "number": 1158,
+      "head_sha": "4ff75b6941bba5732fae47aa88b116bbb5142a62",
+      "conclusion": "success",
+      "benchmark_tests_passed": 35
     }
   }
 }
