@@ -65,3 +65,12 @@ Follow the repository compute and archival policies. Archive extracted native fi
 ## Interpretation
 
 Do not promote a benchmark point to a full parameter-space statement without coverage evidence. Preserve failed points and disconnected allowed regions. Distinguish theoretical realizability, experimental allowance, exclusion, not assessed, and EFT-inapplicable regions. Every reported numerical claim must state its parameter point/region, assumptions, units, precision, and supporting run/claim identifiers.
+
+
+## Normalization and absolute observables
+
+For every change of integration variables, derive the full Jacobian and compare the transformed integrand against the original integral, including all constant factors. Do not silently drop a factor because it appears numerically harmless.
+
+If an overall constant cancels only after unit-area or shape normalization, record the cancellation explicitly and label the result as a normalized shape/distribution. Such an implementation must not be reused as an absolute phase-space factor, cross section, rate, or luminosity until the omitted normalization is restored and independently checked.
+
+When reproducing an archived calculation, verify that the manifest command is accepted by the pinned source code and that regenerated output schemas and hashes match the claimed artifacts. A stale command, mismatched output schema, or nonmatching artifact hash is an open provenance issue even when the numerical routine itself converges.
