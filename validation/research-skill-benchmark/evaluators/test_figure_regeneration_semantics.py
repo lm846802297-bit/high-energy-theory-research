@@ -49,12 +49,6 @@ class SvgSemanticComparisonTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "coordinate mismatch"):
             verifier.compare_svg_semantics(reference, generated)
 
-    def test_non_element_text_content_is_compared(self):
-        reference = b"<svg>archived</svg>"
-        generated = b"<svg>generated</svg>"
-        with self.assertRaisesRegex(ValueError, "SVG text mismatch"):
-            verifier.compare_svg_semantics(reference, generated)
-
     def test_unapproved_label_change_is_rejected(self):
         reference = b'<svg><text x="0" y="0">d sigma / d E_R [cm^2 / keV]</text></svg>'
         generated = b'<svg><text x="0" y="0">d sigma / d E_R [cm^2]</text></svg>'

@@ -48,8 +48,8 @@
     {
       "path": "evaluators/test_evaluate.py",
       "role": "unit_and_semantic_regression_tests",
-      "git_blob_sha1": "ce9d3e706ed2bb39976733523159c132ff44f567",
-      "size_bytes": 35683
+      "git_blob_sha1": "f04434352899242d36553c738921ee9a2983b62a",
+      "size_bytes": 35901
     },
     {
       "path": "evaluators/verify_dirac_trace.py",
@@ -383,7 +383,8 @@
           "status",
           "evaluation_mode",
           "submission_evaluated",
-          "submission_pass"
+          "submission_pass",
+          "submitted_outputs"
         ],
         "properties": {
           "status": {
@@ -397,6 +398,27 @@
           },
           "submission_pass": {
             "const": true
+          },
+          "submitted_outputs": {
+            "type": "array",
+            "minItems": 2,
+            "maxItems": 2,
+            "items": {
+              "type": "object",
+              "required": [
+                "status",
+                "matches_trusted_generator"
+              ],
+              "properties": {
+                "status": {
+                  "const": "PASS"
+                },
+                "matches_trusted_generator": {
+                  "const": true
+                }
+              },
+              "additionalProperties": true
+            }
           }
         },
         "additionalProperties": true
@@ -477,7 +499,7 @@
   "test_suite": {
     "command": "python -m unittest discover -s evaluators -v",
     "tests_defined": 38,
-    "development_run": "Run 1162 passed the prior 35-test suite. Three new tests now enforce evaluator registry/task association, private Holdout registry contracts, and exact registry-hash binding; the updated 38-test suite requires CI validation.",
+    "development_run": "Run 1162 passed the prior 35-test suite. Three new tests enforce evaluator registry/task association, private Holdout registry contracts, and exact registry-hash binding; the updated 38-test suite and stricter two-SVG submission payload contract await CI validation.",
     "exact_committed_tree_rerun_required": true,
     "ci_workflow": ".github/workflows/schema-validation.yml",
     "ci_step": "Validate and test Particle Physics Research Skill Benchmark",

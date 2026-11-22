@@ -544,7 +544,7 @@ class EvaluatorTests(unittest.TestCase):
                     "output_sha256": digest,
                     "result_artifact": relative,
                 })
-            with self.assertRaisesRegex(evaluate.EvaluationError, "baseline-only mode"):
+            with self.assertRaisesRegex(evaluate.EvaluationError, "failed its registry contract"):
                 evaluate.validate_required_evaluators(record, task, root)
 
             svg_path = root / "results/t05-svg.json"
@@ -552,6 +552,10 @@ class EvaluatorTests(unittest.TestCase):
                 "evaluation_mode": "submission",
                 "submission_evaluated": True,
                 "submission_pass": True,
+                "submitted_outputs": [
+                    {"status": "PASS", "matches_trusted_generator": True},
+                    {"status": "PASS", "matches_trusted_generator": True},
+                ],
             })
             svg_path.write_text(json.dumps(svg_result), encoding="utf-8")
             svg_digest = hashlib.sha256(svg_path.read_bytes()).hexdigest()
