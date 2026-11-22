@@ -38,9 +38,7 @@ function Test-ResearchSkillManifestIntegrity {
     }
     $invalidRecords = @($recordedFiles | Where-Object {
         [string]::IsNullOrWhiteSpace([string]$_.path) -or
-        [string]$_.sha256 -cnotmatch '^[0-9a-f]{64}
-}
-
+        [string]$_.sha256 -cnotmatch '^[0-9a-f]{64}$'
     })
     if ($invalidRecords.Count -gt 0) {
         return $false
