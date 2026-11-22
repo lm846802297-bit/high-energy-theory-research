@@ -40,6 +40,14 @@ class SkillContractTests(unittest.TestCase):
         self.assertIn("~/.agents/skills/", tooling)
         self.assertTrue(diagnostic.is_file())
 
+    def test_codex_diagnostic_is_read_only_and_host_aware(self):
+        diagnostic = (SKILL.parent / "scripts" / "check_codex_skill_discovery.ps1").read_text(encoding="utf-8")
+        self.assertIn("runtime_discovery_confirmed = $false", diagnostic)
+        self.assertIn("known_windows_desktop_issue", diagnostic)
+        for command in ("Copy-Item", "Move-Item", "Remove-Item", "Set-Content", "New-Item"):
+            with self.subTest(command=command):
+                self.assertNotIn(command, diagnostic)
+
     def test_project_record_validator_is_referenced_and_present(self):
         script = SKILL.parent / "scripts" / "validate_project_records.py"
         self.assertTrue(script.is_file())
