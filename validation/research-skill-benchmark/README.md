@@ -32,9 +32,12 @@ T01 and T02 share the threshold_kinematics family and count as one independent t
 
 ## Evaluator commands
 
-From the benchmark root, install the pinned evaluator dependencies and run:
+From the benchmark root, install the lightweight pinned test dependencies and run:
 
+    python -m pip install -r evaluators/requirements-test.txt
     python -m unittest discover -s evaluators -v
+
+The CI workflow also validates both JSON Schemas with Draft 2020-12, parses the JSON manifests and scoring YAML, and runs the same evaluator unit suite.
     python evaluators/evaluate.py validate-run path/to/run-record.json --artifact-root path/to/run-artifacts
     python evaluators/evaluate.py validate-pair path/to/A.json path/to/B.json --artifact-root path/to/run-artifacts
     python evaluators/evaluate.py verify-sources --input-root path/to/staged-inputs
