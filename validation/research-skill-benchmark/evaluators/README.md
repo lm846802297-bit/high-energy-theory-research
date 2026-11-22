@@ -4,7 +4,7 @@ The evaluator workspace is separate from model-visible task inputs. The pinned r
 
 ## Deterministic evaluator package
 
-Dependencies are pinned in evaluators/requirements.txt. The package uses Python 3.12+ and JSON Schema Draft 2020-12.
+Runtime dependencies are pinned in evaluators/requirements.txt. The lightweight CI/unit-test dependencies are pinned separately in evaluators/requirements-test.txt. The package uses Python 3.12+ and JSON Schema Draft 2020-12. The central schema-validation workflow runs both JSON Schema meta-validation and the 25-test evaluator suite.
 
 - evaluate.py validate-run: validates a run record, verifies A/B-specific Skill fields, checks budget limits and reviewer consensus/adjudication, verifies every artifact's actual SHA-256 under a required artifact root, and recomputes Q from the five dimension scores.
 - evaluate.py validate-pair: verifies exactly one A and one B record, identical common controls, distinct transcript and artifact paths, the locked Skill commit, and the task-specific Skill reference.
