@@ -28,14 +28,14 @@
     {
       "path": "evaluators/evaluate.py",
       "role": "run_schema_validation_pair_integrity_source_hashing_score_recomputation_and_comparison",
-      "git_blob_sha1": "a629a926d11155dea75c14b4cce33e357e935ab7",
-      "size_bytes": 34703
+      "git_blob_sha1": "d3dc80dd42660b71159ee9caf9c1604e48b5afb6",
+      "size_bytes": 37114
     },
     {
       "path": "evaluators/test_evaluate.py",
       "role": "unit_and_semantic_regression_tests",
-      "git_blob_sha1": "918181396850ceca021c3494470dd2bee0e9ea84",
-      "size_bytes": 22627
+      "git_blob_sha1": "fc0015309437f78bff1ee2d6998ba499a8503b9c",
+      "size_bytes": 24111
     },
     {
       "path": "evaluators/verify_dirac_trace.py",
@@ -78,8 +78,8 @@
     {
       "path": "protocol/experimental-design.md",
       "role": "preregistered_experimental_design_and_pair_integrity_rules",
-      "git_blob_sha1": "c510fee0ed165404b120b3f931b0a61ff5e857cb",
-      "size_bytes": 13804
+      "git_blob_sha1": "59bbdb48e7da21e4ec9e009eb679992157a7ddf4",
+      "size_bytes": 13988
     },
     {
       "path": "protocol/scoring-rubric.yaml",
@@ -90,8 +90,8 @@
     {
       "path": "tasks/development/manifest.json",
       "role": "development_task_family_and_input_manifest",
-      "git_blob_sha1": "142c15d11afd8991f502b3a89ba8e5361bc4b63c",
-      "size_bytes": 4676
+      "git_blob_sha1": "9a9d43eb65b8fbfa8030db15f37c4a9cfc4ca00d",
+      "size_bytes": 5710
     },
     {
       "path": "tasks/development/T06-reproducibility-audit.md",
@@ -237,6 +237,22 @@
       "path": "evaluators/verify_repro_package.py",
       "git_blob_sha1": "ecbf5c416f24ded27cdd09c8025df0fa8b00fa98",
       "scope": "Verifies exact T06 CSV bytes, source/input/output SHA-256 values, manifest bindings, environment fields, and weighted mean. Does not execute model-generated code."
+    },
+    {
+      "id": "E-RUN-SOURCE-BUNDLE",
+      "task_ids": [
+        "T01",
+        "T02",
+        "T03",
+        "T04",
+        "T05",
+        "T06"
+      ],
+      "role": "run_record_source_bundle_matches_task_manifest_and_staged_bytes",
+      "path": "evaluators/evaluate.py",
+      "git_blob_sha1": "d3dc80dd42660b71159ee9caf9c1604e48b5afb6",
+      "size_bytes": 37114,
+      "scope": "Compare every run's repository, source commit, path, Git blob SHA-1 and byte size with the pinned task manifest; verify staged bytes and SHA-256 under the required input root. T05 includes the PDF, plotting script and both CSV inputs; T03 includes the PDF and companion TeX."
     }
   ],
   "blinded_review": {
@@ -255,8 +271,8 @@
   },
   "test_suite": {
     "command": "python -m unittest discover -s evaluators -v",
-    "tests_defined": 24,
-    "development_run": "Not run against the current committed tree. The earlier 17-test draft run predates the two T05 tests and the current artifact/hard-gate checks; final execution is pending.",
+    "tests_defined": 25,
+    "development_run": "Not run against the current committed tree. The earlier 17-test draft run predates the T05 tests, artifact checks, hard-gate reconciliation, and task-source matching; final execution is pending.",
     "exact_committed_tree_rerun_required": true
   },
   "limitations": [
@@ -264,6 +280,6 @@
     "T03 requires human source interpretation and direct PDF-page verification.",
     "T05-A PDF visual inspection remains a human check in addition to the deterministic text screen.",
     "T06 verifies the recorded package and independently recomputes the result; it does not prove submitted source execution unless trusted runner evidence is available.",
-    "The current exact-commit 24-test suite has not been executed; do not claim evaluator acceptance until it runs on the committed tree."
+    "The current exact-commit 25-test suite has not been executed; do not claim evaluator acceptance until it runs on the committed tree."
   ]
 }
