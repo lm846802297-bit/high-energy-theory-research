@@ -26,8 +26,8 @@
 11. 提交数值结果、运行清单和验证证据时，必须遵守[计算结果归档规范](docs/CALCULATION_RESULT_ARCHIVAL_POLICY.zh-CN.md)。
 12. 必须遵守[科研计算执行规范](RESEARCH_COMPUTE_POLICY.md)：普通 GPT 聊天模式使用 ChatGPT Linux；Codex/Work 可使用 Windows 本地环境或 GPT 管理的云端计算机；GitHub 负责长期归档，Actions 只负责独立验证。
 13. 实质性科研 PR 默认使用 [Merge Commit 合并策略](docs/governance/GIT_MERGE_POLICY.md)，保留有科研追溯价值的独立提交。
-13. 已完成且验收通过的科研成果必须及时合并到 `main`，并在专题 README、项目注册表或研究索引中建立稳定入口；PR 负责审查与集成，不作为长期归档位置。未完成工作保留在专题分支或 Draft PR。详见 [科研成果归档与 PR 生命周期规范](docs/governance/GIT_MERGE_POLICY.md#6-main-is-the-canonical-research-archive)。
-14. 本仓库也是相关科研项目的中央规范来源。开展跨项目规范建设时，先阅读[中央科研规范架构设计书](docs/superpowers/specs/2026-11-23-central-research-standards-design.md)和[第一阶段规范审计矩阵](docs/governance/CENTRAL_STANDARDS_AUDIT_MATRIX.md)。
+14. 已完成且验收通过的科研成果必须及时合并到 `main`，并在专题 README、项目注册表或研究索引中建立稳定入口；PR 负责审查与集成，不作为长期归档位置。未完成工作保留在专题分支或 Draft PR。详见 [科研成果归档与 PR 生命周期规范](docs/governance/GIT_MERGE_POLICY.md#6-main-is-the-canonical-research-archive)。
+15. 本仓库也是相关科研项目的中央规范来源。开展跨项目规范建设时，先阅读[中央科研规范架构设计书](docs/superpowers/specs/2026-11-23-central-research-standards-design.md)和[第一阶段规范审计矩阵](docs/governance/CENTRAL_STANDARDS_AUDIT_MATRIX.md)。
 
 ### 核心链条
 
