@@ -399,5 +399,38 @@ class EvaluatorTests(unittest.TestCase):
             with self.assertRaisesRegex(evaluate.EvaluationError, "escapes artifact root"):
                 evaluate.verify_run_artifacts(record, Path(tmp))
 
+    def test_task_source_bundle_must_match_manifest_and_staged_bytes(self):
+        record = make_record("no-skill", "run-a")
+        data = b"pinned source bytes\n"
+        source = {
+            "repository": "owner/repo",
+            "commit": "f" * 40,
+            "path": "data/input.csv",
+            "git_blob_sha1": evaluate.git_blob_sha1(data),
+            "size_bytes": len(data),
+            "sha256": hashlib.sha256(data).hexdigest(),
+        }
+        record["task_input"]["source_commit"] = "f" * 40
+        record["task_input"]["source_files"] = [source]
+        task = {"id": "T-test", "input_sources": [{
+            "repository": "owner/repo",
+            "commit": "f" * 40,
+            "path": "data/input.csv",
+            "staged_path": "repo/data/input.csv",
+            "git_blob_sha1": source["git_blob_sha1"],
+            "size_bytes": len(data),
+        }]}
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            path = root / "repo" / "data" / "input.csv"
+            path.parent.mkdir(parents=True)
+            path.write_bytes(data)
+            verified = evaluate.validate_task_source_bundle(record, task, root)
+            self.assertEqual(verified[0]["sha256"], source["sha256"])
+            task["input_sources"][0]["git_blob_sha1"] = "0" * 40
+            with self.assertRaisesRegex(evaluate.EvaluationError, "source identity differs"):
+                evaluate.validate_task_source_bundle(record, task, root)
+
+
 if __name__ == "__main__":
     unittest.main()
