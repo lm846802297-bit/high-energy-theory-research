@@ -44,6 +44,35 @@ jobs:
       - name: Test Skill scaffold
         run: python -m unittest discover -s tests/unit -v
 
+      - name: Validate and test Particle Physics Research Skill Benchmark
+        run: |
+          python -m pip install -r validation/research-skill-benchmark/evaluators/requirements-test.txt
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          import yaml
+          from jsonschema import Draft202012Validator
+
+          root = Path("validation/research-skill-benchmark")
+          for relative in (
+              "protocol/run-record.schema.json",
+              "protocol/comparison-report.schema.json",
+          ):
+              schema = json.loads((root / relative).read_text(encoding="utf-8"))
+              Draft202012Validator.check_schema(schema)
+
+          for relative in (
+              "protocol/environment-lock.json",
+              "tasks/development/manifest.json",
+              "evaluators/manifest.json",
+          ):
+              json.loads((root / relative).read_text(encoding="utf-8"))
+
+          yaml.safe_load((root / "protocol/scoring-rubric.yaml").read_text(encoding="utf-8"))
+          print("Benchmark JSON Schemas, JSON manifests, and scoring YAML: PASS")
+          PY
+          python -m unittest discover -s validation/research-skill-benchmark/evaluators -v
+
       - name: Compile candidate Python tools and physics pilot
         run: python -m compileall -q schema/v1.4.3.7/tools skills/high-energy-theory-research/scripts tests/eval-cases/uv-eFT-hard-derivative-pilot
 
