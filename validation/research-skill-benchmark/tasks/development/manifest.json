@@ -9,7 +9,10 @@
       "dimension": "theoretical_derivation",
       "task_family": "threshold_kinematics",
       "skill_reference": "references/symbolic-calculation.md",
-      "input_sources": []
+      "input_sources": [],
+      "required_evaluators": [
+        "E-T01-T02-KALLEN-JACOBIAN"
+      ]
     },
     {
       "id": "T02",
@@ -17,7 +20,10 @@
       "dimension": "numerical_integration",
       "task_family": "threshold_kinematics",
       "skill_reference": "references/numerical-scans-and-uncertainty.md",
-      "input_sources": []
+      "input_sources": [],
+      "required_evaluators": [
+        "E-T01-T02-KALLEN-JACOBIAN"
+      ]
     },
     {
       "id": "T03",
@@ -46,7 +52,8 @@
           "role": "companion_tex_source",
           "visibility": "model_input"
         }
-      ]
+      ],
+      "required_evaluators": []
     },
     {
       "id": "T04",
@@ -54,7 +61,10 @@
       "dimension": "symbolic_calculation",
       "task_family": "symbolic_trace",
       "skill_reference": "references/symbolic-calculation.md",
-      "input_sources": []
+      "input_sources": [],
+      "required_evaluators": [
+        "E-T04-DIRAC-TRACE"
+      ]
     },
     {
       "id": "T05",
@@ -104,6 +114,10 @@
           "role": "figure_input_data",
           "visibility": "model_input"
         }
+      ],
+      "required_evaluators": [
+        "E-T05A-PDF-TEXT-SCREEN",
+        "E-T05B-DATA-TO-FIGURE"
       ]
     },
     {
@@ -112,7 +126,10 @@
       "dimension": "reproducibility",
       "task_family": "reproducibility",
       "skill_reference": "references/source-and-version-audit.md",
-      "input_sources": []
+      "input_sources": [],
+      "required_evaluators": [
+        "E-T06-REPRO-PACKAGE"
+      ]
     }
   ],
   "pilot_round_1": [
@@ -133,6 +150,11 @@
     "T03 PDF and companion TeX are model-visible immutable inputs; calculate SHA-256 for both at staging and verify Git blob SHA-1 plus byte size.",
     "T05 PDF audit and CSV-to-SVG reproduction are distinct pipelines. Golden SVG references are evaluator-only.",
     "T01 and T02 share threshold_kinematics and count as one independent task-family cluster.",
-    "Do not expose evaluators/manifest.json, evaluators/development-key.md, or golden outputs to model workspaces."
+    "Do not expose evaluators/manifest.json, evaluators/development-key.md, or golden outputs to model workspaces.",
+    "Every task declares required_evaluators. evaluate.py compare rejects missing or failed required checks and verifies evaluator-result artifact hashes and payloads.",
+    "For T05, E-T05B-DATA-TO-FIGURE must run in submission mode; the CI baseline-only check is not valid evidence for a scored model run.",
+    "The sealed Holdout task manifest must declare required_evaluators for every task before unsealing.",
+    "The pinned evaluator registry associates every deterministic evaluator ID with its permitted task IDs and a result_payload_schema. compare requires an exact registry SHA-256 match to the run protocol.",
+    "Holdout evaluation uses a separate private evaluator registry passed with --evaluator-manifest; its bytes are hashed and must match the frozen protocol evaluator_manifest_sha256."
   ]
 }

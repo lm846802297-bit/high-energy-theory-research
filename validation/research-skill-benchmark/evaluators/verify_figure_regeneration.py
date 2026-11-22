@@ -110,12 +110,14 @@ def _compare_svg_nodes(reference: ET.Element, actual: ET.Element, state: dict[st
                 f"SVG attribute mismatch at {location}/@{name}: {ref_value!r} != {actual_value!r}"
             )
 
-    if reference.tag.endswith("text"):
+    reference_text = _canonical_text(reference.text)
+    actual_text = _canonical_text(actual.text)
+    if reference_text or actual_text:
         state["text_count"] += 1
-        if _canonical_text(reference.text) != _canonical_text(actual.text):
+        if reference_text != actual_text:
             raise ValueError(
                 f"SVG text mismatch at {location}: "
-                f"{_canonical_text(reference.text)!r} != {_canonical_text(actual.text)!r}"
+                f"{reference_text!r} != {actual_text!r}"
             )
 
     ref_children = list(reference)
@@ -217,7 +219,16 @@ def verify_figure_regeneration(
             generated = output_dir / name
             data = generated.read_bytes()
             expected = golden.read_bytes()
-            semantic = compare_svg_semantics(expected, data)
+            try:
+                semantic = compare_svg_semantics(expected, data)
+            except ValueError as exc:
+                semantic = {
+                    "semantic_match": False,
+                    "byte_identity_match": expected == data,
+                    "path_data_exact": False,
+                    "error": str(exc),
+                    "coordinate_tolerance_px": COORDINATE_TOLERANCE_PX,
+                }
             if generated_output_root is not None:
                 (generated_output_root / name).write_bytes(data)
             generated_outputs.append({
