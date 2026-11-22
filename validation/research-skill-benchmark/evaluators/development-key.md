@@ -32,13 +32,6 @@ Evaluator-only reference. Do not mount this file into A/B model workspaces. Thes
 - Require at least three refinement levels, a numerical error/tolerance statement, and a dimensional check.
 - The integral has dimension GeV². It is not by itself a cross section or rate.
 
-## T03 — source-grounded figure reading
-
-- Verify the exact PDF SHA-256 before reading.
-- The input is a one-page figure PDF, not a full paper. A response that invents manuscript sections, equation numbers, or paper-level conclusions fails the source-boundary check.
-- The answer must cite PDF page 1 (human page numbering) and distinguish visible labels/legend/curves from interpretation.
-- If a label or legend item cannot be read from the source, report it as unreadable rather than guessing.
-
 ## T03 — axial-vector manuscript reading
 
 Pinned source:
