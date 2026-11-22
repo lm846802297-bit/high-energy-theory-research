@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Research Skill Benchmark Comparison Report",
+  "type": "object",
+  "required": ["protocol_version", "environment_lock_sha256", "task_pairs", "summary", "decision"],
+  "properties": {
+    "protocol_version": {"const": "1.0"},
+    "environment_lock_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "task_pairs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["task_id", "repeat", "no_skill_run_id", "with_skill_run_id", "scores"],
+        "properties": {
+          "task_id": {"type": "string"},
+          "repeat": {"type": "integer", "minimum": 1},
+          "no_skill_run_id": {"type": "string"},
+          "with_skill_run_id": {"type": "string"},
+          "scores": {"type": "object"},
+          "hard_gate_failures": {"type": "array", "items": {"type": "string"}},
+          "deviations": {"type": "array", "items": {"type": "string"}}
+        }
+      }
+    },
+    "summary": {"type": "object"},
+    "decision": {"enum": ["positive", "negative", "mixed", "inconclusive", "not_run"]}
+  }
+}
