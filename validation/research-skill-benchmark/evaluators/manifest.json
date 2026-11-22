@@ -499,14 +499,14 @@
   "test_suite": {
     "command": "python -m unittest discover -s evaluators -v",
     "tests_defined": 38,
-    "development_run": "All 38 Benchmark evaluator tests passed in GitHub Actions Run 1165 on PR head 146925fdb85c443b46a82a0232001be1d5db5b93. The full workflow passed schema validation, project integration tests, Skill scaffold tests, T01/T02 symbolic and numerical checks, T05 PDF and SVG semantic baseline checks, Python compilation, and the UV-EFT provenance bundle.",
+    "development_run": "All 38 Benchmark evaluator tests passed in GitHub Actions Run 1166 on PR head 00d61983b5e9690eaf54e79b5d1c159559f92d26. The full workflow passed schema validation, project integration tests, Skill scaffold tests, T01/T02 symbolic and numerical checks, T05 PDF and SVG semantic baseline checks, Python compilation, and the UV-EFT provenance bundle.",
     "exact_committed_tree_rerun_required": true,
     "ci_workflow": ".github/workflows/schema-validation.yml",
     "ci_step": "Validate and test Particle Physics Research Skill Benchmark",
-    "last_verified_head_sha": "146925fdb85c443b46a82a0232001be1d5db5b93",
-    "last_verified_run_id": 45056948562,
-    "last_verified_run_number": 1165,
-    "last_verified_run_url": "https://github.com/lm846802297-bit/high-energy-theory-research/actions/runs/45056948562",
+    "last_verified_head_sha": "00d61983b5e9690eaf54e79b5d1c159559f92d26",
+    "last_verified_run_id": 45057173861,
+    "last_verified_run_number": 1166,
+    "last_verified_run_url": "https://github.com/lm846802297-bit/high-energy-theory-research/actions/runs/45057173861",
     "last_verified_conclusion": "success",
     "ci_python_version": "3.12.16",
     "schema_validation_status": "PASS",
@@ -527,7 +527,8 @@
     "Run 1158 passed the 35-test suite and the full CI workflow with required-evaluator enforcement enabled. The next commit updates only this manifest evidence; evaluator source, tests, task requirements, schemas, rubric, and workflow are unchanged.",
     "Run 1159 passed the full 35-test suite and complete CI workflow with required_evaluator enforcement. The next commit updates only this evaluator-manifest evidence; evaluator source, tests, task requirements, schemas, rubric, and workflow are unchanged.",
     "The evaluator registry is now the authoritative source for required evaluator IDs, task associations, and result-payload JSON Schemas. The scoring CLI accepts a separate evaluator manifest for the private Holdout package and verifies its exact bytes against protocol.evaluator_manifest_sha256.",
-    "Run 1165 passed all 38 Benchmark evaluator tests and the full central CI workflow. The same HEAD passed Windows PowerShell 5.1 installer regression Run 4; the next commit updates only this CI evidence record and must be revalidated."
+    "Run 1165 passed all 38 Benchmark evaluator tests and the full central CI workflow. The same HEAD passed Windows PowerShell 5.1 installer regression Run 4; the next commit updates only this CI evidence record and must be revalidated.",
+    "Run 1166 passed the complete 38-test suite and all central CI stages on exact HEAD 00d61983b5e9690eaf54e79b5d1c159559f92d26. The next commit updates only this evaluator-manifest evidence and requires a final evidence-only rerun."
   ],
   "ci_integration": {
     "workflow": ".github/workflows/schema-validation.yml",
@@ -539,11 +540,11 @@
       "Run pinned T05 PDF and data-to-figure evaluators",
       "Upload deterministic Benchmark evaluator outputs"
     ],
-    "current_head_run_status": "success_on_pre_manifest_evidence_commit",
+    "current_head_run_status": "success_on_exact_pre_manifest_evidence_head",
     "last_unit_suite_run": {
-      "head_sha": "146925fdb85c443b46a82a0232001be1d5db5b93",
-      "run_id": 45056948562,
-      "run_number": 1165,
+      "head_sha": "00d61983b5e9690eaf54e79b5d1c159559f92d26",
+      "run_id": 45057173861,
+      "run_number": 1166,
       "conclusion": "success",
       "tests_passed": 38
     },
@@ -551,9 +552,9 @@
     "workflow_size_bytes": 7820
   },
   "latest_deterministic_ci_evidence": {
-    "run_id": 45056948562,
-    "run_number": 1165,
-    "head_sha": "146925fdb85c443b46a82a0232001be1d5db5b93",
+    "run_id": 45057173861,
+    "run_number": 1166,
+    "head_sha": "00d61983b5e9690eaf54e79b5d1c159559f92d26",
     "conclusion": "success",
     "environment": {
       "python": "3.12.16",
@@ -603,19 +604,19 @@
     },
     "UV_EFT_provenance_bundle": {
       "status": "PASS",
-      "artifact_id": 14767188771,
+      "artifact_id": 14768121278,
       "size_bytes": 152776,
-      "sha256": "67df7c0263b34b70855bd9f28a792b92e1c7dad95c94fc9610d35a22c1c8098f"
+      "sha256": "731bf46b7f2dd208dd491979046fbeabc6e1cb917e9a03f427b4b9ab3f2688b3"
     },
     "evaluator_artifacts": {
-      "artifact_id": 14766789536,
-      "size_bytes": 9541,
-      "sha256": "a6700a05aac9953952b314926245588655d8adb26066b7ac013e608d28372a50"
+      "artifact_id": 14767971887,
+      "size_bytes": 9540,
+      "sha256": "e3986f52ce5c4feaa8d8d7eeae40b4ded0395d0246b47851eabb79f2b6332e60"
     },
     "candidate_schema_validation_report": {
-      "artifact_id": 14768165646,
+      "artifact_id": 14768076355,
       "size_bytes": 3808,
-      "sha256": "c497fef69ab779e44e460efbe710b5a8754c3e0b0fb8f7671485487f4cc7da6c"
+      "sha256": "16c16efdb203cb41466127912d34f322be71c088a20ddede713c20ca86a31a11"
     },
     "T02_LZ_convergence": {
       "status": "PASS",
@@ -658,9 +659,9 @@
       "T05 baseline-only result cannot satisfy a scored run"
     ],
     "ci_run": {
-      "id": 45056948562,
-      "number": 1165,
-      "head_sha": "146925fdb85c443b46a82a0232001be1d5db5b93",
+      "id": 45057173861,
+      "number": 1166,
+      "head_sha": "00d61983b5e9690eaf54e79b5d1c159559f92d26",
       "conclusion": "success",
       "benchmark_tests_passed": 38
     },
