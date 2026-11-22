@@ -85,3 +85,23 @@ This repository documents optional capabilities; it does not install them. Befor
 4. Keep Python dependencies in the relevant project environment; do not install them globally.
 5. Do not add automatic update hooks. Review a new upstream commit before updating the pinned source.
 6. Verify Skill discovery, script help, dependency versions, and a small local smoke test before using it on research data.
+
+
+## Codex discovery paths
+
+Current OpenAI CLI installation documentation lists these Skill discovery locations:
+
+- **Project scope:** `.agents/skills/<skill-name>/` inside the repository.
+- **User scope:** `~/.agents/skills/<skill-name>/` shared across projects.
+
+The repository source for this Skill is `skills/high-energy-theory-research/`; that source directory is not itself one of the documented Codex discovery locations. Install or copy the complete Skill directory into one of the two locations before testing discovery. Preserve the complete `references/` directory and scripts.
+
+Older Codex examples and the current design document may refer to `~/.codex/skills/`. Treat that as a legacy path example, not the sole current discovery target. See the [current OpenAI CLI installation reference](https://developers.openai.com/api/reference/cli).
+
+A read-only Windows diagnostic is available at `skills/high-energy-theory-research/scripts/check_codex_skill_discovery.ps1`. Run it from the repository root:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\skills\high-energy-theory-research\scripts\check_codex_skill_discovery.ps1
+```
+
+The script checks the repository source, project-scoped and user-scoped discovery paths, required reference files, and whether the Codex CLI is on PATH. It does not install or copy files and cannot prove that an already-running Codex session has indexed the Skill. After the filesystem check, start a fresh Codex session, inspect `/skills`, and explicitly invoke `high-energy-theory-research` once to confirm runtime discovery. See the [OpenAI Skill evaluation guidance](https://developers.openai.com/blog/eval-skills) for explicit invocation and forward-testing practices.
