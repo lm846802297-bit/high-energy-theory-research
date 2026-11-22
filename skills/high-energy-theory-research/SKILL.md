@@ -70,9 +70,18 @@ For legacy `validation_ids`, resolve references only from the read-only source s
 
 The migration resolver does not implement transactional commit or rollback and does not recover a missing source-schema archive. Keep unresolved items visible, preserve source hashes, and do not treat a successful dry run as migration approval. Candidate Artifact decisions DD-ART-007 through DD-ART-010 remain pending until explicitly approved.
 
-## References
+## Task-specific references
 
-- Task selection: references/task-router.md
-- Claim and evidence gates: references/evidence-and-claim-gates.md
-- Source/version audit: references/source-and-version-audit.md
-- Full design and schema governance: docs/design/README.md and docs/governance/DECISION_REGISTER.md
+Load only the module required by the current task:
+
+- Task selection: [references/task-router.md](references/task-router.md)
+- Claim and evidence gates: [references/evidence-and-claim-gates.md](references/evidence-and-claim-gates.md)
+- Source/version audit: [references/source-and-version-audit.md](references/source-and-version-audit.md)
+- Symbolic algebra and loop calculations: [references/symbolic-calculation.md](references/symbolic-calculation.md)
+- Numerical integration, scans, convergence, and error analysis: [references/numerical-scans-and-uncertainty.md](references/numerical-scans-and-uncertainty.md)
+- Scientific figure design and QA: [references/scientific-figure-audit.md](references/scientific-figure-audit.md)
+- Source-grounded paper reading: [references/paper-reading.md](references/paper-reading.md)
+- Optional third-party tools, reviewed commit pins, license and dependency notes: [references/optional-tooling.md](references/optional-tooling.md)
+- Full design and schema governance: [docs/design/README.md](../../docs/design/README.md) and [docs/governance/DECISION_REGISTER.md](../../docs/governance/DECISION_REGISTER.md)
+
+The optional-tooling map does not install dependencies or make a tool mandatory. Choose methods from the problem's mathematical and physical structure, then use tools only when they add useful evidence.
