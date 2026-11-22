@@ -44,7 +44,7 @@ def _entry(manifest: dict[str, Any], evaluator_id: str) -> dict[str, Any]:
     raise ValueError(f"Evaluator ID not found in registry: {evaluator_id}")
 
 
-def verify_figure_regeneration(manifest_path: Path, model_input_root: Path, golden_root: Path, timeout_seconds: int = 60) -> dict[str, Any]:
+def verify_figure_regeneration(manifest_path: Path, model_input_root: Path, golden_root: Path, timeout_seconds: int = 60, generated_output_root: Path | None = None) -> dict[str, Any]:
     manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
     evaluator = _entry(manifest, "E-T05B-DATA-TO-FIGURE")
     repository = evaluator["repository"]
@@ -97,20 +97,42 @@ def verify_figure_regeneration(manifest_path: Path, model_input_root: Path, gold
             output_dir / "xe131_gcn_jj55_response_ratio_450kev.svg",
         ]
         generated_identities = []
+        mismatches = []
+        if generated_output_root is not None:
+            generated_output_root.mkdir(parents=True, exist_ok=True)
         for generated, golden in zip(generated_paths, golden_paths, strict=True):
             data = generated.read_bytes()
             expected = golden.read_bytes()
-            if data != expected:
-                raise ValueError(f"Generated SVG differs byte-for-byte from golden reference: {generated.name}")
+            if generated_output_root is not None:
+                (generated_output_root / generated.name).write_bytes(data)
+            matches = data == expected
+            first_difference = None
+            if not matches:
+                first_difference = next(
+                    (index for index, (left, right) in enumerate(zip(data, expected)) if left != right),
+                    min(len(data), len(expected)),
+                )
+                mismatches.append({
+                    "path": generated.name,
+                    "generated_size_bytes": len(data),
+                    "golden_size_bytes": len(expected),
+                    "generated_sha256": sha256(data),
+                    "golden_sha256": sha256(expected),
+                    "first_differing_byte": first_difference,
+                    "generated_byte": data[first_difference] if first_difference < len(data) else None,
+                    "golden_byte": expected[first_difference] if first_difference < len(expected) else None,
+                })
             generated_identities.append({
                 "path": generated.name,
                 "size_bytes": len(data),
                 "git_blob_sha1": git_blob_sha1(data),
                 "sha256": sha256(data),
-                "matches_golden": True,
+                "matches_golden": matches,
             })
         return {
-            "status": "PASS",
+            "status": "PASS" if not mismatches else "FAIL",
+            "byte_identity_matches": not mismatches,
+            "mismatches": mismatches,
             "evaluator_id": evaluator["id"],
             "generator": generator_identity,
             "inputs": input_identities,
@@ -131,15 +153,16 @@ def main() -> int:
     parser.add_argument("--manifest", type=Path, required=True)
     parser.add_argument("--model-input-root", type=Path, required=True)
     parser.add_argument("--golden-root", type=Path, required=True)
+    parser.add_argument("--generated-output-root", type=Path)
     parser.add_argument("--timeout-seconds", type=int, default=60)
     args = parser.parse_args()
     try:
-        result = verify_figure_regeneration(args.manifest, args.model_input_root, args.golden_root, args.timeout_seconds)
+        result = verify_figure_regeneration(args.manifest, args.model_input_root, args.golden_root, args.timeout_seconds, args.generated_output_root)
     except (OSError, ValueError, json.JSONDecodeError, subprocess.TimeoutExpired) as exc:
         print(json.dumps({"status": "FAIL", "error": str(exc)}, indent=2))
         return 1
     print(json.dumps(result, indent=2))
-    return 0
+    return 0 if result.get("status") == "PASS" else 1
 
 
 if __name__ == "__main__":
