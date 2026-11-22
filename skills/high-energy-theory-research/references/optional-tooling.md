@@ -108,7 +108,7 @@ The script checks the repository source, project-scoped and user-scoped discover
 
 ## Windows Codex Desktop caveat
 
-The documented project path is `.agents/skills/<skill-name>/`, but filesystem presence is not proof of Windows Desktop runtime discovery. As of 2026-11-22, [openai/codex issue #40458](https://github.com/openai/codex/issues/40458) remains open and reports that the Windows Codex Desktop App may omit repository-local skills while still loading user, system, and plugin skills.
+The documented project path is `.agents/skills/<skill-name>/`, but filesystem presence is not proof of Windows Desktop runtime discovery. As of 2026-11-22, [openai/codex issue #40458](https://github.com/openai/codex/issues/40458) reports that the Windows Codex Desktop App may omit repository-local skills while still loading user, system, and plugin skills.
 
 Test the exact host being used:
 
