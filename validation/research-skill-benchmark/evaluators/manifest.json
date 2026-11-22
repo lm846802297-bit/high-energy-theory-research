@@ -284,16 +284,23 @@
   "test_suite": {
     "command": "python -m unittest discover -s evaluators -v",
     "tests_defined": 25,
-    "development_run": "Pending CI execution against the current committed tree.",
+    "development_run": "25 passed, 0 failed on PR head ad8cdb968875cd07249aa52558282bc556803e4f in GitHub Actions Run 1137 (45050044303). The run also passed Draft 2020-12 schema meta-validation, JSON manifest parsing, and scoring YAML parsing.",
     "exact_committed_tree_rerun_required": true,
     "ci_workflow": ".github/workflows/schema-validation.yml",
-    "ci_step": "Validate and test Particle Physics Research Skill Benchmark"
+    "ci_step": "Validate and test Particle Physics Research Skill Benchmark",
+    "last_verified_head_sha": "ad8cdb968875cd07249aa52558282bc556803e4f",
+    "last_verified_run_id": 45050044303,
+    "last_verified_run_number": 1137,
+    "last_verified_run_url": "https://github.com/lm846802297-bit/high-energy-theory-research/actions/runs/45050044303",
+    "last_verified_conclusion": "success",
+    "ci_python_version": "3.12.16",
+    "schema_validation_status": "PASS"
   },
   "limitations": [
     "This evaluator registry is a development artifact and not a security boundary; keep it out of model workspaces.",
     "T03 requires human source interpretation and direct PDF-page verification.",
     "T05-A PDF visual inspection remains a human check in addition to the deterministic text screen.",
     "T06 verifies the recorded package and independently recomputes the result; it does not prove submitted source execution unless trusted runner evidence is available.",
-    "The current exact-commit 25-test suite has not been executed; do not claim evaluator acceptance until it runs on the committed tree."
+    "Run 1137 validated the evaluator code, test suite, and protocol artifacts at PR head ad8cdb968875cd07249aa52558282bc556803e4f. The subsequent evaluator-manifest-only status update must be rerun after any evaluator or protocol code change."
   ]
 }
