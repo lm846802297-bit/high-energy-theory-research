@@ -8,13 +8,13 @@ Holdout prompts, input snapshots, task manifest, evaluator mappings, and scoring
 
 The private evaluator package must contain:
 
-- A task manifest with task ID, dimension, independent task-family ID, immutable input sources, and an explicit \`required_evaluators\` list for every task.
+- A task manifest with task ID, dimension, independent task-family ID, immutable input sources, and an explicit `required_evaluators` list for every task.
 - Exact prompt and input snapshots, each with repository/commit/path, Git blob SHA-1, byte size, and SHA-256.
 - Evaluator-only answer keys, golden outputs, and expected numerical results.
 - A frozen scoring plan, sample-size plan, bootstrap seed, and hash of the analysis code.
 - A mapping from every required evaluator ID to its pinned evaluator implementation and expected result-payload contract.
 
-Every task must declare \`required_evaluators\`, even when it relies entirely on blinded human review (use an empty list). All non-empty evaluator IDs must exist in the pinned evaluator registry. The comparison evaluator rejects missing or failed required checks, mismatched input/output hash bindings, missing result artifacts, and invalid evaluator payloads. For T05-like figure tasks, the required data-to-figure check must run in submission mode and validate the model's actual submitted outputs; a CI baseline-only check is not sufficient.
+Every task must declare `required_evaluators`, even when it relies entirely on blinded human review (use an empty list). All non-empty evaluator IDs must exist in the pinned evaluator registry. The comparison evaluator rejects missing or failed required checks, evaluator IDs not registered for the task, mismatched input/output hash bindings, missing result artifacts, and payloads that fail the pinned evaluator registry's JSON Schema. Pass the private registry with `--evaluator-manifest`; its exact SHA-256 must match the protocol lock. For T05-like figure tasks, the required data-to-figure check must run in submission mode and validate the model's actual submitted outputs; a CI baseline-only check is not sufficient.
 
 ## Blinding and handling rules
 

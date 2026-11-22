@@ -150,7 +150,7 @@ Before Round 1:
 
 1. Capture the actual Windows Codex model/runtime and hardware in environment-lock.json.
 2. Pin the final Skill commit and hash all Skill files.
-3. Freeze task prompts, input bytes, task manifest (including every task's `required_evaluators`), rubric, evaluator manifest, evaluator code/dependencies, evaluator-result payload contracts, and analysis plan.
+3. Freeze task prompts, input bytes, task manifest (including every task's `required_evaluators`), rubric, evaluator manifest (including task-to-evaluator associations and payload JSON Schemas), evaluator code/dependencies, evaluator-result payload contracts, and analysis plan.
 4. Run the evaluator unit suite and validate both JSON Schemas with Draft 2020-12; verify that each task's required evaluators are registered and have tested PASS/failure fixtures.
 5. Verify all staged source files by Git blob SHA-1, byte size, and SHA-256.
 6. Create isolated A/B workspaces; prove A cannot access the Skill and B can invoke the exact pinned Skill.

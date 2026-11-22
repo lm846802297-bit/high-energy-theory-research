@@ -565,5 +565,96 @@ class EvaluatorTests(unittest.TestCase):
             self.assertEqual(set(validated), set(task["required_evaluators"]))
 
 
+    def test_task_manifest_cannot_bind_evaluator_registered_for_another_task(self):
+        record = make_record("no-skill", "run-wrong-evaluator")
+        digest = "8" * 64
+        record["artifacts"].append({
+            "path": "results/dirac.json",
+            "sha256": digest,
+            "role": "deterministic_evaluator_result",
+        })
+        record["evaluation"]["deterministic_checks"].append({
+            "id": "E-T04-DIRAC-TRACE",
+            "version": "1.0.0",
+            "status": "pass",
+            "input_sha256": record["task_input"]["input_manifest_sha256"],
+            "output_sha256": digest,
+            "result_artifact": "results/dirac.json",
+        })
+        task = {"id": "T01", "required_evaluators": ["E-T04-DIRAC-TRACE"]}
+        with self.assertRaisesRegex(evaluate.EvaluationError, "not registered for task T01"):
+            evaluate.validate_required_evaluators(record, task)
+
+    def test_private_holdout_registry_can_define_task_specific_payload_contract(self):
+        record = make_record("with-skill", "run-holdout")
+        record["task_id"] = "H01"
+        payload = {"status": "PASS", "independent_residual": 2.0e-14}
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            result_path = root / "results/holdout.json"
+            result_path.parent.mkdir(parents=True)
+            result_path.write_text(json.dumps(payload), encoding="utf-8")
+            digest = hashlib.sha256(result_path.read_bytes()).hexdigest()
+            record["artifacts"].append({
+                "path": "results/holdout.json",
+                "sha256": digest,
+                "role": "deterministic_evaluator_result",
+            })
+            record["evaluation"]["deterministic_checks"].append({
+                "id": "E-H01-INDEPENDENT-RESIDUAL",
+                "version": "1.0.0",
+                "status": "pass",
+                "input_sha256": record["task_input"]["input_manifest_sha256"],
+                "output_sha256": digest,
+                "result_artifact": "results/holdout.json",
+            })
+            registry = {
+                "deterministic_evaluators": [{
+                    "id": "E-H01-INDEPENDENT-RESIDUAL",
+                    "evaluator_type": "deterministic",
+                    "task_ids": ["H01"],
+                    "result_payload_schema": {
+                        "type": "object",
+                        "required": ["status", "independent_residual"],
+                        "properties": {
+                            "status": {"const": "PASS"},
+                            "independent_residual": {"type": "number", "minimum": 0, "maximum": 1e-12},
+                        },
+                        "additionalProperties": True,
+                    },
+                }]
+            }
+            validated = evaluate.validate_required_evaluators(
+                record,
+                {"id": "H01", "required_evaluators": ["E-H01-INDEPENDENT-RESIDUAL"]},
+                root,
+                registry,
+            )
+            self.assertEqual(validated, ["E-H01-INDEPENDENT-RESIDUAL"])
+
+    def test_compare_binds_registry_hash_to_run_protocol(self):
+        a = make_record("no-skill", "run-a")
+        b = make_record("with-skill", "run-b")
+        manifest = {"tasks": [{
+            "id": "T01",
+            "dimension": "theoretical_derivation",
+            "task_family": "threshold_kinematics",
+            "skill_reference": "references/symbolic-calculation.md",
+            "required_evaluators": [],
+        }]}
+        registry = {"deterministic_evaluators": []}
+        with self.assertRaisesRegex(evaluate.EvaluationError, "evaluator_manifest_sha256"):
+            evaluate.compare_records(
+                [a, b],
+                manifest,
+                "round_1_pilot",
+                seed=1,
+                schema_path=SCHEMA,
+                rubric_path=RUBRIC,
+                evaluator_manifest=registry,
+                evaluator_manifest_sha256="1" * 64,
+            )
+
+
 if __name__ == "__main__":
     unittest.main()

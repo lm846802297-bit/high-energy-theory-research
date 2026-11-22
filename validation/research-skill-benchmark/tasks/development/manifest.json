@@ -153,6 +153,8 @@
     "Do not expose evaluators/manifest.json, evaluators/development-key.md, or golden outputs to model workspaces.",
     "Every task declares required_evaluators. evaluate.py compare rejects missing or failed required checks and verifies evaluator-result artifact hashes and payloads.",
     "For T05, E-T05B-DATA-TO-FIGURE must run in submission mode; the CI baseline-only check is not valid evidence for a scored model run.",
-    "The sealed Holdout task manifest must declare required_evaluators for every task before unsealing."
+    "The sealed Holdout task manifest must declare required_evaluators for every task before unsealing.",
+    "The pinned evaluator registry associates every deterministic evaluator ID with its permitted task IDs and a result_payload_schema. compare requires an exact registry SHA-256 match to the run protocol.",
+    "Holdout evaluation uses a separate private evaluator registry passed with --evaluator-manifest; its bytes are hashed and must match the frozen protocol evaluator_manifest_sha256."
   ]
 }

@@ -42,14 +42,14 @@
     {
       "path": "evaluators/evaluate.py",
       "role": "run_schema_validation_pair_integrity_source_hashing_score_recomputation_and_comparison",
-      "git_blob_sha1": "a8e0d7048db9679bea3121889563e0b325649aae",
-      "size_bytes": 42057
+      "git_blob_sha1": "e03201cb0289e374f1402fd0687b17c7fdc0be05",
+      "size_bytes": 44903
     },
     {
       "path": "evaluators/test_evaluate.py",
       "role": "unit_and_semantic_regression_tests",
-      "git_blob_sha1": "444b9014293fbb032a2fe2b1c82beebc77dd1299",
-      "size_bytes": 31660
+      "git_blob_sha1": "ce9d3e706ed2bb39976733523159c132ff44f567",
+      "size_bytes": 35683
     },
     {
       "path": "evaluators/verify_dirac_trace.py",
@@ -122,8 +122,8 @@
     {
       "path": "tasks/development/manifest.json",
       "role": "development_task_family_and_input_manifest",
-      "git_blob_sha1": "7663963632276b137d8d6712edd3a8ab3272b6e5",
-      "size_bytes": 6555
+      "git_blob_sha1": "bee90bb1c75dcf7d9cfeb9e93edaf88e3d22b1d6",
+      "size_bytes": 6949
     },
     {
       "path": "tasks/development/T06-reproducibility-audit.md",
@@ -155,6 +155,20 @@
         "value_GeV2": "0.141975883465984392640489856748572220501161185",
         "visibility": "evaluator_only",
         "acceptance": "Compare the model absolute integral with a preregistered absolute/relative tolerance; normalized-shape agreement alone is insufficient."
+      },
+      "evaluator_type": "deterministic",
+      "result_payload_schema": {
+        "type": "object",
+        "required": [
+          "status"
+        ],
+        "properties": {
+          "status": {
+            "type": "string",
+            "pattern": "^PASS"
+          }
+        },
+        "additionalProperties": true
       }
     },
     {
@@ -167,7 +181,63 @@
       "source_commit": "fb4bb38ded984f760375c93ec79d5c1ea6994530",
       "path": "validation/skill-module-evaluation-2026-11-22/numerical/convergence_phase_space.py",
       "git_blob_sha1": "ca15ea3cecb2ec2d21302a409bc50cef7aa5011f",
-      "scope": "Separate LZ reduced three-body phase-space case with Gauss-Legendre orders 4 through 1024 and independent original-s SciPy quadrature. Not the numerical oracle for the T02 (1.0, 0.2, 0.5) GeV benchmark."
+      "scope": "Separate LZ reduced three-body phase-space case with Gauss-Legendre orders 4 through 1024 and independent original-s SciPy quadrature. Not the numerical oracle for the T02 (1.0, 0.2, 0.5) GeV benchmark.",
+      "evaluator_type": "deterministic",
+      "result_payload_schema": {
+        "type": "object",
+        "required": [
+          "exact_kinematics",
+          "convergence_sequence",
+          "independent_scipy_quad_checks",
+          "normalization",
+          "environment",
+          "output"
+        ],
+        "properties": {
+          "exact_kinematics": {
+            "type": "object",
+            "required": [
+              "recoil_endpoints_keV"
+            ]
+          },
+          "convergence_sequence": {
+            "type": "array",
+            "minItems": 1
+          },
+          "independent_scipy_quad_checks": {
+            "type": "array",
+            "minItems": 1
+          },
+          "normalization": {
+            "type": "object",
+            "required": [
+              "shape_is_normalized"
+            ],
+            "properties": {
+              "shape_is_normalized": {
+                "const": true
+              }
+            }
+          },
+          "environment": {
+            "type": "object",
+            "required": [
+              "python",
+              "platform",
+              "numpy",
+              "scipy"
+            ]
+          },
+          "output": {
+            "type": "object",
+            "required": [
+              "csv",
+              "csv_sha256"
+            ]
+          }
+        },
+        "additionalProperties": true
+      }
     },
     {
       "id": "E-T03-SOURCE-READING",
@@ -191,7 +261,8 @@
           "size_bytes": 71477
         }
       ],
-      "scope": "Verify original equation/Figure numbering, PDF page numbers, panel interpretation, benchmark assumptions, and distinctions between official limits and phenomenological recasts. PDF page numbers must be read from the rendered PDF."
+      "scope": "Verify original equation/Figure numbering, PDF page numbers, panel interpretation, benchmark assumptions, and distinctions between official limits and phenomenological recasts. PDF page numbers must be read from the rendered PDF.",
+      "evaluator_type": "manual"
     },
     {
       "id": "E-T04-DIRAC-TRACE",
@@ -201,7 +272,30 @@
       "role": "independent_explicit_matrix_representation_check",
       "path": "evaluators/verify_dirac_trace.py",
       "git_blob_sha1": "366a669a6e0053abe2bafab62778d766da21ea67",
-      "scope": "Checks Clifford algebra and the stated trace against an explicit 4x4 Dirac representation with metric (+---). Python standard library only."
+      "scope": "Checks Clifford algebra and the stated trace against an explicit 4x4 Dirac representation with metric (+---). Python standard library only.",
+      "evaluator_type": "deterministic",
+      "result_payload_schema": {
+        "type": "object",
+        "required": [
+          "status",
+          "max_clifford_residual",
+          "max_trace_residual"
+        ],
+        "properties": {
+          "status": {
+            "const": "PASS"
+          },
+          "max_clifford_residual": {
+            "type": "number",
+            "maximum": 1e-10
+          },
+          "max_trace_residual": {
+            "type": "number",
+            "maximum": 1e-10
+          }
+        },
+        "additionalProperties": true
+      }
     },
     {
       "id": "E-T05A-PDF-TEXT-SCREEN",
@@ -213,7 +307,30 @@
       "source_commit": "fb4bb38ded984f760375c93ec79d5c1ea6994530",
       "path": "validation/skill-module-evaluation-2026-11-22/pdf/audit_pdf_text_reconstructed.py",
       "git_blob_sha1": "f4315e35e5007a5201f3f7f09a6b5f554cc5306e",
-      "scope": "Effective text size and character/word spacing for supported PDF content streams. Screening only; does not replace visual inspection, cover all transforms, or establish journal compliance."
+      "scope": "Effective text size and character/word spacing for supported PDF content streams. Screening only; does not replace visual inspection, cover all transforms, or establish journal compliance.",
+      "evaluator_type": "deterministic",
+      "result_payload_schema": {
+        "type": "object",
+        "required": [
+          "auditable",
+          "below_minimum_count",
+          "spacing_issue_count"
+        ],
+        "properties": {
+          "auditable": {
+            "const": true
+          },
+          "below_minimum_count": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "spacing_issue_count": {
+            "type": "integer",
+            "minimum": 0
+          }
+        },
+        "additionalProperties": true
+      }
     },
     {
       "id": "E-T05B-DATA-TO-FIGURE",
@@ -258,6 +375,31 @@
         "path": "evaluators/verify_figure_regeneration.py",
         "git_blob_sha1": "6e73572b99610a1b988d34cd8a46f354bd2f9c15",
         "size_bytes": 13846
+      },
+      "evaluator_type": "deterministic",
+      "result_payload_schema": {
+        "type": "object",
+        "required": [
+          "status",
+          "evaluation_mode",
+          "submission_evaluated",
+          "submission_pass"
+        ],
+        "properties": {
+          "status": {
+            "const": "PASS"
+          },
+          "evaluation_mode": {
+            "const": "submission"
+          },
+          "submission_evaluated": {
+            "const": true
+          },
+          "submission_pass": {
+            "const": true
+          }
+        },
+        "additionalProperties": true
       }
     },
     {
@@ -268,7 +410,37 @@
       "role": "hash_manifest_validation_and_independent_result_recalculation",
       "path": "evaluators/verify_repro_package.py",
       "git_blob_sha1": "ecbf5c416f24ded27cdd09c8025df0fa8b00fa98",
-      "scope": "Verifies exact T06 CSV bytes, source/input/output SHA-256 values, manifest bindings, environment fields, and weighted mean. Does not execute model-generated code."
+      "scope": "Verifies exact T06 CSV bytes, source/input/output SHA-256 values, manifest bindings, environment fields, and weighted mean. Does not execute model-generated code.",
+      "evaluator_type": "deterministic",
+      "result_payload_schema": {
+        "type": "object",
+        "required": [
+          "status",
+          "source_executed_by_evaluator",
+          "weighted_mean_reported",
+          "weighted_mean_independent",
+          "absolute_difference"
+        ],
+        "properties": {
+          "status": {
+            "const": "PASS"
+          },
+          "source_executed_by_evaluator": {
+            "const": false
+          },
+          "weighted_mean_reported": {
+            "type": "number"
+          },
+          "weighted_mean_independent": {
+            "type": "number"
+          },
+          "absolute_difference": {
+            "type": "number",
+            "minimum": 0
+          }
+        },
+        "additionalProperties": true
+      }
     },
     {
       "id": "E-RUN-SOURCE-BUNDLE",
@@ -282,9 +454,10 @@
       ],
       "role": "run_record_source_bundle_matches_task_manifest_and_staged_bytes",
       "path": "evaluators/evaluate.py",
-      "git_blob_sha1": "d3dc80dd42660b71159ee9caf9c1604e48b5afb6",
-      "size_bytes": 37114,
-      "scope": "Compare every run's repository, source commit, path, Git blob SHA-1 and byte size with the pinned task manifest; verify staged bytes and SHA-256 under the required input root. T05 includes the PDF, plotting script and both CSV inputs; T03 includes the PDF and companion TeX."
+      "git_blob_sha1": "e03201cb0289e374f1402fd0687b17c7fdc0be05",
+      "size_bytes": 44903,
+      "scope": "Compare every run's repository, source commit, path, Git blob SHA-1 and byte size with the pinned task manifest; verify staged bytes and SHA-256 under the required input root. T05 includes the PDF, plotting script and both CSV inputs; T03 includes the PDF and companion TeX.",
+      "evaluator_type": "internal"
     }
   ],
   "blinded_review": {
@@ -303,20 +476,20 @@
   },
   "test_suite": {
     "command": "python -m unittest discover -s evaluators -v",
-    "tests_defined": 35,
-    "development_run": "All 35 Benchmark evaluator tests passed in GitHub Actions Run 1159 on PR head 7b54c844ad48a2f25c4823bad8cc849c6a1dec00. The full workflow passed schema validation, project integration tests, Skill scaffold tests, T01/T02 symbolic and numerical checks, T05 PDF and SVG baseline checks, Python compilation, and the UV-EFT provenance bundle.",
+    "tests_defined": 38,
+    "development_run": "Run 1162 passed the prior 35-test suite. Three new tests now enforce evaluator registry/task association, private Holdout registry contracts, and exact registry-hash binding; the updated 38-test suite requires CI validation.",
     "exact_committed_tree_rerun_required": true,
     "ci_workflow": ".github/workflows/schema-validation.yml",
     "ci_step": "Validate and test Particle Physics Research Skill Benchmark",
-    "last_verified_head_sha": "7b54c844ad48a2f25c4823bad8cc849c6a1dec00",
-    "last_verified_run_id": 45054635989,
-    "last_verified_run_number": 1159,
-    "last_verified_run_url": "https://github.com/lm846802297-bit/high-energy-theory-research/actions/runs/45054635989",
+    "last_verified_head_sha": "6f5194ff688879466ea0fd995de78a9f089fd708",
+    "last_verified_run_id": 45055223059,
+    "last_verified_run_number": 1162,
+    "last_verified_run_url": "https://github.com/lm846802297-bit/high-energy-theory-research/actions/runs/45055223059",
     "last_verified_conclusion": "success",
     "ci_python_version": "3.12.16",
     "schema_validation_status": "PASS",
     "failure_summary": "Run 1149 passed schema validation, project integration tests, Skill scaffold tests, and 31 of 32 Benchmark tests. The sole failure was an old test that still treated a semantic text difference as a byte-serialization mismatch; the test and evaluator were corrected.",
-    "pending_changes": null
+    "pending_changes": "Registry-driven evaluator contracts and exact registry hash binding added; awaiting new CI run."
   },
   "limitations": [
     "This evaluator registry is a development artifact and not a security boundary; keep it out of model workspaces.",
@@ -330,7 +503,8 @@
     "Run 1152 passed all 33 evaluator tests and the complete CI job. T05 historical Golden SVG byte identity remains false by design; semantic curve/structure checks pass. This run did not evaluate model-submitted A/B SVG outputs, which require the submission-mode evaluator during scored task execution.",
     "Run 1154 passed all 33 evaluator tests and the full CI job on HEAD 7db1ded743f173a489331124c0b36140ab8cd382. The following commit updates only this evaluator-manifest CI evidence; evaluator code, tests, task prompts, schemas, rubric, and workflow are unchanged.",
     "Run 1158 passed the 35-test suite and the full CI workflow with required-evaluator enforcement enabled. The next commit updates only this manifest evidence; evaluator source, tests, task requirements, schemas, rubric, and workflow are unchanged.",
-    "Run 1159 passed the full 35-test suite and complete CI workflow with required_evaluator enforcement. The next commit updates only this evaluator-manifest evidence; evaluator source, tests, task requirements, schemas, rubric, and workflow are unchanged."
+    "Run 1159 passed the full 35-test suite and complete CI workflow with required_evaluator enforcement. The next commit updates only this evaluator-manifest evidence; evaluator source, tests, task requirements, schemas, rubric, and workflow are unchanged.",
+    "The evaluator registry is now the authoritative source for required evaluator IDs, task associations, and result-payload JSON Schemas. The scoring CLI accepts a separate evaluator manifest for the private Holdout package and verifies its exact bytes against protocol.evaluator_manifest_sha256."
   ],
   "ci_integration": {
     "workflow": ".github/workflows/schema-validation.yml",

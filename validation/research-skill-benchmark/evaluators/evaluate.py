@@ -26,6 +26,7 @@ DEFAULT_RUN_SCHEMA = ROOT / "protocol" / "run-record.schema.json"
 DEFAULT_REPORT_SCHEMA = ROOT / "protocol" / "comparison-report.schema.json"
 DEFAULT_RUBRIC = ROOT / "protocol" / "scoring-rubric.yaml"
 DEFAULT_TASK_MANIFEST = ROOT / "tasks" / "development" / "manifest.json"
+DEFAULT_EVALUATOR_MANIFEST = ROOT / "evaluators" / "manifest.json"
 DIMENSIONS = (
     "scientific_correctness",
     "independent_validation",
@@ -358,48 +359,83 @@ def validate_task_source_bundle(
 
 
 
-def _validate_evaluator_payload(evaluator_id: str, payload: dict[str, Any], run_id: str) -> None:
-    if not isinstance(payload, dict):
-        raise EvaluationError(f"Evaluator result for {evaluator_id} in run {run_id} is not a JSON object")
+def _index_evaluator_registry(manifest: dict[str, Any]) -> dict[str, dict[str, Any]]:
+    entries = manifest.get("deterministic_evaluators")
+    if not isinstance(entries, list):
+        raise EvaluationError("Evaluator registry must contain a deterministic_evaluators list")
+    indexed: dict[str, dict[str, Any]] = {}
+    allowed_types = {"deterministic", "manual", "internal"}
+    for entry in entries:
+        if not isinstance(entry, dict) or not isinstance(entry.get("id"), str) or not entry["id"]:
+            raise EvaluationError("Evaluator registry contains an invalid evaluator entry")
+        evaluator_id = entry["id"]
+        if evaluator_id in indexed:
+            raise EvaluationError(f"Evaluator registry contains duplicate ID {evaluator_id}")
+        evaluator_type = entry.get("evaluator_type")
+        if evaluator_type not in allowed_types:
+            raise EvaluationError(f"Evaluator {evaluator_id} has an invalid evaluator_type")
+        task_ids = entry.get("task_ids")
+        if not isinstance(task_ids, list) or not task_ids or len(task_ids) != len(set(task_ids)):
+            raise EvaluationError(f"Evaluator {evaluator_id} must declare unique task_ids")
+        if evaluator_type == "deterministic":
+            payload_schema = entry.get("result_payload_schema")
+            if not isinstance(payload_schema, dict):
+                raise EvaluationError(f"Deterministic evaluator {evaluator_id} lacks result_payload_schema")
+            try:
+                Draft202012Validator.check_schema(payload_schema)
+            except Exception as exc:
+                raise EvaluationError(f"Evaluator {evaluator_id} has an invalid result_payload_schema: {exc}") from exc
+        indexed[evaluator_id] = entry
+    return indexed
 
-    if evaluator_id == "E-T01-T02-KALLEN-JACOBIAN":
-        status = payload.get("status")
-        if not isinstance(status, str) or not status.startswith("PASS"):
-            raise EvaluationError(f"Run {run_id} has a non-PASS T01/T02 Jacobian evaluator result")
-    elif evaluator_id == "E-T04-DIRAC-TRACE":
-        if payload.get("status") != "PASS":
-            raise EvaluationError(f"Run {run_id} has a non-PASS T04 Dirac-trace evaluator result")
-    elif evaluator_id == "E-T05A-PDF-TEXT-SCREEN":
-        if payload.get("auditable") is not True:
-            raise EvaluationError(f"Run {run_id} T05 PDF evaluator did not produce an auditable result")
-    elif evaluator_id == "E-T05B-DATA-TO-FIGURE":
-        if payload.get("status") != "PASS":
-            raise EvaluationError(f"Run {run_id} T05 SVG evaluator did not PASS")
-        if payload.get("evaluation_mode") != "submission" or payload.get("submission_evaluated") is not True or payload.get("submission_pass") is not True:
-            raise EvaluationError(
-                f"Run {run_id} T05 SVG evaluator used baseline-only mode or did not verify the submitted model outputs"
-            )
-    elif evaluator_id == "E-T06-REPRO-PACKAGE":
-        if payload.get("status") != "PASS":
-            raise EvaluationError(f"Run {run_id} has a non-PASS T06 reproducibility evaluator result")
-    elif evaluator_id == "E-T02-LZ-CONVERGENCE-SUPPORT":
-        status = payload.get("status")
-        if isinstance(status, str) and not status.startswith("PASS"):
-            raise EvaluationError(f"Run {run_id} has a non-PASS optional T02 convergence cross-check")
-    else:
-        raise EvaluationError(f"Task manifest requires unknown evaluator ID {evaluator_id}")
+
+def _validate_evaluator_payload(
+    evaluator_spec: dict[str, Any],
+    payload: dict[str, Any],
+    run_id: str,
+) -> None:
+    if not isinstance(payload, dict):
+        raise EvaluationError(f"Evaluator result for {evaluator_spec['id']} in run {run_id} is not a JSON object")
+    payload_schema = evaluator_spec["result_payload_schema"]
+    errors = sorted(
+        Draft202012Validator(payload_schema, format_checker=FormatChecker()).iter_errors(payload),
+        key=lambda error: list(map(str, error.path)),
+    )
+    if errors:
+        details = [f"/{'/'.join(map(str, error.path))}: {error.message}" for error in errors]
+        raise EvaluationError(
+            f"Evaluator payload for {evaluator_spec['id']} in run {run_id} failed its registry contract: "
+            + "; ".join(details)
+        )
 
 
 def validate_required_evaluators(
     record: dict[str, Any],
     task: dict[str, Any],
     artifact_root: Path | None = None,
+    evaluator_manifest: dict[str, Any] | None = None,
 ) -> list[str]:
+    if record.get("task_id") != task.get("id"):
+        raise EvaluationError(f"Run {record['run_id']} task_id does not match the task manifest entry")
     if "required_evaluators" not in task or not isinstance(task["required_evaluators"], list):
         raise EvaluationError(f"Task {task.get('id', '<unknown>')} must declare required_evaluators")
     required = task["required_evaluators"]
+    if any(not isinstance(item, str) or not item for item in required):
+        raise EvaluationError(f"Task {task['id']} contains an invalid required_evaluators entry")
     if len(required) != len(set(required)):
         raise EvaluationError(f"Task {task['id']} contains duplicate required_evaluators")
+
+    if evaluator_manifest is None:
+        evaluator_manifest = read_json(DEFAULT_EVALUATOR_MANIFEST)
+    evaluator_specs = _index_evaluator_registry(evaluator_manifest)
+    for evaluator_id in required:
+        spec = evaluator_specs.get(evaluator_id)
+        if spec is None:
+            raise EvaluationError(f"Task {task['id']} requires unregistered evaluator {evaluator_id}")
+        if spec["evaluator_type"] != "deterministic":
+            raise EvaluationError(f"Task {task['id']} requires non-deterministic evaluator {evaluator_id}")
+        if task["id"] not in spec["task_ids"]:
+            raise EvaluationError(f"Evaluator {evaluator_id} is not registered for task {task['id']}")
 
     checks = record["evaluation"].get("deterministic_checks", [])
     by_id: dict[str, dict[str, Any]] = {}
@@ -416,20 +452,26 @@ def validate_required_evaluators(
     artifact_by_path = {item["path"]: item for item in record["artifacts"]}
     validated: list[str] = []
     for evaluator_id in required:
+        spec = evaluator_specs[evaluator_id]
         check = by_id[evaluator_id]
         if check["status"] != "pass":
             raise EvaluationError(
                 f"Run {record['run_id']} required evaluator {evaluator_id} has status {check['status']!r}, not 'pass'"
             )
         if check["input_sha256"] != record["task_input"]["input_manifest_sha256"]:
-            raise EvaluationError(f"Run {record['run_id']} evaluator {evaluator_id} input hash is not bound to the task input manifest")
+            raise EvaluationError(
+                f"Run {record['run_id']} evaluator {evaluator_id} input hash is not bound to the task input manifest"
+            )
         result_path = check["result_artifact"]
         artifact = artifact_by_path.get(result_path)
         if artifact is None:
-            raise EvaluationError(f"Run {record['run_id']} evaluator {evaluator_id} result is not registered as a run artifact")
+            raise EvaluationError(
+                f"Run {record['run_id']} evaluator {evaluator_id} result is not registered as a run artifact"
+            )
         if check["output_sha256"] != artifact["sha256"]:
-            raise EvaluationError(f"Run {record['run_id']} evaluator {evaluator_id} output hash differs from its artifact record")
-
+            raise EvaluationError(
+                f"Run {record['run_id']} evaluator {evaluator_id} output hash differs from its artifact record"
+            )
         if artifact_root is not None:
             root = artifact_root.resolve()
             relative = Path(result_path)
@@ -440,10 +482,10 @@ def validate_required_evaluators(
                 raise EvaluationError(f"Evaluator result path escapes artifact root: {result_path}")
             if not path.is_file():
                 raise EvaluationError(f"Missing evaluator result artifact: {result_path}")
-            payload = read_json(path)
-            _validate_evaluator_payload(evaluator_id, payload, record["run_id"])
+            _validate_evaluator_payload(spec, read_json(path), record["run_id"])
         validated.append(evaluator_id)
     return validated
+
 
 def _quantile(sorted_values: list[float], probability: float):
     if not sorted_values:
@@ -540,7 +582,18 @@ def compare_records(
     rubric_path: Path = DEFAULT_RUBRIC,
     artifact_root: Path | None = None,
     input_root: Path | None = None,
+    evaluator_manifest: dict[str, Any] | None = None,
+    evaluator_manifest_sha256: str | None = None,
 ) -> dict[str, Any]:
+    if evaluator_manifest is None:
+        evaluator_manifest = read_json(DEFAULT_EVALUATOR_MANIFEST)
+    _index_evaluator_registry(evaluator_manifest)
+    if evaluator_manifest_sha256 is not None:
+        for record in records:
+            if record["protocol"].get("evaluator_manifest_sha256") != evaluator_manifest_sha256:
+                raise EvaluationError(
+                    f"Run {record['run_id']} evaluator_manifest_sha256 differs from the exact evaluator registry bytes"
+                )
     task_info = {item["id"]: item for item in task_manifest.get("tasks", [])}
     if not task_info:
         raise EvaluationError("Task manifest contains no tasks")
@@ -570,8 +623,8 @@ def compare_records(
         task = task_info[a["task_id"]]
         validate_task_source_bundle(a, task, input_root)
         validate_task_source_bundle(b, task, input_root)
-        validate_required_evaluators(a, task, artifact_root)
-        validate_required_evaluators(b, task, artifact_root)
+        validate_required_evaluators(a, task, artifact_root, evaluator_manifest)
+        validate_required_evaluators(b, task, artifact_root, evaluator_manifest)
         family = task.get("task_family", a["task_id"])
         qa = float(a["evaluation"]["weighted_score"])
         qb = float(b["evaluation"]["weighted_score"])
@@ -764,7 +817,20 @@ def command_verify_sources(args: argparse.Namespace) -> dict[str, Any]:
 def command_compare(args: argparse.Namespace) -> dict[str, Any]:
     records = _load_run_files(args.records_dir)
     manifest = read_json(args.task_manifest)
-    report = compare_records(records, manifest, args.round, args.seed, args.schema, args.rubric, args.artifact_root, args.input_root)
+    evaluator_manifest = read_json(args.evaluator_manifest)
+    evaluator_manifest_sha256 = sha256(args.evaluator_manifest.read_bytes())
+    report = compare_records(
+        records,
+        manifest,
+        args.round,
+        args.seed,
+        args.schema,
+        args.rubric,
+        args.artifact_root,
+        args.input_root,
+        evaluator_manifest,
+        evaluator_manifest_sha256,
+    )
     report["protocol_commit"] = args.protocol_commit
     report["analysis_plan_sha256"] = args.analysis_plan_sha256
     report["environment_lock_sha256"] = args.environment_lock_sha256
@@ -803,6 +869,7 @@ def build_parser() -> argparse.ArgumentParser:
     compare = sub.add_parser("compare", help="build a paired A/B comparison report")
     compare.add_argument("--records-dir", type=Path, required=True)
     compare.add_argument("--task-manifest", type=Path, default=DEFAULT_TASK_MANIFEST)
+    compare.add_argument("--evaluator-manifest", type=Path, default=DEFAULT_EVALUATOR_MANIFEST)
     compare.add_argument("--round", choices=["round_1_pilot", "round_2_full", "round_3_real_projects"], required=True)
     compare.add_argument("--seed", type=int, required=True)
     compare.add_argument("--protocol-commit", required=True)
