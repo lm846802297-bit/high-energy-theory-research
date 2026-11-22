@@ -24,9 +24,3 @@ Inspect the exact PDF above and produce a source-grounded figure-reading note.
 5. Cite the original PDF page and source path for each claim.
 
 If the source PDF cannot be retrieved byte-for-byte and its SHA-256 verified, stop and report the missing input rather than substituting a web image or another PDF.
-
-## Evaluator notes (not shown to the model)
-
-- Verify the source SHA-256 before scoring.
-- Score exact transcription, page provenance, and the distinction between observation and interpretation.
-- This task evaluates source-grounded figure reading, not the correctness of the underlying physics model.
