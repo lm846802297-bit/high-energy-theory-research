@@ -157,3 +157,6 @@ Before Round 1:
 7. Confirm identical tools, project context, network policy, and budgets.
 8. Record the randomization seed and freeze the protocol commit.
 9. Only then execute the 18 pilot runs. Do not create or expose Holdout until the final Skill and protocol are frozen.
+
+
+The canonical input-manifest SHA-256 is computed from UTF-8 JSON with sorted keys and compact separators over schema version, task ID, prompt SHA-256, source commit, and source-file identities sorted by repository/path. The scoring evaluator independently hashes the exact prompt file named by each task manifest entry and checks the run-record prompt SHA-256.

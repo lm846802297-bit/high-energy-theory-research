@@ -22,7 +22,7 @@ def score_map(value=3):
 
 def make_record(arm: str, run_id: str, score=3):
     available = arm == "with-skill"
-    return {
+    record = {
         "run_id": run_id,
         "pair_id": "pair-T01-r1",
         "task_id": "T01",
@@ -75,6 +75,8 @@ def make_record(arm: str, run_id: str, score=3):
         },
         "deviations": [],
     }
+    record["task_input"]["input_manifest_sha256"] = evaluate.compute_task_input_manifest_sha256(record)
+    return record
 
 
 class EvaluatorTests(unittest.TestCase):
@@ -190,6 +192,7 @@ class EvaluatorTests(unittest.TestCase):
                     for record in (a, b):
                         record["pair_id"] = pair_id
                         record["task_id"] = task_id
+                        record["task_input"]["input_manifest_sha256"] = evaluate.compute_task_input_manifest_sha256(record)
                         record["repeat"] = repeat
                         record["execution"]["transcript_artifact"] = f"transcripts/{record['run_id']}.json"
                         record["artifacts"][1]["path"] = record["execution"]["transcript_artifact"]
@@ -699,6 +702,63 @@ class EvaluatorTests(unittest.TestCase):
                         schema_path=SCHEMA, rubric_path=RUBRIC,
                         evaluator_manifest=registry, protocol_bindings=bindings,
                     )
+
+
+    def test_validate_run_rejects_noncanonical_input_manifest_hash(self):
+        record = make_record("no-skill", "run-bad-input-manifest")
+        record["task_input"]["input_manifest_sha256"] = "0" * 64
+        with self.assertRaisesRegex(evaluate.EvaluationError, "canonical prompt/source manifest"):
+            evaluate.validate_run(record, SCHEMA, RUBRIC)
+
+    def test_compare_verifies_exact_task_prompt_bytes(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            prompt_bytes = b"# T01 exact prompt bytes\nDerive the phase-space Jacobian.\n"
+            (root / "T01.md").write_bytes(prompt_bytes)
+            prompt_sha = hashlib.sha256(prompt_bytes).hexdigest()
+            task = {
+                "id": "T01",
+                "path": "T01.md",
+                "dimension": "theoretical_derivation",
+                "task_family": "threshold_kinematics",
+                "skill_reference": "references/symbolic-calculation.md",
+                "required_evaluators": [],
+            }
+            manifest = {"tasks": [task]}
+            registry = {"deterministic_evaluators": []}
+            a = make_record("no-skill", "run-a")
+            b = make_record("with-skill", "run-b")
+            for record in (a, b):
+                record["task_input"]["prompt_sha256"] = prompt_sha
+                record["task_input"]["input_manifest_sha256"] = evaluate.compute_task_input_manifest_sha256(record)
+            report = evaluate.compare_records(
+                [a, b],
+                manifest,
+                "round_1_pilot",
+                seed=11,
+                schema_path=SCHEMA,
+                rubric_path=RUBRIC,
+                evaluator_manifest=registry,
+                task_prompt_root=root,
+            )
+            self.assertEqual(report["decision"], "inconclusive")
+
+            a = make_record("no-skill", "run-a-bad-prompt")
+            b = make_record("with-skill", "run-b-bad-prompt")
+            for record in (a, b):
+                record["task_input"]["prompt_sha256"] = "0" * 64
+                record["task_input"]["input_manifest_sha256"] = evaluate.compute_task_input_manifest_sha256(record)
+            with self.assertRaisesRegex(evaluate.EvaluationError, "prompt_sha256 mismatch"):
+                evaluate.compare_records(
+                    [a, b],
+                    manifest,
+                    "round_1_pilot",
+                    seed=11,
+                    schema_path=SCHEMA,
+                    rubric_path=RUBRIC,
+                    evaluator_manifest=registry,
+                    task_prompt_root=root,
+                )
 
 
 if __name__ == "__main__":

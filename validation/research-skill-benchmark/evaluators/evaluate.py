@@ -122,6 +122,11 @@ def validate_run(
     artifact_root: Path | None = None,
 ) -> float | None:
     validate_schema(record, schema_path)
+    expected_input_manifest_sha256 = compute_task_input_manifest_sha256(record)
+    if record["task_input"]["input_manifest_sha256"] != expected_input_manifest_sha256:
+        raise EvaluationError(
+            f"Run {record['run_id']} input_manifest_sha256 does not match the canonical prompt/source manifest"
+        )
     rubric = read_rubric(rubric_path)
     evaluation = record["evaluation"]
     if not require_scored:
@@ -271,6 +276,29 @@ def sha256(data: bytes) -> str:
     return hashlib.sha256(data).hexdigest()
 
 
+def compute_task_input_manifest_sha256(record: dict[str, Any]) -> str:
+    task_input = record["task_input"]
+    source_files = sorted(
+        task_input["source_files"],
+        key=lambda item: (item["repository"], item["path"]),
+    )
+    canonical = {
+        "schema_version": "1.0",
+        "task_id": record["task_id"],
+        "prompt_sha256": task_input["prompt_sha256"],
+        "source_commit": task_input["source_commit"],
+        "source_files": [
+            {
+                key: item[key]
+                for key in ("repository", "commit", "path", "git_blob_sha1", "size_bytes", "sha256")
+            }
+            for item in source_files
+        ],
+    }
+    payload = json.dumps(canonical, ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode("utf-8")
+    return sha256(payload)
+
+
 def verify_source_record(record: dict[str, Any], local_path: Path) -> dict[str, Any]:
     try:
         data = local_path.read_bytes()
@@ -309,6 +337,26 @@ def verify_run_artifacts(record: dict[str, Any], artifact_root: Path) -> list[di
             raise EvaluationError(f"Artifact SHA-256 mismatch: {artifact['path']}")
         verified.append({"path": artifact["path"], "sha256": actual_sha, "status": "PASS"})
     return verified
+
+
+def verify_task_prompt(record: dict[str, Any], task: dict[str, Any], prompt_root: Path) -> dict[str, Any]:
+    relative = Path(task["path"])
+    if relative.is_absolute():
+        raise EvaluationError(f"Task prompt path must be relative: {task['path']}")
+    root = prompt_root.resolve()
+    path = (root / relative).resolve()
+    if not path.is_relative_to(root):
+        raise EvaluationError(f"Task prompt path escapes prompt root: {task['path']}")
+    if not path.is_file():
+        raise EvaluationError(f"Missing exact task prompt file: {task['path']}")
+    actual = sha256(path.read_bytes())
+    expected = record["task_input"]["prompt_sha256"]
+    if actual != expected:
+        raise EvaluationError(
+            f"Run {record['run_id']} prompt_sha256 mismatch for {task['path']}: "
+            f"recorded={expected}, actual={actual}"
+        )
+    return {"path": task["path"], "sha256": actual, "status": "PASS"}
 
 
 def validate_task_source_bundle(
@@ -586,6 +634,7 @@ def compare_records(
     input_root: Path | None = None,
     evaluator_manifest: dict[str, Any] | None = None,
     protocol_bindings: dict[str, str] | None = None,
+    task_prompt_root: Path | None = None,
 ) -> dict[str, Any]:
     if evaluator_manifest is None:
         evaluator_manifest = read_json(DEFAULT_EVALUATOR_MANIFEST)
@@ -625,6 +674,9 @@ def compare_records(
             raise EvaluationError(f"Pair {pair_id} has {len(members)} records; expected exactly 2")
         a, b = validate_pair(members[0], members[1], schema_path, rubric_path, artifact_root)
         task = task_info[a["task_id"]]
+        if task_prompt_root is not None:
+            verify_task_prompt(a, task, task_prompt_root)
+            verify_task_prompt(b, task, task_prompt_root)
         validate_task_source_bundle(a, task, input_root)
         validate_task_source_bundle(b, task, input_root)
         validate_required_evaluators(a, task, artifact_root, evaluator_manifest)
@@ -847,6 +899,7 @@ def command_compare(args: argparse.Namespace) -> dict[str, Any]:
         args.input_root,
         evaluator_manifest,
         protocol_bindings,
+        args.task_manifest.parent,
     )
     report["protocol_commit"] = args.protocol_commit
     report["analysis_plan_sha256"] = analysis_plan_sha256

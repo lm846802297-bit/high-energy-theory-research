@@ -37,3 +37,6 @@ For the sealed Holdout, pass its private evaluator registry explicitly with `--e
 
 
 The comparison command hashes the exact bytes of `--task-manifest`, `--rubric`, `--environment-lock`, `--analysis-plan`, and `--evaluator-manifest`. It also requires every run record's `protocol.commit` to equal `--protocol-commit`. Optional `--analysis-plan-sha256` and `--environment-lock-sha256` arguments act as additional expected-value checks; they do not replace file hashing.
+
+
+`input_manifest_sha256` is recomputed from canonical UTF-8 JSON containing `schema_version`, `task_id`, `prompt_sha256`, `source_commit`, and source-file identities sorted by repository/path. The comparison command also hashes the exact task prompt file referenced by `task.path` relative to the task-manifest directory and compares it with each run's `prompt_sha256`.

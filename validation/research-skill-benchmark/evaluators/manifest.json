@@ -42,14 +42,14 @@
     {
       "path": "evaluators/evaluate.py",
       "role": "run_schema_validation_pair_integrity_source_hashing_score_recomputation_and_comparison",
-      "git_blob_sha1": "7bc1de925dc5efc511c339eb98aa30986ea11964",
-      "size_bytes": 46190
+      "git_blob_sha1": "b156178b9f1f9b9378f5de96528eac37b0d95b6e",
+      "size_bytes": 48488
     },
     {
       "path": "evaluators/test_evaluate.py",
       "role": "unit_and_semantic_regression_tests",
-      "git_blob_sha1": "8a48e2fb1e70c39f9d1591555b079c35e5a937d2",
-      "size_bytes": 38011
+      "git_blob_sha1": "da84cd2b88ca3c45f9f5c700ded72e6deeb9cdf9",
+      "size_bytes": 40894
     },
     {
       "path": "evaluators/verify_dirac_trace.py",
@@ -476,8 +476,8 @@
       ],
       "role": "run_record_source_bundle_matches_task_manifest_and_staged_bytes",
       "path": "evaluators/evaluate.py",
-      "git_blob_sha1": "7bc1de925dc5efc511c339eb98aa30986ea11964",
-      "size_bytes": 46190,
+      "git_blob_sha1": "b156178b9f1f9b9378f5de96528eac37b0d95b6e",
+      "size_bytes": 48488,
       "scope": "Compare every run's repository, source commit, path, Git blob SHA-1 and byte size with the pinned task manifest; verify staged bytes and SHA-256 under the required input root. T05 includes the PDF, plotting script and both CSV inputs; T03 includes the PDF and companion TeX.",
       "evaluator_type": "internal"
     }
@@ -498,8 +498,8 @@
   },
   "test_suite": {
     "command": "python -m unittest discover -s evaluators -v",
-    "tests_defined": 39,
-    "development_run": "Run 1168 passed the prior 38-test suite. One new regression test now verifies that protocol commit, environment lock, rubric, evaluator registry, task manifest, and analysis-plan hashes are bound to exact files; the updated 39-test suite requires CI validation.",
+    "tests_defined": 41,
+    "development_run": "Run 1168 passed the prior 39-test protocol-hash suite. Two new regression tests now verify canonical input_manifest_sha256 and exact prompt-file bytes; the updated 41-test suite requires CI validation.",
     "exact_committed_tree_rerun_required": true,
     "ci_workflow": ".github/workflows/schema-validation.yml",
     "ci_step": "Validate and test Particle Physics Research Skill Benchmark",
@@ -511,7 +511,7 @@
     "ci_python_version": "3.12.16",
     "schema_validation_status": "PASS",
     "failure_summary": "Run 1149 passed schema validation, project integration tests, Skill scaffold tests, and 31 of 32 Benchmark tests. The sole failure was an old test that still treated a semantic text difference as a byte-serialization mismatch; the test and evaluator were corrected.",
-    "pending_changes": "Exact protocol artifact hash binding added to compare; awaiting new CI run."
+    "pending_changes": "Canonical input manifest and exact prompt-file binding added; awaiting CI."
   },
   "limitations": [
     "This evaluator registry is a development artifact and not a security boundary; keep it out of model workspaces.",
@@ -530,7 +530,8 @@
     "Run 1165 passed all 38 Benchmark evaluator tests and the full central CI workflow. The same HEAD passed Windows PowerShell 5.1 installer regression Run 4; the next commit updates only this CI evidence record and must be revalidated.",
     "Run 1166 passed the complete 38-test suite and all central CI stages on exact HEAD 00d61983b5e9690eaf54e79b5d1c159559f92d26. The next commit updates only this evaluator-manifest evidence and requires a final evidence-only rerun.",
     "Run 1167 passed the full 38-test suite and all central CI stages on exact HEAD 3e8b9eefa285a51c1973f2ccc29aebd378744613. The next commit updates only this evaluator-manifest evidence and requires a final evidence-only rerun.",
-    "The comparison engine now verifies exact hashes for protocol commit, environment lock, scoring rubric, task manifest, evaluator manifest, and analysis plan. The new run-record schema requires analysis_plan_sha256. The updated 39-test suite is pending CI."
+    "The comparison engine now verifies exact hashes for protocol commit, environment lock, scoring rubric, task manifest, evaluator manifest, and analysis plan. The new run-record schema requires analysis_plan_sha256. The updated 39-test suite is pending CI.",
+    "The input_manifest_sha256 is now defined as a canonical JSON hash of task ID, exact prompt SHA-256, source commit, and sorted source-file identities. compare verifies prompt_sha256 against the exact prompt file and source bytes against the task manifest."
   ],
   "ci_integration": {
     "workflow": ".github/workflows/schema-validation.yml",
@@ -675,5 +676,29 @@
       "private_holdout_registry_supported": true,
       "cli_argument": "--evaluator-manifest"
     }
+  },
+  "input_manifest_contract": {
+    "schema_version": "1.0",
+    "canonicalization": "UTF-8 JSON; ensure_ascii=false; sort_keys=true; separators=(',', ':')",
+    "fields": [
+      "schema_version",
+      "task_id",
+      "prompt_sha256",
+      "source_commit",
+      "source_files"
+    ],
+    "source_file_sort": [
+      "repository",
+      "path"
+    ],
+    "source_file_fields": [
+      "repository",
+      "commit",
+      "path",
+      "git_blob_sha1",
+      "size_bytes",
+      "sha256"
+    ],
+    "prompt_binding": "task_input.prompt_sha256 is checked against the exact task prompt file at task_manifest_parent / task.path"
   }
 }

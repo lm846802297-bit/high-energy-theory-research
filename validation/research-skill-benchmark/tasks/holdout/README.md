@@ -34,3 +34,6 @@ No holdout tasks have been prepared or run yet. This is intentional; the benchma
 
 
 The sealed scoring invocation must pass the private rubric, analysis plan, environment lock, task manifest, and evaluator registry explicitly with `--rubric`, `--analysis-plan`, `--environment-lock`, `--task-manifest`, and `--evaluator-manifest`. The comparison engine computes SHA-256 from the exact bytes of each file and checks them against every run record's protocol fields, including `analysis_plan_sha256` and `protocol.commit`. Do not reuse the development rubric or development environment lock for Round 2.
+
+
+For each task, `task.path` is relative to the task-manifest directory. The scoring evaluator hashes that exact prompt file and verifies `task_input.prompt_sha256`. It also recomputes `task_input.input_manifest_sha256` from canonical UTF-8 JSON containing the schema version, task ID, prompt SHA-256, source commit, and sorted source-file identities. Use the same canonicalization for development and Holdout; do not supply a hand-entered opaque input hash.
