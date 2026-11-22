@@ -33,6 +33,8 @@ $validFiles = @(
 )
 $actualFiles = @($validFiles)
 $validManifest = [PSCustomObject]@{ source_repository = $source; source_commit = $commit; files = $validFiles }
+$extraFiles = @($validFiles)
+$extraFiles += [PSCustomObject]@{ path = 'extra.txt'; sha256 = $hashA }
 $manifestCases = @(
     @{ Name = 'valid manifest and exact file inventory'; Manifest = $validManifest; Actual = $actualFiles; Required = $requiredFiles; Expected = $true },
     @{ Name = 'wrong source repository'; Manifest = [PSCustomObject]@{ source_repository = 'https://example.invalid/repo.git'; source_commit = $commit; files = $validFiles }; Actual = $actualFiles; Required = $requiredFiles; Expected = $false },
@@ -40,7 +42,7 @@ $manifestCases = @(
     @{ Name = 'missing required Skill file'; Manifest = [PSCustomObject]@{ source_repository = $source; source_commit = $commit; files = @($validFiles[0]) }; Actual = @($validFiles[0]); Required = $requiredFiles; Expected = $false },
     @{ Name = 'modified installed file hash'; Manifest = $validManifest; Actual = @([PSCustomObject]@{ path = 'SKILL.md'; sha256 = $hashB }, $validFiles[1]); Required = $requiredFiles; Expected = $false },
     @{ Name = 'empty manifest file list'; Manifest = [PSCustomObject]@{ source_repository = $source; source_commit = $commit; files = @() }; Actual = @(); Required = $requiredFiles; Expected = $false },
-    @{ Name = 'unrecorded extra installed file'; Manifest = $validManifest; Actual = @($validFiles + [PSCustomObject]@{ path = 'extra.txt'; sha256 = $hashA }); Required = $requiredFiles; Expected = $false }
+    @{ Name = 'unrecorded extra installed file'; Manifest = $validManifest; Actual = $extraFiles; Required = $requiredFiles; Expected = $false }
 )
 
 foreach ($case in $manifestCases) {
