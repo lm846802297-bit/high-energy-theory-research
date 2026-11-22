@@ -60,3 +60,11 @@
 - Preserved source identifiers, paths, commands, equations, schema-field names, and validation caveats; no English original was replaced.
 - Verified that each translated document has the same number of Markdown headings as its English source, and checked relative links plus Markdown code-fence pairing in both language versions. No scientific calculation or CI run was performed by this documentation-only change.
 
+## 2026-11-22 — Optional tooling and task-specific physics references
+
+- Added task-specific references for symbolic calculations, numerical integration/scans/convergence, scientific figure auditing, and source-grounded paper reading.
+- Added a pinned optional-tooling map for selected third-party Skills, including source commits, licenses, dependencies, and use boundaries.
+- Kept the existing root AGENTS.md as the sole repository-wide authority; no duplicate AGENTS.md or competing project-wide policy was created.
+- Preserved the existing high-energy-theory-research Skill name and entry point; no existing research records, source calculations, schemas, or open PRs were changed.
+- Added Skill-contract regression coverage for the new reference files and optional-tooling route.
+- Validation and Windows Codex discovery remain pending until run in the target Windows Codex environment.
