@@ -11,9 +11,9 @@ from jsonschema import Draft202012Validator, FormatChecker
 
 SCHEMA_DIR = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(SCHEMA_DIR))
-from validate_result_records import load_json  # noqa: E402
+from validate_result_records import load_json, verify_revision_context, verify_source  # noqa: E402
 
-SCHEMA_PATH = SCHEMA_DIR / "research-result-record-v1.0.0.schema.json"
+SCHEMA_PATH = SCHEMA_DIR / "research-result-record-v1.0.1.schema.json"
 
 
 def minimal_manifest(input_record: dict) -> dict:
@@ -166,6 +166,102 @@ class InputProvenanceSchemaTests(unittest.TestCase):
         })
         record["environment"].pop("hardware")
         self.assertFalse(self.validator.is_valid(record))
+
+
+class RevisionContextTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        with SCHEMA_PATH.open("r", encoding="utf-8") as stream:
+            cls.schema = json.load(stream)
+        Draft202012Validator.check_schema(cls.schema)
+        cls.validator = Draft202012Validator(cls.schema, format_checker=FormatChecker())
+
+    def manifest(self, *, event="pull_request", mode="pull_request_merge"):
+        record = minimal_manifest({
+            "name": "local-table",
+            "source": "repository input",
+            "format": "csv",
+            "path": "data/input.csv",
+            "sha256": "b" * 64,
+        })
+        record["schema_version"] = "1.0.1"
+        record["source"]["branch"] = "feature/archive-provenance"
+        record["source"]["revision_context"] = {
+            "event_name": event,
+            "checked_out_sha": "a" * 40,
+            "pr_number": 104 if event in {"pull_request", "pull_request_target"} else None,
+            "pr_head_sha": "b" * 40 if event in {"pull_request", "pull_request_target"} else None,
+            "base_sha": "c" * 40 if event in {"pull_request", "pull_request_target"} else None,
+            "tested_merge_sha": "a" * 40 if mode == "pull_request_merge" else None,
+            "head_ref": "feature/archive-provenance" if event in {"pull_request", "pull_request_target"} else "main",
+            "base_ref": "main" if event in {"pull_request", "pull_request_target"} else None,
+            "checkout_mode": mode,
+        }
+        if event not in {"pull_request", "pull_request_target"}:
+            record["source"]["branch"] = "main"
+        return record
+
+    def test_v101_pull_request_merge_context_is_valid(self):
+        record = self.manifest()
+        self.assertTrue(self.validator.is_valid(record))
+        self.assertEqual(verify_revision_context(record), [])
+
+    def test_v101_pull_request_head_checkout_is_valid(self):
+        record = self.manifest(mode="pull_request_head")
+        context = record["source"]["revision_context"]
+        context["checked_out_sha"] = context["pr_head_sha"]
+        record["source"]["commit_sha"] = context["pr_head_sha"]
+        self.assertTrue(self.validator.is_valid(record))
+        self.assertEqual(verify_revision_context(record), [])
+
+    def test_v101_local_context_is_valid(self):
+        record = self.manifest(event="local", mode="branch_commit")
+        self.assertTrue(self.validator.is_valid(record))
+        self.assertEqual(verify_revision_context(record), [])
+
+    def test_v101_requires_revision_context(self):
+        record = self.manifest()
+        record["source"].pop("revision_context")
+        self.assertFalse(self.validator.is_valid(record))
+
+    def test_merge_sha_must_equal_checked_out_sha(self):
+        record = self.manifest()
+        record["source"]["revision_context"]["tested_merge_sha"] = "d" * 40
+        self.assertTrue(self.validator.is_valid(record))
+        self.assertTrue(any("tested_merge_sha" in error for error in verify_revision_context(record)))
+
+    def test_pr_branch_must_not_be_the_synthetic_merge_ref(self):
+        record = self.manifest()
+        record["source"]["branch"] = "104/merge"
+        self.assertTrue(self.validator.is_valid(record))
+        self.assertTrue(any("head_ref" in error for error in verify_revision_context(record)))
+
+    def test_v100_manifest_remains_valid_without_revision_context(self):
+        record = minimal_manifest({
+            "name": "local-table",
+            "source": "repository input",
+            "format": "csv",
+            "path": "data/input.csv",
+            "sha256": "b" * 64,
+        })
+        self.assertTrue(self.validator.is_valid(record))
+        self.assertEqual(verify_revision_context(record), [])
+
+    def test_source_script_fingerprint_is_checked(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            script = root / "run.py"
+            script.write_text("print('original')\n", encoding="utf-8")
+            record = {
+                "record_type": "run_manifest",
+                "source": {
+                    "script_path": "run.py",
+                    "script_sha256": __import__("hashlib").sha256(script.read_bytes()).hexdigest(),
+                },
+            }
+            self.assertEqual(verify_source(record, root), [])
+            script.write_text("print('modified')\n", encoding="utf-8")
+            self.assertTrue(verify_source(record, root))
 
 
 if __name__ == "__main__":
