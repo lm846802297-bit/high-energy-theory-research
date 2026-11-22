@@ -93,3 +93,10 @@
 - Clarified that candidate-schema and project-registry validators require a pinned central source checkout; the standalone user-level Skill export does not include the central schema bundle/helper module.
 - Added a Skill contract assertion for the central-only validator boundary.
 - The central PR remains Draft pending Windows PowerShell 5.1 execution of the new rollback regression test and final review.
+
+## 2026-11-22 — Installer manifest integrity hardening
+
+- Existing installation manifests now require the expected source repository, a 40-character lowercase Git commit SHA, every required Skill file, valid 64-character lowercase SHA-256 entries, and an exact match between recorded and actual installed file inventories.
+- Added seven Windows PowerShell manifest-integrity cases covering valid inventory, wrong repository, malformed source commit, missing required file, modified hash, empty inventory, and unrecorded extra file.
+- Extended the Python Skill contract test to assert the installer helper and Windows regression test are included in the repository.
+- Windows PowerShell 5.1 execution of the expanded 13-case installer regression remains pending.
