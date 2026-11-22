@@ -14,7 +14,7 @@ from pathlib import Path
 try:
     from jsonschema import Draft202012Validator, FormatChecker
 except ImportError:
-    print("ERROR: install the pinned dependency with python -m pip install -r docs/schemas/requirements-result-validation.txt.", file=sys.stderr)
+    print("ERROR: install the pinned dependency with python -m pip install -r research/schemas/requirements-result-validation.txt.", file=sys.stderr)
     raise SystemExit(2)
 
 
@@ -162,6 +162,42 @@ def verify_artifacts(record: dict, repo_root: Path):
     return errors, warnings
 
 
+def verify_manifest_checksum(record: dict, record_path: Path):
+    """Check the detached checksum when a run manifest declares one."""
+    if record.get("record_type") != "run_manifest":
+        return []
+    extension = record.get("extensions", {}).get("archive_integrity")
+    if extension is None:
+        return []  # Older v1 records did not have this optional extension.
+    if not isinstance(extension, dict) or extension.get("manifest_checksum") != "MANIFEST.sha256":
+        return ["invalid manifest checksum declaration"]
+    sidecar = record_path.parent / "MANIFEST.sha256"
+    try:
+        contents = sidecar.read_text(encoding="ascii").strip()
+        expected = hashlib.sha256(record_path.read_bytes()).hexdigest()
+    except (OSError, UnicodeError) as exc:
+        return [f"manifest checksum unavailable: {exc}"]
+    if contents != f"{expected}  {record_path.name}":
+        return ["run manifest SHA-256 mismatch or invalid checksum sidecar"]
+    return []
+
+
+def verify_source(record: dict, repo_root: Path):
+    if record.get("record_type") != "run_manifest":
+        return []
+    errors = []
+    source = record["source"]
+    target = resolve_repo_path(repo_root.resolve(), source["script_path"], errors)
+    if target is None:
+        return errors
+    if not target.is_file():
+        return [f"{source['script_path']}: source script does not exist"]
+    digest = hashlib.sha256(target.read_bytes()).hexdigest()
+    if digest != source["script_sha256"]:
+        errors.append(f"{source['script_path']}: source script SHA-256 mismatch")
+    return errors
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("records", nargs="+", type=Path, help="JSON record files to validate")
@@ -205,7 +241,8 @@ def main():
 
         input_errors, input_warnings = verify_inputs(record, args.repo_root)
         file_errors, file_warnings = verify_artifacts(record, args.repo_root)
-        integrity_errors = input_errors + file_errors
+        integrity_errors = (input_errors + file_errors + verify_source(record, args.repo_root)
+                            + verify_manifest_checksum(record, record_path))
         if integrity_errors:
             print(f"FAIL {record_path}: input/output integrity")
             for error in integrity_errors:
