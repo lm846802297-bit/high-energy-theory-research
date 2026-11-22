@@ -55,7 +55,24 @@ Run each task three times in each arm: 3 tasks × 3 repeats × 2 arms = 18 runs.
 
 Three repetitions are a pilot, not enough for a strong population-level statistical claim. Report all individual outcomes, paired differences, mean, median, range, and a bootstrap interval only as exploratory uncertainty. Do not claim statistical significance from this pilot.
 
-## 4. Development and holdout separation
+## 4. Task roster
+
+The six development tasks are indexed in `tasks/development/manifest.json`.
+
+| Task | Dimension | Skill reference for B arm |
+|---|---|---|
+| T01 | Theoretical derivation / Jacobian | `symbolic-calculation.md` |
+| T02 | Numerical integration / convergence | `numerical-scans-and-uncertainty.md` |
+| T03 | Source-grounded paper reading | `paper-reading.md` |
+| T04 | Symbolic Dirac trace | `symbolic-calculation.md` |
+| T05 | PDF figure audit | `scientific-figure-audit.md` |
+| T06 | Reproducibility package | `source-and-version-audit.md` |
+
+Round 1 runs T01–T03 (18 paired-arm runs). Round 2 runs all six development dimensions and adds a separately prepared sealed holdout set. The development tasks and their evaluator key may be used to refine the Skill; they cannot establish generalization on their own.
+
+T03 uses the complete pinned axial-vector manuscript PDF, not the earlier single-figure PDF. Its Git commit, blob SHA-1, file size, and companion TeX source are recorded in the task prompt and task manifest. The evaluator must calculate and record the PDF SHA-256 from the exact staged bytes before the task is scored. The PDF page number and rendered equation number must be read from the PDF, not inferred from TeX line numbers.
+
+## 5. Development and holdout separation
 
 - Development tasks may be inspected and used to improve Skill instructions.
 - Holdout task prompts, inputs, expected results, and scoring keys are sealed from the model and from Skill authors during development.
