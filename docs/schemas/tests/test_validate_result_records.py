@@ -253,6 +253,7 @@ class RevisionContextTests(unittest.TestCase):
             script = root / "run.py"
             script.write_text("print('original')\n", encoding="utf-8")
             record = {
+                "schema_version": "1.0.1",
                 "record_type": "run_manifest",
                 "source": {
                     "script_path": "run.py",
