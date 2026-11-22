@@ -43,7 +43,7 @@ If the host automatically exposes other Skills or changes tool permissions betwe
 
 ## 3. Randomization and repetitions
 
-Round 1 contains three tasks: theory derivation, numerical integration, and paper reading.
+Round 1 contains three development tasks: T01 theory/Jacobian derivation, T02 threshold numerical integration, and T03 source-grounded reading of the pinned axial-vector manuscript.
 
 Run each task three times in each arm: 3 tasks × 3 repeats × 2 arms = 18 runs.
 
