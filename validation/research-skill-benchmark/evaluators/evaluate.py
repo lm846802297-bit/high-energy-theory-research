@@ -308,6 +308,55 @@ def verify_run_artifacts(record: dict[str, Any], artifact_root: Path) -> list[di
     return verified
 
 
+def validate_task_source_bundle(
+    record: dict[str, Any],
+    task: dict[str, Any],
+    input_root: Path | None = None,
+) -> list[dict[str, Any]]:
+    expected_sources = task.get("input_sources", [])
+    actual_sources = record["task_input"]["source_files"]
+
+    def identity(item: dict[str, Any]) -> tuple[str, str, str, str, int]:
+        return (
+            item["repository"],
+            item["commit"],
+            item["path"],
+            item["git_blob_sha1"],
+            item["size_bytes"],
+        )
+
+    expected = sorted(expected_sources, key=lambda item: (item["repository"], item["path"]))
+    actual = sorted(actual_sources, key=lambda item: (item["repository"], item["path"]))
+    if len(expected) != len(actual):
+        raise EvaluationError(
+            f"Run {record['run_id']} source-file count does not match task manifest: "
+            f"{len(actual)} != {len(expected)}"
+        )
+    for exp, got in zip(expected, actual, strict=True):
+        if identity(exp) != identity(got):
+            raise EvaluationError(
+                f"Run {record['run_id']} source identity differs from task manifest for {exp['path']}"
+            )
+        if exp.get("sha256") and exp["sha256"] != got["sha256"]:
+            raise EvaluationError(f"Run {record['run_id']} SHA-256 differs from task manifest for {exp['path']}")
+
+    expected_commits = {item["commit"] for item in expected}
+    if len(expected_commits) == 1 and record["task_input"].get("source_commit") not in expected_commits:
+        raise EvaluationError(f"Run {record['run_id']} source_commit differs from task manifest")
+
+    verified = []
+    if input_root is not None:
+        root = input_root.resolve()
+        for exp, got in zip(expected, actual, strict=True):
+            repository_slug = exp["repository"].split("/", 1)[1]
+            staged_path = exp.get("staged_path", f"{repository_slug}/{exp['path']}")
+            path = (root / staged_path).resolve()
+            if not path.is_relative_to(root):
+                raise EvaluationError(f"Staged source path escapes input root: {staged_path}")
+            verified.append(verify_source_record(got, path))
+    return verified
+
+
 def _quantile(sorted_values: list[float], probability: float):
     if not sorted_values:
         raise EvaluationError("Cannot calculate quantile of empty values")
@@ -402,6 +451,7 @@ def compare_records(
     schema_path: Path = DEFAULT_RUN_SCHEMA,
     rubric_path: Path = DEFAULT_RUBRIC,
     artifact_root: Path | None = None,
+    input_root: Path | None = None,
 ) -> dict[str, Any]:
     task_info = {item["id"]: item for item in task_manifest.get("tasks", [])}
     if not task_info:
@@ -430,6 +480,8 @@ def compare_records(
             raise EvaluationError(f"Pair {pair_id} has {len(members)} records; expected exactly 2")
         a, b = validate_pair(members[0], members[1], schema_path, rubric_path, artifact_root)
         task = task_info[a["task_id"]]
+        validate_task_source_bundle(a, task, input_root)
+        validate_task_source_bundle(b, task, input_root)
         family = task.get("task_family", a["task_id"])
         qa = float(a["evaluation"]["weighted_score"])
         qb = float(b["evaluation"]["weighted_score"])
@@ -622,7 +674,7 @@ def command_verify_sources(args: argparse.Namespace) -> dict[str, Any]:
 def command_compare(args: argparse.Namespace) -> dict[str, Any]:
     records = _load_run_files(args.records_dir)
     manifest = read_json(args.task_manifest)
-    report = compare_records(records, manifest, args.round, args.seed, args.schema, args.rubric, args.artifact_root)
+    report = compare_records(records, manifest, args.round, args.seed, args.schema, args.rubric, args.artifact_root, args.input_root)
     report["protocol_commit"] = args.protocol_commit
     report["analysis_plan_sha256"] = args.analysis_plan_sha256
     report["environment_lock_sha256"] = args.environment_lock_sha256
@@ -669,6 +721,7 @@ def build_parser() -> argparse.ArgumentParser:
     compare.add_argument("--schema", type=Path, default=DEFAULT_RUN_SCHEMA)
     compare.add_argument("--rubric", type=Path, default=DEFAULT_RUBRIC)
     compare.add_argument("--artifact-root", type=Path, required=True)
+    compare.add_argument("--input-root", type=Path, required=True)
     compare.add_argument("--report-schema", type=Path, default=DEFAULT_REPORT_SCHEMA)
     compare.add_argument("--output", type=Path)
     compare.set_defaults(func=command_compare)
