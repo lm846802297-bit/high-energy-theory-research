@@ -77,3 +77,11 @@
 - Strengthened figure guidance so PDF text-size thresholds come from the target journal rather than a universal default.
 - Added a bounded evaluation case using an existing 2→3 phase-space integration and an existing paper figure PDF. The evaluation scripts, environment, inputs, outputs, and audit reports are recorded separately from the original LZ project.
 - Linux contract tests and numerical/PDF checks are recorded; Windows Codex runtime discovery remains pending.
+
+
+## 2026-11-22 — Windows Desktop discovery caveat
+
+- Distinguished filesystem path checks from runtime Skill discovery.
+- Recorded openai/codex issue #40458, which reports repository-local Skill discovery failures in Windows Codex Desktop.
+- Updated the diagnostic output and contract tests to preserve read-only behavior and require host-specific runtime confirmation.
+- A user-scope copy remains a global diagnostic comparison, not a project-isolated workaround.
