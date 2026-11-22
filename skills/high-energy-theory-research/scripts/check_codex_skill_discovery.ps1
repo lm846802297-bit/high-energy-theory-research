@@ -73,8 +73,9 @@ $report = [PSCustomObject]@{
     current_documented_project_scope = ".agents/skills/$SkillName"
     current_documented_user_scope = "~/.agents/skills/$SkillName"
     runtime_discovery_confirmed = $false
-    manual_runtime_check = "Start a new Codex session in the project, inspect /skills, explicitly invoke the Skill by name, and confirm its task-specific references can be read."
-    note = "This script is read-only. It checks files on disk; it cannot prove that an already-running Codex session has reloaded or indexed the Skill."
+    known_windows_desktop_issue = "https://github.com/openai/codex/issues/40458 (open as of 2026-11-22; repository-local discovery may be missing in Windows Desktop)"
+    manual_runtime_check = "Test the exact host in a fresh session. In Codex CLI inspect /skills; in Windows Codex Desktop inspect the native Available skills list. Then explicitly invoke the Skill by name and confirm its task-specific references can be read."
+    note = "This script is read-only. It checks files on disk; it cannot prove runtime discovery. A user-scope copy is global across projects and is diagnostic only, not a project-isolated fix."
 }
 
 $report | ConvertTo-Json -Depth 6
