@@ -1,8 +1,8 @@
 # Calculation-result archival policy
 
-**Status:** Mandatory repository-wide policy for numerical and computational research.
+**Status:** Adopted shared policy for repositories that explicitly adopt the central standards framework.
 
-This policy applies to calculations, simulations, parameter scans, data processing, phenomenology, and computational validation. It supplements the [User Guide](USER_GUIDE.md) and the [Scientific Diff workflow](scientific-diff-workflow.md). Each project repository defines its own artifact index or `artifacts/README.md` for immutable-bundle navigation. This policy governs how results are retained; it does not certify their scientific correctness.
+This policy applies to calculations, simulations, parameter scans, data processing, phenomenology, and computational validation in adopting project repositories. It supplements the [User Guide](USER_GUIDE.md) and the [Scientific Diff workflow](scientific-diff-workflow.md). Each project repository defines its own artifact index or `artifacts/README.md` for immutable-bundle navigation. This policy governs how results are retained; it does not certify their scientific correctness.
 
 ## 1. Use project-local canonical research locations
 
