@@ -8,6 +8,7 @@
 - Added the semantic source-control validator, schema/compatibility tests, source-control invariant tests, and CLI schema-selection tests.
 - Added versioned English and Chinese v1.0.1 standard documents. Both retain the v1.0.0 record roles and describe the same source-control contract.
 - Updated the structured-result validation workflow path filters to include both versioned v1.0.1 documents.
+- Pinned the v1.0.0 English and Chinese validator commands to the explicit v1.0.0 schema so their examples remain version-accurate after the CLI default moves to v1.0.1.
 - **Status: candidate implementation pending PR review and formal adoption.** The v1.0.0 schema and historical result records remain unchanged. This entry does not announce a v1.0.1 release.
 
 ## 2026-10-21 — Initial repository import
