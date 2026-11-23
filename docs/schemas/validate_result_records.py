@@ -359,8 +359,8 @@ def main():
             for error in integrity_errors:
                 print(f"  - {error}")
             failed = True
-        else:
-            print(f"PASS {record_path}: schema and local input/output integrity")
+        elif not source_control_errors:
+            print(f"PASS {record_path}: schema, source-control provenance, and local input/output integrity")
         for warning in input_warnings + file_warnings:
             print(f"WARN {record_path}: {warning}")
 
