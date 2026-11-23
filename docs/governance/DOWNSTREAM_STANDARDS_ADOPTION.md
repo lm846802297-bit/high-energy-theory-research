@@ -44,8 +44,15 @@ The initial profile identifiers are:
 - git-review-and-merge
 - document-review
 - referee-response-and-manuscript-synchronization
+- generated-figure-and-report
 
 Projects may adopt a subset when appropriate, but the lock must list each adopted profile explicitly. A numerical project adopting rcrps-v1.0.1 must also preserve its domain-specific extensions fields and validation procedures.
+
+## 3A. Machine validation
+
+The central repository provides `docs/schemas/standards-adoption-v1.0.0.schema.json` and `docs/schemas/validate_standards_adoption.py`. Run the validator against the repository's canonical lock file and, when present, the task-provenance record and standards validation report. It checks the record contract, known profile-to-document mappings, local extension paths/fingerprints, and task-to-lock/brief fingerprints. The central commit can additionally be checked against the local Git object database when the exact central object is available.
+
+A passing structural validator establishes only that the declared adoption and evidence records are internally consistent. It does not establish that every requirement was followed during reasoning or that a physical result is correct. Task-level application remains subject to review of the actual work and its scientific evidence.
 
 ## 4. Local extensions and deviations
 

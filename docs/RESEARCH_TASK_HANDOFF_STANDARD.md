@@ -45,6 +45,14 @@ Complete all ten fields. If a field does not apply, write N/A and explain why. D
 9. **Expected outputs:** paths, formats, metadata, reproduction commands, tests, run manifests, figures, audit records, PR, and the permitted conclusion level.
 10. **Unresolved questions:** competing definitions/values, source of each, impact, whether blocking, and next discriminating check.
 
+## 3A. Standards provenance
+
+For each substantive task, record the central standards source and the profiles actually applied in the Research Task Brief. Use the downstream repository's `research/standards-lock.yaml` (or its declared canonical path) as the adoption authority; do not resolve a moving central branch during execution.
+
+The task record must identify the exact central commit, lock-file path and SHA-256, task-brief path and SHA-256, applied profile IDs, project-local extensions, and the predeclared acceptance criteria. Select only profiles relevant to the task. Do not claim a profile was applied merely because it appears in the lock.
+
+For RCRPS v1.0.1 numerical runs, repeat this provenance in `run_manifest.extensions.standards_provenance` so the execution record remains independently traceable after the task brief is archived. Generate file hashes from the actual bytes; never use placeholders. The central adoption validator checks record structure and supplied file fingerprints, not whether an agent's reasoning complied with every normative statement.
+
 ## 4. Execution and change control
 
 1. Derive independently from primary sources; previous model outputs are leads and comparison points, not authorities.

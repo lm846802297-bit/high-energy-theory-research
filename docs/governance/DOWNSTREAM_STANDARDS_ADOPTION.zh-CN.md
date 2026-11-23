@@ -42,8 +42,15 @@ Release tag 不能替代 source_commit；如果两者都有，应同时记录。
 - git-review-and-merge
 - document-review
 - referee-response-and-manuscript-synchronization
+- generated-figure-and-report
 
 项目可以根据实际情况选择子集，但锁文件必须明确列出每项实际采用的配置。采用 rcrps-v1.0.1 的数值项目仍须保留自己的领域扩展字段和验证流程。
+
+## 3A. 机器验证
+
+中央仓库提供 `docs/schemas/standards-adoption-v1.0.0.schema.json` 和 `docs/schemas/validate_standards_adoption.py`。应使用该验证器检查项目规范锁文件；存在任务溯源记录或规范验收报告时，也应一并检查。验证器检查记录契约、已知 Profile 与中央规范文件的映射、本地扩展路径/指纹，以及任务记录与锁文件/任务单之间的指纹关系。如果本地 Git 对象库中包含精确中央 commit，还可以检查该 commit 是否真实存在。
+
+结构验证通过只说明声明的采用记录和证据记录在内部一致。它不能证明推理过程中遵守了每一项要求，也不能证明物理结果正确。任务级规范执行仍须结合实际工作和科学证据进行审查。
 
 ## 4. 本地扩展与偏离
 
