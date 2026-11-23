@@ -1,5 +1,13 @@
 # Changelog
 
+## 2026-11-23 — Central research standards consolidation, Phase II
+
+- Added the central standards index, shared research governance standard, general task handoff standard and task brief template, task-profile-aware Research Quality Gate, and downstream standards adoption/lock contract.
+- Updated central AGENTS, English/Chinese READMEs, compute policy, archival policies, and user guides to point to the shared standards architecture.
+- Corrected RCRPS v1.0.0 status wording to historical compatibility and aligned archival instructions with formally adopted RCRPS v1.0.1. Historical v1.0.0 schemas and records remain unchanged.
+- Kept project-specific physics conventions, calculations, data, outputs, and domain-specific acceptance criteria in their owning repositories.
+- This is a central documentation/governance consolidation. No scientific calculation or downstream repository migration is claimed.
+
 ## 2026-11-23 — RCRPS v1.0.1 source-control provenance candidate
 
 - Added the v1.0.1 Draft 2020-12 schema as a compatibility superset for v1.0.0 and v1.0.1 records. New v1.0.1 run manifests require all 14 `execution.source_control` fields.
