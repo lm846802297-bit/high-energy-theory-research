@@ -4,6 +4,10 @@
 
 本仓库是高能理论物理研究的共享基础设施仓库，维护可复用工作流、Skills、科研规范、Schema、模板、测试和导航元数据。具体项目的研究记录、源码、计算、验证输出和研究产物保存在各自的项目仓库中。
 
+## 共享科研规范
+
+[中央科研规范索引](docs/governance/CENTRAL_STANDARDS_INDEX.md)是共享科研治理、任务交接、质量门、计算、溯源、归档、结构化结果、审查和 Git 集成规范的统一入口。下游项目通过 PR 固定采用中央仓库的完整 commit SHA；项目专属物理规则仍保留在各自研究仓库。
+
 ## Scientific Diff 工作流
 
 **Scientific Diff（科学变更追踪）** 不只是文本或代码比较。它记录研究状态发生了什么变化、变化的原因、支持变化的证据、执行过哪些检查，以及哪些下游结果或主张可能受到影响。
@@ -12,7 +16,7 @@
 
 ### 从这里开始
 
-0. 每次开始任务前，先阅读根目录的强制规范 [AGENTS.md](AGENTS.md)。
+0. 每次开始任务前，先阅读根目录的强制规范 [AGENTS.md](AGENTS.md) 和[中央科研规范索引](docs/governance/CENTRAL_STANDARDS_INDEX.md)。
 1. 阅读[详细中文用户手册](docs/USER_GUIDE.zh-CN.md)，了解项目设置、工作流、研究变更、证据、验证和审查。
 2. 阅读[Scientific Diff 工作流规范](docs/scientific-diff-workflow.md)。
 3. 每项实质性研究变更都应从[研究变更模板](templates/research-change.md)开始。
