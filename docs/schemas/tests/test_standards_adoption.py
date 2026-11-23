@@ -29,8 +29,7 @@ class StandardsAdoptionTests(unittest.TestCase):
   spec=importlib.util.spec_from_file_location("standards_validator",VALIDATOR)
   module=importlib.util.module_from_spec(spec); spec.loader.exec_module(module)
   with tempfile.TemporaryDirectory() as tmp:
-   path=Path(tmp)/"lock.yaml"
-   path.write_text("adopted_at: 2026-11-23\n",encoding="utf-8")
+   path=Path(tmp)/"lock.yaml"; path.write_text("adopted_at: 2026-11-23\n",encoding="utf-8")
    self.assertEqual(module.load_record(path)["adopted_at"],"2026-11-23")
  def test_cli_rejects_malformed_lock(self):
   with tempfile.TemporaryDirectory() as tmp:
@@ -44,4 +43,26 @@ class StandardsAdoptionTests(unittest.TestCase):
    report=root/"report.json"; report.write_text(json.dumps({"record_type":"standards_validation_report","report_version":"1.0.0","task_id":"20261123-test-task","repository":"example/project","source_commit":"a"*40,"central_commit_sha":"a"*40,"status":"COMPLIANT","checks":[{"check_id":"profile","status":"BLOCKED","evidence":[]}]}),encoding="utf-8")
    run=subprocess.run([sys.executable,str(VALIDATOR),"--repo-root",str(root),"--lock",str(lock),"--report",str(report)],capture_output=True,text=True)
    self.assertNotEqual(run.returncode,0); self.assertIn("status inconsistent",run.stdout)
+ def make_central_repo(self, central):
+  (central/"docs").mkdir(parents=True); (central/"docs/RESEARCH_TASK_HANDOFF_STANDARD.md").write_text("central policy",encoding="utf-8")
+  subprocess.run(["git","init","-q"],cwd=central,check=True)
+  subprocess.run(["git","config","user.email","test@example.org"],cwd=central,check=True)
+  subprocess.run(["git","config","user.name","Test"],cwd=central,check=True)
+  subprocess.run(["git","add","."],cwd=central,check=True)
+  subprocess.run(["git","commit","-qm","fixture"],cwd=central,check=True)
+  return subprocess.run(["git","rev-parse","HEAD"],cwd=central,capture_output=True,text=True,check=True).stdout.strip()
+ def test_cli_checks_profile_in_exact_central_checkout(self):
+  with tempfile.TemporaryDirectory() as tmp:
+   base=Path(tmp); project=base/"project"; central=base/"central"; project.mkdir(); central.mkdir()
+   sha=self.make_central_repo(central); record=self.lock(); record["source_commit"]=sha; record["adopted_profiles"]=["task-handoff"]
+   lock=project/"standards-lock.json"; lock.write_text(json.dumps(record),encoding="utf-8")
+   run=subprocess.run([sys.executable,str(VALIDATOR),"--repo-root",str(project),"--central-root",str(central),"--require-central-commit","--lock",str(lock)],capture_output=True,text=True)
+   self.assertEqual(run.returncode,0,run.stdout+run.stderr)
+ def test_cli_rejects_central_checkout_at_wrong_commit(self):
+  with tempfile.TemporaryDirectory() as tmp:
+   base=Path(tmp); project=base/"project"; central=base/"central"; project.mkdir(); central.mkdir()
+   self.make_central_repo(central); record=self.lock(); record["adopted_profiles"]=["task-handoff"]
+   lock=project/"standards-lock.json"; lock.write_text(json.dumps(record),encoding="utf-8")
+   run=subprocess.run([sys.executable,str(VALIDATOR),"--repo-root",str(project),"--central-root",str(central),"--lock",str(lock)],capture_output=True,text=True)
+   self.assertNotEqual(run.returncode,0); self.assertIn("central-root HEAD",run.stdout)
 if __name__=="__main__": unittest.main()
