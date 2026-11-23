@@ -10,12 +10,16 @@ on:
       - "docs/governance/DOWNSTREAM_STANDARDS_ADOPTION.zh-CN.md"
       - "templates/research-task-brief.md"
       - "templates/research-task-brief.zh-CN.md"
-      - "docs/STRUCTURED_RESULT_DATA_STANDARD_v1.0.1.md"
-      - "docs/STRUCTURED_RESULT_DATA_STANDARD_v1.0.1.zh-CN.md"
       - "docs/STRUCTURED_RESULT_DATA_STANDARD.md"
       - "docs/STRUCTURED_RESULT_DATA_STANDARD.zh-CN.md"
       - "docs/STRUCTURED_RESULT_DATA_STANDARD_v1.0.1.md"
       - "docs/STRUCTURED_RESULT_DATA_STANDARD_v1.0.1.zh-CN.md"
+      - "docs/RESEARCH_TASK_HANDOFF_STANDARD.md"
+      - "docs/RESEARCH_TASK_HANDOFF_STANDARD.zh-CN.md"
+      - "docs/governance/DOWNSTREAM_STANDARDS_ADOPTION.md"
+      - "docs/governance/DOWNSTREAM_STANDARDS_ADOPTION.zh-CN.md"
+      - "templates/research-task-brief.md"
+      - "templates/research-task-brief.zh-CN.md"
       - ".github/workflows/structured-result-validation.yml"
   push:
     branches:
