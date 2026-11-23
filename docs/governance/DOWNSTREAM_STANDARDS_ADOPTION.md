@@ -1,5 +1,7 @@
 # Downstream Standards Adoption Contract
 
+简体中文版：[DOWNSTREAM_STANDARDS_ADOPTION.zh-CN.md](DOWNSTREAM_STANDARDS_ADOPTION.zh-CN.md)。
+
 **Status:** adopted central contract  
 **Effective date:** 2026-11-23  
 **Scope:** project repositories consuming shared standards from high-energy-theory-research
