@@ -1,5 +1,7 @@
 # Shared Research Governance Standard
 
+简体中文版：[RESEARCH_GOVERNANCE_STANDARD.zh-CN.md](RESEARCH_GOVERNANCE_STANDARD.zh-CN.md)。
+
 **Status:** adopted shared baseline  
 **Effective date:** 2026-11-23  
 **Scope:** research repositories that explicitly adopt the central standards framework
