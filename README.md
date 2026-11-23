@@ -29,8 +29,8 @@ The workflow is designed for theoretical particle physics, UV–EFT matching, pe
 10. Read the [v1.6.5 design baseline](docs/design/high-energy-theory-research-Skill-v1.6.5.md), the [v1.6.7 consolidated design/implementation report](docs/design/high-energy-theory-research-Skill-v1.6.7.md), and the [v1.6.6 Artifact-identity candidate clarification](schema/v1.4.3.7/audit/高能理论物理研究-Skill-详细设计文档-v1.6.6-Artifact身份语义候选修订.md).
 11. Follow the mandatory [calculation-result archival policy](docs/CALCULATION_RESULT_ARCHIVAL_POLICY.md) when committing numerical outputs, run manifests, and validation evidence.
 12. Follow the [Generated Figure and Report Artifact Policy](docs/GENERATED_FIGURE_AND_REPORT_POLICY.md): archive source data, plotting code, configuration, and provenance; generate routine rendered PDFs/PNGs/SVGs on demand; retain frozen deliverables with their hashes.
-12. Follow the project-wide [Research Compute Policy](RESEARCH_COMPUTE_POLICY.md): ordinary GPT chat uses ChatGPT Linux; Codex/Work may use the user's Windows local environment or a GPT-managed cloud computer; GitHub is the canonical archive and Actions is for independent verification.
-13. Follow the normative [Git merge strategy and commit-history policy](docs/governance/GIT_MERGE_POLICY.md): substantive research PRs default to merge commits.
+13. Follow the project-wide [Research Compute Policy](RESEARCH_COMPUTE_POLICY.md): ordinary GPT chat uses ChatGPT Linux; Codex/Work may use the user's Windows local environment or a GPT-managed cloud computer; GitHub is the canonical archive and Actions is for independent verification.
+14. Follow the normative [Git merge strategy and commit-history policy](docs/governance/GIT_MERGE_POLICY.md): substantive research PRs default to merge commits.
 
 ### Core chain
 
