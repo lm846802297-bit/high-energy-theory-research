@@ -166,7 +166,7 @@ PR merge 运行示例片段（值仅作说明）：
 
 对于所有非 PR 事件，七个 PR 专用字段（`pr_number`、`pr_url`、`pr_head_sha`、`base_sha`、`tested_merge_sha`、`head_ref` 和 `base_ref`）都必须存在且显式设置为 `null`。不能省略，也不能填写占位 SHA。
 
-根据实际情况使用 `branch_commit`、`detached_commit` 或 `unknown`。无论哪种情况，`source.commit_sha` 都记录实际使用的 commit。没有 Workflow 的本地运行将 `workflow_run_id` 和 `workflow_run_attempt` 同时设为 null；存在 Workflow 时二者必须同时填写。
+根据实际情况使用 `branch_commit`、`detached_commit` 或 `unknown`。对于非 PR 事件，`branch_commit` 必须提供非 null 的 `checkout_ref`，而 `detached_commit` 的 `checkout_ref` 必须为 null；`unknown` 在实际 ref 已知时仍可记录该 ref。无论哪种情况，`source.commit_sha` 都记录实际使用的 commit。没有 Workflow 的本地运行将 `workflow_run_id` 和 `workflow_run_attempt` 同时设为 null；存在 Workflow 时二者必须同时填写。
 
 本地运行示例片段：
 
