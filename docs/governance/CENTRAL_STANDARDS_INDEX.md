@@ -1,5 +1,7 @@
 # Central Research Standards Index
 
+简体中文版：[CENTRAL_STANDARDS_INDEX.zh-CN.md](CENTRAL_STANDARDS_INDEX.zh-CN.md)。
+
 **Status:** normative navigation index  
 **Owner:** central research infrastructure repository  
 **Scope:** shared minimum standards for research repositories that adopt this framework
