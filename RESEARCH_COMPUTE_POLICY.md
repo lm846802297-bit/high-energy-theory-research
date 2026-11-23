@@ -2,7 +2,7 @@
 
 **Status:** Author-approved normative policy  
 **Effective date:** 2026-11-20  
-**Applies to:** All numerical, symbolic, phenomenological, data-processing, and computational-validation work in this research project.
+**Applies to:** Numerical, symbolic, phenomenological, data-processing, and computational-validation work in this repository and in downstream projects that adopt this central policy.
 
 ## 1. Decision / 总体决策
 
@@ -12,7 +12,7 @@ The project uses a three-part architecture with strictly separated responsibilit
 2. **GitHub — canonical source and research archive.** Store versioned source code, input-data provenance, run manifests, native numerical outputs, plots, validation reports, and pull-request history. GitHub is the durable record, not the primary numerical execution engine.
 3. **GitHub Actions — independent verification.** Use Actions for CI, regression tests, selected independent recalculations, cross-platform checks, and reproducibility checks against the primary results. Actions must not silently replace the primary computation or become a prerequisite for continuing research.
 
-This division is normative for this project. Do not reopen it for each task.
+This division is the shared central minimum. Downstream projects may add compatible domain-specific requirements but must not silently weaken it.
 
 ## 2. Primary computation / 主计算环境
 
