@@ -9,16 +9,13 @@ The repository is a research-process and traceability framework. It is not a ful
 ## 1. Start here
 
 1. Read the [Central Research Standards Index](governance/CENTRAL_STANDARDS_INDEX.md) and [Research Governance Standard](RESEARCH_GOVERNANCE_STANDARD.md).
-2. For substantive work, complete the [Research Task Brief](../templates/research-task-brief.md) under the [Task Handoff Standard](RESEARCH_TASK_HANDOFF_STANDARD.md), then select the appropriate profile in the [Research Quality Gate](governance/RESEARCH_QUALITY_GATE.md).
-
-If this is your first visit:
-
-1. Read this guide once to understand the working model.
-2. Open the [project registry](../projects/README.md) and [registry file](../projects/registry.yaml) to identify the correct project and workstream.
-3. Read the [Scientific Diff workflow](scientific-diff-workflow.md).
-4. Read the [research Skill](../skills/high-energy-theory-research/SKILL.md) before starting a calculation.
-5. Open the selected project's canonical research record and Claim–Evidence Matrix.
-6. Check [repository status](REPOSITORY_STATUS.md) and [open issues](OPEN_ISSUES.md) before changing the candidate Schema or migration behavior.
+2. Read this guide once to understand the working model.
+3. For substantive work, complete the [Research Task Brief](../templates/research-task-brief.md) under the [Task Handoff Standard](RESEARCH_TASK_HANDOFF_STANDARD.md), then select the appropriate profile in the [Research Quality Gate](governance/RESEARCH_QUALITY_GATE.md).
+4. Open the [project registry](../projects/README.md) and [registry file](../projects/registry.yaml) to identify the correct project and workstream.
+5. Read the [Scientific Diff workflow](scientific-diff-workflow.md).
+6. Read the [research Skill](../skills/high-energy-theory-research/SKILL.md) before starting a calculation.
+7. Open the selected project's canonical research record and Claim–Evidence Matrix.
+8. Check [repository status](REPOSITORY_STATUS.md) and [open issues](OPEN_ISSUES.md) before changing the candidate Schema or migration behavior.
 
 The root [README](../README.md) is the short landing page; this document is the detailed operational guide.
 
