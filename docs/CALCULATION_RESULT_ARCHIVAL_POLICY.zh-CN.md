@@ -48,68 +48,68 @@
 
 保留审查或恢复长时间计算所需的日志和 checkpoint。不要提交可丢弃的缓存、临时构建产物、虚拟环境或无关草稿。
 
-## 4A. Reuse accepted calculation results; do not recompute without cause
+## 4A. 复用已验收的计算结果，避免无依据的重复计算
 
-**A result that has passed predeclared numerical and scientific acceptance criteria and has complete source/input provenance is reusable scientific evidence. A new PR, CI restart, documentation edit, archival-path change, or workflow adjustment alone is not a reason to recompute it.**
+**已经通过预先定义的数值与科学验收、且具有完整源码和输入溯源的结果，是可复用的科研证据。不得仅因新建 PR、CI 重启、文档更新、归档路径变化或工作流调整而要求重新计算。**
 
-### 4A.1 Identify a reusable result
+### 4A.1 建立可复用结果的身份
 
-A reusable accepted result must be bound, as applicable, to:
+可复用的已验收结果必须能够绑定以下信息（按任务适用情况）：
 
-- repository and full source commit SHA, plus hashes of the calculation scripts/notebooks actually used;
-- paths, versions, and SHA-256 checksums of all input data, reference data, parameter files, and configurations;
-- physical definitions and conventions: units, normalization, model assumptions, approximations, boundary conditions, and other result-affecting choices;
-- numerical methods and settings: grids, integration/quadrature order, precision, tolerances, random seeds, and parallel settings;
-- execution environment: operating system, runtime, compiler, and relevant dependency versions;
-- native output files and their SHA-256 checksums;
-- predeclared acceptance criteria, actual validation methods/results, and locatable logs/reports.
+- 仓库、完整源码 commit SHA，以及实际参与计算的脚本/Notebook 路径和文件哈希；
+- 全部输入数据、参考数据、参数文件和配置文件的路径、版本及 SHA-256；
+- 物理定义和约定，包括单位、归一化、模型假设、近似、边界条件及其他影响结果的选择；
+- 数值方法与参数，包括网格、积分/求积阶数、精度、容差、随机种子和并行设置；
+- 运行环境，包括操作系统、运行时、编译器及相关依赖版本；
+- 原生输出文件及其 SHA-256；
+- 预先定义的验收标准、实际验证方法和结果，以及可定位的日志/报告。
 
-Together these fields form the result's *calculation fingerprint*. A filename, PR number, green CI status, or verbal statement alone does not establish equivalence between calculation versions.
+以上信息共同构成结果的**计算指纹（calculation fingerprint）**。仅记录文件名、PR 编号、CI 绿色状态或口头结论，不足以证明两个计算版本等价。
 
-### 4A.2 When to reuse directly
+### 4A.2 何时直接复用
 
-When the calculation fingerprint relevant to the current task matches the accepted record, and the supported scientific claim and scope are unchanged:
+若当前任务所依赖的计算指纹与已验收记录一致，且拟支持的科学主张及适用范围没有变化：
 
-1. cite the native result and its exact version;
-2. cite the existing convergence, error-analysis, and independent-validation evidence;
-3. perform necessary integrity/hash checks on the existing files and verify their archival location;
-4. record this task as “reuse of an accepted result,” identifying the reused run ID, commit, input/output hashes, and validation record;
-5. do not rerun expensive physics calculations or duplicate a calculation merely to obtain a new CI record.
+1. 直接引用原生结果及其精确版本；
+2. 引用已有的收敛、误差分析和独立验证证据；
+3. 对现存文件执行必要的完整性/哈希核验，并检查远端归档位置；
+4. 将本次工作记录为“复用既有验收结果”，注明被复用的 run ID、commit、输入/输出哈希及验证记录；
+5. 不重新运行昂贵的物理计算，也不为了获得一条新的 CI 记录而重复同一计算。
 
-Hash verification, metadata checks, result-table comparisons, and archival checks are lightweight verification; they are not reruns of the original calculation. If the result files, source, and inputs are unchanged, the existing independent validation remains valid; do not repeat it merely to “prove it again.”
+哈希核验、元数据核对、结果表比较和归档检查属于轻量级验证，不等同于重新执行原始计算。如果结果文件、源码和输入均未变化，原有独立验证继续有效，不需要仅为“再次证明”而重复运行。
 
-### 4A.3 When recalculation or targeted revalidation is justified
+### 4A.3 何时需要重新计算或针对性复核
 
-Recompute only the affected part when there is a concrete, relevant change or new evidence, for example:
+只有存在具体且相关的变化或新证据时，才重新计算受影响的部分，例如：
 
-- a source-code or algorithm change that may alter numerical results;
-- a change in the content/version of input data, parameters, configuration, data transformation, or reference data;
-- a change in physical definitions, sign conventions, normalization, approximations, model assumptions, or the target scientific claim;
-- a change in numerical method, precision, grid, quadrature, tolerance, random seed, or execution environment that may affect the result;
-- discovery of an actual error, numerical instability, failed convergence, checksum mismatch, or new independent evidence contradicting the old result;
-- evidence that the previous validation scope is insufficient for a stronger claim now being made.
+- 参与计算的源码或算法发生可能改变数值结果的修改；
+- 输入数据、参数、配置、数据转换或参考数据的内容/版本发生变化；
+- 物理定义、符号约定、归一化、近似、模型假设或目标科学主张发生变化；
+- 数值方法、精度、网格、求积、容差、随机种子或运行环境变化可能影响结果；
+- 发现实际错误、数值不稳定、收敛失败、哈希不匹配，或新的独立证据与旧结果矛盾；
+- 原有验证范围不足以支持当前提出的更强主张。
 
-Scope revalidation along the dependency graph: check the downstream components affected by the changed input, code module, result, or claim. Do not treat unrelated documentation edits, plot-style changes, file moves, README additions, PR reopenings, or CI configuration changes as automatic reasons to recompute all physics results. If a change affects only presentation, regenerate the figure without recomputing its upstream numerical data.
+复核范围必须沿依赖关系限定：变化影响哪个输入、代码模块、结果或主张，就检查相应的下游部分。不得把无关文档修改、绘图样式调整、文件移动、README 补充、PR 重开或 CI 配置变化，自动解释为必须重算全部物理结果。如果变化仅影响展示层，应重新生成图件，不重新计算其上游数值数据。
 
-### 4A.4 Keep calculation, validation, and archival status distinct
+### 4A.4 区分计算、验证和归档状态
 
-Record these separately:
+记录中必须分别标记：
 
-- **Calculation status:** result produced, or not yet executed;
-- **Scientific-validation status:** which predeclared checks passed, were not run, or are not applicable;
-- **Archival status:** whether native results, source, inputs, and provenance are durably stored and verified;
-- **Reuse status:** whether this task reuses an accepted result or performs targeted recalculation because of a specified change.
+- **计算状态：** 已产生结果，或尚未执行；
+- **科学验证状态：** 哪些预先定义的检查已通过、未执行或不适用；
+- **归档状态：** 原生结果、源码、输入和溯源是否已可靠保存并核验；
+- **复用状态：** 本次是复用既有验收结果，还是因明确变化进行了针对性重算。
 
-A historical calculation passing does not automatically validate new modifications; equally, not rerunning a calculation in a new PR does not invalidate the existing result. Do not report “not recomputed this round” as “validation failed,” and do not report a matching checksum as a new independent physics validation.
+历史计算通过不代表新修改自动通过；同样，新 PR 中没有重新执行计算也不代表已有结果失效。不得将“本轮未重算”误报为“验证失败”，也不得将哈希一致误报为新的独立物理验证。
 
-### 4A.5 CI and automation requirements
+### 4A.5 CI 和自动化要求
 
-- CI should select checks according to changed paths and dependency relationships. Documentation-only, presentation-only, or non-calculation workflow changes should not automatically trigger every expensive numerical calculation.
-- When a task reuses an accepted result, CI may verify source/input/output hashes, manifest completeness, and consistency of result summaries with frozen references. A full physics rerun is not required unless one of the recalculation triggers above applies.
-- Multiple workflows must not concurrently recompute the same result or overwrite each other merely because an automated archive commit changed a result directory. Archival should be idempotent and keyed to an explicit result identity, with deliberate commit-conflict handling.
-- Independent replay is valuable, but should be performed for initial acceptance, a relevant dependency change, or a concrete discrepancy—not as a default full recomputation for every PR.
+- CI 应根据变更路径和依赖关系选择必要检查。纯文档、纯展示或不影响计算的工作流修改，不应自动触发全部昂贵数值计算。
+- 当任务复用已验收结果时，CI 可以检查源码/输入/输出哈希、清单完整性，以及结果摘要与冻结基准的一致性。除非出现上述重算触发条件，否则不要求重新执行完整物理计算。
+- 多个工作流不得仅因自动归档提交改变了结果目录，就并发重复计算同一结果或相互覆盖。归档应具备幂等性，并依据明确的结果身份处理提交冲突。
+- 独立复算是一种有价值的验证方法，但应在新结果首次验收、关键依赖变化或出现具体疑点时执行；不得把每次 PR 都进行完整独立复算设为默认规则。
 
-This section applies together with the [minimum-sufficient-acceptance and historical-validation-reuse principles in the Research Quality Gate](governance/RESEARCH_QUALITY_GATE.md). Preserve the stricter provenance requirements, but do not expand the recalculation scope without evidence.
+本节与[科研质量门中的最小充分验收及历史验证复用原则](governance/RESEARCH_QUALITY_GATE.zh-CN.md)共同适用。必须保留严格的溯源要求，但不得无依据扩大重算范围。
 
 ## 5. 验证并核对远端提交
 
