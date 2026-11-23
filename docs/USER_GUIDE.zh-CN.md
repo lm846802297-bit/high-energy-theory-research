@@ -2,15 +2,15 @@
 
 语言：简体中文。英文原版：[USER_GUIDE.md](USER_GUIDE.md)。
 
-本手册介绍如何将本仓库作为一个**多项目研究平台**使用。首先阅读[中央科研规范索引](governance/CENTRAL_STANDARDS_INDEX.md)，了解已采用的共享规范和下游采用契约。[科研治理规范](RESEARCH_GOVERNANCE_STANDARD.md)、[任务交接规范](RESEARCH_TASK_HANDOFF_STANDARD.md)和[科研质量门](governance/RESEARCH_QUALITY_GATE.md)定义通用最低要求；项目专属物理规则仍由对应研究仓库维护。
+本手册介绍如何将本仓库作为一个**多项目研究平台**使用。首先阅读[中央科研规范索引](governance/CENTRAL_STANDARDS_INDEX.zh-CN.md)，了解已采用的共享规范和下游采用契约。[科研治理规范](RESEARCH_GOVERNANCE_STANDARD.zh-CN.md)、[任务交接规范](RESEARCH_TASK_HANDOFF_STANDARD.zh-CN.md)和[科研质量门](governance/RESEARCH_QUALITY_GATE.zh-CN.md)定义通用最低要求；项目专属物理规则仍由对应研究仓库维护。
 
 本仓库是研究流程与可追溯性框架，并非完全自主的研究智能体。软件检查通过不等于物理结果正确。
 
 ## 1. 从这里开始
 
-1. 阅读[中央科研规范索引](governance/CENTRAL_STANDARDS_INDEX.md)和[科研治理规范](RESEARCH_GOVERNANCE_STANDARD.md)。
+1. 阅读[中央科研规范索引](governance/CENTRAL_STANDARDS_INDEX.zh-CN.md)和[科研治理规范](RESEARCH_GOVERNANCE_STANDARD.zh-CN.md)。
 2. 阅读本手册，了解整体工作方式。
-3. 实质性研究任务开始前，填写[研究任务单模板](../templates/research-task-brief.md)，遵循[任务交接规范](RESEARCH_TASK_HANDOFF_STANDARD.md)，并选择适用的[科研质量门](governance/RESEARCH_QUALITY_GATE.md)任务类型。
+3. 实质性研究任务开始前，填写[研究任务单模板](../templates/research-task-brief.zh-CN.md)，遵循[任务交接规范](RESEARCH_TASK_HANDOFF_STANDARD.zh-CN.md)，并选择适用的[科研质量门](governance/RESEARCH_QUALITY_GATE.zh-CN.md)任务类型。
 4. 打开[项目注册表说明](../projects/README.zh-CN.md)和[注册表文件](../projects/registry.yaml)，确定研究所属的项目与工作流。
 5. 阅读[Scientific Diff 工作流规范](scientific-diff-workflow.md)。
 6. 开始计算前，阅读[研究 Skill](../skills/high-energy-theory-research/SKILL.md)。
