@@ -33,6 +33,24 @@ Apply the separate [Generated Figure and Report Artifact Policy](GENERATED_FIGUR
 
 - Commit directly to Git when file size, licensing, and repository policy permit.
 - For files too large for ordinary GitHub Git storage, use Git LFS or another repository-approved, durable, versioned storage location. Do not silently omit the file or replace it with an untraceable archive.
+
+
+### 3.1 Select the storage tier by data role
+
+Use the following storage tiers; choose the least complex tier that preserves practical inspection, reproducibility, and durable retrieval:
+
+- **Ordinary Git:** source code, scripts, configuration, schemas, manifests, provenance, validation reports, indexes, and small/medium native datasets that remain practical to diff, clone, and review. Git is the canonical version history for these files.
+- **Git LFS:** large binary or native data files that must be versioned alongside a repository revision and are still practical to retrieve as part of that project's working set. Commit the LFS pointer and keep a dataset manifest containing the logical filename, LFS object SHA-256/OID, byte size, format, source/version, and the repository commit that references it. Verify the retrieved object bytes against the recorded SHA-256; a pointer alone is not proof that the object remains retrievable.
+- **External object storage:** large raw outputs, bulk parameter scans, extensive grids, long-term datasets, or files whose volume/download pattern makes Git/LFS unsuitable. Use a durable, versioned location with immutable object/version identifiers (and retention or object-lock protection where available). Keep a repository-side manifest with the exact object URI/version, filename, byte size, format, source, SHA-256, access/retrieval instructions, and retention owner/policy. A mutable “latest” URL is not an immutable identity.
+
+A file approaching GitHub's ordinary-Git per-file limit must be evaluated for LFS or external storage before it is committed; do not split or recompress data merely to bypass the limit unless the transformation is part of the documented native data format. Storage-tier choice is based on data role, size, access pattern, durability, licensing, and project budget—not on whether the repository is public or private.
+
+### 3.2 Integrity and availability
+
+- Calculate SHA-256 from the exact bytes of each archived native file. For transformed data, retain the raw-source identity where permitted and record the transformation, tool/version, and output SHA-256.
+- For Git LFS and external storage, verify retrieval from the remote location after upload and compare the downloaded bytes with the manifest. Record the verification date and result in the archival/provenance record.
+- Keep the manifest, retrieval instructions, and hashes in the project Git repository even when the data itself is external. Never make an expiring CI artifact, temporary workspace, or unversioned cloud object the only copy.
+- Do not duplicate large data across multiple storage systems without a stated recovery or access reason. If replicas are maintained, record their identities and verify them against the same content hash.
 - For externally stored files, commit a manifest with the exact filename, immutable retrieval URI or release identifier, version, byte size, format, source, and SHA-256. Prefer individual native files over newly generated archive bundles.
 - An expiring GitHub Actions artifact, temporary workspace, chat attachment, or local-only file must never be the sole permanent copy of a result used in a research claim.
 - Do not commit credentials, tokens, private keys, personal data, or inputs that the project is not permitted to redistribute. Record retrieval instructions and checksums for restricted inputs instead.
