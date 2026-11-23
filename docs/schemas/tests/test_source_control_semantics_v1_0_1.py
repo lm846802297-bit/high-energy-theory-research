@@ -101,6 +101,15 @@ class SourceControlSemanticTests(unittest.TestCase):
         record["execution"]["source_control"]["checkout_ref"] = "refs/heads/main"
         self.assertTrue(any("checkout_ref" in error for error in self.errors(record)))
 
+    def test_legacy_source_workflow_run_id_must_match_source_control(self):
+        record = minimal_manifest(event="push", mode="branch_commit")
+        record["source"]["workflow_run_id"] = 123456
+        record["execution"]["source_control"]["workflow_run_id"] = 123456
+        record["execution"]["source_control"]["workflow_run_attempt"] = 1
+        self.assertEqual(self.errors(record), [])
+        record["source"]["workflow_run_id"] = 654321
+        self.assertTrue(any("source.workflow_run_id" in error for error in self.errors(record)))
+
     def test_workflow_run_id_and_attempt_must_be_paired(self):
         record = minimal_manifest()
         record["execution"]["source_control"]["workflow_run_id"] = 123
