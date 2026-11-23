@@ -16,7 +16,7 @@
 
 ### 从这里开始
 
-0. 每次开始任务前，先阅读根目录的强制规范 [AGENTS.md](AGENTS.md) 和[中央科研规范索引](docs/governance/CENTRAL_STANDARDS_INDEX.md)。
+0. 每次开始任务前，先阅读根目录的强制规范 [AGENTS.md](AGENTS.md) 和[中央科研规范索引](docs/governance/CENTRAL_STANDARDS_INDEX.zh-CN.md)。
 1. 阅读[详细中文用户手册](docs/USER_GUIDE.zh-CN.md)，了解项目设置、工作流、研究变更、证据、验证和审查。
 2. 阅读[Scientific Diff 工作流规范](docs/scientific-diff-workflow.md)。
 3. 每项实质性研究变更都应从[研究变更模板](templates/research-change.md)开始。
@@ -29,8 +29,9 @@
 10. 阅读 [v1.6.5 设计基线](docs/design/high-energy-theory-research-Skill-v1.6.5.md)、[v1.6.7 设计与实现整合报告](docs/design/high-energy-theory-research-Skill-v1.6.7.md)，以及 [v1.6.6 Artifact 身份候选澄清](schema/v1.4.3.7/audit/高能理论物理研究-Skill-详细设计文档-v1.6.6-Artifact身份语义候选修订.md)。
 11. 提交数值结果、运行清单和验证证据时，必须遵守[计算结果归档规范](docs/CALCULATION_RESULT_ARCHIVAL_POLICY.zh-CN.md)。
 12. 必须遵守[科研计算执行规范](RESEARCH_COMPUTE_POLICY.md)：普通 GPT 聊天模式使用 ChatGPT Linux；Codex/Work 可使用 Windows 本地环境或 GPT 管理的云端计算机；GitHub 负责长期归档，Actions 只负责独立验证。
-13. 实质性科研 PR 默认使用 [Merge Commit 合并策略](docs/governance/GIT_MERGE_POLICY.md)，保留有科研追溯价值的独立提交。
-13. 已完成且验收通过的科研成果必须及时合并到 `main`，并在专题 README、项目注册表或研究索引中建立稳定入口；PR 负责审查与集成，不作为长期归档位置。未完成工作保留在专题分支或 Draft PR。详见 [科研成果归档与 PR 生命周期规范](docs/governance/GIT_MERGE_POLICY.md#6-main-is-the-canonical-research-archive)。
+13. 每项实质性研究任务开始前，填写[研究任务单模板](templates/research-task-brief.zh-CN.md)，遵循[任务交接规范](docs/RESEARCH_TASK_HANDOFF_STANDARD.zh-CN.md)，并选择适用的[科研质量门](docs/governance/RESEARCH_QUALITY_GATE.zh-CN.md)。
+14. 实质性科研 PR 默认使用 [Merge Commit 合并策略](docs/governance/GIT_MERGE_POLICY.md)，保留有科研追溯价值的独立提交。
+15. 已完成且验收通过的科研成果必须及时合并到 `main`，并在专题 README、项目注册表或研究索引中建立稳定入口；PR 负责审查与集成，不作为长期归档位置。未完成工作保留在专题分支或 Draft PR。详见 [科研成果归档与 PR 生命周期规范](docs/governance/GIT_MERGE_POLICY.md#6-main-is-the-canonical-research-archive)。
 
 ### 核心链条
 
