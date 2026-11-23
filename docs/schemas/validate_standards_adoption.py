@@ -56,6 +56,11 @@ def check_file(root, value, label, errors, expected_sha=None, allow_directory=Fa
  if expected_sha and (not path.is_file() or sha256(path)!=expected_sha):
   errors.append(f"{label}: SHA-256 mismatch: {value}")
  return path
+def check_lock_reference(root, selected_lock, provenance, label, errors):
+ path=check_file(root,provenance["lock_file_path"],label,errors,provenance["lock_file_sha256"])
+ # Compare resolved targets, not spellings, so in-root aliases remain valid.
+ if path is not None and selected_lock is not None and path!=selected_lock:
+  errors.append(f"{label}: does not match --lock: {provenance['lock_file_path']}")
 def main():
  p=argparse.ArgumentParser(description=__doc__)
  p.add_argument("--repo-root",type=Path,default=Path.cwd(),help="downstream project repository")
@@ -70,6 +75,7 @@ def main():
  validator=Draft202012Validator(schema,format_checker=FormatChecker()); errors=[]
  lock_path=a.lock if a.lock.is_absolute() else root/a.lock
  lock,errs=validate(lock_path,validator); errors.extend(errs)
+ selected_lock=lock_path.resolve() if lock and not errs else None
  task=None
  if lock and not errs:
   for profile in lock["adopted_profiles"]:
@@ -86,7 +92,7 @@ def main():
   task_path=a.task_provenance if a.task_provenance.is_absolute() else root/a.task_provenance
   task,errs=validate(task_path,validator); errors.extend(errs)
   if task and not errs:
-   check_file(root,task["lock_file_path"],"task provenance lock file",errors,task["lock_file_sha256"])
+   check_lock_reference(root,selected_lock,task,"task provenance lock file",errors)
    check_file(root,task["task_brief_path"],"task brief",errors,task["task_brief_sha256"])
    if lock and task["central_commit_sha"]!=lock["source_commit"]: errors.append("task central commit differs from locked central commit")
    if lock and not set(task["applied_profiles"]).issubset(set(lock["adopted_profiles"])): errors.append("task applies a profile not adopted by the lock")
@@ -117,7 +123,7 @@ def main():
    else:
     if prov["central_repository"]!="lm846802297-bit/high-energy-theory-research": errors.append("run manifest central_repository is not canonical")
     if lock and prov["central_commit_sha"]!=lock["source_commit"]: errors.append("run manifest central commit differs from lock")
-    check_file(root,prov["lock_file_path"],"run manifest lock file",errors,prov["lock_file_sha256"])
+    check_lock_reference(root,selected_lock,prov,"run manifest lock file",errors)
     check_file(root,prov["task_brief_path"],"run manifest task brief",errors,prov["task_brief_sha256"])
     if lock and not set(prov["applied_profiles"]).issubset(set(lock["adopted_profiles"])): errors.append("run manifest applies a profile not adopted by lock")
     if a.task_provenance and task and prov["task_id"]!=task["task_id"]: errors.append("run manifest task_id differs from task provenance")

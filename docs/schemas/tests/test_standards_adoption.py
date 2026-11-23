@@ -1,6 +1,7 @@
-import json, subprocess, sys, tempfile, unittest
+import hashlib, json, subprocess, sys, tempfile, unittest
 from pathlib import Path
 from jsonschema import Draft202012Validator, FormatChecker
+from rcrps_v1_0_1_fixtures import minimal_manifest
 ROOT=Path(__file__).resolve().parents[1]
 SCHEMA=ROOT/"standards-adoption-v1.0.0.schema.json"
 VALIDATOR=ROOT/"validate_standards_adoption.py"
@@ -43,6 +44,50 @@ class StandardsAdoptionTests(unittest.TestCase):
    report=root/"report.json"; report.write_text(json.dumps({"record_type":"standards_validation_report","report_version":"1.0.0","task_id":"20261123-test-task","repository":"example/project","source_commit":"a"*40,"central_commit_sha":"a"*40,"status":"COMPLIANT","checks":[{"check_id":"profile","status":"BLOCKED","evidence":[]}]}),encoding="utf-8")
    run=subprocess.run([sys.executable,str(VALIDATOR),"--repo-root",str(root),"--lock",str(lock),"--report",str(report)],capture_output=True,text=True)
    self.assertNotEqual(run.returncode,0); self.assertIn("status inconsistent",run.stdout)
+ def test_cli_binds_provenance_to_the_selected_lock(self):
+  with tempfile.TemporaryDirectory() as tmp:
+   root=Path(tmp); (root/"docs").mkdir(); (root/"research").mkdir()
+   (root/"docs/RESEARCH_TASK_HANDOFF_STANDARD.md").write_text("test",encoding="utf-8")
+   lock_path="research/standards-lock.json"
+   other_path="research/another-standards-lock.json"
+   lock={**self.lock(),"adopted_profiles":["task-handoff"]}
+   alternate={**lock,"adoption_pr":"https://github.com/example/project/pull/2"}
+   self.assertTrue(self.validator.is_valid(lock))
+   self.assertTrue(self.validator.is_valid(alternate))
+   (root/lock_path).write_text(json.dumps(lock),encoding="utf-8")
+   (root/other_path).write_text(json.dumps(alternate),encoding="utf-8")
+   (root/"brief.md").write_text("task brief",encoding="utf-8")
+
+   def digest(path):
+    return hashlib.sha256((root/path).read_bytes()).hexdigest()
+
+   def check(record_type, claimed, expected):
+    provenance={
+     "central_repository":lock["central_repository"],"central_commit_sha":lock["source_commit"],
+     "lock_file_path":claimed,"lock_file_sha256":digest(claimed),"task_id":"20261123-test-task",
+     "task_brief_path":"brief.md","task_brief_sha256":digest("brief.md"),
+     "applied_profiles":["task-handoff"],"project_extensions":[],
+    }
+    if record_type=="task provenance":
+     record={**provenance,"record_type":"task_provenance","provenance_version":"1.0.0",
+             "repository":"example/project","acceptance_criteria":["validate"]}
+     flag="--task-provenance"
+    else:
+     record=minimal_manifest()
+     record["extensions"]={"standards_provenance":provenance}
+     flag="--run-manifest"
+    (root/"record.json").write_text(json.dumps(record),encoding="utf-8")
+    run=subprocess.run([sys.executable,str(VALIDATOR),"--repo-root",str(root),"--lock",lock_path,
+                        flag,"record.json"],capture_output=True,text=True)
+    self.assertEqual(run.returncode,expected,run.stdout+run.stderr)
+    if expected:
+     self.assertIn(record_type+" lock file: does not match --lock",run.stdout)
+     self.assertNotIn("SHA-256 mismatch",run.stdout)
+
+   for record_type in ("task provenance","run manifest"):
+    for claimed,expected in ((lock_path,0),("./research/./standards-lock.json",0),(other_path,1)):
+     with self.subTest(record_type=record_type,claimed=claimed):
+      check(record_type,claimed,expected)
  def make_central_repo(self, central):
   (central/"docs").mkdir(parents=True); (central/"docs/RESEARCH_TASK_HANDOFF_STANDARD.md").write_text("central policy",encoding="utf-8")
   subprocess.run(["git","init","-q"],cwd=central,check=True)
