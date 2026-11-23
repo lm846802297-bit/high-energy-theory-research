@@ -308,6 +308,13 @@ def verify_source_control(record: dict) -> list[str]:
     return errors
 
 
+def success_message(record: dict) -> str:
+    """Describe only the validation layers applicable to this record version."""
+    if record.get("record_type") == "run_manifest" and record.get("schema_version") == "1.0.1":
+        return "schema, source-control provenance, and local input/output integrity"
+    return "schema and local input/output integrity"
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("records", nargs="+", type=Path, help="JSON record files to validate")
@@ -365,7 +372,7 @@ def main():
                 print(f"  - {error}")
             failed = True
         elif not source_control_errors:
-            print(f"PASS {record_path}: schema, source-control provenance, and local input/output integrity")
+            print(f"PASS {record_path}: {success_message(record)}")
         for warning in input_warnings + file_warnings:
             print(f"WARN {record_path}: {warning}")
 
