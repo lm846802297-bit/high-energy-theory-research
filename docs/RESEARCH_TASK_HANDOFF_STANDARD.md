@@ -1,5 +1,7 @@
 # Research Task Handoff Standard
 
+简体中文版：[RESEARCH_TASK_HANDOFF_STANDARD.zh-CN.md](RESEARCH_TASK_HANDOFF_STANDARD.zh-CN.md)。
+
 **Status:** adopted shared standard  
 **Effective date:** 2026-11-23  
 **Scope:** substantive research tasks and cross-model/collaborator handoffs in adopting project repositories
