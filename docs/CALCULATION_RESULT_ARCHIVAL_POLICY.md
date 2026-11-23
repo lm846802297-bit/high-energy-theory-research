@@ -4,11 +4,11 @@
 
 This policy applies to calculations, simulations, parameter scans, data processing, phenomenology, and computational validation. It supplements the [User Guide](USER_GUIDE.md) and the [Scientific Diff workflow](scientific-diff-workflow.md). Each project repository defines its own artifact index or `artifacts/README.md` for immutable-bundle navigation. This policy governs how results are retained; it does not certify their scientific correctness.
 
-## 1. Use the canonical research locations
+## 1. Use project-local canonical research locations
 
 - Project-specific research repositories hold the canonical project/workstream records, study-specific code, inputs, results, figures, and audit records. Keep each result beside its canonical research-change record; the shared infrastructure repository retains navigation metadata only.
-- `calculations/` holds reusable or reproducible symbolic/algebraic calculation sources.
-- `validation/` holds captured run outputs, numerical checks, and validation logs. Keep completed checks distinct from planned or unexecuted checks.
+- Within each project repository, `calculations/` holds reusable or reproducible symbolic/algebraic calculation sources.
+- Within each project repository, `validation/` holds captured run outputs, numerical checks, and validation logs. Keep completed checks distinct from planned or unexecuted checks.
 - Within each project repository, `artifacts/<bundle-id>/` holds immutable, hashed snapshots of large or binary sources and computational artifacts. Follow that repository's artifact index or `artifacts/README.md`; add a new bundle for a new snapshot rather than overwriting an existing one.
 
 Follow the existing project/workstream layout and record conventions. Do not create duplicate competing authoritative copies or move historical records merely to satisfy this policy.
