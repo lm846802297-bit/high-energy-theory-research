@@ -233,6 +233,26 @@ v1.0.1 Schema 是向后兼容的校验超集：它继续接受符合原要求的
 
 公共字段放在规范顶层；研究领域特有字段放入 `extensions`，使用稳定的领域名称作为命名空间。不要为了统一格式而丢弃物理上必要的变量，也不要把不同物理层级混为一个观测量。
 
+### 6A. 中央规范溯源扩展
+
+对于依据实质性科研任务单执行的数值运行，应在 RCRPS v1.0.1 的 `run_manifest.extensions.standards_provenance` 中记录中央规范来源：
+
+```json
+{
+  "central_repository": "lm846802297-bit/high-energy-theory-research",
+  "central_commit_sha": "<40 位 commit SHA>",
+  "lock_file_path": "research/standards-lock.yaml",
+  "lock_file_sha256": "<精确锁文件字节的 SHA-256>",
+  "task_id": "YYYYMMDD-short-task-name",
+  "task_brief_path": "research/task_briefs/YYYYMMDD-short-task-name.md",
+  "task_brief_sha256": "<最终任务单字节的 SHA-256>",
+  "applied_profiles": ["research-compute", "rcrps-v1.0.1", "research-quality-gate"],
+  "project_extensions": ["docs/physics-profile.md"]
+}
+```
+
+所有哈希和 commit ID 必须根据实际引用对象生成。Profile 列表记录本次运行实际采用的规范，不是仓库采用的全部配置。该对象放在现有开放的 `extensions` 命名空间中；不得改变已采用的 v1.0.1 基础 Schema，也不得改写历史记录。使用 `--run-manifest` 调用规范采用验证器时，会检查该扩展。
+
 ## 7. Schema 校验和归档验收
 
 本仓库配套的 `docs/schemas/research-result-record-v1.0.1.schema.json` 使用 JSON Schema Draft 2020-12，支持 `run_manifest`、`result_summary` 和 `validation_report` 三类记录。安装依赖并执行本仓库校验器：
