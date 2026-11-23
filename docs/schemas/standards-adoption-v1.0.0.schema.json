@@ -9,9 +9,9 @@
     "profile":{"enum":["core-governance","research-compute","task-handoff","scientific-diff","research-quality-gate","calculation-result-archive","rcrps-v1.0.1","git-review-and-merge","document-review","referee-response-and-manuscript-synchronization","generated-figure-and-report"]},
     "standards_lock":{
       "type":"object","additionalProperties":false,
-      "required":["record_type","lock_version","central_repository","standards_release","source_commit","adopted_at","adoption_pr","adopted_profiles","local_extensions","deviations"],
+      "required":["lock_version","central_repository","standards_release","source_commit","adopted_at","adoption_pr","adopted_profiles","local_extensions","deviations"],
       "properties":{
-        "record_type":{"const":"standards_lock"},"lock_version":{"const":1},
+        "lock_version":{"const":1},
         "central_repository":{"const":"lm846802297-bit/high-energy-theory-research"},
         "standards_release":{"type":["string","null"]},"source_commit":{"$ref":"#/$defs/sha40"},
         "adopted_at":{"type":"string","format":"date"},"adoption_pr":{"type":"string","format":"uri"},
