@@ -1,5 +1,14 @@
 # Changelog
 
+## 2026-11-23 — RCRPS v1.0.1 source-control provenance candidate
+
+- Added the v1.0.1 Draft 2020-12 schema as a compatibility superset for v1.0.0 and v1.0.1 records. New v1.0.1 run manifests require all 14 `execution.source_control` fields.
+- Added conditional PR/non-PR field semantics, distinct PR merge/head/base/unknown checkout modes, workflow run ID/attempt pairing, and working-tree metadata validation.
+- Added the semantic source-control validator, schema/compatibility tests, source-control invariant tests, and CLI schema-selection tests.
+- Added versioned English and Chinese v1.0.1 standard documents. Both retain the v1.0.0 record roles and describe the same source-control contract.
+- Updated the structured-result validation workflow path filters to include both versioned v1.0.1 documents.
+- **Status: candidate implementation pending PR review and formal adoption.** The v1.0.0 schema and historical result records remain unchanged. This entry does not announce a v1.0.1 release.
+
 ## 2026-10-21 — Initial repository import
 
 - Imported the extracted contents of the Schema v1.4.3.7 integrated candidate bundle into schema/v1.4.3.7/.
