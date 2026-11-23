@@ -89,7 +89,7 @@ Example PR merge fragment (illustrative values):
 
 For every non-PR event, all seven PR-specific properties (`pr_number`, `pr_url`, `pr_head_sha`, `base_sha`, `tested_merge_sha`, `head_ref`, and `base_ref`) must be present and explicitly `null`. Do not omit them or insert placeholder SHAs.
 
-Use `branch_commit`, `detached_commit`, or `unknown` as appropriate. For non-PR events, `branch_commit` requires a non-null `checkout_ref`, while `detached_commit` requires `checkout_ref` to be null. `unknown` may record a ref if it is known. `source.commit_sha` still records the exact commit used. For a local execution without a workflow, both `workflow_run_id` and `workflow_run_attempt` are null; otherwise they must both be present.
+Use `branch_commit`, `detached_commit`, or `unknown` as appropriate. For non-PR events, `branch_commit` requires a non-null `checkout_ref`, while `detached_commit` requires `checkout_ref` to be null. `unknown` may record a ref if it is known. `source.commit_sha` still records the exact commit used. For a local execution without a workflow, both `workflow_run_id` and `workflow_run_attempt` are null; otherwise they must both be present. The legacy optional `source.workflow_run_id` is retained for v1.0.0 compatibility; if it appears in a v1.0.1 manifest, it must exactly match `execution.source_control.workflow_run_id` including JSON type. New v1.0.1 producers should omit the legacy duplicate and use the canonical execution field.
 
 Example local fragment:
 
