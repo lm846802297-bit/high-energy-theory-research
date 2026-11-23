@@ -112,14 +112,14 @@ results/<run_label>/
 |---|---|
 | `event` | 实际执行事件，例如 `pull_request`、`pull_request_target`、`push`、`workflow_dispatch`、`schedule`、`workflow_run`、`merge_group` 或 `local` |
 | `checkout_mode` | `pull_request_merge`、`pull_request_head`、`pull_request_base`、`branch_commit`、`detached_commit` 或 `unknown` |
-| `checkout_ref` | 实际检出的 Git ref；detached 或无法获取时为 null |
+| `checkout_ref` | `refs/` 下完整限定且符合 Git ref 命名规则的检出 ref；detached 或无法获取时为 null |
 | `pr_number` | PR 编号；非 PR 事件为 null |
 | `pr_url` | PR 规范 URL；非 PR 事件为 null |
 | `pr_head_sha` | PR 源分支 HEAD SHA；非 PR 事件为 null |
 | `base_sha` | PR 目标分支基准 SHA；非 PR 事件为 null |
 | `tested_merge_sha` | 仅当实际检出并执行了合成 merge commit 时记录其 SHA，否则为 null |
-| `head_ref` | PR 源分支名称；非 PR 事件为 null |
-| `base_ref` | PR 目标分支名称；非 PR 事件为 null |
+| `head_ref` | 符合 Git 分支命名规则的 PR 源分支名称；非 PR 事件为 null |
+| `base_ref` | 符合 Git 分支命名规则的 PR 目标分支名称；非 PR 事件为 null |
 | `workflow_run_id` | Workflow 运行标识；不存在时为 null |
 | `workflow_run_attempt` | 正整数形式的 Workflow 运行尝试次数；不存在时为 null |
 | `working_tree_state` | `clean`、`dirty` 或 `unknown` |
@@ -134,7 +134,15 @@ results/<run_label>/
 - `pull_request_base`：`source.commit_sha` 必须等于 `base_sha`，且 `tested_merge_sha` 为 null。这覆盖 `pull_request_target` 工作流实际执行目标分支的情况。
 - `unknown`：仍须记录实际的 `source.commit_sha`，并将 `tested_merge_sha` 设为 null；没有证据时不得声称检出了 merge commit。
 
-`head_ref`、`base_ref` 和 `checkout_ref` 含义不同。比如 `refs/pull/104/merge` 是检出 ref，不是贡献者的 `head_ref`。
+当 `checkout_ref` 已知时，它必须与 checkout mode 一致：
+- `pull_request_merge`：`refs/pull/{pr_number}/merge`；
+- `pull_request_head`：`refs/pull/{pr_number}/head` 或 `refs/heads/{head_ref}`；
+- `pull_request_base`：`refs/heads/{base_ref}`；
+- `unknown`：可以记录任意符合 Git 规则的完整限定 ref。
+
+当精确 ref 无法获取或检出为 detached 状态时，`checkout_ref` 可以为 null。
+
+`head_ref`、`base_ref` 和 `checkout_ref` 含义不同。比如 `refs/pull/104/merge` 是检出 ref，不是贡献者的 `head_ref`。所有非 null 的 `checkout_ref` 必须是 `refs/` 下的完整限定 Git ref，并符合 Git ref 命名规则；`head_ref` 和 `base_ref` 必须是合法的 Git 分支名称。
 
 PR merge 运行示例片段（值仅作说明）：
 

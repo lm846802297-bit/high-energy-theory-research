@@ -35,14 +35,14 @@ Every new v1.0.1 `run_manifest` must contain `execution.source_control`. All 14 
 |---|---|
 | `event` | Exact execution event, e.g. `pull_request`, `pull_request_target`, `push`, `workflow_dispatch`, `schedule`, `workflow_run`, `merge_group`, or `local` |
 | `checkout_mode` | `pull_request_merge`, `pull_request_head`, `pull_request_base`, `branch_commit`, `detached_commit`, or `unknown` |
-| `checkout_ref` | Actual Git ref checked out, or null when detached or unavailable |
+| `checkout_ref` | Fully qualified Git ref under `refs/`, valid under Git ref-name rules, or null when detached or unavailable |
 | `pr_number` | Pull-request number, or null for non-PR events |
 | `pr_url` | Canonical pull-request URL, or null for non-PR events |
 | `pr_head_sha` | Exact PR source-head SHA, or null for non-PR events |
 | `base_sha` | Exact PR target-base SHA, or null for non-PR events |
 | `tested_merge_sha` | Synthetic merge SHA only when that merge commit was actually checked out and tested; otherwise null |
-| `head_ref` | PR source branch name, or null for non-PR events |
-| `base_ref` | PR target branch name, or null for non-PR events |
+| `head_ref` | Valid PR source branch name, or null for non-PR events |
+| `base_ref` | Valid PR target branch name, or null for non-PR events |
 | `workflow_run_id` | Workflow run identifier, or null when no workflow run exists |
 | `workflow_run_attempt` | Positive workflow attempt number, or null when no workflow run exists |
 | `working_tree_state` | `clean`, `dirty`, or `unknown` |
@@ -57,7 +57,15 @@ For `pull_request` and `pull_request_target`, PR number, URL, head/base SHAs, an
 - `pull_request_base`: `source.commit_sha` must equal `base_sha`; `tested_merge_sha` is null. This covers a `pull_request_target` workflow that executes the base branch.
 - `unknown`: record the actual `source.commit_sha`, but set `tested_merge_sha` to null; do not claim a merge checkout without evidence.
 
-`head_ref`, `base_ref`, and `checkout_ref` have distinct meanings. In particular, a synthetic ref such as `refs/pull/104/merge` is a checkout ref, not the contributor's `head_ref`.
+When `checkout_ref` is known, it must agree with the checkout mode:
+- `pull_request_merge`: `refs/pull/{pr_number}/merge`;
+- `pull_request_head`: `refs/pull/{pr_number}/head` or `refs/heads/{head_ref}`;
+- `pull_request_base`: `refs/heads/{base_ref}`;
+- `unknown`: any valid fully qualified ref may be recorded.
+
+A null `checkout_ref` remains valid when the exact ref is unavailable or the checkout is detached.
+
+`head_ref`, `base_ref`, and `checkout_ref` have distinct meanings. In particular, a synthetic ref such as `refs/pull/104/merge` is a checkout ref, not the contributor's `head_ref`. Every non-null `checkout_ref` must be a fully qualified Git ref under `refs/` and pass Git ref-name syntax checks. `head_ref` and `base_ref` must be valid literal Git branch names.
 
 Example PR merge fragment (illustrative values):
 
@@ -89,7 +97,7 @@ Example PR merge fragment (illustrative values):
 
 For every non-PR event, all seven PR-specific properties (`pr_number`, `pr_url`, `pr_head_sha`, `base_sha`, `tested_merge_sha`, `head_ref`, and `base_ref`) must be present and explicitly `null`. Do not omit them or insert placeholder SHAs.
 
-Use `branch_commit`, `detached_commit`, or `unknown` as appropriate. For non-PR events, `branch_commit` requires a non-null `checkout_ref`, while `detached_commit` requires `checkout_ref` to be null. `unknown` may record a ref if it is known. `source.commit_sha` still records the exact commit used. For a local execution without a workflow, both `workflow_run_id` and `workflow_run_attempt` are null; otherwise they must both be present. The legacy optional `source.workflow_run_id` is retained for v1.0.0 compatibility; if it appears in a v1.0.1 manifest, it must exactly match `execution.source_control.workflow_run_id` including JSON type. New v1.0.1 producers should omit the legacy duplicate and use the canonical execution field.
+Use `branch_commit`, `detached_commit`, or `unknown` as appropriate. A non-null `checkout_ref` must be a valid fully qualified Git ref under `refs/`. For non-PR events, `branch_commit` requires a `refs/heads/...` ref, while `detached_commit` requires `checkout_ref` to be null. `unknown` may record a ref if it is known. `source.commit_sha` still records the exact commit used. For a local execution without a workflow, both `workflow_run_id` and `workflow_run_attempt` are null; otherwise they must both be present. The legacy optional `source.workflow_run_id` is retained for v1.0.0 compatibility; if it appears in a v1.0.1 manifest, it must exactly match `execution.source_control.workflow_run_id` including JSON type. New v1.0.1 producers should omit the legacy duplicate and use the canonical execution field.
 
 Example local fragment:
 
