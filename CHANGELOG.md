@@ -1,5 +1,13 @@
 # Changelog
 
+## 2026-11-23 — Central document-review and referee-response standards
+
+- Extracted the reusable document identity, authority, scientific-content, evidence, consistency, reproducibility, link, disposition, and safe-migration checks from the axial-vector repository's document-by-document review standard.
+- Added a proportional central review standard: full document-level registers are required for declared bulk audits, not for every ordinary research edit.
+- Extracted the generic referee-response and manuscript-synchronization rules: reviewer-facing/internal file separation, point-by-point argument completeness, protection of independent scientific reasoning, author approval for substantive scientific deletions, and before/after review records.
+- Kept project-specific model assumptions, referee numbering, manuscript paths, document counts, and audit-register history in the owning project repository.
+- Added English and Chinese standards and linked them from both central standards indexes.
+
 ## 2026-11-23 — Central research standards consolidation, Phase II
 
 - Added English and Chinese central standards indexes, shared research governance standards, general task handoff standards and task brief templates, task-profile-aware Research Quality Gates, and downstream standards adoption/lock contracts.
