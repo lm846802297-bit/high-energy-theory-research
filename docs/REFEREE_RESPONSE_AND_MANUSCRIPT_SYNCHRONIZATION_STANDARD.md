@@ -26,7 +26,7 @@ Never claim that the manuscript has been revised, added to, removed from, or sho
 
 ## 2. Organize the response around the referee's questions
 
-For a major comment with multiple subquestions, use two levels:
+For a substantive referee comment with multiple subquestions, use two levels:
 
 1. **Overall response:** a concise statement of the central answer, the model or scope boundary, and the issues addressed below.
 2. **Point-by-point responses:** a sufficiently detailed answer to each independent subquestion, following the referee's numbering or structure where practical.
