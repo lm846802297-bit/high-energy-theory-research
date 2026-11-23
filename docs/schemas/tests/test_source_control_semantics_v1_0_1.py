@@ -162,6 +162,14 @@ class ValidatorCliSchemaSelectionTests(unittest.TestCase):
         result = self.run_cli(minimal_manifest(version="1.0.1", event="pull_request", mode="pull_request_merge"))
         self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
 
+    def test_default_cli_rejects_v101_manifest_with_invalid_checkout_sha(self):
+        record = minimal_manifest(version="1.0.1", event="pull_request", mode="pull_request_merge")
+        record["execution"]["source_control"]["tested_merge_sha"] = "e" * 40
+        result = self.run_cli(record)
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("source-control provenance", result.stdout)
+        self.assertNotIn("PASS", result.stdout)
+
     def test_default_cli_rejects_v101_manifest_without_source_control(self):
         record = minimal_manifest(version="1.0.1")
         record["execution"].pop("source_control")
