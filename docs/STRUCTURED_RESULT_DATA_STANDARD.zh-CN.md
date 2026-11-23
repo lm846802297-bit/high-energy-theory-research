@@ -1,6 +1,6 @@
 # 结构化科研结果数据规范 v1.0.0
 
-**状态：** 本规范拟用于本仓库的新数值计算、模拟、参数扫描和计算验证；合并后对新运行生效。历史结果不追溯改写。  
+**状态：** 历史兼容版本。自 2026-11-23 起，新产生的重要计算采用已正式通过的 RCRPS v1.0.1；本 v1.0.0 文件和历史记录保持不变。  
 **规范版本：** `1.0.0`；JSON Schema：Draft 2020-12。  
 **适用边界：** 本规范统一数据结构、运行来源和归档方式；它不把软件测试通过等同于物理结论成立。
 
@@ -133,7 +133,7 @@ results/<run_label>/
 
 ## 6. Schema 校验和归档验收
 
-本仓库配套的 `docs/schemas/research-result-record-v1.0.0.schema.json` 使用 JSON Schema Draft 2020-12，支持 `run_manifest`、`result_summary` 和 `validation_report` 三类记录。安装依赖并执行本仓库校验器：
+历史兼容 Schema `docs/schemas/research-result-record-v1.0.0.schema.json` 使用 JSON Schema Draft 2020-12，支持 `run_manifest`、`result_summary` 和 `validation_report` 三类记录。安装依赖并执行本仓库校验器：
 
 ```bash
 python -m pip install -r docs/schemas/requirements-result-validation.txt
