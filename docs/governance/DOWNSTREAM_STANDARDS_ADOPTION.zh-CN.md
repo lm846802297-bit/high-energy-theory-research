@@ -40,6 +40,8 @@ Release tag 不能替代 source_commit；如果两者都有，应同时记录。
 - calculation-result-archive
 - rcrps-v1.0.1
 - git-review-and-merge
+- document-review
+- referee-response-and-manuscript-synchronization
 
 项目可以根据实际情况选择子集，但锁文件必须明确列出每项实际采用的配置。采用 rcrps-v1.0.1 的数值项目仍须保留自己的领域扩展字段和验证流程。
 

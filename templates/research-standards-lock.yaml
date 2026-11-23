@@ -13,7 +13,8 @@ adoption_pr: "https://github.com/OWNER/REPOSITORY/pull/NUMBER"
 # Select only the profiles explicitly adopted by this project:
 # core-governance, research-compute, task-handoff, scientific-diff,
 # research-quality-gate, calculation-result-archive, rcrps-v1.0.1,
-# git-review-and-merge.
+# git-review-and-merge, document-review,
+# referee-response-and-manuscript-synchronization.
 adopted_profiles: []
 
 # List project-local domain standards that remain authoritative locally.
