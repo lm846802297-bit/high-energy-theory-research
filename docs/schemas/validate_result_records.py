@@ -9,7 +9,7 @@ import json
 import math
 from decimal import Decimal, InvalidOperation
 import sys
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 
 try:
     from jsonschema import Draft202012Validator, FormatChecker
@@ -198,6 +198,111 @@ def verify_source(record: dict, repo_root: Path):
     return errors
 
 
+def verify_source_control(record: dict) -> list[str]:
+    """Validate v1.0.1 source-control provenance relationships.
+
+    JSON Schema handles field presence, types, formats and basic value ranges.
+    This function enforces relationships between fields that JSON Schema alone
+    cannot safely establish.
+    """
+    if record.get("record_type") != "run_manifest" or record.get("schema_version") != "1.0.1":
+        return []
+
+    errors: list[str] = []
+    source = record.get("source")
+    execution = record.get("execution")
+    if not isinstance(source, dict):
+        return ["source must be an object before source-control validation"]
+    if not isinstance(execution, dict):
+        return ["execution must be an object before source-control validation"]
+    context = execution.get("source_control")
+    if not isinstance(context, dict):
+        return ["v1.0.1 run_manifest is missing execution.source_control"]
+
+    commit_sha = source.get("commit_sha")
+    event = context.get("event")
+    mode = context.get("checkout_mode")
+    is_pr = event in {"pull_request", "pull_request_target"}
+    pr_fields = (
+        "pr_number", "pr_url", "pr_head_sha", "base_sha",
+        "tested_merge_sha", "head_ref", "base_ref",
+    )
+    pr_modes = {"pull_request_merge", "pull_request_head", "pull_request_base", "unknown"}
+    non_pr_modes = {"branch_commit", "detached_commit", "unknown"}
+
+    if is_pr:
+        for field in ("pr_number", "pr_url", "pr_head_sha", "base_sha", "head_ref", "base_ref"):
+            if context.get(field) is None:
+                errors.append(f"pull-request source_control requires non-null {field}")
+        if mode not in pr_modes:
+            errors.append("pull-request event requires a pull-request checkout_mode")
+        tested_merge_sha = context.get("tested_merge_sha")
+        if mode == "pull_request_merge":
+            if tested_merge_sha is None:
+                errors.append("pull_request_merge requires tested_merge_sha")
+            elif tested_merge_sha != commit_sha:
+                errors.append("tested_merge_sha must equal source.commit_sha for pull_request_merge")
+        elif mode == "pull_request_head":
+            if commit_sha != context.get("pr_head_sha"):
+                errors.append("source.commit_sha must equal pr_head_sha for pull_request_head")
+            if tested_merge_sha is not None:
+                errors.append("tested_merge_sha must be null for pull_request_head")
+        elif mode == "pull_request_base":
+            if commit_sha != context.get("base_sha"):
+                errors.append("source.commit_sha must equal base_sha for pull_request_base")
+            if tested_merge_sha is not None:
+                errors.append("tested_merge_sha must be null for pull_request_base")
+        elif mode == "unknown" and tested_merge_sha is not None:
+            errors.append("tested_merge_sha must be null when PR checkout_mode is unknown")
+    else:
+        for field in pr_fields:
+            if context.get(field) is not None:
+                errors.append(f"non-PR event requires {field} to be null")
+        if mode not in non_pr_modes:
+            errors.append("non-PR event cannot use a pull-request checkout_mode")
+
+    workflow_run_id = context.get("workflow_run_id")
+    workflow_run_attempt = context.get("workflow_run_attempt")
+    if (workflow_run_id is None) != (workflow_run_attempt is None):
+        errors.append("workflow_run_id and workflow_run_attempt must both be null or both be present")
+    if isinstance(workflow_run_id, str) and not workflow_run_id.strip():
+        errors.append("workflow_run_id must not be an empty string")
+    if workflow_run_attempt is not None and (
+        isinstance(workflow_run_attempt, bool)
+        or not isinstance(workflow_run_attempt, int)
+        or workflow_run_attempt < 1
+    ):
+        errors.append("workflow_run_attempt must be a positive integer")
+
+    tree_state = context.get("working_tree_state")
+    dirty_paths = context.get("dirty_paths")
+    if not isinstance(dirty_paths, list):
+        errors.append("dirty_paths must be an array")
+        dirty_paths = []
+    if tree_state == "clean" and dirty_paths:
+        errors.append("working_tree_state clean requires dirty_paths to be empty")
+    elif tree_state == "dirty" and not dirty_paths:
+        errors.append("working_tree_state dirty requires at least one dirty path")
+
+    seen: set[str] = set()
+    for path in dirty_paths:
+        if not isinstance(path, str) or not path:
+            errors.append("dirty_paths entries must be non-empty strings")
+            continue
+        if "\\" in path or path.startswith("/") or (len(path) >= 2 and path[1] == ":"):
+            errors.append(f"dirty path must be repository-relative POSIX form: {path}")
+            continue
+        normalized = PurePosixPath(path)
+        if normalized.is_absolute() or ".." in normalized.parts or normalized.as_posix() != path:
+            errors.append(f"dirty path must be normalized and cannot escape the repository: {path}")
+            continue
+        if path in seen:
+            errors.append(f"dirty_paths contains duplicate path: {path}")
+        seen.add(path)
+
+    return errors
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("records", nargs="+", type=Path, help="JSON record files to validate")
@@ -241,8 +346,14 @@ def main():
 
         input_errors, input_warnings = verify_inputs(record, args.repo_root)
         file_errors, file_warnings = verify_artifacts(record, args.repo_root)
+        source_control_errors = verify_source_control(record)
         integrity_errors = (input_errors + file_errors + verify_source(record, args.repo_root)
                             + verify_manifest_checksum(record, record_path))
+        if source_control_errors:
+            print(f"FAIL {record_path}: source-control provenance")
+            for error in source_control_errors:
+                print(f"  - {error}")
+            failed = True
         if integrity_errors:
             print(f"FAIL {record_path}: input/output integrity")
             for error in integrity_errors:
