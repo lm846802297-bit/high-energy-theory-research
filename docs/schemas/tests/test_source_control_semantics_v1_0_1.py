@@ -91,6 +91,16 @@ class SourceControlSemanticTests(unittest.TestCase):
         record["execution"]["source_control"]["checkout_mode"] = "branch_commit"
         self.assertTrue(any("checkout_mode" in error for error in self.errors(record)))
 
+    def test_branch_commit_requires_checkout_ref(self):
+        record = minimal_manifest(event="push", mode="branch_commit")
+        record["execution"]["source_control"]["checkout_ref"] = None
+        self.assertTrue(any("checkout_ref" in error for error in self.errors(record)))
+
+    def test_detached_commit_requires_null_checkout_ref(self):
+        record = minimal_manifest(event="local", mode="detached_commit")
+        record["execution"]["source_control"]["checkout_ref"] = "refs/heads/main"
+        self.assertTrue(any("checkout_ref" in error for error in self.errors(record)))
+
     def test_workflow_run_id_and_attempt_must_be_paired(self):
         record = minimal_manifest()
         record["execution"]["source_control"]["workflow_run_id"] = 123
