@@ -17,6 +17,7 @@
 | 科学变更生命周期 | [Scientific Diff 工作流](../scientific-diff-workflow.md) | 项目/工作流/变更/运行/主张层级和证据追踪 |
 | 科研质量门 | [科研质量门](RESEARCH_QUALITY_GATE.zh-CN.md) | 十项共享验收要求、任务类型及 PASS/FAIL/BLOCKED/NOT RUN/N/A 状态 |
 | 科研沟通 | [Scientific Diff 第 11 节](../scientific-diff-workflow.md#11-research-reporting-and-communication-standard) | 结论、依据、结果、剩余工作及与证据相称的表述 |
+| 生成图件与报告 PDF | [生成图件与报告产物规范](../GENERATED_FIGURE_AND_REPORT_POLICY.zh-CN.md) | 以源数据和绘图源码作为规范记录；日常渲染按需生成；冻结交付快照必须带溯源 |
 | 计算结果归档 | [计算结果归档规范](../CALCULATION_RESULT_ARCHIVAL_POLICY.zh-CN.md) | 原生输出、解压后提交、溯源、哈希和 CI 边界 |
 | 结构化数值记录 | [RCRPS v1.0.1](../STRUCTURED_RESULT_DATA_STANDARD_v1.0.1.zh-CN.md) 与[采用记录](RCRPS_V1.0.1_ADOPTION_RECORD.md) | 运行清单、结果摘要、验证报告、源码控制溯源和 CSV 约定 |
 | 科学审查 | [科学变更审查清单](../review-checklist.md) | 基线、推导、计算、物理主张、依赖和决策 |
