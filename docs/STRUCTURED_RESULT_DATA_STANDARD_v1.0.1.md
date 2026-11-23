@@ -1,6 +1,6 @@
 # Structured Research Result Data Standard v1.0.1
 
-**Status:** Candidate implementation; not effective until PR review and formal adoption. Intended for new substantial numerical, simulation, scan, and computational-validation runs after adoption.  
+**Status:** **Adopted on 2026-11-23** by the project owner; effective for new substantial numerical, simulation, scan, and computational-validation runs from this date. See [the formal adoption record](governance/RCRPS_V1.0.1_ADOPTION_RECORD.md).  
 **Schema:** JSON Schema Draft 2020-12.  
 **Purpose:** Standardize data structure, run provenance, and archival. This standard does not certify scientific correctness.
 

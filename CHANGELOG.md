@@ -16,7 +16,7 @@
 - Updated the structured-result validation workflow path filters to include both versioned v1.0.1 documents.
 - Added the same v1.0.1 document paths to the `push.paths` filter so docs-only updates on `main` also trigger validation.
 - Pinned the v1.0.0 English and Chinese validator commands to the explicit v1.0.0 schema so their examples remain version-accurate after the CLI default moves to v1.0.1.
-- **Status: candidate implementation pending PR review and formal adoption.** The v1.0.0 schema and historical result records remain unchanged. This entry does not announce a v1.0.1 release.
+- **Status: formally adopted on 2026-11-23.** The v1.0.0 schema and historical result records remain unchanged; v1.0.0 remains the legacy validation profile. See `docs/governance/RCRPS_V1.0.1_ADOPTION_RECORD.md` for the adoption decision and downstream migration boundary.
 
 ## 2026-10-21 — Initial repository import
 
