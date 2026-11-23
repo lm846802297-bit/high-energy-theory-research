@@ -489,7 +489,8 @@
                   "type": [
                     "string",
                     "null"
-                  ]
+                  ],
+                  "minLength": 1
                 },
                 "pr_number": {
                   "type": [
@@ -915,6 +916,17 @@
                   "finished_at",
                   "source_control"
                 ]
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "execution": {
+                "not": {
+                  "required": [
+                    "source_control"
+                  ]
+                }
               }
             }
           }
