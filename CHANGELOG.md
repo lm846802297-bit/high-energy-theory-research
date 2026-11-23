@@ -7,6 +7,7 @@
 - Enforced non-PR checkout-ref consistency: `branch_commit` requires a ref and `detached_commit` requires a null ref; added RED→GREEN regression tests.
 - Added the semantic source-control validator, schema/compatibility tests, source-control invariant tests, and CLI schema-selection tests.
 - Scoped CLI PASS wording so it reports source-control provenance only for v1.0.1 run manifests, not legacy v1.0.0 records or non-run records.
+- Enforced consistency between the legacy optional `source.workflow_run_id` and the canonical `execution.source_control.workflow_run_id` when both are present; new v1.0.1 records should omit the legacy duplicate.
 - Added versioned English and Chinese v1.0.1 standard documents. Both retain the v1.0.0 record roles and describe the same source-control contract.
 - Updated the structured-result validation workflow path filters to include both versioned v1.0.1 documents.
 - Pinned the v1.0.0 English and Chinese validator commands to the explicit v1.0.0 schema so their examples remain version-accurate after the CLI default moves to v1.0.1.
