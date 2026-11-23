@@ -133,7 +133,7 @@ class SourceControlSemanticTests(unittest.TestCase):
         self.assertTrue(any("dirty" in error for error in self.errors(record)))
 
     def test_dirty_paths_must_be_safe_and_unique(self):
-        for paths in (["/etc/passwd"], ["../escape.py"], ["src\\model.py"], ["./src/model.py"], ["src//model.py"], ["."], ["src/\\x00model.py"], ["src/model.py", "src/model.py"]):
+        for paths in (["/etc/passwd"], ["../escape.py"], ["src\\model.py"], ["./src/model.py"], ["src//model.py"], ["."], ["src/\x00model.py"], ["src/model.py", "src/model.py"]):
             with self.subTest(paths=paths):
                 record = minimal_manifest()
                 record["execution"]["source_control"]["working_tree_state"] = "dirty"
