@@ -4,6 +4,10 @@
 
 A shared infrastructure repository for high-energy-theory research. It maintains reusable workflows, Skills, research standards, schemas, templates, tests, and navigation metadata. Project-specific research records, source code, calculations, validation outputs, and artifacts are maintained in their respective project repositories.
 
+## Shared Research Standards
+
+The [Central Research Standards Index](docs/governance/CENTRAL_STANDARDS_INDEX.md) is the single entry point for shared research governance, task handoff, quality gates, compute, provenance, archival, structured records, review, and Git integration. Downstream projects adopt standards by a reviewed PR pinned to a full central commit SHA; project-specific physics procedures remain in their own repositories.
+
 ## Scientific Diff Workflow
 
 A **scientific diff** is more than a text or code comparison. It records what changed in a research state, why it changed, what evidence supports the change, which checks were performed, and which downstream results or claims may be affected.
@@ -12,10 +16,10 @@ The workflow is designed for theoretical particle physics, UV–EFT matching, pe
 
 ### Start here
 
-0. Before every task, read the mandatory repository instructions in [AGENTS.md](AGENTS.md).
-1. Read the [detailed User Guide](docs/USER_GUIDE.md) for project setup, workstreams, research changes, evidence, validation, and review.
-2. Read [the workflow specification](docs/scientific-diff-workflow.md).
-3. Copy [the research-change template](templates/research-change.md) for each substantive research change.
+0. Before every task, read [AGENTS.md](AGENTS.md) and the [Central Research Standards Index](docs/governance/CENTRAL_STANDARDS_INDEX.md).
+1. Read the [Research Governance Standard](docs/RESEARCH_GOVERNANCE_STANDARD.md) and [detailed User Guide](docs/USER_GUIDE.md) for project setup, workstreams, research changes, evidence, validation, and review.
+2. Read [the workflow specification](docs/scientific-diff-workflow.md) and [Research Quality Gate](docs/governance/RESEARCH_QUALITY_GATE.md).
+3. Prepare a [Research Task Brief](templates/research-task-brief.md) before substantive work. Copy [the research-change template](templates/research-change.md) to record the resulting scientific change.
 4. Use [the claim–evidence matrix template](templates/claim-evidence-matrix.md) to track the support for important physical statements.
 5. Apply [the review checklist](docs/review-checklist.md) before marking a change complete or synchronizing it into a manuscript.
 6. Use the [project registry](projects/README.md) to locate project-specific research repositories. The canonical RC-001 archive is maintained in [axial-vector-review-response](https://github.com/lm846802297-bit/axial-vector-review-response/tree/main/research/rc001-vll-higgs-singlet-uv-eft).
