@@ -1,6 +1,10 @@
 from __future__ import annotations
 
+import hashlib
+import json
+import subprocess
 import sys
+import tempfile
 import unittest
 from pathlib import Path
 
@@ -122,6 +126,50 @@ class SourceControlSemanticTests(unittest.TestCase):
         record = minimal_manifest(event="pull_request", mode="pull_request_merge")
         record["source"]["branch"] = "104/merge"
         self.assertEqual(self.errors(record), [])
+
+
+
+class ValidatorCliSchemaSelectionTests(unittest.TestCase):
+    def run_cli(self, record: dict, schema_path: Path | None = None):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            script = root / "run.py"
+            script.write_text("print('rcrps fixture')\n", encoding="utf-8")
+            record = json.loads(json.dumps(record))
+            record["source"]["script_path"] = "run.py"
+            record["source"]["script_sha256"] = hashlib.sha256(script.read_bytes()).hexdigest()
+            record_path = root / "run_manifest.json"
+            record_path.write_text(json.dumps(record), encoding="utf-8")
+            command = [sys.executable, str(SCHEMA_DIR / "validate_result_records.py"), "--repo-root", str(root)]
+            if schema_path is not None:
+                command.extend(["--schema", str(schema_path)])
+            command.append(str(record_path))
+            return subprocess.run(command, capture_output=True, text=True, check=False)
+
+    def test_default_cli_accepts_v100_records(self):
+        result = self.run_cli(minimal_manifest(version="1.0.0"))
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+
+    def test_default_cli_accepts_v101_local_records(self):
+        result = self.run_cli(minimal_manifest(version="1.0.1", event="local", mode="branch_commit"))
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+
+    def test_default_cli_accepts_v101_pr_records(self):
+        result = self.run_cli(minimal_manifest(version="1.0.1", event="pull_request", mode="pull_request_merge"))
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+
+    def test_default_cli_rejects_v101_manifest_without_source_control(self):
+        record = minimal_manifest(version="1.0.1")
+        record["execution"].pop("source_control")
+        result = self.run_cli(record)
+        self.assertNotEqual(result.returncode, 0)
+
+    def test_explicit_v100_schema_still_accepts_legacy_records(self):
+        result = self.run_cli(
+            minimal_manifest(version="1.0.0"),
+            SCHEMA_DIR / "research-result-record-v1.0.0.schema.json",
+        )
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
 
 
 if __name__ == "__main__":
