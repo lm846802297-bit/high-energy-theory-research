@@ -35,7 +35,7 @@ The authority of a record depends on its provenance, scope, and evidence—not m
 
 A primary source is authoritative for its own published content, not automatically for every later interpretation. An approved project decision governs the adopted choice, while its scientific validity remains subject to derivation and evidence. A code test or successful run proves only the property it actually tests.
 
-The user's/latest project owner's explicit instruction or confirmed decision supersedes older project notes and historical discussions for project direction. Exploratory questions and suggestions are not decisions unless explicitly adopted.
+The latest explicit instruction or confirmed decision from the project owner takes precedence over older project notes and historical discussions when determining project direction. Exploratory questions and suggestions are not decisions unless explicitly adopted.
 
 ## 3. Resolving disagreements
 
