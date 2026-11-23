@@ -19,7 +19,8 @@
 | 科研沟通 | [Scientific Diff 第 11 节](../scientific-diff-workflow.md#11-research-reporting-and-communication-standard) | 结论、依据、结果、剩余工作及与证据相称的表述 |
 | 生成图件与报告 PDF | [生成图件与报告产物规范](../GENERATED_FIGURE_AND_REPORT_POLICY.zh-CN.md) | 以源数据和绘图源码作为规范记录；日常渲染按需生成；冻结交付快照必须带溯源 |
 | 计算结果归档 | [计算结果归档规范](../CALCULATION_RESULT_ARCHIVAL_POLICY.zh-CN.md) | 原生输出、解压后提交、溯源、哈希和 CI 边界 |
-| 规范采用与任务溯源 | [下游采用契约](DOWNSTREAM_STANDARDS_ADOPTION.zh-CN.md) 与[验证器](../schemas/validate_standards_adoption.py) | 锁文件、任务级 Profile 应用、文件指纹和合规证据的机器验证 |\n| 结构化数值记录 | [RCRPS v1.0.1](../STRUCTURED_RESULT_DATA_STANDARD_v1.0.1.zh-CN.md) 与[采用记录](RCRPS_V1.0.1_ADOPTION_RECORD.md) | 运行清单、结果摘要、验证报告、源码控制溯源和 CSV 约定 |
+| 规范采用与任务溯源 | [下游采用契约](DOWNSTREAM_STANDARDS_ADOPTION.zh-CN.md) 与[验证器](../schemas/validate_standards_adoption.py) | 锁文件、任务级 Profile 应用、文件指纹和合规证据的机器验证 |
+| 结构化数值记录 | [RCRPS v1.0.1](../STRUCTURED_RESULT_DATA_STANDARD_v1.0.1.zh-CN.md) 与[采用记录](RCRPS_V1.0.1_ADOPTION_RECORD.md) | 运行清单、结果摘要、验证报告、源码控制溯源和 CSV 约定 |
 | 科学审查 | [科学变更审查清单](../review-checklist.md) | 基线、推导、计算、物理主张、依赖和决策 |
 | 文档审查与迁移 | [科研文档审查规范](../DOCUMENT_REVIEW_STANDARD.zh-CN.md) | 文档身份、权威性、科学内容、引用、一致性、可复现性、链接、处置及安全迁移 |
 | 审稿回复与论文同步 | [审稿回复与论文正文同步规范](../REFEREE_RESPONSE_AND_MANUSCRIPT_SYNCHRONIZATION_STANDARD.zh-CN.md) | 面向审稿人的论证完整性、与内部正文跟踪的分离、独立科学论证的保留及审查记录 |
