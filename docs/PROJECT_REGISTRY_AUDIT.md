@@ -2,7 +2,7 @@
 
 **Date:** 2026-10-23  
 **Scope:** Phase A multi-project registry, onboarding guide, and the currently registered UV–EFT workstream.  
-**Outcome:** Navigation layer established; physical research files were not moved.
+**Outcome:** Phase A established the navigation layer without moving files. A later RC-001 migration (2026-11-23) transferred the frozen 480-file research payload into its project repository; see the dated update at the end of this audit.
 
 ## 1. Confirmed hierarchy
 
@@ -64,4 +64,16 @@ Before moving research/, calculations/, or validation/ artifacts into project-lo
 6. Review the resulting diff to ensure the migration changes paths only and does not silently alter scientific content.
 7. Preserve the pre-migration baseline and leave unresolved references visible.
 
-Until these gates are met, existing research files should remain at their current paths.
+These gates were subsequently completed for RC-001. Its 480-file frozen source snapshot was migrated to [axial-vector-review-response](https://github.com/lm846802297-bit/axial-vector-review-response/tree/main/research/rc001-vll-higgs-singlet-uv-eft) and merged through [PR #135](https://github.com/lm846802297-bit/axial-vector-review-response/pull/135). The central repository cleanup is tracked separately in [PR #34](https://github.com/lm846802297-bit/high-energy-theory-research/pull/34). Other future workstream migrations must satisfy the same gates before their source files are moved.
+
+## 6. RC-001 archive migration update — 2026-11-23
+
+The RC-001 research payload has now been migrated out of this central infrastructure repository into `lm846802297-bit/axial-vector-review-response`, under `research/rc001-vll-higgs-singlet-uv-eft/upstream/`.
+
+- Frozen source commit: `b2dd8f7e4427d0292bc299d273c780c05021fdab`.
+- Migration PR: [axial-vector-review-response#135](https://github.com/lm846802297-bit/axial-vector-review-response/pull/135), merged at `a1940523eb5e345a5a9c03a06b9e0f4f63f4d378`.
+- Archive integrity: 480/480 mapped paths, Git blob SHAs, and file sizes matched; zero missing files or mismatches.
+- The central repository's RC-001 research records, calculations, validation outputs, artifact bundle, and three RC-001-specific workflows are removed by cleanup PR [#34](https://github.com/lm846802297-bit/high-energy-theory-research/pull/34).
+- Shared Skills, schemas, templates, standards, documentation, project registry, tests, and the two generic validation workflows remain in the central repository.
+
+This migration changed repository location and navigation, not scientific content or validation status. The project repository is the canonical location for RC-001 source records and results.

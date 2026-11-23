@@ -207,7 +207,7 @@ python skills/high-energy-theory-research/scripts/validate_project_records.py pa
 
 共享平台层用于存放可复用的方法、Schema、模板、文档、测试和工具。项目专属的物理研究记录与产物最终应能按项目/工作流清晰定位。
 
-当前注册表只是初步导航层。请参阅[第一阶段注册表与迁移预审记录](PROJECT_REGISTRY_AUDIT.md)，了解已经检查的范围以及尚未执行的检查。现有 `research/`、`calculations/` 和 `validation/` 路径有意保持不变。未来迁移前必须：
+注册表用于导航各项目的规范研究仓库。RC-001 归档迁移已于 2026-11-23 完成：480 个文件的冻结源版本保存在 [axial-vector-review-response](https://github.com/lm846802297-bit/axial-vector-review-response/tree/main/research/rc001-vll-higgs-singlet-uv-eft)，中央基础设施仓库只保留导航元数据。请参阅[第一阶段注册表与迁移审计](PROJECT_REGISTRY_AUDIT.md)，了解迁移前审查和已完成的迁移记录。未来迁移其他工作流前必须：
 
 1. 枚举所有待移动文件；
 2. 审查 Markdown 链接、脚本导入、测试、CI 路径、Schema 路径规则和校验器假设；
@@ -225,9 +225,10 @@ python skills/high-energy-theory-research/scripts/validate_project_records.py pa
 
 - **父项目：** `axial-vector-model-building`
 - **工作流：** `vll-higgs-singlet-uv-eft`
-- **主研究记录：** [RC-001-vll-higgs-singlet-uv-eft.md](../research/RC-001-vll-higgs-singlet-uv-eft.md)
-- **规范子图记录：** [RC-001-gauge-subgraph-change-record.md](../research/RC-001-gauge-subgraph-change-record.md)
-- **主张矩阵：** [RC-001-claim-evidence-matrix.md](../research/RC-001-claim-evidence-matrix.md)
+- **归档入口：** [RC-001 归档 README](https://github.com/lm846802297-bit/axial-vector-review-response/blob/main/research/rc001-vll-higgs-singlet-uv-eft/README.md)
+- **主研究记录：** [RC-001-vll-higgs-singlet-uv-eft.md](https://github.com/lm846802297-bit/axial-vector-review-response/blob/main/research/rc001-vll-higgs-singlet-uv-eft/upstream/research/RC-001-vll-higgs-singlet-uv-eft.md)
+- **规范子图记录：** [RC-001-gauge-subgraph-change-record.md](https://github.com/lm846802297-bit/axial-vector-review-response/blob/main/research/rc001-vll-higgs-singlet-uv-eft/upstream/research/RC-001-gauge-subgraph-change-record.md)
+- **主张矩阵：** [RC-001-claim-evidence-matrix.md](https://github.com/lm846802297-bit/axial-vector-review-response/blob/main/research/rc001-vll-higgs-singlet-uv-eft/upstream/research/RC-001-claim-evidence-matrix.md)
 
 该工作目前处于验证进行中。部分解析积分与符号/代数子模块已有记录，但完整 Wilson 系数向量、所有相关规范/箱图贡献、统一算符基底约化以及独立图级验证仍未完成。该示例展示的是可追溯性和状态管理，不应被解读为完整匹配计算已经完成。
 
@@ -237,5 +238,5 @@ python skills/high-energy-theory-research/scripts/validate_project_records.py pa
 - **可以把结构化记录校验器用于注册表吗？** 不可以。`projects/registry.yaml` 应使用项目注册表校验器。
 - **代数检查通过后，可以把物理主张标记为有证据支持吗？** 只有当该检查足以支撑这项具体主张及其适用范围时才可以，否则应记录缺失的独立证据。
 - **CI 不可用怎么办？** 标记为未运行或受阻，不得标记为通过，也不要把软件验证限制与科学证据混为一谈。
-- **现在可以移动已有的 RC-001 文件吗？** 不可以，须先完成路径、Schema、测试和工作流依赖审计，并经过迁移审查。
+- **RC-001 文件现在在哪里？** 480 个文件的冻结归档已迁移并合并至 [axial-vector-review-response](https://github.com/lm846802297-bit/axial-vector-review-response/tree/main/research/rc001-vll-higgs-singlet-uv-eft)。迁移其他工作流前，仍须完成路径、Schema、测试和工作流依赖审计。
 - **可以登记其他研究主题吗？** 可以，但必须先确认其父项目关系；不要仅凭文件名推断归属。
