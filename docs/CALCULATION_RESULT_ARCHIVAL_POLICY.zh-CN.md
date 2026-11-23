@@ -1,8 +1,8 @@
 # 计算结果归档规范
 
-**状态：** 本仓库所有数值与计算研究必须遵守的强制规范。
+**状态：** 已采用的共享规范，适用于明确采用中央科研规范体系的研究仓库。
 
-本规范适用于解析/数值计算、模拟、参数扫描、数据处理、唯象学及计算验证。它补充[用户手册](USER_GUIDE.zh-CN.md)和[Scientific Diff 工作流](scientific-diff-workflow.md)。每个项目仓库自行维护产物索引或 `artifacts/README.md`，用于导航不可变产物包。本规范只规定结果如何保存和追溯，不自动证明物理结论正确。
+本规范适用于采用该规范的项目仓库中的解析/数值计算、模拟、参数扫描、数据处理、唯象学及计算验证。它补充[用户手册](USER_GUIDE.zh-CN.md)和[Scientific Diff 工作流](scientific-diff-workflow.md)。每个项目仓库自行维护产物索引或 `artifacts/README.md`，用于导航不可变产物包。本规范只规定结果如何保存和追溯，不自动证明物理结论正确。
 
 ## 1. 使用项目专属的规范研究目录
 
@@ -52,6 +52,6 @@
 
 ## 6. 结构化 JSON/CSV 结果记录
 
-新产生的重要数值计算应遵循[结构化科研结果数据规范 v1.0.0](STRUCTURED_RESULT_DATA_STANDARD.zh-CN.md)，并使用 `schemas/research-result-record-v1.0.0.schema.json` 校验 `run_manifest`、`result_summary` 和 `validation_report`。运行来源、科学结果和验证报告分开记录；逐点数组保存为带明确单位的原生表格。该归档数据规范独立于尚未发布的研究记录 Schema v1.4.3.7 候选包。
+新产生的重要数值计算应遵循已正式采用的[结构化科研结果数据规范 v1.0.1](STRUCTURED_RESULT_DATA_STANDARD_v1.0.1.zh-CN.md)，并使用 `schemas/research-result-record-v1.0.1.schema.json` 校验 `run_manifest`、`result_summary` 和 `validation_report`。运行来源、科学结果和验证报告分开记录；逐点数组保存为带明确单位的原生表格。该归档数据规范独立于尚未发布的研究记录 Schema v1.4.3.7 候选包。
 
 本规范适用于本仓库今后的所有项目和工作流。

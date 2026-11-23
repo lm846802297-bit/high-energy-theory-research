@@ -1,0 +1,22 @@
+# Copy to the adopting project repository, normally research/standards-lock.yaml.
+lock_version: 1
+
+central_repository: lm846802297-bit/high-energy-theory-research
+
+# Use a release/tag when one exists; otherwise leave null and pin source_commit.
+standards_release: null
+source_commit: "0000000000000000000000000000000000000000"
+
+adopted_at: "YYYY-MM-DD"
+adoption_pr: "https://github.com/OWNER/REPOSITORY/pull/NUMBER"
+
+# Select only the profiles explicitly adopted by this project:
+# core-governance, research-compute, task-handoff, scientific-diff,
+# research-quality-gate, calculation-result-archive, rcrps-v1.0.1,
+# git-review-and-merge.
+adopted_profiles: []
+
+# List project-local domain standards that remain authoritative locally.
+local_extensions: []
+
+deviations: []

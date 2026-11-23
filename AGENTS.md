@@ -2,16 +2,16 @@
 
 > **Mandatory compute architecture:** Follow [RESEARCH_COMPUTE_POLICY.md](RESEARCH_COMPUTE_POLICY.md) for all numerical and computational work. Select the primary environment by actual execution target: ordinary GPT chat uses ChatGPT Linux; Codex/Work local execution uses the user's Windows environment; Codex/Work cloud-computer execution uses the GPT-managed cloud environment. GitHub is the canonical source/result archive; GitHub Actions is reserved for independent verification and CI, not the primary calculation engine.
 
-These instructions are mandatory for all agents and contributors. They complement the User Guide, Scientific Diff workflow, project-specific records, and calculation-result archival policy.
+These instructions are mandatory for all agents and contributors. The [Central Research Standards Index](docs/governance/CENTRAL_STANDARDS_INDEX.md) is the entry point for shared policies. Follow the [Research Governance Standard](docs/RESEARCH_GOVERNANCE_STANDARD.md), [Research Task Handoff Standard](docs/RESEARCH_TASK_HANDOFF_STANDARD.md), and [Research Quality Gate](docs/governance/RESEARCH_QUALITY_GATE.md), together with the User Guide, Scientific Diff workflow, project-specific records, and archival policy.
 
 ## 1. Minimal preflight
 
 Before substantive work:
 
 1. Read this file and the root [README](README.md) or [Chinese README](README.zh-CN.md).
-2. Read [docs/USER_GUIDE.md](docs/USER_GUIDE.md) and [docs/scientific-diff-workflow.md](docs/scientific-diff-workflow.md).
+2. Read [the Central Research Standards Index](docs/governance/CENTRAL_STANDARDS_INDEX.md), [docs/USER_GUIDE.md](docs/USER_GUIDE.md), and [docs/scientific-diff-workflow.md](docs/scientific-diff-workflow.md).
 3. Inspect [projects/registry.yaml](projects/registry.yaml) and the selected project's own repository README/index to identify the canonical project, workstream, research-change records, and claim–evidence matrix. Project-specific research files are not stored in this shared infrastructure repository.
-4. For numerical/computational tasks, follow [RESEARCH_COMPUTE_POLICY.md](RESEARCH_COMPUTE_POLICY.md) and identify the primary execution environment before running. Read only the source files, calculations, and validation records relevant to the task. Do not load or rewrite the entire repository by default.
+4. For substantive research tasks, create a completed [Research Task Brief](templates/research-task-brief.md) under [docs/RESEARCH_TASK_HANDOFF_STANDARD.md](docs/RESEARCH_TASK_HANDOFF_STANDARD.md). Apply the task-appropriate [Research Quality Gate](docs/governance/RESEARCH_QUALITY_GATE.md); for numerical/computational tasks, follow [RESEARCH_COMPUTE_POLICY.md](RESEARCH_COMPUTE_POLICY.md) and identify the primary execution environment before running. Read only the source files, calculations, and validation records relevant to the task. Do not load or rewrite the entire repository by default.
 5. Before changing candidate schemas, migrations, or governance behavior, read [docs/REPOSITORY_STATUS.md](docs/REPOSITORY_STATUS.md), [docs/OPEN_ISSUES.md](docs/OPEN_ISSUES.md), and [docs/governance/DECISION_REGISTER.md](docs/governance/DECISION_REGISTER.md).
 
 Never invent a completed calculation, run record, validation result, source revision, or scientific decision.
@@ -75,7 +75,7 @@ Do not call a calculation independent if it reuses the same trace, integral redu
 
 ## 7. Numerical-result archival and Git workflow
 
-Follow the mandatory [calculation-result archival policy](docs/CALCULATION_RESULT_ARCHIVAL_POLICY.md) and the [Structured Research Result Data Standard v1.0.0](docs/STRUCTURED_RESULT_DATA_STANDARD.md). For machine-readable run/result records, use `docs/schemas/validate_result_records.py` with `docs/schemas/research-result-record-v1.0.0.schema.json`; keep this archive-data profile separate from the unreleased research-record Schema v1.4.3.7 candidate.
+Follow the mandatory [calculation-result archival policy](docs/CALCULATION_RESULT_ARCHIVAL_POLICY.md) and adopted [Structured Research Result Data Standard v1.0.1](docs/STRUCTURED_RESULT_DATA_STANDARD_v1.0.1.md). For new machine-readable run/result records, use `docs/schemas/validate_result_records.py` with `docs/schemas/research-result-record-v1.0.1.schema.json`. The v1.0.0 schema remains the historical compatibility profile; keep both archive-data profiles separate from the unreleased research-record Schema v1.4.3.7 candidate.
 
 - **Extract-before-upload is mandatory:** when results arrive as ZIP/TAR (including ChatGPT handoff bundles, local-runner packages, GitHub Actions artifacts, or collaborator deliveries), extract first and commit the required native files individually. A delivery archive is transport only, not a substitute for its extracted contents. Follow [§2 of the calculation-result archival policy](docs/CALCULATION_RESULT_ARCHIVAL_POLICY.md).
 - Record exact source commit, input provenance and hashes, commands, software versions, physical/numerical settings, outputs, and SHA-256 checksums.

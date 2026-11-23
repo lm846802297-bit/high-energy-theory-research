@@ -1,6 +1,6 @@
 # Structured Research Result Data Standard v1.0.0
 
-**Status:** Proposed for adoption; applies to new substantial numerical, simulation, scan, and computational-validation runs after merge.  
+**Status:** Historical compatibility profile. Superseded for new substantial runs by adopted RCRPS v1.0.1 from 2026-11-23. The v1.0.0 schema and historical records remain unchanged.  
 **Schema:** JSON Schema Draft 2020-12.  
 **Purpose:** Standardize data structure, run provenance, and archival. This standard does not certify scientific correctness.
 
@@ -19,7 +19,7 @@ Do not force every task to create every file. A substantial execution needs a ma
 
 ## 2. JSON record roles
 
-The local `research-result-record-v1.0.0.schema.json` validates three record types:
+The historical `research-result-record-v1.0.0.schema.json` validates three record types. For new runs, use the adopted v1.0.1 standard and schema.
 
 - **run_manifest:** records what actually ran, including the commit SHA used at execution time, script path/fingerprint, input provenance (for repository-local inputs, a repository-relative path, byte count, and SHA-256; when input bytes are unavailable, an immutable URI plus version), physical/numerical configuration, software/hardware environment, exact command, output inventory, validation status, and archival status. The schema requires the entry-script SHA-256 and explicit runtime, dependency, and hardware records.
 - **result_summary:** records what was calculated, the benchmark, scope, observables as numeric values plus separate unit fields, scientific status, interpretation, and data-file references.

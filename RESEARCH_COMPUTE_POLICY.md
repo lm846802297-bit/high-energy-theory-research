@@ -2,24 +2,24 @@
 
 **Status:** Author-approved normative policy  
 **Effective date:** 2026-11-20  
-**Applies to:** All numerical, symbolic, phenomenological, data-processing, and computational-validation work in this research project.
+**Applies to:** Numerical, symbolic, phenomenological, data-processing, and computational-validation work in this repository and in downstream projects that adopt this central policy.
 
 ## 1. Decision / 总体决策
 
-The project uses a three-part architecture with strictly separated responsibilities:
+The shared research framework uses a three-part architecture with strictly separated responsibilities:
 
 1. **Primary computation — selected by the actual execution target.** Ordinary GPT chat mode uses the ChatGPT-provided Linux Python environment. Codex and ChatGPT Work may execute either directly on the user's Windows computer/workspace or on a GPT-managed cloud computer (for example, a Codex cloud computer or a Work cloud computer). Identify which machine actually runs the code; do not infer it from the product or mode name alone. Use only the filesystem, CPU/GPU, memory, storage, and software actually exposed by that execution target, and record the exact environment for every run.
 2. **GitHub — canonical source and research archive.** Store versioned source code, input-data provenance, run manifests, native numerical outputs, plots, validation reports, and pull-request history. GitHub is the durable record, not the primary numerical execution engine.
 3. **GitHub Actions — independent verification.** Use Actions for CI, regression tests, selected independent recalculations, cross-platform checks, and reproducibility checks against the primary results. Actions must not silently replace the primary computation or become a prerequisite for continuing research.
 
-This division is normative for this project. Do not reopen it for each task.
+This division is the shared central minimum. Downstream projects may add compatible domain-specific requirements but must not silently weaken it.
 
 ## 2. Primary computation / 主计算环境
 
 - Select the primary environment from the actual execution target before running: (a) ordinary GPT chat session → ChatGPT Linux; (b) Codex/Work local execution → the user's Windows environment; (c) Codex/Work cloud computer → the GPT-managed cloud environment assigned to that task. Work or Codex cloud access does not by itself guarantee a shell or command runtime: verify that an actual compute runtime is available. A browser-only session is for web interaction and does not count as scientific compute execution. Do not assume the cloud computer's OS; inspect it. Run the main program in the selected environment when its required tools and resources are available.
 - Execute the actual scientific program in the selected primary environment. Do not describe a result as locally recomputed merely because a GitHub Actions artifact was downloaded or inspected.
 - The term **primary computation** means execution on the machine that actually runs the scientific program. Reserve **local Windows execution** for processes running on the user's physical Windows computer. A GPT-managed cloud computer is a separate remote execution environment, even if accessed through Codex or Work.
-- In ordinary GPT chat mode, the Windows workstation/GPU is a separate machine; do not claim access to it unless an authorized connection has actually been established and verified. In Codex/Work local execution, use the Windows files, CPU/GPU, and installed tools exposed by the local integration. In Codex/Work cloud execution, use only the resources exposed by that cloud computer; do not claim access to the user's Windows disks, RTX 5060, or local software from the cloud session unless an explicit connection is established and tested.
+- In ordinary GPT chat mode, the Windows workstation/GPU is a separate machine; do not claim access to it unless an authorized connection has actually been established and verified. In Codex/Work local execution, use the Windows files, CPU/GPU, and installed tools exposed by the local integration. In Codex/Work cloud execution, use only the resources exposed by that cloud computer; do not claim access to the local machine's disks, GPUs, or software from the cloud session unless an explicit connection is established and tested.
 - A GPT-managed cloud computer is distinct from both ChatGPT's ordinary Linux chat container and the user's Windows PC. Record whether it is ephemeral or persistent and how outputs were exported. A Windows self-hosted GitHub Actions runner remains an Actions execution even if hosted on the same physical PC; it is distinct from direct Codex/Work execution and from a GPT-managed cloud computer.
 - If the selected primary environment cannot perform a task (for example, unavailable dependency, inaccessible input, resource limit, or incompatible native software), state the exact blocker. Continue with feasible alternatives in that mode where scientifically sound. Do not silently move the primary workload to Actions.
 - Do not redesign a validated numerical method merely to use a GPU. Introduce GPU acceleration only when a measured performance need justifies it and the accelerated implementation is independently checked against the established reference.

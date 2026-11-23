@@ -1,8 +1,8 @@
 # Calculation-result archival policy
 
-**Status:** Mandatory repository-wide policy for numerical and computational research.
+**Status:** Adopted shared policy for repositories that explicitly adopt the central standards framework.
 
-This policy applies to calculations, simulations, parameter scans, data processing, phenomenology, and computational validation. It supplements the [User Guide](USER_GUIDE.md) and the [Scientific Diff workflow](scientific-diff-workflow.md). Each project repository defines its own artifact index or `artifacts/README.md` for immutable-bundle navigation. This policy governs how results are retained; it does not certify their scientific correctness.
+This policy applies to calculations, simulations, parameter scans, data processing, phenomenology, and computational validation in adopting project repositories. It supplements the [User Guide](USER_GUIDE.md) and the [Scientific Diff workflow](scientific-diff-workflow.md). Each project repository defines its own artifact index or `artifacts/README.md` for immutable-bundle navigation. This policy governs how results are retained; it does not certify their scientific correctness.
 
 ## 1. Use project-local canonical research locations
 
@@ -67,6 +67,6 @@ CI is optional supporting infrastructure, not a prerequisite for calculation, sc
 - Review and merge according to the actual diff, reproducibility, scientific evidence, scope, and relevant checks. Do not require CI status checks as branch-protection gates under this policy. Do not change repository protection settings without explicit authorization.
 - CI is mandatory for a specific task only if the author explicitly requests it.
 
-## 6. Structured JSON/CSV result records
+## 7. Structured JSON/CSV result records
 
-New substantial numerical runs must also follow the [Structured Research Result Data Standard v1.0.0](STRUCTURED_RESULT_DATA_STANDARD.md) and validate `run_manifest`, `result_summary`, and `validation_report` records against `schemas/research-result-record-v1.0.0.schema.json`. Keep execution provenance, scientific results, and validation evidence as distinct records; store pointwise arrays in native tables with explicit units. This archive-data profile is independent of the unreleased research-record Schema v1.4.3.7 candidate.
+New substantial numerical runs must follow the adopted [Structured Research Result Data Standard v1.0.1](STRUCTURED_RESULT_DATA_STANDARD_v1.0.1.md) and validate records against `schemas/research-result-record-v1.0.1.schema.json`. The v1.0.0 standard and schema remain available for historical compatibility; do not rewrite legacy records. Keep execution provenance, scientific results, and validation evidence as distinct records; store pointwise arrays in native tables with explicit units. This archive-data profile is independent of the unreleased research-record Schema v1.4.3.7 candidate.
