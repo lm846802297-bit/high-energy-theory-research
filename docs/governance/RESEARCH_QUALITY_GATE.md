@@ -19,7 +19,7 @@ The Research Quality Gate maps shared research-quality requirements to task-appr
 | 7 | Independent scientific/physical validation | Analytic limits, dimensions, conservation/symmetry identities, independent derivation/implementation, source/table comparison, or domain-specific validation appropriate to the claim |
 | 8 | Relevant software regression tests | Tests that exercise the changed code/schema/workflow behavior; exact command and result. Run in the active primary or approved verification environment; Actions is optional |
 | 9 | Independent technical review | Review of the actual diff and evidence by a reviewer distinct from the authoring pass; findings, severity, disposition, and reviewed commit SHA |
-| 10 | PR review and integration | Focused PR, accurate scope/status, acceptance evidence, owner authorization, merge according to repository policy, and post-merge verification on the canonical branch |
+| 10 | PR review and integration | Focused PR, accurate scope/status, pre-merge review and owner authorization; after integration, verified merge commit and canonical-branch state |
 
 ## 2. Task profiles
 
@@ -71,7 +71,7 @@ A technical review comment is not the same as a GitHub formal APPROVE. Never imp
 
 GitHub Actions is optional unless the task owner explicitly requires a particular workflow. Relevant checks may run in the primary execution environment or an approved independent environment. A queued or unavailable Actions run does not block work when the required evidence can be obtained elsewhere.
 
-Merge decisions follow the [Git merge policy](GIT_MERGE_POLICY.md). The PR must be reviewed, all applicable required gates must be PASS, and any N/A/BLOCKED/NOT RUN items must be explicitly assessed against the task's acceptance criteria before integration. Do not merge a task whose own acceptance criteria require evidence that remains unexecuted.
+Merge decisions follow the [Git merge policy](GIT_MERGE_POLICY.md). Gate 10 has two checkpoints: before merge, the focused PR must have an accurate scope/status, completed review, required evidence, and owner authorization; after merge, the exact merge commit and integrated canonical-branch state must be verified. Before integration, all other applicable required gates must be PASS, with N/A items justified under the task profile. Mark Gate 10 fully PASS only after post-merge verification. A BLOCKED or NOT RUN item cannot replace evidence required by the task's acceptance criteria.
 
 ## 7. Relationship to structured result statuses
 
