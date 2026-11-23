@@ -73,6 +73,35 @@ class SourceControlSchemaTests(unittest.TestCase):
         non_pr_record["execution"]["source_control"]["checkout_mode"] = "pull_request_merge"
         self.assertTrue(self.errors(non_pr_record))
 
+    def test_invalid_pr_sha_url_number_and_empty_refs_are_rejected(self):
+        mutations = (
+            ("pr_head_sha", "not-a-sha"),
+            ("base_sha", "not-a-sha"),
+            ("pr_url", "not-a-uri"),
+            ("pr_number", 0),
+            ("head_ref", ""),
+            ("base_ref", ""),
+        )
+        for field, value in mutations:
+            with self.subTest(field=field):
+                record = minimal_manifest(event="pull_request", mode="pull_request_merge")
+                record["execution"]["source_control"][field] = value
+                self.assertTrue(self.errors(record), field)
+
+    def test_workflow_run_id_and_attempt_must_be_paired(self):
+        record = minimal_manifest()
+        record["execution"]["source_control"]["workflow_run_id"] = 123
+        self.assertTrue(self.errors(record))
+        record = minimal_manifest()
+        record["execution"]["source_control"]["workflow_run_attempt"] = 1
+        self.assertTrue(self.errors(record))
+
+    def test_pr_base_and_unknown_checkout_modes_are_schema_valid(self):
+        base_record = minimal_manifest(event="pull_request_target", mode="pull_request_base")
+        self.assertEqual(self.errors(base_record), [])
+        unknown_record = minimal_manifest(event="pull_request", mode="unknown")
+        self.assertEqual(self.errors(unknown_record), [])
+
     def test_working_tree_state_and_dirty_paths_schema(self):
         record = minimal_manifest()
         record["execution"]["source_control"]["working_tree_state"] = "dirty"
