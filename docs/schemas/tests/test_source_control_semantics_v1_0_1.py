@@ -163,10 +163,12 @@ class ValidatorCliSchemaSelectionTests(unittest.TestCase):
     def test_default_cli_accepts_v100_records(self):
         result = self.run_cli(minimal_manifest(version="1.0.0"))
         self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+        self.assertNotIn("source-control provenance", result.stdout)
 
     def test_default_cli_accepts_v101_local_records(self):
         result = self.run_cli(minimal_manifest(version="1.0.1", event="local", mode="branch_commit"))
         self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+        self.assertIn("source-control provenance", result.stdout)
 
     def test_default_cli_accepts_v101_pr_records(self):
         result = self.run_cli(minimal_manifest(version="1.0.1", event="pull_request", mode="pull_request_merge"))
