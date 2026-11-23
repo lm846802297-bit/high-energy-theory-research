@@ -17,12 +17,13 @@
 - **vll-higgs-singlet-uv-eft** — UV–EFT 匹配及相关的六维规范修正。
 - **manuscript-review-response** — 审稿意见分析、回复信编写、论文 Diff，以及相关物理问题的验证协调。
 
-**vll-higgs-singlet-uv-eft** 工作流属于父项目内部的研究分支，不是独立的顶层项目。其现有记录继续保留在原路径：
+**vll-higgs-singlet-uv-eft** 工作流属于父项目内部的研究分支，不是独立的顶层项目。其规范归档由独立仓库 [axial-vector-review-response](https://github.com/lm846802297-bit/axial-vector-review-response) 维护：
 
-- 主研究记录：[research/RC-001-vll-higgs-singlet-uv-eft.md](../research/RC-001-vll-higgs-singlet-uv-eft.md)
-- 规范子图工作流记录：[research/RC-001-gauge-subgraph-change-record.md](../research/RC-001-gauge-subgraph-change-record.md)
-- 主张—证据矩阵：[research/RC-001-claim-evidence-matrix.md](../research/RC-001-claim-evidence-matrix.md)
-- 当前活跃记录的共享索引：[research/README.zh-CN.md](../research/README.zh-CN.md)
+- 工作流归档入口：[RC-001 归档 README](https://github.com/lm846802297-bit/axial-vector-review-response/blob/main/research/rc001-vll-higgs-singlet-uv-eft/README.md)
+- 主研究记录：[RC-001-vll-higgs-singlet-uv-eft.md](https://github.com/lm846802297-bit/axial-vector-review-response/blob/main/research/rc001-vll-higgs-singlet-uv-eft/upstream/research/RC-001-vll-higgs-singlet-uv-eft.md)
+- 规范子图工作流记录：[RC-001-gauge-subgraph-change-record.md](https://github.com/lm846802297-bit/axial-vector-review-response/blob/main/research/rc001-vll-higgs-singlet-uv-eft/upstream/research/RC-001-gauge-subgraph-change-record.md)
+- 主张—证据矩阵：[RC-001-claim-evidence-matrix.md](https://github.com/lm846802297-bit/axial-vector-review-response/blob/main/research/rc001-vll-higgs-singlet-uv-eft/upstream/research/RC-001-claim-evidence-matrix.md)
+- 原始研究索引：[upstream/research/README.md](https://github.com/lm846802297-bit/axial-vector-review-response/blob/main/research/rc001-vll-higgs-singlet-uv-eft/upstream/research/README.md)
 
 #### 审稿回复与论文修订
 
@@ -30,9 +31,9 @@
 
 该仓库保存投稿论文、审稿报告、综合审稿意见分析、中微子扇区荷分析、单圈混合推导复核以及论文修订资料。相关文件仍以该仓库为来源；本次登记不会把它们复制或迁移到科研工作台。
 
-该工作流与 **vll-higgs-singlet-uv-eft** 有关联，但不会重复建立 RC-001，也不会取代现有计算记录和主张—证据矩阵。注册表中的状态摘要保留尚未解决的研究问题；在相关证据记录完成之前，不得将待核查事项描述为已完成。
+中央基础设施仓库不复制这些研究记录或计算。注册表只承担导航功能，并保留尚未解决的研究问题；在相关证据记录完成之前，不得将待核查事项描述为已完成。
 
-本次登记没有移动、重命名或重新归类任何研究文件。尤其要注意，RC-001 是研究变更/记录 ID，不是父项目 ID。
+2026-11-23，RC-001 冻结源版本的 480 个文件已迁移至项目仓库，并通过 [迁移 PR #135](https://github.com/lm846802297-bit/axial-vector-review-response/pull/135) 合并。本中央基础设施仓库只保留上述导航链接。RC-001 仍是研究变更/记录 ID，不是父项目 ID。
 
 参见[第一阶段注册表与迁移预审](../docs/PROJECT_REGISTRY_AUDIT.md)，了解已执行的检查和仍需满足的迁移门槛。
 

@@ -2,7 +2,7 @@
 
 简体中文版本：[README.zh-CN.md](README.zh-CN.md)。
 
-A research workspace for high-energy theory, with an explicit workflow for tracing changes from scientific questions to derivations, computations, verified claims, and manuscript revisions. It also includes a reusable research Skill and evidence-aware infrastructure for high-energy theoretical physics and phenomenology; peer-review response is one supported workflow, not the overall objective.
+A shared infrastructure repository for high-energy-theory research. It maintains reusable workflows, Skills, research standards, schemas, templates, tests, and navigation metadata. Project-specific research records, source code, calculations, validation outputs, and artifacts are maintained in their respective project repositories.
 
 ## Scientific Diff Workflow
 
@@ -18,7 +18,7 @@ The workflow is designed for theoretical particle physics, UV–EFT matching, pe
 3. Copy [the research-change template](templates/research-change.md) for each substantive research change.
 4. Use [the claim–evidence matrix template](templates/claim-evidence-matrix.md) to track the support for important physical statements.
 5. Apply [the review checklist](docs/review-checklist.md) before marking a change complete or synchronizing it into a manuscript.
-6. Read the [active research records](research/README.md); the first baseline is [RC-001: VLL–Higgs–Singlet UV–EFT matching](research/RC-001-vll-higgs-singlet-uv-eft.md), with its [record-specific claim–evidence matrix](research/RC-001-claim-evidence-matrix.md).
+6. Use the [project registry](projects/README.md) to locate project-specific research repositories. The canonical RC-001 archive is maintained in [axial-vector-review-response](https://github.com/lm846802297-bit/axial-vector-review-response/tree/main/research/rc001-vll-higgs-singlet-uv-eft).
 7. Use the [project registry](projects/README.md) to distinguish top-level research projects from workstreams and research-change records. The VLL–Higgs–Singlet UV–EFT workstream belongs to the parent project axial-vector-model-building; it is not a separate top-level project.
 8. For the reusable research Skill, start at [SKILL.md](skills/high-energy-theory-research/SKILL.md), then read its reference guides.
 9. Review [repository status](docs/REPOSITORY_STATUS.md), [open issues](docs/OPEN_ISSUES.md), and the [normative decision register](docs/governance/DECISION_REGISTER.md) before changing candidate schemas.
@@ -47,10 +47,7 @@ Every arrow should be traceable. A change to an upstream assumption or formula m
 - **templates/research-change.md** — record for an individual research change.
 - **templates/project-record.md** — template for registering a top-level research project or a nested workstream.
 - **templates/claim-evidence-matrix.md** — generic template for a new claim–evidence ledger.
-- **research/** — active research-change records and their current claim status.
-- **artifacts/** — immutable, hashed snapshots of large or binary research sources (main-document versions, calculation script trees, audit outputs), with provenance and verification status. See [artifacts/README.md](artifacts/README.md).
-- **calculations/** — reproducible symbolic/algebraic calculation scripts; each script states what it does and does not validate.
-- **validation/** — captured calculation outputs and validation logs, kept distinct from planned or unexecuted checks.
+- **Project-specific research repositories** — canonical scientific records, calculation source, native outputs, validation records, and artifacts remain in their respective project repositories; this central repository retains navigation metadata only.
 - **schema/v1.4.3.7/** — candidate JSON Schemas, fixtures, validators, migration prototype, audit reports, and requirement/test traceability.
 - **skills/high-energy-theory-research/** — reusable Skill entry point, reference guides, fingerprinting, structured-record validation, and project-registry validation tools.
 - **tests/eval-cases/** — bounded analytic-matrix and UV–EFT hard-derivative pilot cases.

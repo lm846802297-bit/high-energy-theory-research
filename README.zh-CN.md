@@ -2,7 +2,7 @@
 
 语言：简体中文。英文原版：[README.md](README.md)。
 
-本仓库是一个高能理论物理研究工作空间，提供明确的工作流，将科学问题的变化追踪到推导、计算、经验证的主张和论文修订。仓库还包含可复用的研究 Skill，以及面向高能理论与唯象学的证据管理基础设施。审稿回复只是支持的工作流之一，并非项目的唯一目标。
+本仓库是高能理论物理研究的共享基础设施仓库，维护可复用工作流、Skills、科研规范、Schema、模板、测试和导航元数据。具体项目的研究记录、源码、计算、验证输出和研究产物保存在各自的项目仓库中。
 
 ## Scientific Diff 工作流
 
@@ -18,7 +18,7 @@
 3. 每项实质性研究变更都应从[研究变更模板](templates/research-change.md)开始。
 4. 使用[主张—证据矩阵模板](templates/claim-evidence-matrix.md)追踪重要物理陈述的证据支持程度。
 5. 在标记变更完成或将结果同步到论文之前，执行[审查清单](docs/review-checklist.md)。
-6. 阅读[当前研究记录](research/README.zh-CN.md)。首个基线是 [RC-001：VLL–Higgs–Singlet UV–EFT 匹配](research/RC-001-vll-higgs-singlet-uv-eft.md)，并配有[对应的主张—证据矩阵](research/RC-001-claim-evidence-matrix.md)。
+6. 使用[项目注册表](projects/README.zh-CN.md)查找各项目的规范研究仓库。RC-001 的规范归档位于 [axial-vector-review-response](https://github.com/lm846802297-bit/axial-vector-review-response/tree/main/research/rc001-vll-higgs-singlet-uv-eft)。
 7. 使用[项目注册表说明](projects/README.zh-CN.md)区分顶层研究项目、工作流和研究变更记录。VLL–Higgs–Singlet UV–EFT 工作流属于父项目 `axial-vector-model-building`，不是独立的顶层项目。
 8. 可复用的研究 Skill 从 [SKILL.md](skills/high-energy-theory-research/SKILL.md) 开始，再阅读其参考指南。
 9. 修改候选 Schema 前，先检查[仓库状态](docs/REPOSITORY_STATUS.md)、[未解决问题](docs/OPEN_ISSUES.md)和[规范决策登记表](docs/governance/DECISION_REGISTER.md)。
@@ -48,9 +48,7 @@
 - **`templates/research-change.md`** — 单项研究变更的记录模板。
 - **`templates/project-record.md`** — 顶层研究项目或嵌套工作流的登记模板。
 - **`templates/claim-evidence-matrix.md`** — 新建主张—证据台账的通用模板。
-- **`research/`** — 当前研究变更记录及其主张状态；目录说明见[中文版本](research/README.zh-CN.md)。
-- **`calculations/`** — 可复现的符号/代数计算脚本；每个脚本均应说明它能验证和不能验证的内容。
-- **`validation/`** — 已采集的计算输出和验证日志，与计划中或尚未执行的检查分开存放。
+- **项目专属研究仓库** — 规范研究记录、计算源码、原生输出、验证记录和研究产物保存在各自项目仓库；本仓库只保留导航元数据。
 - **`schema/v1.4.3.7/`** — 候选 JSON Schema、测试夹具、校验器、迁移原型、审计报告和需求/测试可追溯性数据；目录说明见[中文版本](schema/v1.4.3.7/README.zh-CN.md)。
 - **`skills/high-energy-theory-research/`** — 可复用的 Skill 入口、参考指南、指纹计算、结构化记录校验和项目注册表校验工具。
 - **`tests/eval-cases/`** — 有明确范围的解析矩阵与 UV–EFT 硬核导数试点；相关说明见[解析质量矩阵试点中文说明](tests/eval-cases/analytic-mass-matrix-pilot/README.zh-CN.md)和 [UV–EFT 硬核导数试点中文说明](tests/eval-cases/uv-eFT-hard-derivative-pilot/README.zh-CN.md)。

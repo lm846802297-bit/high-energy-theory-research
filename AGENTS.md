@@ -10,7 +10,7 @@ Before substantive work:
 
 1. Read this file and the root [README](README.md) or [Chinese README](README.zh-CN.md).
 2. Read [docs/USER_GUIDE.md](docs/USER_GUIDE.md) and [docs/scientific-diff-workflow.md](docs/scientific-diff-workflow.md).
-3. Inspect [projects/registry.yaml](projects/registry.yaml) and [research/README.md](research/README.md) to identify the canonical project, workstream, active research-change record, and claim–evidence matrix.
+3. Inspect [projects/registry.yaml](projects/registry.yaml) and the selected project's own repository README/index to identify the canonical project, workstream, research-change records, and claim–evidence matrix. Project-specific research files are not stored in this shared infrastructure repository.
 4. For numerical/computational tasks, follow [RESEARCH_COMPUTE_POLICY.md](RESEARCH_COMPUTE_POLICY.md) and identify the primary execution environment before running. Read only the source files, calculations, and validation records relevant to the task. Do not load or rewrite the entire repository by default.
 5. Before changing candidate schemas, migrations, or governance behavior, read [docs/REPOSITORY_STATUS.md](docs/REPOSITORY_STATUS.md), [docs/OPEN_ISSUES.md](docs/OPEN_ISSUES.md), and [docs/governance/DECISION_REGISTER.md](docs/governance/DECISION_REGISTER.md).
 

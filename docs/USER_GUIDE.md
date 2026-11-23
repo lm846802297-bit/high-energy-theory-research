@@ -207,7 +207,7 @@ For both commands, inspect the full report, not only the exit code. Fix errors b
 
 The shared platform layer is for reusable methods, schemas, templates, documentation, tests, and tools. Project-specific physics records and outputs should ultimately be easy to identify by project/workstream.
 
-The current registry is an initial navigation layer. See the [Phase A registry and migration pre-audit](PROJECT_REGISTRY_AUDIT.md) for the scope already checked and the checks that remain unexecuted. Existing research/, calculations/, and validation/ paths have intentionally not been moved. Before a future migration:
+The registry is the navigation layer for project-specific repositories. The RC-001 archive migration was completed on 2026-11-23: its 480-file frozen source snapshot is preserved in [axial-vector-review-response](https://github.com/lm846802297-bit/axial-vector-review-response/tree/main/research/rc001-vll-higgs-singlet-uv-eft), and the central infrastructure repository retains only navigation metadata. See the [Phase A registry and migration audit](PROJECT_REGISTRY_AUDIT.md) for the pre-audit and completed migration record. Before any future workstream migration:
 
 1. enumerate all files to be moved;
 2. audit Markdown links, script imports, tests, CI paths, schema path rules, and validator assumptions;
@@ -225,9 +225,10 @@ The current registered hierarchy is:
 
 - **Parent project:** axial-vector-model-building
 - **Workstream:** vll-higgs-singlet-uv-eft
-- **Main research record:** [RC-001-vll-higgs-singlet-uv-eft.md](../research/RC-001-vll-higgs-singlet-uv-eft.md)
-- **Gauge-subgraph record:** [RC-001-gauge-subgraph-change-record.md](../research/RC-001-gauge-subgraph-change-record.md)
-- **Claim Matrix:** [RC-001-claim-evidence-matrix.md](../research/RC-001-claim-evidence-matrix.md)
+- **Archive entry point:** [RC-001 archive README](https://github.com/lm846802297-bit/axial-vector-review-response/blob/main/research/rc001-vll-higgs-singlet-uv-eft/README.md)
+- **Main research record:** [RC-001-vll-higgs-singlet-uv-eft.md](https://github.com/lm846802297-bit/axial-vector-review-response/blob/main/research/rc001-vll-higgs-singlet-uv-eft/upstream/research/RC-001-vll-higgs-singlet-uv-eft.md)
+- **Gauge-subgraph record:** [RC-001-gauge-subgraph-change-record.md](https://github.com/lm846802297-bit/axial-vector-review-response/blob/main/research/rc001-vll-higgs-singlet-uv-eft/upstream/research/RC-001-gauge-subgraph-change-record.md)
+- **Claim Matrix:** [RC-001-claim-evidence-matrix.md](https://github.com/lm846802297-bit/axial-vector-review-response/blob/main/research/rc001-vll-higgs-singlet-uv-eft/upstream/research/RC-001-claim-evidence-matrix.md)
 
 Its status is verification in progress. Some analytic integral and symbolic/algebraic sub-blocks are documented, but the complete Wilson-coefficient vector, all relevant gauge/box contributions, common-basis reduction, and independent diagram-level validation remain open. This example demonstrates traceability and status discipline; it must not be read as a claim that the full matching is complete.
 
@@ -237,5 +238,5 @@ Its status is verification in progress. Some analytic integral and symbolic/alge
 - **Can I run the structured-record validator on the registry?** No. Use the project-registry checker for projects/registry.yaml.
 - **The algebra check passed; can I mark the physics claim supported?** Only if that check is sufficient for the exact claim and domain. Otherwise record the missing independent evidence.
 - **CI is unavailable.** Record it as not run/blocked; do not mark it passed and do not confuse this software limitation with scientific evidence.
-- **Can I move the existing RC-001 files now?** Not until the path, schema, test, and workflow dependency audit is complete and the migration is reviewed.
+- **Where are the RC-001 files now?** The 480-file frozen archive has been migrated and merged into [axial-vector-review-response](https://github.com/lm846802297-bit/axial-vector-review-response/tree/main/research/rc001-vll-higgs-singlet-uv-eft). For another workstream, complete the path, schema, test, and workflow dependency audit before migration.
 - **Can I register another research topic?** Yes, when its parent-project relationship is known. Do not infer that relationship from a filename alone.

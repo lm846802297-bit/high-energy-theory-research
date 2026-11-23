@@ -17,12 +17,13 @@ The top-level research project is **axial-vector-model-building**. It currently 
 - **vll-higgs-singlet-uv-eft** — UV–EFT matching and associated dimension-six gauge corrections.
 - **manuscript-review-response** — referee-comment analysis, response-letter development, manuscript diffs, and coordination of the supporting physics checks.
 
-The **vll-higgs-singlet-uv-eft** workstream is a branch/workstream *inside the parent project*, not an independent top-level project. Its existing records remain at their current paths:
+The **vll-higgs-singlet-uv-eft** workstream is a branch/workstream *inside the parent project*, not an independent top-level project. Its canonical archive is maintained in the separate [axial-vector-review-response repository](https://github.com/lm846802297-bit/axial-vector-review-response):
 
-- Main research record: [research/RC-001-vll-higgs-singlet-uv-eft.md](../research/RC-001-vll-higgs-singlet-uv-eft.md)
-- Gauge-subgraph workstream record: [research/RC-001-gauge-subgraph-change-record.md](../research/RC-001-gauge-subgraph-change-record.md)
-- Claim–evidence matrix: [research/RC-001-claim-evidence-matrix.md](../research/RC-001-claim-evidence-matrix.md)
-- Shared project index for the currently active records: [research/README.md](../research/README.md)
+- Workstream archive entry point: [RC-001 archive README](https://github.com/lm846802297-bit/axial-vector-review-response/blob/main/research/rc001-vll-higgs-singlet-uv-eft/README.md)
+- Main research record: [RC-001-vll-higgs-singlet-uv-eft.md](https://github.com/lm846802297-bit/axial-vector-review-response/blob/main/research/rc001-vll-higgs-singlet-uv-eft/upstream/research/RC-001-vll-higgs-singlet-uv-eft.md)
+- Gauge-subgraph workstream record: [RC-001-gauge-subgraph-change-record.md](https://github.com/lm846802297-bit/axial-vector-review-response/blob/main/research/rc001-vll-higgs-singlet-uv-eft/upstream/research/RC-001-gauge-subgraph-change-record.md)
+- Claim–evidence matrix: [RC-001-claim-evidence-matrix.md](https://github.com/lm846802297-bit/axial-vector-review-response/blob/main/research/rc001-vll-higgs-singlet-uv-eft/upstream/research/RC-001-claim-evidence-matrix.md)
+- Original research index: [upstream/research/README.md](https://github.com/lm846802297-bit/axial-vector-review-response/blob/main/research/rc001-vll-higgs-singlet-uv-eft/upstream/research/README.md)
 
 #### Manuscript review and revision
 
@@ -30,9 +31,9 @@ The **manuscript-review-response** workstream is maintained in its own repositor
 
 That repository retains the submitted manuscript, referee report, consolidated review analyses, neutrino-sector charge analysis, one-loop mixing review, and manuscript-revision materials. It remains the source of those files; this registration does not copy or move them into the workbench.
 
-The workstream is related to **vll-higgs-singlet-uv-eft**, but it does not duplicate RC-001 or replace its calculation and claim–evidence records. The registry's status summary preserves unresolved research questions; pending checks must not be described as completed until their evidence is recorded.
+The central infrastructure repository does not duplicate these research records or calculations. The registry is navigation metadata only. Its status summary preserves unresolved research questions; pending checks must not be described as completed until their evidence is recorded.
 
-No files have been moved, renamed, or reclassified by this registration. In particular, the RC-001 identifier remains a research-change/record identifier; it is not the parent project ID.
+On 2026-11-23, the complete 480-file frozen RC-001 source snapshot was migrated into the project repository and merged through [migration PR #135](https://github.com/lm846802297-bit/axial-vector-review-response/pull/135). The central infrastructure repository retains only the navigation links above; the RC-001 identifier remains a research-change/record identifier, not the parent project ID.
 
 See the [Phase A registry and migration pre-audit](../docs/PROJECT_REGISTRY_AUDIT.md) for the checks performed and the remaining migration gates.
 
