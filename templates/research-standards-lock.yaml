@@ -10,18 +10,13 @@ source_commit: "0000000000000000000000000000000000000000"
 adopted_at: "YYYY-MM-DD"
 adoption_pr: "https://github.com/OWNER/REPOSITORY/pull/NUMBER"
 
-adopted_profiles:
-  - core-governance
-  - research-compute
-  - task-handoff
-  - scientific-diff
-  - research-quality-gate
-  - calculation-result-archive
-  - rcrps-v1.0.1
-  - git-review-and-merge
+# Select only the profiles explicitly adopted by this project:
+# core-governance, research-compute, task-handoff, scientific-diff,
+# research-quality-gate, calculation-result-archive, rcrps-v1.0.1,
+# git-review-and-merge.
+adopted_profiles: []
 
-local_extensions:
-  - path: "AGENTS.md"
-    scope: "Project-specific scientific conventions and validation procedures"
+# List project-local domain standards that remain authoritative locally.
+local_extensions: []
 
 deviations: []
