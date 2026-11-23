@@ -12,24 +12,23 @@ The brief is a task specification. It is not evidence that a derivation, calcula
 
 ## 1. When a brief is required
 
-Create a completed brief before substantive work involving one or more of:
+Create a completed brief before substantial work involving one or more of:
 
 - a physical derivation, matching calculation, or interpretation of a paper;
-- a numerical calculation, simulation, parameter scan, data transformation, or figure;
+- a numerical calculation, simulation, substantial parameter scan, data transformation, or scientific figure/dataset intended to support a claim or benchmark;
 - a change to production code, physical conventions, input data, or validation logic;
 - independent work by multiple models, agents, researchers, or collaborators;
 - a result intended to support a benchmark, scientific conclusion, manuscript statement, or formal repository record.
 
-A trivial editorial or repository-maintenance change with no scientific content may omit the brief when the PR explains why it is not applicable. Historical work does not need retroactive briefs; apply the standard to new substantive work and follow-up tasks.
+A trivial editorial or repository-maintenance change with no scientific content may omit the brief when the PR explains why it is not applicable. Keep the brief proportional to the task: concise answers are sufficient, and it is not a research proposal. Historical work does not need retroactive briefs; apply the standard to new substantive work and follow-up tasks.
 
 ## 2. Canonical location and identity
 
 Use the [Research Task Brief template](../templates/research-task-brief.md).
 
-- Topic-specific task: research/<topic>/task_briefs/<task-id>.md
-- Cross-topic or repository-wide task: research/docs/task_briefs/<task-id>.md
+Preferred locations are a topic-local task_briefs directory or a repository-level research/docs/task_briefs directory. These are defaults, not a mandate to restructure an existing project. If a project already has an established task-record location, use it and link the brief from the relevant study README, issue, or PR. Do not create a new research directory solely to host a task brief.
 
-Use a stable ID such as YYYYMMDD-short-kebab-case. Link the brief from the relevant study README, issue, or PR. A branch name, chat message, or PR title is not a substitute.
+Use a stable ID such as YYYYMMDD-short-kebab-case. A branch name, chat message, or PR title is not a substitute.
 
 ## 3. Required brief fields
 
