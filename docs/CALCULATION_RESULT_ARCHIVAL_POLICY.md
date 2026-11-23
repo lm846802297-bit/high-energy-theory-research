@@ -51,6 +51,69 @@ For every substantial run, include a `run_manifest.json`/YAML or an equivalent c
 
 Retain the logs and checkpoints needed to audit or resume a long calculation. Omit disposable caches, temporary build products, virtual environments, and unrelated scratch files.
 
+## 4A. Reuse accepted calculation results; do not recompute without cause
+
+**A result that has passed predeclared numerical and scientific acceptance criteria and has complete source/input provenance is reusable scientific evidence. A new PR, CI restart, documentation edit, archival-path change, or workflow adjustment alone is not a reason to recompute it.**
+
+### 4A.1 Identify a reusable result
+
+A reusable accepted result must be bound, as applicable, to:
+
+- repository and full source commit SHA, plus hashes of the calculation scripts/notebooks actually used;
+- paths, versions, and SHA-256 checksums of all input data, reference data, parameter files, and configurations;
+- physical definitions and conventions: units, normalization, model assumptions, approximations, boundary conditions, and other result-affecting choices;
+- numerical methods and settings: grids, integration/quadrature order, precision, tolerances, random seeds, and parallel settings;
+- execution environment: operating system, runtime, compiler, and relevant dependency versions;
+- native output files and their SHA-256 checksums;
+- predeclared acceptance criteria, actual validation methods/results, and locatable logs/reports.
+
+Together these fields form the result's *calculation fingerprint*. A filename, PR number, green CI status, or verbal statement alone does not establish equivalence between calculation versions.
+
+### 4A.2 When to reuse directly
+
+When the calculation fingerprint relevant to the current task matches the accepted record, and the supported scientific claim and scope are unchanged:
+
+1. cite the native result and its exact version;
+2. cite the existing convergence, error-analysis, and independent-validation evidence;
+3. perform necessary integrity/hash checks on the existing files and verify their archival location;
+4. record this task as “reuse of an accepted result,” identifying the reused run ID, commit, input/output hashes, and validation record;
+5. do not rerun expensive physics calculations or duplicate a calculation merely to obtain a new CI record.
+
+Hash verification, metadata checks, result-table comparisons, and archival checks are lightweight verification; they are not reruns of the original calculation. If the result files, source, and inputs are unchanged, the existing independent validation remains valid; do not repeat it merely to “prove it again.”
+
+### 4A.3 When recalculation or targeted revalidation is justified
+
+Recompute only the affected part when there is a concrete, relevant change or new evidence, for example:
+
+- a source-code or algorithm change that may alter numerical results;
+- a change in the content/version of input data, parameters, configuration, data transformation, or reference data;
+- a change in physical definitions, sign conventions, normalization, approximations, model assumptions, or the target scientific claim;
+- a change in numerical method, precision, grid, quadrature, tolerance, random seed, or execution environment that may affect the result;
+- discovery of an actual error, numerical instability, failed convergence, checksum mismatch, or new independent evidence contradicting the old result;
+- evidence that the previous validation scope is insufficient for a stronger claim now being made.
+
+Scope revalidation along the dependency graph: check the downstream components affected by the changed input, code module, result, or claim. Do not treat unrelated documentation edits, plot-style changes, file moves, README additions, PR reopenings, or CI configuration changes as automatic reasons to recompute all physics results. If a change affects only presentation, regenerate the figure without recomputing its upstream numerical data.
+
+### 4A.4 Keep calculation, validation, and archival status distinct
+
+Record these separately:
+
+- **Calculation status:** result produced, or not yet executed;
+- **Scientific-validation status:** which predeclared checks passed, were not run, or are not applicable;
+- **Archival status:** whether native results, source, inputs, and provenance are durably stored and verified;
+- **Reuse status:** whether this task reuses an accepted result or performs targeted recalculation because of a specified change.
+
+A historical calculation passing does not automatically validate new modifications; equally, not rerunning a calculation in a new PR does not invalidate the existing result. Do not report “not recomputed this round” as “validation failed,” and do not report a matching checksum as a new independent physics validation.
+
+### 4A.5 CI and automation requirements
+
+- CI should select checks according to changed paths and dependency relationships. Documentation-only, presentation-only, or non-calculation workflow changes should not automatically trigger every expensive numerical calculation.
+- When a task reuses an accepted result, CI may verify source/input/output hashes, manifest completeness, and consistency of result summaries with frozen references. A full physics rerun is not required unless one of the recalculation triggers above applies.
+- Multiple workflows must not concurrently recompute the same result or overwrite each other merely because an automated archive commit changed a result directory. Archival should be idempotent and keyed to an explicit result identity, with deliberate commit-conflict handling.
+- Independent replay is valuable, but should be performed for initial acceptance, a relevant dependency change, or a concrete discrepancy—not as a default full recomputation for every PR.
+
+This section applies together with the [minimum-sufficient-acceptance and historical-validation-reuse principles in the Research Quality Gate](governance/RESEARCH_QUALITY_GATE.md). Preserve the stricter provenance requirements, but do not expand the recalculation scope without evidence.
+
 ## 5. Validate and verify the remote submission
 
 1. Before submission, check completeness, expected file/row counts, units, numerical finiteness, and the calculation-specific acceptance criteria. Record failed, partial, or unrun checks explicitly.
