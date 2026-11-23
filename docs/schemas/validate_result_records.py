@@ -293,7 +293,7 @@ def verify_source_control(record: dict) -> list[str]:
             errors.append(f"dirty path must be repository-relative POSIX form: {path}")
             continue
         normalized = PurePosixPath(path)
-        if normalized.is_absolute() or ".." in normalized.parts or normalized.as_posix() != path:
+        if normalized.is_absolute() or normalized.as_posix() == "." or ".." in normalized.parts or normalized.as_posix() != path:
             errors.append(f"dirty path must be normalized and cannot escape the repository: {path}")
             continue
         if path in seen:
