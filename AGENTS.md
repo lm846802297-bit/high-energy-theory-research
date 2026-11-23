@@ -2,6 +2,12 @@
 
 > **Mandatory compute architecture:** Follow [RESEARCH_COMPUTE_POLICY.md](RESEARCH_COMPUTE_POLICY.md) for all numerical and computational work. Select the primary environment by actual execution target: ordinary GPT chat uses ChatGPT Linux; Codex/Work local execution uses the user's Windows environment; Codex/Work cloud-computer execution uses the GPT-managed cloud environment. GitHub is the canonical source/result archive; GitHub Actions is reserved for independent verification and CI, not the primary calculation engine.
 
+## Repository scope
+
+This repository is the central infrastructure for shared Research Skills, standards, workflows, templates, automation and validators. It is not a research-project workspace. Project-specific derivations, code, inputs, runs, validation, claims, figures and manuscripts belong in the corresponding project repository, which is their sole canonical home. A central registry may link to project evidence at a pinned source revision, but it must not duplicate that evidence.
+
+In this repository, new material under `validation/` must test the shared infrastructure (for example, a synthetic fixture, a Skill benchmark or a workflow regression), not record a project-specific physical result. Treat existing project material as historical references pending a reviewed transfer; do not add new project work there or remove those records simply to enforce this boundary. Verify the destination, byte-level provenance and downstream references before retiring any historical copy.
+
 These instructions are mandatory for all agents and contributors. They complement the User Guide, Scientific Diff workflow, project-specific records, and calculation-result archival policy.
 
 ## 1. Minimal preflight
@@ -10,7 +16,7 @@ Before substantive work:
 
 1. Read this file and the root [README](README.md) or [Chinese README](README.zh-CN.md).
 2. Read [docs/USER_GUIDE.md](docs/USER_GUIDE.md) and [docs/scientific-diff-workflow.md](docs/scientific-diff-workflow.md).
-3. Inspect [projects/registry.yaml](projects/registry.yaml) and [research/README.md](research/README.md) to identify the canonical project, workstream, active research-change record, and claim–evidence matrix.
+3. For cross-project checks, consult [projects/registry.yaml](projects/registry.yaml) only as a navigation aid. Identify the actual research-change and claim–evidence records in the corresponding project repository before opening or changing them.
 4. For numerical/computational tasks, follow [RESEARCH_COMPUTE_POLICY.md](RESEARCH_COMPUTE_POLICY.md) and identify the primary execution environment before running. Read only the source files, calculations, and validation records relevant to the task. Do not load or rewrite the entire repository by default.
 5. Before changing candidate schemas, migrations, or governance behavior, read [docs/REPOSITORY_STATUS.md](docs/REPOSITORY_STATUS.md), [docs/OPEN_ISSUES.md](docs/OPEN_ISSUES.md), and [docs/governance/DECISION_REGISTER.md](docs/governance/DECISION_REGISTER.md).
 

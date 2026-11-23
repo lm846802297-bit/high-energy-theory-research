@@ -2,7 +2,7 @@
 
 语言：简体中文。英文原版：[README.md](README.md)。
 
-本仓库是一个高能理论物理研究工作空间，提供明确的工作流，将科学问题的变化追踪到推导、计算、经验证的主张和论文修订。仓库还包含可复用的研究 Skill，以及面向高能理论与唯象学的证据管理基础设施。审稿回复只是支持的工作流之一，并非项目的唯一目标。
+本仓库是高能理论物理研究的中央基础设施仓库，只维护共享的 Research Skills、规范、工作流、模板、自动化和通用校验工具。物理推导、源码、输入、原始结果和科学证据以对应项目仓库为唯一事实来源。各项目可锁定中央工具的版本使用，不因此改写已完成研究的溯源。
 
 ## Scientific Diff 工作流
 
@@ -18,7 +18,7 @@
 3. 每项实质性研究变更都应从[研究变更模板](templates/research-change.md)开始。
 4. 使用[主张—证据矩阵模板](templates/claim-evidence-matrix.md)追踪重要物理陈述的证据支持程度。
 5. 在标记变更完成或将结果同步到论文之前，执行[审查清单](docs/review-checklist.md)。
-6. 阅读[当前研究记录](research/README.zh-CN.md)。首个基线是 [RC-001：VLL–Higgs–Singlet UV–EFT 匹配](research/RC-001-vll-higgs-singlet-uv-eft.md)，并配有[对应的主张—证据矩阵](research/RC-001-claim-evidence-matrix.md)。
+6. [历史研究索引](research/README.zh-CN.md)仅用于查找保留的记录；新的研究工作在对应的项目仓库接续。
 7. 使用[项目注册表说明](projects/README.zh-CN.md)区分顶层研究项目、工作流和研究变更记录。VLL–Higgs–Singlet UV–EFT 工作流属于父项目 `axial-vector-model-building`，不是独立的顶层项目。
 8. 可复用的研究 Skill 从 [SKILL.md](skills/high-energy-theory-research/SKILL.md) 开始，再阅读其参考指南。
 9. 修改候选 Schema 前，先检查[仓库状态](docs/REPOSITORY_STATUS.md)、[未解决问题](docs/OPEN_ISSUES.md)和[规范决策登记表](docs/governance/DECISION_REGISTER.md)。
@@ -26,7 +26,7 @@
 11. 提交数值结果、运行清单和验证证据时，必须遵守[计算结果归档规范](docs/CALCULATION_RESULT_ARCHIVAL_POLICY.zh-CN.md)。
 12. 必须遵守[科研计算执行规范](RESEARCH_COMPUTE_POLICY.md)：普通 GPT 聊天模式使用 ChatGPT Linux；Codex/Work 可使用 Windows 本地环境或 GPT 管理的云端计算机；GitHub 负责长期归档，Actions 只负责独立验证。
 13. 实质性科研 PR 默认使用 [Merge Commit 合并策略](docs/governance/GIT_MERGE_POLICY.md)，保留有科研追溯价值的独立提交。
-14. 已完成且验收通过的科研成果必须及时合并到 `main`，并在专题 README、项目注册表或研究索引中建立稳定入口；PR 负责审查与集成，不作为长期归档位置。未完成工作保留在专题分支或 Draft PR。详见 [科研成果归档与 PR 生命周期规范](docs/governance/GIT_MERGE_POLICY.md#6-main-is-the-canonical-research-archive)。
+14. 已完成且验收通过的科研成果必须及时合并到**对应项目仓库的 `main`**，并在专题 README、项目注册表或研究索引中建立稳定入口；PR 负责审查与集成，不作为长期归档位置。未完成工作保留在专题分支或 Draft PR。详见 [科研成果归档与 PR 生命周期规范](docs/governance/GIT_MERGE_POLICY.md#6-main-is-the-canonical-research-archive)。
 15. 本仓库也是相关科研项目的中央规范来源。开展跨项目规范建设时，先阅读[中央科研规范架构设计书](docs/superpowers/specs/2026-11-23-central-research-standards-design.md)和[第一阶段规范审计矩阵](docs/governance/CENTRAL_STANDARDS_AUDIT_MATRIX.md)。
 
 ### 核心链条
@@ -49,9 +49,9 @@
 - **`templates/research-change.md`** — 单项研究变更的记录模板。
 - **`templates/project-record.md`** — 顶层研究项目或嵌套工作流的登记模板。
 - **`templates/claim-evidence-matrix.md`** — 新建主张—证据台账的通用模板。
-- **`research/`** — 当前研究变更记录及其主张状态；目录说明见[中文版本](research/README.zh-CN.md)。
-- **`calculations/`** — 可复现的符号/代数计算脚本；每个脚本均应说明它能验证和不能验证的内容。
-- **`validation/`** — 已采集的计算输出和验证日志，与计划中或尚未执行的检查分开存放。
+- **`research/`** — 保留的历史项目记录，等待单独核验迁移；不再接收新的具体科研工作。
+- **`calculations/`** — 保留的历史计算脚本。新的具体计算放项目仓库，通用工具由中央仓维护。
+- **`validation/`** — 新增内容仅限 Skills、工作流和基础设施本身的测试与基准证据。已有的项目级输出是历史记录，不在此处继续追加。
 - **`schema/v1.4.3.7/`** — 候选 JSON Schema、测试夹具、校验器、迁移原型、审计报告和需求/测试可追溯性数据；目录说明见[中文版本](schema/v1.4.3.7/README.zh-CN.md)。
 - **`skills/high-energy-theory-research/`** — 可复用的 Skill 入口、参考指南、指纹计算、结构化记录校验和项目注册表校验工具。
 - **`tests/eval-cases/`** — 有明确范围的解析矩阵与 UV–EFT 硬核导数试点；相关说明见[解析质量矩阵试点中文说明](tests/eval-cases/analytic-mass-matrix-pilot/README.zh-CN.md)和 [UV–EFT 硬核导数试点中文说明](tests/eval-cases/uv-eFT-hard-derivative-pilot/README.zh-CN.md)。
