@@ -6,6 +6,7 @@
 - Updated central AGENTS, English/Chinese READMEs and User Guides, compute policy, archival policies, and bilingual navigation links to point to the shared standards architecture.
 - Corrected RCRPS v1.0.0 status wording to historical compatibility and aligned archival instructions with formally adopted RCRPS v1.0.1. Historical v1.0.0 schemas and records remain unchanged.
 - Kept project-specific physics conventions, calculations, data, outputs, and domain-specific acceptance criteria in their owning repositories.
+- Kept task briefs proportional to task complexity and made their directory locations project-compatible rather than mandating a repository-wide layout.
 - This is a central documentation/governance consolidation. No scientific calculation or downstream repository migration is claimed.
 
 ## 2026-11-23 — RCRPS v1.0.1 source-control provenance candidate
