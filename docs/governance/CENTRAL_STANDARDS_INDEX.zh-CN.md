@@ -20,6 +20,8 @@
 | 计算结果归档 | [计算结果归档规范](../CALCULATION_RESULT_ARCHIVAL_POLICY.zh-CN.md) | 原生输出、解压后提交、溯源、哈希和 CI 边界 |
 | 结构化数值记录 | [RCRPS v1.0.1](../STRUCTURED_RESULT_DATA_STANDARD_v1.0.1.zh-CN.md) 与[采用记录](RCRPS_V1.0.1_ADOPTION_RECORD.md) | 运行清单、结果摘要、验证报告、源码控制溯源和 CSV 约定 |
 | 科学审查 | [科学变更审查清单](../review-checklist.md) | 基线、推导、计算、物理主张、依赖和决策 |
+| 文档审查与迁移 | [科研文档审查规范](../DOCUMENT_REVIEW_STANDARD.zh-CN.md) | 文档身份、权威性、科学内容、引用、一致性、可复现性、链接、处置及安全迁移 |
+| 审稿回复与论文同步 | [审稿回复与论文正文同步规范](../REFEREE_RESPONSE_AND_MANUSCRIPT_SYNCHRONIZATION_STANDARD.zh-CN.md) | 面向审稿人的论证完整性、与内部正文跟踪的分离、独立科学论证的保留及审查记录 |
 | Git 集成 | [Git 合并规范](GIT_MERGE_POLICY.md) | PR 生命周期、审查、合并策略、main 可发现性和合并后验证 |
 | 高能理论方法 | [研究 Skill](../../skills/high-energy-theory-research/SKILL.md) | 文献、推导、UV–EFT、圈图和唯象学等领域专属流程 |
 | 项目/工作流导航 | [项目注册表](../../projects/README.zh-CN.md) | 项目身份、父子层级和规范研究仓库入口 |
