@@ -152,6 +152,26 @@ For UV–EFT and loop calculations, record the model/Lagrangian version, field c
 
 For purely analytic derivations with no numerical arrays, do not create empty CSV files. Archive editable derivation sources and the run record for any symbolic execution.
 
+### 6A. Central standards provenance extension
+
+For a run performed under a substantive Research Task Brief, include `extensions.standards_provenance` in the v1.0.1 `run_manifest`:
+
+```json
+{
+  "central_repository": "lm846802297-bit/high-energy-theory-research",
+  "central_commit_sha": "<40-character-commit-sha>",
+  "lock_file_path": "research/standards-lock.yaml",
+  "lock_file_sha256": "<sha256-of-exact-lock-bytes>",
+  "task_id": "YYYYMMDD-short-task-name",
+  "task_brief_path": "research/task_briefs/YYYYMMDD-short-task-name.md",
+  "task_brief_sha256": "<sha256-of-final-task-brief-bytes>",
+  "applied_profiles": ["research-compute", "rcrps-v1.0.1", "research-quality-gate"],
+  "project_extensions": ["docs/physics-profile.md"]
+}
+```
+
+All hashes and commit IDs must be generated from the actual referenced objects. The profile list records what was applied to this run, not every profile adopted by the repository. Keep the object under the existing open `extensions` namespace; do not alter the adopted v1.0.1 base schema or historical records. The standards-adoption validator checks this extension when invoked with `--run-manifest`.
+
 ## 7. Schema and archive validation
 
 Validate JSON records with the local Draft 2020-12 validator:
