@@ -2,6 +2,7 @@ import importlib.util
 from pathlib import Path
 import tempfile
 import unittest
+import yaml
 
 ROOT = Path(__file__).resolve().parents[2]
 SCRIPT = ROOT / "skills" / "high-energy-theory-research" / "scripts" / "validate_project_registry.py"
@@ -99,6 +100,60 @@ class ProjectRegistryValidatorTests(unittest.TestCase):
         self.registry.write_text(text.replace("projects:\n", "projects:\n" + duplicate, 1), encoding="utf-8")
         report = validate_registry(self.registry, self.root)
         self.assertTrue(any(e["code"] == "PROJECT_ID_DUPLICATE" for e in report["errors"]))
+
+
+    def _related_fixture(self, value):
+        data = yaml.safe_load(self.registry.read_text(encoding="utf-8"))
+        first = data["projects"][0]["workstreams"][0]
+        first["related_workstreams"] = value
+        another = {
+            "project_id": "sibling-project",
+            "title": "Sibling project",
+            "status": "active",
+            "scope": "Generic navigation synthesis",
+            "workstreams": [{
+                "workstream_id": "second-check",
+                "title": "Independent check",
+                "status": "active",
+                "scope": "Independent workstream",
+                "parent_project_id": "sibling-project",
+            }],
+        }
+        data["projects"].append(another)
+        self.registry.write_text(yaml.safe_dump(data), encoding="utf-8")
+        return validate_registry(self.registry, self.root)
+
+    def test_related_workstream_forward_cross_project_reference_passes(self):
+        report = self._related_fixture(["second-check"])
+        self.assertEqual(report["summary"]["errors"], 0, report["errors"])
+
+    def test_related_workstream_rejects_unknown_ids_and_project_ids(self):
+        report = self._related_fixture(["second-chekc", "sibling-project"])
+        self.assertEqual(
+            [(e["code"], e["value"], e["path"]) for e in report["errors"]],
+            [("RELATED_WORKSTREAM_UNKNOWN", "second-chekc",
+              "projects[0].workstreams[0].related_workstreams[0]"),
+             ("RELATED_WORKSTREAM_UNKNOWN", "sibling-project",
+              "projects[0].workstreams[0].related_workstreams[1]")],
+        )
+
+    def test_related_workstream_rejects_duplicate_and_self_edges(self):
+        report = self._related_fixture(["second-check", "second-check", "loop-matching"])
+        self.assertEqual(
+            [e["code"] for e in report["errors"]],
+            ["RELATED_WORKSTREAM_DUPLICATE", "RELATED_WORKSTREAM_SELF"],
+        )
+
+    def test_related_workstream_rejects_wrong_type_and_invalid_keys(self):
+        for value, codes in (
+            ("second-check", ["RELATED_WORKSTREAMS_NOT_LIST"]),
+            (None, ["RELATED_WORKSTREAMS_NOT_LIST"]),
+            ([True, "Second Check", {}], ["RELATED_WORKSTREAM_ID_INVALID"] * 3),
+        ):
+            with self.subTest(value=value):
+                self._write_registry()
+                report = self._related_fixture(value)
+                self.assertEqual([e["code"] for e in report["errors"]], codes)
 
 
 if __name__ == "__main__":

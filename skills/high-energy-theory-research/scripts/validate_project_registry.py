@@ -3,8 +3,9 @@
 
 This is intentionally separate from validate_project_records.py: the project
 registry is not a record type in the current candidate Schema v1.4.3.7 bundle.
-The checker validates metadata structure and repository-local canonical paths;
-it does not validate scientific content.
+The checker validates metadata structure, repository-local canonical paths, and
+optional related_workstreams ID references. Relations may point across projects
+and need not be reciprocated. It does not validate scientific content.
 """
 from __future__ import annotations
 
@@ -100,6 +101,7 @@ def validate_registry(registry_path: str | Path, repo_root: str | Path) -> dict:
 
     seen_projects: set[str] = set()
     seen_workstreams: set[str] = set()
+    related_edges: list[tuple[str, str]] = []
     project_count = 0
     workstream_count = 0
 
@@ -175,6 +177,30 @@ def validate_registry(registry_path: str | Path, repo_root: str | Path) -> dict:
                 if key in workstream and workstream[key] is not None:
                     check_local_path(workstream[key], key.upper(), wpath)
 
+            related = workstream.get("related_workstreams", [])
+            relation_path = f"{wpath}.related_workstreams"
+            if not isinstance(related, list):
+                errors.append({"code": "RELATED_WORKSTREAMS_NOT_LIST", "path": relation_path})
+                continue
+            seen_targets: set[str] = set()
+            for ri, target in enumerate(related):
+                path = f"{relation_path}[{ri}]"
+                if not check_id(target, "RELATED_WORKSTREAM_ID_INVALID", path):
+                    continue
+                if target in seen_targets:
+                    errors.append({"code": "RELATED_WORKSTREAM_DUPLICATE", "path": path, "value": target})
+                    continue
+                seen_targets.add(target)
+                if target == wid:
+                    errors.append({"code": "RELATED_WORKSTREAM_SELF", "path": path, "value": target})
+                    continue
+                related_edges.append((path, target))
+
+    # Resolve after reading every workstream so order and parent do not affect links.
+    for path, target in related_edges:
+        if target not in seen_workstreams:
+            errors.append({"code": "RELATED_WORKSTREAM_UNKNOWN", "path": path, "value": target})
+
     collisions = seen_projects.intersection(seen_workstreams)
     for collision in sorted(collisions):
         errors.append({"code": "PROJECT_WORKSTREAM_ID_COLLISION", "id": collision})
@@ -193,6 +219,7 @@ def validate_registry(registry_path: str | Path, repo_root: str | Path) -> dict:
             "YAML parsing and basic registry structure",
             "stable project/workstream ID format and uniqueness",
             "status/title/scope and parent-child consistency",
+            "optional related_workstreams ID references",
             "existence and repository-root containment of declared canonical paths",
         ],
         "not_implemented": [
