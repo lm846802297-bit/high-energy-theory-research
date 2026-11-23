@@ -310,7 +310,7 @@ def main():
     parser.add_argument(
         "--schema",
         type=Path,
-        default=Path(__file__).resolve().with_name("research-result-record-v1.0.0.schema.json"),
+        default=Path(__file__).resolve().with_name("research-result-record-v1.0.1.schema.json"),
         help="JSON Schema Draft 2020-12 file",
     )
     args = parser.parse_args()
