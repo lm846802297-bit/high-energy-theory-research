@@ -52,6 +52,19 @@ Unavailable sources and their impact:
 - Working-tree state (clean or list local changes):
 - Exact revision against which results must be compared:
 
+## 3A. Central standards provenance
+
+- Central repository: lm846802297-bit/high-energy-theory-research
+- Exact central source commit (40-character SHA):
+- Standards lock path:
+- Standards lock SHA-256 (computed from actual file bytes):
+- Applied profile IDs (select only task-relevant profiles):
+- Project-local extension paths and scope:
+- Task brief SHA-256 (computed after the brief is finalized):
+- Machine-readable task provenance record path:
+
+Do not infer applied profiles from the lock alone. Record only profiles actually consulted and used for this task. The task provenance record must bind the exact lock and brief bytes by SHA-256.
+
 ## 4. Conventions
 
 State definitions explicitly. Do not rely on labels such as “standard sign” or “usual normalization” without defining them.
