@@ -98,6 +98,10 @@ class SourceControlSemanticTests(unittest.TestCase):
         record = minimal_manifest()
         record["execution"]["source_control"]["workflow_run_attempt"] = 1
         self.assertTrue(any("workflow_run_attempt" in error for error in self.errors(record)))
+        record = minimal_manifest()
+        record["execution"]["source_control"]["workflow_run_id"] = ""
+        record["execution"]["source_control"]["workflow_run_attempt"] = 1
+        self.assertTrue(any("workflow_run_id" in error for error in self.errors(record)))
 
     def test_clean_tree_requires_empty_dirty_paths(self):
         record = minimal_manifest()
@@ -110,7 +114,7 @@ class SourceControlSemanticTests(unittest.TestCase):
         self.assertTrue(any("dirty" in error for error in self.errors(record)))
 
     def test_dirty_paths_must_be_safe_and_unique(self):
-        for paths in (["/etc/passwd"], ["../escape.py"], ["src\\model.py"], ["./src/model.py"], ["src//model.py"], ["src/model.py", "src/model.py"]):
+        for paths in (["/etc/passwd"], ["../escape.py"], ["src\\model.py"], ["./src/model.py"], ["src//model.py"], ["."], ["src/model.py", "src/model.py"]):
             with self.subTest(paths=paths):
                 record = minimal_manifest()
                 record["execution"]["source_control"]["working_tree_state"] = "dirty"
