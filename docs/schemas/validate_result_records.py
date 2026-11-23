@@ -268,6 +268,9 @@ def verify_source_control(record: dict) -> list[str]:
 
     workflow_run_id = context.get("workflow_run_id")
     workflow_run_attempt = context.get("workflow_run_attempt")
+    legacy_workflow_run_id = source.get("workflow_run_id")
+    if legacy_workflow_run_id is not None and legacy_workflow_run_id != workflow_run_id:
+        errors.append("source.workflow_run_id must match execution.source_control.workflow_run_id when present")
     if (workflow_run_id is None) != (workflow_run_attempt is None):
         errors.append("workflow_run_id and workflow_run_attempt must both be null or both be present")
     if isinstance(workflow_run_id, str) and not workflow_run_id.strip():
