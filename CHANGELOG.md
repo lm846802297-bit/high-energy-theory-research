@@ -2,8 +2,8 @@
 
 ## 2026-11-23 — Central research standards consolidation, Phase II
 
-- Added the central standards index, shared research governance standard, general task handoff standard and task brief template, task-profile-aware Research Quality Gate, and downstream standards adoption/lock contract.
-- Updated central AGENTS, English/Chinese READMEs, compute policy, archival policies, and user guides to point to the shared standards architecture.
+- Added English and Chinese central standards indexes, shared research governance standards, general task handoff standards and task brief templates, task-profile-aware Research Quality Gates, and downstream standards adoption/lock contracts.
+- Updated central AGENTS, English/Chinese READMEs and User Guides, compute policy, archival policies, and bilingual navigation links to point to the shared standards architecture.
 - Corrected RCRPS v1.0.0 status wording to historical compatibility and aligned archival instructions with formally adopted RCRPS v1.0.1. Historical v1.0.0 schemas and records remain unchanged.
 - Kept project-specific physics conventions, calculations, data, outputs, and domain-specific acceptance criteria in their owning repositories.
 - This is a central documentation/governance consolidation. No scientific calculation or downstream repository migration is claimed.
