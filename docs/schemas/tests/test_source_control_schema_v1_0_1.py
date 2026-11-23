@@ -44,6 +44,11 @@ class SourceControlSchemaTests(unittest.TestCase):
         record["execution"]["source_control"] = source_control()
         self.assertTrue(self.errors(record))
 
+    def test_checkout_ref_must_be_fully_qualified(self):
+        record = minimal_manifest()
+        record["execution"]["source_control"]["checkout_ref"] = "main"
+        self.assertTrue(self.errors(record))
+
     def test_checkout_ref_cannot_be_empty(self):
         record = minimal_manifest()
         record["execution"]["source_control"]["checkout_ref"] = ""

@@ -59,6 +59,86 @@ class SourceControlSemanticTests(unittest.TestCase):
         record["execution"]["source_control"]["tested_merge_sha"] = "e" * 40
         self.assertTrue(any("tested_merge_sha" in error for error in self.errors(record)))
 
+    def test_checkout_ref_must_be_valid_fully_qualified_git_ref(self):
+        invalid_refs = (
+            "main",
+            "refs/heads/foo bar",
+            "refs/heads/main..evil",
+            "refs/heads/foo.lock",
+            "refs/heads/foo.",
+            "refs/heads/foo@{bar}",
+            "refs/heads/foo//bar",
+            "refs/heads/.hidden",
+            "refs/heads/foo^bar",
+        )
+        for checkout_ref in invalid_refs:
+            with self.subTest(checkout_ref=checkout_ref):
+                record = minimal_manifest(event="push", mode="branch_commit")
+                record["execution"]["source_control"]["checkout_ref"] = checkout_ref
+                self.assertTrue(
+                    any("checkout_ref" in error for error in self.errors(record)),
+                    checkout_ref,
+                )
+
+    def test_pr_branch_names_must_follow_git_branch_rules(self):
+        invalid_names = ("feature branch", "main..evil", "foo.lock", ".hidden", "-leading-dash", "foo@{bar}")
+        for field in ("head_ref", "base_ref"):
+            for branch_name in invalid_names:
+                with self.subTest(field=field, branch_name=branch_name):
+                    record = minimal_manifest(event="pull_request", mode="pull_request_merge")
+                    record["execution"]["source_control"][field] = branch_name
+                    self.assertTrue(
+                        any(field in error for error in self.errors(record)),
+                        f"{field}={branch_name!r}",
+                    )
+
+    def test_pr_merge_checkout_ref_matches_pr_number_and_mode(self):
+        record = minimal_manifest(event="pull_request", mode="pull_request_merge")
+        self.assertEqual(self.errors(record), [])
+        for checkout_ref in ("refs/pull/104/head", "refs/pull/105/merge", "refs/heads/main"):
+            with self.subTest(checkout_ref=checkout_ref):
+                broken = minimal_manifest(event="pull_request", mode="pull_request_merge")
+                broken["execution"]["source_control"]["checkout_ref"] = checkout_ref
+                self.assertTrue(
+                    any("checkout_ref" in error for error in self.errors(broken)),
+                    checkout_ref,
+                )
+
+    def test_pr_head_checkout_ref_matches_head_branch_or_pull_ref(self):
+        for checkout_ref in ("refs/pull/104/head", "refs/heads/feature/example"):
+            with self.subTest(valid_checkout_ref=checkout_ref):
+                record = minimal_manifest(event="pull_request", mode="pull_request_head")
+                record["execution"]["source_control"]["checkout_ref"] = checkout_ref
+                self.assertEqual(self.errors(record), [])
+        for checkout_ref in ("refs/pull/104/merge", "refs/heads/main"):
+            with self.subTest(invalid_checkout_ref=checkout_ref):
+                record = minimal_manifest(event="pull_request", mode="pull_request_head")
+                record["execution"]["source_control"]["checkout_ref"] = checkout_ref
+                self.assertTrue(
+                    any("checkout_ref" in error for error in self.errors(record)),
+                    checkout_ref,
+                )
+
+    def test_pr_base_checkout_ref_matches_base_branch(self):
+        record = minimal_manifest(event="pull_request_target", mode="pull_request_base")
+        record["execution"]["source_control"]["checkout_ref"] = "refs/heads/main"
+        self.assertEqual(self.errors(record), [])
+        for checkout_ref in ("refs/pull/104/merge", "refs/pull/104/head", "refs/heads/feature/example"):
+            with self.subTest(checkout_ref=checkout_ref):
+                broken = minimal_manifest(event="pull_request_target", mode="pull_request_base")
+                broken["execution"]["source_control"]["checkout_ref"] = checkout_ref
+                self.assertTrue(
+                    any("checkout_ref" in error for error in self.errors(broken)),
+                    checkout_ref,
+                )
+
+    def test_non_pr_branch_commit_requires_heads_ref(self):
+        record = minimal_manifest(event="push", mode="branch_commit")
+        record["execution"]["source_control"]["checkout_ref"] = "refs/heads/main"
+        self.assertEqual(self.errors(record), [])
+        record["execution"]["source_control"]["checkout_ref"] = "refs/tags/v1.0.1"
+        self.assertTrue(any("checkout_ref" in error for error in self.errors(record)))
+
     def test_non_pr_events_accept_explicit_null_pr_fields(self):
         for event in ("local", "push", "workflow_dispatch", "schedule", "workflow_run"):
             with self.subTest(event=event):

@@ -198,6 +198,37 @@ def verify_source(record: dict, repo_root: Path):
     return errors
 
 
+_FORBIDDEN_GIT_REF_CHARS = frozenset(" ~^:?*[") | {chr(92)}
+
+
+def is_valid_git_ref(ref: object) -> bool:
+    """Return whether ref satisfies git-check-ref-format rules for a full ref."""
+    if not isinstance(ref, str) or not ref or ref == "@":
+        return False
+    if "/" not in ref or ref.startswith("/") or ref.endswith("/") or ref.endswith("."):
+        return False
+    if ".." in ref or "//" in ref or "@{" in ref:
+        return False
+    for char in ref:
+        codepoint = ord(char)
+        if codepoint <= 0x20 or codepoint == 0x7F or char in _FORBIDDEN_GIT_REF_CHARS:
+            return False
+    components = ref.split("/")
+    if any(
+        not component or component.startswith(".") or component.endswith(".lock")
+        for component in components
+    ):
+        return False
+    return True
+
+
+def is_valid_git_branch_name(name: object) -> bool:
+    """Validate a literal branch name, not a checkout shorthand."""
+    if not isinstance(name, str) or not name or name.startswith("-"):
+        return False
+    return is_valid_git_ref(f"refs/heads/{name}")
+
+
 def verify_source_control(record: dict) -> list[str]:
     """Validate v1.0.1 source-control provenance relationships.
 
@@ -230,12 +261,50 @@ def verify_source_control(record: dict) -> list[str]:
     pr_modes = {"pull_request_merge", "pull_request_head", "pull_request_base", "unknown"}
     non_pr_modes = {"branch_commit", "detached_commit", "unknown"}
 
+    checkout_ref = context.get("checkout_ref")
+    checkout_ref_valid = checkout_ref is None or (
+        isinstance(checkout_ref, str)
+        and checkout_ref.startswith("refs/")
+        and is_valid_git_ref(checkout_ref)
+    )
+    if checkout_ref is not None and not checkout_ref_valid:
+        errors.append("checkout_ref must be a valid fully qualified Git ref under refs/")
+
     if is_pr:
         for field in ("pr_number", "pr_url", "pr_head_sha", "base_sha", "head_ref", "base_ref"):
             if context.get(field) is None:
                 errors.append(f"pull-request source_control requires non-null {field}")
+        for field in ("head_ref", "base_ref"):
+            branch_name = context.get(field)
+            if branch_name is not None and not is_valid_git_branch_name(branch_name):
+                errors.append(f"{field} must be a valid Git branch name")
         if mode not in pr_modes:
             errors.append("pull-request event requires a pull-request checkout_mode")
+        elif checkout_ref is not None and checkout_ref_valid:
+            pr_number = context.get("pr_number")
+            head_ref = context.get("head_ref")
+            base_ref = context.get("base_ref")
+            if mode == "pull_request_merge":
+                expected_ref = f"refs/pull/{pr_number}/merge"
+                if checkout_ref != expected_ref:
+                    errors.append(
+                        f"pull_request_merge checkout_ref must be {expected_ref} when known"
+                    )
+            elif mode == "pull_request_head":
+                allowed_refs = {
+                    f"refs/pull/{pr_number}/head",
+                    f"refs/heads/{head_ref}",
+                }
+                if checkout_ref not in allowed_refs:
+                    errors.append(
+                        "pull_request_head checkout_ref must identify the PR head ref when known"
+                    )
+            elif mode == "pull_request_base":
+                expected_ref = f"refs/heads/{base_ref}"
+                if checkout_ref != expected_ref:
+                    errors.append(
+                        "pull_request_base checkout_ref must identify the PR base branch when known"
+                    )
         tested_merge_sha = context.get("tested_merge_sha")
         if mode == "pull_request_merge":
             if tested_merge_sha is None:
@@ -260,9 +329,11 @@ def verify_source_control(record: dict) -> list[str]:
                 errors.append(f"non-PR event requires {field} to be null")
         if mode not in non_pr_modes:
             errors.append("non-PR event cannot use a pull-request checkout_mode")
-        checkout_ref = context.get("checkout_ref")
-        if mode == "branch_commit" and checkout_ref is None:
-            errors.append("branch_commit requires checkout_ref")
+        if mode == "branch_commit":
+            if checkout_ref is None:
+                errors.append("branch_commit requires checkout_ref")
+            elif checkout_ref_valid and not checkout_ref.startswith("refs/heads/"):
+                errors.append("branch_commit checkout_ref must be under refs/heads/")
         elif mode == "detached_commit" and checkout_ref is not None:
             errors.append("checkout_ref must be null for detached_commit")
 
