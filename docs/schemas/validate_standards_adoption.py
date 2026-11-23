@@ -99,6 +99,7 @@ def main():
    states={c["status"] for c in report["checks"]}
    expected="COMPLIANT" if states <= {"PASS","NOT_APPLICABLE"} and "PASS" in states else ("NON_COMPLIANT" if "FAIL" in states else "INCOMPLETE")
    if report["status"]!=expected: errors.append(f"report status inconsistent with checks; expected {expected}")
+   if lock and report["central_commit_sha"]!=lock["source_commit"]: errors.append("report central commit differs from locked central commit")
    for item in report["checks"]:
     for evidence in item["evidence"]:
      check_file(root,evidence,f"report evidence {item['check_id']}",errors)
