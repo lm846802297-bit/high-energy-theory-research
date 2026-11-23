@@ -47,13 +47,13 @@ def validate(path, validator):
  except Exception as exc: return None,[f"{path}: parse error: {exc}"]
  errs=sorted(validator.iter_errors(data),key=lambda e:(list(map(str,e.absolute_path)),e.message))
  return data,[f"{path}: /{'/'.join(map(str,e.absolute_path))}: {e.message}" for e in errs]
-def check_file(root, value, label, errors, expected_sha=None):
+def check_file(root, value, label, errors, expected_sha=None, allow_directory=False):
  try: path=resolve(root,value)
  except (ValueError,OSError) as exc:
   errors.append(f"{label}: {exc}"); return None
- if not path.is_file():
-  errors.append(f"{label}: file missing: {value}"); return None
- if expected_sha and sha256(path)!=expected_sha:
+ if not path.is_file() and not (allow_directory and path.is_dir()):
+  errors.append(f"{label}: path missing: {value}"); return None
+ if expected_sha and (not path.is_file() or sha256(path)!=expected_sha):
   errors.append(f"{label}: SHA-256 mismatch: {value}")
  return path
 def main():
@@ -75,7 +75,7 @@ def main():
   for profile in lock["adopted_profiles"]:
    check_file(central,PROFILE_PATHS[profile],f"profile {profile}",errors)
   for ext in lock["local_extensions"]:
-   check_file(root,ext["path"],"local extension",errors,ext.get("sha256"))
+   check_file(root,ext["path"],"local extension",errors,ext.get("sha256"),allow_directory=True)
   if a.require_central_commit or a.central_root:
    result=subprocess.run(["git","rev-parse","HEAD"],cwd=central,capture_output=True,text=True)
    if result.returncode:
@@ -91,7 +91,7 @@ def main():
    if lock and task["central_commit_sha"]!=lock["source_commit"]: errors.append("task central commit differs from locked central commit")
    if lock and not set(task["applied_profiles"]).issubset(set(lock["adopted_profiles"])): errors.append("task applies a profile not adopted by the lock")
    for ext in task["project_extensions"]:
-    check_file(root,ext["path"],"task project extension",errors,ext.get("sha256"))
+    check_file(root,ext["path"],"task project extension",errors,ext.get("sha256"),allow_directory=True)
  if a.report:
   report_path=a.report if a.report.is_absolute() else root/a.report
   report,errs=validate(report_path,validator); errors.extend(errs)
@@ -121,7 +121,7 @@ def main():
     if lock and not set(prov["applied_profiles"]).issubset(set(lock["adopted_profiles"])): errors.append("run manifest applies a profile not adopted by lock")
     if a.task_provenance and task and prov["task_id"]!=task["task_id"]: errors.append("run manifest task_id differs from task provenance")
     for ext in prov["project_extensions"]:
-     check_file(root,ext,"run manifest project extension",errors)
+     check_file(root,ext,"run manifest project extension",errors,allow_directory=True)
   except Exception as exc: errors.append(f"{run_path}: RCRPS/provenance parse or validation error: {exc}")
  if errors:
   print("NON_COMPLIANT")
