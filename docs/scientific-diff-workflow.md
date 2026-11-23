@@ -216,7 +216,7 @@ This pattern also applies to UV–EFT matching, finite loop terms, neutrino mass
 - Use branches and reviewable commits for proposed changes; preserve a stable baseline.
 - Keep research-change IDs in commit or pull-request descriptions where useful.
 - Use text diffs for LaTeX, Markdown, source code, configuration files, and symbolic expressions stored as text.
-- For notebooks, PDFs, generated plots, large data, and binary files, record relevant metadata, content hashes, input provenance, and a human-readable summary of the scientific difference. Commit essential native/uncompressed outputs directly when practical; for files too large for ordinary Git, use Git LFS or durable versioned storage with an immutable manifest rather than an expiring CI artifact.
+- For notebooks, PDFs, generated plots, large data, and binary files, record relevant metadata, content hashes, input provenance, and a human-readable summary of the scientific difference. For reproducible visual derivatives, follow the [Generated Figure and Report Artifact Policy](GENERATED_FIGURE_AND_REPORT_POLICY.md): archive source data, plotting/assembly code, configuration, and provenance; regenerate routine PDFs/PNGs/SVGs on demand; retain exact rendered files only as frozen deliverables or when they cannot be faithfully regenerated. For other essential native/uncompressed outputs, commit directly when practical; for files too large for ordinary Git, use Git LFS or durable versioned storage with an immutable manifest rather than an expiring CI artifact.
 - Avoid committing credentials, private tokens, or data that the project is not permitted to redistribute.
 - Separate “the source changed” from “the result was regenerated” and “the result was verified.”
 
