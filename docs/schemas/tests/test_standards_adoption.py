@@ -10,7 +10,7 @@ class StandardsAdoptionTests(unittest.TestCase):
   cls.schema=json.loads(SCHEMA.read_text(encoding="utf-8")); Draft202012Validator.check_schema(cls.schema)
   cls.validator=Draft202012Validator(cls.schema,format_checker=FormatChecker())
  def lock(self):
-  return {"record_type":"standards_lock","lock_version":1,"central_repository":"lm846802297-bit/high-energy-theory-research","standards_release":None,"source_commit":"a"*40,"adopted_at":"2026-11-23","adoption_pr":"https://github.com/example/project/pull/1","adopted_profiles":["task-handoff","rcrps-v1.0.1"],"local_extensions":[],"deviations":[]}
+  return {"lock_version":1,"central_repository":"lm846802297-bit/high-energy-theory-research","standards_release":None,"source_commit":"a"*40,"adopted_at":"2026-11-23","adoption_pr":"https://github.com/example/project/pull/1","adopted_profiles":["task-handoff","rcrps-v1.0.1"],"local_extensions":[],"deviations":[]}
  def test_valid_lock(self): self.assertTrue(self.validator.is_valid(self.lock()))
  def test_short_commit_rejected(self):
   r=self.lock(); r["source_commit"]="deadbeef"; self.assertFalse(self.validator.is_valid(r))
