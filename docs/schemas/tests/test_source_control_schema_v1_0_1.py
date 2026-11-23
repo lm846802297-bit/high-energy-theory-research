@@ -39,6 +39,16 @@ class SourceControlSchemaTests(unittest.TestCase):
     def test_v100_validation_report_is_accepted(self):
         self.assertEqual(self.errors(minimal_validation_report("1.0.0")), [])
 
+    def test_v100_run_manifest_rejects_v101_source_control_extension(self):
+        record = minimal_manifest("1.0.0")
+        record["execution"]["source_control"] = source_control()
+        self.assertTrue(self.errors(record))
+
+    def test_checkout_ref_cannot_be_empty(self):
+        record = minimal_manifest()
+        record["execution"]["source_control"]["checkout_ref"] = ""
+        self.assertTrue(self.errors(record))
+
     def test_v101_run_manifest_requires_source_control(self):
         record = minimal_manifest()
         record["execution"].pop("source_control")
