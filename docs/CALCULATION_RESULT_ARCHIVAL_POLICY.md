@@ -24,6 +24,11 @@ Follow the existing project/workstream layout and record conventions. Do not cre
 - Keep raw inputs, transformed inputs, and derived outputs distinguishable. If a conversion or post-processing step changes the data, preserve the raw source where permitted and record the transformation and the output checksum.
 - Tool-native compressed formats that are themselves the original data product may be retained when necessary; document the format and command. This exception does not justify wrapping ordinary outputs in a newly created ZIP/TAR.
 
+
+## 2A. Generated figures and report PDFs
+
+Apply the separate [Generated Figure and Report Artifact Policy](GENERATED_FIGURE_AND_REPORT_POLICY.md) to rendered plots, multi-panel figures, annotated PDFs, and combined figure reports. The default is to archive the scientific data, reference curves, plotting/assembly source, configuration, dependencies, provenance, and hashes, then regenerate routine PDF/PNG/SVG outputs when needed. Do not commit every preview or intermediate rendering. Archive an exact rendered snapshot only when it is a frozen manuscript/report deliverable, a formally approved milestone, required by an external process, or cannot be faithfully regenerated. Preserve its source data and generation provenance alongside it. This rule clarifies the treatment of reproducible presentation derivatives; it does not relax the native-data and run-provenance requirements above.
+
 ## 3. Large or restricted files
 
 - Commit directly to Git when file size, licensing, and repository policy permit.

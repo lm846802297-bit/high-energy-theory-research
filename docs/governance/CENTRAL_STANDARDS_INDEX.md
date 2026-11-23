@@ -19,6 +19,7 @@ This index identifies the single central authority for each shared requirement. 
 | Scientific change lifecycle | [Scientific Diff Workflow](../scientific-diff-workflow.md) | Project/workstream/change/run/claim hierarchy and question-to-evidence traceability |
 | Research Quality Gate | [Research Quality Gate](RESEARCH_QUALITY_GATE.md) | Ten shared acceptance areas, task profiles, and PASS/FAIL/BLOCKED/NOT RUN/N/A semantics |
 | Research communication | [Scientific Diff §11](../scientific-diff-workflow.md#11-research-reporting-and-communication-standard) | Conclusion/evidence/results/remaining-work reporting and evidence-proportional language |
+| Generated figures and report PDFs | [Generated Figure and Report Artifact Policy](../GENERATED_FIGURE_AND_REPORT_POLICY.md) | Source data and plotting code as canonical records; routine rendered outputs on demand; frozen deliverable snapshots with provenance |
 | Calculation-result archival | [Calculation-result archival policy](../CALCULATION_RESULT_ARCHIVAL_POLICY.md) | Native outputs, extract-before-upload, provenance, hashes, remote verification, and CI boundary |
 | Structured numerical records | [RCRPS v1.0.1](../STRUCTURED_RESULT_DATA_STANDARD_v1.0.1.md) and [adoption record](RCRPS_V1.0.1_ADOPTION_RECORD.md) | Run manifests, result summaries, validation reports, source-control provenance, and CSV conventions |
 | Scientific review | [Scientific Change Review Checklist](../review-checklist.md) | Baseline, derivation, computation, physical claims, dependencies, and decisions |
