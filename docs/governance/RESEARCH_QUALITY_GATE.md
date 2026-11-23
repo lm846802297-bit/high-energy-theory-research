@@ -1,5 +1,7 @@
 # Shared Research Quality Gate
 
+简体中文版：[RESEARCH_QUALITY_GATE.zh-CN.md](RESEARCH_QUALITY_GATE.zh-CN.md)。
+
 **Status:** adopted shared minimum  
 **Effective date:** 2026-11-23  
 **Scope:** research changes in repositories that adopt the central standards framework
