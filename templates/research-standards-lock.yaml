@@ -14,7 +14,7 @@ adoption_pr: "https://github.com/OWNER/REPOSITORY/pull/NUMBER"
 # core-governance, research-compute, task-handoff, scientific-diff,
 # research-quality-gate, calculation-result-archive, rcrps-v1.0.1,
 # git-review-and-merge, document-review,
-# referee-response-and-manuscript-synchronization.
+# referee-response-and-manuscript-synchronization, generated-figure-and-report.
 adopted_profiles: []
 
 # List project-local domain standards that remain authoritative locally.
