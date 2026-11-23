@@ -46,6 +46,7 @@
 - **`docs/USER_GUIDE.md`** — 项目设置、研究变更、计算证据、验证和迁移纪律的详细操作手册；另有[中文版本](docs/USER_GUIDE.zh-CN.md)。
 - **`RESEARCH_COMPUTE_POLICY.md`** — 主计算、GitHub 归档和 Actions 独立验证三者职责分离的强制规范。
 - **`docs/CALCULATION_RESULT_ARCHIVAL_POLICY.zh-CN.md`** — 数值结果原生文件归档、运行来源、校验和、大文件存储及远端核对的强制规范；另有[英文版](docs/CALCULATION_RESULT_ARCHIVAL_POLICY.md)。
+- **`docs/GENERATED_FIGURE_AND_REPORT_POLICY.zh-CN.md`** — 归档图件源数据和绘图程序、日常 PDF/PNG/SVG 按需生成的共享规范；另有[英文版](docs/GENERATED_FIGURE_AND_REPORT_POLICY.md)。
 - **`docs/PROJECT_REGISTRY_AUDIT.md`** — 第一阶段注册表/路径预审的范围与证据，明确记录尚未执行的测试和未来文件迁移的限制。
 - **`docs/review-checklist.md`** — 科学变更及其与论文同步时的审查项目。
 - **`docs/design/`** — 保留的设计基线与整合实现报告；目录说明见[中文版本](docs/design/README.zh-CN.md)。
