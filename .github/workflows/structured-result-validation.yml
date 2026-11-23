@@ -54,5 +54,8 @@ jobs:
       - name: Run structured-result regression tests
         run: python -m unittest discover -s docs/schemas/tests -v
 
-      - name: Run standards-adoption regression tests\n        run: python -m unittest discover -s docs/schemas/tests -p "test_standards_adoption.py" -v\n\n      - name: Compile validator
+      - name: Run standards-adoption regression tests
+        run: python -m unittest discover -s docs/schemas/tests -p "test_standards_adoption.py" -v
+
+      - name: Compile validator
         run: python -m compileall -q docs/schemas
