@@ -1,6 +1,6 @@
 # Structured Research Result Data Standard v1.0.0
 
-**Status:** Historical compatibility profile. Superseded for new substantial runs by adopted RCRPS v1.0.1 from 2026-11-23. Retained unchanged for legacy records.  
+**Status:** Historical compatibility profile. Superseded for new substantial runs by adopted RCRPS v1.0.1 from 2026-11-23. The v1.0.0 schema and historical records remain unchanged.  
 **Schema:** JSON Schema Draft 2020-12.  
 **Purpose:** Standardize data structure, run provenance, and archival. This standard does not certify scientific correctness.
 
