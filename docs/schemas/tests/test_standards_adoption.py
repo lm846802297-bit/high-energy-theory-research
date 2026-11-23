@@ -40,7 +40,7 @@ class StandardsAdoptionTests(unittest.TestCase):
  def test_cli_rejects_report_status_without_passing_evidence(self):
   with tempfile.TemporaryDirectory() as tmp:
    root=Path(tmp); (root/"docs").mkdir(); (root/"docs/RESEARCH_TASK_HANDOFF_STANDARD.md").write_text("test",encoding="utf-8")
-   lock=root/"standards-lock.json"; lock.write_text(json.dumps(self.lock()),encoding="utf-8")
+   lock=root/"standards-lock.json"; record=self.lock(); record["adopted_profiles"]=["task-handoff"]; lock.write_text(json.dumps(record),encoding="utf-8")
    report=root/"report.json"; report.write_text(json.dumps({"record_type":"standards_validation_report","report_version":"1.0.0","task_id":"20261123-test-task","repository":"example/project","source_commit":"a"*40,"central_commit_sha":"a"*40,"status":"COMPLIANT","checks":[{"check_id":"profile","status":"BLOCKED","evidence":[]}]}),encoding="utf-8")
    run=subprocess.run([sys.executable,str(VALIDATOR),"--repo-root",str(root),"--lock",str(lock),"--report",str(report)],capture_output=True,text=True)
    self.assertNotEqual(run.returncode,0); self.assertIn("status inconsistent",run.stdout)
