@@ -10,7 +10,7 @@ from pathlib import Path
 
 SCHEMA_DIR = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(SCHEMA_DIR))
-from validate_result_records import verify_source_control  # noqa: E402
+from validate_result_records import success_message, verify_source_control  # noqa: E402
 from rcrps_v1_0_1_fixtures import minimal_manifest  # noqa: E402
 
 
@@ -133,7 +133,7 @@ class SourceControlSemanticTests(unittest.TestCase):
         self.assertTrue(any("dirty" in error for error in self.errors(record)))
 
     def test_dirty_paths_must_be_safe_and_unique(self):
-        for paths in (["/etc/passwd"], ["../escape.py"], ["src\\model.py"], ["./src/model.py"], ["src//model.py"], ["."], ["src/model.py", "src/model.py"]):
+        for paths in (["/etc/passwd"], ["../escape.py"], ["src\\model.py"], ["./src/model.py"], ["src//model.py"], ["."], ["src/\\x00model.py"], ["src/model.py", "src/model.py"]):
             with self.subTest(paths=paths):
                 record = minimal_manifest()
                 record["execution"]["source_control"]["working_tree_state"] = "dirty"
@@ -150,6 +150,31 @@ class SourceControlSemanticTests(unittest.TestCase):
         record["source"]["branch"] = "104/merge"
         self.assertEqual(self.errors(record), [])
 
+
+
+class ValidatorSuccessMessageTests(unittest.TestCase):
+    def test_success_message_reports_only_applicable_validation_layers(self):
+        cases = (
+            (
+                {"record_type": "run_manifest", "schema_version": "1.0.1"},
+                "schema, source-control provenance, and local input/output integrity",
+            ),
+            (
+                {"record_type": "run_manifest", "schema_version": "1.0.0"},
+                "schema and local input/output integrity",
+            ),
+            (
+                {"record_type": "result_summary", "schema_version": "1.0.1"},
+                "schema and local data-file integrity",
+            ),
+            (
+                {"record_type": "validation_report", "schema_version": "1.0.1"},
+                "schema",
+            ),
+        )
+        for record, expected in cases:
+            with self.subTest(record_type=record["record_type"], version=record["schema_version"]):
+                self.assertEqual(success_message(record), expected)
 
 
 class ValidatorCliSchemaSelectionTests(unittest.TestCase):

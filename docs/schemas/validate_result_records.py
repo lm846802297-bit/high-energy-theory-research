@@ -297,6 +297,9 @@ def verify_source_control(record: dict) -> list[str]:
         if not isinstance(path, str) or not path:
             errors.append("dirty_paths entries must be non-empty strings")
             continue
+        if "\x00" in path:
+            errors.append("dirty path must not contain NUL")
+            continue
         if "\\" in path or path.startswith("/") or (len(path) >= 2 and path[1] == ":"):
             errors.append(f"dirty path must be repository-relative POSIX form: {path}")
             continue
@@ -312,10 +315,15 @@ def verify_source_control(record: dict) -> list[str]:
 
 
 def success_message(record: dict) -> str:
-    """Describe only the validation layers applicable to this record version."""
-    if record.get("record_type") == "run_manifest" and record.get("schema_version") == "1.0.1":
-        return "schema, source-control provenance, and local input/output integrity"
-    return "schema and local input/output integrity"
+    """Describe only the validation layers applicable to this record type and version."""
+    record_type = record.get("record_type")
+    if record_type == "run_manifest":
+        if record.get("schema_version") == "1.0.1":
+            return "schema, source-control provenance, and local input/output integrity"
+        return "schema and local input/output integrity"
+    if record_type == "result_summary":
+        return "schema and local data-file integrity"
+    return "schema"
 
 
 def main():
