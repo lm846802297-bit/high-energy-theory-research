@@ -44,6 +44,7 @@ The initial profile identifiers are:
 - git-review-and-merge
 - document-review
 - referee-response-and-manuscript-synchronization
+- generated-figure-and-report
 
 Projects may adopt a subset when appropriate, but the lock must list each adopted profile explicitly. A numerical project adopting rcrps-v1.0.1 must also preserve its domain-specific extensions fields and validation procedures.
 
