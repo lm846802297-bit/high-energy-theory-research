@@ -260,6 +260,11 @@ def verify_source_control(record: dict) -> list[str]:
                 errors.append(f"non-PR event requires {field} to be null")
         if mode not in non_pr_modes:
             errors.append("non-PR event cannot use a pull-request checkout_mode")
+        checkout_ref = context.get("checkout_ref")
+        if mode == "branch_commit" and checkout_ref is None:
+            errors.append("branch_commit requires checkout_ref")
+        elif mode == "detached_commit" and checkout_ref is not None:
+            errors.append("checkout_ref must be null for detached_commit")
 
     workflow_run_id = context.get("workflow_run_id")
     workflow_run_attempt = context.get("workflow_run_attempt")
