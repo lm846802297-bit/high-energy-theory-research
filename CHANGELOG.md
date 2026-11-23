@@ -1,5 +1,10 @@
 # Changelog
 
+## 2026-11-23 — Add document-review and referee-response adoption profiles
+
+- Added stable downstream adoption profile IDs for the central document-review and referee-response/manuscript-synchronization standards.
+- Updated the English/Chinese adoption contract and standards-lock template so downstream projects can pin these standards explicitly.
+
 ## 2026-11-23 — Central document-review and referee-response standards
 
 - Extracted the reusable document identity, authority, scientific-content, evidence, consistency, reproducibility, link, disposition, and safe-migration checks from the axial-vector repository's document-by-document review standard.
