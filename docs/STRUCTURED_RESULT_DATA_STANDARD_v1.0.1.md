@@ -35,7 +35,7 @@ Every new v1.0.1 `run_manifest` must contain `execution.source_control`. All 14 
 |---|---|
 | `event` | Exact execution event, e.g. `pull_request`, `pull_request_target`, `push`, `workflow_dispatch`, `schedule`, `workflow_run`, `merge_group`, or `local` |
 | `checkout_mode` | `pull_request_merge`, `pull_request_head`, `pull_request_base`, `branch_commit`, `detached_commit`, or `unknown` |
-| `checkout_ref` | Actual Git ref checked out, or null when detached/unknown |
+| `checkout_ref` | Actual Git ref checked out, or null when detached or unavailable |
 | `pr_number` | Pull-request number, or null for non-PR events |
 | `pr_url` | Canonical pull-request URL, or null for non-PR events |
 | `pr_head_sha` | Exact PR source-head SHA, or null for non-PR events |
@@ -50,7 +50,7 @@ Every new v1.0.1 `run_manifest` must contain `execution.source_control`. All 14 
 
 ### Pull-request events
 
-For `pull_request` and `pull_request_target`, PR number, URL, head/base SHAs, and head/base refs must be non-null. The actual checkout is identified only by `source.commit_sha` and `checkout_mode`:
+For `pull_request` and `pull_request_target`, PR number, URL, head/base SHAs, and head/base refs must be non-null. `source.commit_sha` records the exact checked-out commit; `checkout_mode` describes its PR role, while `checkout_ref` separately records the exact Git ref when available:
 
 - `pull_request_merge`: `tested_merge_sha` must equal `source.commit_sha`.
 - `pull_request_head`: `source.commit_sha` must equal `pr_head_sha`; `tested_merge_sha` is null.
@@ -117,7 +117,7 @@ Example local fragment:
 }
 ```
 
-A clean tree requires an empty `dirty_paths`; a dirty tree requires at least one path. Paths must be normalized, unique, repository-relative POSIX paths without absolute paths or parent traversal. If dirty source files affect the run, archive and fingerprint the exact changed content or a reproducible patch/snapshot; path names alone do not reproduce dirty source.
+A clean tree requires an empty `dirty_paths`; a dirty tree requires at least one path. Paths must be normalized, unique, repository-relative POSIX paths without NUL bytes, absolute paths, or parent traversal. If dirty source files affect the run, archive and fingerprint the exact changed content or a reproducible patch/snapshot; path names alone do not reproduce dirty source.
 
 The v1.0.1 schema is a validation superset: it accepts v1.0.0 records under their existing requirements, while requiring `execution.source_control` only for v1.0.1 `run_manifest` records. `result_summary` and `validation_report` do not gain source-control fields. The v1.0.0 schema remains unchanged, and historical records are not rewritten.
 

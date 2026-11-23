@@ -112,7 +112,7 @@ results/<run_label>/
 |---|---|
 | `event` | 实际执行事件，例如 `pull_request`、`pull_request_target`、`push`、`workflow_dispatch`、`schedule`、`workflow_run`、`merge_group` 或 `local` |
 | `checkout_mode` | `pull_request_merge`、`pull_request_head`、`pull_request_base`、`branch_commit`、`detached_commit` 或 `unknown` |
-| `checkout_ref` | 实际检出的 Git ref；detached 或无法确定时为 null |
+| `checkout_ref` | 实际检出的 Git ref；detached 或无法获取时为 null |
 | `pr_number` | PR 编号；非 PR 事件为 null |
 | `pr_url` | PR 规范 URL；非 PR 事件为 null |
 | `pr_head_sha` | PR 源分支 HEAD SHA；非 PR 事件为 null |
@@ -127,7 +127,7 @@ results/<run_label>/
 
 ### PR 事件
 
-对于 `pull_request` 和 `pull_request_target`，PR 编号、URL、head/base SHA 以及 head/base ref 必须非 null。实际检出的 commit 由 `source.commit_sha` 和 `checkout_mode` 唯一确定：
+对于 `pull_request` 和 `pull_request_target`，PR 编号、URL、head/base SHA 以及 head/base ref 必须非 null。`source.commit_sha` 记录实际检出的 commit；`checkout_mode` 描述该 commit 在 PR 事件中的角色，`checkout_ref` 则在可确定时单独记录精确 Git ref：
 
 - `pull_request_merge`：`tested_merge_sha` 必须等于 `source.commit_sha`。
 - `pull_request_head`：`source.commit_sha` 必须等于 `pr_head_sha`，且 `tested_merge_sha` 为 null。
@@ -194,7 +194,7 @@ PR merge 运行示例片段（值仅作说明）：
 }
 ```
 
-clean 工作树要求 `dirty_paths` 为空；dirty 工作树至少需要一个路径。路径必须规范化、唯一、相对于仓库根目录，采用 POSIX 格式，不能是绝对路径或包含向上遍历。如果 dirty 源文件影响了计算，必须归档并指纹化实际修改内容或可复现补丁/快照；仅记录路径名称不足以复现 dirty 源码。
+clean 工作树要求 `dirty_paths` 为空；dirty 工作树至少需要一个路径。路径必须规范化、唯一、相对于仓库根目录，采用 POSIX 格式，不能包含 NUL 字节，不能是绝对路径或包含向上遍历。如果 dirty 源文件影响了计算，必须归档并指纹化实际修改内容或可复现补丁/快照；仅记录路径名称不足以复现 dirty 源码。
 
 v1.0.1 Schema 是向后兼容的校验超集：它继续接受符合原要求的 v1.0.0 记录，同时只对 v1.0.1 的 `run_manifest` 强制要求 `execution.source_control`。`result_summary` 和 `validation_report` 不增加源码控制字段。v1.0.0 Schema 保持不变，历史记录不重写。
 

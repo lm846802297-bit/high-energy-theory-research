@@ -6,6 +6,7 @@
 - Added conditional PR/non-PR field semantics, distinct PR merge/head/base/unknown checkout modes, workflow run ID/attempt pairing, and working-tree metadata validation.
 - Enforced non-PR checkout-ref consistency: `branch_commit` requires a ref and `detached_commit` requires a null ref; added RED→GREEN regression tests.
 - Rejected NUL bytes in dirty-path metadata and added an adversarial regression case.
+- Clarified in both v1.0.1 documents that `checkout_ref` is null when detached/unavailable (not merely because checkout mode is `unknown`) and documented the NUL-byte dirty-path restriction.
 - Added the semantic source-control validator, schema/compatibility tests, source-control invariant tests, and CLI schema-selection tests.
 - Scoped CLI PASS wording so it reports source-control provenance only for v1.0.1 run manifests, not legacy v1.0.0 records or non-run records.
 - Scoped successful-validation wording by record type: `result_summary` reports data-file integrity, while `validation_report` reports schema validation only.
