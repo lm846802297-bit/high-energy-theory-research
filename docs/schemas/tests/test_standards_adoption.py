@@ -24,9 +24,24 @@ class StandardsAdoptionTests(unittest.TestCase):
  def test_report_record_shape(self):
   r={"record_type":"standards_validation_report","report_version":"1.0.0","task_id":"20261123-test-task","repository":"example/project","source_commit":"a"*40,"central_commit_sha":"b"*40,"status":"COMPLIANT","checks":[{"check_id":"lock-schema","status":"PASS","evidence":["validation.log"]}]}
   self.assertTrue(self.validator.is_valid(r))
- def test_validator_rejects_malformed_lock(self):
+ def test_yaml_date_remains_a_string(self):
+  import importlib.util
+  spec=importlib.util.spec_from_file_location("standards_validator",VALIDATOR)
+  module=importlib.util.module_from_spec(spec); spec.loader.exec_module(module)
+  with tempfile.TemporaryDirectory() as tmp:
+   path=Path(tmp)/"lock.yaml"
+   path.write_text("adopted_at: 2026-11-23\n",encoding="utf-8")
+   self.assertEqual(module.load_record(path)["adopted_at"],"2026-11-23")
+ def test_cli_rejects_malformed_lock(self):
   with tempfile.TemporaryDirectory() as tmp:
    root=Path(tmp); lock=root/"standards-lock.yaml"; lock.write_text("record_type: standards_lock\n",encoding="utf-8")
    run=subprocess.run([sys.executable,str(VALIDATOR),"--repo-root",str(root),"--lock",str(lock)],capture_output=True,text=True)
    self.assertNotEqual(run.returncode,0); self.assertIn("NON_COMPLIANT",run.stdout)
+ def test_cli_rejects_report_status_without_passing_evidence(self):
+  with tempfile.TemporaryDirectory() as tmp:
+   root=Path(tmp); (root/"docs").mkdir(); (root/"docs/RESEARCH_TASK_HANDOFF_STANDARD.md").write_text("test",encoding="utf-8")
+   lock=root/"standards-lock.json"; lock.write_text(json.dumps(self.lock()),encoding="utf-8")
+   report=root/"report.json"; report.write_text(json.dumps({"record_type":"standards_validation_report","report_version":"1.0.0","task_id":"20261123-test-task","repository":"example/project","source_commit":"a"*40,"central_commit_sha":"a"*40,"status":"COMPLIANT","checks":[{"check_id":"profile","status":"BLOCKED","evidence":[]}]}),encoding="utf-8")
+   run=subprocess.run([sys.executable,str(VALIDATOR),"--repo-root",str(root),"--lock",str(lock),"--report",str(report)],capture_output=True,text=True)
+   self.assertNotEqual(run.returncode,0); self.assertIn("status inconsistent",run.stdout)
 if __name__=="__main__": unittest.main()
