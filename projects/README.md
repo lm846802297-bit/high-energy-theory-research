@@ -17,7 +17,9 @@ The top-level research project is **axial-vector-model-building**. It currently 
 - **vll-higgs-singlet-uv-eft** — UV–EFT matching and associated dimension-six gauge corrections.
 - **manuscript-review-response** — referee-comment analysis, response-letter development, manuscript diffs, and coordination of the supporting physics checks.
 
-The **vll-higgs-singlet-uv-eft** workstream is a branch/workstream *inside the parent project*, not an independent top-level project. Its existing records remain at their current paths:
+The **vll-higgs-singlet-uv-eft** workstream is part of the parent project, not an independent top-level project. Its migration destination is [axial-vector-review-response](https://github.com/lm846802297-bit/axial-vector-review-response), with a [commit-pinned Phase 1 archive](https://github.com/lm846802297-bit/axial-vector-review-response/tree/e1f8a557daec93864f8ba2ed14e9946516e158ed/research/vll-higgs-singlet-uv-eft) verified on the destination migration branch. It is not integrated into the destination's `main`, and the historical v66 archive is inventoried rather than transferred. This notice does not authorize source retirement.
+
+Until that verification, the existing RC-001 records and links stay in place:
 
 - Main research record: [research/RC-001-vll-higgs-singlet-uv-eft.md](../research/RC-001-vll-higgs-singlet-uv-eft.md)
 - Gauge-subgraph workstream record: [research/RC-001-gauge-subgraph-change-record.md](../research/RC-001-gauge-subgraph-change-record.md)

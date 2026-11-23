@@ -17,7 +17,9 @@
 - **vll-higgs-singlet-uv-eft** — UV–EFT 匹配及相关的六维规范修正。
 - **manuscript-review-response** — 审稿意见分析、回复信编写、论文 Diff，以及相关物理问题的验证协调。
 
-**vll-higgs-singlet-uv-eft** 工作流属于父项目内部的研究分支，不是独立的顶层项目。其现有记录继续保留在原路径：
+**vll-higgs-singlet-uv-eft** 工作流属于父项目，不是独立的顶层项目。迁入仓库为 [axial-vector-review-response](https://github.com/lm846802297-bit/axial-vector-review-response)，[第一批归档已在目标仓的迁移分支核验](https://github.com/lm846802297-bit/axial-vector-review-response/tree/e1f8a557daec93864f8ba2ed14e9946516e158ed/research/vll-higgs-singlet-uv-eft)，尚未合入目标仓 `main`，v66 历史包只做了清点，未复制。这一入口不代表可以移除中央仓的旧记录。
+
+核验通过前，保留现有 RC-001 记录及其链接：
 
 - 主研究记录：[research/RC-001-vll-higgs-singlet-uv-eft.md](../research/RC-001-vll-higgs-singlet-uv-eft.md)
 - 规范子图工作流记录：[research/RC-001-gauge-subgraph-change-record.md](../research/RC-001-gauge-subgraph-change-record.md)

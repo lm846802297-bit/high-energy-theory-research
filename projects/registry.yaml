@@ -36,7 +36,12 @@ projects:
           full Wilson-vector closure, crossed-box sum, complete UV-EFT
           subtraction, common-basis reduction, and independent diagram-level
           validation remain open.
-        source_repository: unknown
+        # Migration destination, not verification of the transfer. Historical
+        # local paths above stay in place until the target main archive is verified.
+        source_repository: https://github.com/lm846802297-bit/axial-vector-review-response
+        # Reviewed Phase 1 migration branch: https://github.com/lm846802297-bit/axial-vector-review-response/tree/e1f8a557daec93864f8ba2ed14e9946516e158ed/research/vll-higgs-singlet-uv-eft
+        # Add external_entrypoint_url only after verifying the file on target main:
+        # https://github.com/lm846802297-bit/axial-vector-review-response/blob/<VERIFIED_TARGET_MAIN_COMMIT>/research/vll-higgs-singlet-uv-eft/README.md
       - workstream_id: manuscript-review-response
         title: Axial-vector manuscript review and revision
         kind: manuscript_workstream
