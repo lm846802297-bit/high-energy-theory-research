@@ -77,6 +77,7 @@ def main():
  lock,errs=validate(lock_path,validator); errors.extend(errs)
  selected_lock=lock_path.resolve() if lock and not errs else None
  task=None
+ paired_task=None
  if lock and not errs:
   for profile in lock["adopted_profiles"]:
    check_file(central,PROFILE_PATHS[profile],f"profile {profile}",errors)
@@ -92,6 +93,7 @@ def main():
   task_path=a.task_provenance if a.task_provenance.is_absolute() else root/a.task_provenance
   task,errs=validate(task_path,validator); errors.extend(errs)
   if task and not errs:
+   paired_task=task
    check_lock_reference(root,selected_lock,task,"task provenance lock file",errors)
    check_file(root,task["task_brief_path"],"task brief",errors,task["task_brief_sha256"])
    if lock and task["central_commit_sha"]!=lock["source_commit"]: errors.append("task central commit differs from locked central commit")
@@ -102,6 +104,10 @@ def main():
   report_path=a.report if a.report.is_absolute() else root/a.report
   report,errs=validate(report_path,validator); errors.extend(errs)
   if report and not errs:
+   if paired_task is not None:
+    if report["task_id"]!=paired_task["task_id"]: errors.append("report task_id differs from task provenance")
+    if report["repository"].casefold()!=paired_task["repository"].casefold():
+     errors.append("report repository differs from task provenance")
    states={c["status"] for c in report["checks"]}
    expected="COMPLIANT" if states <= {"PASS","NOT_APPLICABLE"} and "PASS" in states else ("NON_COMPLIANT" if "FAIL" in states else "INCOMPLETE")
    if report["status"]!=expected: errors.append(f"report status inconsistent with checks; expected {expected}")

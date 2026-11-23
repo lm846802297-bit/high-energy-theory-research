@@ -88,6 +88,48 @@ class StandardsAdoptionTests(unittest.TestCase):
     for claimed,expected in ((lock_path,0),("./research/./standards-lock.json",0),(other_path,1)):
      with self.subTest(record_type=record_type,claimed=claimed):
       check(record_type,claimed,expected)
+ def test_cli_pairs_provenance_and_report_by_task_and_repository(self):
+  with tempfile.TemporaryDirectory() as tmp:
+   root=Path(tmp); (root/"docs").mkdir()
+   (root/"docs/RESEARCH_TASK_HANDOFF_STANDARD.md").write_text("test",encoding="utf-8")
+   lock={**self.lock(),"adopted_profiles":["task-handoff"]}
+   def write(name, data):
+    (root/name).write_text(json.dumps(data),encoding="utf-8")
+   def digest(name):
+    return hashlib.sha256((root/name).read_bytes()).hexdigest()
+   write("lock.json",lock)
+   (root/"brief.md").write_text("task brief",encoding="utf-8")
+   task={
+    "record_type":"task_provenance","provenance_version":"1.0.0",
+    "task_id":"20261123-test-task","repository":"example/project",
+    "central_repository":lock["central_repository"],"central_commit_sha":lock["source_commit"],
+    "lock_file_path":"lock.json","lock_file_sha256":digest("lock.json"),
+    "task_brief_path":"brief.md","task_brief_sha256":digest("brief.md"),
+    "applied_profiles":["task-handoff"],"project_extensions":[],"acceptance_criteria":["validate"],
+   }
+   report={
+    "record_type":"standards_validation_report","report_version":"1.0.0",
+    "task_id":task["task_id"],"repository":"Example/Project",
+    "source_commit":"b"*40,"central_commit_sha":lock["source_commit"],"status":"COMPLIANT",
+    "checks":[{"check_id":"evidence","status":"PASS","evidence":["brief.md"]}],
+   }
+   write("task.json",task)
+   task_args=["--task-provenance","task.json"]
+   report_args=["--report","report.json"]
+   def invoke(args, expected, message=""):
+    run=subprocess.run([sys.executable,str(VALIDATOR),"--repo-root",str(root),
+                        "--lock","lock.json",*args],capture_output=True,text=True)
+    self.assertEqual(run.returncode,expected,run.stdout+run.stderr)
+    if message:
+     self.assertIn(message,run.stdout)
+   invoke(task_args,0)
+   write("report.json",report)
+   invoke(task_args+report_args,0)
+   for field, value in (("task_id","20261123-other-task"),("repository","example/other-project")):
+    with self.subTest(field=field):
+     write("report.json",{**report,field:value})
+     invoke(report_args,0)
+     invoke(task_args+report_args,1,f"report {field} differs from task provenance")
  def make_central_repo(self, central):
   (central/"docs").mkdir(parents=True); (central/"docs/RESEARCH_TASK_HANDOFF_STANDARD.md").write_text("central policy",encoding="utf-8")
   subprocess.run(["git","init","-q"],cwd=central,check=True)
