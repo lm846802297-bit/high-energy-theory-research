@@ -2,11 +2,14 @@
 
 语言：简体中文。英文原版：[USER_GUIDE.md](USER_GUIDE.md)。
 
-本手册介绍如何将本仓库作为一个**多项目研究平台**使用，涵盖项目组织、研究 Skill、科学变更记录、计算、证据管理、验证和基于 Git 的变更控制。
+本手册介绍如何将本仓库作为一个**多项目研究平台**使用。首先阅读[中央科研规范索引](governance/CENTRAL_STANDARDS_INDEX.md)，了解已采用的共享规范和下游采用契约。[科研治理规范](RESEARCH_GOVERNANCE_STANDARD.md)、[任务交接规范](RESEARCH_TASK_HANDOFF_STANDARD.md)和[科研质量门](governance/RESEARCH_QUALITY_GATE.md)定义通用最低要求；项目专属物理规则仍由对应研究仓库维护。
 
 本仓库是研究流程与可追溯性框架，并非完全自主的研究智能体。软件检查通过不等于物理结果正确。
 
 ## 1. 从这里开始
+
+1. 阅读[中央科研规范索引](governance/CENTRAL_STANDARDS_INDEX.md)和[科研治理规范](RESEARCH_GOVERNANCE_STANDARD.md)。
+2. 实质性研究任务开始前，填写[研究任务单模板](../templates/research-task-brief.md)，遵循[任务交接规范](RESEARCH_TASK_HANDOFF_STANDARD.md)，并选择适用的[科研质量门](governance/RESEARCH_QUALITY_GATE.md)任务类型。
 
 如果你第一次使用本仓库：
 
