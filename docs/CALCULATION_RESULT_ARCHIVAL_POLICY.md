@@ -51,9 +51,6 @@ A file approaching GitHub's ordinary-Git per-file limit must be evaluated for LF
 - For Git LFS and external storage, verify retrieval from the remote location after upload and compare the downloaded bytes with the manifest. Record the verification date and result in the archival/provenance record.
 - Keep the manifest, retrieval instructions, and hashes in the project Git repository even when the data itself is external. Never make an expiring CI artifact, temporary workspace, or unversioned cloud object the only copy.
 - Do not duplicate large data across multiple storage systems without a stated recovery or access reason. If replicas are maintained, record their identities and verify them against the same content hash.
-- For externally stored files, commit a manifest with the exact filename, immutable retrieval URI or release identifier, version, byte size, format, source, and SHA-256. Prefer individual native files over newly generated archive bundles.
-- An expiring GitHub Actions artifact, temporary workspace, chat attachment, or local-only file must never be the sole permanent copy of a result used in a research claim.
-- Do not commit credentials, tokens, private keys, personal data, or inputs that the project is not permitted to redistribute. Record retrieval instructions and checksums for restricted inputs instead.
 
 ## 4. Required run provenance
 
