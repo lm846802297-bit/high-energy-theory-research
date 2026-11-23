@@ -30,7 +30,7 @@ Apply the following profiles. A project may add a stricter domain profile withou
 | Task profile | Required gates | Typical N/A gates |
 |---|---|---|
 | Analytical derivation / theory | 1, 2, 4, 5, 7, 9, 10; 3 and 8 when symbolic/code execution is used | 3 for a purely handwritten derivation; 6 when no numerical claim is made |
-| Numerical computation / simulation / scan | 1–10, with the method-specific parts of 6 and 7 defined by the project profile | Only individual checks that genuinely do not apply, with a reason |
+| Numerical computation / simulation / scan | 1–7; Gate 8 applies when code/workflows are changed or added; Gates 9 and 10 apply when PR review and integration are used | Gates 3/4 when no code is executed; other genuinely inapplicable individual checks, with reasons |
 | Code / validator / workflow change | 1, 2, 3, 5, 8, 9, 10; 4, 6, 7 when the change affects physical or numerical behavior | 6 or 7 for purely mechanical tooling that cannot affect scientific behavior |
 | Data transformation / archival migration | 1–5, 8 where tooling changes, 9, 10; 6 and 7 where data meaning or physical interpretation changes | 6/7 for byte-preserving path-only migrations |
 | Manuscript / document / literature review | 1, 2, 5, 7, 9, 10; 3 and 8 when compilation, extraction, or scripts are used | 4/6 when no new physical/numerical claim or calculation is involved |
@@ -50,16 +50,23 @@ Use one status for each applicable gate:
 
 Do not infer PASS from a plan, source-code presence, green unrelated CI, successful process exit, matching checksum, or a previous commit's result. If evidence is inconclusive, state the observed result and keep the gate BLOCKED or NOT RUN as appropriate; do not force a PASS.
 
-## 4. Acceptance discipline
+## 4. Minimum sufficient acceptance
 
-1. Define the research question, scope, task profile, and acceptance criteria before execution whenever practical.
-2. Choose the numerical method and tolerances according to the physics and observable. The central standard does not prescribe universal quadrature orders, precision, or percentage tolerances.
-3. Report the actual method, command, source/input revisions, residuals, tolerances, and failed/partial checks.
-4. A software test validates the code path/assertion it exercises; it does not automatically validate a physical derivation.
-5. A numerical convergence check validates numerical stability within its tested setup; it does not by itself validate the model or approximation.
-6. Independent validation must identify what is independent. Two wrappers sharing the same algebraic kernel are not automatically independent implementations.
-7. Preserve historical outputs and create new versioned results when assumptions, conventions, or code change.
-8. Do not add new acceptance conditions after a task passes unless new evidence reveals a concrete problem or the scope changes.
+Acceptance is organized around the research question and the physical claim the task is intended to support, not around maximizing the number of checks. Before work begins, define the question, scope, task profile, the paper figure/equation/numerical conclusion/physical judgment that may be affected, and the acceptance criteria sufficient to support that claim.
+
+1. **State the research purpose.** Identify which figure, equation, numerical result, or physical judgment may change. Do not start work solely to expand technical coverage when no connection to the research objective can be stated.
+2. **Select necessary checks.** Select from the ten quality areas only those that bear on the task's claim. Task profiles are applicability guides, not mechanical instructions to run every test, grid, or workflow. Mark genuinely inapplicable items N/A with a reason; report applicable but unexecuted checks as NOT RUN or BLOCKED.
+3. **Reuse historical validation.** When relevant source, inputs, conventions, execution environment, and supported claim have not changed, cite the existing validation tied to its exact version rather than repeating calculations or rerunning tests. If a relevant dependency changes, recheck only affected results and checks; an unrelated change does not justify a full revalidation.
+4. **Accept once and freeze.** Define numerical methods, error/tolerance criteria, and physical acceptance conditions before execution. Once the predeclared criteria are met, freeze the result. Reopen it only for a concrete error, new evidence, relevant dependency change, or scope change; do not add new conditions at closeout or repeatedly reopen passed items.
+5. **Merge and archive.** A PR requires only the evidence, review, and owner authorization necessary for its actual change scope and supported claims. Unrelated follow-up work must be recorded separately and must not block the current merge. After merging, verify the exact merge commit and canonical branch state.
+
+Additional execution rules:
+
+- Choose numerical methods and tolerances according to the physics and observable; the central standard prescribes no universal quadrature order, precision, or percentage tolerance.
+- A software test validates only the code path/assertion it exercises; it does not automatically validate a physical derivation. A convergence check validates numerical stability within its tested setup, not the model or approximation itself.
+- State what is independent in an independent validation; two wrappers sharing the same algebraic kernel are not automatically independent implementations.
+- Preserve historical outputs and create new versioned results when assumptions, conventions, or code change; do not overwrite old results.
+- Do not expand the current research scope merely to clear a checklist, increase CI counts, or complete a general-purpose technical platform.
 
 ## 5. Independent review and GPT review
 
