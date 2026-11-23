@@ -8,17 +8,33 @@ on:
       - "docs/RESEARCH_TASK_HANDOFF_STANDARD.zh-CN.md"
       - "docs/governance/DOWNSTREAM_STANDARDS_ADOPTION.md"
       - "docs/governance/DOWNSTREAM_STANDARDS_ADOPTION.zh-CN.md"
+      - "docs/governance/CENTRAL_STANDARDS_INDEX.md"
+      - "docs/governance/CENTRAL_STANDARDS_INDEX.zh-CN.md"
       - "templates/research-task-brief.md"
       - "templates/research-task-brief.zh-CN.md"
-      - "docs/STRUCTURED_RESULT_DATA_STANDARD.md"
-      - "docs/STRUCTURED_RESULT_DATA_STANDARD.zh-CN.md"
+      - "templates/research-standards-lock.yaml"
       - "docs/STRUCTURED_RESULT_DATA_STANDARD_v1.0.1.md"
       - "docs/STRUCTURED_RESULT_DATA_STANDARD_v1.0.1.zh-CN.md"
+      - "AGENTS.md"
       - ".github/workflows/structured-result-validation.yml"
   push:
     branches:
       - main
     paths:
+      - "docs/schemas/**"
+      - "docs/RESEARCH_TASK_HANDOFF_STANDARD.md"
+      - "docs/RESEARCH_TASK_HANDOFF_STANDARD.zh-CN.md"
+      - "docs/governance/DOWNSTREAM_STANDARDS_ADOPTION.md"
+      - "docs/governance/DOWNSTREAM_STANDARDS_ADOPTION.zh-CN.md"
+      - "docs/governance/CENTRAL_STANDARDS_INDEX.md"
+      - "docs/governance/CENTRAL_STANDARDS_INDEX.zh-CN.md"
+      - "templates/research-task-brief.md"
+      - "templates/research-task-brief.zh-CN.md"
+      - "templates/research-standards-lock.yaml"
+      - "docs/STRUCTURED_RESULT_DATA_STANDARD_v1.0.1.md"
+      - "docs/STRUCTURED_RESULT_DATA_STANDARD_v1.0.1.zh-CN.md"
+      - "AGENTS.md"
+      - ".github/workflows/structured-result-validation.yml"
   workflow_dispatch:
 
 permissions:
@@ -36,7 +52,7 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Install pinned validation dependency
+      - name: Install pinned validation dependencies
         run: python -m pip install -r docs/schemas/requirements-result-validation.txt -r docs/schemas/requirements-standards-adoption.txt
 
       - name: Run structured-result regression tests
@@ -45,5 +61,5 @@ jobs:
       - name: Run standards-adoption regression tests
         run: python -m unittest discover -s docs/schemas/tests -p "test_standards_adoption.py" -v
 
-      - name: Compile validator
+      - name: Compile validators
         run: python -m compileall -q docs/schemas
