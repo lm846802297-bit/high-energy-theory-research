@@ -22,7 +22,7 @@
 
 ## 2. 规范位置与标识
 
-使用[科研任务单模板](../templates/research-task-brief.md)。
+使用[科研任务单模板](../templates/research-task-brief.zh-CN.md)。
 
 - 专题任务：research/<topic>/task_briefs/<task-id>.md
 - 跨专题或仓库级任务：research/docs/task_briefs/<task-id>.md
