@@ -17,7 +17,7 @@ This index identifies the single central authority for each shared requirement. 
 | Compute execution | [Research Compute Policy](../../RESEARCH_COMPUTE_POLICY.md) | Primary execution environment, GitHub archive, Actions independent verification, and run provenance |
 | Task handoff | [Research Task Handoff Standard](../RESEARCH_TASK_HANDOFF_STANDARD.md) and [brief template](../../templates/research-task-brief.md) | Pre-execution task specification and return record for substantive work |
 | Scientific change lifecycle | [Scientific Diff Workflow](../scientific-diff-workflow.md) | Project/workstream/change/run/claim hierarchy and question-to-evidence traceability |
-| Research Quality Gate | [Research Quality Gate](RESEARCH_QUALITY_GATE.md) | Ten shared acceptance areas, task profiles, and PASS/FAIL/BLOCKED/NOT RUN/N/A semantics |
+| Research Quality Gate | [Research Quality Gate](RESEARCH_QUALITY_GATE.md) | Minimum sufficient acceptance, task-relevant checks, reuse of historical validation, one-time acceptance/freeze, and PR scope control |
 | Research communication | [Scientific Diff §11](../scientific-diff-workflow.md#11-research-reporting-and-communication-standard) | Conclusion/evidence/results/remaining-work reporting and evidence-proportional language |
 | Generated figures and report PDFs | [Generated Figure and Report Artifact Policy](../GENERATED_FIGURE_AND_REPORT_POLICY.md) | Source data and plotting code as canonical records; routine rendered outputs on demand; frozen deliverable snapshots with provenance |
 | Calculation-result archival | [Calculation-result archival policy](../CALCULATION_RESULT_ARCHIVAL_POLICY.md) | Native outputs, extract-before-upload, provenance, hashes, remote verification, and CI boundary |
