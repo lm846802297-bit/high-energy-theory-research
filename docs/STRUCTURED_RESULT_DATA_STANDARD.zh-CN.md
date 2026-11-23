@@ -137,7 +137,7 @@ results/<run_label>/
 
 ```bash
 python -m pip install -r docs/schemas/requirements-result-validation.txt
-python docs/schemas/validate_result_records.py --repo-root . results/<run_label>/run_manifest.json results/<run_label>/result_summary.json results/<run_label>/validation_report.json
+python docs/schemas/validate_result_records.py --schema docs/schemas/research-result-record-v1.0.0.schema.json --repo-root . results/<run_label>/run_manifest.json results/<run_label>/result_summary.json results/<run_label>/validation_report.json
 ```
 
 校验器检查 Schema、严格 JSON 数值、引用文件路径/字节数/SHA-256，以及 CSV 的行数、列名、逐列单位和非有限数值。只传入本次实际存在的 JSON 文件。

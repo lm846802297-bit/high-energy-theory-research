@@ -6,6 +6,8 @@ on:
       - "docs/schemas/**"
       - "docs/STRUCTURED_RESULT_DATA_STANDARD.md"
       - "docs/STRUCTURED_RESULT_DATA_STANDARD.zh-CN.md"
+      - "docs/STRUCTURED_RESULT_DATA_STANDARD_v1.0.1.md"
+      - "docs/STRUCTURED_RESULT_DATA_STANDARD_v1.0.1.zh-CN.md"
       - ".github/workflows/structured-result-validation.yml"
   push:
     branches:
@@ -14,6 +16,8 @@ on:
       - "docs/schemas/**"
       - "docs/STRUCTURED_RESULT_DATA_STANDARD.md"
       - "docs/STRUCTURED_RESULT_DATA_STANDARD.zh-CN.md"
+      - "docs/STRUCTURED_RESULT_DATA_STANDARD_v1.0.1.md"
+      - "docs/STRUCTURED_RESULT_DATA_STANDARD_v1.0.1.zh-CN.md"
       - ".github/workflows/structured-result-validation.yml"
   workflow_dispatch:
 

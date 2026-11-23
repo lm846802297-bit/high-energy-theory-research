@@ -1,5 +1,23 @@
 # Changelog
 
+## 2026-11-23 — RCRPS v1.0.1 source-control provenance candidate
+
+- Added the v1.0.1 Draft 2020-12 schema as a compatibility superset for v1.0.0 and v1.0.1 records. New v1.0.1 run manifests require all 14 `execution.source_control` fields.
+- Added conditional PR/non-PR field semantics, distinct PR merge/head/base/unknown checkout modes, workflow run ID/attempt pairing, and working-tree metadata validation.
+- Enforced non-PR checkout-ref consistency: `branch_commit` requires a ref and `detached_commit` requires a null ref; added RED→GREEN regression tests.
+- Rejected NUL bytes in dirty-path metadata and added an adversarial regression case.
+- Clarified in both v1.0.1 documents that `checkout_ref` is null when detached/unavailable (not merely because checkout mode is `unknown`) and documented the NUL-byte dirty-path restriction.
+- Added Git ref/branch-name syntax validation and cross-checked known PR checkout refs against PR number and merge/head/base checkout mode, with positive and negative regression tests.
+- Added the semantic source-control validator, schema/compatibility tests, source-control invariant tests, and CLI schema-selection tests.
+- Scoped CLI PASS wording so it reports source-control provenance only for v1.0.1 run manifests, not legacy v1.0.0 records or non-run records.
+- Scoped successful-validation wording by record type: `result_summary` reports data-file integrity, while `validation_report` reports schema validation only.
+- Enforced consistency between the legacy optional `source.workflow_run_id` and the canonical `execution.source_control.workflow_run_id` when both are present; new v1.0.1 records should omit the legacy duplicate.
+- Added versioned English and Chinese v1.0.1 standard documents. Both retain the v1.0.0 record roles and describe the same source-control contract.
+- Updated the structured-result validation workflow path filters to include both versioned v1.0.1 documents.
+- Added the same v1.0.1 document paths to the `push.paths` filter so docs-only updates on `main` also trigger validation.
+- Pinned the v1.0.0 English and Chinese validator commands to the explicit v1.0.0 schema so their examples remain version-accurate after the CLI default moves to v1.0.1.
+- **Status: candidate implementation pending PR review and formal adoption.** The v1.0.0 schema and historical result records remain unchanged. This entry does not announce a v1.0.1 release.
+
 ## 2026-10-21 — Initial repository import
 
 - Imported the extracted contents of the Schema v1.4.3.7 integrated candidate bundle into schema/v1.4.3.7/.
