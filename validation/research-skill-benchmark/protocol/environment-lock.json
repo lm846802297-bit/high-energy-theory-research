@@ -58,7 +58,6 @@
     "A and B require fresh independent ChatGPT Web conversations. A must not select or invoke the plugin; B must explicitly select and invoke the installed Particle Physics Research plugin.",
     "No web search, external connectors, external APIs, or additional plugins are permitted in either arm. Stage identical task inputs before the run.",
     "The 30-minute wall-time and 25-tool-call limits apply equally to both arms. Record token counts only if exposed.",
-    "CI T05 uses the private LZ-3-body-for-hdm repository. The repository secret LZ_REPO_READ_TOKEN must be configured with read-only Contents permission for that repository before the full CI job can pass.",
     "Unexposed host/runtime fields remain null by design; no values are inferred.",
     "The protocol and scoring rules are frozen for Round 1. Do not alter them after observing any pilot outputs.",
     "Protocol v1.1 replaces the private LZ T05 inputs with public pinned sources: two axial-vector paper figure panels and the Native AFH Xe-131 response CSV/export provenance bundle.",

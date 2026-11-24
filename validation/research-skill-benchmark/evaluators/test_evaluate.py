@@ -31,7 +31,7 @@ def make_record(arm: str, run_id: str, score=3):
         "started_at_utc": "2026-11-23T00:00:00Z",
         "ended_at_utc": "2026-11-23T00:01:00Z",
         "protocol": {
-            "version": "1.0",
+            "version": "1.1",
             "commit": "a" * 40,
             "skill_source_commit": "9" * 40,
             "environment_lock_sha256": "b" * 64,

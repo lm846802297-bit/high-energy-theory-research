@@ -28,7 +28,7 @@ Only Skill availability/invocation is intentionally changed.
 2. **Round 2 — Full:** all six dimensions plus sealed Holdout. Minimum 12 independent task-family clusters, 36 paired task runs, 72 model runs. Apply frozen statistical decision rules.
 3. **Round 3 — Real projects:** read-only tasks in LZ, axial-vector, and ColliderAgent under a separate project-stratified plan.
 
-T01 and T02 share the threshold_kinematics family and count as one independent task-family cluster. T05 contains a PDF audit and a separate CSV-to-SVG regeneration pipeline; the generator is not claimed to have produced the PDF.
+T01 and T02 share the threshold_kinematics family and count as one independent task-family cluster. T05-A audits two public axial-vector paper figure panels; T05-B separately reproduces SVG views from public Native AFH Xe-131 response data. The two source pipelines are not conflated.
 
 ## Evaluator commands
 
@@ -45,7 +45,7 @@ The CI workflow also validates both JSON Schemas with Draft 2020-12, parses the 
     python evaluators/verify_repro_package.py --source path/to/solution.py --input path/to/input.csv --output path/to/result.json --manifest path/to/manifest.json
     python evaluators/verify_figure_regeneration.py --manifest evaluators/manifest.json --model-input-root path/to/staged-inputs --golden-root path/to/evaluator-goldens --generated-output-root path/to/trusted-generated --baseline-only
 
-For a scored T05 run, pass the model's submitted SVG directory instead of `--baseline-only`:
+For a scored T05 run, pass the model's submitted SVG directory to the public T05 evaluator:
 
     python evaluators/verify_figure_regeneration.py --manifest evaluators/manifest.json --model-input-root path/to/staged-inputs --golden-root path/to/evaluator-goldens --submitted-output-root path/to/run-artifacts/results/plots
 

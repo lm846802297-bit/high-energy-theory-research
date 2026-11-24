@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Deterministic evaluator for Particle Physics Research Skill Benchmark v1.0.
+"""Deterministic evaluator for Particle Physics Research Skill Benchmark v1.1.
 
 This program validates run records, verifies pinned source bytes, checks paired
 A/B controls, recomputes rubric scores, and creates a blinded-comparison report.
@@ -805,7 +805,7 @@ def compare_records(
 
     all_deltas = [row["scores"]["delta_q"] for row in pair_rows]
     report = {
-        "protocol_version": "1.0",
+        "protocol_version": "1.1",
         "protocol_commit": None,
         "analysis_plan_sha256": None,
         "environment_lock_sha256": None,
