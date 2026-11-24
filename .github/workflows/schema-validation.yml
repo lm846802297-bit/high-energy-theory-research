@@ -57,19 +57,24 @@ jobs:
           for relative in (
               "protocol/run-record.schema.json",
               "protocol/comparison-report.schema.json",
+              "protocol/v1.3/run-record.schema.json",
+              "protocol/v1.3/comparison-report.schema.json",
           ):
               schema = json.loads((root / relative).read_text(encoding="utf-8"))
               Draft202012Validator.check_schema(schema)
 
           for relative in (
               "protocol/environment-lock.json",
+              "protocol/v1.3/environment-lock.json",
               "tasks/development/manifest.json",
               "evaluators/manifest.json",
+              "protocol/v1.3/evaluator-manifest.json",
           ):
               json.loads((root / relative).read_text(encoding="utf-8"))
 
           yaml.safe_load((root / "protocol/scoring-rubric.yaml").read_text(encoding="utf-8"))
-          print("Benchmark JSON Schemas, JSON manifests, and scoring YAML: PASS")
+          yaml.safe_load((root / "protocol/v1.3/scoring-rubric.yaml").read_text(encoding="utf-8"))
+          print("Benchmark v1.2/v1.3 JSON Schemas, manifests, and scoring YAML: PASS")
           PY
           python -m unittest discover -s validation/research-skill-benchmark/evaluators -v
 

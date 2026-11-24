@@ -1,0 +1,884 @@
+{
+  "schema_version": "1.3",
+  "evaluator_version": "1.3.0",
+  "status": "frozen_protocol_v1_3_pending_pr_review_merge",
+  "model_workspace_visible": false,
+  "blinding": {
+    "evaluator_manifest_visible_to_models": false,
+    "development_key_visible_to_models": false,
+    "golden_outputs_visible_to_models": false,
+    "holdout_keys_visible_to_models": false,
+    "recommended_network_policy": "offline_after_staging"
+  },
+  "runtime": {
+    "python_minimum": "3.12",
+    "dependencies_file": "evaluators/requirements.txt",
+    "dependencies_are_exactly_pinned": true,
+    "dependencies": [
+      "jsonschema==4.26.0",
+      "PyYAML==6.0.3",
+      "mpmath==1.3.0",
+      "sympy==1.14.0",
+      "numpy==2.3.5",
+      "scipy==1.17.0",
+      "PyMuPDF==1.26.7"
+    ],
+    "test_dependencies_file": "evaluators/requirements-test.txt",
+    "test_dependencies_are_exactly_pinned": true,
+    "test_dependencies": [
+      "jsonschema==4.26.0",
+      "PyYAML==6.0.3"
+    ],
+    "physics_dependencies_file": "evaluators/requirements-physics.txt",
+    "physics_dependencies_are_exactly_pinned": true,
+    "physics_dependencies": [
+      "sympy==1.14.0",
+      "mpmath==1.3.0",
+      "numpy==2.3.5",
+      "scipy==1.17.0"
+    ]
+  },
+  "evaluator_code": [
+    {
+      "path": "evaluators/evaluate_v1_3.py",
+      "role": "v1_3_run_schema_validation_pair_integrity_source_hashing_score_recomputation_and_comparison",
+      "git_blob_sha1": "ec8ca479c8f950c1d46fbc2def5f96d34a50dc08",
+      "size_bytes": 52154
+    },
+    {
+      "path": "evaluators/test_evaluate_v1_3.py",
+      "role": "v1_3_protocol_and_evaluator_regression_tests",
+      "git_blob_sha1": "dfc41d79394c09812a4a2ed53c23f7504ce953a2",
+      "size_bytes": 4528
+    },
+    {
+      "path": "evaluators/verify_dirac_trace.py",
+      "role": "independent_4x4_dirac_representation_and_clifford_algebra_check_for_T04",
+      "git_blob_sha1": "366a669a6e0053abe2bafab62778d766da21ea67",
+      "size_bytes": 4896
+    },
+    {
+      "path": "evaluators/verify_repro_package.py",
+      "role": "T06_hash_manifest_validation_and_independent_weighted_mean_recalculation_without_executing_model_code",
+      "git_blob_sha1": "ecbf5c416f24ded27cdd09c8025df0fa8b00fa98",
+      "size_bytes": 4112
+    },
+    {
+      "path": "evaluators/requirements.txt",
+      "role": "exactly_pinned_evaluator_dependencies",
+      "git_blob_sha1": "51e1219724b4460f1c2513fb8fe32b8598ed4686",
+      "size_bytes": 104
+    },
+    {
+      "path": "evaluators/requirements-test.txt",
+      "role": "minimal_exactly_pinned_dependencies_for_schema_and_evaluator_unit_tests",
+      "git_blob_sha1": "083ac9bf8d74939d8286549caaebf0626e7d51ec",
+      "size_bytes": 33
+    },
+    {
+      "path": "evaluators/requirements-physics.txt",
+      "role": "pinned_dependencies_for_T01_T02_deterministic_symbolic_and_numerical_evaluators",
+      "git_blob_sha1": "235e267836e8e6a42c6dec571d6ff617dc0b0b56",
+      "size_bytes": 55
+    },
+    {
+      "path": "evaluators/verify_public_t05.py",
+      "role": "T05_public_input_identity_pdf_screen_and_native_AFH_SVG_submission_verification",
+      "git_blob_sha1": "7910455fdaedaa9e71b3a79fef1956013c523349",
+      "size_bytes": 10346
+    },
+    {
+      "path": "evaluators/test_public_t05.py",
+      "role": "T05_public_source_identity_and_deterministic_AFH_plot_regression_tests",
+      "git_blob_sha1": "1d34e98b31fee2c5050f691b6298865767dd0450",
+      "size_bytes": 4263
+    },
+    {
+      "path": "evaluators/verify_figure_regeneration.py",
+      "role": "legacy_private_LZ_T05_verifier_retained_only_for_historical_unit_tests_not_active_in_protocol_v1_1",
+      "git_blob_sha1": "a67e0c3336203a0257aa048a4b863d0fe4095c97",
+      "size_bytes": 14246
+    },
+    {
+      "path": "evaluators/test_figure_regeneration_semantics.py",
+      "role": "legacy_private_LZ_T05_semantic_comparison_regression_tests_not_active_in_protocol_v1_1",
+      "git_blob_sha1": "dd66f462be5e12bf96f88ae9b163451fe79d045d",
+      "size_bytes": 7552
+    }
+  ],
+  "protocol_artifacts": [
+    {
+      "path": "protocol/v1.3/run-record.schema.json",
+      "role": "strict_run_record_schema_with_A_B_conditional_Skill_constraints",
+      "git_blob_sha1": "264859643ea1cee8e680dd10d4aeeb581c5fa1f7",
+      "size_bytes": 19588
+    },
+    {
+      "path": "protocol/v1.3/comparison-report.schema.json",
+      "role": "strict_machine_readable_comparison_report_schema",
+      "git_blob_sha1": "c44f0d801c5228f246e9300771abbd8340ea53c7",
+      "size_bytes": 11425
+    },
+    {
+      "path": "protocol/v1.3/experimental-design.md",
+      "role": "preregistered_experimental_design_and_pair_integrity_rules",
+      "git_blob_sha1": "e23532cd31a38956f9bdca8ed8afebd881a2c9f6",
+      "size_bytes": 19791
+    },
+    {
+      "path": "protocol/v1.3/scoring-rubric.yaml",
+      "role": "weighted_score_and_preregistered_decision_thresholds",
+      "git_blob_sha1": "4393618a6087198ebf383edc3b0e6059443631da",
+      "size_bytes": 8772
+    },
+    {
+      "path": "tasks/development/manifest.json",
+      "role": "development_task_family_and_input_manifest",
+      "git_blob_sha1": "87bd149f379fac125c1472aaf75e3f5995113b89",
+      "size_bytes": 10558
+    },
+    {
+      "path": "tasks/development/T06-reproducibility-audit.md",
+      "role": "T06_model_visible_task_specification",
+      "git_blob_sha1": "590e6d01dd448a7437bd18444a5348e9c8f2069c",
+      "size_bytes": 1596
+    },
+    {
+      "path": "tasks/development/T02-numerical-integral.md",
+      "role": "model_visible_development_task_with_evaluator_reference_separated",
+      "git_blob_sha1": "4e51745b18a63d62ff21249eeba2c01b6bdc5a9b",
+      "size_bytes": 1617
+    },
+    {
+      "path": "protocol/v1.3/environment-lock.json",
+      "role": "pinned_protocol_or_model_visible_task_artifact",
+      "git_blob_sha1": "d8f55b91140406f3193e0d1754e4689dd4497a70",
+      "size_bytes": 5943
+    },
+    {
+      "path": "tasks/development/T05-figure-audit.md",
+      "role": "pinned_protocol_or_model_visible_task_artifact",
+      "git_blob_sha1": "143b6313a5e73a9446aee5b097e55db03e71a42a",
+      "size_bytes": 8369
+    }
+  ],
+  "deterministic_evaluators": [
+    {
+      "id": "E-T01-T02-KALLEN-JACOBIAN",
+      "task_ids": [
+        "T01",
+        "T02"
+      ],
+      "role": "primary_exact_symbolic_and_high_precision_reference",
+      "repository": "lm846802297-bit/high-energy-theory-research",
+      "source_commit": "fb4bb38ded984f760375c93ec79d5c1ea6994530",
+      "path": "validation/skill-module-evaluation-2026-11-22/symbolic/derive_phase_space_jacobian.py",
+      "git_blob_sha1": "2d6ced1542d6af95838ef394dd56bb65359b6e10",
+      "scope": "Kallen factorization, complete ds/du Jacobian, and 50-digit original-s versus transformed-u integral comparison.",
+      "T02_reference": {
+        "value_GeV2": "0.141975883465984392640489856748572220501161185",
+        "visibility": "evaluator_only",
+        "acceptance": "Compare the model absolute integral with a preregistered absolute/relative tolerance; normalized-shape agreement alone is insufficient."
+      },
+      "evaluator_type": "deterministic",
+      "result_payload_schema": {
+        "type": "object",
+        "required": [
+          "status"
+        ],
+        "properties": {
+          "status": {
+            "type": "string",
+            "pattern": "^PASS"
+          }
+        },
+        "additionalProperties": true
+      }
+    },
+    {
+      "id": "E-T02-LZ-CONVERGENCE-SUPPORT",
+      "task_ids": [
+        "T02"
+      ],
+      "role": "supporting_cross_check_not_primary_oracle",
+      "repository": "lm846802297-bit/high-energy-theory-research",
+      "source_commit": "fb4bb38ded984f760375c93ec79d5c1ea6994530",
+      "path": "validation/skill-module-evaluation-2026-11-22/numerical/convergence_phase_space.py",
+      "git_blob_sha1": "ca15ea3cecb2ec2d21302a409bc50cef7aa5011f",
+      "scope": "Separate LZ reduced three-body phase-space case with Gauss-Legendre orders 4 through 1024 and independent original-s SciPy quadrature. Not the numerical oracle for the T02 (1.0, 0.2, 0.5) GeV benchmark.",
+      "evaluator_type": "deterministic",
+      "result_payload_schema": {
+        "type": "object",
+        "required": [
+          "exact_kinematics",
+          "convergence_sequence",
+          "independent_scipy_quad_checks",
+          "normalization",
+          "environment",
+          "output"
+        ],
+        "properties": {
+          "exact_kinematics": {
+            "type": "object",
+            "required": [
+              "recoil_endpoints_keV"
+            ]
+          },
+          "convergence_sequence": {
+            "type": "array",
+            "minItems": 1
+          },
+          "independent_scipy_quad_checks": {
+            "type": "array",
+            "minItems": 1
+          },
+          "normalization": {
+            "type": "object",
+            "required": [
+              "shape_is_normalized"
+            ],
+            "properties": {
+              "shape_is_normalized": {
+                "const": true
+              }
+            }
+          },
+          "environment": {
+            "type": "object",
+            "required": [
+              "python",
+              "platform",
+              "numpy",
+              "scipy"
+            ]
+          },
+          "output": {
+            "type": "object",
+            "required": [
+              "csv",
+              "csv_sha256"
+            ]
+          }
+        },
+        "additionalProperties": true
+      }
+    },
+    {
+      "id": "E-T03-SOURCE-READING",
+      "task_ids": [
+        "T03"
+      ],
+      "role": "manual_blinded_source_review",
+      "source_bundle": [
+        {
+          "repository": "lm846802297-bit/axial-vector-review-response",
+          "commit": "a7ac6456dafb27492183912fe4abbaa73a9455f7",
+          "path": "archive/manuscript-baselines/axial_vector_model_building-v6.pdf",
+          "git_blob_sha1": "be8f472a8cc3c35975dcb5970c9be996fde2d985",
+          "size_bytes": 2759986
+        },
+        {
+          "repository": "lm846802297-bit/axial-vector-review-response",
+          "commit": "a7ac6456dafb27492183912fe4abbaa73a9455f7",
+          "path": "overleaf-source/axial-vector-model-building-v6/main-v6.tex",
+          "git_blob_sha1": "b99f9e26a0b57acd0a4938ea6e03fc691a82becb",
+          "size_bytes": 71477
+        }
+      ],
+      "scope": "Verify original equation/Figure numbering, PDF page numbers, panel interpretation, benchmark assumptions, and distinctions between official limits and phenomenological recasts. PDF page numbers must be read from the rendered PDF.",
+      "evaluator_type": "manual"
+    },
+    {
+      "id": "E-T04-DIRAC-TRACE",
+      "task_ids": [
+        "T04"
+      ],
+      "role": "independent_explicit_matrix_representation_check",
+      "path": "evaluators/verify_dirac_trace.py",
+      "git_blob_sha1": "366a669a6e0053abe2bafab62778d766da21ea67",
+      "scope": "Checks Clifford algebra and the stated trace against an explicit 4x4 Dirac representation with metric (+---). Python standard library only.",
+      "evaluator_type": "deterministic",
+      "result_payload_schema": {
+        "type": "object",
+        "required": [
+          "status",
+          "max_clifford_residual",
+          "max_trace_residual"
+        ],
+        "properties": {
+          "status": {
+            "const": "PASS"
+          },
+          "max_clifford_residual": {
+            "type": "number",
+            "maximum": 1e-10
+          },
+          "max_trace_residual": {
+            "type": "number",
+            "maximum": 1e-10
+          }
+        },
+        "additionalProperties": true
+      }
+    },
+    {
+      "id": "E-T06-REPRO-PACKAGE",
+      "task_ids": [
+        "T06"
+      ],
+      "role": "hash_manifest_validation_and_independent_result_recalculation",
+      "path": "evaluators/verify_repro_package.py",
+      "git_blob_sha1": "ecbf5c416f24ded27cdd09c8025df0fa8b00fa98",
+      "scope": "Verifies exact T06 CSV bytes, source/input/output SHA-256 values, manifest bindings, environment fields, and weighted mean. Does not execute model-generated code.",
+      "evaluator_type": "deterministic",
+      "result_payload_schema": {
+        "type": "object",
+        "required": [
+          "status",
+          "source_executed_by_evaluator",
+          "weighted_mean_reported",
+          "weighted_mean_independent",
+          "absolute_difference"
+        ],
+        "properties": {
+          "status": {
+            "const": "PASS"
+          },
+          "source_executed_by_evaluator": {
+            "const": false
+          },
+          "weighted_mean_reported": {
+            "type": "number"
+          },
+          "weighted_mean_independent": {
+            "type": "number"
+          },
+          "absolute_difference": {
+            "type": "number",
+            "minimum": 0
+          }
+        },
+        "additionalProperties": true
+      }
+    },
+    {
+      "id": "E-RUN-SOURCE-BUNDLE",
+      "task_ids": [
+        "T01",
+        "T02",
+        "T03",
+        "T04",
+        "T05",
+        "T06"
+      ],
+      "role": "run_record_source_bundle_matches_task_manifest_and_staged_bytes",
+      "path": "evaluators/evaluate_v1_3.py",
+      "git_blob_sha1": "37549dbc1481f9eec24025cc1570169e386ced46",
+      "size_bytes": 52154,
+      "scope": "Compare every run's repository, source commit, path, Git blob SHA-1 and byte size with the pinned task manifest; verify staged bytes and SHA-256 under the required input root. T03 includes the manuscript PDF and companion TeX. T05 includes two public axial-vector figure PDFs and companion TeX, plus the public Native AFH Xe-131 CSV, WLS exporter, run manifest, README, checksum list, and pinned benchmark plotting adapter.",
+      "evaluator_type": "internal"
+    },
+    {
+      "id": "E-T05A-PDF-TEXT-SCREEN",
+      "task_ids": [
+        "T05"
+      ],
+      "role": "deterministic_text_size_screen_for_both_paired_paper_figure_PDF_panels_plus_visual_review",
+      "repository": "lm846802297-bit/high-energy-theory-research",
+      "source_commit": "fb4bb38ded984f760375c93ec79d5c1ea6994530",
+      "path": "validation/skill-module-evaluation-2026-11-22/pdf/audit_pdf_text_reconstructed.py",
+      "git_blob_sha1": "f4315e35e5007a5201f3f7f09a6b5f554cc5306e",
+      "size_bytes": 9943,
+      "scope": "Run the deterministic effective text-size and spacing screen on both pinned axial-vector constraint panel PDFs. A 5 pt threshold is a screening value only; visual inspection at intended physical size remains a separate reviewer requirement.",
+      "evaluator_type": "deterministic",
+      "result_payload_schema": {
+        "type": "object",
+        "required": [
+          "status",
+          "evaluator_id",
+          "pdf_count",
+          "pdf_results"
+        ],
+        "properties": {
+          "status": {
+            "type": "string",
+            "pattern": "^PASS"
+          },
+          "evaluator_id": {
+            "const": "E-T05A-PDF-TEXT-SCREEN"
+          },
+          "pdf_count": {
+            "const": 2
+          },
+          "pdf_results": {
+            "type": "array",
+            "minItems": 2,
+            "maxItems": 2,
+            "items": {
+              "type": "object",
+              "required": [
+                "path",
+                "screening_status",
+                "below_minimum_count",
+                "spacing_issue_count"
+              ],
+              "properties": {
+                "screening_status": {
+                  "enum": [
+                    "BELOW_5_PT_TEXT_FOUND",
+                    "NO_BELOW_5_PT_TEXT_FOUND"
+                  ]
+                },
+                "below_minimum_count": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "spacing_issue_count": {
+                  "type": "integer",
+                  "minimum": 0
+                }
+              },
+              "additionalProperties": true
+            }
+          }
+        },
+        "additionalProperties": true
+      }
+    },
+    {
+      "id": "E-T05B-AFH-RESPONSE-REPRO",
+      "task_ids": [
+        "T05"
+      ],
+      "role": "public_native_AFH_Xe131_CSV_to_SVG_reproduction_with_source_identity_and_submission_verification",
+      "repository": "lm846802297-bit/high-energy-theory-research",
+      "source_commit": "24669b28d84836b078a03b69ae03e0a926c1e193",
+      "path": "validation/research-skill-benchmark/evaluators/verify_public_t05.py",
+      "git_blob_sha1": "7910455fdaedaa9e71b3a79fef1956013c523349",
+      "size_bytes": 10346,
+      "generator": {
+        "repository": "lm846802297-bit/high-energy-theory-research",
+        "source_commit": "b540b0cb5ef030147b0ceb2357506b02e5f218ea",
+        "path": "validation/research-skill-benchmark/tools/plot_afh_xe131_responses.py",
+        "git_blob_sha1": "f68c3beb0c02048a566d7454a9232ff2041af032",
+        "size_bytes": 12692,
+        "sha256": "deeb762e21a56695eb148da7510d8c463bcc874353b7975c9906e88337e2a394"
+      },
+      "expected_outputs": [
+        "xe131_diagonal_responses.svg",
+        "xe131_signed_interferences.svg"
+      ],
+      "scope": "Verify every T05 input source by Git blob SHA-1, byte size, and SHA-256; execute the pinned standard-library plotting adapter against the native Xe-131 AFH CSV; require both submitted SVGs to be byte-identical to fresh trusted outputs. This is a presentation reproduction of already-computed native response data, not a new AFH calculation.",
+      "evaluator_type": "deterministic",
+      "result_payload_schema": {
+        "type": "object",
+        "required": [
+          "status",
+          "evaluator_id",
+          "evaluation_mode",
+          "submission_evaluated",
+          "submission_pass",
+          "submitted_outputs",
+          "input_identities"
+        ],
+        "properties": {
+          "status": {
+            "const": "PASS"
+          },
+          "evaluator_id": {
+            "const": "E-T05B-AFH-RESPONSE-REPRO"
+          },
+          "evaluation_mode": {
+            "const": "submission"
+          },
+          "submission_evaluated": {
+            "const": true
+          },
+          "submission_pass": {
+            "const": true
+          },
+          "submitted_outputs": {
+            "type": "array",
+            "minItems": 2,
+            "maxItems": 2,
+            "items": {
+              "type": "object",
+              "required": [
+                "status",
+                "matches_trusted_generator"
+              ],
+              "properties": {
+                "status": {
+                  "const": "PASS"
+                },
+                "matches_trusted_generator": {
+                  "const": true
+                }
+              },
+              "additionalProperties": true
+            }
+          },
+          "input_identities": {
+            "type": "array",
+            "minItems": 8
+          }
+        },
+        "additionalProperties": true
+      }
+    }
+  ],
+  "blinded_review": {
+    "reviewers": 2,
+    "arm_labels_hidden": true,
+    "one_point_difference": "documented_consensus_note",
+    "third_adjudicator_for": [
+      "two_or_more_point_difference",
+      "hard_gate_disagreement",
+      "fabricated_evidence_disagreement"
+    ],
+    "statistics": [
+      "exact_agreement",
+      "quadratic_weighted_cohen_kappa"
+    ]
+  },
+  "test_suite": {
+    "command": "python -m unittest discover -s evaluators -v",
+    "tests_defined": 45,
+    "development_run": "Historical v1.2 baseline only: Run 1173 passed all 41 v1.2 evaluator tests. v1.3 adds four dedicated protocol/evaluator regression tests; exact v1.3 PR-head validation is pending.",
+    "exact_committed_tree_rerun_required": true,
+    "ci_workflow": ".github/workflows/schema-validation.yml",
+    "ci_step": "Validate and test Particle Physics Research Skill Benchmark",
+    "last_verified_head_sha": "1ba87dbc09288ad31eac7b816e062b0a4ddb269b",
+    "last_verified_run_id": 45059384540,
+    "last_verified_run_number": 1173,
+    "last_verified_run_url": "https://github.com/lm846802297-bit/high-energy-theory-research/actions/runs/45059384540",
+    "last_verified_conclusion": "success",
+    "ci_python_version": "3.12.16",
+    "schema_validation_status": "PASS",
+    "failure_summary": "Run 1149 passed schema validation, project integration tests, Skill scaffold tests, and 31 of 32 Benchmark tests. The sole failure was an old test that still treated a semantic text difference as a byte-serialization mismatch; the test and evaluator were corrected. Run 1171 initially failed one Round 2 synthetic fixture because the fixture changed task_id without recomputing the canonical input_manifest_sha256. The fixture was corrected; Run 1173 passed all 41 tests.",
+    "pending_changes": "v1.3-specific exact-head evaluator tests and workflow validation; no v1.3 run may start before PR review and merge."
+  },
+  "limitations": [
+    "This evaluator registry is a development artifact and not a security boundary; keep it out of model workspaces.",
+    "T03 requires human source interpretation and direct PDF-page verification.",
+    "T05-A PDF visual inspection remains a human check in addition to the deterministic text screen.",
+    "T06 verifies the recorded package and independently recomputes the result; it does not prove submitted source execution unless trusted runner evidence is available.",
+    "Run 1137 validated the evaluator code, test suite, and protocol artifacts at PR head ad8cdb968875cd07249aa52558282bc556803e4f. The subsequent evaluator-manifest-only status update must be rerun after any evaluator or protocol code change.",
+    "The workflow now includes end-to-end T01/T02 symbolic and numerical checks plus T05 PDF screening and CSV-to-SVG regeneration. These new deterministic evaluator steps are awaiting a workflow run on the current branch head.",
+    "The historical T05 Golden SVGs are not byte-identical to the current pinned plotter serialization. Run 1145 showed exact identity of all three plotted path-data strings; only SVG serialization and coordinate formatting differ. The verifier now checks semantic geometry/labels and separately requires submitted model outputs to match fresh trusted-generator bytes.",
+    "T05-A still requires visual inspection; the semantic SVG comparison is a deterministic data/structure check, not a substitute for reviewing the rendered plots.",
+    "Run 1152 passed all 33 evaluator tests and the complete CI job. T05 historical Golden SVG byte identity remains false by design; semantic curve/structure checks pass. This run did not evaluate model-submitted A/B SVG outputs, which require the submission-mode evaluator during scored task execution.",
+    "Run 1154 passed all 33 evaluator tests and the full CI job on HEAD 7db1ded743f173a489331124c0b36140ab8cd382. The following commit updates only this evaluator-manifest CI evidence; evaluator code, tests, task prompts, schemas, rubric, and workflow are unchanged.",
+    "Run 1158 passed the 35-test suite and the full CI workflow with required-evaluator enforcement enabled. The next commit updates only this manifest evidence; evaluator source, tests, task requirements, schemas, rubric, and workflow are unchanged.",
+    "Run 1159 passed the full 35-test suite and complete CI workflow with required_evaluator enforcement. The next commit updates only this evaluator-manifest evidence; evaluator source, tests, task requirements, schemas, rubric, and workflow are unchanged.",
+    "The evaluator registry is now the authoritative source for required evaluator IDs, task associations, and result-payload JSON Schemas. The scoring CLI accepts a separate evaluator manifest for the private Holdout package and verifies its exact bytes against protocol.evaluator_manifest_sha256.",
+    "Run 1165 passed all 38 Benchmark evaluator tests and the full central CI workflow. The same HEAD passed Windows PowerShell 5.1 installer regression Run 4; the next commit updates only this CI evidence record and must be revalidated.",
+    "Run 1166 passed the complete 38-test suite and all central CI stages on exact HEAD 00d61983b5e9690eaf54e79b5d1c159559f92d26. The next commit updates only this evaluator-manifest evidence and requires a final evidence-only rerun.",
+    "Run 1167 passed the full 38-test suite and all central CI stages on exact HEAD 3e8b9eefa285a51c1973f2ccc29aebd378744613. The next commit updates only this evaluator-manifest evidence and requires a final evidence-only rerun.",
+    "The comparison engine now verifies exact hashes for protocol commit, environment lock, scoring rubric, task manifest, evaluator manifest, and analysis plan. The new run-record schema requires analysis_plan_sha256. The updated 39-test suite is pending CI.",
+    "The input_manifest_sha256 is now defined as a canonical JSON hash of task ID, exact prompt SHA-256, source commit, and sorted source-file identities. compare verifies prompt_sha256 against the exact prompt file and source bytes against the task manifest.",
+    "Run 1173's T05 SVG output is a trusted baseline regeneration only; no model-submitted SVG has been scored. The T05 submission schema requires two submitted outputs and the actual submission comparison.",
+    "The UV-EFT hard-derivative pilot has eight numerical cases and independent Feynman-parameter quadrature checks, but the source record explicitly leaves full UV numerator/diagram completeness, complete-basis Wilson matching, and human scientific review pending.",
+    "The UV-EFT provenance bundle's candidate record validator reports 22 records, zero errors, and zero warnings; its own report explicitly does not implement full directory-manifest digest recomputation, complete state-machine transition coverage, or independent scientific correctness validation.",
+    "The recorded successful CI evidence is the v1.2 baseline only. It does not validate v1.3 files or the three v1.3-specific tests; exact v1.3 PR-head validation is required before the v1.3 cohort is frozen for execution."
+  ],
+  "ci_integration": {
+    "workflow": ".github/workflows/schema-validation.yml",
+    "git_blob_sha1": "4707c0f580e87a4f461b90903a8baf36e3ec9406",
+    "size_bytes": 9374,
+    "new_steps": [
+      "Validate and test Particle Physics Research Skill Benchmark",
+      "Run pinned T01/T02 symbolic and numerical evaluators",
+      "Run pinned T05 PDF and data-to-figure evaluators",
+      "Upload deterministic Benchmark evaluator outputs"
+    ],
+    "current_head_run_status": "pending_v1_3_exact_head_validation",
+    "last_unit_suite_run": {
+      "head_sha": "1ba87dbc09288ad31eac7b816e062b0a4ddb269b",
+      "run_id": 45059384540,
+      "run_number": 1173,
+      "conclusion": "success",
+      "tests_passed": 41,
+      "tests_failed": 0
+    },
+    "workflow_git_blob_sha1": "4707c0f580e87a4f461b90903a8baf36e3ec9406",
+    "workflow_size_bytes": 9374,
+    "last_windows_installer_run": {
+      "head_sha": "1ba87dbc09288ad31eac7b816e062b0a4ddb269b",
+      "run_id": 45059384535,
+      "run_number": 12,
+      "conclusion": "success",
+      "powershell": "5.1.26100.33822",
+      "windows": "Microsoft Windows NT 10.0.26100.0",
+      "rollback_cleanup_cases": 6,
+      "rollback_cleanup_passed": 6,
+      "manifest_integrity_cases": 7,
+      "manifest_integrity_passed": 7
+    }
+  },
+  "latest_deterministic_ci_evidence": {
+    "run_id": 45059384540,
+    "run_number": 1173,
+    "head_sha": "1ba87dbc09288ad31eac7b816e062b0a4ddb269b",
+    "conclusion": "success",
+    "run_url": "https://github.com/lm846802297-bit/high-energy-theory-research/actions/runs/45059384540",
+    "environment": {
+      "python": "3.12.16",
+      "platform": "Linux-7.0.0-1020-azure-x86_64-with-glibc2.43",
+      "architecture": "x86_64",
+      "machine": "x86_64",
+      "processor": ""
+    },
+    "evaluator_tests": {
+      "defined": 41,
+      "passed": 41,
+      "failed": 0
+    },
+    "T01_T02": {
+      "status": "PASS",
+      "precision_digits": 50,
+      "original_s_integral_GeV2": "0.141975883465984392640489856748572220501161185",
+      "transformed_u_integral_GeV2": "0.141975883465984392640489856748572220501161185",
+      "relative_residual": "0.0",
+      "archived_kernel_over_correct": "0.5",
+      "absolute_integral_requires_factor": 2,
+      "symbolic_environment": {
+        "sympy": "1.14.0",
+        "mpmath": "1.3.0"
+      }
+    },
+    "T02_LZ_convergence": {
+      "status": "PASS",
+      "quadrature_orders": [
+        4,
+        8,
+        16,
+        32,
+        64,
+        128,
+        256,
+        512,
+        1024
+      ],
+      "max_order_512_vs_1024_shape_relative_difference": 8.974163090018906e-16,
+      "max_independent_scipy_quadrature_relative_difference": 2.9075609326264896e-15,
+      "recoil_endpoints_keV": [
+        106.5912099531907,
+        670.7107218077737
+      ],
+      "P23_peak_ER_keV": 328.01521028884076,
+      "P23_peak_height_per_keV": 0.0030254675659530075,
+      "shape_normalized": true,
+      "environment": {
+        "python": "3.12.16",
+        "numpy": "2.3.5",
+        "scipy": "1.17.0"
+      }
+    },
+    "T05_PDF": {
+      "auditable": true,
+      "minimum_required_pt": 5,
+      "minimum_found_pt": 6.48,
+      "text_run_count": 37,
+      "below_minimum_count": 0,
+      "spacing_issue_count": 0,
+      "warnings": []
+    },
+    "T05_SVG": {
+      "status": "PASS",
+      "semantic_golden_match": true,
+      "historical_byte_identity": false,
+      "path_data_exact": true,
+      "path_count": 3,
+      "maximum_coordinate_delta_px": 0.0046153846153629274,
+      "coordinate_tolerance_px": 0.01,
+      "evaluation_mode": "trusted_baseline_only",
+      "submission_evaluated": false,
+      "submission_pass": null,
+      "generated_svg_sha256": {
+        "fixed_speed_xe131_dsigma_450kev": "aeb29b7b256573a28503b24da429db680e6ed6f8debba72a59fd6a4b96829452",
+        "xe131_gcn_jj55_response_ratio_450kev": "57d7a23c1e00b91f4505e1f73d29451b489ccd4bb5df3536a020de6ca6525ce1"
+      }
+    },
+    "evaluator_output_files": [
+      {
+        "path": "benchmark-evaluator-environment.json",
+        "sha256": "2f2b9c558a16993fb9662062a6cbb22317ca7e98e1a4756e76adfcc7d61aff66"
+      },
+      {
+        "path": "t01-t02-jacobian.json",
+        "sha256": "a54e4de94229bde8df438573dd1bc3b1ce3a05d99db853e32b84ae0a6bcae653"
+      },
+      {
+        "path": "t02-lz-convergence.json",
+        "sha256": "6c6ecb5f4fd2177db83bdce77f497f74568f94a47a0265ea3801319ededcd567"
+      },
+      {
+        "path": "t05-pdf-text-audit.json",
+        "sha256": "fa7795514204bd99bc8eff8ee31e991bea8ede733ea9f5399178cc2ac1080e36"
+      },
+      {
+        "path": "t05-data-to-figure.json",
+        "sha256": "3a4fc90525fa7b852cba6ca4c0fe1dd9b85998709f8d3241575e2dcc0d33a500"
+      },
+      {
+        "path": "t05-generated/fixed_speed_xe131_dsigma_450kev.svg",
+        "sha256": "aeb29b7b256573a28503b24da429db680e6ed6f8debba72a59fd6a4b96829452"
+      },
+      {
+        "path": "t05-generated/xe131_gcn_jj55_response_ratio_450kev.svg",
+        "sha256": "57d7a23c1e00b91f4505e1f73d29451b489ccd4bb5df3536a020de6ca6525ce1"
+      }
+    ],
+    "evaluator_artifacts": {
+      "artifact_id": 14768603807,
+      "size_bytes": 9541,
+      "sha256": "b2d0fa09ed214f5a4d1a151f54d25531a6da403bfe3c3ee39cc142eccc3cfc5a",
+      "archive_name": "particle-physics-research-skill-benchmark-evaluator-results",
+      "retention_expires_at": "2027-02-20T19:11:56Z"
+    },
+    "candidate_schema_validation_report": {
+      "artifact_id": 14768917102,
+      "size_bytes": 3808,
+      "sha256": "965aa55e5f78916f2cc2ec6b9d442a731185b710132086818965eb6270a4a1e3",
+      "retention_expires_at": "2026-12-22T19:14:28Z"
+    },
+    "UV_EFT_provenance_bundle": {
+      "status": "PASS",
+      "artifact_id": 14768464447,
+      "size_bytes": 152767,
+      "sha256": "f5ed82daef13240046a2ba06af27a4dcdc679adfbdcfd9253b20a7aa7743976",
+      "archive_name": "uv-eFT-hard-derivative-provenance-bundle",
+      "retention_expires_at": "2026-12-22T19:14:58Z"
+    },
+    "UV_EFT_pilot_results": {
+      "status": "all_checks_passed_within_declared_scope",
+      "task_id": "UV-EFT-HARD-DERIVATIVE-001",
+      "cases": 8,
+      "r_values": [
+        0.01,
+        0.001,
+        0.0001,
+        0.00001
+      ],
+      "L_values": [
+        0,
+        0.7
+      ],
+      "max_Fprime_absolute_error": 4.5297099404706387e-13,
+      "max_PV_component_absolute_error": 5.639932965095795e-14,
+      "exact_projection_factor": "1/6",
+      "Pi_prime_at_matching_scale_over_K": -0.008443431970194815,
+      "max_scaled_asymptotic_residual": 2.6105098694477245,
+      "max_scaled_second_order_residual": 63.857764835158655,
+      "environment": {
+        "platform": "linux",
+        "python": "3.12.16",
+        "lockfile_sha256": "34f0ca601edef17dbdfcc8d8d9fffbf08ea267ab46501d33ba7d1503fb7913b2",
+        "container_digest": null
+      },
+      "source_commit": "135dcf5da9ae2a01741b3b4dda1257f42722f9eb",
+      "code_tree_sha256": "1f08eeba4a4bebeed6b8d30dc4137a0a2de9fccad36c00f9cd3e3723c75cf67e",
+      "record_validation": {
+        "records": 22,
+        "errors": 0,
+        "warnings": 0
+      },
+      "record_validation_report_sha256": "25e23a23384387348fb5ca8f5a96ea817d42497ba02864ec08b26b7944243276",
+      "record_chain_sha256": "997883399522ccad7ba093c0b8fb981ce4200fe6c848cf87a0ede150a3f449a4",
+      "record_chain_summary_sha256": "da634c751a8f436946fb129b17e5bb30a9cfeb3b465283d79a6871c41b7ea11c",
+      "results_sha256": "a477697ca87f2f2d91fa71a4663048d2ef56fdd1b87743e5a902bad42ab5e237",
+      "run_log_sha256": "a8154322285dbe688c7588bbd322796f3ed83b3c9c12defe88d781c2e3b0e12f",
+      "config_sha256": "bca9af3b2a6a3cc8b53671c28fdaa8e65909d4aa8a4a2528d4f0394bec729805",
+      "problem_sha256": "91ef514b430955370168e92e18ec2401e473eafd6b3c2f6f65fbca1dc82ff1c0",
+      "source_excerpt_sha256": "eabba70bffe8a428a43d4f275f72332ede0cd6fe6e708f1121f9bb1afe002a9d",
+      "human_review_status": "pending",
+      "physics_scope": "Closed-form PV functions and derivative combination cross-checked against independent Feynman-parameter quadrature; no fresh full UV numerator derivation or complete-basis Wilson matching."
+    },
+    "windows_installer_regression": {
+      "run_id": 45059384535,
+      "run_number": 12,
+      "head_sha": "1ba87dbc09288ad31eac7b816e062b0a4ddb269b",
+      "conclusion": "success",
+      "run_url": "https://github.com/lm846802297-bit/high-energy-theory-research/actions/runs/45059384535",
+      "powershell": "5.1.26100.33822",
+      "windows": "Microsoft Windows NT 10.0.26100.0",
+      "parser_checks": "PASS",
+      "rollback_cleanup": "6/6 PASS",
+      "manifest_integrity": "7/7 PASS"
+    },
+    "protocol_version": "1.2"
+  },
+  "required_evaluator_enforcement": {
+    "status": "implemented_registry_protocol_and_input_bound_full_ci_passed",
+    "task_manifest_field": "required_evaluators",
+    "comparison_requirements": [
+      "Every task must explicitly declare required_evaluators, including an empty list for tasks relying only on blinded human review.",
+      "Each A and B run must contain every required evaluator ID exactly once with status pass.",
+      "Each evaluator input_sha256 must equal the run's task_input.input_manifest_sha256.",
+      "Each evaluator output_sha256 must equal the SHA-256 recorded for its registered result artifact.",
+      "The result artifact must exist under the evaluator artifact root and pass actual SHA-256 verification.",
+      "Evaluator result JSON must satisfy the evaluator-specific payload contract."
+    ],
+    "T05_submission_gate": "E-T05B-DATA-TO-FIGURE must report evaluation_mode=submission, submission_evaluated=true, and submission_pass=true. A CI baseline-only result cannot satisfy a scored T05 run.",
+    "tests_added": [
+      "compare rejects a missing required evaluator",
+      "T05 baseline-only result cannot satisfy a scored run"
+    ],
+    "ci_run": {
+      "id": 45059384540,
+      "number": 1173,
+      "head_sha": "1ba87dbc09288ad31eac7b816e062b0a4ddb269b",
+      "conclusion": "success",
+      "benchmark_tests_passed": 41,
+      "benchmark_tests_failed": 0
+    },
+    "registry_binding": {
+      "evaluator_id_registry": "deterministic_evaluators",
+      "task_association_enforced": true,
+      "result_payload_json_schema_enforced": true,
+      "exact_registry_sha256_bound_to_run_protocol": true,
+      "private_holdout_registry_supported": true,
+      "cli_argument": "--evaluator-manifest"
+    },
+    "protocol_file_binding": {
+      "protocol_commit_equals_cli_protocol_commit": true,
+      "exact_task_manifest_sha256": true,
+      "exact_scoring_rubric_sha256": true,
+      "exact_environment_lock_sha256": true,
+      "exact_analysis_plan_sha256": true,
+      "exact_evaluator_manifest_sha256": true,
+      "run_record_requires_analysis_plan_sha256": true
+    },
+    "input_binding": {
+      "canonical_input_manifest_sha256": true,
+      "exact_task_prompt_file_sha256": true,
+      "prompt_path_relative_to_task_manifest_directory": true,
+      "staged_source_git_blob_sha1_size_and_sha256": true
+    }
+  },
+  "input_manifest_contract": {
+    "schema_version": "1.0",
+    "canonicalization": "UTF-8 JSON; ensure_ascii=false; sort_keys=true; separators=(',', ':')",
+    "fields": [
+      "schema_version",
+      "task_id",
+      "prompt_sha256",
+      "source_commit",
+      "source_files"
+    ],
+    "source_file_sort": [
+      "repository",
+      "path"
+    ],
+    "source_file_fields": [
+      "repository",
+      "commit",
+      "path",
+      "git_blob_sha1",
+      "size_bytes",
+      "sha256"
+    ],
+    "prompt_binding": "compare hashes the exact task prompt file named by task.path, resolved relative to the task-manifest directory, and checks it against each A/B prompt_sha256. validate_run recomputes input_manifest_sha256 from the canonical JSON contract."
+  }
+}

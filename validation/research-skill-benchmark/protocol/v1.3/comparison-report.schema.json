@@ -1,0 +1,446 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:particle-physics-research-skill-benchmark:comparison-report:1.3",
+  "title": "Particle Physics Research Skill Benchmark Comparison Report",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "protocol_version",
+    "protocol_commit",
+    "analysis_plan_sha256",
+    "environment_lock_sha256",
+    "round",
+    "task_pairs",
+    "summary",
+    "decision",
+    "decision_reasons"
+  ],
+  "properties": {
+    "protocol_version": {
+      "const": "1.3"
+    },
+    "protocol_commit": {
+      "$ref": "#/$defs/commit"
+    },
+    "analysis_plan_sha256": {
+      "$ref": "#/$defs/sha256"
+    },
+    "environment_lock_sha256": {
+      "$ref": "#/$defs/sha256"
+    },
+    "round": {
+      "enum": [
+        "round_1_pilot",
+        "round_2_full",
+        "round_3_real_projects"
+      ]
+    },
+    "task_pairs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "pair_id",
+          "task_id",
+          "task_family",
+          "repeat",
+          "no_skill_run_id",
+          "with_skill_run_id",
+          "scores",
+          "hard_gate_failures",
+          "b_only_hard_gate_failures",
+          "deviations",
+          "secondary_metrics"
+        ],
+        "properties": {
+          "pair_id": {
+            "type": "string"
+          },
+          "task_id": {
+            "type": "string"
+          },
+          "task_family": {
+            "type": "string"
+          },
+          "repeat": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "no_skill_run_id": {
+            "type": "string"
+          },
+          "with_skill_run_id": {
+            "type": "string"
+          },
+          "scores": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "q_no_skill",
+              "q_with_skill",
+              "delta_q",
+              "autonomy_no_skill",
+              "autonomy_with_skill",
+              "delta_autonomy"
+            ],
+            "properties": {
+              "q_no_skill": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 100
+              },
+              "q_with_skill": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 100
+              },
+              "delta_q": {
+                "type": "number"
+              },
+              "autonomy_no_skill": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 4
+              },
+              "autonomy_with_skill": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 4
+              },
+              "delta_autonomy": {
+                "type": "number"
+              }
+            }
+          },
+          "hard_gate_failures": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "b_only_hard_gate_failures": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "deviations": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "secondary_metrics": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "unnecessary_computation_count_no_skill",
+              "unnecessary_computation_count_with_skill",
+              "delta_unnecessary_computation_count",
+              "method_selection_note_no_skill",
+              "method_selection_note_with_skill",
+              "reproducibility_evidence_items_no_skill",
+              "reproducibility_evidence_items_with_skill"
+            ],
+            "properties": {
+              "unnecessary_computation_count_no_skill": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "unnecessary_computation_count_with_skill": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "delta_unnecessary_computation_count": {
+                "type": "integer"
+              },
+              "method_selection_note_no_skill": {
+                "type": "string"
+              },
+              "method_selection_note_with_skill": {
+                "type": "string"
+              },
+              "reproducibility_evidence_items_no_skill": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "reproducibility_evidence_items_with_skill": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "paired_run_count",
+        "independent_task_count",
+        "independent_task_family_count",
+        "mean_paired_delta_q",
+        "task_macro_mean_delta_q",
+        "macro_mean_delta_q",
+        "median_paired_delta_q",
+        "minimum_paired_delta_q",
+        "maximum_paired_delta_q",
+        "task_family_mean_delta_q",
+        "confidence_interval_95",
+        "mean_autonomy_delta",
+        "task_family_mean_autonomy_delta",
+        "dimension_deltas",
+        "hard_gate_summary",
+        "reviewer_agreement",
+        "unresolved_deviation_pair_count",
+        "resource_summary",
+        "secondary_metrics"
+      ],
+      "properties": {
+        "paired_run_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "independent_task_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "independent_task_family_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "mean_paired_delta_q": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "task_macro_mean_delta_q": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "macro_mean_delta_q": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "median_paired_delta_q": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "minimum_paired_delta_q": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "maximum_paired_delta_q": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "task_family_mean_delta_q": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "number"
+          }
+        },
+        "confidence_interval_95": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "required": [
+            "lower",
+            "upper",
+            "method",
+            "resamples",
+            "seed"
+          ],
+          "properties": {
+            "lower": {
+              "type": "number"
+            },
+            "upper": {
+              "type": "number"
+            },
+            "method": {
+              "const": "cluster_bootstrap_by_task_family"
+            },
+            "resamples": {
+              "const": 10000
+            },
+            "seed": {
+              "type": "integer"
+            }
+          }
+        },
+        "mean_autonomy_delta": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "task_family_mean_autonomy_delta": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "number"
+          }
+        },
+        "dimension_deltas": {
+          "type": "object",
+          "additionalProperties": {
+            "type": [
+              "number",
+              "null"
+            ]
+          }
+        },
+        "hard_gate_summary": {
+          "type": "object"
+        },
+        "reviewer_agreement": {
+          "type": "object",
+          "required": [
+            "ratings_compared",
+            "exact_agreement_rate",
+            "quadratic_weighted_cohen_kappa"
+          ],
+          "properties": {
+            "ratings_compared": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "exact_agreement_rate": {
+              "type": [
+                "number",
+                "null"
+              ],
+              "minimum": 0,
+              "maximum": 1
+            },
+            "quadratic_weighted_cohen_kappa": {
+              "type": [
+                "number",
+                "null"
+              ],
+              "minimum": -1,
+              "maximum": 1
+            }
+          }
+        },
+        "unresolved_deviation_pair_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "resource_summary": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "mean_visible_turnaround_upper_bound_seconds",
+            "mean_backend_wall_time_seconds",
+            "mean_tool_call_count",
+            "tool_call_count_observable_by_arm"
+          ],
+          "properties": {
+            "mean_visible_turnaround_upper_bound_seconds": {
+              "type": "object",
+              "additionalProperties": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              }
+            },
+            "mean_backend_wall_time_seconds": {
+              "type": "object",
+              "additionalProperties": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              }
+            },
+            "mean_tool_call_count": {
+              "type": "object",
+              "additionalProperties": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              }
+            },
+            "tool_call_count_observable_by_arm": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "boolean"
+              }
+            }
+          }
+        },
+        "secondary_metrics": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "mean_unnecessary_computation_count_by_arm",
+            "mean_delta_unnecessary_computation_count"
+          ],
+          "properties": {
+            "mean_unnecessary_computation_count_by_arm": {
+              "type": "object",
+              "additionalProperties": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              }
+            },
+            "mean_delta_unnecessary_computation_count": {
+              "type": [
+                "number",
+                "null"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "decision": {
+      "enum": [
+        "positive",
+        "negative",
+        "mixed",
+        "inconclusive",
+        "not_run"
+      ]
+    },
+    "decision_reasons": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "commit": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$"
+    }
+  }
+}
