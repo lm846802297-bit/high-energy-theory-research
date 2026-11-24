@@ -1,0 +1,26 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "author": {
+    "email": "lm846802297@gmail.com",
+    "name": "Li Dr (Leedri)"
+  },
+  "description": "A private High Energy Theory Research workflow for source-grounded theory, numerical checks, literature review, and reproducible particle-physics research.",
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "capabilities": [
+          "Interactive"
+        ],
+        "category": "Scientific Research",
+        "defaultPrompt": "Help me check this particle physics derivation. State the conventions and choose an independent check.",
+        "developerName": "Li Dr (Leedri)",
+        "displayName": "Particle Physics Research",
+        "longDescription": "Use the pinned High Energy Theory Research Skill for derivations, numerical checks, literature review, and research reproducibility. Includes no connected apps, external API, or MCP server.",
+        "shortDescription": "Particle physics research"
+      }
+    }
+  },
+  "name": "particle-physics-research",
+  "repository": "https://github.com/lm846802297-bit/high-energy-theory-research",
+  "version": "0.2.0"
+}

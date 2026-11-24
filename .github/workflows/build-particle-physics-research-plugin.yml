@@ -1,0 +1,47 @@
+name: Build Particle Physics Research plugin package
+
+on:
+  pull_request:
+    paths:
+      - "skills/high-energy-theory-research/**"
+      - "packaging/particle-physics-research/**"
+      - "scripts/build_particle_physics_research_plugin.py"
+      - ".github/workflows/build-particle-physics-research-plugin.yml"
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - "skills/high-energy-theory-research/**"
+      - "packaging/particle-physics-research/**"
+      - "scripts/build_particle_physics_research_plugin.py"
+      - ".github/workflows/build-particle-physics-research-plugin.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Build and verify plugin update archive
+        run: |
+          python scripts/build_particle_physics_research_plugin.py --output dist/particle-physics-research-v0.2.0.zip
+      - name: Upload plugin update archive
+        uses: actions/upload-artifact@v4
+        with:
+          name: particle-physics-research-v0.2.0
+          path: |
+            dist/particle-physics-research-v0.2.0.zip
+            dist/particle-physics-research-v0.2.0.zip.sha256
+          if-no-files-found: error
+          retention-days: 7
