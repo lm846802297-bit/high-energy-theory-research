@@ -1,6 +1,6 @@
 # With-Skill arm run records
 
-Store one immutable run directory per run ID. Install or mount the exact Skill commit from the frozen environment lock.
+Store one immutable run directory per run ID. Select the installed Particle Physics Research plugin, version 0.1.0, pinned to the exact Skill commit from the frozen environment lock. Explicitly invoke `@Particle Physics Research` and load only the task-specific reference.
 
 Each run must include:
 - `run-record.json` conforming to [run-record.schema.json](../../protocol/run-record.schema.json);
