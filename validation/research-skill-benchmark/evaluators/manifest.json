@@ -92,6 +92,18 @@
       "role": "T05_public_source_identity_and_deterministic_AFH_plot_regression_tests",
       "git_blob_sha1": "1d34e98b31fee2c5050f691b6298865767dd0450",
       "size_bytes": 4263
+    },
+    {
+      "path": "evaluators/verify_figure_regeneration.py",
+      "role": "legacy_private_LZ_T05_verifier_retained_only_for_historical_unit_tests_not_active_in_protocol_v1_1",
+      "git_blob_sha1": "a67e0c3336203a0257aa048a4b863d0fe4095c97",
+      "size_bytes": 14246
+    },
+    {
+      "path": "evaluators/test_figure_regeneration_semantics.py",
+      "role": "legacy_private_LZ_T05_semantic_comparison_regression_tests_not_active_in_protocol_v1_1",
+      "git_blob_sha1": "dd66f462be5e12bf96f88ae9b163451fe79d045d",
+      "size_bytes": 7552
     }
   ],
   "protocol_artifacts": [
