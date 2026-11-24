@@ -1,6 +1,6 @@
 # Experimental design — v1.0 draft
 
-Status: **draft; freeze only after the target Windows Codex model/runtime is recorded. No formal A/B run has been performed.**
+Status: **draft; freeze only after the ChatGPT Web model, client, browser, and tool configuration are captured. No formal A/B run has been performed.**
 
 ## 1. Hypothesis and estimand
 
@@ -16,30 +16,30 @@ The estimand is the paired difference in blinded scientific-quality score for th
 
 ### A — No Skill
 
-- The shared high-energy-theory-research Skill is not installed, mounted, or present in the accessible workspace.
-- No Skill manifest or Skill-specific reference files are provided.
-- The model receives the common task prompt, project context, and tool access.
+- The Particle Physics Research plugin is not selected or invoked in the A conversation.
+- No Skill manifest or Skill-specific reference files are supplied to the A conversation.
+- The model receives the common task prompt, project context, and built-in tool access.
 
 ### B — With Skill
 
-- Install or mount the exact Skill commit recorded in the protocol lock.
-- Explicitly invoke the shared Skill for the task.
+- Select the already-installed Particle Physics Research plugin, version 0.1.0, pinned to the exact Skill commit recorded in the protocol lock.
+- Explicitly invoke `@Particle Physics Research` for the task.
 - Load only the task-specific reference required by the Skill.
 - Record the Skill source commit, installation manifest SHA-256, and loaded references.
 
 ### Identical in A and B
 
-- Exact model label/build, reasoning effort, sampling settings, and system/developer configuration where exposed.
-- Fresh conversation/session and clean working directory for every run.
-- Same task prompt, input bytes, source snapshots, project instructions, tool allowlist, network policy, time/token budget, and stopping rule.
-- Same OS, hardware/runtime, Python/compiler/package versions, and available external software.
+- Exact ChatGPT model label, reasoning effort, and system/developer configuration where exposed.
+- Fresh ChatGPT Web conversation for every run; one task per conversation.
+- Same task prompt, input bytes, source snapshots, user/project instructions, built-in tool allowlist, network policy, time/token budget, and stopping rule.
+- Same browser, OS, client/runtime, Python/data-analysis availability, and file-upload path.
 - Same evaluator versions and reference answers; neither is exposed to the model.
-- Remove the shared-Skill routing paragraph from the common AGENTS.md snapshot used by both arms, preserving all other project instructions byte-for-byte. Record the transformed snapshot hash. A must not be told that the Skill exists.
-- Other project-specific Skills and tools remain identical in both arms; do not weaken the baseline by removing unrelated tools.
+- Use the same user/project instruction snapshot in both arms. Remove any explicit Particle Physics Research routing instruction from that common snapshot and record its hash. A must not be told that the Skill exists.
+- No other plugins, connected apps, external APIs, or web search are enabled in either arm.
 
 Stage all source inputs before a run. The preferred network policy is **offline after staging**: no external search or network retrieval during a scored task. If the actual host cannot enforce this, record the exact policy and invalidate any pair with asymmetric network access. The common harness must not mention the Skill in A. Skill availability/invocation is the only intended treatment difference.
 
-If the host automatically exposes other Skills or changes tool permissions between arms, preserve the records and invalidate the entire pair. Do not repair only one arm.
+If ChatGPT automatically exposes Skill instructions in A, or changes built-in tool permissions between arms, preserve the records and invalidate the entire pair. Do not repair only one arm.
 
 ## 3. Randomization and repetitions
 
@@ -140,7 +140,7 @@ Do not store secrets, API keys, private tokens, or personal data in benchmark re
 
 Before scoring, validate each pair with both the JSON Schema and the deterministic pair checker. The following must match exactly between A and B: protocol lock, model/settings, runtime/hardware, project instruction/workspace snapshots, task prompt/input/source hashes, tool allowlist/versions, network policy, budgets, randomization seed, and pair execution order.
 
-Permitted treatment differences are limited to Skill availability, Skill source/manifest, invocation, and task-specific references loaded by B. A must prove no Skill was available; B must prove the pinned Skill was available, invoked, and the task-specific reference was loaded. The transcript/output workspaces must be separate. Any control mismatch invalidates the entire pair; preserve both records and rerun both arms under a new pair ID.
+Permitted treatment differences are limited to Skill availability, Skill source/manifest, invocation, and task-specific references loaded by B. A must prove no Skill was available; B must prove the pinned plugin was selected, invoked, and the task-specific reference was loaded. The transcript/output workspaces must be separate. Any control mismatch invalidates the entire pair; preserve both records and rerun both arms under a new pair ID.
 
 The run-record Schema enforces arm-specific Skill fields and adjudicated hard-gate consistency. The comparison evaluator requires every task manifest entry to declare `required_evaluators`, requires every A/B run to contain each listed evaluator exactly once with PASS status, binds evaluator input hashes to the task input manifest, binds evaluator output hashes to registered result artifacts, and inspects the actual evaluator JSON payloads under the explicit artifact root. T05-B must use submission mode and prove that the model-submitted SVGs match a fresh trusted-generator run; the CI baseline-only check cannot satisfy a scored T05 task. The comparison evaluator binds the exact protocol commit and exact bytes of the environment lock, scoring rubric, task manifest, analysis plan, and evaluator registry to each run record. It also requires each run's source-file bundle to match the pinned task manifest and verifies staged source bytes, Git blob IDs, sizes, and SHA-256 values. The pair checker enforces equality of shared controls, budget adherence, pinned Skill commit, task-specific reference loading, and separate per-run artifact paths. A hash written in a record without matching bytes is not evidence. Neither check alone is sufficient.
 
@@ -148,12 +148,12 @@ The run-record Schema enforces arm-specific Skill fields and adjudicated hard-ga
 
 Before Round 1:
 
-1. Capture the actual Windows Codex model/runtime and hardware in environment-lock.json.
-2. Pin the final Skill commit and hash all Skill files.
+1. Capture the actual ChatGPT Web model label, reasoning setting, browser/client details, host OS, and available built-in tools in environment-lock.json.
+2. Pin the final Skill commit and hash all Skill files; verify the installed plugin manifest against that commit.
 3. Freeze task prompts, input bytes, task manifest (including every task's `required_evaluators`), rubric, evaluator manifest (including task-to-evaluator associations and payload JSON Schemas), evaluator code/dependencies, evaluator-result payload contracts, and analysis plan.
 4. Run the evaluator unit suite and validate both JSON Schemas with Draft 2020-12; verify that each task's required evaluators are registered and have tested PASS/failure fixtures.
 5. Verify all staged source files by Git blob SHA-1, byte size, and SHA-256.
-6. Create isolated A/B workspaces; prove A cannot access the Skill and B can invoke the exact pinned Skill.
+6. Create isolated A/B ChatGPT Web conversations; prove A has no plugin/Skill context and B can invoke the exact pinned plugin.
 7. Confirm identical tools, project context, network policy, and budgets.
 8. Record the randomization seed and freeze the protocol commit.
 9. Only then execute the 18 pilot runs. Do not create or expose Holdout until the final Skill and protocol are frozen.
