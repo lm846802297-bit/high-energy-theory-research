@@ -677,8 +677,11 @@ def compare_records(
     b_failure_pair_ids: set[str] = set()
     unresolved_deviation_pair_ids: set[str] = set()
     dimension_deltas: dict[str, list[float]] = {name: [] for name in DIMENSIONS}
-    wall_times = {"no-skill": [], "with-skill": []}
+    visible_turnaround = {"no-skill": [], "with-skill": []}
+    backend_wall_times = {"no-skill": [], "with-skill": []}
     tool_calls = {"no-skill": [], "with-skill": []}
+    tool_call_observability = {"no-skill": [], "with-skill": []}
+    unnecessary_computations = {"no-skill": [], "with-skill": []}
     for pair_id, members in sorted(by_pair.items()):
         if len(members) != 2:
             raise EvaluationError(f"Pair {pair_id} has {len(members)} records; expected exactly 2")
@@ -715,8 +718,14 @@ def compare_records(
                 float(b["evaluation"]["dimension_scores"][name]) - float(a["evaluation"]["dimension_scores"][name])
             )
         for arm, record in (("no-skill", a), ("with-skill", b)):
-            wall_times[arm].append(float(record["execution"]["actual_wall_time_seconds"]))
-            tool_calls[arm].append(int(record["execution"]["actual_tool_calls"]))
+            execution = record["execution"]
+            visible_turnaround[arm].append(float(execution["visible_turnaround_upper_bound_seconds"]))
+            if execution["backend_wall_time_seconds"] is not None:
+                backend_wall_times[arm].append(float(execution["backend_wall_time_seconds"]))
+            if execution["tool_call_count"] is not None:
+                tool_calls[arm].append(int(execution["tool_call_count"]))
+            tool_call_observability[arm].append(bool(execution["tool_call_count_observable"]))
+            unnecessary_computations[arm].append(int(record["evaluation"]["secondary_metrics"]["unnecessary_computation_count"]))
         pair_deviations = list(a["deviations"]) + list(b["deviations"])
         unresolved = [item for item in pair_deviations if not str(item).lower().startswith(("resolved:", "none"))]
         if unresolved:
@@ -739,6 +748,15 @@ def compare_records(
             "hard_gate_failures": [f"A:{name}" for name in gates_a] + [f"B:{name}" for name in gates_b],
             "b_only_hard_gate_failures": b_only,
             "deviations": pair_deviations,
+            "secondary_metrics": {
+                "unnecessary_computation_count_no_skill": a["evaluation"]["secondary_metrics"]["unnecessary_computation_count"],
+                "unnecessary_computation_count_with_skill": b["evaluation"]["secondary_metrics"]["unnecessary_computation_count"],
+                "delta_unnecessary_computation_count": b["evaluation"]["secondary_metrics"]["unnecessary_computation_count"] - a["evaluation"]["secondary_metrics"]["unnecessary_computation_count"],
+                "method_selection_note_no_skill": a["evaluation"]["secondary_metrics"]["method_selection_note"],
+                "method_selection_note_with_skill": b["evaluation"]["secondary_metrics"]["method_selection_note"],
+                "reproducibility_evidence_items_no_skill": a["evaluation"]["secondary_metrics"]["reproducibility_evidence_items"],
+                "reproducibility_evidence_items_with_skill": b["evaluation"]["secondary_metrics"]["reproducibility_evidence_items"],
+            },
         }
         pair_rows.append(row)
         task_pairs[a["task_id"]].append(row)
@@ -840,8 +858,14 @@ def compare_records(
             "reviewer_agreement": reviewer_agreement(records),
             "unresolved_deviation_pair_count": len(unresolved_deviation_pair_ids),
             "resource_summary": {
-                "mean_wall_time_seconds": {arm: statistics.fmean(values) if values else None for arm, values in wall_times.items()},
-                "mean_tool_calls": {arm: statistics.fmean(values) if values else None for arm, values in tool_calls.items()},
+                "mean_visible_turnaround_upper_bound_seconds": {arm: statistics.fmean(values) if values else None for arm, values in visible_turnaround.items()},
+                "mean_backend_wall_time_seconds": {arm: statistics.fmean(values) if values else None for arm, values in backend_wall_times.items()},
+                "mean_tool_call_count": {arm: statistics.fmean(values) if values else None for arm, values in tool_calls.items()},
+                "tool_call_count_observable_by_arm": {arm: bool(values) and all(values) for arm, values in tool_call_observability.items()},
+            },
+            "secondary_metrics": {
+                "mean_unnecessary_computation_count_by_arm": {arm: statistics.fmean(values) if values else None for arm, values in unnecessary_computations.items()},
+                "mean_delta_unnecessary_computation_count": statistics.fmean(unnecessary_computations["with-skill"]) - statistics.fmean(unnecessary_computations["no-skill"]) if unnecessary_computations["with-skill"] and unnecessary_computations["no-skill"] else None,
             },
         },
         "decision": decision,
