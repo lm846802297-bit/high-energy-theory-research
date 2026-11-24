@@ -98,32 +98,32 @@
     {
       "path": "protocol/run-record.schema.json",
       "role": "strict_run_record_schema_with_A_B_conditional_Skill_constraints",
-      "git_blob_sha1": "b8ec2d1b241827841178c48b452af5a2c99ace03",
-      "size_bytes": 17730
+      "git_blob_sha1": "e21622c991a8fabd27bef8ea53f83c2e32478662",
+      "size_bytes": 17750
     },
     {
       "path": "protocol/comparison-report.schema.json",
       "role": "strict_machine_readable_comparison_report_schema",
-      "git_blob_sha1": "f6b0b34923e96d47f360bd0d7aa05a5edb194616",
-      "size_bytes": 4343
+      "git_blob_sha1": "e2c61875b2963071d7f45eb163a89951fce7c111",
+      "size_bytes": 7858
     },
     {
       "path": "protocol/experimental-design.md",
       "role": "preregistered_experimental_design_and_pair_integrity_rules",
-      "git_blob_sha1": "d7a64d4ed3e218b57e44d142b4af3761be6ce8d0",
-      "size_bytes": 15324
+      "git_blob_sha1": "a74565a8e837ab7088270a683307542308389cdb",
+      "size_bytes": 16471
     },
     {
       "path": "protocol/scoring-rubric.yaml",
       "role": "weighted_score_and_preregistered_decision_thresholds",
-      "git_blob_sha1": "497a9346ff3c43c734d037bcb79ad0430bf9bbfa",
-      "size_bytes": 7557
+      "git_blob_sha1": "d1fc970d007ec9ea39d43fbbe011ee8f25f41c52",
+      "size_bytes": 7555
     },
     {
       "path": "tasks/development/manifest.json",
       "role": "development_task_family_and_input_manifest",
-      "git_blob_sha1": "bee90bb1c75dcf7d9cfeb9e93edaf88e3d22b1d6",
-      "size_bytes": 6949
+      "git_blob_sha1": "8053e64d81e9316c3d6a4f497595882431023b59",
+      "size_bytes": 10558
     },
     {
       "path": "tasks/development/T06-reproducibility-audit.md",
@@ -136,6 +136,18 @@
       "role": "model_visible_development_task_with_evaluator_reference_separated",
       "git_blob_sha1": "4e51745b18a63d62ff21249eeba2c01b6bdc5a9b",
       "size_bytes": 1617
+    },
+    {
+      "path": "protocol/environment-lock.json",
+      "role": "pinned_protocol_or_model_visible_task_artifact",
+      "git_blob_sha1": "ad3fcc76951f3e85ea696bea92ebce72f1a52f5d",
+      "size_bytes": 3729
+    },
+    {
+      "path": "tasks/development/T05-figure-audit.md",
+      "role": "pinned_protocol_or_model_visible_task_artifact",
+      "git_blob_sha1": "a94785a05cb2ba1b9873a341c0298276d2e22fef",
+      "size_bytes": 8369
     }
   ],
   "deterministic_evaluators": [
@@ -351,7 +363,7 @@
       "path": "evaluators/evaluate.py",
       "git_blob_sha1": "b156178b9f1f9b9378f5de96528eac37b0d95b6e",
       "size_bytes": 48488,
-      "scope": "Compare every run's repository, source commit, path, Git blob SHA-1 and byte size with the pinned task manifest; verify staged bytes and SHA-256 under the required input root. T05 includes the PDF, plotting script and both CSV inputs; T03 includes the PDF and companion TeX.",
+      "scope": "Compare every run's repository, source commit, path, Git blob SHA-1 and byte size with the pinned task manifest; verify staged bytes and SHA-256 under the required input root. T03 includes the manuscript PDF and companion TeX. T05 includes two public axial-vector figure PDFs and companion TeX, plus the public Native AFH Xe-131 CSV, WLS exporter, run manifest, README, checksum list, and pinned benchmark plotting adapter.",
       "evaluator_type": "internal"
     },
     {
