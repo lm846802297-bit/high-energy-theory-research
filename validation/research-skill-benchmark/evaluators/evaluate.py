@@ -143,17 +143,25 @@ def validate_run(
             f"Run {record['run_id']} weighted_score mismatch: stored={stored}, recomputed={computed:.12g}"
         )
     adjudication = evaluation.get("adjudication")
-    if adjudication is not None:
-        if adjudication.get("final_dimension_scores") != evaluation["dimension_scores"]:
-            raise EvaluationError(f"Run {record['run_id']} final scores disagree with adjudication")
-        if adjudication.get("final_autonomy_score") != evaluation["autonomy_score"]:
-            raise EvaluationError(f"Run {record['run_id']} autonomy score disagrees with adjudication")
     reviewers = evaluation.get("reviewer_assessments", [])
     if len(reviewers) != 2:
         raise EvaluationError(f"Run {record['run_id']} must contain exactly two blinded reviewer assessments")
     for reviewer in reviewers:
         if reviewer.get("arm_label_hidden") is not True:
             raise EvaluationError(f"Run {record['run_id']} reviewer was not blinded to arm")
+        secondary = reviewer["secondary_metrics"]
+        if secondary["unnecessary_computation_count"] != len(secondary["unnecessary_computation_events"]):
+            raise EvaluationError(f"Run {record['run_id']} reviewer unnecessary-computation count does not match its event list")
+    final_secondary = evaluation["secondary_metrics"]
+    if final_secondary["unnecessary_computation_count"] != len(final_secondary["unnecessary_computation_events"]):
+        raise EvaluationError(f"Run {record['run_id']} final unnecessary-computation count does not match its event list")
+    if adjudication is not None:
+        if adjudication.get("final_dimension_scores") != evaluation["dimension_scores"]:
+            raise EvaluationError(f"Run {record['run_id']} final scores disagree with adjudication")
+        if adjudication.get("final_autonomy_score") != evaluation["autonomy_score"]:
+            raise EvaluationError(f"Run {record['run_id']} autonomy score disagrees with adjudication")
+        if adjudication.get("final_secondary_metrics") != final_secondary:
+            raise EvaluationError(f"Run {record['run_id']} secondary metrics disagree with adjudication")
     disagreements = []
     for name in DIMENSIONS:
         left = reviewers[0]["dimension_scores"].get(name)
@@ -169,12 +177,22 @@ def validate_run(
             raise EvaluationError(f"Run {record['run_id']} final hard gates disagree with adjudication")
     elif not hard_disagreement and evaluation["hard_gates"] != reviewers[0]["hard_gates"]:
         raise EvaluationError(f"Run {record['run_id']} final hard gates differ from unanimous reviewer gates")
+    secondary_fields = ("unnecessary_computation_count", "unnecessary_computation_events", "reproducibility_evidence_items")
+    secondary_disagreements = [
+        field for field in secondary_fields
+        if reviewers[0]["secondary_metrics"][field] != reviewers[1]["secondary_metrics"][field]
+    ]
+    count_disagreement = abs(
+        reviewers[0]["secondary_metrics"]["unnecessary_computation_count"]
+        - reviewers[1]["secondary_metrics"]["unnecessary_computation_count"]
+    )
     needs_adjudication = hard_disagreement or any(abs(float(a) - float(b)) >= 2 for _, a, b in disagreements)
     if autonomy_disagreement and autonomy_left is not None and autonomy_right is not None:
         needs_adjudication = needs_adjudication or abs(float(autonomy_left) - float(autonomy_right)) >= 2
+    needs_adjudication = needs_adjudication or count_disagreement >= 2
     if needs_adjudication and adjudication is None:
         raise EvaluationError(f"Run {record['run_id']} requires third-party adjudication")
-    any_reviewer_disagreement = bool(disagreements) or autonomy_disagreement
+    any_reviewer_disagreement = bool(disagreements) or autonomy_disagreement or bool(secondary_disagreements)
     if any_reviewer_disagreement and adjudication is None and not evaluation.get("reviewer_consensus_note"):
         raise EvaluationError(f"Run {record['run_id']} requires a documented reviewer consensus note")
     if adjudication is None:
@@ -183,15 +201,24 @@ def validate_run(
                 raise EvaluationError(f"Run {record['run_id']} consensus score for {name} is not one of the reviewers' scores")
         if autonomy_disagreement and evaluation["autonomy_score"] not in (autonomy_left, autonomy_right):
             raise EvaluationError(f"Run {record['run_id']} consensus autonomy score is not one of the reviewers' scores")
+        for field in secondary_fields:
+            left = reviewers[0]["secondary_metrics"][field]
+            right = reviewers[1]["secondary_metrics"][field]
+            final = final_secondary[field]
+            if left == right and final != left:
+                raise EvaluationError(f"Run {record['run_id']} final {field} differs from unanimous reviewer assessments")
+            if left != right and final not in (left, right):
+                raise EvaluationError(f"Run {record['run_id']} consensus {field} is not one of the reviewers' assessments")
         if not any_reviewer_disagreement:
             if evaluation["dimension_scores"] != reviewers[0]["dimension_scores"] or evaluation["autonomy_score"] != reviewers[0]["autonomy_score"]:
                 raise EvaluationError(f"Run {record['run_id']} final scores differ from unanimous reviewer scores")
     artifact_paths = {item["path"] for item in record["artifacts"]}
     required_artifacts = {
-        record["execution"]["tool_log_artifact"],
         record["execution"]["transcript_artifact"],
         record["skill"]["availability_evidence_artifact"],
     }
+    if record["execution"]["tool_log_artifact"] is not None:
+        required_artifacts.add(record["execution"]["tool_log_artifact"])
     missing_artifacts = sorted(required_artifacts - artifact_paths)
     if missing_artifacts:
         raise EvaluationError(f"Run {record['run_id']} is missing required artifact records: {missing_artifacts}")
@@ -205,11 +232,20 @@ def validate_run(
         raise EvaluationError("Protocol must pin the Skill source commit even for the no-skill comparison arm")
     budget = record["budget"]
     execution = record["execution"]
-    if execution["actual_wall_time_seconds"] > budget["wall_time_seconds"]:
-        raise EvaluationError(f"Run {record['run_id']} exceeded its wall-time budget")
-    if execution["actual_tool_calls"] > budget["tool_call_limit"]:
-        raise EvaluationError(f"Run {record['run_id']} exceeded its tool-call budget")
-    if budget.get("token_limit") is not None and execution.get("token_count") is not None:
+    if execution["visible_turnaround_upper_bound_seconds"] > budget["visible_turnaround_limit_seconds"]:
+        raise EvaluationError(f"Run {record['run_id']} exceeded its visible-turnaround budget")
+    if execution["tool_call_count_observable"] and execution["tool_call_count"] is None:
+        raise EvaluationError(f"Run {record['run_id']} marks tool-call count observable but records no count")
+    if not execution["tool_call_count_observable"] and execution["tool_call_count"] is not None:
+        raise EvaluationError(f"Run {record['run_id']} records a tool-call count without observable evidence")
+    if budget["tool_call_limit"] is not None:
+        if not execution["tool_call_count_observable"] or execution["tool_call_count"] is None:
+            raise EvaluationError(f"Run {record['run_id']} cannot certify its configured tool-call budget")
+        if execution["tool_call_count"] > budget["tool_call_limit"]:
+            raise EvaluationError(f"Run {record['run_id']} exceeded its tool-call budget")
+    if budget["token_limit"] is not None:
+        if execution["token_count"] is None:
+            raise EvaluationError(f"Run {record['run_id']} cannot certify its configured token budget")
         if execution["token_count"] > budget["token_limit"]:
             raise EvaluationError(f"Run {record['run_id']} exceeded its token budget")
     return computed
@@ -227,6 +263,10 @@ def _control_projection(record: dict[str, Any]) -> dict[str, Any]:
         "budget": record["budget"],
         "randomization_seed": execution["randomization_seed"],
         "pair_order": execution["pair_order"],
+        "observability": {
+            "tool_call_count_observable": execution["tool_call_count_observable"],
+            "backend_transcript_available": execution["backend_transcript_available"],
+        },
     }
 
 
@@ -667,8 +707,14 @@ def compare_records(
     b_failure_pair_ids: set[str] = set()
     unresolved_deviation_pair_ids: set[str] = set()
     dimension_deltas: dict[str, list[float]] = {name: [] for name in DIMENSIONS}
-    wall_times = {"no-skill": [], "with-skill": []}
+    visible_turnaround = {"no-skill": [], "with-skill": []}
+    backend_wall_times = {"no-skill": [], "with-skill": []}
     tool_calls = {"no-skill": [], "with-skill": []}
+    tool_call_observability = {"no-skill": [], "with-skill": []}
+    token_counts = {"no-skill": [], "with-skill": []}
+    token_observability = {"no-skill": [], "with-skill": []}
+    ui_worked_labels = {"no-skill": [], "with-skill": []}
+    unnecessary_computations = {"no-skill": [], "with-skill": []}
     for pair_id, members in sorted(by_pair.items()):
         if len(members) != 2:
             raise EvaluationError(f"Pair {pair_id} has {len(members)} records; expected exactly 2")
@@ -705,8 +751,21 @@ def compare_records(
                 float(b["evaluation"]["dimension_scores"][name]) - float(a["evaluation"]["dimension_scores"][name])
             )
         for arm, record in (("no-skill", a), ("with-skill", b)):
-            wall_times[arm].append(float(record["execution"]["actual_wall_time_seconds"]))
-            tool_calls[arm].append(int(record["execution"]["actual_tool_calls"]))
+            execution = record["execution"]
+            visible_turnaround[arm].append(float(execution["visible_turnaround_upper_bound_seconds"]))
+            if execution["backend_wall_time_seconds"] is not None:
+                backend_wall_times[arm].append(float(execution["backend_wall_time_seconds"]))
+            if execution["tool_call_count"] is not None:
+                tool_calls[arm].append(int(execution["tool_call_count"]))
+            tool_call_observability[arm].append(bool(execution["tool_call_count_observable"]))
+            if execution["token_count"] is not None:
+                token_counts[arm].append(int(execution["token_count"]))
+            token_observability[arm].append(execution["token_count"] is not None)
+            if execution["visible_ui_worked_label"] is not None:
+                ui_worked_labels[arm].append(execution["visible_ui_worked_label"])
+            unnecessary_computations[arm].append(
+                int(record["evaluation"]["secondary_metrics"]["unnecessary_computation_count"])
+            )
         pair_deviations = list(a["deviations"]) + list(b["deviations"])
         unresolved = [item for item in pair_deviations if not str(item).lower().startswith(("resolved:", "none"))]
         if unresolved:
@@ -729,6 +788,20 @@ def compare_records(
             "hard_gate_failures": [f"A:{name}" for name in gates_a] + [f"B:{name}" for name in gates_b],
             "b_only_hard_gate_failures": b_only,
             "deviations": pair_deviations,
+            "secondary_metrics": {
+                "unnecessary_computation_count_no_skill": a["evaluation"]["secondary_metrics"]["unnecessary_computation_count"],
+                "unnecessary_computation_count_with_skill": b["evaluation"]["secondary_metrics"]["unnecessary_computation_count"],
+                "delta_unnecessary_computation_count": (
+                    b["evaluation"]["secondary_metrics"]["unnecessary_computation_count"]
+                    - a["evaluation"]["secondary_metrics"]["unnecessary_computation_count"]
+                ),
+                "unnecessary_computation_events_no_skill": a["evaluation"]["secondary_metrics"]["unnecessary_computation_events"],
+                "unnecessary_computation_events_with_skill": b["evaluation"]["secondary_metrics"]["unnecessary_computation_events"],
+                "method_selection_note_no_skill": a["evaluation"]["secondary_metrics"]["method_selection_note"],
+                "method_selection_note_with_skill": b["evaluation"]["secondary_metrics"]["method_selection_note"],
+                "reproducibility_evidence_items_no_skill": a["evaluation"]["secondary_metrics"]["reproducibility_evidence_items"],
+                "reproducibility_evidence_items_with_skill": b["evaluation"]["secondary_metrics"]["reproducibility_evidence_items"],
+            },
         }
         pair_rows.append(row)
         task_pairs[a["task_id"]].append(row)
@@ -805,7 +878,7 @@ def compare_records(
 
     all_deltas = [row["scores"]["delta_q"] for row in pair_rows]
     report = {
-        "protocol_version": "1.1",
+        "protocol_version": "1.2",
         "protocol_commit": None,
         "analysis_plan_sha256": None,
         "environment_lock_sha256": None,
@@ -830,8 +903,43 @@ def compare_records(
             "reviewer_agreement": reviewer_agreement(records),
             "unresolved_deviation_pair_count": len(unresolved_deviation_pair_ids),
             "resource_summary": {
-                "mean_wall_time_seconds": {arm: statistics.fmean(values) if values else None for arm, values in wall_times.items()},
-                "mean_tool_calls": {arm: statistics.fmean(values) if values else None for arm, values in tool_calls.items()},
+                "mean_visible_turnaround_upper_bound_seconds": {
+                    arm: statistics.fmean(values) if values else None
+                    for arm, values in visible_turnaround.items()
+                },
+                "mean_backend_wall_time_seconds": {
+                    arm: statistics.fmean(values) if values else None
+                    for arm, values in backend_wall_times.items()
+                },
+                "mean_tool_call_count": {
+                    arm: statistics.fmean(values) if values else None
+                    for arm, values in tool_calls.items()
+                },
+                "tool_call_count_observable_by_arm": {
+                    arm: bool(values) and all(values)
+                    for arm, values in tool_call_observability.items()
+                },
+                "mean_token_count": {
+                    arm: statistics.fmean(values) if values else None
+                    for arm, values in token_counts.items()
+                },
+                "token_count_observable_by_arm": {
+                    arm: bool(values) and all(values)
+                    for arm, values in token_observability.items()
+                },
+                "visible_ui_worked_labels_by_arm": ui_worked_labels,
+            },
+            "secondary_metrics": {
+                "mean_unnecessary_computation_count_by_arm": {
+                    arm: statistics.fmean(values) if values else 0.0
+                    for arm, values in unnecessary_computations.items()
+                },
+                "mean_delta_unnecessary_computation_count": (
+                    statistics.fmean(unnecessary_computations["with-skill"])
+                    - statistics.fmean(unnecessary_computations["no-skill"])
+                    if unnecessary_computations["with-skill"] and unnecessary_computations["no-skill"]
+                    else None
+                ),
             },
         },
         "decision": decision,
