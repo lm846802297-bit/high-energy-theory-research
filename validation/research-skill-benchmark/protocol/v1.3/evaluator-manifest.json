@@ -122,8 +122,8 @@
     {
       "path": "protocol/v1.3/experimental-design.md",
       "role": "preregistered_experimental_design_and_pair_integrity_rules",
-      "git_blob_sha1": "f48d2f21264d6a4daf2016cb85452ee30aace9cf",
-      "size_bytes": 19823
+      "git_blob_sha1": "4a91a806f4ce22c7ed63280b41128960dfe75559",
+      "size_bytes": 19749
     },
     {
       "path": "protocol/v1.3/scoring-rubric.yaml",
