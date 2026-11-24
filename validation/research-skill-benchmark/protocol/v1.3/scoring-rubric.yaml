@@ -1,5 +1,5 @@
 version: "1.3"
-status: "frozen_round_1_pilot_v1_3_pending_pr_review_merge"
+status: "frozen_round_1_pilot_v1_3"
 scale:
   min: 0
   max: 4
