@@ -36,6 +36,13 @@ class SkillContractTests(unittest.TestCase):
         self.assertIn("invocation does not make tools", skill_text)
         self.assertIn("Do not create a project record, run manifest", skill_text)
 
+    def test_source_search_is_not_mandatory_for_self_contained_derivations(self):
+        skill_text = SKILL.read_text(encoding="utf-8")
+        router = (SKILL.parent / "references" / "task-router.md").read_text(encoding="utf-8")
+        self.assertIn("for a self-contained derivation, derive from the stated inputs", skill_text)
+        self.assertIn("for a self-contained derivation, derive from the stated inputs", router)
+        self.assertIn("if code is used", router)
+
     def test_task_router_prefers_lowest_sufficient_tier(self):
         router = (SKILL.parent / "references" / "task-router.md").read_text(encoding="utf-8")
         self.assertIn("Tier 0 — Quick analytic", router)
