@@ -126,7 +126,7 @@ def _x_axis(parts: list[str], left: float, right: float, y: float) -> None:
         parts.append(f'<line x1="{x:.2f}" y1="{y:.2f}" x2="{x:.2f}" y2="{y+6:.2f}" stroke="#222"/>')
         parts.append(_text(x, y + 27, f"{q:.1f}", size=13))
     parts.append(f'<line x1="{left:.2f}" y1="{y:.2f}" x2="{right:.2f}" y2="{y:.2f}" stroke="#222" stroke-width="1.3"/>')
-    parts.append(_text((left + right) / 2, y + 62, "Momentum transfer q_A (GeV)", size=16))
+    parts.append(_text((left + right) / 2, y + 62, "Momentum transfer q (GeV)", size=16))
 
 
 def make_diagonal_svg(rows: list[dict[str, float]], csv_sha256: str) -> str:
@@ -161,8 +161,8 @@ def make_diagonal_svg(rows: list[dict[str, float]], csv_sha256: str) -> str:
     parts.append(_text(830, 390, "Normalization", size=15, anchor="start", weight="bold"))
     parts.append(_text(830, 416, "Raw Native AFH v6.0", size=13, anchor="start"))
     parts.append(_text(830, 438, "isoscalar columns", size=13, anchor="start"))
-    parts.append(_text(830, 478, "No factor-four equal-p=n", size=13, anchor="start"))
-    parts.append(_text(830, 500, "conversion is applied.", size=13, anchor="start"))
+    parts.append(_text(830, 478, "No factor-4 isoscalar-to", size=13, anchor="start"))
+    parts.append(_text(830, 500, "equal-p=n conversion is applied.", size=13, anchor="start"))
     parts.append(f'<metadata>source=lm846802297-bit/radiative-dark-matter-nuclear-currents; commit=9ed185aefe29cebbaaf575c5b2ae4b3fc16b0078; csv_sha256={csv_sha256}</metadata>')
     parts.append("</svg>")
     return "\n".join(parts) + "\n"
@@ -199,7 +199,7 @@ def _interference_panel(
     def y_map(value: float) -> float:
         return panel_bottom - (_symlog(value, threshold) - low) / (high - low) * (panel_bottom - panel_top)
     parts: list[str] = [_text(105, panel_top - 18, f"{label} (signed symlog; linear threshold={threshold:.3g})", size=15, anchor="start", weight="bold")]
-    tick_values = [-maximum, -threshold, 0.0, threshold, maximum]
+    tick_values = [min(values), 0.0, max(values)]
     for tick in tick_values:
         y = y_map(tick)
         parts.append(f'<line x1="{left:.2f}" y1="{y:.2f}" x2="{right:.2f}" y2="{y:.2f}" stroke="{("#999999" if tick == 0 else "#e3e3e3")}" stroke-width="{(1.4 if tick == 0 else 1)}"/>')
