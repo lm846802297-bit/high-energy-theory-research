@@ -35,3 +35,14 @@ The model-submitted AFH SVGs are verified with:
     python evaluators/verify_public_t05.py --part figures --task-manifest tasks/development/manifest.json --evaluator-manifest evaluators/manifest.json --input-root path/to/staged-inputs --submitted-output-root path/to/model/results/plots --output path/to/t05-afh-figure-check.json
 
 The comparison command consumes immutable A/B run records and exact frozen protocol artifacts. It verifies each source byte, prompt hash, evaluator payload, evaluator output artifact, protocol commit, and pair control before scoring. Round 1 remains descriptive only; the sealed Holdout is not part of development runs.
+
+
+## ChatGPT Web observability (protocol v1.2)
+
+- `visible_turnaround_upper_bound_seconds` is UTC send time to first observation of the complete visible answer. It is an upper bound on visible turnaround, not backend latency.
+- `visible_ui_worked_label` is recorded separately and must not be substituted for the visible-turnaround measure.
+- `backend_wall_time_seconds`, `tool_call_count`, and `token_count` are null when the host does not expose them. Missing logs do not mean zero tool calls.
+- `tool_call_limit` must remain null when tool-call counts are unobservable. The evaluator rejects a configured hard tool-call limit if the run cannot certify the count.
+- `transcript_artifact` identifies the complete user-visible answer capture. It is not a backend raw transcript unless `backend_transcript_available` is true.
+- The 30-minute Round 1 limit applies to the visible-turnaround upper bound in both arms. No tool-call cap is imposed for the current Web host.
+- The original weighted scientific-quality score is unchanged. Unnecessary-computation count/events, the existing method-selection autonomy score, method-selection notes, and reproducibility evidence items are separate secondary metrics.
