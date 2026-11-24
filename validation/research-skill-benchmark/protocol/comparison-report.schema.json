@@ -406,10 +406,16 @@
               ],
               "properties": {
                 "no-skill": {
-                  "type": "number"
+                  "type": [
+                    "number",
+                    "null"
+                  ]
                 },
                 "with-skill": {
-                  "type": "number"
+                  "type": [
+                    "number",
+                    "null"
+                  ]
                 }
               },
               "additionalProperties": false
@@ -552,10 +558,16 @@
               ],
               "properties": {
                 "no-skill": {
-                  "type": "number"
+                  "type": [
+                    "number",
+                    "null"
+                  ]
                 },
                 "with-skill": {
-                  "type": "number"
+                  "type": [
+                    "number",
+                    "null"
+                  ]
                 }
               },
               "additionalProperties": false
