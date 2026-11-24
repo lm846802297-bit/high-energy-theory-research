@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "urn:particle-physics-research-skill-benchmark:comparison-report:1.1",
+  "$id": "urn:particle-physics-research-skill-benchmark:comparison-report:1.2",
   "title": "Particle Physics Research Skill Benchmark Comparison Report",
   "type": "object",
   "additionalProperties": false,
@@ -17,7 +17,7 @@
   ],
   "properties": {
     "protocol_version": {
-      "const": "1.1"
+      "const": "1.2"
     },
     "protocol_commit": {
       "$ref": "#/$defs/commit"
@@ -50,7 +50,8 @@
           "scores",
           "hard_gate_failures",
           "b_only_hard_gate_failures",
-          "deviations"
+          "deviations",
+          "secondary_metrics"
         ],
         "properties": {
           "pair_id": {
@@ -129,6 +130,90 @@
             "items": {
               "type": "string"
             }
+          },
+          "secondary_metrics": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "unnecessary_computation_count_no_skill",
+              "unnecessary_computation_count_with_skill",
+              "delta_unnecessary_computation_count",
+              "unnecessary_computation_events_no_skill",
+              "unnecessary_computation_events_with_skill",
+              "method_selection_note_no_skill",
+              "method_selection_note_with_skill",
+              "reproducibility_evidence_items_no_skill",
+              "reproducibility_evidence_items_with_skill"
+            ],
+            "properties": {
+              "unnecessary_computation_count_no_skill": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "unnecessary_computation_count_with_skill": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "delta_unnecessary_computation_count": {
+                "type": "integer"
+              },
+              "unnecessary_computation_events_no_skill": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "description",
+                    "reason"
+                  ],
+                  "properties": {
+                    "description": {
+                      "type": "string"
+                    },
+                    "reason": {
+                      "type": "string"
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              },
+              "unnecessary_computation_events_with_skill": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "description",
+                    "reason"
+                  ],
+                  "properties": {
+                    "description": {
+                      "type": "string"
+                    },
+                    "reason": {
+                      "type": "string"
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              },
+              "method_selection_note_no_skill": {
+                "type": "string"
+              },
+              "method_selection_note_with_skill": {
+                "type": "string"
+              },
+              "reproducibility_evidence_items_no_skill": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "reproducibility_evidence_items_with_skill": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
           }
         }
       }
@@ -154,7 +239,8 @@
         "hard_gate_summary",
         "reviewer_agreement",
         "unresolved_deviation_pair_count",
-        "resource_summary"
+        "resource_summary",
+        "secondary_metrics"
       ],
       "properties": {
         "paired_run_count": {
@@ -300,7 +386,187 @@
           "minimum": 0
         },
         "resource_summary": {
-          "type": "object"
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "mean_visible_turnaround_upper_bound_seconds",
+            "mean_backend_wall_time_seconds",
+            "mean_tool_call_count",
+            "tool_call_count_observable_by_arm",
+            "mean_token_count",
+            "token_count_observable_by_arm",
+            "visible_ui_worked_labels_by_arm"
+          ],
+          "properties": {
+            "mean_visible_turnaround_upper_bound_seconds": {
+              "type": "object",
+              "required": [
+                "no-skill",
+                "with-skill"
+              ],
+              "properties": {
+                "no-skill": {
+                  "type": "number"
+                },
+                "with-skill": {
+                  "type": "number"
+                }
+              },
+              "additionalProperties": false
+            },
+            "mean_backend_wall_time_seconds": {
+              "type": "object",
+              "required": [
+                "no-skill",
+                "with-skill"
+              ],
+              "properties": {
+                "no-skill": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "with-skill": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                }
+              },
+              "additionalProperties": false
+            },
+            "mean_tool_call_count": {
+              "type": "object",
+              "required": [
+                "no-skill",
+                "with-skill"
+              ],
+              "properties": {
+                "no-skill": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "with-skill": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                }
+              },
+              "additionalProperties": false
+            },
+            "tool_call_count_observable_by_arm": {
+              "type": "object",
+              "required": [
+                "no-skill",
+                "with-skill"
+              ],
+              "properties": {
+                "no-skill": {
+                  "type": "boolean"
+                },
+                "with-skill": {
+                  "type": "boolean"
+                }
+              },
+              "additionalProperties": false
+            },
+            "mean_token_count": {
+              "type": "object",
+              "required": [
+                "no-skill",
+                "with-skill"
+              ],
+              "properties": {
+                "no-skill": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "with-skill": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                }
+              },
+              "additionalProperties": false
+            },
+            "token_count_observable_by_arm": {
+              "type": "object",
+              "required": [
+                "no-skill",
+                "with-skill"
+              ],
+              "properties": {
+                "no-skill": {
+                  "type": "boolean"
+                },
+                "with-skill": {
+                  "type": "boolean"
+                }
+              },
+              "additionalProperties": false
+            },
+            "visible_ui_worked_labels_by_arm": {
+              "type": "object",
+              "required": [
+                "no-skill",
+                "with-skill"
+              ],
+              "properties": {
+                "no-skill": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "with-skill": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "additionalProperties": false
+            }
+          }
+        },
+        "secondary_metrics": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "mean_unnecessary_computation_count_by_arm",
+            "mean_delta_unnecessary_computation_count"
+          ],
+          "properties": {
+            "mean_unnecessary_computation_count_by_arm": {
+              "type": "object",
+              "required": [
+                "no-skill",
+                "with-skill"
+              ],
+              "properties": {
+                "no-skill": {
+                  "type": "number"
+                },
+                "with-skill": {
+                  "type": "number"
+                }
+              },
+              "additionalProperties": false
+            },
+            "mean_delta_unnecessary_computation_count": {
+              "type": [
+                "number",
+                "null"
+              ]
+            }
+          }
         }
       }
     },
