@@ -1,6 +1,6 @@
 # Particle Physics Research Skill Benchmark
 
-Status: **Protocol v1.2 remains frozen and unchanged. Protocol v1.3 (GPT-6 / Extra High) is frozen as a review candidate; no formal A/B runs have started.**
+Status: **Protocol v1.2 remains frozen and unchanged. Protocol v1.3 is frozen for GPT-6 / Extra High; its activation metadata is finalized by PR #46. No formal A/B runs have started.**
 
 This benchmark tests whether the shared high-energy-theory-research Skill improves scientific work relative to the same GPT model without that Skill.
 
@@ -89,7 +89,7 @@ The v1.3 evaluator defaults to the versioned v1.3 schemas, rubric, evaluator man
 
 - Benchmark and development tasks are in central PR #27.
 - Protocol v1.2 and its environment lock remain frozen and unchanged.
-- Protocol v1.3 is a separate GPT-6 / Extra High review candidate; no v1.3 runs start until its PR is reviewed and merged.
+- Protocol v1.3 is frozen for GPT-6 / Extra High. PR #46 finalizes the post-review activation metadata; the 18-run pilot remains unstarted.
 - No formal v1.2 or v1.3 A/B model runs have started.
 - T05 uses public pinned inputs from axial-vector-review-response and radiative-dark-matter-nuclear-currents; no private LZ repository access or token is required.
 - Protocol v1.2 distinguishes visible turnaround upper bounds from backend wall time and records unobservable tool counts as null.

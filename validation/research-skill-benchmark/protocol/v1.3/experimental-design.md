@@ -1,6 +1,6 @@
 # Experimental design — v1.3
 
-Status: **FROZEN CANDIDATE PROTOCOL v1.3 — pending PR review and merge. Round 1 remains the 18-run T01/T02/T03 pilot; no model runs have started.**
+Status: **FROZEN PROTOCOL v1.3. Round 1 remains the 18-run T01/T02/T03 pilot; no model runs have started. Round 1 remains the 18-run T01/T02/T03 pilot; no model runs have started.**
 
 ## 1. Hypothesis and estimand
 

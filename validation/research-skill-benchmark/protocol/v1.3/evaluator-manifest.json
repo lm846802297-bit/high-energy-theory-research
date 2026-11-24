@@ -1,7 +1,7 @@
 {
   "schema_version": "1.3",
   "evaluator_version": "1.3.0",
-  "status": "frozen_protocol_v1_3_pending_pr_review_merge",
+  "status": "frozen_protocol_v1_3",
   "model_workspace_visible": false,
   "blinding": {
     "evaluator_manifest_visible_to_models": false,
@@ -122,14 +122,14 @@
     {
       "path": "protocol/v1.3/experimental-design.md",
       "role": "preregistered_experimental_design_and_pair_integrity_rules",
-      "git_blob_sha1": "e23532cd31a38956f9bdca8ed8afebd881a2c9f6",
-      "size_bytes": 19791
+      "git_blob_sha1": "f48d2f21264d6a4daf2016cb85452ee30aace9cf",
+      "size_bytes": 19823
     },
     {
       "path": "protocol/v1.3/scoring-rubric.yaml",
       "role": "weighted_score_and_preregistered_decision_thresholds",
-      "git_blob_sha1": "4393618a6087198ebf383edc3b0e6059443631da",
-      "size_bytes": 8772
+      "git_blob_sha1": "6be3a1139fca06d98b09fe0874bd5391441a29a2",
+      "size_bytes": 8748
     },
     {
       "path": "tasks/development/manifest.json",
@@ -152,8 +152,8 @@
     {
       "path": "protocol/v1.3/environment-lock.json",
       "role": "pinned_protocol_or_model_visible_task_artifact",
-      "git_blob_sha1": "d8f55b91140406f3193e0d1754e4689dd4497a70",
-      "size_bytes": 5943
+      "git_blob_sha1": "985d20227a68ba37a25a9a3bf5aaa5b4fc38c080",
+      "size_bytes": 6007
     },
     {
       "path": "tasks/development/T05-figure-audit.md",
@@ -544,19 +544,19 @@
   "test_suite": {
     "command": "python -m unittest discover -s evaluators -v",
     "tests_defined": 45,
-    "development_run": "Historical v1.2 baseline only: Run 1173 passed all 41 v1.2 evaluator tests. v1.3 adds four dedicated protocol/evaluator regression tests; exact v1.3 PR-head validation is pending.",
+    "development_run": "GitHub Actions Run #1327 passed the complete 54-test evaluator suite on exact PR #45 head 67426af501738650a1cd7877649e644b6bdceb31. The merged PR #45 tree is identical (tree b1b7499ea4f8697921d85dffb2f2066166ab0ca7). The formal 18-run A/B pilot has not started.",
     "exact_committed_tree_rerun_required": true,
     "ci_workflow": ".github/workflows/schema-validation.yml",
     "ci_step": "Validate and test Particle Physics Research Skill Benchmark",
-    "last_verified_head_sha": "1ba87dbc09288ad31eac7b816e062b0a4ddb269b",
-    "last_verified_run_id": 45059384540,
-    "last_verified_run_number": 1173,
-    "last_verified_run_url": "https://github.com/lm846802297-bit/high-energy-theory-research/actions/runs/45059384540",
+    "last_verified_head_sha": "67426af501738650a1cd7877649e644b6bdceb31",
+    "last_verified_run_id": 45430283667,
+    "last_verified_run_number": 1327,
+    "last_verified_run_url": "https://github.com/lm846802297-bit/high-energy-theory-research/actions/runs/45430283667",
     "last_verified_conclusion": "success",
     "ci_python_version": "3.12.16",
     "schema_validation_status": "PASS",
     "failure_summary": "Run 1149 passed schema validation, project integration tests, Skill scaffold tests, and 31 of 32 Benchmark tests. The sole failure was an old test that still treated a semantic text difference as a byte-serialization mismatch; the test and evaluator were corrected. Run 1171 initially failed one Round 2 synthetic fixture because the fixture changed task_id without recomputing the canonical input_manifest_sha256. The fixture was corrected; Run 1173 passed all 41 tests.",
-    "pending_changes": "v1.3-specific exact-head evaluator tests and workflow validation; no v1.3 run may start before PR review and merge."
+    "pending_changes": "No pending v1.3 protocol or evaluator changes. The formal 18-run Round 1 pilot remains unstarted and is activated only after PR #46 is merged."
   },
   "limitations": [
     "This evaluator registry is a development artifact and not a security boundary; keep it out of model workspaces.",
@@ -564,7 +564,6 @@
     "T05-A PDF visual inspection remains a human check in addition to the deterministic text screen.",
     "T06 verifies the recorded package and independently recomputes the result; it does not prove submitted source execution unless trusted runner evidence is available.",
     "Run 1137 validated the evaluator code, test suite, and protocol artifacts at PR head ad8cdb968875cd07249aa52558282bc556803e4f. The subsequent evaluator-manifest-only status update must be rerun after any evaluator or protocol code change.",
-    "The workflow now includes end-to-end T01/T02 symbolic and numerical checks plus T05 PDF screening and CSV-to-SVG regeneration. These new deterministic evaluator steps are awaiting a workflow run on the current branch head.",
     "The historical T05 Golden SVGs are not byte-identical to the current pinned plotter serialization. Run 1145 showed exact identity of all three plotted path-data strings; only SVG serialization and coordinate formatting differ. The verifier now checks semantic geometry/labels and separately requires submitted model outputs to match fresh trusted-generator bytes.",
     "T05-A still requires visual inspection; the semantic SVG comparison is a deterministic data/structure check, not a substitute for reviewing the rendered plots.",
     "Run 1152 passed all 33 evaluator tests and the complete CI job. T05 historical Golden SVG byte identity remains false by design; semantic curve/structure checks pass. This run did not evaluate model-submitted A/B SVG outputs, which require the submission-mode evaluator during scored task execution.",
@@ -580,7 +579,7 @@
     "Run 1173's T05 SVG output is a trusted baseline regeneration only; no model-submitted SVG has been scored. The T05 submission schema requires two submitted outputs and the actual submission comparison.",
     "The UV-EFT hard-derivative pilot has eight numerical cases and independent Feynman-parameter quadrature checks, but the source record explicitly leaves full UV numerator/diagram completeness, complete-basis Wilson matching, and human scientific review pending.",
     "The UV-EFT provenance bundle's candidate record validator reports 22 records, zero errors, and zero warnings; its own report explicitly does not implement full directory-manifest digest recomputation, complete state-machine transition coverage, or independent scientific correctness validation.",
-    "The recorded successful CI evidence is the v1.2 baseline only. It does not validate v1.3 files or the three v1.3-specific tests; exact v1.3 PR-head validation is required before the v1.3 cohort is frozen for execution."
+    "Benchmark v1.3 Run #1327 passed all 54 discovered evaluator tests and all workflow stages on PR #45 head 67426af501738650a1cd7877649e644b6bdceb31. The merged PR #45 tree is identical; no formal A/B model run is included in this CI evidence."
   ],
   "ci_integration": {
     "workflow": ".github/workflows/schema-validation.yml",
@@ -592,14 +591,15 @@
       "Run pinned T05 PDF and data-to-figure evaluators",
       "Upload deterministic Benchmark evaluator outputs"
     ],
-    "current_head_run_status": "pending_v1_3_exact_head_validation",
+    "current_head_run_status": "success_on_exact_v1_3_PR_head_67426af501738650a1cd7877649e644b6bdceb31; merged PR #45 tree is identical",
     "last_unit_suite_run": {
-      "head_sha": "1ba87dbc09288ad31eac7b816e062b0a4ddb269b",
-      "run_id": 45059384540,
-      "run_number": 1173,
+      "head_sha": "67426af501738650a1cd7877649e644b6bdceb31",
+      "run_id": 45430283667,
+      "run_number": 1327,
       "conclusion": "success",
-      "tests_passed": 41,
-      "tests_failed": 0
+      "tests_passed": 54,
+      "tests_failed": 0,
+      "run_url": "https://github.com/lm846802297-bit/high-energy-theory-research/actions/runs/45430283667"
     },
     "workflow_git_blob_sha1": "4707c0f580e87a4f461b90903a8baf36e3ec9406",
     "workflow_size_bytes": 9374,
@@ -617,6 +617,101 @@
     }
   },
   "latest_deterministic_ci_evidence": {
+    "protocol_version": "1.3",
+    "run_id": 45430283667,
+    "run_number": 1327,
+    "head_sha": "67426af501738650a1cd7877649e644b6bdceb31",
+    "conclusion": "success",
+    "run_url": "https://github.com/lm846802297-bit/high-energy-theory-research/actions/runs/45430283667",
+    "evaluator_tests": {
+      "benchmark_specific_defined": 45,
+      "full_suite_passed": 54,
+      "full_suite_failed": 0
+    },
+    "checks": {
+      "both_protocol_schema_manifest_rubric_sets": "PASS",
+      "candidate_integration_tests": "PASS",
+      "skill_scaffold_tests": "PASS",
+      "pinned_T01_T02_symbolic_and_numerical_evaluators": "PASS",
+      "public_T05_PDF_and_AFH_figure_checks": "PASS",
+      "Python_compilation": "PASS",
+      "UV_EFT_research_task_bundle_validation": "PASS"
+    },
+    "note": "CI software/evaluator validation only. This is not one of the 18 A/B model runs."
+  },
+  "required_evaluator_enforcement": {
+    "status": "implemented_registry_protocol_and_input_bound_full_ci_passed",
+    "task_manifest_field": "required_evaluators",
+    "comparison_requirements": [
+      "Every task must explicitly declare required_evaluators, including an empty list for tasks relying only on blinded human review.",
+      "Each A and B run must contain every required evaluator ID exactly once with status pass.",
+      "Each evaluator input_sha256 must equal the run's task_input.input_manifest_sha256.",
+      "Each evaluator output_sha256 must equal the SHA-256 recorded for its registered result artifact.",
+      "The result artifact must exist under the evaluator artifact root and pass actual SHA-256 verification.",
+      "Evaluator result JSON must satisfy the evaluator-specific payload contract."
+    ],
+    "T05_submission_gate": "E-T05B-DATA-TO-FIGURE must report evaluation_mode=submission, submission_evaluated=true, and submission_pass=true. A CI baseline-only result cannot satisfy a scored T05 run.",
+    "tests_added": [
+      "compare rejects a missing required evaluator",
+      "T05 baseline-only result cannot satisfy a scored run"
+    ],
+    "ci_run": {
+      "id": 45059384540,
+      "number": 1173,
+      "head_sha": "1ba87dbc09288ad31eac7b816e062b0a4ddb269b",
+      "conclusion": "success",
+      "benchmark_tests_passed": 41,
+      "benchmark_tests_failed": 0
+    },
+    "registry_binding": {
+      "evaluator_id_registry": "deterministic_evaluators",
+      "task_association_enforced": true,
+      "result_payload_json_schema_enforced": true,
+      "exact_registry_sha256_bound_to_run_protocol": true,
+      "private_holdout_registry_supported": true,
+      "cli_argument": "--evaluator-manifest"
+    },
+    "protocol_file_binding": {
+      "protocol_commit_equals_cli_protocol_commit": true,
+      "exact_task_manifest_sha256": true,
+      "exact_scoring_rubric_sha256": true,
+      "exact_environment_lock_sha256": true,
+      "exact_analysis_plan_sha256": true,
+      "exact_evaluator_manifest_sha256": true,
+      "run_record_requires_analysis_plan_sha256": true
+    },
+    "input_binding": {
+      "canonical_input_manifest_sha256": true,
+      "exact_task_prompt_file_sha256": true,
+      "prompt_path_relative_to_task_manifest_directory": true,
+      "staged_source_git_blob_sha1_size_and_sha256": true
+    }
+  },
+  "input_manifest_contract": {
+    "schema_version": "1.0",
+    "canonicalization": "UTF-8 JSON; ensure_ascii=false; sort_keys=true; separators=(',', ':')",
+    "fields": [
+      "schema_version",
+      "task_id",
+      "prompt_sha256",
+      "source_commit",
+      "source_files"
+    ],
+    "source_file_sort": [
+      "repository",
+      "path"
+    ],
+    "source_file_fields": [
+      "repository",
+      "commit",
+      "path",
+      "git_blob_sha1",
+      "size_bytes",
+      "sha256"
+    ],
+    "prompt_binding": "compare hashes the exact task prompt file named by task.path, resolved relative to the task-manifest directory, and checks it against each A/B prompt_sha256. validate_run recomputes input_manifest_sha256 from the canonical JSON contract."
+  },
+  "historical_v1_2_ci_evidence": {
     "run_id": 45059384540,
     "run_number": 1173,
     "head_sha": "1ba87dbc09288ad31eac7b816e062b0a4ddb269b",
@@ -808,77 +903,5 @@
       "manifest_integrity": "7/7 PASS"
     },
     "protocol_version": "1.2"
-  },
-  "required_evaluator_enforcement": {
-    "status": "implemented_registry_protocol_and_input_bound_full_ci_passed",
-    "task_manifest_field": "required_evaluators",
-    "comparison_requirements": [
-      "Every task must explicitly declare required_evaluators, including an empty list for tasks relying only on blinded human review.",
-      "Each A and B run must contain every required evaluator ID exactly once with status pass.",
-      "Each evaluator input_sha256 must equal the run's task_input.input_manifest_sha256.",
-      "Each evaluator output_sha256 must equal the SHA-256 recorded for its registered result artifact.",
-      "The result artifact must exist under the evaluator artifact root and pass actual SHA-256 verification.",
-      "Evaluator result JSON must satisfy the evaluator-specific payload contract."
-    ],
-    "T05_submission_gate": "E-T05B-DATA-TO-FIGURE must report evaluation_mode=submission, submission_evaluated=true, and submission_pass=true. A CI baseline-only result cannot satisfy a scored T05 run.",
-    "tests_added": [
-      "compare rejects a missing required evaluator",
-      "T05 baseline-only result cannot satisfy a scored run"
-    ],
-    "ci_run": {
-      "id": 45059384540,
-      "number": 1173,
-      "head_sha": "1ba87dbc09288ad31eac7b816e062b0a4ddb269b",
-      "conclusion": "success",
-      "benchmark_tests_passed": 41,
-      "benchmark_tests_failed": 0
-    },
-    "registry_binding": {
-      "evaluator_id_registry": "deterministic_evaluators",
-      "task_association_enforced": true,
-      "result_payload_json_schema_enforced": true,
-      "exact_registry_sha256_bound_to_run_protocol": true,
-      "private_holdout_registry_supported": true,
-      "cli_argument": "--evaluator-manifest"
-    },
-    "protocol_file_binding": {
-      "protocol_commit_equals_cli_protocol_commit": true,
-      "exact_task_manifest_sha256": true,
-      "exact_scoring_rubric_sha256": true,
-      "exact_environment_lock_sha256": true,
-      "exact_analysis_plan_sha256": true,
-      "exact_evaluator_manifest_sha256": true,
-      "run_record_requires_analysis_plan_sha256": true
-    },
-    "input_binding": {
-      "canonical_input_manifest_sha256": true,
-      "exact_task_prompt_file_sha256": true,
-      "prompt_path_relative_to_task_manifest_directory": true,
-      "staged_source_git_blob_sha1_size_and_sha256": true
-    }
-  },
-  "input_manifest_contract": {
-    "schema_version": "1.0",
-    "canonicalization": "UTF-8 JSON; ensure_ascii=false; sort_keys=true; separators=(',', ':')",
-    "fields": [
-      "schema_version",
-      "task_id",
-      "prompt_sha256",
-      "source_commit",
-      "source_files"
-    ],
-    "source_file_sort": [
-      "repository",
-      "path"
-    ],
-    "source_file_fields": [
-      "repository",
-      "commit",
-      "path",
-      "git_blob_sha1",
-      "size_bytes",
-      "sha256"
-    ],
-    "prompt_binding": "compare hashes the exact task prompt file named by task.path, resolved relative to the task-manifest directory, and checks it against each A/B prompt_sha256. validate_run recomputes input_manifest_sha256 from the canonical JSON contract."
   }
 }
