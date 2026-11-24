@@ -49,7 +49,7 @@ def load_rows(path: Path, expected_rows: int = EXPECTED_ROWS) -> list[dict[str, 
         reader = csv.DictReader(stream)
         required = {"A", "q_GeV", *(name for name, _ in DIAGONAL + INTERFERENCE)}
         required.update(
-            "Im_" + name.removeprefix("W_")
+            "Im_" + name
             for name, _ in DIAGONAL + INTERFERENCE
         )
         missing = sorted(required.difference(reader.fieldnames or []))
@@ -76,7 +76,7 @@ def load_rows(path: Path, expected_rows: int = EXPECTED_ROWS) -> list[dict[str, 
     if any(right <= left for left, right in zip(q_values, q_values[1:])):
         raise ValueError("q_GeV must be strictly increasing")
     imaginary_columns = [
-        "Im_" + name.removeprefix("W_")
+        "Im_" + name
         for name, _ in DIAGONAL + INTERFERENCE
     ]
     maximum_imaginary = max(abs(row[column]) for row in rows for column in imaginary_columns)
@@ -151,7 +151,7 @@ def make_diagonal_svg(rows: list[dict[str, float]], csv_sha256: str) -> str:
         parts.append(_text(left - 12, y + 5, f"10^{exponent}", size=12, anchor="end"))
     parts.append(f'<line x1="{left:.2f}" y1="{top:.2f}" x2="{left:.2f}" y2="{bottom:.2f}" stroke="#222" stroke-width="1.3"/>')
     _x_axis(parts, left, right, bottom)
-    parts.append(_text(34, (top + bottom) / 2, "Response W (raw AFH convention)", size=15))
+    parts.append(f'<text transform="rotate(-90 30 {(top + bottom) / 2:.2f})" x="30" y="{(top + bottom) / 2:.2f}" font-family="Arial,sans-serif" font-size="15" text-anchor="middle">Response W (raw AFH convention)</text>')
     for index, (column, label) in enumerate(DIAGONAL):
         points = [(_x_map(row["q_GeV"], left, right), y_map(row[column])) for row in rows]
         parts.append(_polyline(points, COLORS[index]))
@@ -254,7 +254,7 @@ def generate(csv_path: Path, output_dir: Path) -> dict[str, Any]:
         "q_min_GeV": rows[0]["q_GeV"],
         "q_max_GeV": rows[-1]["q_GeV"],
         "maximum_imaginary_residual": max(
-            abs(row["Im_" + name.removeprefix("W_")])
+            abs(row["Im_" + name])
             for row in rows
             for name, _ in DIAGONAL + INTERFERENCE
         ),
