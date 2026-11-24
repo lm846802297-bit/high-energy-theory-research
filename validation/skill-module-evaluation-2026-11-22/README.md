@@ -13,9 +13,9 @@ This is a bounded evaluation record for PR #27 in `lm846802297-bit/high-energy-t
 
 ## Symbolic calculation
 
-`symbolic/derive_phase_space_jacobian.py` verifies the Kallen factorization and the exact Jacobian for `s = Delta*u^2`. It finds that the existing LZ Fig. 2 phase-space shape kernel is half the unnormalized integral because it omits an overall factor of 2. This factor cancels after unit-area normalization, so the normalized shape is unchanged. It must be restored before using the kernel for an absolute phase-space factor, cross section, or rate.
+`symbolic/derive_phase_space_jacobian.py` verifies the Källén factorization and the exact Jacobian for `s = Delta*u^2`. It also compares the correct transformed integrand with an explicitly constructed candidate expression that omits the factor 2. That candidate is exactly half the correct absolute integral; the factor cancels after unit-area normalization, so its normalized shape is unchanged. This script does **not** parse or execute the private LZ `reproduce_fig2.py` source file, so the candidate comparison alone is not proof of what that source file contains.
 
-The original-variable and transformed-variable mpmath integrals agree at 50 decimal digits for the stated dimensionless benchmark. See `symbolic/result.json`.
+The original-variable and transformed-variable mpmath integrals agree at 50 decimal digits for the stated unit-specified benchmark (`m1 = 1.0 GeV`, `m2 = 0.2 GeV`, `Delta = 0.5 GeV^2`). See `symbolic/result.json`.
 
 ## Numerical convergence
 
@@ -40,7 +40,7 @@ The numerical test was based on the already merged LZ Fig. 2 reproduction record
 4. The manifest records five tests, while the only test file in the directory contains four test methods.
 5. The README lists `paper_fig2_vector_digitized.csv` and two SVG files that are not present in the committed directory tree.
 
-These are findings about the existing LZ reproduction record, not changes made by this Skill PR. The original LZ repository was not modified.
+These are historical observations from a prior read-only inspection, not changes made by this Skill PR. The referenced LZ repository is private and its source bytes are not included in this public evaluation bundle. They are therefore not independently revalidated by the current public CI and must not be presented as CI-verified findings. The original LZ repository was not modified.
 
 ## PDF figure audit
 
@@ -59,7 +59,7 @@ At the later installer review, two additional safeguards were added:
 
 The Windows PowerShell regression script now contains six rollback-cleanup cases and seven manifest-integrity cases (13 total). The Python Skill contract suite now contains seven tests, including a check that the installer helper and Windows regression script are included.
 
-**These latest 13 PowerShell cases and the seventh Python contract test have not yet been executed.** The earlier six-test Python result and 45-test central Windows result apply to earlier revisions, not the latest installer-hardening HEAD. Re-run them before treating the latest HEAD as validated.
+**Superseded by current-head CI:** Windows PowerShell 5.1 installer run #46 passed all 6 rollback-cleanup and 7 manifest-integrity cases. Candidate validation run #1310 passed the Skill contract suite, the full central unit suite (51 tests), and the Benchmark evaluator suite (46 tests). These results apply to PR HEAD `653c2a16c44482cea77ae11ee0459516c0c1adff`. The workflow tests the installer helpers and script parsing; it does not perform a full user-level installation on the user's Windows host.
 
 ## Windows Codex discovery
 
@@ -85,3 +85,11 @@ python pdf/audit_pdf_text_reconstructed.py /path/to/fixed_speed_recoil_spectra_v
 ```
 
 The PDF is not duplicated in this evaluation folder; its repository path, source commit, and SHA-256 are recorded in [`pdf/audit_result.json`](pdf/audit_result.json).
+
+
+## Current review boundary — 2026-11-24
+
+- The current PR head is `653c2a16c44482cea77ae11ee0459516c0c1adff`.
+- Current-head CI: Candidate validation Run 1310 succeeded; Windows PowerShell 5.1 installer Run 46 succeeded.
+- The symbolic Jacobian script's factor-2 comparison is an analytic candidate-kernel diagnostic. It does not fetch or execute the private LZ source; the separate historical LZ source-audit observations above are not revalidated by public CI.
+- Formal ChatGPT Web A/B runs have not started. Benchmark protocol v1.1 requires backend wall time, per-call tool counts, and tool logs that the current Web UI does not expose. Upgrade to a Web-observable v1.2 protocol and re-freeze the environment before any formal run.
