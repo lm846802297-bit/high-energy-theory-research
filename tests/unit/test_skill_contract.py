@@ -40,7 +40,7 @@ class SkillContractTests(unittest.TestCase):
         router = (SKILL.parent / "references" / "task-router.md").read_text(encoding="utf-8")
         self.assertIn("Tier 0 — Quick analytic", router)
         self.assertIn("Tier 2 — Numerical/computational", router)
-        self.assertIn("lowest-effort path", router)
+        self.assertIn("smallest workflow", router)
         self.assertIn("Stop once the requested deliverable", router)
         self.assertIn("do not run a numerical integral solely", router)
 
@@ -93,9 +93,11 @@ class SkillContractTests(unittest.TestCase):
         script = SKILL.parent / "scripts" / "validate_project_records.py"
         self.assertTrue(script.is_file())
         skill_text = SKILL.read_text(encoding="utf-8")
-        self.assertIn("validate_project_records.py", skill_text)
+        central = (SKILL.parent / "references" / "central-repository-governance.md").read_text(encoding="utf-8")
+        self.assertIn("references/central-repository-governance.md", skill_text)
+        self.assertIn("validate_project_records.py", central)
         self.assertIn("references/optional-tooling.md", skill_text)
-        self.assertIn("Central-repository-only tooling", skill_text)
+        self.assertIn("Central-repository-only tooling", central)
 
 
 if __name__ == "__main__":
