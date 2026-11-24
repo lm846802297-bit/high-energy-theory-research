@@ -1,6 +1,6 @@
 # Particle Physics Research Skill Benchmark
 
-Status: **Protocol v1.2 draft; Round 1 remains 18 T01/T02/T03 A/B model runs. No formal runs have started.**
+Status: **Protocol v1.2 remains frozen and unchanged. Protocol v1.3 (GPT-6 / Extra High) is frozen as a review candidate; no formal A/B runs have started.**
 
 This benchmark tests whether the shared high-energy-theory-research Skill improves scientific work relative to the same GPT model without that Skill.
 
@@ -8,19 +8,41 @@ This benchmark tests whether the shared high-energy-theory-research Skill improv
 
 Does the Skill improve scientific quality, independent validation, reproducibility, and evidence quality without materially reducing method-selection autonomy?
 
+## Protocol v1.2 — preserved reference cohort
+
 - **A — No Skill:** GPT-6 Pro (Astra Pro), Pro-default reasoning; the installed plugin is not selected or invoked.
 - **B — With Skill:** identical controls; Particle Physics Research v0.2.0 is selected and explicitly invoked.
 
-Only Skill availability/invocation and task-tier routing behavior are intentionally changed.
+Only Skill availability/invocation and task-tier routing behavior are intentionally changed in v1.2.
+
+## Protocol v1.3 — GPT-6 / Extra High
+
+- **A — No Skill:** GPT-6 with Extra High reasoning effort; Particle Physics Research is not selected or invoked.
+- **B — With Skill:** the same GPT-6 / Extra High configuration; Particle Physics Research v0.2.0 is selected and explicitly invoked.
+- The task prompts, source inputs, T01/T02/T03 roster, three repetitions per task per arm, 18-run total, five weighted dimensions, weights (35/25/20/10/10), secondary metrics, and stopping rules are preserved.
+- The installed plugin remains v0.2.0 at source commit `f83c28825215c2d306c2966991a09aae84c2d195`; this protocol does not modify or update the plugin.
+- v1.2 and v1.3 are separate model/configuration cohorts. Do not pool their scores or present their difference as a causal Skill effect.
+- Round 1 randomization seed: `20261124`; the nine pair orders are frozen in the v1.3 experimental design.
+
+Versioned v1.3 artifacts:
+- [Experimental design](protocol/v1.3/experimental-design.md)
+- [Environment lock](protocol/v1.3/environment-lock.json)
+- [Scoring rubric](protocol/v1.3/scoring-rubric.yaml)
+- [Run-record schema](protocol/v1.3/run-record.schema.json)
+- [Comparison-report schema](protocol/v1.3/comparison-report.schema.json)
+- [Evaluator manifest](protocol/v1.3/evaluator-manifest.json)
+- [Versioned evaluator](evaluators/evaluate_v1_3.py)
 
 ## Structure
 
 - protocol/: pre-registered design, scoring rubric, environment lock, and JSON Schemas.
 - tasks/development/: tasks that may be used to improve Skill instructions.
 - tasks/holdout/: sealed final-evaluation area; do not use during development.
-- runs/no-skill/ and runs/with-skill/: immutable run records and native outputs.
+- runs/no-skill/ and runs/with-skill/: original v1.2 run-artifact layout; do not mix with v1.3.
 - evaluators/: deterministic validators, pinned evaluator registry, and blinded-review guidance.
-- reports/: generated comparisons; no report is PASS until all run records and checks exist.
+- runs/v1.3/run-artifacts/: separate v1.3 records and native outputs; A/B records live under records/no-skill/ and records/with-skill/.
+- reports/v1.3/: v1.3 comparison reports, separate from any v1.2 outputs.
+- reports/: original v1.2 generated comparisons; no report is PASS until all run records and checks exist.
 
 ## Evaluation rounds
 
@@ -55,10 +77,20 @@ For Round 1, use the development task manifest. For Round 2, pass the sealed eva
 
 The compare command consumes immutable A/B run records and a task manifest, verifies every artifact's actual bytes, requires each task's declared deterministic evaluators, checks each ID against the pinned registry and task association, validates evaluator JSON payloads against registry JSON Schemas, binds the exact protocol commit and the exact bytes of the task manifest, scoring rubric, environment lock, analysis plan, and evaluator registry to each run record, recomputes the canonical input-manifest hash, verifies prompt_sha256 against the exact task prompt file, checks result status and input/output hash bindings, recomputes scores, validates pairs, calculates task-family summaries, and writes a comparison report. Round 1 is never classified as confirmatory. The evaluator never executes model-generated source code.
 
+## Protocol v1.3 comparison command
+
+After the v1.3 PR is merged, use its exact merge commit as `--protocol-commit`. The development task manifest and all task prompt/source bytes remain unchanged; v1.3 protocol bindings are versioned separately.
+
+    python evaluators/evaluate_v1_3.py compare --records-dir runs/v1.3/run-artifacts/records --task-manifest tasks/development/manifest.json --round round_1_pilot --seed 20261124 --protocol-commit MERGE_COMMIT_SHA --artifact-root runs/v1.3/run-artifacts --input-root path/to/staged-inputs --output reports/v1.3/comparison.json
+
+The v1.3 evaluator defaults to the versioned v1.3 schemas, rubric, evaluator manifest, environment lock, and analysis plan. The v1.2 evaluator and defaults remain unchanged.
+
 ## Current status
 
 - Benchmark and development tasks are in central PR #27.
-- Protocol v1.2 and the Web-observability environment lock are frozen. No formal model runs have started.
+- Protocol v1.2 and its environment lock remain frozen and unchanged.
+- Protocol v1.3 is a separate GPT-6 / Extra High review candidate; no v1.3 runs start until its PR is reviewed and merged.
+- No formal v1.2 or v1.3 A/B model runs have started.
 - T05 uses public pinned inputs from axial-vector-review-response and radiative-dark-matter-nuclear-currents; no private LZ repository access or token is required.
 - Protocol v1.2 distinguishes visible turnaround upper bounds from backend wall time and records unobservable tool counts as null.
 - The original weighted score remains unchanged; unnecessary-computation count, method-selection autonomy, reproducibility evidence, and observable resource overhead are separate secondary metrics.
