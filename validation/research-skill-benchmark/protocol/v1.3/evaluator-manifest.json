@@ -48,8 +48,8 @@
     {
       "path": "evaluators/test_evaluate_v1_3.py",
       "role": "v1_3_protocol_and_evaluator_regression_tests",
-      "git_blob_sha1": "d20abcf1de1c82e7d73f0787a035f924e63025d7",
-      "size_bytes": 3808
+      "git_blob_sha1": "dfc41d79394c09812a4a2ed53c23f7504ce953a2",
+      "size_bytes": 4528
     },
     {
       "path": "evaluators/verify_dirac_trace.py",
@@ -134,7 +134,7 @@
     {
       "path": "tasks/development/manifest.json",
       "role": "development_task_family_and_input_manifest",
-      "git_blob_sha1": "8053e64d81e9316c3d6a4f497595882431023b59",
+      "git_blob_sha1": "87bd149f379fac125c1472aaf75e3f5995113b89",
       "size_bytes": 10558
     },
     {
@@ -158,7 +158,7 @@
     {
       "path": "tasks/development/T05-figure-audit.md",
       "role": "pinned_protocol_or_model_visible_task_artifact",
-      "git_blob_sha1": "a94785a05cb2ba1b9873a341c0298276d2e22fef",
+      "git_blob_sha1": "143b6313a5e73a9446aee5b097e55db03e71a42a",
       "size_bytes": 8369
     }
   ],

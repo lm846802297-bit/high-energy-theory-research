@@ -47,6 +47,14 @@ class EvaluatorV13Tests(unittest.TestCase):
             "skill_reference": "references/symbolic-calculation.md",
             "required_evaluators": [],
         }]}
+        bindings = {
+            "commit": a["protocol"]["commit"],
+            "task_manifest_sha256": a["protocol"]["task_manifest_sha256"],
+            "scoring_rubric_sha256": a["protocol"]["scoring_rubric_sha256"],
+            "environment_lock_sha256": a["protocol"]["environment_lock_sha256"],
+            "evaluator_manifest_sha256": a["protocol"]["evaluator_manifest_sha256"],
+            "analysis_plan_sha256": a["protocol"]["analysis_plan_sha256"],
+        }
         report = evaluate.compare_records(
             [a, b],
             tasks,
@@ -55,7 +63,11 @@ class EvaluatorV13Tests(unittest.TestCase):
             schema_path=schema,
             rubric_path=rubric,
             evaluator_manifest=evaluator_manifest,
+            protocol_bindings=bindings,
         )
+        report["protocol_commit"] = bindings["commit"]
+        report["analysis_plan_sha256"] = bindings["analysis_plan_sha256"]
+        report["environment_lock_sha256"] = bindings["environment_lock_sha256"]
         self.assertEqual(report["protocol_version"], "1.3")
         evaluate.validate_schema(report, report_schema)
         self.assertEqual(report["summary"]["paired_run_count"], 1)
