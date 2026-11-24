@@ -1,6 +1,6 @@
 # Particle Physics Research Skill Benchmark
 
-Status: **protocol draft — not frozen; no formal A/B runs have been executed.**
+Status: **Round 1 protocol and environment lock frozen; 18 A/B model runs not yet started.**
 
 This benchmark tests whether the shared high-energy-theory-research Skill improves scientific work relative to the same GPT model without that Skill.
 
@@ -8,8 +8,8 @@ This benchmark tests whether the shared high-energy-theory-research Skill improv
 
 Does the Skill improve scientific quality, independent validation, reproducibility, and evidence quality without materially reducing method-selection autonomy?
 
-- **A — No Skill:** fixed model, tools, project instructions, inputs, and budget; shared Skill is unavailable.
-- **B — With Skill:** identical controls; the pinned shared Skill is available and explicitly invoked.
+- **A — No Skill:** GPT-6 Pro (Astra Pro), Pro-default reasoning; the installed plugin is not selected or invoked.
+- **B — With Skill:** identical controls; Particle Physics Research v0.1.0 is selected and explicitly invoked.
 
 Only Skill availability/invocation is intentionally changed.
 
@@ -58,8 +58,8 @@ The compare command consumes immutable A/B run records and a task manifest, veri
 ## Current status
 
 - Benchmark and development tasks are in central PR #27.
-- Protocol remains draft pending ChatGPT Web host capture and independent review.
-- No model A/B result exists; no Skill module has been accepted or rejected.
+- Round 1 protocol and environment lock are frozen. Unexposed host fields are null rather than inferred.
+- No model A/B run has started; no Skill module has been accepted or rejected.
 - The evaluator manifest, reference outputs, and development key are evaluator-only and must not be mounted into model workspaces.
 - Holdout prompts/keys have intentionally not been created; an independent evaluator prepares them only after protocol and Skill freeze.
 - No formal A/B runs have been executed.

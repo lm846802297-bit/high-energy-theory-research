@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "split": "development",
-  "status": "draft_not_frozen",
+  "status": "frozen_round_1_pilot",
   "tasks": [
     {
       "id": "T01",

@@ -1,6 +1,6 @@
-# Experimental design — v1.0 draft
+# Experimental design — v1.0
 
-Status: **draft; freeze only after the ChatGPT Web model, client, browser, and tool configuration are captured. No formal A/B run has been performed.**
+Status: **FROZEN FOR ROUND 1 PILOT. The 18 model runs have not yet started.**
 
 ## 1. Hypothesis and estimand
 
@@ -8,7 +8,7 @@ The primary hypothesis is:
 
     H1: mean(Q_B - Q_A) > 0
 
-A is the fixed GPT model without the shared Research Skill; B is the same model with the pinned Skill available and explicitly invoked.
+A is GPT-6 Pro (Astra Pro) with the Particle Physics Research plugin not selected or invoked; B is the same model and Pro-default reasoning configuration with the pinned plugin explicitly selected and invoked.
 
 The estimand is the paired difference in blinded scientific-quality score for the same task. Report task-level and task-family outcomes; a pooled run mean alone is not the primary result. This benchmark measures the incremental effect of the Skill package under the recorded runtime, tools, tasks, and project context. It does not claim to improve the underlying model.
 
@@ -16,9 +16,10 @@ The estimand is the paired difference in blinded scientific-quality score for th
 
 ### A — No Skill
 
-- The Particle Physics Research plugin is not selected or invoked in the A conversation.
+- The installed Particle Physics Research plugin is not selected or invoked in the A conversation.
 - No Skill manifest or Skill-specific reference files are supplied to the A conversation.
-- The model receives the common task prompt, project context, and built-in tool access.
+- Record evidence that no Skill reference was loaded. If the plugin is automatically invoked or any Skill reference appears in A, invalidate the pair.
+- The model receives the common task prompt and identical built-in tool access.
 
 ### B — With Skill
 
@@ -29,13 +30,13 @@ The estimand is the paired difference in blinded scientific-quality score for th
 
 ### Identical in A and B
 
-- Exact ChatGPT model label, reasoning effort, and system/developer configuration where exposed.
+- Exact ChatGPT model label **GPT-6 Pro (Astra Pro)** and **Pro default** reasoning configuration, as fixed by the user; record any additional UI-exposed settings.
 - Fresh ChatGPT Web conversation for every run; one task per conversation.
 - Same task prompt, input bytes, source snapshots, user/project instructions, built-in tool allowlist, network policy, time/token budget, and stopping rule.
 - Same browser, OS, client/runtime, Python/data-analysis availability, and file-upload path.
 - Same evaluator versions and reference answers; neither is exposed to the model.
-- Use the same user/project instruction snapshot in both arms. Remove any explicit Particle Physics Research routing instruction from that common snapshot and record its hash. A must not be told that the Skill exists.
-- No other plugins, connected apps, external APIs, or web search are enabled in either arm.
+- Use identical user-provided task context and instructions in both arms; do not add a project-specific Skill-routing paragraph to either arm. A must not be told that the Skill exists.
+- No other plugins, connected apps, external APIs, or web search are used in either arm. Stage identical inputs before the run.
 
 Stage all source inputs before a run. The preferred network policy is **offline after staging**: no external search or network retrieval during a scored task. If the actual host cannot enforce this, record the exact policy and invalidate any pair with asymmetric network access. The common harness must not mention the Skill in A. Skill availability/invocation is the only intended treatment difference.
 
@@ -128,7 +129,7 @@ For every run, retain:
 - run ID, pair ID, task ID, arm, repetition, timestamps, randomization seed, and A/B execution order;
 - protocol commit, Skill source commit, environment-lock/rubric/evaluator/task-manifest/analysis-plan hashes;
 - exact model/build/runtime/reasoning settings and host hardware where exposed;
-- common project instruction/workspace hashes, including proof that shared-Skill routing was removed;
+- common task-context and staged-workspace hashes, including proof that no Skill-routing instructions were supplied;
 - exact task prompt/input hashes and every source file's repository, commit, path, Git blob SHA-1, byte size, and SHA-256;
 - tool allowlist/versions, network policy, resource budgets, actual wall time, tokens if exposed, tool-call count, commands, exit status, and logs;
 - Skill availability evidence, install manifest hash, invocation, and references loaded (B); explicit absence evidence (A);
@@ -140,7 +141,7 @@ Do not store secrets, API keys, private tokens, or personal data in benchmark re
 
 Before scoring, validate each pair with both the JSON Schema and the deterministic pair checker. The following must match exactly between A and B: protocol lock, model/settings, runtime/hardware, project instruction/workspace snapshots, task prompt/input/source hashes, tool allowlist/versions, network policy, budgets, randomization seed, and pair execution order.
 
-Permitted treatment differences are limited to Skill availability, Skill source/manifest, invocation, and task-specific references loaded by B. A must prove no Skill was available; B must prove the pinned plugin was selected, invoked, and the task-specific reference was loaded. The transcript/output workspaces must be separate. Any control mismatch invalidates the entire pair; preserve both records and rerun both arms under a new pair ID.
+Permitted treatment differences are limited to Skill availability, Skill source/manifest, invocation, and task-specific references loaded by B. A must prove the plugin was not selected, no Skill reference was loaded, and no Skill-specific context was supplied; B must prove the pinned plugin was selected, invoked, and the task-specific reference was loaded. The transcript/output workspaces must be separate. Any control mismatch invalidates the entire pair; preserve both records and rerun both arms under a new pair ID.
 
 The run-record Schema enforces arm-specific Skill fields and adjudicated hard-gate consistency. The comparison evaluator requires every task manifest entry to declare `required_evaluators`, requires every A/B run to contain each listed evaluator exactly once with PASS status, binds evaluator input hashes to the task input manifest, binds evaluator output hashes to registered result artifacts, and inspects the actual evaluator JSON payloads under the explicit artifact root. T05-B must use submission mode and prove that the model-submitted SVGs match a fresh trusted-generator run; the CI baseline-only check cannot satisfy a scored T05 task. The comparison evaluator binds the exact protocol commit and exact bytes of the environment lock, scoring rubric, task manifest, analysis plan, and evaluator registry to each run record. It also requires each run's source-file bundle to match the pinned task manifest and verifies staged source bytes, Git blob IDs, sizes, and SHA-256 values. The pair checker enforces equality of shared controls, budget adherence, pinned Skill commit, task-specific reference loading, and separate per-run artifact paths. A hash written in a record without matching bytes is not evidence. Neither check alone is sufficient.
 
@@ -148,8 +149,8 @@ The run-record Schema enforces arm-specific Skill fields and adjudicated hard-ga
 
 Before Round 1:
 
-1. Capture the actual ChatGPT Web model label, reasoning setting, browser/client details, host OS, and available built-in tools in environment-lock.json.
-2. Pin the final Skill commit and hash all Skill files; verify the installed plugin manifest against that commit.
+1. Record the fixed GPT-6 Pro (Astra Pro) / Pro-default configuration and all available ChatGPT Web client/host fields in environment-lock.json; retain null for unexposed fields.
+2. Pin the installed Skill commit and hash all Skill files; verify the installed plugin manifest against that commit.
 3. Freeze task prompts, input bytes, task manifest (including every task's `required_evaluators`), rubric, evaluator manifest (including task-to-evaluator associations and payload JSON Schemas), evaluator code/dependencies, evaluator-result payload contracts, and analysis plan.
 4. Run the evaluator unit suite and validate both JSON Schemas with Draft 2020-12; verify that each task's required evaluators are registered and have tested PASS/failure fixtures.
 5. Verify all staged source files by Git blob SHA-1, byte size, and SHA-256.

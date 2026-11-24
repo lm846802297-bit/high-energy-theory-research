@@ -1,5 +1,5 @@
-version: "1.0-draft"
-status: "draft_not_frozen"
+version: "1.0"
+status: "frozen_round_1_pilot"
 scale:
   min: 0
   max: 4
