@@ -1,65 +1,111 @@
-# Development task T05 — scientific figure integrity audit
+# Development task T05 — public-source scientific figure integrity and AFH response reproduction
 
-Status: development only; intended for Round 2.
+Status: development task; included in protocol v1.1. The two parts are separate source pipelines.
 
-This task contains two separate pipelines. Do not claim that the CSV-to-SVG generator in Part B produced the PDF in Part A.
+This task uses only public GitHub repositories. It does not access or depend on the private LZ-3-body-for-hdm repository.
 
-## Immutable input bundle
+## Immutable public input bundle
 
-All files below are pinned to commit `8902abdb8bc44cad690059f9985204b4c0737657` in `lm846802297-bit/LZ-3-body-for-hdm`.
+### Part A — paired paper figure panels
 
-### Part A — PDF audit target
+Repository: lm846802297-bit/axial-vector-review-response
 
-- Path: `paper-source/figures/fixed_speed_recoil_spectra_v2.pdf`
-- Git blob SHA-1: `5f2d7a7192c0b3d78fa057ea8a004305f0ae13e8`
-- SHA-256: `9eb61ea4dc77c6a23af29aa1d2887b692488daa9e997d59f0c7aea28c8be9df1`
-- Size: 30,288 bytes
+Pinned source commit: 80fef16fa73f77b5374e50e076ffaeaf71df3b76
 
-### Part B — separate CSV-to-SVG source pipeline
+The two single-panel PDFs are the left and right panels of the same existing-constraints figure in the axial-vector model manuscript.
 
-Model-visible inputs:
+1. Left panel:
+   - Path: overleaf-source/axial-vector-model-building-v6/plots/axial_vector_constraint.pdf
+   - Git blob SHA-1: 2c99971dd49595946e10cc2c58fc8ed5e7db6000
+   - SHA-256: 376b232856af01995abe5b7350bc1ecc357d51c3b93002b23c8946a0b81f5adb
+   - Size: 681,479 bytes
+2. Right panel:
+   - Path: overleaf-source/axial-vector-model-building-v6/plots/axial_vector_constraint_g_vs.pdf
+   - Git blob SHA-1: 918ae390bc57c146e4c27637189fe16c33536a1a
+   - SHA-256: a523d9e801a4fadf749bef3294fcf5ba3905d68f9077a41d4cea43e095cf1a4d
+   - Size: 595,427 bytes
+3. Companion manuscript source:
+   - Path: overleaf-source/axial-vector-model-building-v6/main-v6.tex
+   - Git blob SHA-1: b99f9e26a0b57acd0a4938ea6e03fc691a82becb
+   - SHA-256: de9132ba936c6b1f3701d7c5a6398e39b89357903be789953972527753540e9a
+   - Size: 71,477 bytes
 
-- Generator: `research/three_body_calculation_and_validation/plot_user_dsigma_curve.py`
-  - Git blob SHA-1: `1a1fd7ccca9961d10d4eea83df66ecaaf8377baa`
-  - Size: 8,378 bytes
-- Data: `research/three_body_calculation_and_validation/results/fixed_speed_xe131_dsigma_450kev.csv`
-  - Git blob SHA-1: `a3b590d1705d1478a293eb9e37f6587f2040d57c`
-  - Size: 9,348 bytes
-- Minima: `research/three_body_calculation_and_validation/results/local_minima_refinement_1keV.csv`
-  - Git blob SHA-1: `423bce6526ae931f6d0b95262e3a405872e44d48`
-  - Size: 3,949 bytes
+The companion TeX includes both panels at 0.48\textwidth and gives their shared caption. Use it to establish the intended physical width and the figure's model assumptions. Do not infer figure page numbers from TeX line numbers.
 
-Golden SVG outputs are evaluator-only and must not be placed in either model workspace.
+### Part B — native Xe-131 AFH response data and reproducible SVG views
+
+Repository: lm846802297-bit/radiative-dark-matter-nuclear-currents
+
+Pinned source commit: 9ed185aefe29cebbaaf575c5b2ae4b3fc16b0078
+
+1. Native Xe-131 response CSV:
+   - Path: nuclear/afh/data/native_v6_2026-11-22/native/afh_v6_xe131_eight_response_native.csv
+   - Git blob SHA-1: ea2aca029b6f298f79fc009a17d6fb73d53da36e
+   - SHA-256: 585ab0f483be0d8131566cefc4cb420c6db7e07bebbcd2b887da568cda2f4ffb
+   - Size: 538,596 bytes
+2. Native Wolfram exporter:
+   - Path: nuclear/afh/data/native_v6_2026-11-22/source/run_afh_full_response_database.wls
+   - Git blob SHA-1: c815500398d7f55de079dffbaaa846bc84de81f5
+   - SHA-256: 10b254971a1f9dade783cfdf603f15885b08894e4de54aae2791243bf3369642
+   - Size: 2,947 bytes
+3. Original run manifest:
+   - Path: nuclear/afh/data/native_v6_2026-11-22/run_manifest.json
+   - Git blob SHA-1: a7b271f1ecd8eacc0a29d67623a2ae1c31e341a6
+   - SHA-256: 5cc300da9d199946a6d9df08c8e448d2ddd426a50f4310a9984ce1c1e06b39f7
+   - Size: 10,803 bytes
+4. Dataset README:
+   - Path: nuclear/afh/data/native_v6_2026-11-22/README.md
+   - Git blob SHA-1: b987e3b12f710dad834af7909b367e6caa05e2da
+   - SHA-256: f79b51c251b164a4f0e144e06def48e434b408b98538e3e791db87d2bcf43101
+   - Size: 2,138 bytes
+5. Dataset checksum list:
+   - Path: nuclear/afh/data/native_v6_2026-11-22/SHA256SUMS.txt
+   - Git blob SHA-1: 20dfa29c8bf3c74be74a0841aea4f0ac66a5f939
+   - SHA-256: 3ec08fd0fb76a93b94d21ee12b3f3a06db2fc40ac46d94aa376995629e7b81a9
+   - Size: 2,473 bytes
+
+The public repository documents 2,401 momentum points for Xe-131, q_A from 0 to 0.6 GeV, eight response columns, and zero native imaginary residual. The native database was compared against a source-translated Python reference for 16,807 isotope/q rows at rtol=5e-7, atol=2e-12; the maximum combined-tolerance utilization was 0.05879.
+
+The original AFH package is not redistributed. The WLS file is the retained Native exporter and the run manifest records the original package version and source hash. Do not claim that running this exporter from the public bundle regenerates the native CSV, and do not execute or invent the unavailable package.
+
+6. Deterministic plotting adapter supplied with this benchmark:
+   - Repository: lm846802297-bit/high-energy-theory-research
+   - Source commit: 4009faeae4411cbd677554b9eb9d25ad58abde75
+   - Path: validation/research-skill-benchmark/tools/plot_afh_xe131_responses.py
+   - Git blob SHA-1: d66f44b38b9dc1dd8a959b5e1729795113af7d19
+   - Size: 12,700 bytes
+
+This adapter uses only the Python standard library. It creates two deterministic SVG views from the pinned CSV: six positive diagonal responses on a logarithmic axis, and the two signed interference responses on separate symmetric-log panels. It is a presentation transformation, not a new AFH calculation.
 
 ## Prompt
 
-### Part A — audit the PDF
+### Part A — audit the paper figure
 
-1. Verify PDF Git blob identity and SHA-256.
-2. Render the final page at a recorded resolution and inspect at intended physical size.
-3. Audit effective text sizes and exact threshold. Treat 5 pt only as a screening value unless a target-journal rule is independently established.
-4. Check labels, units, legends, line styles, panel layout, collisions, clipping, vector/raster content, and effective raster resolution.
-5. Assess visual encoding using evidence available in the PDF. Do not claim source-data fidelity where source data are unavailable.
+1. Verify the Git blob SHA-1, byte size, and SHA-256 of both PDF panels and the companion TeX source.
+2. Read the TeX around the two includegraphics commands and the shared caption. Explain which physical variables each panel displays and how the right panel is mapped from the left panel.
+3. Render both PDFs at the intended width implied by 0.48\textwidth, at a recorded resolution of at least 300 dpi. Preserve the rendered PNGs as native run artifacts.
+4. Run the deterministic PDF text-size screen on both panels with --min-pt 5.0. Report the minimum effective text size, text-run count, below-threshold count, spacing-issue count, and warnings separately for each panel.
+5. Inspect the rendered panels at intended physical size. Check axis labels and units, tick readability, legend placement, contour identities, dashed perturbativity boundary, line styles, clipping, overlap, and color/line distinguishability.
+6. Explain the figure caption's assumptions: pure-axial effective-current benchmark, scalar-decoupling choice, the meaning of the dashed perturbativity boundary, and the fact that the right panel contains no additional likelihood information.
+7. Distinguish the PDF text-size screening result from the actual visual inspection. Five points is a screening threshold in this task, not an independently established journal requirement.
 
-### Part B — reproduce the separate CSV-to-SVG pipeline
+### Part B — audit data provenance and reproduce the separate AFH response views
 
-1. Verify Git blob identities and byte sizes of the generator and both CSVs; compute SHA-256 for each staged input.
-2. Inspect plotted fields, transformations, axis scales, labels, units, and derived ratios.
-3. Run the unmodified generator in an isolated copy of the pinned input tree:
-
-```bash
-python plot_user_dsigma_curve.py --csv results/fixed_speed_xe131_dsigma_450kev.csv --minima results/local_minima_refinement_1keV.csv --out-dir results/plots
-```
-
-4. Confirm both SVGs are generated under `results/plots/` in the run's native output package; record their SHA-256 values and inspect the rendered figures.
-5. Independently spot-check plotted coordinates against the raw CSV and verify the response ratio uses the stated GCN/JJ55 columns.
-6. Do not modify source or raw CSVs to force a match.
+1. Verify Git blob SHA-1, byte size, and SHA-256 for the CSV, Native WLS exporter, run manifest, README, checksum list, and benchmark plotting adapter.
+2. Cross-check the CSV SHA-256 against the repository's SHA256SUMS.txt entry. Read the README and run manifest to report the original AFH version, Native Wolfram version, source-package hash, isotope, q-grid, response columns, normalization convention, and recorded independent comparison status/tolerances.
+3. Confirm the CSV contains exactly 2,401 Xe-131 rows with strictly increasing q_GeV from 0 to 0.6 GeV, all eight real response columns, and the documented imaginary-residual behavior.
+4. Run the unmodified plotting adapter:
+   python high-energy-theory-research/validation/research-skill-benchmark/tools/plot_afh_xe131_responses.py --csv radiative-dark-matter-nuclear-currents/nuclear/afh/data/native_v6_2026-11-22/native/afh_v6_xe131_eight_response_native.csv --out-dir results/plots
+5. Preserve both generated SVGs and their SHA-256 values. Render both SVGs for visual inspection.
+6. Explain why the diagonal responses use a logarithmic axis and why the interference plot must preserve signs. Check the plotted endpoint values and at least three interior q points against the raw CSV.
+7. Do not apply the factor-four equal-proton/equal-neutron conversion to the raw AFH columns. Do not replace signed interference terms by absolute values.
+8. State explicitly that the native response dataset's recorded Python comparison does not validate the complete P3-C particle-nuclear current contraction.
 
 ## Required output
 
-- Part A audit report, native rendered page, and machine-readable JSON.
-- Part B input hash manifest, exact command, environment, stdout/stderr, both SVGs, and output hashes. Include both SVGs as run artifacts.
-- Visual inspection notes and explicit PASS/FAIL/NOT AUDITABLE per check.
-- Explicit statement that Part A and Part B are separate source pipelines.
-
-The historical Golden SVGs are evaluator-only and are used for a semantic cross-check: exact plotted path data, SVG structure and labels, exact dimensions, and numeric coordinate agreement within 0.01 px. They are not byte-identical to the current generator's serialization. The model's submitted SVGs must match a fresh execution of the trusted pinned generator byte-for-byte. Do not modify the source project or historical Golden files.
+- Source identity and a machine-readable SHA-256/Git-blob manifest for every input.
+- Part A: two rendered panel PNGs, two PDF screening JSON results, a concise visual audit, and explicit PASS/FAIL/NOT AUDITABLE for each check.
+- Part B: input provenance audit, native generator/source interpretation, both SVGs, SVG hashes, rendered previews, and independent CSV-coordinate spot checks.
+- Exact command, Python version, operating system, environment, stdout/stderr, and runtime.
+- An explicit statement that Part A is a paper-PDF audit and Part B is a separate native-CSV-to-SVG presentation pipeline.
+- Do not claim that the plotting adapter recalculates AFH responses or that the original WLS exporter can run without the unbundled AFH package.
