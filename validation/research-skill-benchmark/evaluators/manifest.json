@@ -1,7 +1,7 @@
 {
-  "schema_version": "1.0",
-  "evaluator_version": "1.0.0",
-  "status": "draft_not_frozen",
+  "schema_version": "1.1",
+  "evaluator_version": "1.1.0",
+  "status": "frozen_protocol_v1_1",
   "model_workspace_visible": false,
   "blinding": {
     "evaluator_manifest_visible_to_models": false,
@@ -70,12 +70,6 @@
       "size_bytes": 104
     },
     {
-      "path": "evaluators/verify_figure_regeneration.py",
-      "role": "T05B_pinned_plot_script_execution_and_byte_for_byte_golden_SVG_comparison",
-      "git_blob_sha1": "a67e0c3336203a0257aa048a4b863d0fe4095c97",
-      "size_bytes": 14246
-    },
-    {
       "path": "evaluators/requirements-test.txt",
       "role": "minimal_exactly_pinned_dependencies_for_schema_and_evaluator_unit_tests",
       "git_blob_sha1": "083ac9bf8d74939d8286549caaebf0626e7d51ec",
@@ -88,10 +82,16 @@
       "size_bytes": 55
     },
     {
-      "path": "evaluators/test_figure_regeneration_semantics.py",
-      "role": "T05_semantic_golden_comparison_and_submitted_output_regression_tests",
-      "git_blob_sha1": "dd66f462be5e12bf96f88ae9b163451fe79d045d",
-      "size_bytes": 7552
+      "path": "evaluators/verify_public_t05.py",
+      "role": "T05_public_input_identity_pdf_screen_and_native_AFH_SVG_submission_verification",
+      "git_blob_sha1": "7910455fdaedaa9e71b3a79fef1956013c523349",
+      "size_bytes": 10346
+    },
+    {
+      "path": "evaluators/test_public_t05.py",
+      "role": "T05_public_source_identity_and_deterministic_AFH_plot_regression_tests",
+      "git_blob_sha1": "1d34e98b31fee2c5050f691b6298865767dd0450",
+      "size_bytes": 4263
     }
   ],
   "protocol_artifacts": [
@@ -298,133 +298,6 @@
       }
     },
     {
-      "id": "E-T05A-PDF-TEXT-SCREEN",
-      "task_ids": [
-        "T05"
-      ],
-      "role": "deterministic_pdf_text_screen_plus_visual_review",
-      "repository": "lm846802297-bit/high-energy-theory-research",
-      "source_commit": "fb4bb38ded984f760375c93ec79d5c1ea6994530",
-      "path": "validation/skill-module-evaluation-2026-11-22/pdf/audit_pdf_text_reconstructed.py",
-      "git_blob_sha1": "f4315e35e5007a5201f3f7f09a6b5f554cc5306e",
-      "scope": "Effective text size and character/word spacing for supported PDF content streams. Screening only; does not replace visual inspection, cover all transforms, or establish journal compliance.",
-      "evaluator_type": "deterministic",
-      "result_payload_schema": {
-        "type": "object",
-        "required": [
-          "auditable",
-          "below_minimum_count",
-          "spacing_issue_count"
-        ],
-        "properties": {
-          "auditable": {
-            "const": true
-          },
-          "below_minimum_count": {
-            "type": "integer",
-            "minimum": 0
-          },
-          "spacing_issue_count": {
-            "type": "integer",
-            "minimum": 0
-          }
-        },
-        "additionalProperties": true
-      }
-    },
-    {
-      "id": "E-T05B-DATA-TO-FIGURE",
-      "task_ids": [
-        "T05"
-      ],
-      "role": "pinned_csv_to_svg_regeneration_with_sealed_golden_outputs",
-      "repository": "lm846802297-bit/LZ-3-body-for-hdm",
-      "source_commit": "8902abdb8bc44cad690059f9985204b4c0737657",
-      "generator": {
-        "path": "research/three_body_calculation_and_validation/plot_user_dsigma_curve.py",
-        "git_blob_sha1": "1a1fd7ccca9961d10d4eea83df66ecaaf8377baa",
-        "size_bytes": 8378
-      },
-      "model_visible_inputs": [
-        {
-          "path": "research/three_body_calculation_and_validation/results/fixed_speed_xe131_dsigma_450kev.csv",
-          "git_blob_sha1": "a3b590d1705d1478a293eb9e37f6587f2040d57c",
-          "size_bytes": 9348
-        },
-        {
-          "path": "research/three_body_calculation_and_validation/results/local_minima_refinement_1keV.csv",
-          "git_blob_sha1": "423bce6526ae931f6d0b95262e3a405872e44d48",
-          "size_bytes": 3949
-        }
-      ],
-      "evaluator_only_reference_outputs": [
-        {
-          "path": "research/three_body_calculation_and_validation/results/plots/fixed_speed_xe131_dsigma_450kev.svg",
-          "git_blob_sha1": "067903cbae2303de551d1f0b074b9603964b2244",
-          "size_bytes": 10223
-        },
-        {
-          "path": "research/three_body_calculation_and_validation/results/plots/xe131_gcn_jj55_response_ratio_450kev.svg",
-          "git_blob_sha1": "620f85205c465bdd6364a1f2b6fad103069e9915",
-          "size_bytes": 8961
-        }
-      ],
-      "command": "python plot_user_dsigma_curve.py --csv results/fixed_speed_xe131_dsigma_450kev.csv --minima results/local_minima_refinement_1keV.csv --out-dir results/plots",
-      "acceptance": "Verify staged input Git blob IDs, sizes and SHA-256; run the unmodified pinned generator in a temporary offline workspace; compare historical Golden SVGs semantically (exact path data, SVG structure/labels, exact dimensions, and coordinate agreement within 0.01 px); record serialization differences without failing when semantic content matches. For an actual scored run, compare both model-submitted SVGs byte-for-byte with the fresh trusted-generator outputs. Independently spot-check plotted coordinates and visually inspect rendered outputs.",
-      "verifier_script": {
-        "path": "evaluators/verify_figure_regeneration.py",
-        "git_blob_sha1": "6e73572b99610a1b988d34cd8a46f354bd2f9c15",
-        "size_bytes": 13846
-      },
-      "evaluator_type": "deterministic",
-      "result_payload_schema": {
-        "type": "object",
-        "required": [
-          "status",
-          "evaluation_mode",
-          "submission_evaluated",
-          "submission_pass",
-          "submitted_outputs"
-        ],
-        "properties": {
-          "status": {
-            "const": "PASS"
-          },
-          "evaluation_mode": {
-            "const": "submission"
-          },
-          "submission_evaluated": {
-            "const": true
-          },
-          "submission_pass": {
-            "const": true
-          },
-          "submitted_outputs": {
-            "type": "array",
-            "minItems": 2,
-            "maxItems": 2,
-            "items": {
-              "type": "object",
-              "required": [
-                "status",
-                "matches_trusted_generator"
-              ],
-              "properties": {
-                "status": {
-                  "const": "PASS"
-                },
-                "matches_trusted_generator": {
-                  "const": true
-                }
-              },
-              "additionalProperties": true
-            }
-          }
-        },
-        "additionalProperties": true
-      }
-    },
-    {
       "id": "E-T06-REPRO-PACKAGE",
       "task_ids": [
         "T06"
@@ -480,6 +353,154 @@
       "size_bytes": 48488,
       "scope": "Compare every run's repository, source commit, path, Git blob SHA-1 and byte size with the pinned task manifest; verify staged bytes and SHA-256 under the required input root. T05 includes the PDF, plotting script and both CSV inputs; T03 includes the PDF and companion TeX.",
       "evaluator_type": "internal"
+    },
+    {
+      "id": "E-T05A-PDF-TEXT-SCREEN",
+      "task_ids": [
+        "T05"
+      ],
+      "role": "deterministic_text_size_screen_for_both_paired_paper_figure_PDF_panels_plus_visual_review",
+      "repository": "lm846802297-bit/high-energy-theory-research",
+      "source_commit": "fb4bb38ded984f760375c93ec79d5c1ea6994530",
+      "path": "validation/skill-module-evaluation-2026-11-22/pdf/audit_pdf_text_reconstructed.py",
+      "git_blob_sha1": "f4315e35e5007a5201f3f7f09a6b5f554cc5306e",
+      "size_bytes": 9943,
+      "scope": "Run the deterministic effective text-size and spacing screen on both pinned axial-vector constraint panel PDFs. A 5 pt threshold is a screening value only; visual inspection at intended physical size remains a separate reviewer requirement.",
+      "evaluator_type": "deterministic",
+      "result_payload_schema": {
+        "type": "object",
+        "required": [
+          "status",
+          "evaluator_id",
+          "pdf_count",
+          "pdf_results"
+        ],
+        "properties": {
+          "status": {
+            "type": "string",
+            "pattern": "^PASS"
+          },
+          "evaluator_id": {
+            "const": "E-T05A-PDF-TEXT-SCREEN"
+          },
+          "pdf_count": {
+            "const": 2
+          },
+          "pdf_results": {
+            "type": "array",
+            "minItems": 2,
+            "maxItems": 2,
+            "items": {
+              "type": "object",
+              "required": [
+                "path",
+                "screening_status",
+                "below_minimum_count",
+                "spacing_issue_count"
+              ],
+              "properties": {
+                "screening_status": {
+                  "enum": [
+                    "BELOW_5_PT_TEXT_FOUND",
+                    "NO_BELOW_5_PT_TEXT_FOUND"
+                  ]
+                },
+                "below_minimum_count": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "spacing_issue_count": {
+                  "type": "integer",
+                  "minimum": 0
+                }
+              },
+              "additionalProperties": true
+            }
+          }
+        },
+        "additionalProperties": true
+      }
+    },
+    {
+      "id": "E-T05B-AFH-RESPONSE-REPRO",
+      "task_ids": [
+        "T05"
+      ],
+      "role": "public_native_AFH_Xe131_CSV_to_SVG_reproduction_with_source_identity_and_submission_verification",
+      "repository": "lm846802297-bit/high-energy-theory-research",
+      "source_commit": "24669b28d84836b078a03b69ae03e0a926c1e193",
+      "path": "validation/research-skill-benchmark/evaluators/verify_public_t05.py",
+      "git_blob_sha1": "7910455fdaedaa9e71b3a79fef1956013c523349",
+      "size_bytes": 10346,
+      "generator": {
+        "repository": "lm846802297-bit/high-energy-theory-research",
+        "source_commit": "4009faeae4411cbd677554b9eb9d25ad58abde75",
+        "path": "validation/research-skill-benchmark/tools/plot_afh_xe131_responses.py",
+        "git_blob_sha1": "d66f44b38b9dc1dd8a959b5e1729795113af7d19",
+        "size_bytes": 12700,
+        "sha256": "63b22929386b4c131a7c343a09935f110c02739201c672388c24cf8ee96780cd"
+      },
+      "expected_outputs": [
+        "xe131_diagonal_responses.svg",
+        "xe131_signed_interferences.svg"
+      ],
+      "scope": "Verify every T05 input source by Git blob SHA-1, byte size, and SHA-256; execute the pinned standard-library plotting adapter against the native Xe-131 AFH CSV; require both submitted SVGs to be byte-identical to fresh trusted outputs. This is a presentation reproduction of already-computed native response data, not a new AFH calculation.",
+      "evaluator_type": "deterministic",
+      "result_payload_schema": {
+        "type": "object",
+        "required": [
+          "status",
+          "evaluator_id",
+          "evaluation_mode",
+          "submission_evaluated",
+          "submission_pass",
+          "submitted_outputs",
+          "input_identities"
+        ],
+        "properties": {
+          "status": {
+            "const": "PASS"
+          },
+          "evaluator_id": {
+            "const": "E-T05B-AFH-RESPONSE-REPRO"
+          },
+          "evaluation_mode": {
+            "const": "submission"
+          },
+          "submission_evaluated": {
+            "const": true
+          },
+          "submission_pass": {
+            "const": true
+          },
+          "submitted_outputs": {
+            "type": "array",
+            "minItems": 2,
+            "maxItems": 2,
+            "items": {
+              "type": "object",
+              "required": [
+                "status",
+                "matches_trusted_generator"
+              ],
+              "properties": {
+                "status": {
+                  "const": "PASS"
+                },
+                "matches_trusted_generator": {
+                  "const": true
+                }
+              },
+              "additionalProperties": true
+            }
+          },
+          "input_identities": {
+            "type": "array",
+            "minItems": 8
+          }
+        },
+        "additionalProperties": true
+      }
     }
   ],
   "blinded_review": {
