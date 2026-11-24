@@ -157,7 +157,7 @@ Permitted treatment differences are limited to Skill availability, Skill source/
 
 The run-record Schema enforces arm-specific Skill fields and adjudicated hard-gate consistency. The comparison evaluator requires every task manifest entry to declare `required_evaluators`, requires every A/B run to contain each listed evaluator exactly once with PASS status, binds evaluator input hashes to the task input manifest, binds evaluator output hashes to registered result artifacts, and inspects the actual evaluator JSON payloads under the explicit artifact root. T05-B must use submission mode and prove that the model-submitted SVGs match a fresh trusted-generator run; the CI baseline-only check cannot satisfy a scored T05 task. The comparison evaluator binds the exact protocol commit and exact bytes of the environment lock, scoring rubric, task manifest, analysis plan, and evaluator registry to each run record. It also requires each run's source-file bundle to match the pinned task manifest and verifies staged source bytes, Git blob IDs, sizes, and SHA-256 values. The pair checker enforces equality of shared controls, visible-turnaround budget adherence, matching observability capabilities, pinned Skill commit, task-specific reference loading, and separate per-run artifact paths. A hash written in a record without matching bytes is not evidence. Neither check alone is sufficient.
 
-## 10. Freeze checklist
+## 11. Freeze checklist
 
 Before Round 1:
 
