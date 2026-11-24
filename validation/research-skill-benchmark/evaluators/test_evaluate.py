@@ -471,7 +471,7 @@ class EvaluatorTests(unittest.TestCase):
 
             evaluator_manifest = {
                 "deterministic_evaluators": [{
-                    "id": "E-T05B-DATA-TO-FIGURE",
+                    "id": "E-T05B-AFH-RESPONSE-REPRO",
                     "repository": "owner/" + repo_slug,
                     "generator": {"path": generator_rel, **identity(generator)},
                     "model_visible_inputs": [
@@ -519,12 +519,12 @@ class EvaluatorTests(unittest.TestCase):
             "id": "T05",
             "required_evaluators": [
                 "E-T05A-PDF-TEXT-SCREEN",
-                "E-T05B-DATA-TO-FIGURE",
+                "E-T05B-AFH-RESPONSE-REPRO",
             ],
         }
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
-            pdf_result = {"auditable": True, "below_minimum_count": 0, "spacing_issue_count": 0}
+            pdf_result = {"status": "PASS_AUDIT_COMPLETED", "evaluator_id": "E-T05A-PDF-TEXT-SCREEN", "pdf_count": 2, "pdf_results": [{"path": "left.pdf", "screening_status": "NO_BELOW_5_PT_TEXT_FOUND", "below_minimum_count": 0, "spacing_issue_count": 0}, {"path": "right.pdf", "screening_status": "NO_BELOW_5_PT_TEXT_FOUND", "below_minimum_count": 0, "spacing_issue_count": 0}]}
             svg_result = {
                 "status": "PASS",
                 "evaluator_id": "E-T05B-AFH-RESPONSE-REPRO",
