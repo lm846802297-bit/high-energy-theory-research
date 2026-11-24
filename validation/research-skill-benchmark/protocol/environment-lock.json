@@ -1,21 +1,21 @@
 {
   "schema_version": "1.0",
-  "status": "incomplete_pending_windows_host_capture",
+  "status": "incomplete_pending_chatgpt_web_host_capture",
   "captured_at_utc": null,
   "host": {
-    "os_name": "Windows",
-    "os_build": "26300",
+    "os_name": null,
+    "os_build": null,
     "architecture": null,
     "cpu_model": null,
     "gpu_model": null,
     "memory_gb": null
   },
-  "codex": {
-    "product": "Codex Desktop",
-    "desktop_version": "26.1117.4957.0",
-    "cli_version": "0.171.0-alpha.13",
-    "runtime_mode": "Desktop project-scoped Skill discovery previously verified; user-level installation and benchmark workspace isolation pending",
-    "skill_discovery_scope": "project-scoped on prior acceptance; benchmark treatment must use the exact pinned user-level installation after central release"
+  "client": {
+    "product": "ChatGPT Web",
+    "client_version": null,
+    "browser_name": null,
+    "browser_version": null,
+    "operating_mode": "fresh web conversations; one task per conversation"
   },
   "model": {
     "model_label": null,
@@ -25,33 +25,35 @@
     "system_configuration_fingerprint_if_available": null
   },
   "tools": {
-    "python_version": null,
-    "python_executable": null,
-    "packages_lock_sha256": null,
-    "mathematica_version": null,
-    "feyncalc_version": null,
-    "form_version": null,
-    "git_version": null,
     "available_tools_allowlist": [],
-    "network_policy": null
+    "python_version": null,
+    "packages_lock_sha256": null,
+    "network_policy": "offline after staging; web search and external connectors disabled for all scored sessions"
   },
   "skill_treatment": {
     "source_repository": "https://github.com/lm846802297-bit/high-energy-theory-research",
-    "source_commit": null,
+    "source_commit": "bee95d3c60dabc8e642cc1fb3f4abc63350e5b41",
+    "plugin_version": "0.1.0",
     "skill_directory_manifest_sha256": null,
     "installation_manifest_sha256": null,
-    "task_reference_files": []
+    "task_reference_files": [
+      "references/symbolic-calculation.md",
+      "references/numerical-scans-and-uncertainty.md",
+      "references/paper-reading.md"
+    ]
   },
   "run_budget": {
-    "max_wall_time_seconds_per_run": null,
+    "max_wall_time_seconds_per_run": 1800,
     "max_tokens_per_run_if_exposed": null,
-    "max_tool_calls_per_run": null,
+    "max_tool_calls_per_run": 25,
     "same_budget_for_both_arms": true
   },
   "notes": [
-    "Do not invent values that the host does not expose; use null and record the limitation.",
-    "The exact model label/build and Codex runtime must be captured from the actual Windows host before protocol freeze.",
-    "The Skill source commit must be pinned; do not benchmark against a moving main branch.",
-    "Windows build 26300, Codex Desktop 26.1117.4957.0, and bundled codex-cli 0.171.0-alpha.13 were recorded in the prior Windows discovery acceptance at an earlier PR head. Reconfirm these values on the actual benchmark run host."
+    "Capture the actual OS, browser and ChatGPT Web client details from the benchmark host; use null when a value is not exposed.",
+    "Record the exact model label and reasoning setting shown by the ChatGPT Web interface before the first run; do not infer a hidden model build.",
+    "Use the exact installed plugin/Skill source commit and version recorded above. Do not benchmark against a moving branch.",
+    "A and B use fresh conversations with identical built-in tools and staged input files. No external search, connected apps, or external APIs are allowed during scored runs.",
+    "Arm A must have the Particle Physics Research plugin unselected and no Skill references in its context. Arm B explicitly selects and invokes the installed plugin. If A receives Skill instructions or plugin tool context, invalidate the pair.",
+    "The 30-minute wall-time and 25-tool-call limits apply equally to both arms. Token counts are recorded only if exposed."
   ]
 }
