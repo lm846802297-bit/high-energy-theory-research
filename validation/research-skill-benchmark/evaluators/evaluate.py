@@ -237,6 +237,10 @@ def _control_projection(record: dict[str, Any]) -> dict[str, Any]:
         "budget": record["budget"],
         "randomization_seed": execution["randomization_seed"],
         "pair_order": execution["pair_order"],
+        "observability": {
+            "tool_call_count_observable": execution["tool_call_count_observable"],
+            "backend_transcript_available": execution["backend_transcript_available"],
+        },
     }
 
 
