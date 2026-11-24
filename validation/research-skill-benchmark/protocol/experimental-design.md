@@ -1,6 +1,6 @@
-# Experimental design — v1.0
+# Experimental design — v1.1
 
-Status: **FROZEN FOR ROUND 1 PILOT. The 18 model runs have not yet started.**
+Status: **FROZEN PROTOCOL v1.1. Round 1 remains the 18-run T01/T02/T03 pilot; no model runs have started.**
 
 ## 1. Hypothesis and estimand
 
@@ -73,7 +73,7 @@ T02 is a reduced one-dimensional threshold phase-space kernel in a constant-ampl
 
 T03 uses the complete pinned axial-vector manuscript PDF and its companion TeX source from the same repository commit. The evaluator stages both files once, verifies each Git blob SHA-1 and byte size, computes SHA-256 for both, and distributes byte-identical read-only copies to A and B. The TeX is a locator/cross-check aid. Original equation/Figure numbering and every reported PDF page number must be verified against the rendered PDF; never infer PDF pages from TeX line numbers.
 
-T05 has two separate source pipelines. **T05-A** audits the pinned PDF. **T05-B** regenerates two SVG figures from a separately pinned plotting script and two raw CSV inputs. The CSV-to-SVG generator is not claimed to have produced the PDF in T05-A. Golden SVGs and their hashes are evaluator-only; they are never placed in model workspaces.
+T05 has two separate public-source pipelines. **T05-A** audits both paired axial-vector constraint-panel PDFs from axial-vector-review-response, with the companion TeX used to establish the shared caption and intended panel width. **T05-B** verifies the Native AFH Xe-131 CSV and its WLS exporter/run-manifest provenance from radiative-dark-matter-nuclear-currents, then reproduces two SVG views using the pinned standard-library plotting adapter in this benchmark. The adapter is a presentation transformation of existing native data; it does not rerun the unavailable AFH package or calculate new nuclear responses. T05-A and T05-B are independent pipelines.
 
 ## 5. Development and holdout separation
 
@@ -152,8 +152,8 @@ Before Round 1:
 1. Record the fixed GPT-6 Pro (Astra Pro) / Pro-default configuration and all available ChatGPT Web client/host fields in environment-lock.json; retain null for unexposed fields.
 2. Pin the installed Skill commit and hash all Skill files; verify the installed plugin manifest against that commit.
 3. Freeze task prompts, input bytes, task manifest (including every task's `required_evaluators`), rubric, evaluator manifest (including task-to-evaluator associations and payload JSON Schemas), evaluator code/dependencies, evaluator-result payload contracts, and analysis plan.
-4. Run the evaluator unit suite and validate both JSON Schemas with Draft 2020-12; verify that each task's required evaluators are registered and have tested PASS/failure fixtures.
-5. Verify all staged source files by Git blob SHA-1, byte size, and SHA-256.
+4. Run the evaluator unit suite and validate both JSON Schemas with Draft 2020-12; verify that each task's required evaluators are registered and have tested PASS/failure fixtures, including both T05 PDF panels and exact SVG submission comparison.
+5. Verify all staged source files by Git blob SHA-1, byte size, and SHA-256. For T05, stage the two public axial-vector PDFs/TeX and the public Native AFH Xe-131 CSV, WLS exporter, run manifest, README, checksum list, and pinned plotting adapter.
 6. Create isolated A/B ChatGPT Web conversations; prove A has no plugin/Skill context and B can invoke the exact pinned plugin.
 7. Confirm identical tools, project context, network policy, and budgets.
 8. Record the randomization seed and freeze the protocol commit.

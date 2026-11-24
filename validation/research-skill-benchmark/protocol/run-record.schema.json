@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "urn:particle-physics-research-skill-benchmark:run-record:1.0",
+  "$id": "urn:particle-physics-research-skill-benchmark:run-record:1.1",
   "title": "Particle Physics Research Skill Benchmark Run Record",
   "type": "object",
   "additionalProperties": false,
@@ -71,7 +71,7 @@
       ],
       "properties": {
         "version": {
-          "const": "1.0"
+          "const": "1.1"
         },
         "commit": {
           "$ref": "#/$defs/commit"
@@ -156,19 +156,34 @@
           "minLength": 1
         },
         "client_version": {
-          "type": ["string", "null"]
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "browser": {
-          "type": ["string", "null"]
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "python_version": {
-          "type": ["string", "null"]
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "architecture": {
-          "type": ["string", "null"]
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "hardware": {
-          "type": ["object", "null"]
+          "type": [
+            "object",
+            "null"
+          ]
         }
       }
     },

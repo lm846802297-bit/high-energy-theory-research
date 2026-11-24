@@ -1,6 +1,6 @@
 # Particle Physics Research Skill Benchmark
 
-Status: **Round 1 protocol and environment lock frozen; 18 A/B model runs not yet started.**
+Status: **Protocol v1.1 and environment lock frozen; Round 1's 18 T01/T02/T03 A/B model runs have not yet started.**
 
 This benchmark tests whether the shared high-energy-theory-research Skill improves scientific work relative to the same GPT model without that Skill.
 
@@ -58,7 +58,8 @@ The compare command consumes immutable A/B run records and a task manifest, veri
 ## Current status
 
 - Benchmark and development tasks are in central PR #27.
-- Round 1 protocol and environment lock are frozen. Unexposed host fields are null rather than inferred.
+- Protocol v1.1 and environment lock are frozen. Unexposed host fields are null rather than inferred.
+- T05 uses public pinned inputs from axial-vector-review-response and radiative-dark-matter-nuclear-currents; no private LZ repository access or token is required.
 - No model A/B run has started; no Skill module has been accepted or rejected.
 - The evaluator manifest, reference outputs, and development key are evaluator-only and must not be mounted into model workspaces.
 - Holdout prompts/keys have intentionally not been created; an independent evaluator prepares them only after protocol and Skill freeze.

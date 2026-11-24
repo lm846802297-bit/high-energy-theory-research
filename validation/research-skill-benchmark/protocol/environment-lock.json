@@ -1,6 +1,6 @@
 {
-  "schema_version": "1.0",
-  "status": "frozen_round_1_pilot",
+  "schema_version": "1.1",
+  "status": "frozen_protocol_v1_1_round_1_pilot",
   "captured_at_utc": null,
   "host": {
     "os_name": "Windows (version/build not exposed)",
@@ -41,7 +41,8 @@
     "task_reference_files": [
       "references/symbolic-calculation.md",
       "references/numerical-scans-and-uncertainty.md",
-      "references/paper-reading.md"
+      "references/paper-reading.md",
+      "references/scientific-figure-audit.md"
     ]
   },
   "run_budget": {
@@ -59,6 +60,8 @@
     "The 30-minute wall-time and 25-tool-call limits apply equally to both arms. Record token counts only if exposed.",
     "CI T05 uses the private LZ-3-body-for-hdm repository. The repository secret LZ_REPO_READ_TOKEN must be configured with read-only Contents permission for that repository before the full CI job can pass.",
     "Unexposed host/runtime fields remain null by design; no values are inferred.",
-    "The protocol and scoring rules are frozen for Round 1. Do not alter them after observing any pilot outputs."
+    "The protocol and scoring rules are frozen for Round 1. Do not alter them after observing any pilot outputs.",
+    "Protocol v1.1 replaces the private LZ T05 inputs with public pinned sources: two axial-vector paper figure panels and the Native AFH Xe-131 response CSV/export provenance bundle.",
+    "T05 Part B is a deterministic presentation transformation of the existing native CSV. It does not rerun the unavailable original AFH package or calculate new nuclear responses."
   ]
 }
