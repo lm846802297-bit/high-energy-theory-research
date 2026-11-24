@@ -1,5 +1,5 @@
-version: "1.0"
-status: "frozen_round_1_pilot"
+version: "1.2"
+status: "draft_web_observability_v1_2"
 scale:
   min: 0
   max: 4
@@ -65,6 +65,28 @@ reasoning_autonomy_guardrail:
     - "B follows an irrelevant Skill instruction that causes a material physics/math error."
     - "B cannot select a suitable method when the loaded reference is inapplicable."
     - "B performs unnecessary external transmission or destructive actions because of Skill guidance."
+secondary_metrics:
+  weighted_score_inclusion: false
+  unnecessary_computation:
+    definition: "A discrete visible calculation, search, tool step, or workflow artifact that was not needed for the requested task and added no decision-relevant evidence."
+    do_not_count: "Ordinary algebraic steps or useful independent checks."
+    required_reporting: ["count_by_arm", "paired_difference", "event_description", "reason_for_classification"]
+    reviewer_process: "Both blinded reviewers count events; one-count disagreement requires a consensus note; a difference of two or more requires third-party adjudication."
+  method_selection:
+    source: "Existing separate 0-4 reasoning_autonomy_guardrail score."
+    required_note: "Explain whether the least-complex sufficient method was selected, unnecessary Skill references/tools were avoided, and the model stopped after acceptance checks."
+    weighted_score_inclusion: false
+  reproducibility_evidence:
+    source: "Existing reproducibility and evidence_quality dimension scores."
+    evidence_items: ["source_input_identity", "code_or_command", "environment_and_parameters", "native_output", "convergence_or_error_analysis", "independent_check"]
+    weighted_score_inclusion: false
+  resource_overhead:
+    primary_observable: "visible_turnaround_upper_bound_seconds"
+    secondary_ui_observation: "visible_ui_worked_label"
+    backend_wall_time: "Record only if exposed; otherwise null."
+    tool_calls: "Record only if per-invocation counts are exposed; otherwise null and not certified."
+    tokens: "Record only if exposed; otherwise null."
+    weighted_score_inclusion: false
 scoring_formula:
   expression: "Q = 25 * sum((weight_percent / 100) * dimension_score)"
   scale: [0, 100]
@@ -130,6 +152,8 @@ reporting:
     - "Task-level and task-family-level means"
     - "Mean, median, range, and all individual results"
     - "95% task-family cluster-bootstrap interval for Round 2"
-    - "Time, tokens if available, tool calls, and compute cost if available"
+    - "Visible-turnaround upper bound and UI Worked label, kept as distinct measures"
+    - "Backend wall time, token count, and tool-call count only when actually exposed"
+    - "Unnecessary-computation counts/events, method-selection notes, and reproducibility evidence items"
     - "Deviations, invalidated pairs, and missing data"
   pilot_inference: "Three repetitions per task/arm are exploratory. Do not claim statistical significance."
