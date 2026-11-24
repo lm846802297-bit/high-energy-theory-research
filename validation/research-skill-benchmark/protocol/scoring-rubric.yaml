@@ -1,5 +1,5 @@
 version: "1.2"
-status: "draft_web_observability_v1_2"
+status: "frozen_round_1_pilot_v1_2"
 scale:
   min: 0
   max: 4
