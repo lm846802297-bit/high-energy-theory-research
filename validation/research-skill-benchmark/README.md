@@ -79,7 +79,7 @@ The compare command consumes immutable A/B run records and a task manifest, veri
 
 ## Protocol v1.3 comparison command
 
-After the v1.3 PR is merged, use its exact merge commit as `--protocol-commit`. The development task manifest and all task prompt/source bytes remain unchanged; v1.3 protocol bindings are versioned separately.
+After the freeze-status PR #46 is merged, use its exact merge commit as `--protocol-commit`. The development task manifest and all task prompt/source bytes remain unchanged; v1.3 protocol bindings are versioned separately.
 
     python evaluators/evaluate_v1_3.py compare --records-dir runs/v1.3/run-artifacts/records --task-manifest tasks/development/manifest.json --round round_1_pilot --seed 20261124 --protocol-commit MERGE_COMMIT_SHA --artifact-root runs/v1.3/run-artifacts --input-root path/to/staged-inputs --output reports/v1.3/comparison.json
 
