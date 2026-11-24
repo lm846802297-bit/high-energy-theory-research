@@ -88,7 +88,7 @@ def make_record(arm: str, run_id: str, score=3):
 class EvaluatorTests(unittest.TestCase):
     def test_web_observability_allows_unknown_tool_count_without_tool_budget(self):
         record = make_record("no-skill", "run-web")
-        self.assertIsNone(evaluate.validate_run(record, SCHEMA, RUBRIC))
+        self.assertEqual(evaluate.validate_run(record, SCHEMA, RUBRIC), 75.0)
 
     def test_unobservable_tool_count_cannot_certify_a_tool_call_limit(self):
         record = make_record("no-skill", "run-web-budget")
