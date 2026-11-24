@@ -1,6 +1,12 @@
 name: Build Particle Physics Research plugin package
 
 on:
+  pull_request:
+    paths:
+      - "skills/high-energy-theory-research/**"
+      - "packaging/particle-physics-research/**"
+      - "scripts/build_particle_physics_research_plugin.py"
+      - ".github/workflows/build-particle-physics-research-plugin.yml"
   workflow_dispatch:
   push:
     branches:
