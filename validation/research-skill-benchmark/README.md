@@ -1,6 +1,6 @@
 # Particle Physics Research Skill Benchmark
 
-Status: **Protocol v1.1 and environment lock frozen; Round 1's 18 T01/T02/T03 A/B model runs have not yet started.**
+Status: **Protocol v1.2 draft; Round 1 remains 18 T01/T02/T03 A/B model runs. No formal runs have started.**
 
 This benchmark tests whether the shared high-energy-theory-research Skill improves scientific work relative to the same GPT model without that Skill.
 
@@ -9,9 +9,9 @@ This benchmark tests whether the shared high-energy-theory-research Skill improv
 Does the Skill improve scientific quality, independent validation, reproducibility, and evidence quality without materially reducing method-selection autonomy?
 
 - **A — No Skill:** GPT-6 Pro (Astra Pro), Pro-default reasoning; the installed plugin is not selected or invoked.
-- **B — With Skill:** identical controls; Particle Physics Research v0.1.0 is selected and explicitly invoked.
+- **B — With Skill:** identical controls; Particle Physics Research v0.2.0 is selected and explicitly invoked.
 
-Only Skill availability/invocation is intentionally changed.
+Only Skill availability/invocation and task-tier routing behavior are intentionally changed.
 
 ## Structure
 
@@ -58,11 +58,23 @@ The compare command consumes immutable A/B run records and a task manifest, veri
 ## Current status
 
 - Benchmark and development tasks are in central PR #27.
-- Protocol v1.1 and environment lock are frozen. Unexposed host fields are null rather than inferred.
+- Protocol v1.2 and the Web-observability environment lock are frozen. No formal model runs have started.
 - T05 uses public pinned inputs from axial-vector-review-response and radiative-dark-matter-nuclear-currents; no private LZ repository access or token is required.
-- No model A/B run has started; no Skill module has been accepted or rejected.
+- Protocol v1.2 distinguishes visible turnaround upper bounds from backend wall time and records unobservable tool counts as null.
+- The original weighted score remains unchanged; unnecessary-computation count, method-selection autonomy, reproducibility evidence, and observable resource overhead are separate secondary metrics.
+- No formal model A/B run has started; no Skill module has been accepted or rejected.
 - The evaluator manifest, reference outputs, and development key are evaluator-only and must not be mounted into model workspaces.
 - Holdout prompts/keys have intentionally not been created; an independent evaluator prepares them only after protocol and Skill freeze.
 - No formal A/B runs have been executed.
 
 See the experimental design, scoring rubric, environment lock, and evaluator guide in this directory.
+
+
+## ChatGPT Web observability (protocol v1.2)
+
+- Record UTC send-to-first-observation timing as a visible turnaround upper bound, not backend latency.
+- Record a UI “Worked for” label separately; do not substitute it for backend time.
+- Backend wall time, token count, per-invocation tool-call count, and backend transcript remain null when not exposed.
+- Missing tool logs do not mean zero tool calls. No hard tool-call cap can be certified for the current Web host.
+- The visible Markdown answer is a visible-answer capture, not a backend transcript.
+- Preserve the five weighted dimensions and 18-run T01/T02/T03 pilot. Report unnecessary computations, method selection, reproducibility evidence, and observable resources separately.

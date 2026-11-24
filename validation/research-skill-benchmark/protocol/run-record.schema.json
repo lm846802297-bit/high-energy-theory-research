@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "urn:particle-physics-research-skill-benchmark:run-record:1.1",
+  "$id": "urn:particle-physics-research-skill-benchmark:run-record:1.2",
   "title": "Particle Physics Research Skill Benchmark Run Record",
   "type": "object",
   "additionalProperties": false,
@@ -71,7 +71,7 @@
       ],
       "properties": {
         "version": {
-          "const": "1.1"
+          "const": "1.2"
         },
         "commit": {
           "$ref": "#/$defs/commit"
@@ -319,11 +319,11 @@
       "type": "object",
       "additionalProperties": false,
       "required": [
-        "wall_time_seconds",
+        "visible_turnaround_limit_seconds",
         "tool_call_limit"
       ],
       "properties": {
-        "wall_time_seconds": {
+        "visible_turnaround_limit_seconds": {
           "type": "number",
           "exclusiveMinimum": 0
         },
@@ -335,7 +335,10 @@
           "minimum": 1
         },
         "tool_call_limit": {
-          "type": "integer",
+          "type": [
+            "integer",
+            "null"
+          ],
           "minimum": 1
         }
       }
@@ -346,13 +349,18 @@
       "required": [
         "randomization_seed",
         "pair_order",
-        "actual_wall_time_seconds",
-        "actual_tool_calls",
+        "backend_wall_time_seconds",
+        "visible_turnaround_upper_bound_seconds",
+        "visible_ui_worked_label",
+        "tool_call_count",
+        "tool_call_count_observable",
+        "backend_transcript_available",
         "token_count",
         "commands",
         "tool_log_artifact",
         "transcript_artifact",
-        "exit_status"
+        "exit_status",
+        "observability_notes"
       ],
       "properties": {
         "randomization_seed": {
@@ -365,13 +373,35 @@
             "B_then_A"
           ]
         },
-        "actual_wall_time_seconds": {
+        "backend_wall_time_seconds": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "visible_turnaround_upper_bound_seconds": {
           "type": "number",
           "minimum": 0
         },
-        "actual_tool_calls": {
-          "type": "integer",
+        "visible_ui_worked_label": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "tool_call_count": {
+          "type": [
+            "integer",
+            "null"
+          ],
           "minimum": 0
+        },
+        "tool_call_count_observable": {
+          "type": "boolean"
+        },
+        "backend_transcript_available": {
+          "type": "boolean"
         },
         "token_count": {
           "type": [
@@ -387,8 +417,10 @@
           }
         },
         "tool_log_artifact": {
-          "type": "string",
-          "minLength": 1
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "transcript_artifact": {
           "type": "string",
@@ -399,6 +431,12 @@
             "integer",
             "null"
           ]
+        },
+        "observability_notes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
@@ -489,7 +527,8 @@
         "deterministic_checks",
         "reviewer_assessments",
         "reviewer_consensus_note",
-        "adjudication"
+        "adjudication",
+        "secondary_metrics"
       ],
       "properties": {
         "hard_gates": {
@@ -615,6 +654,37 @@
             },
             "final_hard_gates": {
               "$ref": "#/$defs/hard_gates"
+            }
+          }
+        },
+        "secondary_metrics": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "unnecessary_computation_count",
+            "unnecessary_computation_events",
+            "method_selection_note",
+            "reproducibility_evidence_items"
+          ],
+          "properties": {
+            "unnecessary_computation_count": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "unnecessary_computation_events": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "method_selection_note": {
+              "type": "string"
+            },
+            "reproducibility_evidence_items": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
             }
           }
         }

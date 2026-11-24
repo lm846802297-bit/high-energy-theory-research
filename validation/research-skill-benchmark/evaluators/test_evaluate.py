@@ -31,7 +31,7 @@ def make_record(arm: str, run_id: str, score=3):
         "started_at_utc": "2026-11-23T00:00:00Z",
         "ended_at_utc": "2026-11-23T00:01:00Z",
         "protocol": {
-            "version": "1.1",
+            "version": "1.2",
             "commit": "a" * 40,
             "skill_source_commit": "9" * 40,
             "environment_lock_sha256": "b" * 64,
@@ -45,8 +45,8 @@ def make_record(arm: str, run_id: str, score=3):
         "project_context": {"repository": "test/repo", "source_commit": "f" * 40, "instructions_sha256": "1" * 64, "workspace_snapshot_sha256": "2" * 64, "shared_skill_routing_removed": True},
         "task_input": {"prompt_sha256": "3" * 64, "input_manifest_sha256": "4" * 64, "source_commit": "f" * 40, "source_files": []},
         "tools": {"allowlist": ["python"], "network_policy": "offline", "versions": {"python": "3.13"}},
-        "budget": {"wall_time_seconds": 600, "token_limit": 10000, "tool_call_limit": 30},
-        "execution": {"randomization_seed": "seed-1", "pair_order": "A_then_B", "actual_wall_time_seconds": 60, "actual_tool_calls": 5, "token_count": 1000, "commands": ["python task.py"], "tool_log_artifact": f"logs/{run_id}.json", "transcript_artifact": f"transcripts/{run_id}.json", "exit_status": 0},
+        "budget": {"visible_turnaround_limit_seconds": 600, "token_limit": None, "tool_call_limit": None},
+        "execution": {"randomization_seed": "seed-1", "pair_order": "A_then_B", "backend_wall_time_seconds": None, "visible_turnaround_upper_bound_seconds": 60, "visible_ui_worked_label": None, "tool_call_count": None, "tool_call_count_observable": False, "backend_transcript_available": False, "token_count": None, "commands": [], "tool_log_artifact": None, "transcript_artifact": f"transcripts/{run_id}.md", "exit_status": None, "observability_notes": ["ChatGPT Web does not expose backend wall time, per-invocation tool events, or a backend transcript."]},
         "skill": {
             "available": available,
             "source_commit": "9" * 40 if available else None,
@@ -56,8 +56,8 @@ def make_record(arm: str, run_id: str, score=3):
             "availability_evidence_artifact": f"evidence/{run_id}-skill.json",
         },
         "artifacts": [
-            {"path": f"logs/{run_id}.json", "sha256": "5" * 64, "role": "tool_log"},
-            {"path": f"transcripts/{run_id}.json", "sha256": "6" * 64, "role": "transcript"},
+            {"path": f"observations/{run_id}.json", "sha256": "5" * 64, "role": "web_observability_record"},
+            {"path": f"transcripts/{run_id}.md", "sha256": "6" * 64, "role": "visible_answer"},
             {"path": f"evidence/{run_id}-skill.json", "sha256": "7" * 64, "role": "skill_availability_evidence"},
         ],
         "evaluation": {
@@ -66,6 +66,12 @@ def make_record(arm: str, run_id: str, score=3):
             "autonomy_score": 3,
             "weighted_score": 25 * score,
             "deterministic_checks": [],
+            "secondary_metrics": {
+                "unnecessary_computation_count": 0,
+                "unnecessary_computation_events": [],
+                "method_selection_note": "Selected the simplest sufficient method for the task.",
+                "reproducibility_evidence_items": ["visible answer", "prompt hash"],
+            },
             "reviewer_assessments": [
                 {"reviewer_id": "reviewer-1", "arm_label_hidden": True, "dimension_scores": score_map(score), "autonomy_score": 3, "hard_gates": {name: "pass" for name in evaluate.GATES}},
                 {"reviewer_id": "reviewer-2", "arm_label_hidden": True, "dimension_scores": score_map(score), "autonomy_score": 3, "hard_gates": {name: "pass" for name in evaluate.GATES}},
@@ -80,6 +86,22 @@ def make_record(arm: str, run_id: str, score=3):
 
 
 class EvaluatorTests(unittest.TestCase):
+    def test_web_observability_allows_unknown_tool_count_without_tool_budget(self):
+        record = make_record("no-skill", "run-web")
+        self.assertEqual(evaluate.validate_run(record, SCHEMA, RUBRIC), 75.0)
+
+    def test_unobservable_tool_count_cannot_certify_a_tool_call_limit(self):
+        record = make_record("no-skill", "run-web-budget")
+        record["budget"]["tool_call_limit"] = 25
+        with self.assertRaisesRegex(evaluate.EvaluationError, "cannot certify its configured tool-call budget"):
+            evaluate.validate_run(record, SCHEMA, RUBRIC)
+
+    def test_visible_turnaround_upper_bound_enforces_web_budget(self):
+        record = make_record("no-skill", "run-web-time")
+        record["execution"]["visible_turnaround_upper_bound_seconds"] = 601
+        with self.assertRaisesRegex(evaluate.EvaluationError, "visible-turnaround budget"):
+            evaluate.validate_run(record, SCHEMA, RUBRIC)
+
     def test_score_formula_zero_and_maximum(self):
         weights = evaluate.read_rubric(RUBRIC)["weights"]
         self.assertEqual(evaluate.score_dimensions(score_map(0), weights), 0.0)
@@ -92,6 +114,14 @@ class EvaluatorTests(unittest.TestCase):
         a2, b2 = evaluate.validate_pair(a, b, SCHEMA, RUBRIC)
         self.assertEqual(a2["arm"], "no-skill")
         self.assertEqual(b2["arm"], "with-skill")
+
+    def test_pair_rejects_observability_capability_mismatch(self):
+        a = make_record("no-skill", "run-a")
+        b = make_record("with-skill", "run-b")
+        b["execution"]["tool_call_count_observable"] = True
+        b["execution"]["tool_call_count"] = 5
+        with self.assertRaisesRegex(evaluate.EvaluationError, "controls differ outside the Skill treatment"):
+            evaluate.validate_pair(a, b, SCHEMA, RUBRIC)
 
     def test_no_skill_cannot_claim_skill_available(self):
         a = make_record("no-skill", "run-a")

@@ -1,7 +1,7 @@
 {
-  "schema_version": "1.1",
-  "evaluator_version": "1.1.0",
-  "status": "frozen_protocol_v1_1",
+  "schema_version": "1.2",
+  "evaluator_version": "1.2.0",
+  "status": "frozen_protocol_v1_2",
   "model_workspace_visible": false,
   "blinding": {
     "evaluator_manifest_visible_to_models": false,
@@ -42,14 +42,14 @@
     {
       "path": "evaluators/evaluate.py",
       "role": "run_schema_validation_pair_integrity_source_hashing_score_recomputation_and_comparison",
-      "git_blob_sha1": "dab87468d27ab0d7765e9d97cf1f35cf627d2dd6",
-      "size_bytes": 48488
+      "git_blob_sha1": "c9c2eb4a3f76f5b2f9882a6de7d4d5209d6db54e",
+      "size_bytes": 52092
     },
     {
       "path": "evaluators/test_evaluate.py",
       "role": "unit_and_semantic_regression_tests",
-      "git_blob_sha1": "7af6288368ab1fa3886a78f8eb1a78b0bc122d71",
-      "size_bytes": 41472
+      "git_blob_sha1": "09ae36bf2046884744d8f5c1307f550169dc281b",
+      "size_bytes": 43468
     },
     {
       "path": "evaluators/verify_dirac_trace.py",
@@ -110,26 +110,26 @@
     {
       "path": "protocol/run-record.schema.json",
       "role": "strict_run_record_schema_with_A_B_conditional_Skill_constraints",
-      "git_blob_sha1": "e21622c991a8fabd27bef8ea53f83c2e32478662",
-      "size_bytes": 17750
+      "git_blob_sha1": "a2623f08eb8d58cb0e5ecd2b3674a7d151572f22",
+      "size_bytes": 19588
     },
     {
       "path": "protocol/comparison-report.schema.json",
       "role": "strict_machine_readable_comparison_report_schema",
-      "git_blob_sha1": "e2c61875b2963071d7f45eb163a89951fce7c111",
-      "size_bytes": 7858
+      "git_blob_sha1": "e939af7ebe6a381d754b73be64d2d2ea859ce466",
+      "size_bytes": 11425
     },
     {
       "path": "protocol/experimental-design.md",
       "role": "preregistered_experimental_design_and_pair_integrity_rules",
-      "git_blob_sha1": "a74565a8e837ab7088270a683307542308389cdb",
-      "size_bytes": 16471
+      "git_blob_sha1": "8bf060ac82dc9273d6456253ff379395a1454ea2",
+      "size_bytes": 18594
     },
     {
       "path": "protocol/scoring-rubric.yaml",
       "role": "weighted_score_and_preregistered_decision_thresholds",
-      "git_blob_sha1": "d1fc970d007ec9ea39d43fbbe011ee8f25f41c52",
-      "size_bytes": 7555
+      "git_blob_sha1": "d4b651006b624a8e6b8cbc9e34721aa4bdc8a1f9",
+      "size_bytes": 8748
     },
     {
       "path": "tasks/development/manifest.json",
@@ -152,8 +152,8 @@
     {
       "path": "protocol/environment-lock.json",
       "role": "pinned_protocol_or_model_visible_task_artifact",
-      "git_blob_sha1": "2ea3a71acfd2b476cd3f6b42000d2b3170cee63c",
-      "size_bytes": 3520
+      "git_blob_sha1": "4490897712d6e51ed4a57cc951ad5ca2b1e8209e",
+      "size_bytes": 5223
     },
     {
       "path": "tasks/development/T05-figure-audit.md",
