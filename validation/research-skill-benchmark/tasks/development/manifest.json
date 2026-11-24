@@ -1,7 +1,7 @@
 {
-  "schema_version": "1.0",
+  "schema_version": "1.1",
   "split": "development",
-  "status": "frozen_round_1_pilot",
+  "status": "frozen_protocol_v1_1",
   "tasks": [
     {
       "id": "T01",
@@ -74,50 +74,108 @@
       "skill_reference": "references/scientific-figure-audit.md",
       "input_sources": [
         {
-          "repository": "lm846802297-bit/LZ-3-body-for-hdm",
-          "commit": "8902abdb8bc44cad690059f9985204b4c0737657",
-          "path": "paper-source/figures/fixed_speed_recoil_spectra_v2.pdf",
-          "staged_path": "LZ-3-body-for-hdm/paper-source/figures/fixed_speed_recoil_spectra_v2.pdf",
-          "git_blob_sha1": "5f2d7a7192c0b3d78fa057ea8a004305f0ae13e8",
-          "size_bytes": 30288,
-          "sha256": "9eb61ea4dc77c6a23af29aa1d2887b692488daa9e997d59f0c7aea28c8be9df1",
+          "repository": "lm846802297-bit/axial-vector-review-response",
+          "commit": "80fef16fa73f77b5374e50e076ffaeaf71df3b76",
+          "path": "overleaf-source/axial-vector-model-building-v6/plots/axial_vector_constraint.pdf",
+          "staged_path": "axial-vector-review-response/overleaf-source/axial-vector-model-building-v6/plots/axial_vector_constraint.pdf",
+          "git_blob_sha1": "2c99971dd49595946e10cc2c58fc8ed5e7db6000",
+          "size_bytes": 681479,
+          "sha256": "376b232856af01995abe5b7350bc1ecc357d51c3b93002b23c8946a0b81f5adb",
           "role": "pdf_audit_input",
           "visibility": "model_input"
         },
         {
-          "repository": "lm846802297-bit/LZ-3-body-for-hdm",
-          "commit": "8902abdb8bc44cad690059f9985204b4c0737657",
-          "path": "research/three_body_calculation_and_validation/plot_user_dsigma_curve.py",
-          "staged_path": "LZ-3-body-for-hdm/research/three_body_calculation_and_validation/plot_user_dsigma_curve.py",
-          "git_blob_sha1": "1a1fd7ccca9961d10d4eea83df66ecaaf8377baa",
-          "size_bytes": 8378,
+          "repository": "lm846802297-bit/axial-vector-review-response",
+          "commit": "80fef16fa73f77b5374e50e076ffaeaf71df3b76",
+          "path": "overleaf-source/axial-vector-model-building-v6/plots/axial_vector_constraint_g_vs.pdf",
+          "staged_path": "axial-vector-review-response/overleaf-source/axial-vector-model-building-v6/plots/axial_vector_constraint_g_vs.pdf",
+          "git_blob_sha1": "918ae390bc57c146e4c27637189fe16c33536a1a",
+          "size_bytes": 595427,
+          "sha256": "a523d9e801a4fadf749bef3294fcf5ba3905d68f9077a41d4cea43e095cf1a4d",
+          "role": "pdf_audit_input",
+          "visibility": "model_input"
+        },
+        {
+          "repository": "lm846802297-bit/axial-vector-review-response",
+          "commit": "80fef16fa73f77b5374e50e076ffaeaf71df3b76",
+          "path": "overleaf-source/axial-vector-model-building-v6/main-v6.tex",
+          "staged_path": "axial-vector-review-response/overleaf-source/axial-vector-model-building-v6/main-v6.tex",
+          "git_blob_sha1": "b99f9e26a0b57acd0a4938ea6e03fc691a82becb",
+          "size_bytes": 71477,
+          "sha256": "de9132ba936c6b1f3701d7c5a6398e39b89357903be789953972527753540e9a",
+          "role": "companion_tex_source",
+          "visibility": "model_input"
+        },
+        {
+          "repository": "lm846802297-bit/radiative-dark-matter-nuclear-currents",
+          "commit": "9ed185aefe29cebbaaf575c5b2ae4b3fc16b0078",
+          "path": "nuclear/afh/data/native_v6_2026-11-22/native/afh_v6_xe131_eight_response_native.csv",
+          "staged_path": "radiative-dark-matter-nuclear-currents/nuclear/afh/data/native_v6_2026-11-22/native/afh_v6_xe131_eight_response_native.csv",
+          "git_blob_sha1": "ea2aca029b6f298f79fc009a17d6fb73d53da36e",
+          "size_bytes": 538596,
+          "sha256": "585ab0f483be0d8131566cefc4cb420c6db7e07bebbcd2b887da568cda2f4ffb",
+          "role": "figure_input_data",
+          "visibility": "model_input"
+        },
+        {
+          "repository": "lm846802297-bit/radiative-dark-matter-nuclear-currents",
+          "commit": "9ed185aefe29cebbaaf575c5b2ae4b3fc16b0078",
+          "path": "nuclear/afh/data/native_v6_2026-11-22/source/run_afh_full_response_database.wls",
+          "staged_path": "radiative-dark-matter-nuclear-currents/nuclear/afh/data/native_v6_2026-11-22/source/run_afh_full_response_database.wls",
+          "git_blob_sha1": "c815500398d7f55de079dffbaaa846bc84de81f5",
+          "size_bytes": 2947,
+          "sha256": "10b254971a1f9dade783cfdf603f15885b08894e4de54aae2791243bf3369642",
+          "role": "native_calculation_exporter",
+          "visibility": "model_input"
+        },
+        {
+          "repository": "lm846802297-bit/radiative-dark-matter-nuclear-currents",
+          "commit": "9ed185aefe29cebbaaf575c5b2ae4b3fc16b0078",
+          "path": "nuclear/afh/data/native_v6_2026-11-22/run_manifest.json",
+          "staged_path": "radiative-dark-matter-nuclear-currents/nuclear/afh/data/native_v6_2026-11-22/run_manifest.json",
+          "git_blob_sha1": "a7b271f1ecd8eacc0a29d67623a2ae1c31e341a6",
+          "size_bytes": 10803,
+          "sha256": "5cc300da9d199946a6d9df08c8e448d2ddd426a50f4310a9984ce1c1e06b39f7",
+          "role": "native_run_manifest",
+          "visibility": "model_input"
+        },
+        {
+          "repository": "lm846802297-bit/radiative-dark-matter-nuclear-currents",
+          "commit": "9ed185aefe29cebbaaf575c5b2ae4b3fc16b0078",
+          "path": "nuclear/afh/data/native_v6_2026-11-22/README.md",
+          "staged_path": "radiative-dark-matter-nuclear-currents/nuclear/afh/data/native_v6_2026-11-22/README.md",
+          "git_blob_sha1": "b987e3b12f710dad834af7909b367e6caa05e2da",
+          "size_bytes": 2138,
+          "sha256": "f79b51c251b164a4f0e144e06def48e434b408b98538e3e791db87d2bcf43101",
+          "role": "dataset_readme",
+          "visibility": "model_input"
+        },
+        {
+          "repository": "lm846802297-bit/radiative-dark-matter-nuclear-currents",
+          "commit": "9ed185aefe29cebbaaf575c5b2ae4b3fc16b0078",
+          "path": "nuclear/afh/data/native_v6_2026-11-22/SHA256SUMS.txt",
+          "staged_path": "radiative-dark-matter-nuclear-currents/nuclear/afh/data/native_v6_2026-11-22/SHA256SUMS.txt",
+          "git_blob_sha1": "20dfa29c8bf3c74be74a0841aea4f0ac66a5f939",
+          "size_bytes": 2473,
+          "sha256": "3ec08fd0fb76a93b94d21ee12b3f3a06db2fc40ac46d94aa376995629e7b81a9",
+          "role": "dataset_checksum_manifest",
+          "visibility": "model_input"
+        },
+        {
+          "repository": "lm846802297-bit/high-energy-theory-research",
+          "commit": "4009faeae4411cbd677554b9eb9d25ad58abde75",
+          "path": "validation/research-skill-benchmark/tools/plot_afh_xe131_responses.py",
+          "staged_path": "high-energy-theory-research/validation/research-skill-benchmark/tools/plot_afh_xe131_responses.py",
+          "git_blob_sha1": "d66f44b38b9dc1dd8a959b5e1729795113af7d19",
+          "size_bytes": 12700,
+          "sha256": null,
           "role": "figure_generator",
-          "visibility": "model_input"
-        },
-        {
-          "repository": "lm846802297-bit/LZ-3-body-for-hdm",
-          "commit": "8902abdb8bc44cad690059f9985204b4c0737657",
-          "path": "research/three_body_calculation_and_validation/results/fixed_speed_xe131_dsigma_450kev.csv",
-          "staged_path": "LZ-3-body-for-hdm/research/three_body_calculation_and_validation/results/fixed_speed_xe131_dsigma_450kev.csv",
-          "git_blob_sha1": "a3b590d1705d1478a293eb9e37f6587f2040d57c",
-          "size_bytes": 9348,
-          "role": "figure_input_data",
-          "visibility": "model_input"
-        },
-        {
-          "repository": "lm846802297-bit/LZ-3-body-for-hdm",
-          "commit": "8902abdb8bc44cad690059f9985204b4c0737657",
-          "path": "research/three_body_calculation_and_validation/results/local_minima_refinement_1keV.csv",
-          "staged_path": "LZ-3-body-for-hdm/research/three_body_calculation_and_validation/results/local_minima_refinement_1keV.csv",
-          "git_blob_sha1": "423bce6526ae931f6d0b95262e3a405872e44d48",
-          "size_bytes": 3949,
-          "role": "figure_input_data",
           "visibility": "model_input"
         }
       ],
       "required_evaluators": [
         "E-T05A-PDF-TEXT-SCREEN",
-        "E-T05B-DATA-TO-FIGURE"
+        "E-T05B-AFH-RESPONSE-REPRO"
       ]
     },
     {
