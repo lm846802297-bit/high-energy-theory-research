@@ -41,7 +41,7 @@ def make_record(arm: str, run_id: str, score=3):
             "analysis_plan_sha256": "f" * 64,
         },
         "model": {"label": "test-model", "immutable_id": None, "reasoning_effort": "high", "sampling": None},
-        "runtime": {"os": "test-host", "client_product": "ChatGPT Web", "client_version": null, "browser": "test-browser", "python_version": "3.13", "architecture": "x86_64", "hardware": {"cpu": "test"}},
+        "runtime": {"os": "test-host", "client_product": "ChatGPT Web", "client_version": None, "browser": "test-browser", "python_version": "3.13", "architecture": "x86_64", "hardware": {"cpu": "test"}},
         "project_context": {"repository": "test/repo", "source_commit": "f" * 40, "instructions_sha256": "1" * 64, "workspace_snapshot_sha256": "2" * 64, "shared_skill_routing_removed": True},
         "task_input": {"prompt_sha256": "3" * 64, "input_manifest_sha256": "4" * 64, "source_commit": "f" * 40, "source_files": []},
         "tools": {"allowlist": ["python"], "network_policy": "offline", "versions": {"python": "3.13"}},
