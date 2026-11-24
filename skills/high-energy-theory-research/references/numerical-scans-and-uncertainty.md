@@ -2,9 +2,13 @@
 
 Load this reference for numerical integration, multidimensional quadrature, parameter scans, interpolation, fitting, Monte Carlo calculations, or numerical results used in a physical claim.
 
+This reference governs numerical work **after** the task-complexity gate has established that a numerical result is needed. It does not create a requirement to perform numerical work. For a self-contained exact derivation, prefer an analytic check; do not add a numerical integral merely to demonstrate a second method. Before launching a numerical check, state what specific uncertainty or failure mode it will resolve and what evidence it adds. If it adds no decision-relevant evidence, skip it.
+
+A one-point numerical spot check is not a convergence study. Label it as a diagnostic spot check and do not present it as a converged production result.
+
 ## Method selection
 
-Choose the method from the mathematical structure, regularity, dimensionality, boundaries, singularities, and required precision. Possible methods include analytic reduction, adaptive quadrature, Gauss-Kronrod, Gaussian or sparse-grid quadrature, quasi-Monte Carlo, Monte Carlo, importance sampling, deterministic parameter grids, and problem-specific transformations.
+Numerical methods are not the default independent check for an analytic result. First decide whether a numerical result is actually needed. If it is, choose the method from the mathematical structure, regularity, dimensionality, boundaries, singularities, and required precision. Possible methods include analytic reduction, adaptive quadrature, Gauss-Kronrod, Gaussian or sparse-grid quadrature, quasi-Monte Carlo, Monte Carlo, importance sampling, deterministic parameter grids, and problem-specific transformations.
 
 Do not select an algorithm merely because a package or Skill recommends it. Record why the method is appropriate and which failure modes are relevant.
 
@@ -49,9 +53,9 @@ Agreement between two routines that share the same integrand construction, trace
 
 A numerical convergence study does not establish that the integrand, model, or physical assumptions are correct. A physics identity does not establish numerical convergence. Report these evidence classes separately.
 
-## Required run record
+## Run-record depth
 
-Retain native outputs and enough information to reconstruct the calculation:
+For a production calculation or a numerical result supporting a quantitative physical claim, retain native outputs and enough information to reconstruct the calculation:
 
 - exact source commit and source-file identities;
 - input file paths/immutable source identifiers, byte sizes, and SHA-256;
@@ -61,6 +65,8 @@ Retain native outputs and enough information to reconstruct the calculation:
 - convergence table, error budget, independent-check results, and known failed/blocked checks.
 
 Follow the repository compute and archival policies. Archive extracted native files, not a newly generated ZIP/TAR as the only result. Keep computed, archived, numerically validated, and physically validated statuses distinct.
+
+For a one-off diagnostic spot check that is not used as a production result, retain at minimum the exact expression/point, script or command if code was run, precision and parameters, output, and tool/runtime version. Label its scope explicitly. Do not impose the full production-run archive on a trivial diagnostic, and do not use a spot check as a substitute for convergence evidence when a quantitative numerical result is claimed.
 
 ## Interpretation
 

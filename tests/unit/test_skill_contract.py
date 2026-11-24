@@ -23,9 +23,39 @@ class SkillContractTests(unittest.TestCase):
             "scientific-figure-audit.md",
             "paper-reading.md",
             "optional-tooling.md",
+            "central-repository-governance.md",
         ):
             with self.subTest(name=name):
                 self.assertTrue((refs / name).is_file())
+
+
+    def test_task_complexity_gate_is_explicit(self):
+        skill_text = SKILL.read_text(encoding="utf-8")
+        self.assertIn("Task-complexity gate and proportionality", skill_text)
+        self.assertIn("Quick analytic task", skill_text)
+        self.assertIn("invocation does not make tools", skill_text)
+        self.assertIn("Do not create a project record, run manifest", skill_text)
+
+    def test_task_router_prefers_lowest_sufficient_tier(self):
+        router = (SKILL.parent / "references" / "task-router.md").read_text(encoding="utf-8")
+        self.assertIn("Tier 0 — Quick analytic", router)
+        self.assertIn("Tier 2 — Numerical/computational", router)
+        self.assertIn("lowest-effort path", router)
+        self.assertIn("Stop once the requested deliverable", router)
+        self.assertIn("do not run a numerical integral solely", router)
+
+    def test_numerical_reference_does_not_force_numeric_work(self):
+        numerical = (SKILL.parent / "references" / "numerical-scans-and-uncertainty.md").read_text(encoding="utf-8")
+        self.assertIn("does not create a requirement to perform numerical work", numerical)
+        self.assertIn("Numerical methods are not the default independent check", numerical)
+        self.assertIn("one-off diagnostic spot check", numerical)
+
+    def test_central_repository_rules_are_isolated(self):
+        skill_text = SKILL.read_text(encoding="utf-8")
+        central = (SKILL.parent / "references" / "central-repository-governance.md").read_text(encoding="utf-8")
+        self.assertNotIn("current UV–EFT matching workstream belongs", skill_text)
+        self.assertIn("current UV–EFT matching workstream belongs", central)
+        self.assertIn("only when the active repository is", skill_text)
 
     def test_candidate_status_is_explicit(self):
         readme = (ROOT / "README.md").read_text(encoding="utf-8").lower()
