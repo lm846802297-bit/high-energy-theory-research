@@ -332,7 +332,7 @@ class EvaluatorTests(unittest.TestCase):
 
             evaluator_manifest = {
                 "deterministic_evaluators": [{
-                    "id": "E-T05B-DATA-TO-FIGURE",
+                    "id": "E-T05B-AFH-RESPONSE-REPRO",
                     "repository": "owner/" + repo_slug,
                     "generator": {"path": generator_rel, **identity(generator)},
                     "model_visible_inputs": [
@@ -527,13 +527,15 @@ class EvaluatorTests(unittest.TestCase):
             pdf_result = {"auditable": True, "below_minimum_count": 0, "spacing_issue_count": 0}
             svg_result = {
                 "status": "PASS",
+                "evaluator_id": "E-T05B-AFH-RESPONSE-REPRO",
                 "evaluation_mode": "trusted_baseline_only",
                 "submission_evaluated": False,
                 "submission_pass": None,
+                "input_identities": [{} for _ in range(8)],
             }
             result_specs = [
                 ("results/t05-pdf.json", "E-T05A-PDF-TEXT-SCREEN", pdf_result),
-                ("results/t05-svg.json", "E-T05B-DATA-TO-FIGURE", svg_result),
+                ("results/t05-svg.json", "E-T05B-AFH-RESPONSE-REPRO", svg_result),
             ]
             for relative, evaluator_id, payload in result_specs:
                 path = root / relative
@@ -568,7 +570,7 @@ class EvaluatorTests(unittest.TestCase):
                 if artifact["path"] == "results/t05-svg.json":
                     artifact["sha256"] = svg_digest
             for check in record["evaluation"]["deterministic_checks"]:
-                if check["id"] == "E-T05B-DATA-TO-FIGURE":
+                if check["id"] == "E-T05B-AFH-RESPONSE-REPRO":
                     check["output_sha256"] = svg_digest
             validated = evaluate.validate_required_evaluators(record, task, root)
             self.assertEqual(set(validated), set(task["required_evaluators"]))
