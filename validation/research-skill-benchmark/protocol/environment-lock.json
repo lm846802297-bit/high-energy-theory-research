@@ -1,6 +1,6 @@
 {
-  "schema_version": "1.1",
-  "status": "frozen_protocol_v1_1_round_1_pilot",
+  "schema_version": "1.2",
+  "status": "draft_pending_final_host_capture_and_hash_freeze",
   "captured_at_utc": null,
   "host": {
     "os_name": "Windows (version/build not exposed)",
@@ -34,10 +34,10 @@
   },
   "skill_treatment": {
     "source_repository": "https://github.com/lm846802297-bit/high-energy-theory-research",
-    "source_commit": "bee95d3c60dabc8e642cc1fb3f4abc63350e5b41",
-    "plugin_version": "0.1.0",
+    "source_commit": "f83c28825215c2d306c2966991a09aae84c2d195",
+    "plugin_version": "0.2.0",
     "skill_directory_manifest_sha256": null,
-    "installation_manifest_sha256": "985361a8632e3592eb1b6cc40e15cfff5671ccb939d1f36e5f07af3086410af9",
+    "installation_manifest_sha256": null,
     "task_reference_files": [
       "references/symbolic-calculation.md",
       "references/numerical-scans-and-uncertainty.md",
@@ -46,9 +46,9 @@
     ]
   },
   "run_budget": {
-    "max_wall_time_seconds_per_run": 1800,
-    "max_tokens_per_run_if_exposed": null,
-    "max_tool_calls_per_run": 25,
+    "visible_turnaround_limit_seconds_per_run": 1800,
+    "tool_call_limit_per_run": null,
+    "token_limit_per_run_if_exposed": null,
     "same_budget_for_both_arms": true
   },
   "notes": [
@@ -57,10 +57,14 @@
     "The exact Skill source commit is pinned to the installed plugin's source manifest. The plugin installation-manifest SHA-256 is recorded; per-file source SHA-256 values are in the installation manifest.",
     "A and B require fresh independent ChatGPT Web conversations. A must not select or invoke the plugin; B must explicitly select and invoke the installed Particle Physics Research plugin.",
     "No web search, external connectors, external APIs, or additional plugins are permitted in either arm. Stage identical task inputs before the run.",
-    "The 30-minute wall-time and 25-tool-call limits apply equally to both arms. Record token counts only if exposed.",
     "Unexposed host/runtime fields remain null by design; no values are inferred.",
     "The protocol and scoring rules are frozen for Round 1. Do not alter them after observing any pilot outputs.",
     "Protocol v1.1 replaces the private LZ T05 inputs with public pinned sources: two axial-vector paper figure panels and the Native AFH Xe-131 response CSV/export provenance bundle.",
-    "T05 Part B is a deterministic presentation transformation of the existing native CSV. It does not rerun the unavailable original AFH package or calculate new nuclear responses."
+    "T05 Part B is a deterministic presentation transformation of the existing native CSV. It does not rerun the unavailable original AFH package or calculate new nuclear responses.",
+    "Protocol v1.2 draft: plugin v0.2.0 is installed; its 14 source-file Git Blob SHA-1 values match source commit f83c28825215c2d306c2966991a09aae84c2d195. Final installation-manifest SHA-256 and host capture remain to be frozen.",
+    "ChatGPT Web send-to-first-observation timing is a visible turnaround upper bound, not backend wall time. Record UI Worked labels separately. Backend wall time, tokens, per-invocation tool count, and backend transcript remain null/unavailable unless exposed.",
+    "No tool-call limit is imposed for the current Web host because per-invocation tool logs are unavailable. Never infer zero calls or claim compliance with a 25-call budget.",
+    "Round 1 uses a 30-minute visible-turnaround upper bound in both arms. The original five weighted dimensions and 18-run design remain unchanged.",
+    "Secondary metrics: unnecessary-computation count/events, method-selection note/autonomy, reproducibility evidence items, and observable resource overhead. These do not alter the weighted Q score."
   ]
 }
