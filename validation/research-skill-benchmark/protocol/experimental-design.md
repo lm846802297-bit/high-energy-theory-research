@@ -1,6 +1,6 @@
 # Experimental design — v1.2
 
-Status: **DRAFT PROTOCOL v1.2. Round 1 remains the 18-run T01/T02/T03 pilot. Freeze after host capture and lock hashes are verified; no model runs have started.**
+Status: **FROZEN PROTOCOL v1.2. Round 1 remains the 18-run T01/T02/T03 pilot; no model runs have started.**
 
 ## 1. Hypothesis and estimand
 
