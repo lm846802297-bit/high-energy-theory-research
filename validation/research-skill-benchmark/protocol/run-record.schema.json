@@ -140,8 +140,8 @@
       "additionalProperties": false,
       "required": [
         "os",
-        "codex_product",
-        "codex_version",
+        "client_product",
+        "client_version",
         "python_version",
         "architecture",
         "hardware"
@@ -151,37 +151,24 @@
           "type": "string",
           "minLength": 1
         },
-        "codex_product": {
+        "client_product": {
           "type": "string",
           "minLength": 1
         },
-        "codex_version": {
-          "type": "string",
-          "minLength": 1
+        "client_version": {
+          "type": ["string", "null"]
         },
-        "cli_version": {
-          "type": [
-            "string",
-            "null"
-          ]
+        "browser": {
+          "type": ["string", "null"]
         },
         "python_version": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "architecture": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "hardware": {
-          "type": [
-            "object",
-            "null"
-          ]
+          "type": ["object", "null"]
         }
       }
     },
