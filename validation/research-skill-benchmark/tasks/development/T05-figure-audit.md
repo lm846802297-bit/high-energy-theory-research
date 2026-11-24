@@ -70,10 +70,10 @@ The original AFH package is not redistributed. The WLS file is the retained Nati
 
 6. Deterministic plotting adapter supplied with this benchmark:
    - Repository: lm846802297-bit/high-energy-theory-research
-   - Source commit: 4009faeae4411cbd677554b9eb9d25ad58abde75
+   - Source commit: b540b0cb5ef030147b0ceb2357506b02e5f218ea
    - Path: validation/research-skill-benchmark/tools/plot_afh_xe131_responses.py
-   - Git blob SHA-1: d66f44b38b9dc1dd8a959b5e1729795113af7d19
-   - Size: 12,700 bytes
+   - Git blob SHA-1: f68c3beb0c02048a566d7454a9232ff2041af032
+   - Size: 12,692 bytes
 
 This adapter uses only the Python standard library. It creates two deterministic SVG views from the pinned CSV: six positive diagonal responses on a logarithmic axis, and the two signed interference responses on separate symmetric-log panels. It is a presentation transformation, not a new AFH calculation.
 
