@@ -1,9 +1,9 @@
 {
   "schema_version": "1.0",
-  "status": "incomplete_pending_chatgpt_web_host_capture",
-  "captured_at_utc": null,
+  "status": "frozen_pending_private_source_token_and_host_fingerprint",
+  "captured_at_utc": "2026-11-24T00:00:00Z",
   "host": {
-    "os_name": null,
+    "os_name": "Windows",
     "os_build": null,
     "architecture": null,
     "cpu_model": null,
@@ -12,30 +12,32 @@
   },
   "client": {
     "product": "ChatGPT Web",
-    "client_version": null,
-    "browser_name": null,
-    "browser_version": null,
-    "operating_mode": "fresh web conversations; one task per conversation"
+    "version": null,
+    "browser": "Google Chrome 157.0.0.0",
+    "operating_mode": "fresh independent conversation per run"
   },
   "model": {
-    "model_label": null,
+    "model_label": "GPT-6 Pro (Astra Pro)",
     "immutable_model_id_if_exposed": null,
-    "reasoning_effort": null,
+    "reasoning_effort": "Pro default; no separate numeric effort setting",
     "sampling_parameters_if_exposed": null,
     "system_configuration_fingerprint_if_available": null
   },
   "tools": {
-    "available_tools_allowlist": [],
+    "available_tools_allowlist": [
+      "ChatGPT Web conversation",
+      "ChatGPT built-in Python execution (if exposed in the run)"
+    ],
     "python_version": null,
     "packages_lock_sha256": null,
-    "network_policy": "offline after staging; web search and external connectors disabled for all scored sessions"
+    "network_policy": "offline after staging; no web search, no external connectors, no external APIs; the only treatment difference is selection/invocation of Particle Physics Research in B"
   },
   "skill_treatment": {
     "source_repository": "https://github.com/lm846802297-bit/high-energy-theory-research",
     "source_commit": "bee95d3c60dabc8e642cc1fb3f4abc63350e5b41",
     "plugin_version": "0.1.0",
     "skill_directory_manifest_sha256": null,
-    "installation_manifest_sha256": null,
+    "installation_manifest_sha256": "985361a8632e3592eb1b6cc40e15cfff5671ccb939d1f36e5f07af3086410af9",
     "task_reference_files": [
       "references/symbolic-calculation.md",
       "references/numerical-scans-and-uncertainty.md",
@@ -49,11 +51,13 @@
     "same_budget_for_both_arms": true
   },
   "notes": [
-    "Capture the actual OS, browser and ChatGPT Web client details from the benchmark host; use null when a value is not exposed.",
-    "Record the exact model label and reasoning setting shown by the ChatGPT Web interface before the first run; do not infer a hidden model build.",
-    "Use the exact installed plugin/Skill source commit and version recorded above. Do not benchmark against a moving branch.",
-    "A and B use fresh conversations with identical built-in tools and staged input files. No external search, connected apps, or external APIs are allowed during scored runs.",
-    "Arm A must have the Particle Physics Research plugin unselected and no Skill references in its context. Arm B explicitly selects and invokes the installed plugin. If A receives Skill instructions or plugin tool context, invalidate the pair.",
-    "The 30-minute wall-time and 25-tool-call limits apply equally to both arms. Token counts are recorded only if exposed."
+    "Model label and mode fixed by user: GPT-6 Pro (Astra Pro), Pro default reasoning configuration.",
+    "Browser family/version is recorded from the active ChatGPT Web user-agent metadata; OS is Windows, but build, architecture, CPU, GPU, memory, exact ChatGPT client build, and Python version are not exposed and remain null.",
+    "The exact Skill source commit is pinned to the installed plugin's source manifest. The plugin installation-manifest SHA-256 is recorded; per-file source SHA-256 values are in the installation manifest.",
+    "A and B require fresh independent ChatGPT Web conversations. A must not select or invoke the plugin; B must explicitly select and invoke the installed Particle Physics Research plugin.",
+    "No web search, external connectors, external APIs, or additional plugins are permitted in either arm. Stage identical task inputs before the run.",
+    "The 30-minute wall-time and 25-tool-call limits apply equally to both arms. Record token counts only if exposed.",
+    "Before scored runs, capture any additional host/runtime fields exposed by the UI. Do not infer unavailable fields.",
+    "CI T05 uses the private LZ-3-body-for-hdm repository. The repository secret LZ_REPO_READ_TOKEN must be configured with read-only Contents permission for that repository before the full CI job can pass."
   ]
 }
