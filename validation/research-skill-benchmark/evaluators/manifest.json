@@ -42,14 +42,14 @@
     {
       "path": "evaluators/evaluate.py",
       "role": "run_schema_validation_pair_integrity_source_hashing_score_recomputation_and_comparison",
-      "git_blob_sha1": "b156178b9f1f9b9378f5de96528eac37b0d95b6e",
+      "git_blob_sha1": "dab87468d27ab0d7765e9d97cf1f35cf627d2dd6",
       "size_bytes": 48488
     },
     {
       "path": "evaluators/test_evaluate.py",
       "role": "unit_and_semantic_regression_tests",
-      "git_blob_sha1": "648767bf8203736cfab3af53757399253f94c583",
-      "size_bytes": 41018
+      "git_blob_sha1": "458986300e9e2a14d9e2add37af740b4abd32e89",
+      "size_bytes": 41056
     },
     {
       "path": "evaluators/verify_dirac_trace.py",
@@ -140,8 +140,8 @@
     {
       "path": "protocol/environment-lock.json",
       "role": "pinned_protocol_or_model_visible_task_artifact",
-      "git_blob_sha1": "ad3fcc76951f3e85ea696bea92ebce72f1a52f5d",
-      "size_bytes": 3729
+      "git_blob_sha1": "2ea3a71acfd2b476cd3f6b42000d2b3170cee63c",
+      "size_bytes": 3520
     },
     {
       "path": "tasks/development/T05-figure-audit.md",
