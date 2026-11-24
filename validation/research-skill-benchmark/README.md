@@ -58,7 +58,7 @@ The compare command consumes immutable A/B run records and a task manifest, veri
 ## Current status
 
 - Benchmark and development tasks are in central PR #27.
-- Protocol remains draft pending Windows host capture and independent review.
+- Protocol remains draft pending ChatGPT Web host capture and independent review.
 - No model A/B result exists; no Skill module has been accepted or rejected.
 - The evaluator manifest, reference outputs, and development key are evaluator-only and must not be mounted into model workspaces.
 - Holdout prompts/keys have intentionally not been created; an independent evaluator prepares them only after protocol and Skill freeze.
