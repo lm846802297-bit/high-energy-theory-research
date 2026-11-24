@@ -48,7 +48,7 @@ Round 1 uses T01 theoretical derivation, T02 reduced threshold phase-space integ
 
 - Use fresh sessions and clean working directories.
 - Randomize whether A or B runs first for each task/repetition using a recorded seed.
-- **v1.3 Round 1 randomization is frozen:** seed = `20261124`; generate a balanced list containing five `A_then_B` and four `B_then_A` orders, shuffle it with Python `random.Random(20261124).shuffle`, and assign it to the nine pairs in the order T01-r1, T01-r2, T01-r3, T02-r1, T02-r2, T02-r3, T03-r1, T03-r2, T03-r3. The resulting pair-order map is: T01-r1 B_then_A; T01-r2 B_then_A; T01-r3 A_then_B; T02-r1 A_then_B; T02-r2 A_then_B; T02-r3 B_then_A; T03-r1 B_then_A; T03-r2 A_then_B; T03-r3 A_then_B. Record the same seed and pair order in both run records of each pair.
+- **v1.3 Round 1 randomization is frozen:** seed = `20261124`; generate a balanced list containing five `A_then_B` and four `B_then_A` orders, shuffle it with Python 3.13.5 `random.Random(20261124).shuffle`, and assign it to the nine pairs in the order T01-r1, T01-r2, T01-r3, T02-r1, T02-r2, T02-r3, T03-r1, T03-r2, T03-r3. The resulting pair-order map is: T01-r1 B_then_A; T01-r2 B_then_A; T01-r3 A_then_B; T02-r1 A_then_B; T02-r2 A_then_B; T02-r3 B_then_A; T03-r1 B_then_A; T03-r2 A_then_B; T03-r3 A_then_B. Record the same seed and pair order in both run records of each pair.
 - Pair runs by task ID and repetition index.
 - Do not reuse one arm's conversation, outputs, intermediate files, or discoveries in the other arm.
 - If an infrastructure failure prevents a run, preserve its record and rerun both members under a new pair ID. Never silently discard an unfavorable scientific result.

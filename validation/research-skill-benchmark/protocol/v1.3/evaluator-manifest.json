@@ -42,7 +42,7 @@
     {
       "path": "evaluators/evaluate_v1_3.py",
       "role": "v1_3_run_schema_validation_pair_integrity_source_hashing_score_recomputation_and_comparison",
-      "git_blob_sha1": "37549dbc1481f9eec24025cc1570169e386ced46",
+      "git_blob_sha1": "ec8ca479c8f950c1d46fbc2def5f96d34a50dc08",
       "size_bytes": 52154
     },
     {
@@ -122,8 +122,8 @@
     {
       "path": "protocol/v1.3/experimental-design.md",
       "role": "preregistered_experimental_design_and_pair_integrity_rules",
-      "git_blob_sha1": "457dfc3daf61118ba0403430dc64917b37ac77f8",
-      "size_bytes": 19784
+      "git_blob_sha1": "e23532cd31a38956f9bdca8ed8afebd881a2c9f6",
+      "size_bytes": 19791
     },
     {
       "path": "protocol/v1.3/scoring-rubric.yaml",
@@ -152,8 +152,8 @@
     {
       "path": "protocol/v1.3/environment-lock.json",
       "role": "pinned_protocol_or_model_visible_task_artifact",
-      "git_blob_sha1": "f9968d0c4f324e4eef44a5e2c6aace05af00632b",
-      "size_bytes": 5800
+      "git_blob_sha1": "d8f55b91140406f3193e0d1754e4689dd4497a70",
+      "size_bytes": 5943
     },
     {
       "path": "tasks/development/T05-figure-audit.md",

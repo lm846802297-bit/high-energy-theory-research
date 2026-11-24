@@ -58,20 +58,20 @@
     "A and B require fresh independent ChatGPT Web conversations. A must not select or invoke the plugin; B must explicitly select and invoke the installed Particle Physics Research plugin.",
     "No web search, external connectors, external APIs, or additional plugins are permitted in either arm. Stage identical task inputs before the run.",
     "Unexposed host/runtime fields remain null by design; no values are inferred.",
-    "The protocol and scoring rules are frozen for Round 1. Do not alter them after observing any pilot outputs.",
+    "The candidate protocol and scoring rules are fixed for PR review; after merge, do not alter them after observing any pilot outputs.",
     "Protocol v1.1 replaces the private LZ T05 inputs with public pinned sources: two axial-vector paper figure panels and the Native AFH Xe-131 response CSV/export provenance bundle.",
     "T05 Part B is a deterministic presentation transformation of the existing native CSV. It does not rerun the unavailable original AFH package or calculate new nuclear responses.",
     "ChatGPT Web send-to-first-observation timing is a visible turnaround upper bound, not backend wall time. Record UI Worked labels separately. Backend wall time, tokens, per-invocation tool count, and backend transcript remain null/unavailable unless exposed.",
     "No tool-call limit is imposed for the current Web host because per-invocation tool logs are unavailable. Never infer zero calls or claim compliance with a 25-call budget.",
     "Round 1 uses a 30-minute visible-turnaround upper bound in both arms. The original five weighted dimensions and 18-run design remain unchanged.",
     "Secondary metrics: unnecessary-computation count/events, method-selection note/autonomy, reproducibility evidence items, and observable resource overhead. These do not alter the weighted Q score.",
-    "Environment lock frozen for protocol v1.3 and the Round 1 pilot. Plugin v0.2.0 installation manifest SHA-256 is 0c2f09ca324cbc24d32b0be41efa07581ef73322df63ba567271df64d9e6dc0b; all 14 source-file Git Blob SHA-1 values match the pinned source commit.",
+    "Candidate environment lock prepared for the protocol v1.3 Round 1 pilot; it becomes the active frozen lock only after PR review and merge. Plugin v0.2.0 installation-manifest SHA-256 is 0c2f09ca324cbc24d32b0be41efa07581ef73322df63ba567271df64d9e6dc0b; all 14 source-file Git Blob SHA-1 values match the pinned source commit.",
     "The Web host does not technically enforce offline mode. The protocol forbids web search, external connectors, and external APIs during scored runs; any observed external retrieval is recorded as a deviation and assessed symmetrically.",
     "Tool-call count and backend transcript are unobservable in the current ChatGPT Web interface. Record tool_call_count=null, tool_call_count_observable=false, tool_log_artifact=null, and backend_transcript_available=false. No hard tool-call cap is claimed.",
     "The host capture time is not exposed as an offset-aware timestamp in this record, so captured_at_utc remains null rather than inferred.",
     "Protocol v1.3 is a separate GPT-6 / Extra High cohort from v1.2 (GPT-6 Pro / Astra Pro); do not pool or directly compare scores across protocol versions.",
     "The v1.3 plugin treatment is unchanged: Particle Physics Research v0.2.0 at source commit f83c28825215c2d306c2966991a09aae84c2d195, with installation-manifest SHA-256 0c2f09ca324cbc24d32b0be41efa07581ef73322df63ba567271df64d9e6dc0b.",
-    "Round 1 randomization seed is 20261124; pair order is preassigned in protocol/v1.3/experimental-design.md.",
+    "Round 1 randomization seed is 20261124; the pair-order map was generated with Python 3.13.5 and is preassigned in protocol/v1.3/experimental-design.md.",
     "No v1.3 model runs have started. Do not start until the PR is reviewed and merged; record the exact merge commit in every run."
   ]
 }

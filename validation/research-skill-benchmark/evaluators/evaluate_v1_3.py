@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Deterministic evaluator for Particle Physics Research Skill Benchmark v1.1.
+"""Deterministic evaluator for Particle Physics Research Skill Benchmark v1.3.
 
 This program validates run records, verifies pinned source bytes, checks paired
 A/B controls, recomputes rubric scores, and creates a blinded-comparison report.
