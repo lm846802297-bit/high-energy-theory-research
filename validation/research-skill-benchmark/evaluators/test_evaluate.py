@@ -115,6 +115,14 @@ class EvaluatorTests(unittest.TestCase):
         self.assertEqual(a2["arm"], "no-skill")
         self.assertEqual(b2["arm"], "with-skill")
 
+    def test_pair_rejects_observability_capability_mismatch(self):
+        a = make_record("no-skill", "run-a")
+        b = make_record("with-skill", "run-b")
+        b["execution"]["tool_call_count_observable"] = True
+        b["execution"]["tool_call_count"] = 5
+        with self.assertRaisesRegex(evaluate.EvaluationError, "controls differ outside the Skill treatment"):
+            evaluate.validate_pair(a, b, SCHEMA, RUBRIC)
+
     def test_no_skill_cannot_claim_skill_available(self):
         a = make_record("no-skill", "run-a")
         a["skill"]["available"] = True
