@@ -1,0 +1,63 @@
+{
+  "schema_version": "1.0",
+  "status": "frozen_with_unexposed_host_fields",
+  "captured_at_utc": null,
+  "host": {
+    "os_name": "Windows",
+    "os_build": null,
+    "architecture": null,
+    "cpu_model": null,
+    "gpu_model": null,
+    "memory_gb": null
+  },
+  "client": {
+    "product": "ChatGPT Web",
+    "version": null,
+    "browser": "Google Chrome 157.0.0.0",
+    "operating_mode": "fresh independent conversation per run"
+  },
+  "model": {
+    "model_label": "GPT-6 Pro (Astra Pro)",
+    "immutable_model_id_if_exposed": null,
+    "reasoning_effort": "Pro default; no separate numeric effort setting",
+    "sampling_parameters_if_exposed": null,
+    "system_configuration_fingerprint_if_available": null
+  },
+  "tools": {
+    "available_tools_allowlist": [
+      "ChatGPT Web conversation",
+      "ChatGPT built-in Python execution (if exposed in the run)"
+    ],
+    "python_version": null,
+    "packages_lock_sha256": null,
+    "network_policy": "offline after staging; no web search, no external connectors, no external APIs; the only treatment difference is selection/invocation of Particle Physics Research in B"
+  },
+  "skill_treatment": {
+    "source_repository": "https://github.com/lm846802297-bit/high-energy-theory-research",
+    "source_commit": "bee95d3c60dabc8e642cc1fb3f4abc63350e5b41",
+    "plugin_version": "0.1.0",
+    "skill_directory_manifest_sha256": null,
+    "installation_manifest_sha256": "985361a8632e3592eb1b6cc40e15cfff5671ccb939d1f36e5f07af3086410af9",
+    "task_reference_files": [
+      "references/symbolic-calculation.md",
+      "references/numerical-scans-and-uncertainty.md",
+      "references/paper-reading.md"
+    ]
+  },
+  "run_budget": {
+    "max_wall_time_seconds_per_run": 1800,
+    "max_tokens_per_run_if_exposed": null,
+    "max_tool_calls_per_run": 25,
+    "same_budget_for_both_arms": true
+  },
+  "notes": [
+    "Model label and mode fixed by user: GPT-6 Pro (Astra Pro), Pro default reasoning configuration.",
+    "Browser family/version is recorded from the active ChatGPT Web user-agent metadata; OS is Windows, but build, architecture, CPU, GPU, memory, exact ChatGPT client build, and Python version are not exposed and remain null.",
+    "The exact Skill source commit is pinned to the installed plugin's source manifest. The plugin installation-manifest SHA-256 is recorded; per-file source SHA-256 values are in the installation manifest.",
+    "A and B require fresh independent ChatGPT Web conversations. A must not select or invoke the plugin; B must explicitly select and invoke the installed Particle Physics Research plugin.",
+    "No web search, external connectors, external APIs, or additional plugins are permitted in either arm. Stage identical task inputs before the run.",
+    "The 30-minute wall-time and 25-tool-call limits apply equally to both arms. Record token counts only if exposed.",
+    "Before scored runs, capture any additional host/runtime fields exposed by the UI. Do not infer unavailable fields.",
+    "CI T05 uses the private LZ-3-body-for-hdm repository. The repository secret LZ_REPO_READ_TOKEN must be configured with read-only Contents permission for that repository before the full CI job can pass."
+  ]
+}
