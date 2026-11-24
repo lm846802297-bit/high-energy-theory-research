@@ -44,6 +44,114 @@ jobs:
       - name: Test Skill scaffold
         run: python -m unittest discover -s tests/unit -v
 
+      - name: Validate and test Particle Physics Research Skill Benchmark
+        run: |
+          python -m pip install -r validation/research-skill-benchmark/evaluators/requirements-test.txt
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          import yaml
+          from jsonschema import Draft202012Validator
+
+          root = Path("validation/research-skill-benchmark")
+          for relative in (
+              "protocol/run-record.schema.json",
+              "protocol/comparison-report.schema.json",
+          ):
+              schema = json.loads((root / relative).read_text(encoding="utf-8"))
+              Draft202012Validator.check_schema(schema)
+
+          for relative in (
+              "protocol/environment-lock.json",
+              "tasks/development/manifest.json",
+              "evaluators/manifest.json",
+          ):
+              json.loads((root / relative).read_text(encoding="utf-8"))
+
+          yaml.safe_load((root / "protocol/scoring-rubric.yaml").read_text(encoding="utf-8"))
+          print("Benchmark JSON Schemas, JSON manifests, and scoring YAML: PASS")
+          PY
+          python -m unittest discover -s validation/research-skill-benchmark/evaluators -v
+
+      - name: Run pinned T01/T02 symbolic and numerical evaluators
+        run: |
+          python -m pip install -r validation/research-skill-benchmark/evaluators/requirements-physics.txt
+          tmpdir="$(mktemp -d)"
+          cp validation/skill-module-evaluation-2026-11-22/symbolic/derive_phase_space_jacobian.py "$tmpdir/"
+          python "$tmpdir/derive_phase_space_jacobian.py" > "$RUNNER_TEMP/t01-t02-jacobian.json"
+          cp validation/skill-module-evaluation-2026-11-22/numerical/convergence_phase_space.py "$tmpdir/"
+          python "$tmpdir/convergence_phase_space.py" > "$RUNNER_TEMP/t02-lz-convergence.json"
+          python - <<'PY' > "$RUNNER_TEMP/benchmark-evaluator-environment.json"
+          import json
+          import platform
+          import sys
+          print(json.dumps({
+              "python": sys.version,
+              "platform": platform.platform(),
+              "machine": platform.machine(),
+              "processor": platform.processor(),
+          }, indent=2))
+          PY
+
+      - name: Run public-source T05 PDF and AFH response evaluators
+        run: |
+          set -euo pipefail
+          model_root="$RUNNER_TEMP/t05-public-model-input"
+          axial="$model_root/axial-vector-review-response"
+          radiative="$model_root/radiative-dark-matter-nuclear-currents"
+          generator="$model_root/high-energy-theory-research/validation/research-skill-benchmark/tools/plot_afh_xe131_responses.py"
+          mkdir -p "$axial/overleaf-source/axial-vector-model-building-v6/plots"
+          mkdir -p "$radiative/nuclear/afh/data/native_v6_2026-11-22/native"
+          mkdir -p "$radiative/nuclear/afh/data/native_v6_2026-11-22/source"
+          mkdir -p "$model_root/high-energy-theory-research/validation/research-skill-benchmark/tools"
+          axial_commit="80fef16fa73f77b5374e50e076ffaeaf71df3b76"
+          radiative_commit="9ed185aefe29cebbaaf575c5b2ae4b3fc16b0078"
+          axial_base="https://raw.githubusercontent.com/lm846802297-bit/axial-vector-review-response/$axial_commit"
+          radiative_base="https://raw.githubusercontent.com/lm846802297-bit/radiative-dark-matter-nuclear-currents/$radiative_commit"
+          curl -fsSL "$axial_base/overleaf-source/axial-vector-model-building-v6/plots/axial_vector_constraint.pdf" -o "$axial/overleaf-source/axial-vector-model-building-v6/plots/axial_vector_constraint.pdf"
+          curl -fsSL "$axial_base/overleaf-source/axial-vector-model-building-v6/plots/axial_vector_constraint_g_vs.pdf" -o "$axial/overleaf-source/axial-vector-model-building-v6/plots/axial_vector_constraint_g_vs.pdf"
+          curl -fsSL "$axial_base/overleaf-source/axial-vector-model-building-v6/main-v6.tex" -o "$axial/overleaf-source/axial-vector-model-building-v6/main-v6.tex"
+          curl -fsSL "$radiative_base/nuclear/afh/data/native_v6_2026-11-22/native/afh_v6_xe131_eight_response_native.csv" -o "$radiative/nuclear/afh/data/native_v6_2026-11-22/native/afh_v6_xe131_eight_response_native.csv"
+          curl -fsSL "$radiative_base/nuclear/afh/data/native_v6_2026-11-22/source/run_afh_full_response_database.wls" -o "$radiative/nuclear/afh/data/native_v6_2026-11-22/source/run_afh_full_response_database.wls"
+          curl -fsSL "$radiative_base/nuclear/afh/data/native_v6_2026-11-22/run_manifest.json" -o "$radiative/nuclear/afh/data/native_v6_2026-11-22/run_manifest.json"
+          curl -fsSL "$radiative_base/nuclear/afh/data/native_v6_2026-11-22/README.md" -o "$radiative/nuclear/afh/data/native_v6_2026-11-22/README.md"
+          curl -fsSL "$radiative_base/nuclear/afh/data/native_v6_2026-11-22/SHA256SUMS.txt" -o "$radiative/nuclear/afh/data/native_v6_2026-11-22/SHA256SUMS.txt"
+          cp validation/research-skill-benchmark/tools/plot_afh_xe131_responses.py "$generator"
+          python validation/research-skill-benchmark/evaluators/verify_public_t05.py \
+            --part pdf \
+            --task-manifest validation/research-skill-benchmark/tasks/development/manifest.json \
+            --evaluator-manifest validation/research-skill-benchmark/evaluators/manifest.json \
+            --input-root "$model_root" \
+            --pdf-audit-script validation/skill-module-evaluation-2026-11-22/pdf/audit_pdf_text_reconstructed.py \
+            --output "$RUNNER_TEMP/t05-pdf-text-audit.json" > /dev/null
+          trusted_output="$RUNNER_TEMP/t05-trusted-afh-output"
+          python "$generator" \
+            --csv "$radiative/nuclear/afh/data/native_v6_2026-11-22/native/afh_v6_xe131_eight_response_native.csv" \
+            --out-dir "$trusted_output" > "$RUNNER_TEMP/t05-generator-self-test.json"
+          python validation/research-skill-benchmark/evaluators/verify_public_t05.py \
+            --part figures \
+            --task-manifest validation/research-skill-benchmark/tasks/development/manifest.json \
+            --evaluator-manifest validation/research-skill-benchmark/evaluators/manifest.json \
+            --input-root "$model_root" \
+            --submitted-output-root "$trusted_output" \
+            --output "$RUNNER_TEMP/t05-data-to-figure.json" > /dev/null
+          mkdir -p "$RUNNER_TEMP/t05-generated"
+          cp "$trusted_output"/*.svg "$RUNNER_TEMP/t05-generated/"
+      - name: Upload deterministic Benchmark evaluator outputs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: particle-physics-research-skill-benchmark-evaluator-results
+          path: |
+            ${{ runner.temp }}/t01-t02-jacobian.json
+            ${{ runner.temp }}/t02-lz-convergence.json
+            ${{ runner.temp }}/t05-pdf-text-audit.json
+            ${{ runner.temp }}/t05-data-to-figure.json
+            ${{ runner.temp }}/t05-generated/*.svg
+            ${{ runner.temp }}/t05-generator-self-test.json
+            ${{ runner.temp }}/benchmark-evaluator-environment.json
+          if-no-files-found: warn
+
       - name: Compile candidate Python tools and physics pilot
         run: python -m compileall -q schema/v1.4.3.7/tools skills/high-energy-theory-research/scripts tests/eval-cases/uv-eFT-hard-derivative-pilot
 

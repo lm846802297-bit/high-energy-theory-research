@@ -1,0 +1,218 @@
+{
+  "schema_version": "1.1",
+  "split": "development",
+  "status": "frozen_protocol_v1_1",
+  "tasks": [
+    {
+      "id": "T01",
+      "path": "T01-theory-jacobian.md",
+      "dimension": "theoretical_derivation",
+      "task_family": "threshold_kinematics",
+      "skill_reference": "references/symbolic-calculation.md",
+      "input_sources": [],
+      "required_evaluators": [
+        "E-T01-T02-KALLEN-JACOBIAN"
+      ]
+    },
+    {
+      "id": "T02",
+      "path": "T02-numerical-integral.md",
+      "dimension": "numerical_integration",
+      "task_family": "threshold_kinematics",
+      "skill_reference": "references/numerical-scans-and-uncertainty.md",
+      "input_sources": [],
+      "required_evaluators": [
+        "E-T01-T02-KALLEN-JACOBIAN"
+      ]
+    },
+    {
+      "id": "T03",
+      "path": "T03-paper-reading.md",
+      "dimension": "paper_reading",
+      "task_family": "source_grounded_reading",
+      "skill_reference": "references/paper-reading.md",
+      "input_sources": [
+        {
+          "repository": "lm846802297-bit/axial-vector-review-response",
+          "commit": "a7ac6456dafb27492183912fe4abbaa73a9455f7",
+          "path": "archive/manuscript-baselines/axial_vector_model_building-v6.pdf",
+          "staged_path": "axial-vector-review-response/archive/manuscript-baselines/axial_vector_model_building-v6.pdf",
+          "git_blob_sha1": "be8f472a8cc3c35975dcb5970c9be996fde2d985",
+          "size_bytes": 2759986,
+          "role": "primary_pdf",
+          "visibility": "model_input"
+        },
+        {
+          "repository": "lm846802297-bit/axial-vector-review-response",
+          "commit": "a7ac6456dafb27492183912fe4abbaa73a9455f7",
+          "path": "overleaf-source/axial-vector-model-building-v6/main-v6.tex",
+          "staged_path": "axial-vector-review-response/overleaf-source/axial-vector-model-building-v6/main-v6.tex",
+          "git_blob_sha1": "b99f9e26a0b57acd0a4938ea6e03fc691a82becb",
+          "size_bytes": 71477,
+          "role": "companion_tex_source",
+          "visibility": "model_input"
+        }
+      ],
+      "required_evaluators": []
+    },
+    {
+      "id": "T04",
+      "path": "T04-symbolic-dirac-trace.md",
+      "dimension": "symbolic_calculation",
+      "task_family": "symbolic_trace",
+      "skill_reference": "references/symbolic-calculation.md",
+      "input_sources": [],
+      "required_evaluators": [
+        "E-T04-DIRAC-TRACE"
+      ]
+    },
+    {
+      "id": "T05",
+      "path": "T05-figure-audit.md",
+      "dimension": "figure_audit",
+      "task_family": "figure_integrity",
+      "skill_reference": "references/scientific-figure-audit.md",
+      "input_sources": [
+        {
+          "repository": "lm846802297-bit/axial-vector-review-response",
+          "commit": "80fef16fa73f77b5374e50e076ffaeaf71df3b76",
+          "path": "overleaf-source/axial-vector-model-building-v6/plots/axial_vector_constraint.pdf",
+          "staged_path": "axial-vector-review-response/overleaf-source/axial-vector-model-building-v6/plots/axial_vector_constraint.pdf",
+          "git_blob_sha1": "2c99971dd49595946e10cc2c58fc8ed5e7db6000",
+          "size_bytes": 681479,
+          "sha256": "376b232856af01995abe5b7350bc1ecc357d51c3b93002b23c8946a0b81f5adb",
+          "role": "pdf_audit_input",
+          "visibility": "model_input"
+        },
+        {
+          "repository": "lm846802297-bit/axial-vector-review-response",
+          "commit": "80fef16fa73f77b5374e50e076ffaeaf71df3b76",
+          "path": "overleaf-source/axial-vector-model-building-v6/plots/axial_vector_constraint_g_vs.pdf",
+          "staged_path": "axial-vector-review-response/overleaf-source/axial-vector-model-building-v6/plots/axial_vector_constraint_g_vs.pdf",
+          "git_blob_sha1": "918ae390bc57c146e4c27637189fe16c33536a1a",
+          "size_bytes": 595427,
+          "sha256": "a523d9e801a4fadf749bef3294fcf5ba3905d68f9077a41d4cea43e095cf1a4d",
+          "role": "pdf_audit_input",
+          "visibility": "model_input"
+        },
+        {
+          "repository": "lm846802297-bit/axial-vector-review-response",
+          "commit": "80fef16fa73f77b5374e50e076ffaeaf71df3b76",
+          "path": "overleaf-source/axial-vector-model-building-v6/main-v6.tex",
+          "staged_path": "axial-vector-review-response/overleaf-source/axial-vector-model-building-v6/main-v6.tex",
+          "git_blob_sha1": "b99f9e26a0b57acd0a4938ea6e03fc691a82becb",
+          "size_bytes": 71477,
+          "sha256": "de9132ba936c6b1f3701d7c5a6398e39b89357903be789953972527753540e9a",
+          "role": "companion_tex_source",
+          "visibility": "model_input"
+        },
+        {
+          "repository": "lm846802297-bit/radiative-dark-matter-nuclear-currents",
+          "commit": "9ed185aefe29cebbaaf575c5b2ae4b3fc16b0078",
+          "path": "nuclear/afh/data/native_v6_2026-11-22/native/afh_v6_xe131_eight_response_native.csv",
+          "staged_path": "radiative-dark-matter-nuclear-currents/nuclear/afh/data/native_v6_2026-11-22/native/afh_v6_xe131_eight_response_native.csv",
+          "git_blob_sha1": "ea2aca029b6f298f79fc009a17d6fb73d53da36e",
+          "size_bytes": 538596,
+          "sha256": "585ab0f483be0d8131566cefc4cb420c6db7e07bebbcd2b887da568cda2f4ffb",
+          "role": "figure_input_data",
+          "visibility": "model_input"
+        },
+        {
+          "repository": "lm846802297-bit/radiative-dark-matter-nuclear-currents",
+          "commit": "9ed185aefe29cebbaaf575c5b2ae4b3fc16b0078",
+          "path": "nuclear/afh/data/native_v6_2026-11-22/source/run_afh_full_response_database.wls",
+          "staged_path": "radiative-dark-matter-nuclear-currents/nuclear/afh/data/native_v6_2026-11-22/source/run_afh_full_response_database.wls",
+          "git_blob_sha1": "c815500398d7f55de079dffbaaa846bc84de81f5",
+          "size_bytes": 2947,
+          "sha256": "10b254971a1f9dade783cfdf603f15885b08894e4de54aae2791243bf3369642",
+          "role": "native_calculation_exporter",
+          "visibility": "model_input"
+        },
+        {
+          "repository": "lm846802297-bit/radiative-dark-matter-nuclear-currents",
+          "commit": "9ed185aefe29cebbaaf575c5b2ae4b3fc16b0078",
+          "path": "nuclear/afh/data/native_v6_2026-11-22/run_manifest.json",
+          "staged_path": "radiative-dark-matter-nuclear-currents/nuclear/afh/data/native_v6_2026-11-22/run_manifest.json",
+          "git_blob_sha1": "a7b271f1ecd8eacc0a29d67623a2ae1c31e341a6",
+          "size_bytes": 10803,
+          "sha256": "5cc300da9d199946a6d9df08c8e448d2ddd426a50f4310a9984ce1c1e06b39f7",
+          "role": "native_run_manifest",
+          "visibility": "model_input"
+        },
+        {
+          "repository": "lm846802297-bit/radiative-dark-matter-nuclear-currents",
+          "commit": "9ed185aefe29cebbaaf575c5b2ae4b3fc16b0078",
+          "path": "nuclear/afh/data/native_v6_2026-11-22/README.md",
+          "staged_path": "radiative-dark-matter-nuclear-currents/nuclear/afh/data/native_v6_2026-11-22/README.md",
+          "git_blob_sha1": "b987e3b12f710dad834af7909b367e6caa05e2da",
+          "size_bytes": 2138,
+          "sha256": "f79b51c251b164a4f0e144e06def48e434b408b98538e3e791db87d2bcf43101",
+          "role": "dataset_readme",
+          "visibility": "model_input"
+        },
+        {
+          "repository": "lm846802297-bit/radiative-dark-matter-nuclear-currents",
+          "commit": "9ed185aefe29cebbaaf575c5b2ae4b3fc16b0078",
+          "path": "nuclear/afh/data/native_v6_2026-11-22/SHA256SUMS.txt",
+          "staged_path": "radiative-dark-matter-nuclear-currents/nuclear/afh/data/native_v6_2026-11-22/SHA256SUMS.txt",
+          "git_blob_sha1": "20dfa29c8bf3c74be74a0841aea4f0ac66a5f939",
+          "size_bytes": 2473,
+          "sha256": "3ec08fd0fb76a93b94d21ee12b3f3a06db2fc40ac46d94aa376995629e7b81a9",
+          "role": "dataset_checksum_manifest",
+          "visibility": "model_input"
+        },
+        {
+          "repository": "lm846802297-bit/high-energy-theory-research",
+          "commit": "b540b0cb5ef030147b0ceb2357506b02e5f218ea",
+          "path": "validation/research-skill-benchmark/tools/plot_afh_xe131_responses.py",
+          "staged_path": "high-energy-theory-research/validation/research-skill-benchmark/tools/plot_afh_xe131_responses.py",
+          "git_blob_sha1": "f68c3beb0c02048a566d7454a9232ff2041af032",
+          "size_bytes": 12692,
+          "sha256": "deeb762e21a56695eb148da7510d8c463bcc874353b7975c9906e88337e2a394",
+          "role": "figure_generator",
+          "visibility": "model_input"
+        }
+      ],
+      "required_evaluators": [
+        "E-T05A-PDF-TEXT-SCREEN",
+        "E-T05B-AFH-RESPONSE-REPRO"
+      ]
+    },
+    {
+      "id": "T06",
+      "path": "T06-reproducibility-audit.md",
+      "dimension": "reproducibility",
+      "task_family": "reproducibility",
+      "skill_reference": "references/source-and-version-audit.md",
+      "input_sources": [],
+      "required_evaluators": [
+        "E-T06-REPRO-PACKAGE"
+      ]
+    }
+  ],
+  "pilot_round_1": [
+    "T01",
+    "T02",
+    "T03"
+  ],
+  "full_round_2": [
+    "T01",
+    "T02",
+    "T03",
+    "T04",
+    "T05",
+    "T06"
+  ],
+  "notes": [
+    "Prompt SHA-256 values are computed from exact frozen prompt bytes immediately before the run and recorded in run records.",
+    "T03 PDF and companion TeX are model-visible immutable inputs; calculate SHA-256 for both at staging and verify Git blob SHA-1 plus byte size.",
+    "T05 PDF audit and CSV-to-SVG reproduction are distinct pipelines. Golden SVG references are evaluator-only.",
+    "T01 and T02 share threshold_kinematics and count as one independent task-family cluster.",
+    "Do not expose evaluators/manifest.json, evaluators/development-key.md, or golden outputs to model workspaces.",
+    "Every task declares required_evaluators. evaluate.py compare rejects missing or failed required checks and verifies evaluator-result artifact hashes and payloads.",
+    "For T05, E-T05B-DATA-TO-FIGURE must run in submission mode; the CI baseline-only check is not valid evidence for a scored model run.",
+    "The sealed Holdout task manifest must declare required_evaluators for every task before unsealing.",
+    "The pinned evaluator registry associates every deterministic evaluator ID with its permitted task IDs and a result_payload_schema. compare requires an exact registry SHA-256 match to the run protocol.",
+    "Holdout evaluation uses a separate private evaluator registry passed with --evaluator-manifest; its bytes are hashed and must match the frozen protocol evaluator_manifest_sha256."
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "status": "PASS: Kallen factorization and transformed Jacobian; candidate half-Jacobian expression is half the correct absolute integral",
+  "symbolic": {
+    "kallen_factorization": "lambda(W2,mchi2,ms2) = s*(s + 4*mchi*ms)",
+    "variable_change": "s = Delta*u^2, 0 <= u <= 1",
+    "jacobian_ds_du": "2*Delta*u",
+    "correct_transformed_integrand": "2*Delta^(3/2)*u^2*sqrt(4*mchi*ms + Delta*u^2)/((mchi+ms)^2 + Delta*u^2)",
+    "normalized_shape_unchanged": true,
+    "absolute_integral_requires_factor": 2,
+    "candidate_half_jacobian_ratio_to_correct": "1/2"
+  },
+  "numeric_independent_check": {
+    "mchi_GeV": "1.0",
+    "ms_GeV": "0.2",
+    "Delta_GeV2": "0.5",
+    "mpmath_dps": 50,
+    "original_s_integral_GeV2": "0.141975883465984392640489856748572220501161185",
+    "transformed_u_integral_GeV2": "0.141975883465984392640489856748572220501161185",
+    "relative_residual": "0.0",
+    "candidate_half_integral_over_correct": "0.5"
+  },
+  "environment": {
+    "python": "3.13.5",
+    "platform": "Linux-6.18.57-x86_64-with-glibc2.41",
+    "sympy": "1.14.0",
+    "mpmath": "1.3.0"
+  }
+}

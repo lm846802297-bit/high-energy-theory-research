@@ -100,3 +100,62 @@
 - Preserved source identifiers, paths, commands, equations, schema-field names, and validation caveats; no English original was replaced.
 - Verified that each translated document has the same number of Markdown headings as its English source, and checked relative links plus Markdown code-fence pairing in both language versions. No scientific calculation or CI run was performed by this documentation-only change.
 
+## 2026-11-22 — Optional tooling and task-specific physics references
+
+- Added task-specific references for symbolic calculations, numerical integration/scans/convergence, scientific figure auditing, and source-grounded paper reading.
+- Added a pinned optional-tooling map for selected third-party Skills, including source commits, licenses, dependencies, and use boundaries.
+- Kept the existing root AGENTS.md as the sole repository-wide authority; no duplicate AGENTS.md or competing project-wide policy was created.
+- Preserved the existing high-energy-theory-research Skill name and entry point; no existing research records, source calculations, schemas, or open PRs were changed.
+- Added Skill-contract regression coverage for the new reference files and optional-tooling route.
+- Validation and Windows Codex discovery remain pending until run in the target Windows Codex environment.
+
+## 2026-11-22 — Skill module evaluation and Codex discovery diagnostics
+
+- Added a read-only PowerShell diagnostic for the current project/user Codex Skill paths; no local installation or runtime discovery is claimed.
+- Updated the optional-tooling map to distinguish current `.agents/skills` paths from older `.codex/skills` examples.
+- Strengthened numerical guidance on full Jacobians, normalized shapes versus absolute rates, and output/manifest consistency.
+- Strengthened figure guidance so PDF text-size thresholds come from the target journal rather than a universal default.
+- Added a bounded evaluation case using an existing 2→3 phase-space integration and an existing paper figure PDF. The evaluation scripts, environment, inputs, outputs, and audit reports are recorded separately from the original LZ project.
+- Linux contract tests and numerical/PDF checks are recorded; Windows Codex runtime discovery remains pending.
+
+
+## 2026-11-22 — Windows Desktop discovery caveat
+
+- Distinguished filesystem path checks from runtime Skill discovery.
+- Recorded openai/codex issue #40458, which reports repository-local Skill discovery failures in Windows Codex Desktop.
+- Updated the diagnostic output and contract tests to preserve read-only behavior and require host-specific runtime confirmation.
+- A user-scope copy remains a global diagnostic comparison, not a project-isolated workaround.
+
+## 2026-11-22 — Installer rollback and cross-repository scope review
+
+- Fixed scratch cleanup so a previous Skill backup is preserved whenever installation/rollback has not safely completed; destination existence alone no longer authorizes deleting a remaining backup.
+- Extracted the cleanup decision into a small helper and added six Windows PowerShell regression cases, including a rollback failure with a concurrently occupied destination. Windows execution of this new regression file is pending.
+- Clarified that candidate-schema and project-registry validators require a pinned central source checkout; the standalone user-level Skill export does not include the central schema bundle/helper module.
+- Added a Skill contract assertion for the central-only validator boundary.
+- The central PR remains Draft pending Windows PowerShell 5.1 execution of the new rollback regression test and final review.
+
+## 2026-11-22 — Installer manifest integrity hardening
+
+- Existing installation manifests now require the expected source repository, a 40-character lowercase Git commit SHA, every required Skill file, valid 64-character lowercase SHA-256 entries, and an exact match between recorded and actual installed file inventories.
+- Added seven Windows PowerShell manifest-integrity cases covering valid inventory, wrong repository, malformed source commit, missing required file, modified hash, empty inventory, and unrecorded extra file.
+- Extended the Python Skill contract test to assert the installer helper and Windows regression test are included in the repository.
+- Windows PowerShell 5.1 execution of the expanded 13-case installer regression remains pending.
+
+## 2026-11-22 — Research Skill A/B benchmark scaffold
+
+- Added a preregistered A/B protocol comparing the same GPT/Codex runtime with and without the shared Research Skill.
+- Added a weighted scoring rubric with non-compensatory physics/evidence gates and a separate reasoning-autonomy guardrail.
+- Added an environment lock, run-record schema, comparison-report schema, and separate run directories for both arms.
+- Added six development tasks covering theoretical derivation, numerical integration, source-grounded manuscript reading, symbolic Dirac traces, PDF figure audit, and reproducibility.
+- Separated development evaluator keys from model-visible task prompts.
+- Reserved a holdout area but did not create or expose holdout prompts/keys; a genuinely blind holdout must be prepared after protocol and Skill versions are frozen.
+- No A/B model runs have been executed. The benchmark protocol remains draft pending exact model/build capture and Windows workspace-isolation checks.
+
+## 2026-11-22 — Benchmark protocol refinement
+
+- Added six task specifications and a development-task manifest; separated model-visible prompts from evaluator-only keys.
+- Replaced the initial figure-only reading exercise with a full pinned axial-vector manuscript reading task. The evaluator must verify the PDF identity, calculate its SHA-256, and extract equation/Figure numbers and PDF pages from the actual PDF.
+- Specified byte-identical read-only source staging for both A/B arms.
+- Defined a common project-instruction snapshot that removes the shared-Skill routing paragraph from both arms, preserving all other project instructions, so the treatment variable remains Skill availability/invocation.
+- Added a 0.5-point maximum allowed mean autonomy regression margin and explicit autonomy failure conditions.
+- Protocol remains draft; environment/model lock and sealed holdout preparation are pending. No A/B runs have been executed.

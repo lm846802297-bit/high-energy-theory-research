@@ -1,0 +1,17 @@
+{
+  "source_pdf": {
+    "repository": "lm846802297-bit/LZ-3-body-for-hdm",
+    "commit": "8902abdb8bc44cad690059f9985204b4c0737657",
+    "path": "paper-source/figures/fixed_speed_recoil_spectra_v2.pdf",
+    "sha256": "9eb61ea4dc77c6a23af29aa1d2887b692488daa9e997d59f0c7aea28c8be9df1"
+  },
+  "minimum_required_pt_screening_value": 5.0,
+  "auditable": true,
+  "minimum_effective_text_size_pt": 6.48,
+  "text_run_count": 37,
+  "below_minimum_count": 0,
+  "spacing_issue_count": 0,
+  "warnings": [],
+  "verdict": "PASS for the 5 pt screening check only; not a journal-specific compliance verdict",
+  "visual_inspection": "One-page, single-panel figure rendered at 180 dpi; axis labels, units, legend, and curves were legible"
+}
