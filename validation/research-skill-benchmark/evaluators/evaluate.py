@@ -931,7 +931,7 @@ def compare_records(
             },
             "secondary_metrics": {
                 "mean_unnecessary_computation_count_by_arm": {
-                    arm: statistics.fmean(values) if values else 0.0
+                    arm: statistics.fmean(values) if values else None
                     for arm, values in unnecessary_computations.items()
                 },
                 "mean_delta_unnecessary_computation_count": (
