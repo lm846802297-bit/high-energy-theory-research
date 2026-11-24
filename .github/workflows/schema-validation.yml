@@ -135,7 +135,8 @@ jobs:
             --input-root "$model_root" \
             --submitted-output-root "$trusted_output" \
             --output "$RUNNER_TEMP/t05-data-to-figure.json" > /dev/null
-          cp "$trusted_output"/*.svg "$RUNNER_TEMP/"
+          mkdir -p "$RUNNER_TEMP/t05-generated"
+          cp "$trusted_output"/*.svg "$RUNNER_TEMP/t05-generated/"
       - name: Upload deterministic Benchmark evaluator outputs
         if: always()
         uses: actions/upload-artifact@v4
@@ -147,6 +148,7 @@ jobs:
             ${{ runner.temp }}/t05-pdf-text-audit.json
             ${{ runner.temp }}/t05-data-to-figure.json
             ${{ runner.temp }}/t05-generated/*.svg
+            ${{ runner.temp }}/t05-generator-self-test.json
             ${{ runner.temp }}/benchmark-evaluator-environment.json
           if-no-files-found: warn
 
