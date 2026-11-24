@@ -58,7 +58,7 @@ The compare command consumes immutable A/B run records and a task manifest, veri
 ## Current status
 
 - Benchmark and development tasks are in central PR #27.
-- Protocol v1.2 is being adapted to ChatGPT Web observability. Freeze only after lock hashes and host capture are verified.
+- Protocol v1.2 and the Web-observability environment lock are frozen. No formal model runs have started.
 - T05 uses public pinned inputs from axial-vector-review-response and radiative-dark-matter-nuclear-currents; no private LZ repository access or token is required.
 - Protocol v1.2 distinguishes visible turnaround upper bounds from backend wall time and records unobservable tool counts as null.
 - The original weighted score remains unchanged; unnecessary-computation count, method-selection autonomy, reproducibility evidence, and observable resource overhead are separate secondary metrics.
