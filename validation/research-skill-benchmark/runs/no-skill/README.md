@@ -10,4 +10,4 @@ Each run must include:
 - native outputs and their SHA-256;
 - evaluation record.
 
-The no-skill arm must have `skill.available=false`, null Skill commit/manifest, and an explicit record that the Skill was not accessible in the workspace.
+The no-skill arm must have `skill.available=false`, null Skill commit/manifest, and an explicit record that the Particle Physics Research plugin was not selected or accessible in the conversation.
