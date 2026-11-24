@@ -48,8 +48,8 @@
     {
       "path": "evaluators/test_evaluate_v1_3.py",
       "role": "v1_3_protocol_and_evaluator_regression_tests",
-      "git_blob_sha1": "649af5677c178317b7cac347cd22ee8a6d218216",
-      "size_bytes": 3341
+      "git_blob_sha1": "d20abcf1de1c82e7d73f0787a035f924e63025d7",
+      "size_bytes": 3808
     },
     {
       "path": "evaluators/verify_dirac_trace.py",
@@ -543,8 +543,8 @@
   },
   "test_suite": {
     "command": "python -m unittest discover -s evaluators -v",
-    "tests_defined": 44,
-    "development_run": "Historical v1.2 baseline only: Run 1173 passed all 41 v1.2 evaluator tests. v1.3 adds three dedicated protocol/evaluator regression tests; exact v1.3 PR-head validation is pending.",
+    "tests_defined": 45,
+    "development_run": "Historical v1.2 baseline only: Run 1173 passed all 41 v1.2 evaluator tests. v1.3 adds four dedicated protocol/evaluator regression tests; exact v1.3 PR-head validation is pending.",
     "exact_committed_tree_rerun_required": true,
     "ci_workflow": ".github/workflows/schema-validation.yml",
     "ci_step": "Validate and test Particle Physics Research Skill Benchmark",
@@ -556,7 +556,7 @@
     "ci_python_version": "3.12.16",
     "schema_validation_status": "PASS",
     "failure_summary": "Run 1149 passed schema validation, project integration tests, Skill scaffold tests, and 31 of 32 Benchmark tests. The sole failure was an old test that still treated a semantic text difference as a byte-serialization mismatch; the test and evaluator were corrected. Run 1171 initially failed one Round 2 synthetic fixture because the fixture changed task_id without recomputing the canonical input_manifest_sha256. The fixture was corrected; Run 1173 passed all 41 tests.",
-    "pending_changes": "v1.3-specific exact-head evaluator test and workflow validation; no v1.3 run may start before PR review and merge."
+    "pending_changes": "v1.3-specific exact-head evaluator tests and workflow validation; no v1.3 run may start before PR review and merge."
   },
   "limitations": [
     "This evaluator registry is a development artifact and not a security boundary; keep it out of model workspaces.",

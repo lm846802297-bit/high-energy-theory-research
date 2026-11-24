@@ -61,6 +61,14 @@ class EvaluatorV13Tests(unittest.TestCase):
         self.assertEqual(report["summary"]["paired_run_count"], 1)
         self.assertEqual(report["decision"], "inconclusive")
 
+    def test_v13_evaluator_manifest_binds_actual_files(self):
+        manifest = evaluate.read_json(V13 / "evaluator-manifest.json")
+        for entry in manifest["evaluator_code"] + manifest["protocol_artifacts"]:
+            path = ROOT / entry["path"]
+            data = path.read_bytes()
+            self.assertEqual(len(data), entry["size_bytes"], entry["path"])
+            self.assertEqual(evaluate.git_blob_sha1(data), entry["git_blob_sha1"], entry["path"])
+
     def test_v12_evaluator_and_environment_lock_remain_unchanged(self):
         v12_lock = evaluate.read_json(ROOT / "protocol" / "environment-lock.json")
         self.assertEqual(v12_lock["model"]["model_label"], "GPT-6 Pro (Astra Pro)")
