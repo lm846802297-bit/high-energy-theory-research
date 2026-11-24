@@ -1,6 +1,6 @@
 {
   "schema_version": "1.2",
-  "status": "draft_pending_final_host_capture_and_hash_freeze",
+  "status": "frozen_protocol_v1_2_round_1_pilot",
   "captured_at_utc": null,
   "host": {
     "os_name": "Windows (version/build not exposed)",
@@ -30,19 +30,19 @@
     ],
     "python_version": null,
     "packages_lock_sha256": null,
-    "network_policy": "offline after staging; no web search, no external connectors, no external APIs; the only treatment difference is selection/invocation of Particle Physics Research in B"
+    "network_policy": "No web search, external connectors, external APIs, or additional plugins are used in either arm. Inputs are staged identically. The Web host does not provide a technical offline lock, so this is a run instruction and any observed external retrieval is recorded as a protocol deviation."
   },
   "skill_treatment": {
     "source_repository": "https://github.com/lm846802297-bit/high-energy-theory-research",
     "source_commit": "f83c28825215c2d306c2966991a09aae84c2d195",
     "plugin_version": "0.2.0",
     "skill_directory_manifest_sha256": null,
-    "installation_manifest_sha256": null,
+    "installation_manifest_sha256": "0c2f09ca324cbc24d32b0be41efa07581ef73322df63ba567271df64d9e6dc0b",
     "task_reference_files": [
+      "references/task-router.md",
       "references/symbolic-calculation.md",
       "references/numerical-scans-and-uncertainty.md",
-      "references/paper-reading.md",
-      "references/scientific-figure-audit.md"
+      "references/paper-reading.md"
     ]
   },
   "run_budget": {
@@ -61,10 +61,13 @@
     "The protocol and scoring rules are frozen for Round 1. Do not alter them after observing any pilot outputs.",
     "Protocol v1.1 replaces the private LZ T05 inputs with public pinned sources: two axial-vector paper figure panels and the Native AFH Xe-131 response CSV/export provenance bundle.",
     "T05 Part B is a deterministic presentation transformation of the existing native CSV. It does not rerun the unavailable original AFH package or calculate new nuclear responses.",
-    "Protocol v1.2 draft: plugin v0.2.0 is installed; its 14 source-file Git Blob SHA-1 values match source commit f83c28825215c2d306c2966991a09aae84c2d195. Final installation-manifest SHA-256 and host capture remain to be frozen.",
     "ChatGPT Web send-to-first-observation timing is a visible turnaround upper bound, not backend wall time. Record UI Worked labels separately. Backend wall time, tokens, per-invocation tool count, and backend transcript remain null/unavailable unless exposed.",
     "No tool-call limit is imposed for the current Web host because per-invocation tool logs are unavailable. Never infer zero calls or claim compliance with a 25-call budget.",
     "Round 1 uses a 30-minute visible-turnaround upper bound in both arms. The original five weighted dimensions and 18-run design remain unchanged.",
-    "Secondary metrics: unnecessary-computation count/events, method-selection note/autonomy, reproducibility evidence items, and observable resource overhead. These do not alter the weighted Q score."
+    "Secondary metrics: unnecessary-computation count/events, method-selection note/autonomy, reproducibility evidence items, and observable resource overhead. These do not alter the weighted Q score.",
+    "Environment lock frozen for protocol v1.2 and the Round 1 pilot. Plugin v0.2.0 installation manifest SHA-256 is 0c2f09ca324cbc24d32b0be41efa07581ef73322df63ba567271df64d9e6dc0b; all 14 source-file Git Blob SHA-1 values match the pinned source commit.",
+    "The Web host does not technically enforce offline mode. The protocol forbids web search, external connectors, and external APIs during scored runs; any observed external retrieval is recorded as a deviation and assessed symmetrically.",
+    "Tool-call count and backend transcript are unobservable in the current ChatGPT Web interface. Record tool_call_count=null, tool_call_count_observable=false, tool_log_artifact=null, and backend_transcript_available=false. No hard tool-call cap is claimed.",
+    "The host capture time is not exposed as an offset-aware timestamp in this record, so captured_at_utc remains null rather than inferred."
   ]
 }
