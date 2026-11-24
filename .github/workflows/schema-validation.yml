@@ -93,46 +93,49 @@ jobs:
           }, indent=2))
           PY
 
-      - name: Run pinned T05 PDF and data-to-figure evaluators
-        env:
-          LZ_REPO_READ_TOKEN: ${{ secrets.LZ_REPO_READ_TOKEN }}
+      - name: Run public-source T05 PDF and AFH response evaluators
         run: |
           set -euo pipefail
-          lz_commit="8902abdb8bc44cad690059f9985204b4c0737657"
-          lz_root="$RUNNER_TEMP/lz-source"
-          model_root="$RUNNER_TEMP/t05-model-input"
-          golden_root="$RUNNER_TEMP/t05-evaluator-golden"
-          if [ -z "${LZ_REPO_READ_TOKEN:-}" ]; then
-            echo "::error::Missing repository secret LZ_REPO_READ_TOKEN. Add a fine-grained token with Contents: Read access to lm846802297-bit/LZ-3-body-for-hdm."
-            exit 1
-          fi
-          auth_header="$(printf 'x-access-token:%s' "$LZ_REPO_READ_TOKEN" | base64 -w0)"
-          git -c http.extraheader="AUTHORIZATION: basic $auth_header" clone --filter=blob:none --no-checkout https://github.com/lm846802297-bit/LZ-3-body-for-hdm.git "$lz_root"
-          git -C "$lz_root" fetch --depth 1 origin "$lz_commit"
-          git -C "$lz_root" checkout --detach "$lz_commit"
-          mkdir -p "$model_root/LZ-3-body-for-hdm/paper-source/figures"
-          mkdir -p "$model_root/LZ-3-body-for-hdm/research/three_body_calculation_and_validation/results"
-          mkdir -p "$golden_root/LZ-3-body-for-hdm/research/three_body_calculation_and_validation/results/plots"
-          cp "$lz_root/paper-source/figures/fixed_speed_recoil_spectra_v2.pdf" "$model_root/LZ-3-body-for-hdm/paper-source/figures/"
-          cp "$lz_root/research/three_body_calculation_and_validation/plot_user_dsigma_curve.py" "$model_root/LZ-3-body-for-hdm/research/three_body_calculation_and_validation/"
-          cp "$lz_root/research/three_body_calculation_and_validation/results/fixed_speed_xe131_dsigma_450kev.csv" "$model_root/LZ-3-body-for-hdm/research/three_body_calculation_and_validation/results/"
-          cp "$lz_root/research/three_body_calculation_and_validation/results/local_minima_refinement_1keV.csv" "$model_root/LZ-3-body-for-hdm/research/three_body_calculation_and_validation/results/"
-          cp "$lz_root/research/three_body_calculation_and_validation/results/plots/fixed_speed_xe131_dsigma_450kev.svg" "$golden_root/LZ-3-body-for-hdm/research/three_body_calculation_and_validation/results/plots/"
-          cp "$lz_root/research/three_body_calculation_and_validation/results/plots/xe131_gcn_jj55_response_ratio_450kev.svg" "$golden_root/LZ-3-body-for-hdm/research/three_body_calculation_and_validation/results/plots/"
-          set +e
-          python validation/skill-module-evaluation-2026-11-22/pdf/audit_pdf_text_reconstructed.py "$model_root/LZ-3-body-for-hdm/paper-source/figures/fixed_speed_recoil_spectra_v2.pdf" --min-pt 5.0 --json > "$RUNNER_TEMP/t05-pdf-text-audit.json"
-          pdf_status=$?
-          set -e
-          if [ "$pdf_status" -eq 2 ]; then
-            echo "T05 PDF text audit was not auditable"
-            exit 1
-          elif [ "$pdf_status" -eq 1 ]; then
-            echo "::warning::T05 PDF text-size screening found below-threshold glyph runs; retain the report for blinded visual review"
-          elif [ "$pdf_status" -ne 0 ]; then
-            exit "$pdf_status"
-          fi
-          python validation/research-skill-benchmark/evaluators/verify_figure_regeneration.py --manifest validation/research-skill-benchmark/evaluators/manifest.json --model-input-root "$model_root" --golden-root "$golden_root" --generated-output-root "$RUNNER_TEMP/t05-generated" --baseline-only > "$RUNNER_TEMP/t05-data-to-figure.json"
-
+          model_root="$RUNNER_TEMP/t05-public-model-input"
+          axial="$model_root/axial-vector-review-response"
+          radiative="$model_root/radiative-dark-matter-nuclear-currents"
+          generator="$model_root/high-energy-theory-research/validation/research-skill-benchmark/tools/plot_afh_xe131_responses.py"
+          mkdir -p "$axial/overleaf-source/axial-vector-model-building-v6/plots"
+          mkdir -p "$radiative/nuclear/afh/data/native_v6_2026-11-22/native"
+          mkdir -p "$radiative/nuclear/afh/data/native_v6_2026-11-22/source"
+          mkdir -p "$model_root/high-energy-theory-research/validation/research-skill-benchmark/tools"
+          axial_commit="80fef16fa73f77b5374e50e076ffaeaf71df3b76"
+          radiative_commit="9ed185aefe29cebbaaf575c5b2ae4b3fc16b0078"
+          axial_base="https://raw.githubusercontent.com/lm846802297-bit/axial-vector-review-response/$axial_commit"
+          radiative_base="https://raw.githubusercontent.com/lm846802297-bit/radiative-dark-matter-nuclear-currents/$radiative_commit"
+          curl -fsSL "$axial_base/overleaf-source/axial-vector-model-building-v6/plots/axial_vector_constraint.pdf" -o "$axial/overleaf-source/axial-vector-model-building-v6/plots/axial_vector_constraint.pdf"
+          curl -fsSL "$axial_base/overleaf-source/axial-vector-model-building-v6/plots/axial_vector_constraint_g_vs.pdf" -o "$axial/overleaf-source/axial-vector-model-building-v6/plots/axial_vector_constraint_g_vs.pdf"
+          curl -fsSL "$axial_base/overleaf-source/axial-vector-model-building-v6/main-v6.tex" -o "$axial/overleaf-source/axial-vector-model-building-v6/main-v6.tex"
+          curl -fsSL "$radiative_base/nuclear/afh/data/native_v6_2026-11-22/native/afh_v6_xe131_eight_response_native.csv" -o "$radiative/nuclear/afh/data/native_v6_2026-11-22/native/afh_v6_xe131_eight_response_native.csv"
+          curl -fsSL "$radiative_base/nuclear/afh/data/native_v6_2026-11-22/source/run_afh_full_response_database.wls" -o "$radiative/nuclear/afh/data/native_v6_2026-11-22/source/run_afh_full_response_database.wls"
+          curl -fsSL "$radiative_base/nuclear/afh/data/native_v6_2026-11-22/run_manifest.json" -o "$radiative/nuclear/afh/data/native_v6_2026-11-22/run_manifest.json"
+          curl -fsSL "$radiative_base/nuclear/afh/data/native_v6_2026-11-22/README.md" -o "$radiative/nuclear/afh/data/native_v6_2026-11-22/README.md"
+          curl -fsSL "$radiative_base/nuclear/afh/data/native_v6_2026-11-22/SHA256SUMS.txt" -o "$radiative/nuclear/afh/data/native_v6_2026-11-22/SHA256SUMS.txt"
+          cp validation/research-skill-benchmark/tools/plot_afh_xe131_responses.py "$generator"
+          python validation/research-skill-benchmark/evaluators/verify_public_t05.py \
+            --part pdf \
+            --task-manifest validation/research-skill-benchmark/tasks/development/manifest.json \
+            --evaluator-manifest validation/research-skill-benchmark/evaluators/manifest.json \
+            --input-root "$model_root" \
+            --pdf-audit-script validation/skill-module-evaluation-2026-11-22/pdf/audit_pdf_text_reconstructed.py \
+            --output "$RUNNER_TEMP/t05-pdf-text-audit.json" > /dev/null
+          trusted_output="$RUNNER_TEMP/t05-trusted-afh-output"
+          python "$generator" \
+            --csv "$radiative/nuclear/afh/data/native_v6_2026-11-22/native/afh_v6_xe131_eight_response_native.csv" \
+            --out-dir "$trusted_output" > "$RUNNER_TEMP/t05-generator-self-test.json"
+          python validation/research-skill-benchmark/evaluators/verify_public_t05.py \
+            --part figures \
+            --task-manifest validation/research-skill-benchmark/tasks/development/manifest.json \
+            --evaluator-manifest validation/research-skill-benchmark/evaluators/manifest.json \
+            --input-root "$model_root" \
+            --submitted-output-root "$trusted_output" \
+            --output "$RUNNER_TEMP/t05-data-to-figure.json" > /dev/null
+          cp "$trusted_output"/*.svg "$RUNNER_TEMP/"
       - name: Upload deterministic Benchmark evaluator outputs
         if: always()
         uses: actions/upload-artifact@v4
