@@ -332,7 +332,7 @@ class EvaluatorTests(unittest.TestCase):
 
             evaluator_manifest = {
                 "deterministic_evaluators": [{
-                    "id": "E-T05B-AFH-RESPONSE-REPRO",
+                    "id": "E-T05B-DATA-TO-FIGURE",
                     "repository": "owner/" + repo_slug,
                     "generator": {"path": generator_rel, **identity(generator)},
                     "model_visible_inputs": [
@@ -471,7 +471,7 @@ class EvaluatorTests(unittest.TestCase):
 
             evaluator_manifest = {
                 "deterministic_evaluators": [{
-                    "id": "E-T05B-AFH-RESPONSE-REPRO",
+                    "id": "E-T05B-DATA-TO-FIGURE",
                     "repository": "owner/" + repo_slug,
                     "generator": {"path": generator_rel, **identity(generator)},
                     "model_visible_inputs": [
