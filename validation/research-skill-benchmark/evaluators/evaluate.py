@@ -188,10 +188,11 @@ def validate_run(
                 raise EvaluationError(f"Run {record['run_id']} final scores differ from unanimous reviewer scores")
     artifact_paths = {item["path"] for item in record["artifacts"]}
     required_artifacts = {
-        record["execution"]["tool_log_artifact"],
         record["execution"]["transcript_artifact"],
         record["skill"]["availability_evidence_artifact"],
     }
+    if record["execution"]["tool_log_artifact"] is not None:
+        required_artifacts.add(record["execution"]["tool_log_artifact"])
     missing_artifacts = sorted(required_artifacts - artifact_paths)
     if missing_artifacts:
         raise EvaluationError(f"Run {record['run_id']} is missing required artifact records: {missing_artifacts}")
@@ -205,11 +206,20 @@ def validate_run(
         raise EvaluationError("Protocol must pin the Skill source commit even for the no-skill comparison arm")
     budget = record["budget"]
     execution = record["execution"]
-    if execution["actual_wall_time_seconds"] > budget["wall_time_seconds"]:
-        raise EvaluationError(f"Run {record['run_id']} exceeded its wall-time budget")
-    if execution["actual_tool_calls"] > budget["tool_call_limit"]:
-        raise EvaluationError(f"Run {record['run_id']} exceeded its tool-call budget")
-    if budget.get("token_limit") is not None and execution.get("token_count") is not None:
+    if execution["visible_turnaround_upper_bound_seconds"] > budget["visible_turnaround_limit_seconds"]:
+        raise EvaluationError(f"Run {record['run_id']} exceeded its visible-turnaround budget")
+    if execution["tool_call_count_observable"] and execution["tool_call_count"] is None:
+        raise EvaluationError(f"Run {record['run_id']} marks tool-call count observable but records no count")
+    if not execution["tool_call_count_observable"] and execution["tool_call_count"] is not None:
+        raise EvaluationError(f"Run {record['run_id']} records a tool-call count without observable evidence")
+    if budget.get("tool_call_limit") is not None:
+        if not execution["tool_call_count_observable"] or execution["tool_call_count"] is None:
+            raise EvaluationError(f"Run {record['run_id']} cannot certify its configured tool-call budget")
+        if execution["tool_call_count"] > budget["tool_call_limit"]:
+            raise EvaluationError(f"Run {record['run_id']} exceeded its tool-call budget")
+    if budget.get("token_limit") is not None:
+        if execution.get("token_count") is None:
+            raise EvaluationError(f"Run {record['run_id']} cannot certify its configured token budget")
         if execution["token_count"] > budget["token_limit"]:
             raise EvaluationError(f"Run {record['run_id']} exceeded its token budget")
     return computed
@@ -805,7 +815,7 @@ def compare_records(
 
     all_deltas = [row["scores"]["delta_q"] for row in pair_rows]
     report = {
-        "protocol_version": "1.1",
+        "protocol_version": "1.2",
         "protocol_commit": None,
         "analysis_plan_sha256": None,
         "environment_lock_sha256": None,
