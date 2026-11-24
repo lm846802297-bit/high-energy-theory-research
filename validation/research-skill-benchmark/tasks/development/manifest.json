@@ -168,7 +168,7 @@
           "staged_path": "high-energy-theory-research/validation/research-skill-benchmark/tools/plot_afh_xe131_responses.py",
           "git_blob_sha1": "d66f44b38b9dc1dd8a959b5e1729795113af7d19",
           "size_bytes": 12700,
-          "sha256": null,
+          "sha256": "63b22929386b4c131a7c343a09935f110c02739201c672388c24cf8ee96780cd",
           "role": "figure_generator",
           "visibility": "model_input"
         }
