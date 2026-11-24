@@ -1,7 +1,7 @@
 {
-  "schema_version": "1.1",
-  "status": "frozen_protocol_v1_1_round_1_pilot",
-  "captured_at_utc": null,
+  "schema_version": "1.2",
+  "status": "draft_pending_runtime_skill_refresh",
+  "captured_at_utc": "2026-11-24T09:47:35Z",
   "host": {
     "os_name": "Windows (version/build not exposed)",
     "os_build": null,
@@ -34,21 +34,25 @@
   },
   "skill_treatment": {
     "source_repository": "https://github.com/lm846802297-bit/high-energy-theory-research",
-    "source_commit": "bee95d3c60dabc8e642cc1fb3f4abc63350e5b41",
-    "plugin_version": "0.1.0",
+    "source_commit": "f83c28825215c2d306c2966991a09aae84c2d195",
+    "plugin_version": "0.2.0",
     "skill_directory_manifest_sha256": null,
-    "installation_manifest_sha256": "985361a8632e3592eb1b6cc40e15cfff5671ccb939d1f36e5f07af3086410af9",
+    "installation_manifest_sha256": "0c2f09ca324cbc24d32b0be41efa07581ef73322df63ba567271df64d9e6dc0b",
     "task_reference_files": [
+      "references/task-router.md",
       "references/symbolic-calculation.md",
       "references/numerical-scans-and-uncertainty.md",
       "references/paper-reading.md",
       "references/scientific-figure-audit.md"
-    ]
+    ],
+    "plugin_release_id": "pluginrel_6b055ae5ad548191a0eec6417eb66b38",
+    "plugin_archive_sha256": "69e5f3d5ebe628950c335f1ce7cced34b2c90537fb7f9228b2e77c761e2acda3",
+    "runtime_refresh_confirmed": false
   },
   "run_budget": {
-    "max_wall_time_seconds_per_run": 1800,
+    "max_visible_turnaround_seconds_per_run": 1800,
+    "max_tool_calls_per_run": null,
     "max_tokens_per_run_if_exposed": null,
-    "max_tool_calls_per_run": 25,
     "same_budget_for_both_arms": true
   },
   "notes": [
@@ -57,10 +61,13 @@
     "The exact Skill source commit is pinned to the installed plugin's source manifest. The plugin installation-manifest SHA-256 is recorded; per-file source SHA-256 values are in the installation manifest.",
     "A and B require fresh independent ChatGPT Web conversations. A must not select or invoke the plugin; B must explicitly select and invoke the installed Particle Physics Research plugin.",
     "No web search, external connectors, external APIs, or additional plugins are permitted in either arm. Stage identical task inputs before the run.",
-    "The 30-minute wall-time and 25-tool-call limits apply equally to both arms. Record token counts only if exposed.",
     "Unexposed host/runtime fields remain null by design; no values are inferred.",
-    "The protocol and scoring rules are frozen for Round 1. Do not alter them after observing any pilot outputs.",
     "Protocol v1.1 replaces the private LZ T05 inputs with public pinned sources: two axial-vector paper figure panels and the Native AFH Xe-131 response CSV/export provenance bundle.",
-    "T05 Part B is a deterministic presentation transformation of the existing native CSV. It does not rerun the unavailable original AFH package or calculate new nuclear responses."
+    "T05 Part B is a deterministic presentation transformation of the existing native CSV. It does not rerun the unavailable original AFH package or calculate new nuclear responses.",
+    "Protocol v1.2 is a draft. The Plugin Creator source update to v0.2.0 and its file-hash read-back passed, but the current conversation's Skill runtime index still returned the previous Skill content. Do not freeze this lock or start scored runs until a fresh ChatGPT Web conversation confirms the v0.2.0 task-tier rules and task references.",
+    "ChatGPT Web exposes send-to-first-observation-of-complete-answer timing as an upper bound, not backend wall time. Record it as visible_turnaround_upper_bound_seconds; record backend_wall_time_seconds as null when unavailable. A UI Worked label is a separate field and must not be treated as the same timing measure.",
+    "ChatGPT Web does not expose a per-invocation tool event log in the current host. Set tool_call_count_observable=false, tool_call_count=null, tool_log_artifact=null, and backend_transcript_available=false. Do not infer zero calls or claim compliance with a tool-call cap.",
+    "Round 1 uses a 30-minute visible-turnaround upper bound for both arms. No hard tool-call limit is imposed unless the host later exposes verifiable counts for both arms. Tool availability remains identical between A and B.",
+    "The original five weighted quality dimensions and their weights are unchanged. Method-selection autonomy remains a separate 0-4 score. Unnecessary-computation counts/events, method-selection notes, reproducibility evidence items, and observable resource measures are secondary metrics outside Q."
   ]
 }
