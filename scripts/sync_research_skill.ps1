@@ -56,6 +56,7 @@ $required = @(
     'references/scientific-figure-audit.md',
     'references/paper-reading.md',
     'references/optional-tooling.md',
+    'references/central-repository-governance.md',
     'scripts/check_codex_skill_discovery.ps1'
 )
 $tracked = Invoke-Git @('ls-tree', '-r', '--name-only', $commit, '--', $skillPath)

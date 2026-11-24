@@ -13,7 +13,8 @@ $RequiredReferences = @(
     "numerical-scans-and-uncertainty.md",
     "scientific-figure-audit.md",
     "paper-reading.md",
-    "optional-tooling.md"
+    "optional-tooling.md",
+    "central-repository-governance.md"
 )
 
 if ([string]::IsNullOrWhiteSpace($ProjectRoot)) {

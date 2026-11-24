@@ -78,6 +78,12 @@ class SkillContractTests(unittest.TestCase):
             with self.subTest(command=command):
                 self.assertNotIn(command, diagnostic)
 
+    def test_central_governance_reference_is_required_by_installers(self):
+        installer = (ROOT / "scripts" / "sync_research_skill.ps1").read_text(encoding="utf-8")
+        discovery = (SKILL.parent / "scripts" / "check_codex_skill_discovery.ps1").read_text(encoding="utf-8")
+        self.assertIn("'references/central-repository-governance.md'", installer)
+        self.assertIn('"central-repository-governance.md"', discovery)
+
     def test_windows_installer_regression_assets_exist(self):
         installer = ROOT / "scripts" / "sync_research_skill.ps1"
         helper = ROOT / "scripts" / "research-skill-installer.helpers.ps1"
