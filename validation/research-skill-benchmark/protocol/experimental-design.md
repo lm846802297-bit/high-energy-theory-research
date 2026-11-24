@@ -1,6 +1,6 @@
-# Experimental design — v1.1
+# Experimental design — v1.2
 
-Status: **FROZEN PROTOCOL v1.1. Round 1 remains the 18-run T01/T02/T03 pilot; no model runs have started.**
+Status: **DRAFT PROTOCOL v1.2. Round 1 remains the 18-run T01/T02/T03 pilot. Freeze only after a fresh ChatGPT Web conversation confirms the installed v0.2.0 Skill runtime; no model runs have started.**
 
 ## 1. Hypothesis and estimand
 
@@ -23,7 +23,7 @@ The estimand is the paired difference in blinded scientific-quality score for th
 
 ### B — With Skill
 
-- Select the already-installed Particle Physics Research plugin, version 0.1.0, pinned to the exact Skill commit recorded in the protocol lock.
+- Select the already-installed Particle Physics Research plugin, version 0.2.0, pinned to the exact Skill commit recorded in the protocol lock.
 - Explicitly invoke `@Particle Physics Research` for the task.
 - Load only the task-specific reference required by the Skill.
 - Record the Skill source commit, installation manifest SHA-256, and loaded references.
@@ -32,7 +32,7 @@ The estimand is the paired difference in blinded scientific-quality score for th
 
 - Exact ChatGPT model label **GPT-6 Pro (Astra Pro)** and **Pro default** reasoning configuration, as fixed by the user; record any additional UI-exposed settings.
 - Fresh ChatGPT Web conversation for every run; one task per conversation.
-- Same task prompt, input bytes, source snapshots, user/project instructions, built-in tool allowlist, network policy, time/token budget, and stopping rule.
+- Same task prompt, input bytes, source snapshots, user/project instructions, built-in tool allowlist, network policy, 30-minute visible-turnaround upper-bound limit, and stopping rule. No tool-call cap is imposed because ChatGPT Web does not expose a verifiable per-invocation event log; token limits are not imposed when token counts are unobservable.
 - Same browser, OS, client/runtime, Python/data-analysis availability, and file-upload path.
 - Same evaluator versions and reference answers; neither is exposed to the model.
 - Use identical user-provided task context and instructions in both arms; do not add a project-specific Skill-routing paragraph to either arm. A must not be told that the Skill exists.
@@ -97,6 +97,17 @@ Two reviewers independently score anonymized outputs without seeing the arm labe
 
 A critical physics/math error, fabricated evidence, unauthorized destructive change, false PASS claim, or material convention/unit error fails the affected run regardless of weighted score. A B-arm hard-gate failure prevents a Positive decision.
 
+### 6.1 Secondary behavioral and resource metrics (not included in Q)
+
+The five weighted dimensions and their original weights remain unchanged. Report these additional measures separately from Q:
+
+- **Unnecessary computation count:** both blinded reviewers count discrete visible calculations, searches, tool steps, or workflow artifacts that were not needed to satisfy the task and added no decision-relevant evidence. Do not count ordinary algebraic steps or useful independent checks. Record each event and the reason it was unnecessary. A one-count reviewer disagreement requires a consensus note; a difference of two or more requires third-party adjudication.
+- **Method-selection autonomy:** retain the existing separate 0–4 autonomy score. Add a short method-selection note stating whether the least-complex sufficient method was chosen, whether unnecessary Skill references/tools were avoided, and whether the model stopped when the acceptance checks were satisfied.
+- **Reproducibility evidence:** list the concrete evidence items present, such as source/input identity, code or command, environment and parameters, native output, convergence/error analysis, and independent check. Keep this list separate from the existing reproducibility/evidence-quality scores.
+- **Observable resource overhead:** compare the send-to-first-observation visible-turnaround upper bound across A and B. Record a UI “Worked for …” label separately; it is not backend latency. Backend wall time, token counts, and tool-call counts are null unless the host exposes them. Do not infer zero tool calls from missing logs.
+
+These secondary metrics are descriptive in Round 1 and do not alter the weighted score or preregistered decision thresholds.
+
 ## 7. Statistical analysis and decisions
 
 The minimum practically meaningful improvement is **+5 Q points** on the 0–100 scale. Smaller positive effects may be reported but do not satisfy the Positive criterion.
@@ -129,9 +140,13 @@ For every run, retain:
 - run ID, pair ID, task ID, arm, repetition, timestamps, randomization seed, and A/B execution order;
 - protocol commit, Skill source commit, environment-lock/rubric/evaluator/task-manifest/analysis-plan hashes;
 - exact model/build/runtime/reasoning settings and host hardware where exposed;
+- `visible_turnaround_upper_bound_seconds` (UTC send to first observation of the complete answer), `visible_ui_worked_label` separately, and `backend_wall_time_seconds` only when actually exposed;
+- `tool_call_count` and `tool_log_artifact` only when the host exposes verifiable per-invocation records. Otherwise record null, set `tool_call_count_observable=false`, and leave the tool-call budget null. Never infer zero calls from missing logs;
+- `backend_transcript_available=false` when only the user-visible answer can be exported. Store that visible answer as the transcript artifact, not as a backend raw transcript;
+- reviewer-coded unnecessary-computation count/events, method-selection note, and reproducibility evidence items;
 - common task-context and staged-workspace hashes, including proof that no Skill-routing instructions were supplied;
 - exact task prompt/input hashes and every source file's repository, commit, path, Git blob SHA-1, byte size, and SHA-256;
-- tool allowlist/versions, network policy, resource budgets, actual wall time, tokens if exposed, tool-call count, commands, exit status, and logs;
+- tool allowlist/versions, network policy, the visible-turnaround limit, visible turnaround upper bound, UI Worked label as a separate field, backend wall time if exposed, token count if exposed, tool-call count only if exposed, commands only if observable, and observability notes;
 - Skill availability evidence, install manifest hash, invocation, and references loaded (B); explicit absence evidence (A);
 - native output files and SHA-256, the task's required_evaluators list, deterministic evaluator versions/results, evaluator result IDs/statuses/input-output hash bindings, hash-verified evaluator result artifacts, both blinded reviewer sheets, consensus/adjudication, deviations, failed checks, and unresolved issues.
 
@@ -143,7 +158,7 @@ Before scoring, validate each pair with both the JSON Schema and the determinist
 
 Permitted treatment differences are limited to Skill availability, Skill source/manifest, invocation, and task-specific references loaded by B. A must prove the plugin was not selected, no Skill reference was loaded, and no Skill-specific context was supplied; B must prove the pinned plugin was selected, invoked, and the task-specific reference was loaded. The transcript/output workspaces must be separate. Any control mismatch invalidates the entire pair; preserve both records and rerun both arms under a new pair ID.
 
-The run-record Schema enforces arm-specific Skill fields and adjudicated hard-gate consistency. The comparison evaluator requires every task manifest entry to declare `required_evaluators`, requires every A/B run to contain each listed evaluator exactly once with PASS status, binds evaluator input hashes to the task input manifest, binds evaluator output hashes to registered result artifacts, and inspects the actual evaluator JSON payloads under the explicit artifact root. T05-B must use submission mode and prove that the model-submitted SVGs match a fresh trusted-generator run; the CI baseline-only check cannot satisfy a scored T05 task. The comparison evaluator binds the exact protocol commit and exact bytes of the environment lock, scoring rubric, task manifest, analysis plan, and evaluator registry to each run record. It also requires each run's source-file bundle to match the pinned task manifest and verifies staged source bytes, Git blob IDs, sizes, and SHA-256 values. The pair checker enforces equality of shared controls, budget adherence, pinned Skill commit, task-specific reference loading, and separate per-run artifact paths. A hash written in a record without matching bytes is not evidence. Neither check alone is sufficient.
+The run-record Schema enforces arm-specific Skill fields and adjudicated hard-gate consistency. The comparison evaluator requires every task manifest entry to declare `required_evaluators`, requires every A/B run to contain each listed evaluator exactly once with PASS status, binds evaluator input hashes to the task input manifest, binds evaluator output hashes to registered result artifacts, and inspects the actual evaluator JSON payloads under the explicit artifact root. T05-B must use submission mode and prove that the model-submitted SVGs match a fresh trusted-generator run; the CI baseline-only check cannot satisfy a scored T05 task. The comparison evaluator binds the exact protocol commit and exact bytes of the environment lock, scoring rubric, task manifest, analysis plan, and evaluator registry to each run record. It also requires each run's source-file bundle to match the pinned task manifest and verifies staged source bytes, Git blob IDs, sizes, and SHA-256 values. The pair checker enforces equality of shared controls, visible-turnaround budget adherence, observability capability flags, pinned Skill commit, task-specific reference loading, and separate per-run artifact paths. A hard tool-call limit is not used for the current Web host because its per-invocation counts are unobservable. A hash written in a record without matching bytes is not evidence. Neither check alone is sufficient.
 
 ## 10. Freeze checklist
 
@@ -155,7 +170,7 @@ Before Round 1:
 4. Run the evaluator unit suite and validate both JSON Schemas with Draft 2020-12; verify that each task's required evaluators are registered and have tested PASS/failure fixtures, including both T05 PDF panels and exact SVG submission comparison.
 5. Verify all staged source files by Git blob SHA-1, byte size, and SHA-256. For T05, stage the two public axial-vector PDFs/TeX and the public Native AFH Xe-131 CSV, WLS exporter, run manifest, README, checksum list, and pinned plotting adapter.
 6. Create isolated A/B ChatGPT Web conversations; prove A has no plugin/Skill context and B can invoke the exact pinned plugin.
-7. Confirm identical tools, project context, network policy, and budgets.
+7. Confirm identical tools, project context, network policy, visible-turnaround budget, and observability settings. Record unavailable backend/tool telemetry as null, not zero.
 8. Record the randomization seed and freeze the protocol commit.
 9. Only then execute the 18 pilot runs. Do not create or expose Holdout until the final Skill and protocol are frozen.
 
