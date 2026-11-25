@@ -40,5 +40,13 @@
 
 **待批准项：** 是否允许缺失登记表在迁移中显式转换为 `[]`。建议只有在迁移规则中声明并留下审计记录后才允许，不能静默补默认值。
 
+## 配套兼容性与测试矩阵
+四项决策的兼容性影响、正反测试及未验证门禁汇总于 [Schema v1.4.3.7 决策兼容性与测试矩阵](schema-v1.4.3.7-decision-compatibility-test-matrix.md)。该矩阵仅用于审查和实施规划，不构成任何决策批准。
+
 ## 本轮代码范围
 本轮实现迁移器原型与跨记录校验器。目录 JCS 重算、真实文件系统遍历、状态事件哈希重算和科学验收仍按未实现/未运行报告。
+
+
+## DD-ART-008 implementation comparison (non-normative)
+
+A separate comparison of serialization/numeric-domain, normalized-path ordering, digest preimage scope, and symlink-policy alternatives is recorded in [DD-ART-008 decision options](schema-v1.4.3.7-dd-art-008-decision-options-2026-10-24.md). It is an implementation/review aid only; DD-ART-008 remains pending owner approval, and no Schema semantics or historical hashes have been changed.

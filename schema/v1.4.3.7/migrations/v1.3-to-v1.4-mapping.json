@@ -2,7 +2,7 @@
   "migration_id": "MIG-V1.3-TO-V1.4-CANDIDATE",
   "source_schema_version": "1.3",
   "target_schema_version": "1.4",
-  "status": "contract_only_not_implemented",
+  "status": "implemented_prototype_staging_only",
   "source_bundle_available": false,
   "compatibility_status": "unverified",
   "rules": [
@@ -28,11 +28,43 @@
     },
     {
       "rule_id": "MIG-006",
-      "rule": "Repeated migration of the same source snapshot and rule version must yield identical canonical target hashes."
+      "rule": "Repeated migration of the same source snapshot and rule version must yield identical target SHA-256 values computed over RFC 8785 JCS canonical UTF-8 bytes."
     },
     {
       "rule_id": "MIG-007",
       "rule": "Rollback restores the active dataset pointer; it never deletes source history."
+    },
+    {
+      "rule_id": "MIG-008",
+      "rule": "If a source record has any unresolved mapping, quarantined unknown field, or unapproved normative artifact transformation, do not emit a target record or target_sha256; report any provisional candidate digest under a candidate-prefixed field only."
+    },
+    {
+      "rule_id": "MIG-009",
+      "rule": "Before migration, verify the exact candidate bundle manifest, all expected record types, each schema path, and every schema SHA-256 against the manifest."
+    },
+    {
+      "rule_id": "MIG-010",
+      "rule": "Inventory JSON/YAML/YML source files; reject duplicate mapping keys, non-JSON YAML values, unsupported YAML aliases, malformed inputs, and source symlinks rather than silently skipping them."
+    },
+    {
+      "rule_id": "MIG-011",
+      "rule": "Emit a complete ID-mapping provenance row with source-relative URI, hashes, rule identifiers, review state, collision status, rewritten-reference count, UTC timestamp, and operator field; omitted operator is not approval."
+    },
+    {
+      "rule_id": "MIG-012",
+      "rule": "Validate every provisional target against its complete Draft 2020-12 JSON Schema with a format checker; any target schema error blocks target emission to staging."
+    },
+    {
+      "rule_id": "MIG-013",
+      "rule": "Compute target_record_sha256 as SHA-256 over RFC 8785 JCS canonical UTF-8 bytes; source_sha256 remains the digest of the original source bytes."
+    },
+    {
+      "rule_id": "MIG-014",
+      "rule": "Withhold a migrated record when a validation_ids reference resolves to a source Validation Plan or Validation Activity that does not produce a valid target record; report VALIDATION_TARGET_WITHHELD."
+    },
+    {
+      "rule_id": "MIG-015",
+      "rule": "Withhold a migrated Task Execution Contract when alternative_identity_methods is absent or contract_sha256 cannot be revalidated under an owner-approved DD-ART-010 payload; do not silently default the registry to an empty array."
     }
   ],
   "id_mapping_fields": [
@@ -43,14 +75,179 @@
     "target_record_type",
     "target_primary_key",
     "target_sha256",
+    "candidate_target_record_type",
+    "candidate_target_primary_key",
+    "candidate_target_sha256",
     "mapping_basis",
     "mapping_rule_id",
-    "review_status"
+    "applied_field_mapping_ids",
+    "review_status",
+    "collision_check",
+    "rewritten_reference_count",
+    "unresolved_count",
+    "mapped_at_utc",
+    "operator"
   ],
   "prohibited_actions": [
     "overwrite_source_records",
     "invent_legacy_field_mappings",
     "silently_drop_unmapped_fields",
-    "auto_merge_multiple_sources_without_review"
-  ]
+    "auto_merge_multiple_sources_without_review",
+    "silently default a missing Task Execution Contract alternative_identity_methods registry to an empty array"
+  ],
+  "migration_rules_version": "v1.4.3.7-migration-rules-6",
+  "commit_allowed": false,
+  "staging_only": true,
+  "validation_ids_resolution": {
+    "status": "source_aware_prototype",
+    "rule": "Resolve only a unique primary key within the same project. A validation_activity reference additionally requires a valid timezone-aware ISO date-time started_at and an execution_status with an explicit mapping to a v1.4 target enum value. The current candidate does not infer that in_progress means running.",
+    "unresolved_cases": [
+      "missing target",
+      "duplicate/cross-type ID",
+      "project mismatch",
+      "not-started activity",
+      "insufficient launch evidence",
+      "invalid source shape",
+      "missing or invalid project_id",
+      "non-string or missing primary key",
+      "duplicate same-project typed primary key",
+      "source execution_status without an explicit target-enum mapping",
+      "invalid or timezone-naive started_at",
+      "malformed JSON or non-object source file",
+      "missing record_type",
+      "empty source snapshot",
+      "missing/malformed candidate schema directory",
+      "artifact alternative_identity null-insertion rule pending normative approval",
+      "hashless artifact integrity downgrade rule pending normative approval"
+    ],
+    "full_historical_compatibility": "unverified_until_original_v1_3_bundle_is_supplied"
+  },
+  "field_mappings": [
+    {
+      "record_type": "claim",
+      "source_field": "planned_run_ids",
+      "target_field": "run_plan_ids",
+      "basis": "candidate explicit mapping; historical v1.3 source schema unavailable",
+      "compatibility_status": "unverified_until_original_v1_3_bundle_is_supplied",
+      "rule_id": "MAP-CLAIM-PLANNED_RUN_IDS"
+    },
+    {
+      "record_type": "claim",
+      "source_field": "planned_validation_ids",
+      "target_field": "validation_plan_ids",
+      "basis": "candidate explicit mapping; historical v1.3 source schema unavailable",
+      "compatibility_status": "unverified_until_original_v1_3_bundle_is_supplied",
+      "rule_id": "MAP-CLAIM-PLANNED_VALIDATION_IDS"
+    },
+    {
+      "record_type": "claim",
+      "source_field": "expected_artifact_plan_ids",
+      "target_field": "artifact_plan_ids",
+      "basis": "candidate explicit mapping; historical v1.3 source schema unavailable",
+      "compatibility_status": "unverified_until_original_v1_3_bundle_is_supplied",
+      "rule_id": "MAP-CLAIM-EXPECTED_ARTIFACT_PLAN_IDS"
+    },
+    {
+      "record_type": "task",
+      "source_field": "expected_artifact_plan_ids",
+      "target_field": "artifact_plan_ids",
+      "basis": "candidate explicit mapping; historical v1.3 source schema unavailable",
+      "compatibility_status": "unverified_until_original_v1_3_bundle_is_supplied",
+      "rule_id": "MAP-TASK-EXPECTED_ARTIFACT_PLAN_IDS"
+    },
+    {
+      "record_type": "task_execution_contract",
+      "source_field": "expected_artifact_plan_ids",
+      "target_field": "artifact_plan_ids",
+      "basis": "candidate explicit mapping; historical v1.3 source schema unavailable",
+      "compatibility_status": "unverified_until_original_v1_3_bundle_is_supplied",
+      "rule_id": "MAP-TASK_EXECUTION_CONTRACT-EXPECTED_ARTIFACT_PLAN_IDS"
+    },
+    {
+      "record_type": "run_plan",
+      "source_field": "expected_artifact_plan_ids",
+      "target_field": "artifact_plan_ids",
+      "basis": "candidate explicit mapping; historical v1.3 source schema unavailable",
+      "compatibility_status": "unverified_until_original_v1_3_bundle_is_supplied",
+      "rule_id": "MAP-RUN_PLAN-EXPECTED_ARTIFACT_PLAN_IDS"
+    },
+    {
+      "record_type": "artifact",
+      "source_field": "sha256",
+      "target_field": "content_sha256",
+      "basis": "candidate record-type-specific alias; historical v1.3 source schema unavailable",
+      "compatibility_status": "unverified_until_original_v1_3_bundle_is_supplied",
+      "rule_id": "MAP-ARTIFACT-SHA256"
+    },
+    {
+      "record_type": "artifact",
+      "source_field": "uri",
+      "target_field": "path_or_uri",
+      "basis": "candidate record-type-specific alias; historical v1.3 source schema unavailable",
+      "compatibility_status": "unverified_until_original_v1_3_bundle_is_supplied",
+      "rule_id": "MAP-ARTIFACT-URI"
+    },
+    {
+      "record_type": "artifact",
+      "source_field": "producer_run_id",
+      "target_field": "generated_by_run_id",
+      "basis": "candidate record-type-specific alias; historical v1.3 source schema unavailable",
+      "compatibility_status": "unverified_until_original_v1_3_bundle_is_supplied",
+      "rule_id": "MAP-ARTIFACT-PRODUCER_RUN_ID"
+    },
+    {
+      "record_type": "artifact",
+      "source_field": "integrity_status",
+      "target_field": "artifact_integrity_status",
+      "basis": "candidate record-type-specific alias; historical v1.3 source schema unavailable",
+      "compatibility_status": "unverified_until_original_v1_3_bundle_is_supplied",
+      "rule_id": "MAP-ARTIFACT-INTEGRITY_STATUS"
+    },
+    {
+      "record_type": "task_execution_contract",
+      "source_field": "version",
+      "target_field": "contract_version",
+      "basis": "candidate record-type-specific alias; historical v1.3 source schema unavailable",
+      "compatibility_status": "unverified_until_original_v1_3_bundle_is_supplied",
+      "rule_id": "MAP-TASK_EXECUTION_CONTRACT-VERSION"
+    },
+    {
+      "record_type": "task_execution_contract",
+      "source_field": "contract_hash",
+      "target_field": "contract_sha256",
+      "basis": "candidate record-type-specific alias; historical v1.3 source schema unavailable",
+      "compatibility_status": "unverified_until_original_v1_3_bundle_is_supplied",
+      "rule_id": "MAP-TASK_EXECUTION_CONTRACT-CONTRACT_HASH"
+    }
+  ],
+  "target_schema_validation": "draft2020-12+format-checker-per-record; invalid-targets-withheld",
+  "staging_output_policy": "Staging output must be outside the input tree and use a new empty directory. The tool refuses non-empty output directories to prevent stale artifacts from being mistaken for current output. Every provisional target must pass full Draft 2020-12 JSON Schema validation with a format checker; any schema-invalid or otherwise unresolved target is withheld from staging.",
+  "source_record_uri_semantics": "source_record_uri is a percent-encoded, input-relative URI reference; it is not a machine-specific absolute file URI.",
+  "id_mapping_policy": {
+    "target_record_policy": "A source record with any unresolved item does not receive a target_record or target_sha256 and is never written to staging. Provisional target identity/digest fields, when present, are explicitly prefixed candidate_target_.",
+    "mapping_rule_id": "MIG-002 identifies the source-record key mapping rule; applied_field_mapping_ids list record-type-specific field mappings used by the candidate transformation.",
+    "review_status_values": [
+      "blocked_unresolved",
+      "pending_review"
+    ],
+    "operator_policy": "operator is recorded as not_recorded when omitted; this is not an approval identity and cannot authorize commit.",
+    "collision_check_policy": "failed for duplicate same-project/same-record-type primary keys; passed_typed_primary_key only when a typed key is present and no duplicate was found; not_checked_missing_identity otherwise."
+  },
+  "source_formats": [
+    ".json",
+    ".yaml",
+    ".yml"
+  ],
+  "source_parser_policy": {
+    "json": "UTF-8 JSON; duplicate object keys and non-finite numeric constants are rejected.",
+    "yaml": "UTF-8 YAML parsed with SafeLoader semantics; duplicate mapping keys, aliases, non-string mapping keys, non-JSON values, and non-finite numbers are rejected. PyYAML must be available or the source file is reported unresolved.",
+    "unsupported_formats": "Unsupported file extensions are not treated as source records. Only JSON/YAML/YML files are inventoried by this prototype."
+  },
+  "pending_normative_rules": [
+    "Adding alternative_identity=null to a source Artifact remains unresolved until the relevant normative decision is explicitly approved.",
+    "Downgrading hashless external Artifact integrity_status from passed to needs_review remains unresolved until the relevant normative decision is explicitly approved.",
+    "Task Execution Contract migration remains unresolved when alternative_identity_methods is missing or contract_sha256 cannot be revalidated under the owner-approved DD-ART-010 payload; do not silently default the registry to an empty array."
+  ],
+  "target_digest_algorithm": "RFC8785-JCS-SHA256",
+  "target_digest_policy": "SHA-256 over RFC 8785 JSON Canonicalization Scheme canonical UTF-8 bytes of the transformed target record. This does not replace source_sha256, which hashes the original source bytes."
 }

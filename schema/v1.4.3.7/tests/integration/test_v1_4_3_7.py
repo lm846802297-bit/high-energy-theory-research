@@ -119,6 +119,7 @@ class MigrationTests(unittest.TestCase):
         out,ch,un,w=mig.migrate_record(rec,target_properties={"schema_version":{},"record_type":{},"project_id":{},"source_id":{}})
         self.assertNotIn("mystery_field",out)
         self.assertIn("UNKNOWN_FIELDS_QUARANTINED",[x["code"] for x in w])
+        self.assertIn("UNKNOWN_FIELDS_QUARANTINED_REQUIRES_REVIEW",[x["code"] for x in un])
     def test_22_migration_is_deterministic(self):
         rec={"schema_version":"1.3","record_type":"claim","claim_id":"C-1","project_id":"P-1","planned_run_ids":["RPL-1"]}
         a=mig.migrate_record(rec)[0]; b=mig.migrate_record(rec)[0]
@@ -160,5 +161,46 @@ class MigrationTests(unittest.TestCase):
            "previous_event_sha256":None,"event_sha256":"a"*64,"subject_id":"NO-RECORD"}
         r=cross.validate_records([e])
         self.assertIn("REF_TARGET_MISSING",[x["code"] for x in r["errors"]])
+
+    def test_30_validation_ids_resolve_but_invalid_targets_are_withheld(self):
+        source_dir = HERE.parent / "migration-source-v1.3-resolvable"
+        report = mig.migrate(source_dir)
+        self.assertEqual(report["source_count"], 3)
+        self.assertFalse(report["commit_allowed"])
+        self.assertEqual(report["target_schema_validation"], mig.TARGET_SCHEMA_VALIDATION_POLICY)
+        schema_failures = [
+            item for item in report["unresolved"]
+            if item["code"] == "TARGET_SCHEMA_VALIDATION_FAILED"
+        ]
+        # Each source fixture deliberately omits one required target property:
+        # claim.statement, validation_activity.tool_id, validation_plan.method.
+        # Reference resolution must still work, but complete target-schema validation
+        # must reject all three provisional records and withhold them from staging.
+        self.assertEqual(report["schema_validation_failure_count"], 3)
+        self.assertEqual(len(schema_failures), 3)
+        self.assertEqual(
+            {item["record_type"] for item in schema_failures},
+            {"claim", "validation_activity", "validation_plan"},
+        )
+        self.assertEqual(report["migratable_record_count"], 0)
+        self.assertTrue(all(item["target_record_type"] is None for item in report["id_mapping"]))
+        self.assertEqual(
+            {item["candidate_target_record_type"] for item in report["id_mapping"]},
+            {"claim", "validation_activity", "validation_plan"},
+        )
+
+        claim_mapping = next(item for item in report["id_mapping"] if item["source_record_type"] == "claim")
+        self.assertGreater(claim_mapping["unresolved_count"], 0)
+
+        source_records = [json.loads(path.read_text(encoding="utf-8")) for path in source_dir.glob("*.json")]
+        source_index = {}
+        for record in source_records:
+            key = (record.get("project_id"), mig.primary_key(record))
+            source_index.setdefault(key, []).append(record)
+        claim = next(record for record in source_records if record.get("record_type") == "claim")
+        migrated, _, unresolved, _ = mig.migrate_record(claim, source_index=source_index)
+        self.assertEqual(migrated["validation_activity_ids"], ["VAL-ACT-RESOLVABLE-1"])
+        self.assertEqual(migrated["validation_plan_ids"], ["VAL-PLAN-RESOLVABLE-1"])
+        self.assertEqual(unresolved, [])
 
 if __name__=="__main__": unittest.main(verbosity=2)

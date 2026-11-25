@@ -3,7 +3,7 @@
   "schema_version": "1.4.3.7-candidate",
   "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
   "bundle_status": "candidate",
-  "compatibility_status": "unverified; schema adds required artifact fields and requires data migration",
+  "compatibility_status": "unverified; the complete historical v1.3 source bundle is unavailable, and migration remains staging-only",
   "source_design_document": "高能理论物理研究-Skill-详细设计文档-v1.6.6-Artifact身份语义候选修订.md",
   "source_design_sha256": "49b113fe790b413851dbafafc0728426d6de74af05503a728dd687ebcbde2269",
   "record_types": [
@@ -137,47 +137,53 @@
       "sha256": "d4ff296ef6270c84585c5ed858fef8a3fd4fb7334da09e987bdb12b6187d1f3b"
     }
   },
-  "fixture_index": "tests/fixture-index.json",
+  "fixture_index": "tests/fixture-index-v1.4.3.7.json",
+  "fixture_index_sha256": "720a2f450991ecf8518e1fae86c0e17bfa0765aae1d0c7ff684bb71e32de4fc4",
+  "legacy_fixture_index": "tests/fixture-index.json",
+  "legacy_fixture_index_schema_version": "1.4.3.6-candidate",
+  "legacy_fixture_index_sha256": "fa1047d096208c81e2798af0276cfe0aeccca37dba599e3ef837664c44cc6133",
+  "fixture_index_version_semantics": "schema_version identifies the target schema bundle whose fixture expectations are declared; it is not the index-format version or source archive lineage.",
   "migration_contract": "migrations/v1.3-to-v1.4-mapping.json",
   "limitations": [
-    "v1.3 machine-readable bundle was not found in the available workspace; backward compatibility is unverified.",
+    "The complete historical v1.3 machine-readable source bundle was not found in the available repository/library; backward compatibility remains unverified.",
     "Schemas are candidate minimal envelopes, not a complete transcription of every normative field in the design document.",
-    "Cross-record semantic validation, state-machine validation, event-ledger verification, and migration execution are not implemented.",
+    "Cross-record semantic validation and migration exist as bounded prototypes; full state-machine validation, event-ledger verification, and transactional migration commit are not implemented.",
     "Conditional fixtures validate schema shape only; semantic guards remain not_run.",
     "v1.4.1 is an audited candidate, not a released baseline.",
     "Only explicit fixes with normative support were applied; many record-specific required fields and conditions remain uncovered.",
     "Cross-record references, full state transition graph, event-chain/checkpoint integrity, directory normalization and scientific validity are not checked by JSON Schema alone.",
     "Compatibility with the historical schema v1.3 bundle has not been verified because that bundle was not available in the current workspace.",
-    "v1.4.3.6 introduces required artifact_storage_kind and alternative_identity keys; no migration has been implemented.",
-    "Strict status interpretation: a hashless external file remains needs_review even if an alternative identity method is verified; byte integrity is not inferred.",
+    "The candidate requires artifact_storage_kind and alternative_identity; a v1.3-to-v1.4 staging migration prototype exists, but historical compatibility is unverified and commit remains disabled.",
+    "Candidate behavior associated with pending DD-ART-009: a hashless external file remains needs_review even if an alternative identity method is verified; this recommendation is not an approved normative decision.",
     "For directories, content_sha256 is null and directory_manifest_sha256 is the integrity digest. This is a proposed clarification of the previous storage-agnostic generated-hash rule.",
-    "Only the DD-ART-006 subset of cross-record semantics is tested; full cross-record validator is not implemented.",
+    "Cross-record semantics cover a bounded subset and do not constitute complete reference/state-machine validation.",
     "Physics correctness is not validated.",
-    "The inherited tests/fixture-index.json remains schema version 1.4.3.6-candidate and is preserved byte-for-byte. Its four Run Plan/Run Manifest placeholder fixtures do not satisfy the stricter v1.4.3.7 candidate schemas; current-schema fixtures live in a separate versioned index and compatibility drift is reported separately."
+    "The canonical fixture_index is version-matched to schema_version; legacy_fixture_index preserves the 1.4.3.6-candidate expectation set without relabeling it.",
+    "The checked-in migration staging report was generated with rules v1 and is a historical snapshot, not execution evidence for the current rules-v3 migration prototype."
   ],
   "release_evidence": {
-    "schema_meta_validation": "25/25 passed",
-    "fixture_validation": "v1.4.3.7 candidate index: 83/83 expected outcomes matched; inherited v1.4.3.6 index retained unchanged and audited separately",
-    "cross_record_semantics": "16/16 expected outcomes matched for DD-ART-006 subset",
-    "traceability": "58/58 validator checks passed overall; 96 trace rows",
-    "migration": "not run",
-    "physics_acceptance": "not implemented"
+    "schema_meta_validation": "Historical snapshot only (25/25 on a prior SHA); current-HEAD evidence must come from the provenance-bearing CI report artifact.",
+    "fixture_validation": "Historical snapshot only (83/83 expected outcomes on a prior SHA); current-HEAD evidence must come from the provenance-bearing CI report artifact.",
+    "cross_record_semantics": "Historical snapshot only (16/16 expected outcomes on a prior SHA); current-HEAD evidence must come from the provenance-bearing CI report artifact.",
+    "traceability": "Runtime-generated by the candidate validator; use the candidate-schema-validation-report artifact from the exact CI run, not the checked-in historical snapshot.",
+    "traceability_rows": 125,
+    "migration": "not run against the complete historical v1.3 source corpus; staging prototype only",
+    "physics_acceptance": "not implemented; excluded from Schema-only CI"
   },
   "requirement_traceability": "audit/requirement-test-trace.csv",
-  "fixture_index_sha256": "fa1047d096208c81e2798af0276cfe0aeccca37dba599e3ef837664c44cc6133",
   "audit_status": {
-    "schema_meta_validation": "passed: 25/25",
-    "schema_fixture_validation": "v1.4.3.7 candidate index to be validated; v1.4.3.6 baseline index retained with compatibility drift explicitly audited",
-    "inherited_semantic_subset": "passed: 16/16",
-    "new_prototype_tests": "passed: 29/29",
-    "cross_record_smoke": "passed: 5 records, 0 errors",
+    "schema_meta_validation": "historical_snapshot_only: 25/25 on a prior SHA; current HEAD not yet validated",
+    "schema_fixture_validation": "historical_snapshot_only: 83/83 expected outcomes on a prior SHA; current HEAD not yet validated",
+    "inherited_semantic_subset": "historical_snapshot_only: 16/16 on a prior SHA; current HEAD not yet validated",
+    "new_prototype_tests": "historical_snapshot_only: 29/29 on a prior SHA; current HEAD not yet validated",
+    "cross_record_smoke": "historical_snapshot_only: 5 records, 0 errors on a prior SHA; current HEAD not yet validated",
     "migration": "staging prototype; unresolved ambiguity; commit blocked",
     "directory_jcs": "restricted FileEntry canonicalization helper; not general RFC8785 or filesystem verifier",
-    "physics_acceptance": "not_implemented"
+    "physics_acceptance": "not_implemented; not run by Schema-only CI"
   },
   "source_bundle": "schema-v1.4.3.6-integrated-candidate-bundle.zip",
   "source_bundle_sha256": "aefb34e68af65daf8277b9553d232cab29ffb5df9c4f18c1cfe126474a06adf1",
   "requirement_traceability_rows": 125,
-  "candidate_fixture_index": "tests/fixture-index-v1.4.3.7.json",
-  "candidate_fixture_index_sha256": "720a2f450991ecf8518e1fae86c0e17bfa0765aae1d0c7ff684bb71e32de4fc4"
+  "release_status": "not_released",
+  "test_id_pattern": "^[A-Z][A-Z0-9]{1,4}-[0-9]{3}$"
 }

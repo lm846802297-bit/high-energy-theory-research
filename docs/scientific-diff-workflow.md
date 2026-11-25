@@ -1,5 +1,7 @@
 # Scientific Diff Workflow
 
+> **Research communication standard:** Follow the canonical [project-wide decision policy](https://github.com/lm846802297-bit/high-energy-theory-research/blob/main/AGENTS.md#research-communication-and-decision-policy) and [Scientific Diff reporting workflow](https://github.com/lm846802297-bit/high-energy-theory-research/blob/main/docs/scientific-diff-workflow.md#11-research-reporting-and-communication-standard). Preserve RC/run/claim identifiers, evidence links, and assessed claim status.
+
 ## 1. Purpose and scope
 
 Scientific Diff is a change-tracking and evidence-management method for theoretical and phenomenological research. Its purpose is to preserve a traceable chain from a scientific question to the physical claims and manuscript statements that depend on it.

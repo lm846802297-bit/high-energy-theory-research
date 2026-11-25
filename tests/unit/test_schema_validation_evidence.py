@@ -1,0 +1,129 @@
+import csv
+import json
+import unittest
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[2]
+SCHEMA_ROOT = ROOT / "schema" / "v1.4.3.7"
+MANIFEST_PATH = SCHEMA_ROOT / "manifest.json"
+TRACE_PATH = SCHEMA_ROOT / "audit" / "requirement-test-trace.csv"
+REPORT_PATH = SCHEMA_ROOT / "audit" / "validation-report.json"
+VALIDATOR_PATH = SCHEMA_ROOT / "tools" / "schema-v1.4.3.6-validate.py"
+WORKFLOW_PATH = ROOT / ".github" / "workflows" / "schema-validation.yml"
+MIGRATION_PATH = SCHEMA_ROOT / "migrations" / "v1.3-to-v1.4-mapping.json"
+
+
+class SchemaValidationEvidenceTests(unittest.TestCase):
+    def test_manifest_traceability_counts_match_the_csv(self):
+        manifest = json.loads(MANIFEST_PATH.read_text(encoding="utf-8"))
+        with TRACE_PATH.open(encoding="utf-8-sig", newline="") as stream:
+            rows = list(csv.DictReader(stream))
+
+        self.assertEqual(len(rows), manifest["requirement_traceability_rows"])
+        self.assertEqual(len(rows), manifest["release_evidence"]["traceability_rows"])
+        self.assertIn("Runtime-generated", manifest["release_evidence"]["traceability"])
+
+    def test_candidate_and_migration_safety_states_remain_explicit(self):
+        manifest = json.loads(MANIFEST_PATH.read_text(encoding="utf-8"))
+        migration = json.loads(MIGRATION_PATH.read_text(encoding="utf-8"))
+
+        self.assertEqual(manifest["bundle_status"], "candidate")
+        self.assertEqual(manifest["release_status"], "not_released")
+        self.assertFalse(migration["commit_allowed"])
+        self.assertTrue(migration["staging_only"])
+        self.assertEqual(migration["compatibility_status"], "unverified")
+
+    def test_candidate_fixture_index_baseline_link_matches_manifest(self):
+        manifest = json.loads(MANIFEST_PATH.read_text(encoding="utf-8"))
+        candidate_index = json.loads(
+            (SCHEMA_ROOT / manifest["fixture_index"]).read_text(encoding="utf-8")
+        )
+        legacy_index = json.loads(
+            (SCHEMA_ROOT / manifest["legacy_fixture_index"]).read_text(encoding="utf-8")
+        )
+        validator = VALIDATOR_PATH.read_text(encoding="utf-8")
+
+        self.assertEqual(candidate_index["schema_version"], manifest["schema_version"])
+        self.assertEqual(candidate_index["source_baseline_index"], manifest["legacy_fixture_index"])
+        self.assertEqual(
+            candidate_index["source_baseline_schema_version"],
+            manifest["legacy_fixture_index_schema_version"],
+        )
+        self.assertEqual(legacy_index["schema_version"], manifest["legacy_fixture_index_schema_version"])
+        self.assertIn("candidate_index_declares_manifest_legacy_baseline", validator)
+
+    def test_validator_emits_run_scoped_provenance_and_count_checks(self):
+        validator = VALIDATOR_PATH.read_text(encoding="utf-8")
+        for token in (
+            "candidate_release_status",
+            "m.get('schema_version')=='1.4.3.7-candidate'",
+            "=='1.4.3.6-candidate'",
+            "manifest_traceability_row_count_matches",
+            "manifest_release_evidence_traceability_rows_matches",
+            "validated_commit_sha",
+            "workflow_run_id",
+            "generated_at_utc",
+            "validator_sha256",
+            "manifest_sha256",
+            "traceability_csv_sha256",
+            "execution_environment",
+        ):
+            with self.subTest(token=token):
+                self.assertIn(token, validator)
+
+    def test_manifest_declares_the_test_id_pattern_and_strict_field_policy(self):
+        manifest = json.loads(MANIFEST_PATH.read_text(encoding="utf-8"))
+        test_case_path = SCHEMA_ROOT / "schemas" / "test_case.schema.json"
+        test_case = json.loads(test_case_path.read_text(encoding="utf-8"))
+        validator = VALIDATOR_PATH.read_text(encoding="utf-8")
+
+        self.assertEqual(manifest["test_id_pattern"], test_case["properties"]["test_id"]["pattern"])
+        self.assertTrue(manifest["strict_unknown_fields"])
+        self.assertFalse(manifest["extensions_supported"])
+        self.assertIn("manifest_test_id_pattern_matches_schema", validator)
+        self.assertIn("strict_unknown_fields_enabled", validator)
+        self.assertIn("extensions_disabled", validator)
+
+    def test_checked_in_report_is_not_misrepresented_as_current_evidence(self):
+        report = json.loads(REPORT_PATH.read_text(encoding="utf-8"))
+        provenance = report.get("provenance", {})
+        status = provenance.get("validation_status")
+
+        if status == "historical_snapshot_not_current_head":
+            self.assertIn("historical_snapshot", report)
+            self.assertIsNone(provenance.get("validated_commit_sha"))
+            self.assertEqual(report["summary"]["validation_status"], "not_run_for_current_head")
+        else:
+            self.assertIn(status, {"passed", "failed"})
+            self.assertTrue(provenance.get("validated_commit_sha"))
+            self.assertTrue(provenance.get("workflow_run_id"))
+            self.assertTrue(provenance.get("validator_sha256"))
+
+    def test_schema_ci_builds_and_uploads_uv_eft_bundle(self):
+        workflow = WORKFLOW_PATH.read_text(encoding="utf-8")
+        self.assertIn("Remove historical validation report", workflow)
+        self.assertIn("Verify generated evidence provenance", workflow)
+        self.assertIn("ref: ${{ github.event.pull_request.head.sha || github.sha }}", workflow)
+        self.assertIn("report does not identify GitHub Actions as its execution environment", workflow)
+        self.assertIn("report workflow_run_id does not match this Actions run", workflow)
+        self.assertIn("report workflow_run_attempt does not match this Actions attempt", workflow)
+        self.assertIn("report validator_sha256 does not match the checked validator", workflow)
+        self.assertIn("report traceability_csv_sha256 does not match the checked traceability CSV", workflow)
+        self.assertIn("candidate-schema-validation-report", workflow)
+        self.assertIn("Build and validate real UV-EFT research-task bundle", workflow)
+        self.assertIn(
+            'run: python tests/eval-cases/uv-eFT-hard-derivative-pilot/run_record_chain.py '
+            '--output-dir "$RUNNER_TEMP/uv-eFT-hard-derivative-bundle"',
+            workflow,
+        )
+        self.assertIn("Upload real research-task provenance bundle", workflow)
+        self.assertIn("uses: actions/upload-artifact@v4", workflow)
+        self.assertIn("name: uv-eFT-hard-derivative-provenance-bundle", workflow)
+        self.assertIn("path: ${{ runner.temp }}/uv-eFT-hard-derivative-bundle", workflow)
+        self.assertIn("if-no-files-found: error", workflow)
+        self.assertIn("retention-days: 30", workflow)
+        self.assertNotIn("verify_pv_derivative_mathematica.wl", workflow)
+
+
+if __name__ == "__main__":
+    unittest.main(verbosity=2)

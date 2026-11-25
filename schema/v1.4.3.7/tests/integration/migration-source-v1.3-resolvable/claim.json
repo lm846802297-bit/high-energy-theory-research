@@ -1,0 +1,29 @@
+{
+  "schema_version": "1.3",
+  "record_type": "claim",
+  "project_id": "P-HEP",
+  "claim_id": "CLAIM-RESOLVABLE-1",
+  "task_id": "TASK-HEP-1",
+  "claim_type": "methodological",
+  "claim_lifecycle_status": "active",
+  "evidence_status": {},
+  "physics_assessment": null,
+  "assumptions": [],
+  "source_ids": [],
+  "config_ids": [],
+  "run_plan_ids": [],
+  "run_ids": [],
+  "validation_ids": [
+    "VAL-ACT-RESOLVABLE-1",
+    "VAL-PLAN-RESOLVABLE-1"
+  ],
+  "validation_plan_ids": [],
+  "validation_activity_ids": [],
+  "validation_report_ids": [],
+  "artifact_plan_ids": [],
+  "artifact_ids": [],
+  "limitations": [],
+  "unresolved_items": [],
+  "created_at": "2026-10-20T10:00:00Z",
+  "updated_at": "2026-10-20T10:00:00Z"
+}

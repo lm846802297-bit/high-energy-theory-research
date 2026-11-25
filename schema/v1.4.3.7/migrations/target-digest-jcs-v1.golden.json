@@ -1,0 +1,12 @@
+{
+  "vector_id": "migration-target-digest-jcs-v1-001",
+  "algorithm": "RFC8785-JCS-SHA256",
+  "input": {
+    "a": 1,
+    "b": "x",
+    "unicode": "é"
+  },
+  "canonical_json": "{\"a\":1,\"b\":\"x\",\"unicode\":\"é\"}",
+  "sha256": "3281c80c630dc0f669446579e57f01a8fb1d55bc844f7223d6b87b219bd53611",
+  "note": "Golden vector for canonical UTF-8 bytes and SHA-256. This vector is software-contract evidence only; it does not establish historical migration compatibility."
+}

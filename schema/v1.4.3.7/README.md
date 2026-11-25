@@ -6,9 +6,10 @@ This directory contains an unapproved candidate schema bundle. It is not a relea
 
 ## Versioned fixture sets
 
-- `tests/fixture-index.json` is the inherited `1.4.3.6-candidate` fixture index. Its bytes and version label are preserved as provenance; it is not silently relabeled.
-- `tests/fixture-index-v1.4.3.7.json` is the candidate-specific fixture index used for acceptance against the current schemas. The four Run Plan/Run Manifest valid/conditional fixture records are regenerated in `tests/v1.4.3.7/` with non-empty structured payloads that meet the candidate contracts.
-- The validator reports mismatches between the inherited fixture expectations and current candidate schemas separately as compatibility drift. Those mismatches do not replace or weaken the version-matched candidate test suite.
+- The canonical manifest field `fixture_index` points to `tests/fixture-index-v1.4.3.7.json`, the acceptance index for this candidate. Its top-level `schema_version` must equal the bundle `schema_version`.
+- The manifest field `legacy_fixture_index` points to `tests/fixture-index.json`, the preserved `1.4.3.6-candidate` expectation baseline. The legacy bytes and version label are not rewritten.
+- The index `schema_version` means “the target bundle whose fixture expectations are declared”; source-archive lineage is recorded separately in `IMPORT_PROVENANCE.json`. The validator checks both index digests and both declared version relationships.
+- The validator reports mismatches between legacy fixture expectations and current candidate schemas separately as compatibility drift. They do not replace or weaken the version-matched candidate test suite.
 
 ## FingerprintInputs
 
@@ -21,20 +22,32 @@ The workflow regenerates `audit/validation-report.json` in the runner and upload
 
 ## Migration prototype and validation_ids boundary
 
-The migration tool uses rules version v1.4.3.7-migration-rules-2.
+Static implementation findings and version-label questions are recorded in [the 2026-10-23 static Schema/migration review](audit/static-schema-migration-review-2026-10-23.md). The owner reports that the directory-manifest tests (7/7), migration regression tests (33/33), integration tests (30/30), full unit suite (83/83), Python compilation, and Schema validation (68/68 checks, 83/83 candidate fixtures, 16/16 semantic cases, 125 trace rows) passed locally on code/test HEAD `0799dada7eaa8dcd08b8db2f2311a844335d7198`. These are local results, not GitHub Actions evidence. Complete cross-record validation and historical compatibility remain separate gates.
 
-- The tool loads the read-only source snapshot first and resolves references only by unique primary key within the same project.
+The migration tool now uses rules version `v1.4.3.7-migration-rules-6`. Static review tightened JSON/YAML source inventory, duplicate-key handling, project/key checks, timestamp and target-enum validation, record-type-specific aliases, manifest SHA verification, mapping-contract parity, ID-mapping provenance, and staging-output safety. Every proposed target receives full Draft 2020-12 validation with a format checker; schema-invalid targets are withheld. The owner reports rules-v5 local verification on code/test HEAD `0799dada7eaa8dcd08b8db2f2311a844335d7198`: migration regression 33/33, integration 30/30, repository unit tests 83/83, directory-manifest tests 7/7, Python compilation passed, and Schema validation passed (68/68 checks, 83/83 candidate fixtures, 16/16 semantic cases, 125 trace rows). A later static review added rules-v6 MIG-015 to block Task Execution Contract targets whose identity registry is missing or whose source contract hash has not been revalidated; two Task Execution Contract tests were added. The source inventory was also fixed to reject a symlinked input root, with a third regression test. These rules-v6/source-inventory changes have not yet been run locally. The prior rules-v5 results do not validate rules v6. Synthetic fixtures do not establish compatibility with the full historical v1.3 corpus.
+
+- The tool inventories `.json`, `.yaml`, and `.yml` source files before resolving references only by unique primary key within the same project. Duplicate JSON/YAML mapping keys, malformed files, non-object records, and unsupported YAML constructs are reported as unresolved rather than silently ignored. An empty snapshot, any skipped source file, or source symlink blocks all target writes to staging, preventing a partial inventory from appearing to be a complete migration.
 - A uniquely resolved validation_plan maps to validation_plan_ids.
-- A validation_activity maps to validation_activity_ids only when execution_status is in_progress, succeeded, or failed and started_at is non-empty.
+- A validation_activity reference maps to validation_activity_ids only when the target is unique in the same project, started_at is a valid timezone-aware ISO date-time, and its source status has an explicit mapping to a v1.4 enum. in_progress is not in the target enum (running is), so it remains unresolved until an explicit mapping is approved.
 - Missing targets, cross-type duplicate IDs, unsupported record types, project mismatches, and insufficient launch evidence remain unresolved.
 - An empty legacy validation_ids list maps to empty validation_activity_ids and validation_plan_ids arrays.
-- Dry-run and staging remain non-committing. The report always sets commit_allowed=false; transactional commit, active-pointer switching, rollback, and full migration validation are not implemented.
+- Dry-run and staging remain non-committing. The report always sets `commit_allowed=false`. Every provisional target is validated against its complete Draft 2020-12 JSON Schema with a format checker before staging; schema-invalid records are withheld. The owner-reported local results on code/test HEAD `0799dada7eaa8dcd08b8db2f2311a844335d7198` cover rules v5, including the dependent-reference withholding regression and directory-manifest fail-closed regression tests. Rules v6 adds MIG-015, and the source inventory now rejects a symlinked input root as well as descendant symlinks; these code changes and three new migration tests are awaiting local execution. GitHub Actions is temporarily excluded from this phase's acceptance and will be supplemented when runners are available. Complete cross-record/state-machine validation beyond the specific migrated validation references, transactional commit, active-pointer switching, and rollback remain unimplemented. The tool also verifies schema hashes against the candidate Manifest, reports malformed JSON/YAML and duplicate keys, and refuses unsafe staging paths.
+- Any record with unresolved items—including quarantined unknown fields and artifact transformations that depend on pending normative decisions—is withheld from target JSON staging. The ID-mapping report records source/target hashes, candidate-only target hashes when blocked, rule IDs, review state, collision state, rewritten-reference count, UTC timestamp, and operator identifier; an omitted operator is recorded as `not_recorded` and never implies approval.
 - Regression tests: tests/unit/test_migration_reference_resolution.py. The existing audit/migration-dry-run-summary.json is a historical report generated under rules version 1.
 
-This resolver reduces avoidable ambiguity only when source evidence is complete. It does not make the migration source bundle available and does not approve any normative decision.
+### Directory-manifest helper — latest static safety fix
+
+The helper now rejects FileEntry objects with missing or additional keys instead of silently dropping extra data before hashing. Its `allow_symlinks=True` argument is explicitly rejected because this manifest-only helper cannot prove symlink targets remain inside a filesystem root. The owner reports that the new unit tests passed 7/7 on code/test HEAD `0799dada7eaa8dcd08b8db2f2311a844335d7198`. The helper still does not verify manifest entries against actual filesystem bytes. DD-ART-008 remains pending owner approval. The Artifact Schema currently allows `entry_type: "symlink"` even though the manifest helper rejects symlink entries; resolve this contract mismatch only after the owner approves the normative symlink policy.
+
+This resolver reduces avoidable ambiguity only when source evidence is complete. The full historical v1.3 source bundle remains unavailable, so compatibility remains unverified. See `audit/v1.3-compatibility-gate.md`. No normative decision is implicitly approved.
+
+### Task Execution Contract migration gate (DD-ART-010)
+
+The rules-v6 migrator adds MIG-015. A missing `alternative_identity_methods` registry is not silently defaulted to `[]`, and a source `contract_hash` mapped to `contract_sha256` is not treated as a verified target digest. Such Task Execution Contract records remain unresolved and are withheld until the owner approves the payload rule and the hash can be revalidated. The code and two Task Execution Contract regression tests were added after the rules-v5 local validation; the separate source-root symlink guard and its regression test were also added. All three migration tests await execution.
 
 ## Release constraints
 
 - DD-ART-007 through DD-ART-010 remain unapproved.
 - `validation_ids` migration remains staging-only and blocked while ambiguous.
+- Target digests use RFC 8785 JCS followed by SHA-256 (`RFC8785-JCS-SHA256`); a fixed canonical-byte/hash regression vector is included in the unit suite.
 - Schema/CI success is not a physics correctness certificate. A real research task must independently verify provenance → configuration → run → artifact → validation → evidence → Claim before any release decision.
