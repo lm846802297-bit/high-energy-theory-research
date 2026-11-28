@@ -1,8 +1,8 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "author": {
-    "email": "lm846802297@gmail.com",
-    "name": "Li Dr (Leedri)"
+    "name": "Li Dr (Leedri)",
+    "url": "https://github.com/lm846802297-bit/high-energy-theory-research/issues"
   },
   "description": "A private High Energy Theory Research workflow for source-grounded theory, numerical checks, literature review, and reproducible particle-physics research.",
   "extensions": {
